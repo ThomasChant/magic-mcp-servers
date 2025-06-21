@@ -1,0 +1,262 @@
+[
+    {
+        "id": "filesystem",
+        "name": "文件系统",
+        "nameEn": "File System",
+        "description": "文件和目录操作，云存储集成，文件管理工具",
+        "descriptionEn": "File and directory operations, cloud storage integration, file management tools",
+        "icon": "folder",
+        "color": "#3B82F6",
+        "serverCount": 0,
+        "subcategories": [
+            {
+                "id": "local-files",
+                "name": "本地文件",
+                "nameEn": "Local Files",
+                "description": "本地文件系统操作",
+                "descriptionEn": "Local file system operations"
+            },
+            {
+                "id": "cloud-storage",
+                "name": "云存储",
+                "nameEn": "Cloud Storage",
+                "description": "云存储服务集成",
+                "descriptionEn": "Cloud storage service integration"
+            }
+        ]
+    },
+    {
+        "id": "database",
+        "name": "数据库",
+        "nameEn": "Database",
+        "description": "数据库连接、查询、管理工具",
+        "descriptionEn": "Database connection, querying, and management tools",
+        "icon": "database",
+        "color": "#10B981",
+        "serverCount": 0,
+        "subcategories": [
+            {
+                "id": "sql",
+                "name": "SQL数据库",
+                "nameEn": "SQL Database",
+                "description": "MySQL, PostgreSQL, SQLite等关系型数据库",
+                "descriptionEn": "Relational databases like MySQL, PostgreSQL, SQLite"
+            },
+            {
+                "id": "nosql",
+                "name": "NoSQL数据库",
+                "nameEn": "NoSQL Database",
+                "description": "MongoDB, Redis等非关系型数据库",
+                "descriptionEn": "NoSQL databases like MongoDB, Redis"
+            }
+        ]
+    },
+    {
+        "id": "communication",
+        "name": "通信服务",
+        "nameEn": "Communication",
+        "description": "消息发送、通知、聊天机器人",
+        "descriptionEn": "Messaging, notifications, chatbots",
+        "icon": "message-circle",
+        "color": "#8B5CF6",
+        "serverCount": 0,
+        "subcategories": [
+            {
+                "id": "messaging",
+                "name": "即时消息",
+                "nameEn": "Instant Messaging",
+                "description": "Slack, Discord, Telegram等",
+                "descriptionEn": "Slack, Discord, Telegram, etc."
+            },
+            {
+                "id": "email",
+                "name": "邮件服务",
+                "nameEn": "Email Service",
+                "description": "邮件发送和管理",
+                "descriptionEn": "Email sending and management"
+            }
+        ]
+    },
+    {
+        "id": "monitoring",
+        "name": "监控分析",
+        "nameEn": "Monitoring & Analytics",
+        "description": "系统监控、日志分析、性能指标",
+        "descriptionEn": "System monitoring, log analysis, performance metrics",
+        "icon": "activity",
+        "color": "#F59E0B",
+        "serverCount": 0,
+        "subcategories": [
+            {
+                "id": "system-monitoring",
+                "name": "系统监控",
+                "nameEn": "System Monitoring",
+                "description": "服务器和应用监控",
+                "descriptionEn": "Server and application monitoring"
+            },
+            {
+                "id": "log-analysis",
+                "name": "日志分析",
+                "nameEn": "Log Analysis",
+                "description": "日志收集和分析工具",
+                "descriptionEn": "Log collection and analysis tools"
+            }
+        ]
+    },
+    {
+        "id": "search",
+        "name": "搜索服务",
+        "nameEn": "Search Services",
+        "description": "搜索引擎、向量搜索、文本检索",
+        "descriptionEn": "Search engines, vector search, text retrieval",
+        "icon": "search",
+        "color": "#EF4444",
+        "serverCount": 0,
+        "subcategories": [
+            {
+                "id": "text-search",
+                "name": "文本搜索",
+                "nameEn": "Text Search",
+                "description": "全文搜索和文本检索",
+                "descriptionEn": "Full-text search and text retrieval"
+            },
+            {
+                "id": "vector-search",
+                "name": "向量搜索",
+                "nameEn": "Vector Search",
+                "description": "语义搜索和向量数据库",
+                "descriptionEn": "Semantic search and vector databases"
+            }
+        ]
+    },
+    {
+        "id": "development",
+        "name": "开发工具",
+        "nameEn": "Development Tools",
+        "description": "Git操作、CI/CD、代码分析工具",
+        "descriptionEn": "Git operations, CI/CD, code analysis tools",
+        "icon": "code",
+        "color": "#6366F1",
+        "serverCount": 0,
+        "subcategories": [
+            {
+                "id": "version-control",
+                "name": "版本控制",
+                "nameEn": "Version Control",
+                "description": "Git和其他版本控制系统",
+                "descriptionEn": "Git and other version control systems"
+            },
+            {
+                "id": "ci-cd",
+                "name": "CI/CD",
+                "nameEn": "CI/CD",
+                "description": "持续集成和部署工具",
+                "descriptionEn": "Continuous integration and deployment tools"
+            }
+        ]
+    },
+    {
+        "id": "api-integration",
+        "name": "API集成",
+        "nameEn": "API Integration",
+        "description": "第三方服务API封装和集成",
+        "descriptionEn": "Third-party service API wrappers and integration",
+        "icon": "link",
+        "color": "#14B8A6",
+        "serverCount": 0,
+        "subcategories": [
+            {
+                "id": "social-media",
+                "name": "社交媒体",
+                "nameEn": "Social Media",
+                "description": "社交媒体平台API",
+                "descriptionEn": "Social media platform APIs"
+            },
+            {
+                "id": "cloud-services",
+                "name": "云服务",
+                "nameEn": "Cloud Services",
+                "description": "AWS, Azure, GCP等云服务",
+                "descriptionEn": "Cloud services like AWS, Azure, GCP"
+            }
+        ]
+    },
+    {
+        "id": "ai-ml",
+        "name": "AI/机器学习",
+        "nameEn": "AI/Machine Learning",
+        "description": "机器学习模型、数据处理、推理服务",
+        "descriptionEn": "Machine learning models, data processing, inference services",
+        "icon": "brain",
+        "color": "#EC4899",
+        "serverCount": 0,
+        "subcategories": [
+            {
+                "id": "nlp",
+                "name": "自然语言处理",
+                "nameEn": "Natural Language Processing",
+                "description": "文本分析和语言模型",
+                "descriptionEn": "Text analysis and language models"
+            },
+            {
+                "id": "computer-vision",
+                "name": "计算机视觉",
+                "nameEn": "Computer Vision",
+                "description": "图像识别和处理",
+                "descriptionEn": "Image recognition and processing"
+            }
+        ]
+    },
+    {
+        "id": "productivity",
+        "name": "生产力工具",
+        "nameEn": "Productivity Tools",
+        "description": "任务管理、文档处理、工作流自动化",
+        "descriptionEn": "Task management, document processing, workflow automation",
+        "icon": "briefcase",
+        "color": "#84CC16",
+        "serverCount": 0,
+        "subcategories": [
+            {
+                "id": "task-management",
+                "name": "任务管理",
+                "nameEn": "Task Management",
+                "description": "项目管理和任务跟踪",
+                "descriptionEn": "Project management and task tracking"
+            },
+            {
+                "id": "document-processing",
+                "name": "文档处理",
+                "nameEn": "Document Processing",
+                "description": "文档生成和格式转换",
+                "descriptionEn": "Document generation and format conversion"
+            }
+        ]
+    },
+    {
+        "id": "security",
+        "name": "安全工具",
+        "nameEn": "Security Tools",
+        "description": "安全扫描、加密、身份验证",
+        "descriptionEn": "Security scanning, encryption, authentication",
+        "icon": "shield",
+        "color": "#DC2626",
+        "serverCount": 0,
+        "subcategories": [
+            {
+                "id": "vulnerability-scanning",
+                "name": "漏洞扫描",
+                "nameEn": "Vulnerability Scanning",
+                "description": "安全漏洞检测和扫描",
+                "descriptionEn": "Security vulnerability detection and scanning"
+            },
+            {
+                "id": "authentication",
+                "name": "身份验证",
+                "nameEn": "Authentication",
+                "description": "用户认证和授权服务",
+                "descriptionEn": "User authentication and authorization services"
+            }
+        ]
+    }
+]

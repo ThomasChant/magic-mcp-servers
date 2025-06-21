@@ -1,0 +1,380 @@
+[
+    {
+        "id": "filesystem-mcp",
+        "name": "Filesystem MCP",
+        "description": "提供文件系统操作的MCP服务器，支持文件读写、目录浏览、文件搜索等功能",
+        "descriptionEn": "MCP server providing file system operations including file read/write, directory browsing, and file search capabilities",
+        "category": ["filesystem"],
+        "subcategory": ["local-files"],
+        "tags": ["file-system", "local-files", "directory", "read-write"],
+        "repository": {
+            "url": "https://github.com/modelcontextprotocol/servers",
+            "owner": "modelcontextprotocol",
+            "name": "servers",
+            "stars": 1250,
+            "forks": 180,
+            "lastUpdate": "2024-01-15"
+        },
+        "installation": {
+            "npm": "npx @modelcontextprotocol/server-filesystem",
+            "pip": "pip install mcp-server-filesystem",
+            "manual": "从源码编译安装"
+        },
+        "documentation": {
+            "readme": "https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem",
+            "website": "https://modelcontextprotocol.io/servers/filesystem",
+            "examples": ["基本文件操作示例", "目录遍历示例", "文件搜索示例"]
+        },
+        "compatibility": {
+            "platforms": ["Linux", "macOS", "Windows"],
+            "languages": ["Python", "TypeScript", "JavaScript"],
+            "frameworks": ["Node.js", "Python"]
+        },
+        "quality": {
+            "score": 92,
+            "factors": {
+                "documentation": 95,
+                "maintenance": 90,
+                "community": 88,
+                "testing": 95
+            }
+        },
+        "usage": {
+            "downloads": 15000,
+            "dependents": 120,
+            "popularity": 85
+        },
+        "featured": true,
+        "official": true
+    },
+    {
+        "id": "mysql-mcp",
+        "name": "MySQL MCP Server",
+        "description": "MySQL数据库连接和查询服务器，提供安全的数据库操作接口",
+        "descriptionEn": "MySQL database connection and query server providing secure database operation interfaces",
+        "category": ["database"],
+        "subcategory": ["sql"],
+        "tags": ["mysql", "database", "sql", "query"],
+        "repository": {
+            "url": "https://github.com/designcomputer/mysql_mcp_server",
+            "owner": "designcomputer",
+            "name": "mysql_mcp_server",
+            "stars": 125,
+            "forks": 25,
+            "lastUpdate": "2024-01-10"
+        },
+        "installation": {
+            "pip": "pip install mysql-mcp-server",
+            "docker": "docker run mysql-mcp-server",
+            "manual": "从GitHub克隆并手动安装"
+        },
+        "documentation": {
+            "readme": "https://github.com/designcomputer/mysql_mcp_server/blob/main/README.md",
+            "examples": ["数据库连接配置", "SQL查询示例", "事务处理示例"]
+        },
+        "compatibility": {
+            "platforms": ["Linux", "macOS", "Windows"],
+            "languages": ["Python"],
+            "frameworks": ["Python", "MySQL"]
+        },
+        "quality": {
+            "score": 88,
+            "factors": {
+                "documentation": 85,
+                "maintenance": 90,
+                "community": 75,
+                "testing": 85
+            }
+        },
+        "usage": {
+            "downloads": 8500,
+            "dependents": 45,
+            "popularity": 72
+        },
+        "featured": false,
+        "official": false
+    },
+    {
+        "id": "slack-mcp",
+        "name": "Slack MCP Server",
+        "description": "Slack集成服务器，支持消息发送、频道管理、用户查询等功能",
+        "descriptionEn": "Slack integration server supporting message sending, channel management, and user queries",
+        "category": ["communication"],
+        "subcategory": ["messaging"],
+        "tags": ["slack", "messaging", "communication", "bot"],
+        "repository": {
+            "url": "https://github.com/modelcontextprotocol/servers",
+            "owner": "modelcontextprotocol",
+            "name": "servers",
+            "stars": 1250,
+            "forks": 180,
+            "lastUpdate": "2024-01-12"
+        },
+        "installation": {
+            "npm": "npx @modelcontextprotocol/server-slack",
+            "pip": "pip install mcp-server-slack"
+        },
+        "documentation": {
+            "readme": "https://github.com/modelcontextprotocol/servers/tree/main/src/slack",
+            "website": "https://modelcontextprotocol.io/servers/slack",
+            "examples": ["Slack Bot配置", "消息发送示例", "频道管理示例"]
+        },
+        "compatibility": {
+            "platforms": ["Linux", "macOS", "Windows"],
+            "languages": ["Python", "TypeScript"],
+            "frameworks": ["Node.js", "Python"]
+        },
+        "quality": {
+            "score": 90,
+            "factors": {
+                "documentation": 92,
+                "maintenance": 90,
+                "community": 88,
+                "testing": 90
+            }
+        },
+        "usage": {
+            "downloads": 12000,
+            "dependents": 85,
+            "popularity": 80
+        },
+        "featured": true,
+        "official": true
+    },
+    {
+        "id": "github-mcp",
+        "name": "GitHub MCP Server",
+        "description": "GitHub API集成服务器，提供仓库管理、issue跟踪、PR操作等功能",
+        "descriptionEn": "GitHub API integration server providing repository management, issue tracking, and PR operations",
+        "category": ["development", "api-integration"],
+        "subcategory": ["version-control", "social-media"],
+        "tags": ["github", "git", "repository", "api", "development"],
+        "repository": {
+            "url": "https://github.com/modelcontextprotocol/servers",
+            "owner": "modelcontextprotocol",
+            "name": "servers",
+            "stars": 1250,
+            "forks": 180,
+            "lastUpdate": "2024-01-14"
+        },
+        "installation": {
+            "npm": "npx @modelcontextprotocol/server-github",
+            "pip": "pip install mcp-server-github"
+        },
+        "documentation": {
+            "readme": "https://github.com/modelcontextprotocol/servers/tree/main/src/github",
+            "website": "https://modelcontextprotocol.io/servers/github",
+            "examples": ["GitHub认证配置", "仓库操作示例", "Issue管理示例"]
+        },
+        "compatibility": {
+            "platforms": ["Linux", "macOS", "Windows"],
+            "languages": ["Python", "TypeScript"],
+            "frameworks": ["Node.js", "Python"]
+        },
+        "quality": {
+            "score": 94,
+            "factors": {
+                "documentation": 95,
+                "maintenance": 95,
+                "community": 92,
+                "testing": 95
+            }
+        },
+        "usage": {
+            "downloads": 18000,
+            "dependents": 150,
+            "popularity": 90
+        },
+        "featured": true,
+        "official": true
+    },
+    {
+        "id": "postgres-mcp",
+        "name": "PostgreSQL MCP Server",
+        "description": "PostgreSQL数据库服务器，支持复杂查询、存储过程、数据分析等高级功能",
+        "descriptionEn": "PostgreSQL database server supporting complex queries, stored procedures, and advanced data analysis features",
+        "category": ["database"],
+        "subcategory": ["sql"],
+        "tags": ["postgresql", "database", "sql", "analytics"],
+        "repository": {
+            "url": "https://github.com/modelcontextprotocol/servers",
+            "owner": "modelcontextprotocol",
+            "name": "servers",
+            "stars": 1250,
+            "forks": 180,
+            "lastUpdate": "2024-01-13"
+        },
+        "installation": {
+            "npm": "npx @modelcontextprotocol/server-postgres",
+            "pip": "pip install mcp-server-postgres",
+            "docker": "docker run mcp-postgres-server"
+        },
+        "documentation": {
+            "readme": "https://github.com/modelcontextprotocol/servers/tree/main/src/postgres",
+            "website": "https://modelcontextprotocol.io/servers/postgres",
+            "examples": ["数据库连接配置", "复杂查询示例", "数据分析示例"]
+        },
+        "compatibility": {
+            "platforms": ["Linux", "macOS", "Windows"],
+            "languages": ["Python", "TypeScript"],
+            "frameworks": ["Node.js", "Python", "PostgreSQL"]
+        },
+        "quality": {
+            "score": 91,
+            "factors": {
+                "documentation": 90,
+                "maintenance": 92,
+                "community": 90,
+                "testing": 92
+            }
+        },
+        "usage": {
+            "downloads": 14500,
+            "dependents": 95,
+            "popularity": 82
+        },
+        "featured": true,
+        "official": true
+    },
+    {
+        "id": "brave-search-mcp",
+        "name": "Brave Search MCP",
+        "description": "Brave搜索引擎集成服务器，提供隐私保护的网络搜索功能",
+        "descriptionEn": "Brave search engine integration server providing privacy-focused web search capabilities",
+        "category": ["search", "api-integration"],
+        "subcategory": ["text-search"],
+        "tags": ["brave", "search", "privacy", "web-search"],
+        "repository": {
+            "url": "https://github.com/modelcontextprotocol/servers",
+            "owner": "modelcontextprotocol",
+            "name": "servers",
+            "stars": 1250,
+            "forks": 180,
+            "lastUpdate": "2024-01-11"
+        },
+        "installation": {
+            "npm": "npx @modelcontextprotocol/server-brave-search",
+            "pip": "pip install mcp-server-brave-search"
+        },
+        "documentation": {
+            "readme": "https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search",
+            "website": "https://modelcontextprotocol.io/servers/brave-search",
+            "examples": ["搜索API配置", "基本搜索示例", "高级搜索过滤"]
+        },
+        "compatibility": {
+            "platforms": ["Linux", "macOS", "Windows"],
+            "languages": ["Python", "TypeScript"],
+            "frameworks": ["Node.js", "Python"]
+        },
+        "quality": {
+            "score": 87,
+            "factors": {
+                "documentation": 85,
+                "maintenance": 88,
+                "community": 85,
+                "testing": 90
+            }
+        },
+        "usage": {
+            "downloads": 9200,
+            "dependents": 55,
+            "popularity": 75
+        },
+        "featured": false,
+        "official": true
+    },
+    {
+        "id": "sqlite-mcp",
+        "name": "SQLite MCP Server",
+        "description": "轻量级SQLite数据库服务器，适合小型项目和本地开发环境",
+        "descriptionEn": "Lightweight SQLite database server perfect for small projects and local development environments",
+        "category": ["database"],
+        "subcategory": ["sql"],
+        "tags": ["sqlite", "database", "lightweight", "local"],
+        "repository": {
+            "url": "https://github.com/modelcontextprotocol/servers",
+            "owner": "modelcontextprotocol",
+            "name": "servers",
+            "stars": 1250,
+            "forks": 180,
+            "lastUpdate": "2024-01-09"
+        },
+        "installation": {
+            "npm": "npx @modelcontextprotocol/server-sqlite",
+            "pip": "pip install mcp-server-sqlite"
+        },
+        "documentation": {
+            "readme": "https://github.com/modelcontextprotocol/servers/tree/main/src/sqlite",
+            "website": "https://modelcontextprotocol.io/servers/sqlite",
+            "examples": ["数据库创建示例", "数据查询示例", "数据迁移示例"]
+        },
+        "compatibility": {
+            "platforms": ["Linux", "macOS", "Windows"],
+            "languages": ["Python", "TypeScript"],
+            "frameworks": ["Node.js", "Python", "SQLite"]
+        },
+        "quality": {
+            "score": 89,
+            "factors": {
+                "documentation": 88,
+                "maintenance": 90,
+                "community": 87,
+                "testing": 92
+            }
+        },
+        "usage": {
+            "downloads": 11000,
+            "dependents": 70,
+            "popularity": 78
+        },
+        "featured": false,
+        "official": true
+    },
+    {
+        "id": "memory-mcp",
+        "name": "Memory MCP Server",
+        "description": "内存存储服务器，提供快速的键值存储和会话状态管理",
+        "descriptionEn": "Memory storage server providing fast key-value storage and session state management",
+        "category": ["database"],
+        "subcategory": ["nosql"],
+        "tags": ["memory", "cache", "key-value", "session"],
+        "repository": {
+            "url": "https://github.com/modelcontextprotocol/servers",
+            "owner": "modelcontextprotocol",
+            "name": "servers",
+            "stars": 1250,
+            "forks": 180,
+            "lastUpdate": "2024-01-08"
+        },
+        "installation": {
+            "npm": "npx @modelcontextprotocol/server-memory",
+            "pip": "pip install mcp-server-memory"
+        },
+        "documentation": {
+            "readme": "https://github.com/modelcontextprotocol/servers/tree/main/src/memory",
+            "website": "https://modelcontextprotocol.io/servers/memory",
+            "examples": ["键值存储示例", "会话管理示例", "缓存策略示例"]
+        },
+        "compatibility": {
+            "platforms": ["Linux", "macOS", "Windows"],
+            "languages": ["Python", "TypeScript"],
+            "frameworks": ["Node.js", "Python"]
+        },
+        "quality": {
+            "score": 86,
+            "factors": {
+                "documentation": 85,
+                "maintenance": 88,
+                "community": 84,
+                "testing": 87
+            }
+        },
+        "usage": {
+            "downloads": 7800,
+            "dependents": 40,
+            "popularity": 70
+        },
+        "featured": false,
+        "official": true
+    }
+]
