@@ -13,7 +13,7 @@ import {
     AlertCircle,
 } from "lucide-react";
 import { useServersByCategory, useCategories } from "../hooks/useData";
-import type{ MCPServer, SearchFilters, SortOption } from "../types";
+import type { MCPServer, SearchFilters, SortOption } from "../types";
 
 const CategoryDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
