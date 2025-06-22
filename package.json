@@ -7,9 +7,12 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "todo:watch": "node todo-monitor.js",
+    "todo:check": "node todo-monitor.js --once"
   },
   "dependencies": {
+    "@playwright/test": "^1.53.1",
     "@tanstack/react-query": "^5.80.11",
     "lucide-react": "^0.522.0",
     "react": "^19.1.0",

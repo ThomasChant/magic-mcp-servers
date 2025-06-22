@@ -1,10 +1,7 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
     Search,
-    Star,
-    Download,
-    Calendar,
     ArrowRight,
     Rocket,
     Book,
@@ -13,96 +10,131 @@ import {
     MessageCircle,
     Code,
     Brain,
+    Activity,
+    Link2,
+    Briefcase,
+    Shield,
 } from "lucide-react";
 import { useAppStore } from "../store/useAppStore";
 import CosmicBackground from "../components/CosmicBackground";
-import { useFeaturedServers, useServers } from "../hooks/useData";
+import { useServers, useCategories } from "../hooks/useData";
+import CategorySection from "../components/Home/CategorySection";
+
+// Helper functions moved outside component to prevent recreation on every render
+const getCategoryIcon = (category: string) => {
+    switch (category) {
+        case 'filesystem':
+            return <Folder className="text-white w-5 h-5" />;
+        case 'database':
+            return <Database className="text-white w-5 h-5" />;
+        case 'communication':
+            return <MessageCircle className="text-white w-5 h-5" />;
+        case 'development':
+            return <Code className="text-white w-5 h-5" />;
+        case 'api-integration':
+            return <Link2 className="text-white w-5 h-5" />;
+        case 'search':
+            return <Search className="text-white w-5 h-5" />;
+        case 'ai-ml':
+            return <Brain className="text-white w-5 h-5" />;
+        case 'monitoring':
+            return <Activity className="text-white w-5 h-5" />;
+        case 'productivity':
+            return <Briefcase className="text-white w-5 h-5" />;
+        case 'security':
+            return <Shield className="text-white w-5 h-5" />;
+        default:
+            return <Code className="text-white w-5 h-5" />;
+    }
+};
+
+const getCategoryColor = (category: string) => {
+    switch (category) {
+        case 'filesystem':
+            return 'bg-blue-600';
+        case 'database':
+            return 'bg-green-600';
+        case 'communication':
+            return 'bg-purple-600';
+        case 'development':
+            return 'bg-indigo-600';
+        case 'api-integration':
+            return 'bg-teal-600';
+        case 'search':
+            return 'bg-orange-600';
+        case 'ai-ml':
+            return 'bg-pink-600';
+        case 'monitoring':
+            return 'bg-yellow-600';
+        case 'productivity':
+            return 'bg-lime-600';
+        case 'security':
+            return 'bg-red-600';
+        default:
+            return 'bg-gray-600';
+    }
+};
+
+const formatLastUpdated = (dateString: string) => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffTime = Math.abs(now.getTime() - date.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    if (diffDays === 1) return '1d ago';
+    if (diffDays < 7) return `${diffDays}d ago`;
+    if (diffDays < 30) return `${Math.ceil(diffDays / 7)}w ago`;
+    return `${Math.ceil(diffDays / 30)}m ago`;
+};
 
 const Home: React.FC = () => {
     const { searchQuery, setSearchQuery } = useAppStore();
-    const { data: featuredServers, isLoading: serversLoading } = useFeaturedServers();
     const { data: allServers } = useServers();
+    const { data: categories } = useCategories();
     
-    // Calculate real statistics from server data
-    const totalServers = allServers?.length || 0;
-    const totalDownloads = allServers?.reduce((sum, server) => sum + server.usage.downloads, 0) || 0;
-    const uniqueCategories = new Set(allServers?.map(server => server.category)).size || 0;
-    const averageQualityScore = allServers && allServers.length > 0 
-        ? Math.round(allServers.reduce((sum, server) => sum + server.quality.score, 0) / allServers.length)
-        : 90;
-
-    // Helper function to get appropriate icon for server category
-    const getCategoryIcon = (category: string) => {
-        switch (category) {
-            case 'filesystem':
-                return <Folder className="text-white w-5 h-5" />;
-            case 'database':
-                return <Database className="text-white w-5 h-5" />;
-            case 'communication':
-                return <MessageCircle className="text-white w-5 h-5" />;
-            case 'development':
-            case 'api-integration':
-                return <Code className="text-white w-5 h-5" />;
-            case 'search':
-                return <Search className="text-white w-5 h-5" />;
-            default:
-                return <Code className="text-white w-5 h-5" />;
+    // Memoize expensive calculations
+    const statistics = useMemo(() => {
+        if (!allServers || allServers.length === 0) {
+            return {
+                totalServers: 0,
+                totalDownloads: 0,
+                uniqueCategories: 0,
+                averageQualityScore: 90
+            };
         }
-    };
-
-    // Helper function to get category color
-    const getCategoryColor = (category: string) => {
-        switch (category) {
-            case 'filesystem':
-                return 'bg-blue-600';
-            case 'database':
-                return 'bg-green-600';
-            case 'communication':
-                return 'bg-purple-600';
-            case 'development':
-            case 'api-integration':
-                return 'bg-indigo-600';
-            case 'search':
-                return 'bg-orange-600';
-            default:
-                return 'bg-gray-600';
-        }
-    };
-
-    // Helper function to format last updated time
-    const formatLastUpdated = (dateString: string) => {
-        const date = new Date(dateString);
-        const now = new Date();
-        const diffTime = Math.abs(now.getTime() - date.getTime());
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
         
-        if (diffDays === 1) return '1d ago';
-        if (diffDays < 7) return `${diffDays}d ago`;
-        if (diffDays < 30) return `${Math.ceil(diffDays / 7)}w ago`;
-        return `${Math.ceil(diffDays / 30)}m ago`;
-    };
+        const totalServers = allServers.length;
+        const totalDownloads = allServers.reduce((sum, server) => sum + server.usage.downloads, 0);
+        const uniqueCategories = new Set(allServers.map(server => server.category)).size;
+        const averageQualityScore = Math.round(
+            allServers.reduce((sum, server) => sum + server.quality.score, 0) / allServers.length
+        );
+        
+        return {
+            totalServers,
+            totalDownloads,
+            uniqueCategories,
+            averageQualityScore
+        };
+    }, [allServers]);
+
+    // Group servers by category
+    const serversByCategory = useMemo(() => {
+        if (!allServers || !categories) return {};
+        
+        const grouped: Record<string, typeof allServers> = {};
+        categories.forEach(category => {
+            grouped[category.id] = allServers.filter(server => server.category === category.id);
+        });
+        
+        return grouped;
+    }, [allServers, categories]);
 
     return (
         <div className="min-h-screen bg-white dark:bg-gray-900">
             {/* Hero Section */}
             <section className="relative overflow-hidden cosmic-bg h-[80vh] flex items-center">
                 <CosmicBackground />
-                
-                {/* Additional visible test stars */}
-                <div className="star large" style={{ left: '10%', top: '20%', animationDelay: '0s', zIndex: 2, position: 'absolute' }}></div>
-                <div className="star large" style={{ left: '90%', top: '30%', animationDelay: '1s', zIndex: 2, position: 'absolute' }}></div>
-                <div className="star medium" style={{ left: '30%', top: '40%', animationDelay: '0.5s', zIndex: 2, position: 'absolute' }}></div>
-                <div className="star medium" style={{ left: '70%', top: '60%', animationDelay: '1.5s', zIndex: 2, position: 'absolute' }}></div>
-                <div className="star small" style={{ left: '50%', top: '15%', animationDelay: '0.3s', zIndex: 2, position: 'absolute' }}></div>
-                <div className="star small" style={{ left: '80%', top: '80%', animationDelay: '2s', zIndex: 2, position: 'absolute' }}></div>
-                
-                
-                
-                {/* Test photons */}
-                <div className="photon" style={{ top: '25%', animationDelay: '0s', zIndex: 3 }}></div>
-                <div className="photon" style={{ top: '55%', animationDelay: '2s', zIndex: 3 }}></div>
-                <div className="photon" style={{ top: '75%', animationDelay: '4s', zIndex: 3 }}></div>
-                
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black opacity-30" style={{ zIndex: 5 }}></div>
                 <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32" style={{ zIndex: 10 }}>
                     <div className="text-center animate-fade-in-up">
@@ -145,7 +177,7 @@ const Home: React.FC = () => {
                                 boxShadow: '0 8px 32px rgba(100, 255, 218, 0.1)'
                             }}>
                                 <div className="text-3xl font-bold bg-gradient-to-r from-cyan-300 to-white bg-clip-text text-transparent">
-                                    {totalServers > 0 ? `${totalServers}+` : '200+'}
+                                    {statistics.totalServers > 0 ? `${statistics.totalServers}+` : '200+'}
                                 </div>
                                 <div className="text-gray-300">MCP Servers</div>
                             </div>
@@ -156,7 +188,7 @@ const Home: React.FC = () => {
                                 boxShadow: '0 8px 32px rgba(147, 51, 234, 0.1)'
                             }}>
                                 <div className="text-3xl font-bold bg-gradient-to-r from-purple-300 to-white bg-clip-text text-transparent">
-                                    {uniqueCategories > 0 ? uniqueCategories : '10'}
+                                    {statistics.uniqueCategories > 0 ? statistics.uniqueCategories : '10'}
                                 </div>
                                 <div className="text-gray-300">Categories</div>
                             </div>
@@ -167,10 +199,10 @@ const Home: React.FC = () => {
                                 boxShadow: '0 8px 32px rgba(34, 197, 94, 0.1)'
                             }}>
                                 <div className="text-3xl font-bold bg-gradient-to-r from-green-300 to-white bg-clip-text text-transparent">
-                                    {totalDownloads > 0 
-                                        ? totalDownloads >= 1000 
-                                            ? `${Math.floor(totalDownloads / 1000)}K+` 
-                                            : `${totalDownloads}+`
+                                    {statistics.totalDownloads > 0 
+                                        ? statistics.totalDownloads >= 1000 
+                                            ? `${Math.floor(statistics.totalDownloads / 1000)}K+` 
+                                            : `${statistics.totalDownloads}+`
                                         : '50K+'
                                     }
                                 </div>
@@ -183,7 +215,7 @@ const Home: React.FC = () => {
                                 boxShadow: '0 8px 32px rgba(249, 115, 22, 0.1)'
                             }}>
                                 <div className="text-3xl font-bold bg-gradient-to-r from-orange-300 to-white bg-clip-text text-transparent">
-                                    {averageQualityScore}%
+                                    {statistics.averageQualityScore}%
                                 </div>
                                 <div className="text-gray-300">Quality Score</div>
                             </div>
@@ -192,255 +224,100 @@ const Home: React.FC = () => {
                 </div>
             </section>
 
-            {/* Categories Section */}
+
+            {/* Servers by Category Section */}
             <section className="py-16 bg-white dark:bg-gray-900">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-12">
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                            Browse by Category
-                        </h2>
-                        <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                            Discover MCP servers organized by functionality and use case
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-                        {/* File System Category */}
-                        <Link
-                            to="/categories/filesystem"
-                            className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 cursor-pointer border border-blue-100 dark:border-blue-800 transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg"
-                        >
-                            <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
-                                <Folder className="text-white text-xl w-6 h-6" />
-                            </div>
-                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                                File System
-                            </h3>
-                            <p className="text-gray-600 dark:text-gray-300 text-sm mb-3">
-                                File operations and cloud storage integration
-                            </p>
-                            <div className="text-blue-600 dark:text-blue-400 font-medium text-sm">
-                                25 servers
-                            </div>
-                        </Link>
-
-                        {/* Database Category */}
-                        <Link
-                            to="/categories/database"
-                            className="bg-green-50 dark:bg-green-900/20 rounded-xl p-6 cursor-pointer border border-green-100 dark:border-green-800 transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg"
-                        >
-                            <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mb-4">
-                                <Database className="text-white text-xl w-6 h-6" />
-                            </div>
-                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                                Database
-                            </h3>
-                            <p className="text-gray-600 dark:text-gray-300 text-sm mb-3">
-                                SQL and NoSQL database connections
-                            </p>
-                            <div className="text-green-600 dark:text-green-400 font-medium text-sm">
-                                30 servers
-                            </div>
-                        </Link>
-
-                        {/* Communication Category */}
-                        <Link
-                            to="/categories/communication"
-                            className="bg-purple-50 dark:bg-purple-900/20 rounded-xl p-6 cursor-pointer border border-purple-100 dark:border-purple-800 transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg"
-                        >
-                            <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mb-4">
-                                <MessageCircle className="text-white text-xl w-6 h-6" />
-                            </div>
-                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                                Communication
-                            </h3>
-                            <p className="text-gray-600 dark:text-gray-300 text-sm mb-3">
-                                Messaging and notification services
-                            </p>
-                            <div className="text-purple-600 dark:text-purple-400 font-medium text-sm">
-                                18 servers
-                            </div>
-                        </Link>
-
-                        {/* Development Tools */}
-                        <Link
-                            to="/categories/development"
-                            className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 cursor-pointer border border-indigo-100 dark:border-indigo-800 transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg"
-                        >
-                            <div className="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center mb-4">
-                                <Code className="text-white text-xl w-6 h-6" />
-                            </div>
-                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                                Development
-                            </h3>
-                            <p className="text-gray-600 dark:text-gray-300 text-sm mb-3">
-                                Git, CI/CD, and code analysis tools
-                            </p>
-                            <div className="text-indigo-600 dark:text-indigo-400 font-medium text-sm">
-                                22 servers
-                            </div>
-                        </Link>
-
-                        {/* AI/ML Category */}
-                        <Link
-                            to="/categories/ai-ml"
-                            className="bg-pink-50 dark:bg-pink-900/20 rounded-xl p-6 cursor-pointer border border-pink-100 dark:border-pink-800 transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg"
-                        >
-                            <div className="w-12 h-12 bg-pink-600 rounded-lg flex items-center justify-center mb-4">
-                                <Brain className="text-white text-xl w-6 h-6" />
-                            </div>
-                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                                AI/ML
-                            </h3>
-                            <p className="text-gray-600 dark:text-gray-300 text-sm mb-3">
-                                Machine learning and AI services
-                            </p>
-                            <div className="text-pink-600 dark:text-pink-400 font-medium text-sm">
-                                15 servers
-                            </div>
-                        </Link>
-                    </div>
-
-                    <div className="text-center mt-8">
-                        <Link
-                            to="/categories"
-                            className="inline-flex items-center px-6 py-3 bg-blue-600 dark:bg-blue-700 text-white font-medium rounded-lg hover:bg-blue-700 dark:hover:bg-blue-800 transition-colors"
-                        >
-                            View All Categories
-                            <ArrowRight className="ml-2 h-4 w-4" />
-                        </Link>
-                    </div>
-                </div>
-            </section>
-
-            {/* Featured Servers Section */}
-            <section className="py-16 bg-gray-50 dark:bg-gray-800">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-12">
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                            Featured Servers
-                        </h2>
-                        <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                            Handpicked MCP servers recommended by our community
-                        </p>
-                    </div>
-
-                    {serversLoading ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {[1, 2, 3].map((i) => (
-                                <div key={i} className="bg-white dark:bg-gray-700 rounded-xl shadow-sm border border-gray-200 dark:border-gray-600 p-6 animate-pulse">
-                                    <div className="flex items-start justify-between mb-4">
-                                        <div className="flex items-center">
-                                            <div className="w-10 h-10 bg-gray-300 dark:bg-gray-600 rounded-lg mr-3"></div>
-                                            <div>
-                                                <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-32 mb-2"></div>
-                                                <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
-                                            </div>
+                    {/* Category Navigation */}
+                    {categories && (
+                        <div className="flex flex-wrap justify-center gap-4 mb-16">
+                            {categories.map((category) => {
+                                const categoryServers = serversByCategory[category.id] || [];
+                                if (categoryServers.length === 0) return null;
+                                
+                                return (
+                                    <button
+                                        key={category.id}
+                                        onClick={() => {
+                                            const element = document.getElementById(`category-${category.id}`);
+                                            if (element) {
+                                                element.scrollIntoView({ 
+                                                    behavior: 'smooth',
+                                                    block: 'start'
+                                                });
+                                            }
+                                        }}
+                                        className="group flex items-center px-6 py-3 bg-gray-100 dark:bg-gray-800 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600 cursor-pointer"
+                                    >
+                                        <div className={`w-8 h-8 rounded-lg ${getCategoryColor(category.id)} flex items-center justify-center mr-3 group-hover:scale-110 transition-transform`}>
+                                            {getCategoryIcon(category.id)}
                                         </div>
-                                        <div className="text-right">
-                                            <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-12 mb-1"></div>
-                                            <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
-                                        </div>
-                                    </div>
-                                    <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded mb-4"></div>
-                                    <div className="flex gap-2 mb-4">
-                                        <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
-                                        <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-24"></div>
-                                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {featuredServers?.map((server) => (
-                                <div key={server.id} className="bg-white dark:bg-gray-700 rounded-xl shadow-sm border border-gray-200 dark:border-gray-600 p-6 transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg">
-                                    <div className="flex items-start justify-between mb-4">
-                                        <div className="flex items-center">
-                                            <div className={`w-10 h-10 ${getCategoryColor(server.category)} rounded-lg flex items-center justify-center mr-3`}>
-                                                {getCategoryIcon(server.category)}
-                                            </div>
-                                            <div>
-                                                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                                                    {server.name}
-                                                </h3>
-                                                <div className="flex items-center space-x-2 mt-1">
-                                                    {server.verified && (
-                                                        <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-xs px-2 py-1 rounded-full">
-                                                            Official
-                                                        </span>
-                                                    )}
-                                                    {server.featured && (
-                                                        <span className="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 text-xs px-2 py-1 rounded-full">
-                                                            Featured
-                                                        </span>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="text-right">
-                                            <div className="flex items-center text-yellow-500">
-                                                <Star className="w-4 h-4 fill-current" />
-                                                <span className="ml-1 text-gray-900 dark:text-white font-medium">
-                                                    {(server.quality.score / 20).toFixed(1)}
-                                                </span>
+                                        <div>
+                                            <div className="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                                {category.name.en}
                                             </div>
                                             <div className="text-sm text-gray-500 dark:text-gray-400">
-                                                {server.repository.stars >= 1000 
-                                                    ? `${(server.repository.stars / 1000).toFixed(1)}k` 
-                                                    : server.repository.stars} stars
+                                                {categoryServers.length} servers
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <p className="text-gray-600 dark:text-gray-300 mb-4">
-                                        {server.longDescription || server.description}
-                                    </p>
-
-                                    <div className="flex flex-wrap gap-2 mb-4">
-                                        {server.tags.slice(0, 3).map((tag) => (
-                                            <span key={tag} className="bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded">
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
-                                            <span>
-                                                <Download className="w-4 h-4 mr-1 inline" />
-                                                {server.usage.downloads >= 1000 
-                                                    ? `${(server.usage.downloads / 1000).toFixed(0)}k` 
-                                                    : server.usage.downloads}
-                                            </span>
-                                            <span>
-                                                <Calendar className="w-4 h-4 mr-1 inline" />
-                                                Updated {formatLastUpdated(server.repository.lastUpdated)}
-                                            </span>
-                                        </div>
-                                        <Link
-                                            to={`/servers/${server.id}`}
-                                            className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
-                                        >
-                                            View Details
-                                            <ArrowRight className="w-4 h-4 ml-1 inline" />
-                                        </Link>
-                                    </div>
-                                </div>
-                            ))}
+                                    </button>
+                                );
+                            })}
                         </div>
                     )}
 
-                    <div className="text-center mt-8">
+                    {categories && allServers ? (
+                        categories.map((category) => {
+                            const categoryServers = serversByCategory[category.id] || [];
+                            return (
+                                <CategorySection
+                                    key={category.id}
+                                    category={category}
+                                    servers={categoryServers}
+                                    getCategoryIcon={getCategoryIcon}
+                                    getCategoryColor={getCategoryColor}
+                                    formatLastUpdated={formatLastUpdated}
+                                />
+                            );
+                        })
+                    ) : (
+                        <div className="text-center">
+                            <div className="animate-pulse">
+                                <div className="h-8 bg-gray-300 dark:bg-gray-600 rounded w-64 mx-auto mb-4"></div>
+                                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-96 mx-auto mb-8"></div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                                    {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+                                        <div key={i} className="bg-white dark:bg-gray-700 rounded-xl p-6 border border-gray-200 dark:border-gray-600">
+                                            <div className="flex items-center mb-4">
+                                                <div className="w-10 h-10 bg-gray-300 dark:bg-gray-600 rounded-lg mr-3"></div>
+                                                <div className="flex-1">
+                                                    <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-24 mb-2"></div>
+                                                    <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
+                                                </div>
+                                            </div>
+                                            <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded mb-4"></div>
+                                            <div className="flex gap-2 mb-4">
+                                                <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-12"></div>
+                                                <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
+                                            </div>
+                                            <div className="flex justify-between">
+                                                <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
+                                                <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-12"></div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    <div className="text-center mt-12">
                         <Link
                             to="/servers"
-                            className="inline-flex items-center px-6 py-3 bg-blue-600 dark:bg-blue-700 text-white font-medium rounded-lg hover:bg-blue-700 dark:hover:bg-blue-800 transition-colors"
+                            className="inline-flex items-center px-8 py-4 bg-blue-600 dark:bg-blue-700 text-white font-medium rounded-lg hover:bg-blue-700 dark:hover:bg-blue-800 transition-colors shadow-lg hover:shadow-xl"
                         >
                             Browse All Servers
-                            <ArrowRight className="ml-2 h-4 w-4" />
+                            <ArrowRight className="ml-2 h-5 w-5" />
                         </Link>
                     </div>
                 </div>
