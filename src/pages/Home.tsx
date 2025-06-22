@@ -230,7 +230,7 @@ const Home: React.FC = () => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     {/* Category Navigation */}
                     {categories && (
-                        <div className="flex flex-wrap justify-center gap-4 mb-16">
+                        <div className="flex flex-wrap justify-space-between gap-4 mb-16">
                             {categories.map((category) => {
                                 const categoryServers = serversByCategory[category.id] || [];
                                 if (categoryServers.length === 0) return null;
