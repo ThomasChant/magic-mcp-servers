@@ -117,7 +117,7 @@ const ServerDetail: React.FC = () => {
                                 </Link>
                             </li>
                             <li>
-                                <ChevronRight className="h-4 w-4 text-gray-400" />
+                                <ChevronRight className="h-4 w-4 text-gray-400 dark:text-gray-500" />
                             </li>
                             <li>
                                 <Link
@@ -128,7 +128,7 @@ const ServerDetail: React.FC = () => {
                                 </Link>
                             </li>
                             <li>
-                                <ChevronRight className="h-4 w-4 text-gray-400" />
+                                <ChevronRight className="h-4 w-4 text-gray-400 dark:text-gray-500" />
                             </li>
                             <li>
                                 <Link
@@ -139,7 +139,7 @@ const ServerDetail: React.FC = () => {
                                 </Link>
                             </li>
                             <li>
-                                <ChevronRight className="h-4 w-4 text-gray-400" />
+                                <ChevronRight className="h-4 w-4 text-gray-400 dark:text-gray-500" />
                             </li>
                             <li className="text-gray-900 font-medium">
                                 {server.name}

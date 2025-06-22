@@ -132,7 +132,7 @@ const CategoryDetail: React.FC = () => {
     const ServerCard: React.FC<{ server: MCPServer }> = ({ server }) => {
         if (viewMode === "list") {
             return (
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-all duration-300 hover:-translate-y-1">
                     <div className="flex items-start justify-between">
                         <div className="flex items-start space-x-4 flex-1">
                             <div
@@ -148,38 +148,38 @@ const CategoryDetail: React.FC = () => {
                                 <div className="flex items-center gap-2 mb-2">
                                     <Link
                                         to={`/servers/${server.id}`}
-                                        className="text-lg font-semibold text-gray-900 hover:text-primary-600 transition-colors"
+                                        className="text-lg font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
                                     >
                                         {server.name}
                                     </Link>
                                     {server.verified && (
-                                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">
                                             Verified
                                         </span>
                                     )}
                                     {server.featured && (
-                                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
                                             Featured
                                         </span>
                                     )}
                                 </div>
-                                <p className="text-gray-600 mb-3 text-sm">
+                                <p className="text-gray-600 dark:text-gray-300 mb-3 text-sm">
                                     {server.description}
                                 </p>
                                 <div className="flex flex-wrap gap-2 mb-3">
                                     {server.tags.slice(0, 4).map((tag) => (
                                         <span
                                             key={tag}
-                                            className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-100 text-gray-700"
+                                            className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
                                         >
                                             {tag}
                                         </span>
                                     ))}
                                 </div>
-                                <div className="flex items-center space-x-6 text-sm text-gray-500">
+                                <div className="flex items-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
                                     <div className="flex items-center">
                                         <Star className="h-4 w-4 text-yellow-500 mr-1" />
-                                        <span className="font-medium text-gray-900">
+                                        <span className="font-medium text-gray-900 dark:text-white">
                                             {server.repository.stars.toLocaleString()}
                                         </span>
                                     </div>
@@ -198,8 +198,8 @@ const CategoryDetail: React.FC = () => {
                         </div>
                         <div className="flex items-center space-x-2 ml-4">
                             <div className="text-right mb-2">
-                                <div className="text-sm text-gray-500">Quality Score</div>
-                                <div className="text-lg font-bold text-primary-600">
+                                <div className="text-sm text-gray-500 dark:text-gray-400">Quality Score</div>
+                                <div className="text-lg font-bold text-primary-600 dark:text-primary-400">
                                     {server.quality.score}/100
                                 </div>
                             </div>
@@ -208,13 +208,13 @@ const CategoryDetail: React.FC = () => {
                                     to={server.repository.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="p-2 text-gray-400 hover:text-gray-600 transition-colors rounded-lg hover:bg-gray-100"
+                                    className="p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
                                 >
                                     <Github className="h-5 w-5" />
                                 </Link>
                                 <Link
                                     to={`/servers/${server.id}`}
-                                    className="p-2 text-gray-400 hover:text-primary-600 transition-colors rounded-lg hover:bg-primary-50"
+                                    className="p-2 text-gray-400 dark:text-gray-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/30"
                                 >
                                     <ExternalLink className="h-5 w-5" />
                                 </Link>
@@ -226,7 +226,7 @@ const CategoryDetail: React.FC = () => {
         }
 
         return (
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
                 <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center">
                         <div
@@ -242,19 +242,19 @@ const CategoryDetail: React.FC = () => {
                             <div className="flex items-center gap-2 mb-1">
                                 <Link
                                     to={`/servers/${server.id}`}
-                                    className="text-lg font-semibold text-gray-900 hover:text-primary-600 transition-colors"
+                                    className="text-lg font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
                                 >
                                     {server.name}
                                 </Link>
                             </div>
                             <div className="flex gap-2">
                                 {server.verified && (
-                                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">
                                         Verified
                                     </span>
                                 )}
                                 {server.featured && (
-                                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
                                         Featured
                                     </span>
                                 )}
@@ -264,14 +264,14 @@ const CategoryDetail: React.FC = () => {
                     <div className="text-right">
                         <div className="flex items-center text-yellow-500">
                             <Star className="h-4 w-4" />
-                            <span className="ml-1 text-gray-900 font-medium text-sm">
+                            <span className="ml-1 text-gray-900 dark:text-white font-medium text-sm">
                                 {server.quality.score}/100
                             </span>
                         </div>
                     </div>
                 </div>
                 
-                <p className="text-gray-600 text-sm mb-4">
+                <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
                     {server.description}
                 </p>
                 
@@ -279,14 +279,14 @@ const CategoryDetail: React.FC = () => {
                     {server.tags.slice(0, 3).map((tag) => (
                         <span
                             key={tag}
-                            className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-100 text-gray-700"
+                            className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
                         >
                             {tag}
                         </span>
                     ))}
                 </div>
 
-                <div className="flex items-center justify-between text-sm text-gray-500 border-t border-gray-100 pt-4">
+                <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 border-t border-gray-100 dark:border-gray-700 pt-4">
                     <div className="flex items-center space-x-4">
                         <div className="flex items-center">
                             <Star className="h-4 w-4 text-yellow-500 mr-1" />
@@ -302,13 +302,13 @@ const CategoryDetail: React.FC = () => {
                             to={server.repository.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-1 text-gray-400 hover:text-gray-600 transition-colors"
+                            className="p-1 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                         >
                             <Github className="h-4 w-4" />
                         </Link>
                         <Link
                             to={`/servers/${server.id}`}
-                            className="text-primary-600 hover:text-primary-700 font-medium text-sm"
+                            className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium text-sm"
                         >
                             View Details <ExternalLink className="h-3 w-3 inline ml-1" />
                         </Link>
@@ -321,18 +321,18 @@ const CategoryDetail: React.FC = () => {
     if (!category && !serversLoading) {
         return (
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-                <div className="text-red-400 mb-4">
+                <div className="text-red-400 dark:text-red-500 mb-4">
                     <AlertCircle className="h-12 w-12 mx-auto" />
                 </div>
-                <h1 className="text-2xl font-bold text-gray-900 mb-4">
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                     Category Not Found
                 </h1>
-                <p className="text-gray-600 mb-8">
+                <p className="text-gray-600 dark:text-gray-300 mb-8">
                     Sorry, we couldn't find the category you're looking for.
                 </p>
                 <Link
                     to="/categories"
-                    className="inline-flex items-center px-4 py-2 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors"
+                    className="inline-flex items-center px-4 py-2 bg-primary-600 dark:bg-primary-500 text-white font-medium rounded-lg hover:bg-primary-700 dark:hover:bg-primary-600 transition-colors"
                 >
                     <ArrowLeft className="mr-2 h-4 w-4" />
                     Back to Categories
@@ -342,14 +342,14 @@ const CategoryDetail: React.FC = () => {
     }
 
     return (
-        <div className="bg-gray-50 min-h-screen">
+        <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
             {/* Page Header */}
-            <div className="bg-white border-b border-gray-200">
+            <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     {/* Back Button */}
                     <Link
                         to="/categories"
-                        className="inline-flex items-center text-gray-600 hover:text-gray-900 mb-6 transition-colors"
+                        className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mb-6 transition-colors"
                     >
                         <ArrowLeft className="mr-2 h-4 w-4" />
                         Back to Categories
@@ -370,11 +370,11 @@ const CategoryDetail: React.FC = () => {
                                 </div>
                                 <div>
                                     <div className="flex items-center space-x-3 mb-2">
-                                        <h1 className="text-3xl font-bold text-gray-900">
+                                        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
                                             {category.name["en"] || category.name["zh-CN"]}
                                         </h1>
                                         <span
-                                            className="text-sm bg-white bg-opacity-20 px-3 py-1 rounded-full"
+                                            className="text-sm bg-white dark:bg-gray-700 bg-opacity-20 px-3 py-1 rounded-full"
                                             style={{
                                                 backgroundColor: category.color + "20",
                                                 color: category.color,
@@ -383,7 +383,7 @@ const CategoryDetail: React.FC = () => {
                                             {filteredAndSortedServers.length} servers
                                         </span>
                                     </div>
-                                    <p className="text-lg text-gray-600">
+                                    <p className="text-lg text-gray-600 dark:text-gray-300">
                                         {category.description["en"] || category.description["zh-CN"]}
                                     </p>
                                     
@@ -393,7 +393,7 @@ const CategoryDetail: React.FC = () => {
                                             {category.subcategories.map((sub) => (
                                                 <span
                                                     key={sub.id}
-                                                    className="inline-flex items-center px-3 py-1 rounded-md text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors cursor-pointer"
+                                                    className="inline-flex items-center px-3 py-1 rounded-md text-sm font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors cursor-pointer"
                                                     onClick={() => setFilters({
                                                         ...filters,
                                                         subcategory: filters.subcategory === sub.id ? undefined : sub.id
@@ -414,13 +414,13 @@ const CategoryDetail: React.FC = () => {
                             {/* View Toggle and Sort */}
                             <div className="flex items-center space-x-4">
                                 <div className="flex items-center space-x-2">
-                                    <span className="text-sm text-gray-600">View:</span>
+                                    <span className="text-sm text-gray-600 dark:text-gray-400">View:</span>
                                     <button
                                         onClick={() => setViewMode("grid")}
                                         className={`p-2 rounded-md ${
                                             viewMode === "grid"
-                                                ? "bg-primary-100 text-primary-600"
-                                                : "text-gray-400 hover:text-gray-600"
+                                                ? "bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400"
+                                                : "text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
                                         }`}
                                     >
                                         <Grid3X3 className="h-4 w-4" />
@@ -429,8 +429,8 @@ const CategoryDetail: React.FC = () => {
                                         onClick={() => setViewMode("list")}
                                         className={`p-2 rounded-md ${
                                             viewMode === "list"
-                                                ? "bg-primary-100 text-primary-600"
-                                                : "text-gray-400 hover:text-gray-600"
+                                                ? "bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400"
+                                                : "text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
                                         }`}
                                     >
                                         <List className="h-4 w-4" />
@@ -450,7 +450,7 @@ const CategoryDetail: React.FC = () => {
                                                 });
                                             }
                                         }}
-                                        className="appearance-none bg-white border border-gray-300 rounded-md px-3 py-2 text-sm pr-8 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                                        className="appearance-none bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 text-sm pr-8 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                                     >
                                         {sortOptions.map((option) => (
                                             <option
@@ -461,7 +461,7 @@ const CategoryDetail: React.FC = () => {
                                             </option>
                                         ))}
                                     </select>
-                                    <ChevronDown className="absolute right-2 top-2.5 h-4 w-4 text-gray-400 pointer-events-none" />
+                                    <ChevronDown className="absolute right-2 top-2.5 h-4 w-4 text-gray-400 dark:text-gray-500 pointer-events-none" />
                                 </div>
                             </div>
                         </div>
@@ -473,22 +473,22 @@ const CategoryDetail: React.FC = () => {
                 <div className="flex flex-col lg:flex-row gap-8">
                     {/* Sidebar Filters */}
                     <div className="lg:w-1/4">
-                        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 sticky top-24">
-                            <h3 className="text-lg font-semibold text-gray-900 mb-4">Filters</h3>
+                        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 sticky top-24">
+                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Filters</h3>
 
                             {/* Search Filter */}
                             <div className="mb-6">
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                     Search
                                 </label>
                                 <div className="relative">
-                                    <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                                    <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400 dark:text-gray-500" />
                                     <input
                                         type="text"
                                         placeholder="Filter by name or description..."
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
-                                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"
+                                        className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
                                     />
                                 </div>
                             </div>
@@ -496,7 +496,7 @@ const CategoryDetail: React.FC = () => {
                             {/* Subcategory Filter */}
                             {category?.subcategories && category.subcategories.length > 0 && (
                                 <div className="mb-6">
-                                    <label className="block text-sm font-medium text-gray-700 mb-3">
+                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
                                         Subcategories
                                     </label>
                                     <div className="space-y-2">
@@ -511,9 +511,9 @@ const CategoryDetail: React.FC = () => {
                                                             subcategory: e.target.checked ? sub.id : undefined,
                                                         })
                                                     }
-                                                    className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                                                    className="rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500 dark:bg-gray-700"
                                                 />
-                                                <span className="ml-2 text-sm text-gray-700">
+                                                <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
                                                     {sub.name["en"] || sub.name["zh-CN"]}
                                                 </span>
                                             </label>
@@ -524,7 +524,7 @@ const CategoryDetail: React.FC = () => {
 
                             {/* Quality Score Filter */}
                             <div className="mb-6">
-                                <label className="block text-sm font-medium text-gray-700 mb-3">
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
                                     Quality Score
                                 </label>
                                 <div className="space-y-2">
@@ -540,9 +540,9 @@ const CategoryDetail: React.FC = () => {
                                                         qualityScore: filters.qualityScore === score ? undefined : score,
                                                     })
                                                 }
-                                                className="border-gray-300 text-primary-600 focus:ring-primary-500"
+                                                className="border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500 dark:bg-gray-700"
                                             />
-                                            <span className="ml-2 text-sm text-gray-700">
+                                            <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
                                                 {score}+ Score
                                             </span>
                                         </label>
@@ -552,7 +552,7 @@ const CategoryDetail: React.FC = () => {
 
                             {/* Server Type Filter */}
                             <div className="mb-6">
-                                <label className="block text-sm font-medium text-gray-700 mb-3">
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
                                     Server Type
                                 </label>
                                 <div className="space-y-2">
@@ -566,9 +566,9 @@ const CategoryDetail: React.FC = () => {
                                                     featured: e.target.checked || undefined,
                                                 })
                                             }
-                                            className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                                            className="rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500 dark:bg-gray-700"
                                         />
-                                        <span className="ml-2 text-sm text-gray-700">Featured</span>
+                                        <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">Featured</span>
                                     </label>
                                     <label className="flex items-center">
                                         <input
@@ -580,9 +580,9 @@ const CategoryDetail: React.FC = () => {
                                                     verified: e.target.checked || undefined,
                                                 })
                                             }
-                                            className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                                            className="rounded border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500 dark:bg-gray-700"
                                         />
-                                        <span className="ml-2 text-sm text-gray-700">Verified</span>
+                                        <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">Verified</span>
                                     </label>
                                 </div>
                             </div>
@@ -591,7 +591,7 @@ const CategoryDetail: React.FC = () => {
                             {(filters.subcategory || filters.qualityScore || filters.featured || filters.verified) && (
                                 <button
                                     onClick={() => setFilters({})}
-                                    className="w-full px-4 py-2 text-sm text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                                    className="w-full px-4 py-2 text-sm text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
                                 >
                                     Clear All Filters
                                 </button>
@@ -603,7 +603,7 @@ const CategoryDetail: React.FC = () => {
                     <div className="lg:w-3/4">
                         {/* Results Header */}
                         <div className="mb-6 flex items-center justify-between">
-                            <p className="text-gray-600">
+                            <p className="text-gray-600 dark:text-gray-400">
                                 Showing {filteredAndSortedServers.length} of {servers?.length || 0} servers
                             </p>
                         </div>
@@ -614,37 +614,37 @@ const CategoryDetail: React.FC = () => {
                                 {[...Array(6)].map((_, i) => (
                                     <div
                                         key={i}
-                                        className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 animate-pulse"
+                                        className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 animate-pulse"
                                     >
                                         <div className="flex items-center mb-4">
-                                            <div className="w-12 h-12 bg-gray-300 rounded-lg mr-3"></div>
+                                            <div className="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-lg mr-3"></div>
                                             <div className="flex-1">
-                                                <div className="h-5 bg-gray-300 rounded mb-2"></div>
-                                                <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                                                <div className="h-5 bg-gray-300 dark:bg-gray-600 rounded mb-2"></div>
+                                                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
                                             </div>
                                         </div>
-                                        <div className="h-4 bg-gray-200 rounded mb-3"></div>
-                                        <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
+                                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded mb-3"></div>
+                                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-4"></div>
                                         <div className="flex gap-2 mb-4">
-                                            <div className="h-6 w-16 bg-gray-200 rounded"></div>
-                                            <div className="h-6 w-16 bg-gray-200 rounded"></div>
+                                            <div className="h-6 w-16 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                                            <div className="h-6 w-16 bg-gray-200 dark:bg-gray-700 rounded"></div>
                                         </div>
-                                        <div className="flex justify-between border-t border-gray-100 pt-4">
-                                            <div className="h-4 w-32 bg-gray-200 rounded"></div>
-                                            <div className="h-4 w-20 bg-gray-200 rounded"></div>
+                                        <div className="flex justify-between border-t border-gray-100 dark:border-gray-700 pt-4">
+                                            <div className="h-4 w-32 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                                            <div className="h-4 w-20 bg-gray-200 dark:bg-gray-700 rounded"></div>
                                         </div>
                                     </div>
                                 ))}
                             </div>
                         ) : filteredAndSortedServers.length === 0 ? (
                             <div className="text-center py-16">
-                                <div className="text-gray-400 mb-4">
+                                <div className="text-gray-400 dark:text-gray-500 mb-4">
                                     <Search className="h-16 w-16 mx-auto" />
                                 </div>
-                                <h3 className="text-xl font-medium text-gray-900 mb-2">
+                                <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-2">
                                     No servers found in this category
                                 </h3>
-                                <p className="text-gray-600 mb-8">
+                                <p className="text-gray-600 dark:text-gray-400 mb-8">
                                     Try adjusting your filters or search for different terms
                                 </p>
                                 <div className="flex justify-center space-x-4">
@@ -653,13 +653,13 @@ const CategoryDetail: React.FC = () => {
                                             setFilters({});
                                             setSearchQuery("");
                                         }}
-                                        className="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
+                                        className="px-6 py-2 bg-primary-600 dark:bg-primary-500 text-white rounded-lg hover:bg-primary-700 dark:hover:bg-primary-600 transition-colors"
                                     >
                                         Clear All Filters
                                     </button>
                                     <Link
                                         to="/categories"
-                                        className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                                        className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                                     >
                                         Browse Categories
                                     </Link>
@@ -676,7 +676,7 @@ const CategoryDetail: React.FC = () => {
                         {/* Load More Button - Placeholder for pagination */}
                         {!serversLoading && filteredAndSortedServers.length > 0 && filteredAndSortedServers.length >= 9 && (
                             <div className="text-center mt-12">
-                                <button className="px-8 py-3 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                                <button className="px-8 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                                     Load More Servers
                                 </button>
                             </div>

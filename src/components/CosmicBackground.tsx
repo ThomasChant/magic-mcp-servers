@@ -56,37 +56,6 @@ const CosmicBackground: React.FC = () => {
         />
       ))}
 
-      {/* Enhanced Nebula effects */}
-      <div 
-        className="nebula"
-        style={{
-          left: '15%',
-          top: '25%',
-          width: '350px',
-          height: '350px',
-          animationDelay: '0s',
-        }}
-      />
-      <div 
-        className="nebula"
-        style={{
-          left: '65%',
-          top: '55%',
-          width: '280px',
-          height: '280px',
-          animationDelay: '7s',
-        }}
-      />
-      <div 
-        className="nebula"
-        style={{
-          left: '40%',
-          top: '10%',
-          width: '200px',
-          height: '200px',
-          animationDelay: '12s',
-        }}
-      />
     </div>
   );
 };

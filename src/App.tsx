@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Layout from "./components/Layout/Layout";
@@ -8,6 +9,7 @@ import CategoriesPage from "./pages/Categories";
 import CategoryDetailPage from "./pages/CategoryDetail";
 import DocsPage from "./pages/Docs";
 import AboutPage from "./pages/About";
+import { useAppStore } from "./store/useAppStore";
 
 // Create Query Client
 const queryClient = new QueryClient({
@@ -31,6 +33,16 @@ const NotFoundPage = () => (
 );
 
 function App() {
+    const theme = useAppStore((state) => state.theme);
+
+    useEffect(() => {
+        if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    }, [theme]);
+
     return (
         <QueryClientProvider client={queryClient}>
             <Router>

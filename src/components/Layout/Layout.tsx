@@ -9,7 +9,7 @@ const Layout: React.FC = () => {
 
     return (
         <div className={`min-h-screen ${theme === "dark" ? "dark" : ""}`}>
-            <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
+            <div className="bg-gray-50 dark:bg-gray-900 min-h-screen text-gray-900 dark:text-gray-100 transition-colors duration-200">
                 <Header />
                 <main className="flex-1">
                     <Outlet />

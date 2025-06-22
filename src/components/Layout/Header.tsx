@@ -47,7 +47,7 @@ const Header: React.FC = () => {
     ];
 
     return (
-        <nav className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <nav className="bg-white dark:bg-gray-900 shadow-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
@@ -58,7 +58,7 @@ const Header: React.FC = () => {
                                     M
                                 </span>
                             </div>
-                            <span className="text-xl font-bold text-gray-900">
+                            <span className="text-xl font-bold text-gray-900 dark:text-white">
                                 MCP Hub
                             </span>
                         </Link>
@@ -73,8 +73,8 @@ const Header: React.FC = () => {
                                     to={item.href}
                                     className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                                         item.current
-                                            ? "text-primary-600 bg-primary-50"
-                                            : "text-gray-600 hover:text-primary-600 hover:bg-gray-50"
+                                            ? "text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-primary-900/50"
+                                            : "text-gray-600 hover:text-primary-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:text-primary-400 dark:hover:bg-gray-800"
                                     }`}
                                 >
                                     {item.name}
@@ -95,16 +95,16 @@ const Header: React.FC = () => {
                                     onChange={(e) =>
                                         setSearchQuery(e.target.value)
                                     }
-                                    className="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                                    className="w-64 pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                                 />
-                                <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+                                <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400 dark:text-gray-500" />
                             </div>
                         </div>
 
                         {/* Theme Toggle */}
                         <button
                             onClick={toggleTheme}
-                            className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
+                            className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-800 rounded-md transition-colors"
                             title="Toggle Theme"
                         >
                             {theme === "light" ? (
@@ -116,22 +116,22 @@ const Header: React.FC = () => {
 
                         {/* Language Selector */}
                         <div className="relative group">
-                            <button className="flex items-center p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors">
+                            <button className="flex items-center p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-800 rounded-md transition-colors">
                                 <Globe className="h-5 w-5 mr-1" />
                                 <span className="text-sm">{language}</span>
                             </button>
 
-                            <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                                 {languages.map((lang) => (
                                     <button
                                         key={lang.code}
                                         onClick={() =>
                                             setLanguage(lang.code as Language)
                                         }
-                                        className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 first:rounded-t-lg last:rounded-b-lg ${
+                                        className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 first:rounded-t-lg last:rounded-b-lg ${
                                             language === lang.code
-                                                ? "text-primary-600 bg-primary-50"
-                                                : "text-gray-700"
+                                                ? "text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-primary-900/50"
+                                                : "text-gray-700 dark:text-gray-300"
                                         }`}
                                     >
                                         {lang.name}

@@ -130,12 +130,12 @@ const Categories: React.FC = () => {
 
     if (isLoading) {
         return (
-            <div className="bg-gray-50 min-h-screen">
-                <div className="bg-white border-b border-gray-200">
+            <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
+                <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                         <div className="text-center animate-pulse">
-                            <div className="h-10 bg-gray-200 rounded w-64 mx-auto mb-4"></div>
-                            <div className="h-6 bg-gray-200 rounded w-96 mx-auto"></div>
+                            <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-64 mx-auto mb-4"></div>
+                            <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-96 mx-auto"></div>
                         </div>
                     </div>
                 </div>
@@ -144,18 +144,18 @@ const Categories: React.FC = () => {
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
                             {[...Array(4)].map((_, i) => (
                                 <div key={i} className="text-center animate-pulse">
-                                    <div className="h-8 bg-gray-200 rounded w-16 mx-auto mb-2"></div>
-                                    <div className="h-4 bg-gray-200 rounded w-20 mx-auto"></div>
+                                    <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-16 mx-auto mb-2"></div>
+                                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-20 mx-auto"></div>
                                 </div>
                             ))}
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {[...Array(6)].map((_, i) => (
-                                <div key={i} className="bg-white rounded-xl shadow-lg overflow-hidden animate-pulse">
-                                    <div className="h-32 bg-gray-200"></div>
+                                <div key={i} className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden animate-pulse">
+                                    <div className="h-32 bg-gray-200 dark:bg-gray-700"></div>
                                     <div className="p-6">
-                                        <div className="h-4 bg-gray-200 rounded mb-2"></div>
-                                        <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded mb-2"></div>
+                                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
                                     </div>
                                 </div>
                             ))}
@@ -167,15 +167,15 @@ const Categories: React.FC = () => {
     }
 
     return (
-        <div className="bg-gray-50 min-h-screen">
+        <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
             {/* Page Header */}
-            <div className="bg-white border-b border-gray-200">
+            <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                     <div className="text-center">
-                        <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
                             Server Categories
                         </h1>
-                        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                        <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
                             Explore MCP servers organized by functionality and use case. Find the perfect server for your AI application needs.
                         </p>
                     </div>
@@ -188,27 +188,27 @@ const Categories: React.FC = () => {
                     {/* Stats */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
                         <div className="text-center">
-                            <div className="text-3xl font-bold text-blue-600">10</div>
-                            <div className="text-gray-600">Categories</div>
+                            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">10</div>
+                            <div className="text-gray-600 dark:text-gray-400">Categories</div>
                         </div>
                         <div className="text-center">
-                            <div className="text-3xl font-bold text-green-600">127</div>
-                            <div className="text-gray-600">Total Servers</div>
+                            <div className="text-3xl font-bold text-green-600 dark:text-green-400">127</div>
+                            <div className="text-gray-600 dark:text-gray-400">Total Servers</div>
                         </div>
                         <div className="text-center">
-                            <div className="text-3xl font-bold text-purple-600">45K+</div>
-                            <div className="text-gray-600">Downloads</div>
+                            <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">45K+</div>
+                            <div className="text-gray-600 dark:text-gray-400">Downloads</div>
                         </div>
                         <div className="text-center">
-                            <div className="text-3xl font-bold text-orange-600">98%</div>
-                            <div className="text-gray-600">Uptime</div>
+                            <div className="text-3xl font-bold text-orange-600 dark:text-orange-400">98%</div>
+                            <div className="text-gray-600 dark:text-gray-400">Uptime</div>
                         </div>
                     </div>
 
                     {/* Main Categories Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
                         {mainCategories.map((category) => (
-                            <div key={category.id} className="category-card bg-white rounded-xl shadow-lg overflow-hidden hover-lift">
+                            <div key={category.id} className="category-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover-lift">
                                 <div className={`${category.gradient} p-6 text-white`}>
                                     <div className="flex items-center justify-between mb-4">
                                         <div className="w-12 h-12 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
@@ -232,7 +232,7 @@ const Categories: React.FC = () => {
                                         ))}
                                     </div>
                                     <div className="flex items-center justify-between">
-                                        <span className="text-sm text-gray-500">
+                                        <span className="text-sm text-gray-500 dark:text-gray-400">
                                             Most Popular: {category.popular}
                                         </span>
                                         <Link
@@ -249,25 +249,25 @@ const Categories: React.FC = () => {
                     </div>
 
                     {/* Additional Categories */}
-                    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-                        <h2 className="text-2xl font-bold text-gray-900 mb-6">All Categories</h2>
+                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-8">
+                        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">All Categories</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {additionalCategories.map((category) => (
                                 <Link
                                     key={category.id}
                                     to={`/servers?category=${category.id}`}
-                                    className={`group p-4 border border-gray-200 rounded-lg hover:border-${category.color}-300 hover:bg-${category.color}-50 transition-colors`}
+                                    className={`group p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-${category.color}-300 hover:bg-${category.color}-50 dark:hover:bg-${category.color}-900 transition-colors`}
                                 >
                                     <div className="flex items-center mb-3">
                                         <div className={`w-10 h-10 bg-${category.color}-100 rounded-lg flex items-center justify-center mr-3 group-hover:bg-${category.color}-200`}>
                                             <category.icon className={`w-5 h-5 text-${category.color}-600`} />
                                         </div>
                                         <div>
-                                            <h3 className="font-semibold text-gray-900">{category.name}</h3>
-                                            <span className="text-sm text-gray-500">{category.serverCount} servers</span>
+                                            <h3 className="font-semibold text-gray-900 dark:text-white">{category.name}</h3>
+                                            <span className="text-sm text-gray-500 dark:text-gray-400">{category.serverCount} servers</span>
                                         </div>
                                     </div>
-                                    <p className="text-sm text-gray-600">{category.description}</p>
+                                    <p className="text-sm text-gray-600 dark:text-gray-300">{category.description}</p>
                                 </Link>
                             ))}
                         </div>
@@ -276,13 +276,13 @@ const Categories: React.FC = () => {
             </section>
 
             {/* Featured by Category */}
-            <section className="py-16 bg-gray-100">
+            <section className="py-16 bg-gray-100 dark:bg-gray-800">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
                             Featured Servers by Category
                         </h2>
-                        <p className="text-lg text-gray-600">
+                        <p className="text-lg text-gray-600 dark:text-gray-300">
                             Top-rated servers from each major category
                         </p>
                     </div>
@@ -296,7 +296,7 @@ const Categories: React.FC = () => {
                                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                                     activeTab === category.id
                                         ? "bg-blue-600 text-white"
-                                        : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                                        : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
                                 }`}
                             >
                                 {category.name}
@@ -307,14 +307,14 @@ const Categories: React.FC = () => {
                     {/* Featured Servers Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {featuredServers[activeTab as keyof typeof featuredServers]?.map((server, index) => (
-                            <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover-lift">
+                            <div key={index} className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover-lift">
                                 <div className="flex items-start justify-between mb-4">
                                     <div className="flex items-center">
                                         <div className={`w-10 h-10 bg-${mainCategories.find(c => c.id === activeTab)?.color}-600 rounded-lg flex items-center justify-center mr-3`}>
                                             <server.icon className="w-5 h-5 text-white" />
                                         </div>
                                         <div>
-                                            <h3 className="text-lg font-semibold text-gray-900">{server.name}</h3>
+                                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{server.name}</h3>
                                             <span className={`bg-${server.badgeColor}-100 text-${server.badgeColor}-800 text-xs px-2 py-1 rounded-full`}>
                                                 {server.badge}
                                             </span>
@@ -323,11 +323,11 @@ const Categories: React.FC = () => {
                                     <div className="text-right">
                                         <div className="flex items-center text-yellow-500">
                                             <Star className="w-4 h-4 fill-current" />
-                                            <span className="ml-1 text-gray-900 font-medium text-sm">{server.rating}</span>
+                                            <span className="ml-1 text-gray-900 dark:text-white font-medium text-sm">{server.rating}</span>
                                         </div>
                                     </div>
                                 </div>
-                                <p className="text-gray-600 text-sm mb-4">{server.description}</p>
+                                <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">{server.description}</p>
                                 <Link
                                     to="/servers/filesystem-mcp"
                                     className="text-blue-600 hover:text-blue-700 font-medium text-sm"
