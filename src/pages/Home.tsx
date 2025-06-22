@@ -15,6 +15,7 @@ import {
     Brain,
 } from "lucide-react";
 import { useAppStore } from "../store/useAppStore";
+import CosmicBackground from "../components/CosmicBackground";
 
 const Home: React.FC = () => {
     const { searchQuery, setSearchQuery } = useAppStore();
@@ -22,26 +23,54 @@ const Home: React.FC = () => {
     return (
         <div className="min-h-screen">
             {/* Hero Section */}
-            <section className="relative overflow-hidden" style={{
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-            }}>
-                <div className="absolute inset-0 bg-black opacity-20"></div>
-                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+            <section className="relative overflow-hidden cosmic-bg min-h-screen flex items-center">
+                <CosmicBackground />
+                
+                {/* Additional visible test stars */}
+                <div className="star large" style={{ left: '10%', top: '20%', animationDelay: '0s', zIndex: 2, position: 'absolute' }}></div>
+                <div className="star large" style={{ left: '90%', top: '30%', animationDelay: '1s', zIndex: 2, position: 'absolute' }}></div>
+                <div className="star medium" style={{ left: '30%', top: '40%', animationDelay: '0.5s', zIndex: 2, position: 'absolute' }}></div>
+                <div className="star medium" style={{ left: '70%', top: '60%', animationDelay: '1.5s', zIndex: 2, position: 'absolute' }}></div>
+                <div className="star small" style={{ left: '50%', top: '15%', animationDelay: '0.3s', zIndex: 2, position: 'absolute' }}></div>
+                <div className="star small" style={{ left: '80%', top: '80%', animationDelay: '2s', zIndex: 2, position: 'absolute' }}></div>
+                
+                {/* Additional test nebula - super visible */}
+                <div className="nebula" style={{ 
+                  left: '5%', 
+                  top: '70%', 
+                  width: '200px', 
+                  height: '200px', 
+                  animationDelay: '0s', 
+                  zIndex: 1, 
+                  position: 'absolute',
+                  background: 'radial-gradient(circle, rgba(100, 255, 218, 0.4) 0%, rgba(147, 51, 234, 0.3) 40%, rgba(255, 107, 107, 0.2) 70%, transparent 100%)',
+                  filter: 'blur(3px)'
+                }}></div>
+                
+                
+                {/* Test photons */}
+                <div className="photon" style={{ top: '25%', animationDelay: '0s', zIndex: 3 }}></div>
+                <div className="photon" style={{ top: '55%', animationDelay: '2s', zIndex: 3 }}></div>
+                <div className="photon" style={{ top: '75%', animationDelay: '4s', zIndex: 3 }}></div>
+                
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black opacity-30" style={{ zIndex: 5 }}></div>
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32" style={{ zIndex: 10 }}>
                     <div className="text-center animate-fade-in-up">
-                        <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+                        <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 relative z-10">
                             Discover the Best
-                            <span className="block text-blue-200">MCP Servers</span>
+                            <span className="block bg-gradient-to-r from-cyan-300 to-purple-300 bg-clip-text text-transparent">MCP Servers</span>
                         </h1>
-                        <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
+                        <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto relative z-10">
                             Your gateway to enhanced AI capabilities. Explore, integrate, and supercharge your applications with Model Context Protocol servers.
                         </p>
 
                         {/* Search Bar */}
-                        <div className="max-w-2xl mx-auto mb-8">
+                        <div className="max-w-2xl mx-auto mb-8 relative z-10">
                             <div className="relative rounded-xl p-2" style={{
-                                background: 'rgba(255, 255, 255, 0.1)',
-                                backdropFilter: 'blur(10px)',
-                                border: '1px solid rgba(255, 255, 255, 0.2)'
+                                background: 'rgba(100, 255, 218, 0.1)',
+                                backdropFilter: 'blur(15px)',
+                                border: '1px solid rgba(100, 255, 218, 0.3)',
+                                boxShadow: '0 8px 32px rgba(100, 255, 218, 0.1)'
                             }}>
                                 <input
                                     type="text"
@@ -50,7 +79,7 @@ const Home: React.FC = () => {
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     className="w-full px-6 py-4 bg-white rounded-lg border-0 focus:ring-2 focus:ring-blue-400 text-lg"
                                 />
-                                <button className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                <button className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-6 py-2 rounded-lg hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 shadow-lg hover:shadow-cyan-500/25">
                                     <Search className="h-4 w-4 mr-2 inline" />
                                     Search
                                 </button>
@@ -58,38 +87,42 @@ const Home: React.FC = () => {
                         </div>
 
                         {/* Quick Stats */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-                            <div className="rounded-lg p-4 text-center" style={{
-                                background: 'rgba(255, 255, 255, 0.1)',
-                                backdropFilter: 'blur(10px)',
-                                border: '1px solid rgba(255, 255, 255, 0.2)'
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto relative z-10">
+                            <div className="rounded-lg p-4 text-center hover-lift" style={{
+                                background: 'rgba(100, 255, 218, 0.1)',
+                                backdropFilter: 'blur(15px)',
+                                border: '1px solid rgba(100, 255, 218, 0.3)',
+                                boxShadow: '0 8px 32px rgba(100, 255, 218, 0.1)'
                             }}>
-                                <div className="text-3xl font-bold text-white">200+</div>
-                                <div className="text-blue-200">MCP Servers</div>
+                                <div className="text-3xl font-bold bg-gradient-to-r from-cyan-300 to-white bg-clip-text text-transparent">200+</div>
+                                <div className="text-gray-300">MCP Servers</div>
                             </div>
-                            <div className="rounded-lg p-4 text-center" style={{
-                                background: 'rgba(255, 255, 255, 0.1)',
-                                backdropFilter: 'blur(10px)',
-                                border: '1px solid rgba(255, 255, 255, 0.2)'
+                            <div className="rounded-lg p-4 text-center hover-lift" style={{
+                                background: 'rgba(147, 51, 234, 0.1)',
+                                backdropFilter: 'blur(15px)',
+                                border: '1px solid rgba(147, 51, 234, 0.3)',
+                                boxShadow: '0 8px 32px rgba(147, 51, 234, 0.1)'
                             }}>
-                                <div className="text-3xl font-bold text-white">10</div>
-                                <div className="text-blue-200">Categories</div>
+                                <div className="text-3xl font-bold bg-gradient-to-r from-purple-300 to-white bg-clip-text text-transparent">10</div>
+                                <div className="text-gray-300">Categories</div>
                             </div>
-                            <div className="rounded-lg p-4 text-center" style={{
-                                background: 'rgba(255, 255, 255, 0.1)',
-                                backdropFilter: 'blur(10px)',
-                                border: '1px solid rgba(255, 255, 255, 0.2)'
+                            <div className="rounded-lg p-4 text-center hover-lift" style={{
+                                background: 'rgba(34, 197, 94, 0.1)',
+                                backdropFilter: 'blur(15px)',
+                                border: '1px solid rgba(34, 197, 94, 0.3)',
+                                boxShadow: '0 8px 32px rgba(34, 197, 94, 0.1)'
                             }}>
-                                <div className="text-3xl font-bold text-white">50K+</div>
-                                <div className="text-blue-200">Downloads</div>
+                                <div className="text-3xl font-bold bg-gradient-to-r from-green-300 to-white bg-clip-text text-transparent">50K+</div>
+                                <div className="text-gray-300">Downloads</div>
                             </div>
-                            <div className="rounded-lg p-4 text-center" style={{
-                                background: 'rgba(255, 255, 255, 0.1)',
-                                backdropFilter: 'blur(10px)',
-                                border: '1px solid rgba(255, 255, 255, 0.2)'
+                            <div className="rounded-lg p-4 text-center hover-lift" style={{
+                                background: 'rgba(249, 115, 22, 0.1)',
+                                backdropFilter: 'blur(15px)',
+                                border: '1px solid rgba(249, 115, 22, 0.3)',
+                                boxShadow: '0 8px 32px rgba(249, 115, 22, 0.1)'
                             }}>
-                                <div className="text-3xl font-bold text-white">24/7</div>
-                                <div className="text-blue-200">Support</div>
+                                <div className="text-3xl font-bold bg-gradient-to-r from-orange-300 to-white bg-clip-text text-transparent">24/7</div>
+                                <div className="text-gray-300">Support</div>
                             </div>
                         </div>
                     </div>
