@@ -16,14 +16,76 @@ import {
 } from "lucide-react";
 import { useAppStore } from "../store/useAppStore";
 import CosmicBackground from "../components/CosmicBackground";
+import { useFeaturedServers, useServers } from "../hooks/useData";
 
 const Home: React.FC = () => {
     const { searchQuery, setSearchQuery } = useAppStore();
+    const { data: featuredServers, isLoading: serversLoading } = useFeaturedServers();
+    const { data: allServers } = useServers();
+    
+    // Calculate real statistics from server data
+    const totalServers = allServers?.length || 0;
+    const totalDownloads = allServers?.reduce((sum, server) => sum + server.usage.downloads, 0) || 0;
+    const uniqueCategories = new Set(allServers?.map(server => server.category)).size || 0;
+    const averageQualityScore = allServers && allServers.length > 0 
+        ? Math.round(allServers.reduce((sum, server) => sum + server.quality.score, 0) / allServers.length)
+        : 90;
+
+    // Helper function to get appropriate icon for server category
+    const getCategoryIcon = (category: string) => {
+        switch (category) {
+            case 'filesystem':
+                return <Folder className="text-white w-5 h-5" />;
+            case 'database':
+                return <Database className="text-white w-5 h-5" />;
+            case 'communication':
+                return <MessageCircle className="text-white w-5 h-5" />;
+            case 'development':
+            case 'api-integration':
+                return <Code className="text-white w-5 h-5" />;
+            case 'search':
+                return <Search className="text-white w-5 h-5" />;
+            default:
+                return <Code className="text-white w-5 h-5" />;
+        }
+    };
+
+    // Helper function to get category color
+    const getCategoryColor = (category: string) => {
+        switch (category) {
+            case 'filesystem':
+                return 'bg-blue-600';
+            case 'database':
+                return 'bg-green-600';
+            case 'communication':
+                return 'bg-purple-600';
+            case 'development':
+            case 'api-integration':
+                return 'bg-indigo-600';
+            case 'search':
+                return 'bg-orange-600';
+            default:
+                return 'bg-gray-600';
+        }
+    };
+
+    // Helper function to format last updated time
+    const formatLastUpdated = (dateString: string) => {
+        const date = new Date(dateString);
+        const now = new Date();
+        const diffTime = Math.abs(now.getTime() - date.getTime());
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        
+        if (diffDays === 1) return '1d ago';
+        if (diffDays < 7) return `${diffDays}d ago`;
+        if (diffDays < 30) return `${Math.ceil(diffDays / 7)}w ago`;
+        return `${Math.ceil(diffDays / 30)}m ago`;
+    };
 
     return (
         <div className="min-h-screen bg-white dark:bg-gray-900">
             {/* Hero Section */}
-            <section className="relative overflow-hidden cosmic-bg min-h-screen flex items-center">
+            <section className="relative overflow-hidden cosmic-bg h-[80vh] flex items-center">
                 <CosmicBackground />
                 
                 {/* Additional visible test stars */}
@@ -82,7 +144,9 @@ const Home: React.FC = () => {
                                 border: '1px solid rgba(100, 255, 218, 0.3)',
                                 boxShadow: '0 8px 32px rgba(100, 255, 218, 0.1)'
                             }}>
-                                <div className="text-3xl font-bold bg-gradient-to-r from-cyan-300 to-white bg-clip-text text-transparent">200+</div>
+                                <div className="text-3xl font-bold bg-gradient-to-r from-cyan-300 to-white bg-clip-text text-transparent">
+                                    {totalServers > 0 ? `${totalServers}+` : '200+'}
+                                </div>
                                 <div className="text-gray-300">MCP Servers</div>
                             </div>
                             <div className="rounded-lg p-4 text-center hover-lift" style={{
@@ -91,7 +155,9 @@ const Home: React.FC = () => {
                                 border: '1px solid rgba(147, 51, 234, 0.3)',
                                 boxShadow: '0 8px 32px rgba(147, 51, 234, 0.1)'
                             }}>
-                                <div className="text-3xl font-bold bg-gradient-to-r from-purple-300 to-white bg-clip-text text-transparent">10</div>
+                                <div className="text-3xl font-bold bg-gradient-to-r from-purple-300 to-white bg-clip-text text-transparent">
+                                    {uniqueCategories > 0 ? uniqueCategories : '10'}
+                                </div>
                                 <div className="text-gray-300">Categories</div>
                             </div>
                             <div className="rounded-lg p-4 text-center hover-lift" style={{
@@ -100,7 +166,14 @@ const Home: React.FC = () => {
                                 border: '1px solid rgba(34, 197, 94, 0.3)',
                                 boxShadow: '0 8px 32px rgba(34, 197, 94, 0.1)'
                             }}>
-                                <div className="text-3xl font-bold bg-gradient-to-r from-green-300 to-white bg-clip-text text-transparent">50K+</div>
+                                <div className="text-3xl font-bold bg-gradient-to-r from-green-300 to-white bg-clip-text text-transparent">
+                                    {totalDownloads > 0 
+                                        ? totalDownloads >= 1000 
+                                            ? `${Math.floor(totalDownloads / 1000)}K+` 
+                                            : `${totalDownloads}+`
+                                        : '50K+'
+                                    }
+                                </div>
                                 <div className="text-gray-300">Downloads</div>
                             </div>
                             <div className="rounded-lg p-4 text-center hover-lift" style={{
@@ -109,8 +182,10 @@ const Home: React.FC = () => {
                                 border: '1px solid rgba(249, 115, 22, 0.3)',
                                 boxShadow: '0 8px 32px rgba(249, 115, 22, 0.1)'
                             }}>
-                                <div className="text-3xl font-bold bg-gradient-to-r from-orange-300 to-white bg-clip-text text-transparent">24/7</div>
-                                <div className="text-gray-300">Support</div>
+                                <div className="text-3xl font-bold bg-gradient-to-r from-orange-300 to-white bg-clip-text text-transparent">
+                                    {averageQualityScore}%
+                                </div>
+                                <div className="text-gray-300">Quality Score</div>
                             </div>
                         </div>
                     </div>
@@ -250,205 +325,114 @@ const Home: React.FC = () => {
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {/* Featured Server 1 */}
-                        <div className="bg-white dark:bg-gray-700 rounded-xl shadow-sm border border-gray-200 dark:border-gray-600 p-6 transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg">
-                            <div className="flex items-start justify-between mb-4">
-                                <div className="flex items-center">
-                                    <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
-                                        <Folder className="text-white w-5 h-5" />
-                                    </div>
-                                    <div>
-                                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                                            Filesystem MCP
-                                        </h3>
-                                        <div className="flex items-center space-x-2 mt-1">
-                                            <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-xs px-2 py-1 rounded-full">
-                                                Official
-                                            </span>
-                                            <span className="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 text-xs px-2 py-1 rounded-full">
-                                                Featured
-                                            </span>
+                    {serversLoading ? (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {[1, 2, 3].map((i) => (
+                                <div key={i} className="bg-white dark:bg-gray-700 rounded-xl shadow-sm border border-gray-200 dark:border-gray-600 p-6 animate-pulse">
+                                    <div className="flex items-start justify-between mb-4">
+                                        <div className="flex items-center">
+                                            <div className="w-10 h-10 bg-gray-300 dark:bg-gray-600 rounded-lg mr-3"></div>
+                                            <div>
+                                                <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-32 mb-2"></div>
+                                                <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
+                                            </div>
+                                        </div>
+                                        <div className="text-right">
+                                            <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-12 mb-1"></div>
+                                            <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="text-right">
-                                    <div className="flex items-center text-yellow-500">
-                                        <Star className="w-4 h-4 fill-current" />
-                                        <span className="ml-1 text-gray-900 dark:text-white font-medium">4.8</span>
+                                    <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded mb-4"></div>
+                                    <div className="flex gap-2 mb-4">
+                                        <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
+                                        <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
                                     </div>
-                                    <div className="text-sm text-gray-500 dark:text-gray-400">1.2k stars</div>
+                                    <div className="flex justify-between">
+                                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-24"></div>
+                                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <p className="text-gray-600 dark:text-gray-300 mb-4">
-                                Comprehensive file system operations with support for local and cloud storage integration.
-                            </p>
-
-                            <div className="flex flex-wrap gap-2 mb-4">
-                                <span className="bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded">
-                                    file-system
-                                </span>
-                                <span className="bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded">
-                                    storage
-                                </span>
-                                <span className="bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded">
-                                    cloud
-                                </span>
-                            </div>
-
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
-                                    <span>
-                                        <Download className="w-4 h-4 mr-1 inline" />
-                                        15k
-                                    </span>
-                                    <span>
-                                        <Calendar className="w-4 h-4 mr-1 inline" />
-                                        Updated 2d ago
-                                    </span>
-                                </div>
-                                <Link
-                                    to="/servers/filesystem-mcp"
-                                    className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
-                                >
-                                    View Details
-                                    <ArrowRight className="w-4 h-4 ml-1 inline" />
-                                </Link>
-                            </div>
+                            ))}
                         </div>
-
-                        {/* Featured Server 2 */}
-                        <div className="bg-white dark:bg-gray-700 rounded-xl shadow-sm border border-gray-200 dark:border-gray-600 p-6 transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg">
-                            <div className="flex items-start justify-between mb-4">
-                                <div className="flex items-center">
-                                    <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center mr-3">
-                                        <Database className="text-white w-5 h-5" />
-                                    </div>
-                                    <div>
-                                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                                            PostgreSQL MCP
-                                        </h3>
-                                        <div className="flex items-center space-x-2 mt-1">
-                                            <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-xs px-2 py-1 rounded-full">
-                                                Official
-                                            </span>
+                    ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {featuredServers?.map((server) => (
+                                <div key={server.id} className="bg-white dark:bg-gray-700 rounded-xl shadow-sm border border-gray-200 dark:border-gray-600 p-6 transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg">
+                                    <div className="flex items-start justify-between mb-4">
+                                        <div className="flex items-center">
+                                            <div className={`w-10 h-10 ${getCategoryColor(server.category)} rounded-lg flex items-center justify-center mr-3`}>
+                                                {getCategoryIcon(server.category)}
+                                            </div>
+                                            <div>
+                                                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                                                    {server.name}
+                                                </h3>
+                                                <div className="flex items-center space-x-2 mt-1">
+                                                    {server.verified && (
+                                                        <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-xs px-2 py-1 rounded-full">
+                                                            Official
+                                                        </span>
+                                                    )}
+                                                    {server.featured && (
+                                                        <span className="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 text-xs px-2 py-1 rounded-full">
+                                                            Featured
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="text-right">
+                                            <div className="flex items-center text-yellow-500">
+                                                <Star className="w-4 h-4 fill-current" />
+                                                <span className="ml-1 text-gray-900 dark:text-white font-medium">
+                                                    {(server.quality.score / 20).toFixed(1)}
+                                                </span>
+                                            </div>
+                                            <div className="text-sm text-gray-500 dark:text-gray-400">
+                                                {server.repository.stars >= 1000 
+                                                    ? `${(server.repository.stars / 1000).toFixed(1)}k` 
+                                                    : server.repository.stars} stars
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="text-right">
-                                    <div className="flex items-center text-yellow-500">
-                                        <Star className="w-4 h-4 fill-current" />
-                                        <span className="ml-1 text-gray-900 dark:text-white font-medium">4.6</span>
-                                    </div>
-                                    <div className="text-sm text-gray-500 dark:text-gray-400">856 stars</div>
-                                </div>
-                            </div>
 
-                            <p className="text-gray-600 dark:text-gray-300 mb-4">
-                                Advanced PostgreSQL integration with support for complex queries and analytics.
-                            </p>
+                                    <p className="text-gray-600 dark:text-gray-300 mb-4">
+                                        {server.longDescription || server.description}
+                                    </p>
 
-                            <div className="flex flex-wrap gap-2 mb-4">
-                                <span className="bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded">
-                                    postgresql
-                                </span>
-                                <span className="bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded">
-                                    database
-                                </span>
-                                <span className="bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded">
-                                    sql
-                                </span>
-                            </div>
-
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
-                                    <span>
-                                        <Download className="w-4 h-4 mr-1 inline" />
-                                        12k
-                                    </span>
-                                    <span>
-                                        <Calendar className="w-4 h-4 mr-1 inline" />
-                                        Updated 1w ago
-                                    </span>
-                                </div>
-                                <Link
-                                    to="/servers/postgresql-mcp"
-                                    className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
-                                >
-                                    View Details
-                                    <ArrowRight className="w-4 h-4 ml-1 inline" />
-                                </Link>
-                            </div>
-                        </div>
-
-                        {/* Featured Server 3 */}
-                        <div className="bg-white dark:bg-gray-700 rounded-xl shadow-sm border border-gray-200 dark:border-gray-600 p-6 transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg">
-                            <div className="flex items-start justify-between mb-4">
-                                <div className="flex items-center">
-                                    <div className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center mr-3">
-                                        <MessageCircle className="text-white w-5 h-5" />
-                                    </div>
-                                    <div>
-                                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                                            Slack MCP
-                                        </h3>
-                                        <div className="flex items-center space-x-2 mt-1">
-                                            <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-xs px-2 py-1 rounded-full">
-                                                Official
+                                    <div className="flex flex-wrap gap-2 mb-4">
+                                        {server.tags.slice(0, 3).map((tag) => (
+                                            <span key={tag} className="bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded">
+                                                {tag}
                                             </span>
-                                            <span className="bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-300 text-xs px-2 py-1 rounded-full">
-                                                Popular
+                                        ))}
+                                    </div>
+
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
+                                            <span>
+                                                <Download className="w-4 h-4 mr-1 inline" />
+                                                {server.usage.downloads >= 1000 
+                                                    ? `${(server.usage.downloads / 1000).toFixed(0)}k` 
+                                                    : server.usage.downloads}
+                                            </span>
+                                            <span>
+                                                <Calendar className="w-4 h-4 mr-1 inline" />
+                                                Updated {formatLastUpdated(server.repository.lastUpdated)}
                                             </span>
                                         </div>
+                                        <Link
+                                            to={`/servers/${server.id}`}
+                                            className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
+                                        >
+                                            View Details
+                                            <ArrowRight className="w-4 h-4 ml-1 inline" />
+                                        </Link>
                                     </div>
                                 </div>
-                                <div className="text-right">
-                                    <div className="flex items-center text-yellow-500">
-                                        <Star className="w-4 h-4 fill-current" />
-                                        <span className="ml-1 text-gray-900 dark:text-white font-medium">4.7</span>
-                                    </div>
-                                    <div className="text-sm text-gray-500 dark:text-gray-400">1.1k stars</div>
-                                </div>
-                            </div>
-
-                            <p className="text-gray-600 dark:text-gray-300 mb-4">
-                                Seamless Slack integration for messaging, channel management, and bot automation.
-                            </p>
-
-                            <div className="flex flex-wrap gap-2 mb-4">
-                                <span className="bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded">
-                                    slack
-                                </span>
-                                <span className="bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded">
-                                    messaging
-                                </span>
-                                <span className="bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded">
-                                    bot
-                                </span>
-                            </div>
-
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
-                                    <span>
-                                        <Download className="w-4 h-4 mr-1 inline" />
-                                        18k
-                                    </span>
-                                    <span>
-                                        <Calendar className="w-4 h-4 mr-1 inline" />
-                                        Updated 3d ago
-                                    </span>
-                                </div>
-                                <Link
-                                    to="/servers/slack-mcp"
-                                    className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
-                                >
-                                    View Details
-                                    <ArrowRight className="w-4 h-4 ml-1 inline" />
-                                </Link>
-                            </div>
+                            ))}
                         </div>
-                    </div>
+                    )}
 
                     <div className="text-center mt-8">
                         <Link
