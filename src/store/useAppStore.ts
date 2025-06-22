@@ -28,14 +28,14 @@ export const useAppStore = create<AppStore>()(
     persist(
         (set) => ({
             // 初始状态
-            language: "zh-CN",
+            language: "en",
             theme: "light",
             sidebarOpen: false,
             searchQuery: "",
             filters: {},
             sortBy: {
                 key: "quality",
-                label: "质量评分",
+                label: "Quality Score",
                 direction: "desc",
             },
 

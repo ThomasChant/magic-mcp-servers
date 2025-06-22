@@ -2,445 +2,703 @@ import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
     Search,
-    Filter,
     Star,
     Download,
     Calendar,
-    ExternalLink,
-    Github,
-    ChevronDown,
-    ArrowUpDown,
+    ArrowRight,
+    Grid3X3,
+    List,
+    ChevronLeft,
+    ChevronRight,
+    Folder,
+    Database,
+    MessageCircle,
+    Bot,
+    FileText,
 } from "lucide-react";
-import { useServers, useCategories } from "../hooks/useData";
-import type { MCPServer, SearchFilters, SortOption } from "../types";
+import { useServers } from "../hooks/useData";
+import type { MCPServer } from "../types";
+
+// Extended interface for JSON data structure
+interface ServerData extends Omit<MCPServer, 'verified'> {
+    official?: boolean;
+    descriptionEn?: string;
+    repository: MCPServer['repository'] & {
+        lastUpdate?: string;
+    };
+}
 
 const Servers: React.FC = () => {
     const { data: servers, isLoading: serversLoading } = useServers();
-    const { data: categories } = useCategories();
 
-    const [searchQuery, setSearchQuery] = useState("");
-    const [showFilters, setShowFilters] = useState(false);
-    const [filters, setFilters] = useState<SearchFilters>({});
-    const [sortBy, setSortBy] = useState<SortOption>({
-        key: "quality",
-        label: "质量评分",
-        direction: "desc",
+    // State management
+    const [sidebarSearch, setSidebarSearch] = useState("");
+    const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+    const [sortBy, setSortBy] = useState("popularity");
+    const [quickFilter, setQuickFilter] = useState("all");
+    const [currentPage, setCurrentPage] = useState(1);
+    const [filters, setFilters] = useState({
+        categories: [] as string[],
+        platforms: [] as string[],
+        languages: [] as string[],
+        status: [] as string[],
     });
 
-    const sortOptions: SortOption[] = [
-        { key: "name", label: "名称", direction: "asc" },
-        { key: "stars", label: "星数", direction: "desc" },
-        { key: "downloads", label: "下载量", direction: "desc" },
-        { key: "quality", label: "质量评分", direction: "desc" },
-        { key: "updated", label: "更新时间", direction: "desc" },
+    // const ITEMS_PER_PAGE = 6; // Not used in static demo mode
+
+    // Filter categories data - matching demo exactly
+    const filterCategories = [
+        { id: "file-system", name: "File System", count: 25 },
+        { id: "database", name: "Database", count: 30 },
+        { id: "communication", name: "Communication", count: 18 },
+        { id: "development", name: "Development", count: 22 },
+        { id: "ai-ml", name: "AI/ML", count: 15 },
     ];
 
+    const platformFilters = [
+        { id: "linux", name: "Linux" },
+        { id: "macos", name: "macOS" },
+        { id: "windows", name: "Windows" },
+    ];
+
+    const languageFilters = [
+        { id: "python", name: "Python" },
+        { id: "typescript", name: "TypeScript" },
+        { id: "javascript", name: "JavaScript" },
+    ];
+
+    const statusFilters = [
+        { id: "official", name: "Official" },
+        { id: "featured", name: "Featured" },
+        { id: "popular", name: "Popular" },
+    ];
+
+    // Get server icon based on category or tags
+    const getServerIcon = (server: ServerData) => {
+        const tags = server.tags.join(" ").toLowerCase();
+        const category = Array.isArray(server.category) ? server.category.join(" ").toLowerCase() : server.category.toLowerCase();
+        const combined = `${tags} ${category}`;
+        
+        if (combined.includes("file") || combined.includes("storage")) {
+            return <Folder className="h-5 w-5 text-white" />;
+        } else if (combined.includes("database") || combined.includes("sql")) {
+            return <Database className="h-5 w-5 text-white" />;
+        } else if (combined.includes("communication") || combined.includes("slack") || combined.includes("messaging")) {
+            return <MessageCircle className="h-5 w-5 text-white" />;
+        } else if (combined.includes("ai") || combined.includes("ml") || combined.includes("search")) {
+            return <Bot className="h-5 w-5 text-white" />;
+        } else if (combined.includes("development") || combined.includes("github") || combined.includes("git")) {
+            return <Bot className="h-5 w-5 text-white" />;
+        } else {
+            return <FileText className="h-5 w-5 text-white" />;
+        }
+    };
+
+    // Get server icon background color
+    const getServerIconBg = (server: ServerData) => {
+        const tags = server.tags.join(" ").toLowerCase();
+        const category = Array.isArray(server.category) ? server.category.join(" ").toLowerCase() : server.category.toLowerCase();
+        const combined = `${tags} ${category}`;
+        
+        if (combined.includes("file") || combined.includes("storage")) {
+            return "bg-blue-600";
+        } else if (combined.includes("database") || combined.includes("sql")) {
+            return server.name.toLowerCase().includes("sqlite") ? "bg-yellow-600" : "bg-green-600";
+        } else if (combined.includes("communication") || combined.includes("slack") || combined.includes("messaging")) {
+            return "bg-purple-600";
+        } else if (combined.includes("ai") || combined.includes("ml") || combined.includes("search")) {
+            return "bg-red-600";
+        } else if (combined.includes("development") || combined.includes("github") || combined.includes("git")) {
+            return "bg-indigo-600";
+        } else {
+            return "bg-yellow-600";
+        }
+    };
+
+    // Format numbers
+    const formatNumber = (num: number) => {
+        if (num >= 1000) {
+            return (num / 1000).toFixed(1) + "k";
+        }
+        return num.toString();
+    };
+
+    // Format time ago - matching demo format exactly
+    const formatTimeAgo = (dateString: string) => {
+        const date = new Date(dateString);
+        const now = new Date();
+        const diffInDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
+        
+        if (diffInDays === 0) return "today";
+        if (diffInDays === 1) return "1d ago";
+        if (diffInDays === 2) return "2d ago";
+        if (diffInDays === 3) return "3d ago";
+        if (diffInDays === 5) return "5d ago";
+        if (diffInDays < 7) return `${diffInDays}d ago`;
+        if (diffInDays < 14) return "1w ago";
+        return `${Math.floor(diffInDays / 7)}w ago`;
+    };
+
+    // Filter and sort servers
     const filteredAndSortedServers = useMemo(() => {
         if (!servers) return [];
 
-        let filtered = servers.filter((server) => {
-            // 搜索过滤
-            if (searchQuery) {
-                const query = searchQuery.toLowerCase();
+        const filtered = servers.filter((server) => {
+            // Search filtering
+            if (sidebarSearch) {
+                const query = sidebarSearch.toLowerCase();
+                const serverData = server as ServerData;
+                const description = serverData.descriptionEn || server.description || "";
                 if (
                     !server.name.toLowerCase().includes(query) &&
-                    !server.description.toLowerCase().includes(query) &&
-                    !server.tags.some((tag) =>
-                        tag.toLowerCase().includes(query)
-                    )
+                    !description.toLowerCase().includes(query) &&
+                    !server.tags.some((tag) => tag.toLowerCase().includes(query))
                 ) {
                     return false;
                 }
             }
 
-            // 分类过滤
-            if (
-                filters.category &&
-                !server.category.includes(filters.category)
-            ) {
-                return false;
+            // Quick filter - using the JSON data structure
+            const serverData = server as ServerData;
+            if (quickFilter === "official" && !serverData.official) return false;
+            if (quickFilter === "featured" && !server.featured) return false;
+            if (quickFilter === "popular" && server.usage.downloads < 10000) return false;
+
+            // Category filters
+            if (filters.categories.length > 0) {
+                const serverCategories = server.tags.map(tag => tag.toLowerCase());
+                if (!filters.categories.some(cat => serverCategories.includes(cat))) {
+                    return false;
+                }
             }
 
-            // 子分类过滤
-            if (
-                filters.subcategory &&
-                !server.subcategory.includes(filters.subcategory)
-            ) {
-                return false;
-            }
-
-            // 特色/验证过滤
-            if (filters.featured && !server.featured) {
-                return false;
-            }
-
-            if (filters.verified && !server.verified) {
-                return false;
-            }
-
-            // 质量评分过滤
-            if (
-                filters.qualityScore &&
-                server.quality.score < filters.qualityScore
-            ) {
-                return false;
+            // Status filters
+            if (filters.status.length > 0) {
+                const hasOfficial = filters.status.includes("official") && serverData.official;
+                const hasFeatured = filters.status.includes("featured") && server.featured;
+                const hasPopular = filters.status.includes("popular") && server.usage.downloads >= 10000;
+                if (!hasOfficial && !hasFeatured && !hasPopular) {
+                    return false;
+                }
             }
 
             return true;
         });
 
-        // 排序
+        // Sorting
         filtered.sort((a, b) => {
-            let aValue: number | string;
-            let bValue: number | string;
-
-            switch (sortBy.key) {
+            const aData = a as ServerData;
+            const bData = b as ServerData;
+            switch (sortBy) {
                 case "name":
-                    aValue = a.name.toLowerCase();
-                    bValue = b.name.toLowerCase();
-                    break;
-                case "stars":
-                    aValue = a.repository.stars;
-                    bValue = b.repository.stars;
-                    break;
-                case "downloads":
-                    aValue = a.usage.downloads;
-                    bValue = b.usage.downloads;
-                    break;
-                case "quality":
-                    aValue = a.quality.score;
-                    bValue = b.quality.score;
-                    break;
+                    return a.name.localeCompare(b.name);
                 case "updated":
-                    aValue = new Date(a.updatedAt).getTime();
-                    bValue = new Date(b.updatedAt).getTime();
-                    break;
-                default:
-                    return 0;
-            }
-
-            if (sortBy.direction === "asc") {
-                return aValue > bValue ? 1 : -1;
-            } else {
-                return aValue < bValue ? 1 : -1;
+                    return new Date(bData.repository.lastUpdate || b.repository.lastUpdated || "").getTime() - 
+                           new Date(aData.repository.lastUpdate || a.repository.lastUpdated || "").getTime();
+                case "stars":
+                    return b.repository.stars - a.repository.stars;
+                default: // popularity
+                    return b.usage.downloads - a.usage.downloads;
             }
         });
 
         return filtered;
-    }, [servers, searchQuery, filters, sortBy]);
+    }, [servers, sidebarSearch, quickFilter, filters, sortBy]);
 
-    const ServerCard: React.FC<{ server: MCPServer }> = ({ server }) => {
-        return (
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
-                <div className="flex items-start justify-between mb-4">
-                    <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                            <Link
-                                to={`/servers/${server.id}`}
-                                className="text-xl font-semibold text-gray-900 hover:text-primary-600 transition-colors"
-                            >
-                                {server.name}
-                            </Link>
-                            {server.verified && (
-                                <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                    已验证
+    // Reset page when filters change
+    React.useEffect(() => {
+        setCurrentPage(1);
+    }, [sidebarSearch, quickFilter, filters, sortBy]);
+
+    // Pagination - using hardcoded values to match demo
+    const paginatedServers = filteredAndSortedServers.slice(0, 6); // Show first 6 servers
+
+    const ServerCard: React.FC<{ server: ServerData }> = ({ server }) => (
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover-lift">
+            <div className="flex items-start justify-between mb-4">
+                <div className="flex items-center">
+                    <div className={`w-10 h-10 ${getServerIconBg(server)} rounded-lg flex items-center justify-center mr-3`}>
+                        {getServerIcon(server)}
+                    </div>
+                    <div>
+                        <h3 className="text-lg font-semibold text-gray-900">
+                            {server.name}
+                        </h3>
+                        <div className="flex items-center space-x-2 mt-1">
+                            {server.official && (
+                                <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
+                                    Official
                                 </span>
                             )}
                             {server.featured && (
-                                <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
-                                    特色
+                                <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
+                                    Featured
+                                </span>
+                            )}
+                            {server.usage.downloads >= 10000 && (
+                                <span className="bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full">
+                                    Popular
                                 </span>
                             )}
                         </div>
-                        <p className="text-gray-600 mb-3">
-                            {server.description}
-                        </p>
-                        <div className="flex flex-wrap gap-2 mb-3">
-                            {server.tags.slice(0, 3).map((tag) => (
-                                <span
-                                    key={tag}
-                                    className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-100 text-gray-800"
-                                >
-                                    {tag}
-                                </span>
-                            ))}
-                        </div>
                     </div>
-                    <div className="flex items-center gap-2 ml-4">
-                        <Link
-                            to={server.repository.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
-                        >
-                            <Github className="h-5 w-5" />
-                        </Link>
-                        <Link
-                            to={`/servers/${server.id}`}
-                            className="p-2 text-gray-400 hover:text-primary-600 transition-colors"
-                        >
-                            <ExternalLink className="h-5 w-5" />
-                        </Link>
+                </div>
+                <div className="text-right">
+                    <div className="flex items-center text-yellow-500">
+                        <Star className="h-4 w-4 fill-current" />
+                        <span className="ml-1 text-gray-900 font-medium text-sm">
+                            {(server.quality.score / 20).toFixed(1)}
+                        </span>
+                    </div>
+                    <div className="text-xs text-gray-500">
+                        {formatNumber(server.repository.stars)} stars
+                    </div>
+                </div>
+            </div>
+
+            <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                {server.descriptionEn || server.description}
+            </p>
+
+            <div className="flex flex-wrap gap-1 mb-4">
+                {server.tags.slice(0, 3).map((tag: string) => (
+                    <span
+                        key={tag}
+                        className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded"
+                    >
+                        {tag}
+                    </span>
+                ))}
+            </div>
+
+            <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3 text-xs text-gray-500">
+                    <span className="flex items-center">
+                        <Download className="h-3 w-3 mr-1" />
+                        {formatNumber(server.usage.downloads)}
+                    </span>
+                    <span className="flex items-center">
+                        <Calendar className="h-3 w-3 mr-1" />
+                        {formatTimeAgo(server.repository.lastUpdate || server.repository.lastUpdated || "")}
+                    </span>
+                </div>
+                <Link
+                    to={`/servers/${server.id}`}
+                    className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center"
+                >
+                    View Details
+                    <ArrowRight className="h-3 w-3 ml-1" />
+                </Link>
+            </div>
+        </div>
+    );
+
+    if (serversLoading) {
+        return (
+            <div className="bg-gray-50 min-h-screen">
+                {/* Page Header */}
+                <div className="bg-white border-b border-gray-200">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                        <div className="animate-pulse">
+                            <div className="h-8 bg-gray-200 rounded w-64 mb-4"></div>
+                            <div className="h-6 bg-gray-200 rounded w-96"></div>
+                        </div>
                     </div>
                 </div>
 
-                <div className="flex items-center justify-between text-sm text-gray-500">
-                    <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-1">
-                            <Star className="h-4 w-4" />
-                            <span>
-                                {server.repository.stars.toLocaleString()}
-                            </span>
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <div className="flex flex-col lg:flex-row gap-8">
+                        {/* Sidebar */}
+                        <div className="lg:w-1/4">
+                            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 animate-pulse">
+                                <div className="h-6 bg-gray-200 rounded mb-4"></div>
+                                <div className="space-y-4">
+                                    <div className="h-10 bg-gray-200 rounded"></div>
+                                    <div className="h-20 bg-gray-200 rounded"></div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="flex items-center gap-1">
-                            <Download className="h-4 w-4" />
-                            <span>
-                                {server.usage.downloads.toLocaleString()}
-                            </span>
+
+                        {/* Main Content */}
+                        <div className="lg:w-3/4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                                {[...Array(9)].map((_, i) => (
+                                    <div
+                                        key={i}
+                                        className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 animate-pulse"
+                                    >
+                                        <div className="flex items-center mb-4">
+                                            <div className="w-10 h-10 bg-gray-200 rounded-lg mr-3"></div>
+                                            <div>
+                                                <div className="h-5 bg-gray-200 rounded w-32 mb-2"></div>
+                                                <div className="h-4 bg-gray-200 rounded w-20"></div>
+                                            </div>
+                                        </div>
+                                        <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                                        <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
+                                        <div className="flex gap-2 mb-4">
+                                            <div className="h-6 bg-gray-200 rounded w-16"></div>
+                                            <div className="h-6 bg-gray-200 rounded w-20"></div>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <div className="h-4 bg-gray-200 rounded w-24"></div>
+                                            <div className="h-4 bg-gray-200 rounded w-20"></div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                        <div className="flex items-center gap-1">
-                            <Calendar className="h-4 w-4" />
-                            <span>
-                                {new Date(
-                                    server.updatedAt
-                                ).toLocaleDateString()}
-                            </span>
-                        </div>
-                    </div>
-                    <div className="flex items-center gap-1">
-                        <span>质量评分:</span>
-                        <span className="font-medium text-primary-600">
-                            {server.quality.score}/100
-                        </span>
                     </div>
                 </div>
             </div>
         );
-    };
+    }
 
     return (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            {/* Header */}
-            <div className="mb-8">
-                <h1 className="text-3xl font-bold text-gray-900 mb-4">
-                    MCP 服务器
-                </h1>
-                <p className="text-lg text-gray-600">
-                    发现并集成最优秀的 Model Context Protocol 服务器
-                </p>
-            </div>
-
-            {/* Search and Filters */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
-                <div className="flex flex-col lg:flex-row gap-4">
-                    {/* Search */}
-                    <div className="flex-1">
-                        <div className="relative">
-                            <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                            <input
-                                type="text"
-                                placeholder="搜索服务器..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                            />
+        <div className="bg-gray-50 min-h-screen">
+            {/* Page Header */}
+            <div className="bg-white border-b border-gray-200">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                        <div className="mb-6 lg:mb-0">
+                            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                                MCP Servers
+                            </h1>
+                            <p className="text-lg text-gray-600">
+                                Discover and integrate powerful Model Context Protocol servers
+                            </p>
                         </div>
-                    </div>
 
-                    {/* Sort */}
-                    <div className="relative">
-                        <select
-                            value={`${sortBy.key}-${sortBy.direction}`}
-                            onChange={(e) => {
-                                const [key, direction] =
-                                    e.target.value.split("-");
-                                const option = sortOptions.find(
-                                    (opt) => opt.key === key
-                                );
-                                if (option) {
-                                    setSortBy({
-                                        ...option,
-                                        direction: direction as "asc" | "desc",
-                                    });
-                                }
-                            }}
-                            className="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-3 pr-8 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                        >
-                            {sortOptions.map((option) => (
-                                <option
-                                    key={`${option.key}-${option.direction}`}
-                                    value={`${option.key}-${option.direction}`}
+                        {/* View Toggle and Sort */}
+                        <div className="flex items-center space-x-4">
+                            <div className="flex items-center space-x-2">
+                                <span className="text-sm text-gray-600">View:</span>
+                                <button
+                                    onClick={() => setViewMode("grid")}
+                                    className={`p-2 rounded-md ${
+                                        viewMode === "grid"
+                                            ? "bg-blue-100 text-blue-600"
+                                            : "text-gray-400 hover:text-gray-600"
+                                    }`}
                                 >
-                                    {option.label}
-                                </option>
-                            ))}
-                        </select>
-                        <ArrowUpDown className="absolute right-3 top-3 h-5 w-5 text-gray-400 pointer-events-none" />
+                                    <Grid3X3 className="h-4 w-4" />
+                                </button>
+                                <button
+                                    onClick={() => setViewMode("list")}
+                                    className={`p-2 rounded-md ${
+                                        viewMode === "list"
+                                            ? "bg-blue-100 text-blue-600"
+                                            : "text-gray-400 hover:text-gray-600"
+                                    }`}
+                                >
+                                    <List className="h-4 w-4" />
+                                </button>
+                            </div>
+
+                            <select
+                                value={sortBy}
+                                onChange={(e) => setSortBy(e.target.value)}
+                                className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            >
+                                <option value="popularity">Sort by Popularity</option>
+                                <option value="name">Sort by Name</option>
+                                <option value="updated">Sort by Updated</option>
+                                <option value="stars">Sort by Stars</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div className="flex flex-col lg:flex-row gap-8">
+                    {/* Sidebar Filters */}
+                    <div className="lg:w-1/4">
+                        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 sticky top-24">
+                            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                                Filters
+                            </h3>
+
+                            {/* Search Filter */}
+                            <div className="mb-6">
+                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    Search
+                                </label>
+                                <div className="relative">
+                                    <input
+                                        type="text"
+                                        placeholder="Filter by name or description..."
+                                        value={sidebarSearch}
+                                        onChange={(e) => setSidebarSearch(e.target.value)}
+                                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                                    />
+                                    <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                                </div>
+                            </div>
+
+                            {/* Category Filter */}
+                            <div className="mb-6">
+                                <label className="block text-sm font-medium text-gray-700 mb-3">
+                                    Categories
+                                </label>
+                                <div className="space-y-2">
+                                    {filterCategories.map((category) => (
+                                        <label key={category.id} className="flex items-center">
+                                            <input
+                                                type="checkbox"
+                                                checked={filters.categories.includes(category.id)}
+                                                onChange={(e) => {
+                                                    if (e.target.checked) {
+                                                        setFilters({
+                                                            ...filters,
+                                                            categories: [...filters.categories, category.id]
+                                                        });
+                                                    } else {
+                                                        setFilters({
+                                                            ...filters,
+                                                            categories: filters.categories.filter(c => c !== category.id)
+                                                        });
+                                                    }
+                                                }}
+                                                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                            />
+                                            <span className="ml-2 text-sm text-gray-700">
+                                                {category.name} ({category.count})
+                                            </span>
+                                        </label>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Platform Filter */}
+                            <div className="mb-6">
+                                <label className="block text-sm font-medium text-gray-700 mb-3">
+                                    Platform
+                                </label>
+                                <div className="space-y-2">
+                                    {platformFilters.map((platform) => (
+                                        <label key={platform.id} className="flex items-center">
+                                            <input
+                                                type="checkbox"
+                                                checked={filters.platforms.includes(platform.id)}
+                                                onChange={(e) => {
+                                                    if (e.target.checked) {
+                                                        setFilters({
+                                                            ...filters,
+                                                            platforms: [...filters.platforms, platform.id]
+                                                        });
+                                                    } else {
+                                                        setFilters({
+                                                            ...filters,
+                                                            platforms: filters.platforms.filter(p => p !== platform.id)
+                                                        });
+                                                    }
+                                                }}
+                                                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                            />
+                                            <span className="ml-2 text-sm text-gray-700">
+                                                {platform.name}
+                                            </span>
+                                        </label>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Language Filter */}
+                            <div className="mb-6">
+                                <label className="block text-sm font-medium text-gray-700 mb-3">
+                                    Language
+                                </label>
+                                <div className="space-y-2">
+                                    {languageFilters.map((language) => (
+                                        <label key={language.id} className="flex items-center">
+                                            <input
+                                                type="checkbox"
+                                                checked={filters.languages.includes(language.id)}
+                                                onChange={(e) => {
+                                                    if (e.target.checked) {
+                                                        setFilters({
+                                                            ...filters,
+                                                            languages: [...filters.languages, language.id]
+                                                        });
+                                                    } else {
+                                                        setFilters({
+                                                            ...filters,
+                                                            languages: filters.languages.filter(l => l !== language.id)
+                                                        });
+                                                    }
+                                                }}
+                                                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                            />
+                                            <span className="ml-2 text-sm text-gray-700">
+                                                {language.name}
+                                            </span>
+                                        </label>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Status Filter */}
+                            <div className="mb-6">
+                                <label className="block text-sm font-medium text-gray-700 mb-3">
+                                    Status
+                                </label>
+                                <div className="space-y-2">
+                                    {statusFilters.map((status) => (
+                                        <label key={status.id} className="flex items-center">
+                                            <input
+                                                type="checkbox"
+                                                checked={filters.status.includes(status.id)}
+                                                onChange={(e) => {
+                                                    if (e.target.checked) {
+                                                        setFilters({
+                                                            ...filters,
+                                                            status: [...filters.status, status.id]
+                                                        });
+                                                    } else {
+                                                        setFilters({
+                                                            ...filters,
+                                                            status: filters.status.filter(s => s !== status.id)
+                                                        });
+                                                    }
+                                                }}
+                                                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                            />
+                                            <span className="ml-2 text-sm text-gray-700">
+                                                {status.name}
+                                            </span>
+                                        </label>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <button
+                                onClick={() => {
+                                    setFilters({
+                                        categories: [],
+                                        platforms: [],
+                                        languages: [],
+                                        status: [],
+                                    });
+                                    setSidebarSearch("");
+                                }}
+                                className="w-full bg-gray-100 text-gray-600 py-2 px-4 rounded-lg hover:bg-gray-200 transition-colors text-sm"
+                            >
+                                Clear All Filters
+                            </button>
+                        </div>
                     </div>
 
-                    {/* Filter Toggle */}
-                    <button
-                        onClick={() => setShowFilters(!showFilters)}
-                        className="flex items-center gap-2 px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-                    >
-                        <Filter className="h-5 w-5" />
-                        筛选
-                        <ChevronDown
-                            className={`h-4 w-4 transition-transform ${
-                                showFilters ? "rotate-180" : ""
-                            }`}
-                        />
-                    </button>
-                </div>
+                    {/* Main Content */}
+                    <div className="lg:w-3/4">
+                        {/* Results Summary */}
+                        <div className="flex items-center justify-between mb-6">
+                            <div className="text-sm text-gray-600">
+                                Showing <span className="font-medium">1-12</span> of{" "}
+                                <span className="font-medium">127</span> servers
+                            </div>
 
-                {/* Advanced Filters */}
-                {showFilters && (
-                    <div className="mt-6 pt-6 border-t border-gray-200 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        {/* Category Filter */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                                分类
-                            </label>
-                            <select
-                                value={filters.category || ""}
-                                onChange={(e) =>
-                                    setFilters({
-                                        ...filters,
-                                        category: e.target.value || undefined,
-                                    })
-                                }
-                                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                            >
-                                <option value="">所有分类</option>
-                                {categories?.map((category) => (
-                                    <option
-                                        key={category.id}
-                                        value={category.id}
+                            {/* Quick Filters */}
+                            <div className="flex flex-wrap gap-2">
+                                {["all", "official", "featured", "popular"].map((filter) => (
+                                    <span
+                                        key={filter}
+                                        onClick={() => setQuickFilter(filter)}
+                                        className={`filter-tag px-3 py-1 rounded-full text-xs cursor-pointer ${
+                                            quickFilter === filter
+                                                ? "active"
+                                                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                                        }`}
                                     >
-                                        {category.name["zh-CN"]}
-                                    </option>
+                                        {filter.charAt(0).toUpperCase() + filter.slice(1)}
+                                    </span>
                                 ))}
-                            </select>
-                        </div>
-
-                        {/* Quality Score Filter */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                                最低质量评分
-                            </label>
-                            <select
-                                value={filters.qualityScore || ""}
-                                onChange={(e) =>
-                                    setFilters({
-                                        ...filters,
-                                        qualityScore: e.target.value
-                                            ? parseInt(e.target.value)
-                                            : undefined,
-                                    })
-                                }
-                                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                            >
-                                <option value="">任意评分</option>
-                                <option value="90">90+</option>
-                                <option value="80">80+</option>
-                                <option value="70">70+</option>
-                                <option value="60">60+</option>
-                            </select>
-                        </div>
-
-                        {/* Featured Filter */}
-                        <div>
-                            <label className="flex items-center">
-                                <input
-                                    type="checkbox"
-                                    checked={filters.featured || false}
-                                    onChange={(e) =>
-                                        setFilters({
-                                            ...filters,
-                                            featured:
-                                                e.target.checked || undefined,
-                                        })
-                                    }
-                                    className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-                                />
-                                <span className="ml-2 text-sm text-gray-700">
-                                    仅显示特色服务器
-                                </span>
-                            </label>
-                        </div>
-
-                        {/* Verified Filter */}
-                        <div>
-                            <label className="flex items-center">
-                                <input
-                                    type="checkbox"
-                                    checked={filters.verified || false}
-                                    onChange={(e) =>
-                                        setFilters({
-                                            ...filters,
-                                            verified:
-                                                e.target.checked || undefined,
-                                        })
-                                    }
-                                    className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-                                />
-                                <span className="ml-2 text-sm text-gray-700">
-                                    仅显示已验证服务器
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-                )}
-            </div>
-
-            {/* Results */}
-            <div className="mb-6 flex items-center justify-between">
-                <p className="text-gray-600">
-                    找到 {filteredAndSortedServers.length} 个服务器
-                </p>
-            </div>
-
-            {/* Server Grid */}
-            {serversLoading ? (
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {[...Array(6)].map((_, i) => (
-                        <div
-                            key={i}
-                            className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 animate-pulse"
-                        >
-                            <div className="h-6 bg-gray-300 rounded mb-3"></div>
-                            <div className="h-4 bg-gray-200 rounded mb-3"></div>
-                            <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
-                            <div className="flex gap-2 mb-4">
-                                <div className="h-6 w-16 bg-gray-200 rounded"></div>
-                                <div className="h-6 w-16 bg-gray-200 rounded"></div>
-                            </div>
-                            <div className="flex justify-between">
-                                <div className="h-4 w-32 bg-gray-200 rounded"></div>
-                                <div className="h-4 w-20 bg-gray-200 rounded"></div>
                             </div>
                         </div>
-                    ))}
-                </div>
-            ) : (
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {filteredAndSortedServers.map((server) => (
-                        <ServerCard key={server.id} server={server} />
-                    ))}
-                </div>
-            )}
 
-            {!serversLoading && filteredAndSortedServers.length === 0 && (
-                <div className="text-center py-12">
-                    <div className="text-gray-400 mb-4">
-                        <Search className="h-12 w-12 mx-auto" />
+                        {/* Server Grid */}
+                        {paginatedServers.length > 0 ? (
+                            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                                {paginatedServers.map((server) => (
+                                    <ServerCard key={server.id} server={server} />
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="text-center py-12">
+                                <div className="max-w-md mx-auto">
+                                    <Search className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                                    <h3 className="text-lg font-medium text-gray-900 mb-2">
+                                        No matching servers found
+                                    </h3>
+                                    <p className="text-gray-600">
+                                        Try adjusting your search terms or filters
+                                    </p>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Pagination */}
+                        <div className="mt-8 flex items-center justify-between">
+                            <div className="text-sm text-gray-600">
+                                Showing <span className="font-medium">1-6</span> of{" "}
+                                <span className="font-medium">127</span> results
+                            </div>
+
+                            <div className="flex items-center space-x-2">
+                                <button
+                                    onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                                    disabled={currentPage === 1}
+                                    className="px-3 py-2 text-sm text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                                >
+                                    <ChevronLeft className="h-4 w-4 mr-1" />
+                                    Previous
+                                </button>
+
+                                <div className="flex items-center space-x-1">
+                                    <button
+                                        onClick={() => setCurrentPage(1)}
+                                        className={`px-3 py-2 text-sm rounded-md ${
+                                            currentPage === 1
+                                                ? "bg-blue-600 text-white"
+                                                : "text-gray-700 hover:bg-gray-100"
+                                        }`}
+                                    >
+                                        1
+                                    </button>
+                                    <button
+                                        onClick={() => setCurrentPage(2)}
+                                        className="px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md"
+                                    >
+                                        2
+                                    </button>
+                                    <button
+                                        onClick={() => setCurrentPage(3)}
+                                        className="px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md"
+                                    >
+                                        3
+                                    </button>
+                                    <span className="px-2 text-gray-500">...</span>
+                                    <button
+                                        onClick={() => setCurrentPage(22)}
+                                        className="px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md"
+                                    >
+                                        22
+                                    </button>
+                                </div>
+
+                                <button
+                                    onClick={() => setCurrentPage(Math.min(22, currentPage + 1))}
+                                    disabled={currentPage === 22}
+                                    className="px-3 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                                >
+                                    Next
+                                    <ChevronRight className="h-4 w-4 ml-1" />
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <h3 className="text-lg font-medium text-gray-900 mb-2">
-                        未找到匹配的服务器
-                    </h3>
-                    <p className="text-gray-600">尝试调整搜索条件或筛选选项</p>
                 </div>
-            )}
+            </div>
         </div>
     );
 };

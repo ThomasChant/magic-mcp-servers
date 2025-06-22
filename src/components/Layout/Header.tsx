@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Search, Menu, X, Globe, Sun, Moon } from "lucide-react";
 import { useAppStore } from "../../store/useAppStore";
+import type { Language } from "../../types/language";
 
 const Header: React.FC = () => {
     const location = useLocation();
@@ -16,20 +17,20 @@ const Header: React.FC = () => {
     } = useAppStore();
 
     const navigation = [
-        { name: "首页", href: "/", current: location.pathname === "/" },
+        { name: "Home", href: "/", current: location.pathname === "/" },
         {
-            name: "服务器",
+            name: "Servers",
             href: "/servers",
             current: location.pathname === "/servers",
         },
         {
-            name: "分类",
+            name: "Categories",
             href: "/categories",
             current: location.pathname === "/categories",
         },
-        { name: "文档", href: "/docs", current: location.pathname === "/docs" },
+        { name: "Documentation", href: "/docs", current: location.pathname === "/docs" },
         {
-            name: "关于",
+            name: "About",
             href: "/about",
             current: location.pathname === "/about",
         },
@@ -89,7 +90,7 @@ const Header: React.FC = () => {
                             <div className="relative">
                                 <input
                                     type="text"
-                                    placeholder="搜索服务器..."
+                                    placeholder="Search servers..."
                                     value={searchQuery}
                                     onChange={(e) =>
                                         setSearchQuery(e.target.value)
@@ -104,7 +105,7 @@ const Header: React.FC = () => {
                         <button
                             onClick={toggleTheme}
                             className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
-                            title="切换主题"
+                            title="Toggle Theme"
                         >
                             {theme === "light" ? (
                                 <Moon className="h-5 w-5" />
@@ -125,7 +126,7 @@ const Header: React.FC = () => {
                                     <button
                                         key={lang.code}
                                         onClick={() =>
-                                            setLanguage(lang.code as any)
+                                            setLanguage(lang.code as Language)
                                         }
                                         className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 first:rounded-t-lg last:rounded-b-lg ${
                                             language === lang.code
@@ -165,7 +166,7 @@ const Header: React.FC = () => {
                             <div className="relative mb-3">
                                 <input
                                     type="text"
-                                    placeholder="搜索服务器..."
+                                    placeholder="Search servers..."
                                     value={searchQuery}
                                     onChange={(e) =>
                                         setSearchQuery(e.target.value)

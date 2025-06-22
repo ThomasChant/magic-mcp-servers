@@ -114,7 +114,7 @@ export interface SortOption {
 }
 
 export interface AppState {
-    language: Language;
+    language: "en" | "zh-CN" | "zh-TW" | "fr" | "ja" | "ko" | "ru";
     theme: "light" | "dark";
     searchQuery: string;
     filters: SearchFilters;

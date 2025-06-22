@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Layout from "./components/Layout/Layout";
@@ -10,13 +9,13 @@ import CategoryDetailPage from "./pages/CategoryDetail";
 import DocsPage from "./pages/Docs";
 import AboutPage from "./pages/About";
 
-// 创建 Query Client
+// Create Query Client
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
             retry: 2,
             refetchOnWindowFocus: false,
-            staleTime: 5 * 60 * 1000, // 5分钟
+            staleTime: 5 * 60 * 1000, // 5 minutes
         },
     },
 });
@@ -24,9 +23,9 @@ const queryClient = new QueryClient({
 const NotFoundPage = () => (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">404</h1>
-        <p className="text-xl text-gray-600 mb-8">页面未找到</p>
+        <p className="text-xl text-gray-600 mb-8">Page Not Found</p>
         <a href="/" className="btn-primary">
-            返回首页
+            Back to Home
         </a>
     </div>
 );

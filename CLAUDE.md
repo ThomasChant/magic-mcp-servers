@@ -78,3 +78,4 @@ The project follows a feature-based organization:
 - ESLint configured with TypeScript, React hooks, and React refresh rules
 - Tailwind configured with custom primary color palette and animations
 - All queries have 2 retries and 5-minute stale time by default
+- Always use English as default language in code.

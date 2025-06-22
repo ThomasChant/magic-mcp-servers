@@ -1,311 +1,1000 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
-    BookOpen,
     Code,
-    ExternalLink,
-    Download,
-    Terminal,
-    Users,
-    Zap,
-    Shield,
+    Search,
+    Copy,
+    Check,
     ArrowRight,
+    Star,
+    Users,
+    Shield,
+    Plug,
+    ExpandIcon as Expand,
+    Settings,
+    Database,
+    MessageCircle,
+    Folder,
+    Rocket,
+    LayoutGrid,
+    Info,
 } from "lucide-react";
 
 const Docs: React.FC = () => {
-    const sections = [
-        {
-            title: "快速开始",
-            description: "了解 MCP 基础概念并运行您的第一个服务器",
-            icon: Zap,
-            color: "bg-blue-100 text-blue-600",
-            items: [
-                "什么是 Model Context Protocol?",
-                "安装 MCP 工具",
-                "创建您的第一个 MCP 服务器",
-                "集成到 AI 应用中",
-            ],
-        },
-        {
-            title: "开发指南",
-            description: "深入了解如何开发和部署 MCP 服务器",
-            icon: Code,
-            color: "bg-green-100 text-green-600",
-            items: [
-                "MCP 协议规范",
-                "服务器开发最佳实践",
-                "API 参考文档",
-                "调试和测试",
-            ],
-        },
-        {
-            title: "部署指南",
-            description: "学习如何在生产环境中部署 MCP 服务器",
-            icon: Shield,
-            color: "bg-purple-100 text-purple-600",
-            items: ["生产环境配置", "安全最佳实践", "性能优化", "监控和日志"],
-        },
-        {
-            title: "社区资源",
-            description: "加入 MCP 社区并获取更多资源",
-            icon: Users,
-            color: "bg-orange-100 text-orange-600",
-            items: ["GitHub 讨论区", "示例项目", "贡献指南", "常见问题解答"],
-        },
-    ];
+    const [activeSection, setActiveSection] = useState("introduction");
+    const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
-    const quickLinks = [
-        {
-            title: "MCP 官方文档",
-            description: "查看官方的 Model Context Protocol 文档",
-            url: "https://modelcontextprotocol.io/introduction",
-            icon: BookOpen,
-        },
-        {
-            title: "GitHub 仓库",
-            description: "浏览 MCP 相关的开源项目",
-            url: "https://github.com/punkpeye/awesome-mcp-servers",
-            icon: Code,
-        },
-        {
-            title: "开发工具",
-            description: "下载 MCP 开发工具和 SDK",
-            url: "/servers?category=development",
-            icon: Download,
-        },
-        {
-            title: "示例代码",
-            description: "查看 MCP 服务器实现示例",
-            url: "/servers?featured=true",
-            icon: Terminal,
-        },
-    ];
+    // Handle copy functionality
+    const copyToClipboard = async (text: string, id: string) => {
+        try {
+            await navigator.clipboard.writeText(text);
+            setCopiedCode(id);
+            setTimeout(() => setCopiedCode(null), 2000);
+        } catch (err) {
+            console.error("Failed to copy:", err);
+        }
+    };
+
+    // Handle scroll spy for active section
+    useEffect(() => {
+        const handleScroll = () => {
+            const sections = document.querySelectorAll("section[id]");
+            const scrollPosition = window.scrollY + 200;
+
+            sections.forEach((section) => {
+                const element = section as HTMLElement;
+                const top = element.offsetTop;
+                const height = element.offsetHeight;
+
+                if (scrollPosition >= top && scrollPosition < top + height) {
+                    setActiveSection(element.id);
+                }
+            });
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    // Smooth scroll to section
+    const scrollToSection = (sectionId: string) => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+            setActiveSection(sectionId);
+        }
+    };
+
+    // Navigation item component
+    const NavItem = ({ sectionId, children, className = "" }: { sectionId: string; children: React.ReactNode; className?: string }) => (
+        <button
+            onClick={() => scrollToSection(sectionId)}
+            className={`block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md w-full text-left transition-colors ${
+                activeSection === sectionId
+                    ? "bg-blue-50 text-blue-600 border-r-3 border-blue-600"
+                    : ""
+            } ${className}`}
+        >
+            {children}
+        </button>
+    );
+
+    // Code block component
+    const CodeBlock = ({ code, id }: { code: string; id: string }) => (
+        <div className="relative bg-gray-900 rounded-lg p-4 mb-3">
+            <button
+                onClick={() => copyToClipboard(code, id)}
+                className="absolute top-2 right-2 bg-gray-700 text-white px-3 py-1 rounded text-sm hover:bg-gray-600 transition-colors opacity-0 group-hover:opacity-100"
+            >
+                {copiedCode === id ? (
+                    <>
+                        <Check className="inline mr-1" size={12} />
+                        Copied!
+                    </>
+                ) : (
+                    <>
+                        <Copy className="inline mr-1" size={12} />
+                        Copy
+                    </>
+                )}
+            </button>
+            <pre className="text-green-400 text-sm">
+                <code>{code}</code>
+            </pre>
+        </div>
+    );
 
     return (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            {/* Header */}
-            <div className="text-center mb-16">
-                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                    MCP 开发文档
-                </h1>
-                <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-                    学习如何使用 Model Context Protocol 构建强大的 AI
-                    应用集成解决方案
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a
-                        href="https://modelcontextprotocol.io/introduction"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors"
-                    >
-                        <BookOpen className="mr-2 h-5 w-5" />
-                        查看官方文档
-                        <ExternalLink className="ml-2 h-4 w-4" />
-                    </a>
-                    <Link
-                        to="/servers"
-                        className="inline-flex items-center px-6 py-3 border-2 border-primary-600 text-primary-600 font-semibold rounded-lg hover:bg-primary-50 transition-colors"
-                    >
-                        浏览服务器
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                </div>
-            </div>
-
-            {/* What is MCP Section */}
-            <div className="bg-gradient-to-r from-primary-600 to-purple-600 rounded-2xl p-8 mb-16 text-white">
-                <div className="max-w-4xl mx-auto">
-                    <h2 className="text-3xl font-bold mb-6">
-                        什么是 Model Context Protocol?
-                    </h2>
-                    <div className="text-lg text-primary-100 space-y-4 mb-8">
-                        <p>
-                            Model Context Protocol (MCP)
-                            是一个开放协议，旨在标准化AI模型与外部数据源和工具的连接方式。
-                            它就像是AI应用的"USB-C端口"，为AI模型提供了一种统一的方式来访问各种外部资源。
-                        </p>
-                        <p>
-                            通过 MCP，开发者可以轻松地将 AI
-                            模型连接到数据库、API、文件系统和其他服务，
-                            而无需为每个集成编写自定义代码。
-                        </p>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="bg-white bg-opacity-20 rounded-lg p-4">
-                            <h3 className="text-lg font-semibold mb-2">
-                                标准化连接
-                            </h3>
-                            <p className="text-sm text-primary-100">
-                                统一的协议规范，简化AI应用与外部系统的集成
-                            </p>
-                        </div>
-                        <div className="bg-white bg-opacity-20 rounded-lg p-4">
-                            <h3 className="text-lg font-semibold mb-2">
-                                开放生态
-                            </h3>
-                            <p className="text-sm text-primary-100">
-                                开源协议，社区驱动，支持多种编程语言和平台
-                            </p>
-                        </div>
-                        <div className="bg-white bg-opacity-20 rounded-lg p-4">
-                            <h3 className="text-lg font-semibold mb-2">
-                                易于扩展
-                            </h3>
-                            <p className="text-sm text-primary-100">
-                                模块化设计，支持快速开发和部署新的集成功能
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Documentation Sections */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-                {sections.map((section, index) => (
-                    <div
-                        key={section.title}
-                        className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow"
-                    >
-                        <div className="flex items-center mb-4">
-                            <div
-                                className={`w-12 h-12 ${section.color} rounded-lg flex items-center justify-center mr-4`}
-                            >
-                                <section.icon className="h-6 w-6" />
-                            </div>
-                            <div>
-                                <h3 className="text-xl font-semibold text-gray-900">
-                                    {section.title}
-                                </h3>
-                                <p className="text-gray-600">
-                                    {section.description}
-                                </p>
-                            </div>
-                        </div>
-                        <ul className="space-y-2">
-                            {section.items.map((item, itemIndex) => (
-                                <li
-                                    key={itemIndex}
-                                    className="flex items-center text-gray-700"
-                                >
-                                    <ArrowRight className="h-4 w-4 text-primary-600 mr-2 flex-shrink-0" />
-                                    {item}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                ))}
-            </div>
-
-            {/* Quick Links */}
-            <div className="mb-16">
-                <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">
-                    快速链接
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {quickLinks.map((link, index) => (
-                        <a
-                            key={link.title}
-                            href={link.url}
-                            target={
-                                link.url.startsWith("http")
-                                    ? "_blank"
-                                    : undefined
-                            }
-                            rel={
-                                link.url.startsWith("http")
-                                    ? "noopener noreferrer"
-                                    : undefined
-                            }
-                            className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md hover:border-primary-300 transition-all duration-200 group"
-                        >
-                            <div className="flex items-center justify-center w-12 h-12 bg-primary-100 rounded-lg mx-auto mb-4 group-hover:bg-primary-200 transition-colors">
-                                <link.icon className="h-6 w-6 text-primary-600" />
-                            </div>
-                            <h3 className="text-lg font-semibold text-gray-900 text-center mb-2 group-hover:text-primary-600 transition-colors">
-                                {link.title}
-                            </h3>
-                            <p className="text-gray-600 text-center text-sm">
-                                {link.description}
-                            </p>
-                        </a>
-                    ))}
-                </div>
-            </div>
-
-            {/* Architecture Overview */}
-            <div className="bg-gray-50 rounded-2xl p-8 mb-16">
-                <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">
-                    MCP 架构概览
-                </h2>
-                <div className="max-w-4xl mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="text-center">
-                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 mb-4">
-                                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                                    Host 应用
-                                </h3>
-                                <p className="text-gray-600 text-sm">
-                                    Claude
-                                    Desktop、Cursor等AI应用，作为MCP客户端运行
-                                </p>
-                            </div>
-                        </div>
-                        <div className="text-center">
-                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 mb-4">
-                                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                                    MCP 协议
-                                </h3>
-                                <p className="text-gray-600 text-sm">
-                                    基于JSON-RPC 2.0的标准化通信协议
-                                </p>
-                            </div>
-                        </div>
-                        <div className="text-center">
-                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 mb-4">
-                                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                                    MCP 服务器
-                                </h3>
-                                <p className="text-gray-600 text-sm">
-                                    提供具体功能的服务器，如数据库连接、文件操作等
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="text-center mt-6">
-                        <p className="text-gray-600">
-                            通过标准化的协议，AI应用可以无缝连接到各种外部服务和数据源
+        <div className="bg-gray-50 min-h-screen">
+            {/* Page Header */}
+            <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                    <div className="text-center">
+                        <h1 className="text-4xl font-bold mb-4">Documentation</h1>
+                        <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+                            Everything you need to know about discovering,
+                            integrating, and using MCP servers effectively.
                         </p>
                     </div>
                 </div>
             </div>
 
-            {/* Getting Started CTA */}
-            <div className="text-center bg-white rounded-lg shadow-sm border border-gray-200 p-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                    准备开始了吗？
-                </h2>
-                <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-                    浏览我们的服务器集合，找到适合您项目的 MCP
-                    服务器，或者学习如何创建自己的服务器。
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Link
-                        to="/servers"
-                        className="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors"
-                    >
-                        浏览服务器
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                    <a
-                        href="https://modelcontextprotocol.io/introduction"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center px-6 py-3 border-2 border-primary-600 text-primary-600 font-semibold rounded-lg hover:bg-primary-50 transition-colors"
-                    >
-                        阅读官方文档
-                        <ExternalLink className="ml-2 h-4 w-4" />
-                    </a>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div className="flex flex-col lg:flex-row gap-8">
+                    {/* Sidebar Navigation */}
+                    <div className="lg:w-1/4">
+                        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 sticky top-6">
+                            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                                Documentation
+                            </h3>
+
+                            <nav className="space-y-1">
+                                <div className="mb-4">
+                                    <h4 className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">
+                                        Getting Started
+                                    </h4>
+                                    <NavItem sectionId="introduction">Introduction</NavItem>
+                                    <NavItem sectionId="quick-start">Quick Start</NavItem>
+                                    <NavItem sectionId="installation">Installation</NavItem>
+                                </div>
+
+                                <div className="mb-4">
+                                    <h4 className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">
+                                        Core Concepts
+                                    </h4>
+                                    <NavItem sectionId="what-is-mcp">What is MCP?</NavItem>
+                                    <NavItem sectionId="server-types">Server Types</NavItem>
+                                    <NavItem sectionId="integration">Integration Guide</NavItem>
+                                </div>
+
+                                <div className="mb-4">
+                                    <h4 className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">
+                                        Advanced
+                                    </h4>
+                                    <NavItem sectionId="custom-servers">Building Servers</NavItem>
+                                    <NavItem sectionId="best-practices">Best Practices</NavItem>
+                                    <NavItem sectionId="troubleshooting">Troubleshooting</NavItem>
+                                </div>
+
+                                <div>
+                                    <h4 className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">
+                                        Reference
+                                    </h4>
+                                    <NavItem sectionId="api-reference">API Reference</NavItem>
+                                    <NavItem sectionId="examples">Examples</NavItem>
+                                    <NavItem sectionId="faq">FAQ</NavItem>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+
+                    {/* Main Content */}
+                    <div className="lg:w-3/4">
+                        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+                            {/* Introduction Section */}
+                            <section id="introduction" className="mb-12">
+                                <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                                    Introduction to MCP Hub
+                                </h2>
+                                <p className="text-lg text-gray-600 mb-6">
+                                    MCP Hub is your comprehensive platform for
+                                    discovering, evaluating, and integrating Model
+                                    Context Protocol (MCP) servers. Whether you're
+                                    building AI applications or enhancing existing
+                                    systems, MCP Hub provides the tools and
+                                    resources you need.
+                                </p>
+
+                                <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+                                    <div className="flex">
+                                        <div className="flex-shrink-0">
+                                            <Info className="text-blue-400" size={20} />
+                                        </div>
+                                        <div className="ml-3">
+                                            <p className="text-sm text-blue-700">
+                                                <strong>New to MCP?</strong> The
+                                                Model Context Protocol is a
+                                                standardized way for AI applications
+                                                to connect with external data
+                                                sources and tools.{" "}
+                                                <button
+                                                    onClick={() =>
+                                                        scrollToSection("what-is-mcp")
+                                                    }
+                                                    className="underline hover:no-underline"
+                                                >
+                                                    Learn more about MCP →
+                                                </button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                                    Key Features
+                                </h3>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                    <div className="flex items-start">
+                                        <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3 mt-1">
+                                            <Search className="text-blue-600" size={16} />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-medium text-gray-900">
+                                                Smart Discovery
+                                            </h4>
+                                            <p className="text-sm text-gray-600">
+                                                Find the perfect MCP server using
+                                                intelligent search and filtering
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-start">
+                                        <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-3 mt-1">
+                                            <Star className="text-green-600" size={16} />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-medium text-gray-900">
+                                                Quality Ratings
+                                            </h4>
+                                            <p className="text-sm text-gray-600">
+                                                Community-driven ratings and reviews
+                                                for reliable choices
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-start">
+                                        <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center mr-3 mt-1">
+                                            <Code className="text-purple-600" size={16} />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-medium text-gray-900">
+                                                Easy Integration
+                                            </h4>
+                                            <p className="text-sm text-gray-600">
+                                                Step-by-step guides and code
+                                                examples for quick setup
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-start">
+                                        <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center mr-3 mt-1">
+                                            <Users className="text-orange-600" size={16} />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-medium text-gray-900">
+                                                Active Community
+                                            </h4>
+                                            <p className="text-sm text-gray-600">
+                                                Connect with developers and share
+                                                knowledge
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            {/* Quick Start Section */}
+                            <section id="quick-start" className="mb-12">
+                                <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                                    Quick Start Guide
+                                </h2>
+                                <p className="text-gray-600 mb-6">
+                                    Get up and running with MCP servers in just a
+                                    few minutes. Follow these simple steps to
+                                    integrate your first server.
+                                </p>
+
+                                <div className="space-y-6">
+                                    {/* Step 1 */}
+                                    <div className="flex items-start">
+                                        <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center mr-4 mt-1 text-sm font-bold">
+                                            1
+                                        </div>
+                                        <div className="flex-1">
+                                            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                                                Discover a Server
+                                            </h3>
+                                            <p className="text-gray-600 mb-3">
+                                                Browse our catalog or use the search
+                                                function to find a server that meets
+                                                your needs.
+                                            </p>
+                                            <Link
+                                                to="/servers"
+                                                className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
+                                            >
+                                                Browse Servers
+                                                <ArrowRight className="ml-1" size={16} />
+                                            </Link>
+                                        </div>
+                                    </div>
+
+                                    {/* Step 2 */}
+                                    <div className="flex items-start">
+                                        <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center mr-4 mt-1 text-sm font-bold">
+                                            2
+                                        </div>
+                                        <div className="flex-1">
+                                            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                                                Install the Server
+                                            </h3>
+                                            <p className="text-gray-600 mb-3">
+                                                Follow the installation instructions
+                                                for your preferred method (npm, pip,
+                                                Docker).
+                                            </p>
+                                            <div className="group">
+                                                <CodeBlock
+                                                    code="npx @modelcontextprotocol/server-filesystem"
+                                                    id="install-cmd"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Step 3 */}
+                                    <div className="flex items-start">
+                                        <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center mr-4 mt-1 text-sm font-bold">
+                                            3
+                                        </div>
+                                        <div className="flex-1">
+                                            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                                                Configure Your Application
+                                            </h3>
+                                            <p className="text-gray-600 mb-3">
+                                                Connect your AI application to the
+                                                MCP server using the provided
+                                                configuration.
+                                            </p>
+                                            <div className="group">
+                                                <CodeBlock
+                                                    code={`{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-filesystem", "/path/to/allowed/files"]
+    }
+  }
+}`}
+                                                    id="config-cmd"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Step 4 */}
+                                    <div className="flex items-start">
+                                        <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center mr-4 mt-1 text-sm font-bold">
+                                            ✓
+                                        </div>
+                                        <div className="flex-1">
+                                            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                                                Start Building
+                                            </h3>
+                                            <p className="text-gray-600 mb-3">
+                                                Your MCP server is now ready! Start
+                                                building amazing AI-powered
+                                                applications.
+                                            </p>
+                                            <button
+                                                onClick={() => scrollToSection("examples")}
+                                                className="inline-flex items-center text-green-600 hover:text-green-700 font-medium"
+                                            >
+                                                View Examples
+                                                <ArrowRight className="ml-1" size={16} />
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            {/* Installation Section */}
+                            <section id="installation" className="mb-12">
+                                <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                                    Installation
+                                </h2>
+                                <p className="text-gray-600 mb-6">
+                                    MCP servers can be installed using various package managers and deployment methods. 
+                                    Choose the method that best fits your development environment.
+                                </p>
+
+                                <div className="space-y-6">
+                                    <div>
+                                        <h3 className="text-xl font-semibold text-gray-900 mb-4">NPM Installation</h3>
+                                        <p className="text-gray-600 mb-3">For Node.js-based MCP servers:</p>
+                                        <div className="group">
+                                            <CodeBlock code="npm install @modelcontextprotocol/server-filesystem" id="npm-install" />
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <h3 className="text-xl font-semibold text-gray-900 mb-4">Python Installation</h3>
+                                        <p className="text-gray-600 mb-3">For Python-based MCP servers:</p>
+                                        <div className="group">
+                                            <CodeBlock code="pip install mcp-server-filesystem" id="pip-install" />
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <h3 className="text-xl font-semibold text-gray-900 mb-4">Docker Installation</h3>
+                                        <p className="text-gray-600 mb-3">Run MCP servers in containers:</p>
+                                        <div className="group">
+                                            <CodeBlock code="docker run -p 3000:3000 mcp-hub/filesystem-server" id="docker-install" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            {/* What is MCP Section */}
+                            <section id="what-is-mcp" className="mb-12">
+                                <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                                    What is Model Context Protocol?
+                                </h2>
+                                <p className="text-gray-600 mb-6">
+                                    The Model Context Protocol (MCP) is an open
+                                    standard that enables AI applications to
+                                    securely connect with external data sources,
+                                    tools, and services. It provides a standardized
+                                    way for AI models to access and interact with
+                                    various resources while maintaining security and
+                                    control.
+                                </p>
+
+                                <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-6 mb-6">
+                                    <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                                        Key Benefits
+                                    </h3>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div className="flex items-center">
+                                            <Shield className="text-blue-600 mr-3" size={20} />
+                                            <span className="text-gray-700">
+                                                Secure data access
+                                            </span>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <Plug className="text-green-600 mr-3" size={20} />
+                                            <span className="text-gray-700">
+                                                Standardized integration
+                                            </span>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <Expand className="text-purple-600 mr-3" size={20} />
+                                            <span className="text-gray-700">
+                                                Scalable architecture
+                                            </span>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <Settings className="text-orange-600 mr-3" size={20} />
+                                            <span className="text-gray-700">
+                                                Easy maintenance
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                                    How MCP Works
+                                </h3>
+                                <div className="space-y-4 mb-6">
+                                    <div className="flex items-start">
+                                        <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3"></div>
+                                        <p className="text-gray-600">
+                                            <strong>Client-Server Architecture:</strong>
+                                            AI applications (clients) connect to MCP
+                                            servers that provide specific
+                                            capabilities
+                                        </p>
+                                    </div>
+                                    <div className="flex items-start">
+                                        <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3"></div>
+                                        <p className="text-gray-600">
+                                            <strong>Standardized Protocol:</strong>
+                                            All communication follows the MCP
+                                            specification for consistency
+                                        </p>
+                                    </div>
+                                    <div className="flex items-start">
+                                        <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3"></div>
+                                        <p className="text-gray-600">
+                                            <strong>Resource Access:</strong>
+                                            Servers expose resources (data, tools,
+                                            prompts) that clients can discover and
+                                            use
+                                        </p>
+                                    </div>
+                                    <div className="flex items-start">
+                                        <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3"></div>
+                                        <p className="text-gray-600">
+                                            <strong>Secure Boundaries:</strong> Each
+                                            server operates within defined security
+                                            boundaries and permissions
+                                        </p>
+                                    </div>
+                                </div>
+                            </section>
+
+                            {/* Server Types Section */}
+                            <section id="server-types" className="mb-12">
+                                <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                                    Server Types & Categories
+                                </h2>
+                                <p className="text-gray-600 mb-6">
+                                    MCP servers come in various types, each designed
+                                    for specific use cases. Understanding these
+                                    categories helps you choose the right server for
+                                    your needs.
+                                </p>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div className="border border-gray-200 rounded-lg p-6 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                                        <div className="flex items-center mb-4">
+                                            <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                                <Folder className="text-blue-600" size={20} />
+                                            </div>
+                                            <h3 className="text-lg font-semibold text-gray-900">
+                                                File System
+                                            </h3>
+                                        </div>
+                                        <p className="text-gray-600 mb-3">
+                                            Access and manipulate files and
+                                            directories with secure boundaries.
+                                        </p>
+                                        <div className="text-sm text-gray-500">
+                                            <span className="bg-gray-100 px-2 py-1 rounded mr-2">
+                                                Read/Write
+                                            </span>
+                                            <span className="bg-gray-100 px-2 py-1 rounded mr-2">
+                                                Cloud Storage
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div className="border border-gray-200 rounded-lg p-6 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                                        <div className="flex items-center mb-4">
+                                            <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                                                <Database className="text-green-600" size={20} />
+                                            </div>
+                                            <h3 className="text-lg font-semibold text-gray-900">
+                                                Database
+                                            </h3>
+                                        </div>
+                                        <p className="text-gray-600 mb-3">
+                                            Connect to SQL and NoSQL databases for
+                                            data operations.
+                                        </p>
+                                        <div className="text-sm text-gray-500">
+                                            <span className="bg-gray-100 px-2 py-1 rounded mr-2">
+                                                SQL
+                                            </span>
+                                            <span className="bg-gray-100 px-2 py-1 rounded mr-2">
+                                                NoSQL
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div className="border border-gray-200 rounded-lg p-6 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                                        <div className="flex items-center mb-4">
+                                            <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                                                <MessageCircle className="text-purple-600" size={20} />
+                                            </div>
+                                            <h3 className="text-lg font-semibold text-gray-900">
+                                                Communication
+                                            </h3>
+                                        </div>
+                                        <p className="text-gray-600 mb-3">
+                                            Integrate with messaging and
+                                            notification platforms.
+                                        </p>
+                                        <div className="text-sm text-gray-500">
+                                            <span className="bg-gray-100 px-2 py-1 rounded mr-2">
+                                                Slack
+                                            </span>
+                                            <span className="bg-gray-100 px-2 py-1 rounded mr-2">
+                                                Email
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div className="border border-gray-200 rounded-lg p-6 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                                        <div className="flex items-center mb-4">
+                                            <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center mr-3">
+                                                <Code className="text-orange-600" size={20} />
+                                            </div>
+                                            <h3 className="text-lg font-semibold text-gray-900">
+                                                Development
+                                            </h3>
+                                        </div>
+                                        <p className="text-gray-600 mb-3">
+                                            Access development tools, version
+                                            control, and CI/CD systems.
+                                        </p>
+                                        <div className="text-sm text-gray-500">
+                                            <span className="bg-gray-100 px-2 py-1 rounded mr-2">
+                                                Git
+                                            </span>
+                                            <span className="bg-gray-100 px-2 py-1 rounded mr-2">
+                                                CI/CD
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            {/* Integration Section */}
+                            <section id="integration" className="mb-12">
+                                <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                                    Integration Guide
+                                </h2>
+                                <p className="text-gray-600 mb-6">
+                                    Integrating MCP servers with your AI application requires configuring the connection
+                                    and understanding the available resources and tools.
+                                </p>
+
+                                <div className="space-y-6">
+                                    <div>
+                                        <h3 className="text-xl font-semibold text-gray-900 mb-4">Configuration Setup</h3>
+                                        <p className="text-gray-600 mb-3">
+                                            Add your MCP server configuration to your application's config file:
+                                        </p>
+                                        <div className="group">
+                                            <CodeBlock
+                                                code={`{
+  "mcpServers": {
+    "myserver": {
+      "command": "node",
+      "args": ["path/to/server.js"],
+      "env": {
+        "API_KEY": "your-api-key"
+      }
+    }
+  }
+}`}
+                                                id="integration-config"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <h3 className="text-xl font-semibold text-gray-900 mb-4">Connection Testing</h3>
+                                        <p className="text-gray-600 mb-3">
+                                            Test your connection to ensure the server is responding correctly:
+                                        </p>
+                                        <div className="group">
+                                            <CodeBlock
+                                                code="mcp-cli test-connection myserver"
+                                                id="test-connection"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            {/* Building Servers Section */}
+                            <section id="custom-servers" className="mb-12">
+                                <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                                    Building Custom Servers
+                                </h2>
+                                <p className="text-gray-600 mb-6">
+                                    Create your own MCP servers to expose custom functionality and data sources
+                                    to AI applications.
+                                </p>
+
+                                <div className="space-y-6">
+                                    <div>
+                                        <h3 className="text-xl font-semibold text-gray-900 mb-4">Server Structure</h3>
+                                        <p className="text-gray-600 mb-3">
+                                            A basic MCP server implementation:
+                                        </p>
+                                        <div className="group">
+                                            <CodeBlock
+                                                code={`import { Server } from '@modelcontextprotocol/sdk/server/index.js';
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+
+const server = new Server({
+  name: 'my-custom-server',
+  version: '1.0.0'
+});
+
+// Add your resources and tools here
+server.setRequestHandler('resources/list', async () => {
+  return {
+    resources: [
+      {
+        uri: 'custom://data',
+        name: 'Custom Data',
+        description: 'My custom data source'
+      }
+    ]
+  };
+});
+
+const transport = new StdioServerTransport();
+await server.connect(transport);`}
+                                                id="server-structure"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            {/* Best Practices Section */}
+                            <section id="best-practices" className="mb-12">
+                                <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                                    Best Practices
+                                </h2>
+                                <p className="text-gray-600 mb-6">
+                                    Follow these best practices to ensure optimal performance, security, and maintainability
+                                    of your MCP server implementations.
+                                </p>
+
+                                <div className="space-y-6">
+                                    <div className="bg-green-50 border-l-4 border-green-400 p-4">
+                                        <h3 className="text-lg font-semibold text-green-800 mb-2">Security</h3>
+                                        <ul className="text-green-700 space-y-1">
+                                            <li>• Always validate input parameters</li>
+                                            <li>• Implement proper authentication and authorization</li>
+                                            <li>• Use environment variables for sensitive data</li>
+                                            <li>• Regularly update dependencies</li>
+                                        </ul>
+                                    </div>
+
+                                    <div className="bg-blue-50 border-l-4 border-blue-400 p-4">
+                                        <h3 className="text-lg font-semibold text-blue-800 mb-2">Performance</h3>
+                                        <ul className="text-blue-700 space-y-1">
+                                            <li>• Implement caching for frequently accessed data</li>
+                                            <li>• Use connection pooling for database connections</li>
+                                            <li>• Optimize resource loading and memory usage</li>
+                                            <li>• Monitor and log performance metrics</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </section>
+
+                            {/* Troubleshooting Section */}
+                            <section id="troubleshooting" className="mb-12">
+                                <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                                    Troubleshooting
+                                </h2>
+                                <p className="text-gray-600 mb-6">
+                                    Common issues and solutions when working with MCP servers.
+                                </p>
+
+                                <div className="space-y-6">
+                                    <div className="border border-gray-200 rounded-lg p-6">
+                                        <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                                            Connection Failures
+                                        </h3>
+                                        <p className="text-gray-600 mb-3">
+                                            If your MCP server fails to connect:
+                                        </p>
+                                        <ul className="text-gray-600 space-y-1 ml-4">
+                                            <li>• Check that the server process is running</li>
+                                            <li>• Verify the configuration file paths</li>
+                                            <li>• Ensure all required dependencies are installed</li>
+                                            <li>• Check the server logs for error messages</li>
+                                        </ul>
+                                    </div>
+
+                                    <div className="border border-gray-200 rounded-lg p-6">
+                                        <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                                            Permission Errors
+                                        </h3>
+                                        <p className="text-gray-600 mb-3">
+                                            For file system or resource access issues:
+                                        </p>
+                                        <ul className="text-gray-600 space-y-1 ml-4">
+                                            <li>• Verify file and directory permissions</li>
+                                            <li>• Check that the server has access to required paths</li>
+                                            <li>• Ensure API keys and credentials are correct</li>
+                                            <li>• Review security policies and access controls</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </section>
+
+                            {/* API Reference Section */}
+                            <section id="api-reference" className="mb-12">
+                                <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                                    API Reference
+                                </h2>
+                                <p className="text-gray-600 mb-6">
+                                    Complete reference for the MCP protocol methods and data structures.
+                                </p>
+
+                                <div className="space-y-6">
+                                    <div>
+                                        <h3 className="text-xl font-semibold text-gray-900 mb-4">Core Methods</h3>
+                                        <div className="space-y-4">
+                                            <div className="border border-gray-200 rounded-lg p-4">
+                                                <h4 className="font-mono text-sm font-semibold text-purple-600 mb-2">
+                                                    resources/list
+                                                </h4>
+                                                <p className="text-gray-600 text-sm">
+                                                    Lists all available resources from the server.
+                                                </p>
+                                            </div>
+                                            <div className="border border-gray-200 rounded-lg p-4">
+                                                <h4 className="font-mono text-sm font-semibold text-purple-600 mb-2">
+                                                    resources/read
+                                                </h4>
+                                                <p className="text-gray-600 text-sm">
+                                                    Reads the contents of a specific resource.
+                                                </p>
+                                            </div>
+                                            <div className="border border-gray-200 rounded-lg p-4">
+                                                <h4 className="font-mono text-sm font-semibold text-purple-600 mb-2">
+                                                    tools/list
+                                                </h4>
+                                                <p className="text-gray-600 text-sm">
+                                                    Lists all available tools provided by the server.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            {/* Examples Section */}
+                            <section id="examples" className="mb-12">
+                                <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                                    Examples
+                                </h2>
+                                <p className="text-gray-600 mb-6">
+                                    Practical examples of MCP server implementations and integrations.
+                                </p>
+
+                                <div className="space-y-6">
+                                    <div>
+                                        <h3 className="text-xl font-semibold text-gray-900 mb-4">File System Server</h3>
+                                        <p className="text-gray-600 mb-3">
+                                            A simple file system server that provides read/write access to a specific directory:
+                                        </p>
+                                        <div className="group">
+                                            <CodeBlock
+                                                code={`// Configuration
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-filesystem",
+        "/home/user/documents"
+      ]
+    }
+  }
+}
+
+// Usage in AI application
+// The AI can now read and write files in /home/user/documents`}
+                                                id="filesystem-example"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <h3 className="text-xl font-semibold text-gray-900 mb-4">Database Server</h3>
+                                        <p className="text-gray-600 mb-3">
+                                            Connect to a PostgreSQL database and execute queries:
+                                        </p>
+                                        <div className="group">
+                                            <CodeBlock
+                                                code={`// Configuration
+{
+  "mcpServers": {
+    "database": {
+      "command": "mcp-postgres-server",
+      "env": {
+        "DATABASE_URL": "postgresql://user:pass@localhost/db"
+      }
+    }
+  }
+}
+
+// The AI can now query your database
+// Example: "Show me all users created in the last week"`}
+                                                id="database-example"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            {/* FAQ Section */}
+                            <section id="faq" className="mb-12">
+                                <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                                    Frequently Asked Questions
+                                </h2>
+
+                                <div className="space-y-6">
+                                    <div className="border border-gray-200 rounded-lg p-6">
+                                        <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                                            How do I choose the right MCP server?
+                                        </h3>
+                                        <p className="text-gray-600">
+                                            Consider your specific use case, the
+                                            type of data or functionality you need,
+                                            and the server's compatibility with your
+                                            tech stack. Use our filtering and search
+                                            features to narrow down options, and
+                                            check community ratings and reviews.
+                                        </p>
+                                    </div>
+
+                                    <div className="border border-gray-200 rounded-lg p-6">
+                                        <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                                            Are MCP servers secure?
+                                        </h3>
+                                        <p className="text-gray-600">
+                                            Yes, MCP servers are designed with
+                                            security in mind. They operate within
+                                            defined boundaries, support permission
+                                            controls, and follow the MCP security
+                                            specifications. Always review the
+                                            server's documentation and configure
+                                            appropriate access controls.
+                                        </p>
+                                    </div>
+
+                                    <div className="border border-gray-200 rounded-lg p-6">
+                                        <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                                            Can I use multiple MCP servers together?
+                                        </h3>
+                                        <p className="text-gray-600">
+                                            Absolutely! Most AI applications use
+                                            multiple MCP servers to access different
+                                            types of resources. The MCP protocol is
+                                            designed to support multiple concurrent
+                                            server connections.
+                                        </p>
+                                    </div>
+
+                                    <div className="border border-gray-200 rounded-lg p-6">
+                                        <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                                            How do I contribute a new server?
+                                        </h3>
+                                        <p className="text-gray-600">
+                                            We welcome community contributions! You
+                                            can submit your MCP server through our
+                                            GitHub repository or contact us
+                                            directly. Make sure your server follows
+                                            MCP specifications and includes proper
+                                            documentation.
+                                        </p>
+                                    </div>
+                                </div>
+                            </section>
+
+                            {/* Call to Action */}
+                            <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-8 text-center text-white">
+                                <h2 className="text-2xl font-bold mb-4">
+                                    Ready to Get Started?
+                                </h2>
+                                <p className="text-blue-100 mb-6">
+                                    Explore our collection of MCP servers and start
+                                    building amazing AI applications today.
+                                </p>
+                                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                    <Link
+                                        to="/servers"
+                                        className="inline-flex items-center px-6 py-3 bg-white text-blue-600 font-medium rounded-lg hover:bg-gray-50 transition-colors"
+                                    >
+                                        <Rocket className="mr-2" size={20} />
+                                        Browse Servers
+                                    </Link>
+                                    <Link
+                                        to="/categories"
+                                        className="inline-flex items-center px-6 py-3 border-2 border-white text-white font-medium rounded-lg hover:bg-white hover:text-blue-600 transition-colors"
+                                    >
+                                        <LayoutGrid className="mr-2" size={20} />
+                                        View Categories
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
