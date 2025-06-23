@@ -1,10 +1,97 @@
 import { useQuery } from "@tanstack/react-query";
 import type { Category, MCPServer, ProcessedREADME } from "../types";
-// import categoriesData from "../data/categories.json";
-import serversData from "../data/servers_integrated.json";
-import categoriesData from "../data/categories_full_updated.json";
 
-// 定义JSON数据结构接口
+// 定义优化后的数据结构接口
+interface CoreServerData {
+    id: string;
+    name: string;
+    owner: string;
+    slug: string;
+    description: {
+        "zh-CN": string;
+        en: string;
+        "zh-TW": string;
+        fr: string;
+        ja: string;
+        ko: string;
+        ru: string;
+    };
+    category: string;
+    subcategory?: string;
+    featured: boolean;
+    verified: boolean;
+    stats: {
+        stars: number;
+        forks: number;
+        lastUpdated: string;
+    };
+    qualityScore: number;
+    tags: string[];
+    links: {
+        github: string;
+        npm: string;
+        docs: string;
+    };
+}
+
+interface ExtendedServerData {
+    [serverId: string]: {
+        fullDescription?: string;
+        techStack: (string | { name?: string; label?: string })[];
+        serviceTypes: string[];
+        quality: {
+            score: number;
+            factors: {
+                documentation: number;
+                maintenance: number;
+                community: number;
+                performance: number;
+            };
+        };
+        metadata: Record<string, unknown>;
+        categorization: Record<string, unknown>;
+        usage: {
+            downloads: number;
+            dependents: number;
+            weeklyDownloads: number;
+        };
+        installation: {
+            npm?: string;
+            pip?: string;
+            docker?: string;
+            manual?: string;
+            uv?: string;
+            instructions: Array<{ type?: string; content?: string; description?: string }>;
+        };
+        repository: {
+            url: string;
+            owner: string;
+            name: string;
+            stars: number;
+            forks: number;
+            lastUpdated: string;
+            watchers: number;
+            openIssues: number;
+        };
+        compatibility: {
+            platforms: string[];
+            nodeVersion?: string;
+            pythonVersion?: string;
+            requirements: string[];
+        };
+        documentation: {
+            hasReadme: boolean;
+            hasExamples: boolean;
+            hasApiReference: boolean;
+            hasInstallation: boolean;
+            api?: string;
+        };
+        allTags: string[];
+        badges: Array<{ name?: string; type?: string; color?: string }>;
+        icon?: string;
+    };
+}
+
 interface CategoryJson {
     id: string;
     name: string;
@@ -25,19 +112,152 @@ interface SubcategoryJson {
     descriptionEn: string;
 }
 
-// The integrated server data matches the MCPServer interface closely
-// We'll type it as 'any' for flexibility during the transition
-
 // 模拟异步数据加载
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// 合并核心数据和扩展数据为完整的 MCPServer 对象
+function mergeServerData(coreData: CoreServerData[], extendedData: ExtendedServerData): MCPServer[] {
+    return coreData.map(core => {
+        const extended = extendedData[core.id] || {};
+        
+        return {
+            // 核心字段
+            id: core.id,
+            name: core.name,
+            owner: core.owner,
+            slug: core.slug,
+            fullDescription: extended.fullDescription || core.description["zh-CN"],
+            icon: extended.icon || "",
+            badges: (extended.badges || []).map(badge => ({
+                type: badge.type || "default",
+                label: badge.name || "",
+                color: badge.color || "gray",
+                icon: ""
+            })),
+            tags: extended.allTags || core.tags,
+            category: core.category,
+            subcategory: core.subcategory || "",
+            serviceTypes: (extended.serviceTypes || []).map(type => ({
+                type: type,
+                label: type,
+                icon: "",
+                description: ""
+            })),
+            techStack: (extended.techStack || []).map(tech => 
+                typeof tech === 'string' ? tech : (tech.name || tech.label || '')
+            ),
+            links: {
+                github: core.links.github,
+                demo: null,
+                docs: extended.documentation?.api || core.links.docs || null
+            },
+            
+            // 多语言描述
+            description: core.description,
+            
+            // 统计信息
+            stats: {
+                ...core.stats,
+                createdAt: (extended.metadata as any)?.createdAt || new Date(2024, 0, 1).toISOString()
+            },
+            metadata: {
+                complexity: (extended.metadata as any)?.complexity || "medium",
+                maturity: (extended.metadata as any)?.maturity || "stable",
+                deployment: (extended.metadata as any)?.deployment || ["cloud", "local"],
+                featured: core.featured,
+                verified: core.verified
+            },
+            categorization: extended.categorization as any || {
+                confidence: 0.8,
+                reason: "Automatically categorized",
+                matched_keywords: []
+            },
+            
+            // 仓库信息
+            repository: extended.repository || {
+                url: core.links.github,
+                owner: core.owner,
+                name: core.name.split('/')[1] || core.name,
+                stars: core.stats.stars,
+                forks: core.stats.forks,
+                lastUpdated: core.stats.lastUpdated,
+                watchers: core.stats.stars,
+                openIssues: 0,
+            },
+            
+            // 安装信息
+            installation: {
+                npm: extended.installation?.npm || undefined,
+                pip: extended.installation?.pip || undefined,
+                docker: extended.installation?.docker || undefined,
+                manual: extended.installation?.manual || undefined,
+                uv: extended.installation?.uv || undefined,
+                instructions: (extended.installation?.instructions || []).map(inst => ({
+                    type: inst.type || "bash",
+                    content: inst.content || "",
+                    description: inst.description || ""
+                }))
+            },
+            
+            // 文档信息
+            documentation: {
+                readme: extended.fullDescription || core.description["zh-CN"],
+                overview: undefined,
+                installation: undefined,
+                examples: undefined,
+                api_reference: undefined,
+                api: extended.documentation?.api || core.links.docs || undefined,
+                structured: undefined
+            },
+            
+            // 兼容性信息
+            compatibility: extended.compatibility || {
+                platforms: ['web', 'desktop'],
+                nodeVersion: undefined,
+                pythonVersion: undefined,
+                requirements: []
+            },
+            
+            // 质量评分
+            quality: extended.quality || {
+                score: core.qualityScore,
+                factors: {
+                    documentation: 60,
+                    maintenance: 50,
+                    community: 40,
+                    performance: 85
+                }
+            },
+            
+            // 使用统计
+            usage: extended.usage || {
+                downloads: core.stats.stars * 10,
+                dependents: core.stats.forks,
+                weeklyDownloads: Math.floor(core.stats.stars * 2),
+            },
+            
+            // 兼容性字段
+            featured: core.featured,
+            verified: core.verified,
+            createdAt: (extended.metadata as any)?.createdAt || new Date(2024, 0, 1).toISOString(),
+            updatedAt: core.stats.lastUpdated,
+        };
+    });
+}
 
 export const useCategories = () => {
     return useQuery({
         queryKey: ["categories"],
         queryFn: async (): Promise<Category[]> => {
             await delay(100); // 模拟网络延迟
+            const response = await fetch("/data/categories.json");
+            if (!response.ok) {
+                throw new Error("Failed to fetch categories");
+            }
+            const categoriesData = await response.json() as CategoryJson[];
+            
             // 转换数据格式以匹配类型定义
-            return (categoriesData as CategoryJson[]).map((cat) => ({
+            return categoriesData.map((cat) => ({
                 ...cat,
                 name: {
                     "zh-CN": cat.name,
@@ -85,89 +305,56 @@ export const useCategories = () => {
     });
 };
 
-// Since the data is now pre-integrated, we can simplify the transformation
-const transformServerData = (server: unknown): MCPServer => {
-    const serverData = server as Record<string, any>;
-    // Extract owner and project name from the name field
-    const nameParts = (serverData.name as string).split('/');
-    const owner = nameParts.length > 1 ? nameParts[0] : '';
-    const projectName = nameParts.length > 1 ? nameParts[1] : serverData.name;
-    
-    // The server data is already enhanced, so we mainly need to handle the format
-    return {
-        // Core fields
-        id: serverData.id,
-        name: projectName,
-        owner: owner,
-        slug: serverData.slug,
-        fullDescription: serverData.fullDescription,
-        icon: serverData.icon,
-        badges: serverData.badges,
-        tags: serverData.tags,
-        category: serverData.category,
-        subcategory: serverData.subcategory,
-        serviceTypes: serverData.serviceTypes,
-        techStack: Array.isArray(serverData.techStack) ? 
-            serverData.techStack.map((tech: any) => typeof tech === 'string' ? tech : (tech.name || tech.label || '')) :
-            [],
-        links: serverData.links,
-        
-        // Multi-language description
-        description: {
-            "zh-CN": serverData.description,
-            en: serverData.description,
-            "zh-TW": serverData.description,
-            fr: serverData.description,
-            ja: serverData.description,
-            ko: serverData.description,
-            ru: serverData.description,
-        },
-        
-        // Enhanced stats
-        stats: serverData.stats,
-        metadata: serverData.metadata,
-        categorization: serverData.categorization,
-        
-        // Enhanced repository info (now integrated)
-        repository: serverData.repository,
-        
-        // Enhanced installation (now integrated)
-        installation: serverData.installation,
-        
-        // Enhanced documentation (now integrated)
-        documentation: serverData.documentation,
-        
-        // Enhanced compatibility (now integrated)
-        compatibility: serverData.compatibility,
-        
-        // Enhanced quality scores (now integrated)
-        quality: serverData.quality,
-        
-        // Usage metrics
-        usage: serverData.usage || {
-            downloads: serverData.stats.stars * 10,
-            dependents: serverData.stats.forks,
-            weeklyDownloads: Math.floor(serverData.stats.stars * 2),
-        },
-        
-        // Legacy compatibility fields
-        featured: serverData.metadata.featured,
-        verified: serverData.metadata.verified,
-        createdAt: serverData.stats.createdAt || new Date(2024, 0, 1).toISOString(),
-        updatedAt: serverData.stats.lastUpdated || new Date().toISOString(),
-    };
-};
-
-
-export const useServers = () => {
+// 核心数据加载 Hook - 立即加载，用于初始页面渲染
+export const useCoreServers = () => {
     return useQuery({
-        queryKey: ["servers"],
-        queryFn: async (): Promise<MCPServer[]> => {
+        queryKey: ["servers", "core"],
+        queryFn: async (): Promise<CoreServerData[]> => {
             await delay(200); // 模拟网络延迟
-            // Transform the integrated data to MCPServer format
-            return (serversData as unknown[]).map(transformServerData);
+            const response = await fetch("/data/servers-core.json");
+            if (!response.ok) {
+                throw new Error("Failed to fetch core server data");
+            }
+            return response.json();
         },
         staleTime: 5 * 60 * 1000, // 5分钟
+    });
+};
+
+// 扩展数据加载 Hook - 按需加载
+export const useExtendedServers = () => {
+    return useQuery({
+        queryKey: ["servers", "extended"],
+        queryFn: async (): Promise<ExtendedServerData> => {
+            await delay(300); // 模拟网络延迟
+            const response = await fetch("/data/servers-extended.json");
+            if (!response.ok) {
+                throw new Error("Failed to fetch extended server data");
+            }
+            return response.json();
+        },
+        staleTime: 5 * 60 * 1000, // 5分钟
+    });
+};
+
+// 主要的服务器数据 Hook - 合并核心和扩展数据
+export const useServers = () => {
+    const { data: coreData } = useCoreServers();
+    const { data: extendedData } = useExtendedServers();
+
+    return useQuery({
+        queryKey: ["servers", "merged", !!coreData, !!extendedData],
+        queryFn: async (): Promise<MCPServer[]> => {
+            if (!coreData) {
+                throw new Error("Core data not available");
+            }
+            
+            // 如果扩展数据还没加载完，使用核心数据创建基础对象
+            const extended = extendedData || {};
+            return mergeServerData(coreData, extended);
+        },
+        enabled: !!coreData,
+        staleTime: 5 * 60 * 1000,
     });
 };
 
@@ -218,22 +405,15 @@ export const useServersByCategory = (categoryId: string) => {
     });
 };
 
-// Enhanced hook to get server with integrated README data
+// 优化的 README 数据加载 Hook
 export const useServerReadme = (serverId: string) => {
-    const { data: servers } = useServers();
-    
     return useQuery({
         queryKey: ["readme", serverId],
         queryFn: async (): Promise<ProcessedREADME | null> => {
-            // First try to get it from the integrated data
-            const server = servers?.find(s => s.id === serverId);
-            if (server?.documentation?.structured) {
-                return server.documentation.structured;
-            }
+            if (!serverId) return null;
             
-            // Fallback to fetching from public directory (for backwards compatibility)
             try {
-                const response = await fetch(`/structured_readme_data/${serverId}.json`);
+                const response = await fetch(`/data/readme/${serverId}.json`);
                 if (!response.ok) {
                     return null;
                 }
@@ -245,6 +425,36 @@ export const useServerReadme = (serverId: string) => {
             }
         },
         enabled: !!serverId,
+        staleTime: 10 * 60 * 1000, // 10 minutes
+    });
+};
+
+// 搜索索引 Hook - 用于快速客户端搜索
+export const useSearchIndex = () => {
+    return useQuery({
+        queryKey: ["search", "index"],
+        queryFn: async () => {
+            const response = await fetch("/data/search-index.json");
+            if (!response.ok) {
+                throw new Error("Failed to fetch search index");
+            }
+            return response.json();
+        },
+        staleTime: 10 * 60 * 1000, // 10 minutes
+    });
+};
+
+// README 索引 Hook - 用于了解哪些服务器有文档
+export const useReadmeIndex = () => {
+    return useQuery({
+        queryKey: ["readme", "index"],
+        queryFn: async () => {
+            const response = await fetch("/data/readme/index.json");
+            if (!response.ok) {
+                throw new Error("Failed to fetch README index");
+            }
+            return response.json();
+        },
         staleTime: 10 * 60 * 1000, // 10 minutes
     });
 };

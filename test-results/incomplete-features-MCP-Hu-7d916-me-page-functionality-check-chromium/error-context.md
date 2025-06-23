@@ -1,0 +1,952 @@
+# Page snapshot
+
+```yaml
+- navigation:
+  - link "M MCP Hub":
+    - /url: /
+  - link "Home":
+    - /url: /
+  - link "Servers":
+    - /url: /servers
+  - link "Categories":
+    - /url: /categories
+  - link "Documentation":
+    - /url: /docs
+  - link "About":
+    - /url: /about
+  - searchbox "Search servers..."
+  - button "Toggle Theme"
+  - button "en"
+- main:
+  - button "Navigate to mcp-pr-pilot"
+  - button "Navigate to web3-research-mcp"
+  - button "Navigate to spring-rest-to-mcp"
+  - button "Navigate to AgentQL"
+  - button "Navigate to Aiven"
+  - button "Navigate to bear-mcp-server"
+  - button "Navigate to alibabacloud-adbpg-mcp-server"
+  - button "Navigate to mcp-simple-timeserver"
+  - button "Navigate to Apple Notes"
+  - button "Navigate to sg-lta-mcp"
+  - button "Navigate to FastlyMCP"
+  - button "Navigate to AWS CDK"
+  - button "Navigate to mcp-server-taskwarrior"
+  - button "Navigate to base-mcp"
+  - button "Navigate to BGG MCP"
+  - button "Navigate to mcp_3d_relief"
+  - button "Navigate to mcp-go-colly"
+  - button "Navigate to jobspy-mcp-server"
+  - button "Navigate to mcp-server-ipinfo"
+  - button "Navigate to mcp-shodan"
+  - button "Navigate to mcp-virustotal"
+  - button "Navigate to Calculator"
+  - button "Navigate to CalDAV MCP"
+  - button "Navigate to gin-mcp"
+  - button "Navigate to openapi-mcp"
+  - button "Navigate to seo-mcp"
+  - button "Navigate to PubMed-MCP-Server"
+  - button "Navigate to Contentful"
+  - button "Navigate to Creatify"
+  - button "Navigate to backlog-manager-mcp"
+  - button "Navigate to mcp-dndzgz"
+  - button "Navigate to mysql-mcp-server"
+  - button "Navigate to DealX"
+  - button "Navigate to Vulnerable-file-reader-server"
+  - button "Navigate to Email"
+  - button "Navigate to zettelkasten-mcp"
+  - button "Navigate to Facebook Ads Library"
+  - button "Navigate to mcp-minimax-music-server"
+  - button "Navigate to wsb-analyst-mcp"
+  - button "Navigate to mcp-server-cortex"
+  - button "Navigate to Homebrew MCP"
+  - button "Navigate to Hostinger"
+  - button "Navigate to bruno-mcp"
+  - button "Navigate to railway-mcp"
+  - button "Navigate to code-explorer-mcp"
+  - button "Navigate to mcp-image-generator"
+  - button "Navigate to mcp-kibela-server"
+  - button "Navigate to gitlab-mr-mcp"
+  - button "Navigate to alertmcp"
+  - button "Navigate to kubectl-mcp-server"
+  - button "Navigate to bing-search-mcp"
+  - button "Navigate to ArxivMCP"
+  - button "Navigate to LlamaCloud"
+  - button "Navigate to Logfire"
+  - button "Navigate to pocketbase-mcp"
+  - button "Navigate to gemini-img-gen-MCP"
+  - button "Navigate to mcp-gameboy"
+  - button "Navigate to voice-mcp"
+  - button "Navigate to MCP Plexus"
+  - button "Navigate to MCP Toolbox for Databases"
+  - button "Navigate to MCP-Chatbot"
+  - button "Navigate to MCP-SearXNG-Enhanced Web Search"
+  - button "Navigate to Microsoft 365"
+  - button "Navigate to godoc-mcp"
+  - button "Navigate to pocketbase-mcp"
+  - button "Navigate to mcp-temple"
+  - button "Navigate to all-in-one-model-context-protocol"
+  - button "Navigate to searxng-mcp-bridge"
+  - button "Navigate to Norman Finance"
+  - button "Navigate to tfmcp"
+  - button "Navigate to remote-cloudflare-youtube-transcript-mcp-server"
+  - button "Navigate to mcp-human"
+  - button "Navigate to mcp-server-airbnb"
+  - button "Navigate to mcp-adonet-server"
+  - button "Navigate to Paperless-MCP"
+  - button "Navigate to mcp-server-proj"
+  - button "Navigate to RAG Web Browser"
+  - button "Navigate to roo-code-custom-mode-editor-mcp-server"
+  - button "Navigate to mcp-openapi"
+  - button "Navigate to k8s-mcp-server"
+  - button "Navigate to fantasy-pl-mcp"
+  - button "Navigate to searchAPI-mcp"
+  - button "Navigate to xrpl-mcp-server"
+  - button "Navigate to Root Signals"
+  - button "Navigate to android-adb-controller"
+  - button "Navigate to google-photos-mcp"
+  - button "Navigate to Scrapeless"
+  - button "Navigate to eclass-mcp-server"
+  - button "Navigate to mcp-monitor"
+  - button "Navigate to mcp-k8s"
+  - button "Navigate to opensearch"
+  - button "Navigate to tandoor-mcp-server"
+  - button "Navigate to GitHubMCP"
+  - button "Navigate to hugo-mcp"
+  - button "Navigate to Tavily"
+  - button "Navigate to page_control_mcp"
+  - button "Navigate to mcp_server_manager"
+  - button "Navigate to mcp_mongodb"
+  - button "Navigate to mcp-gdrive-server"
+  - button "Navigate to Unified Diff MCP Server"
+  - button "Navigate to Napier-mcp"
+  - button "Navigate to variflight-mcp"
+  - button "Navigate to Vectorize"
+  - button "Navigate to VictoriaMetrics"
+  - button "Navigate to skill-set"
+  - button "Navigate to iotdb-mcp-server-TreeModel"
+  - button "Navigate to databricks-genie-MCP"
+  - button "Navigate to YepCode"
+  - button "Navigate to mcp-typescribe"
+  - button "Navigate to jadx-ai-mcp"
+  - button "Navigate to PentestMCP"
+  - button "Navigate to shopware-mcp"
+  - button "Navigate to sqlite-explorer-fastmcp-mcp-server"
+  - button "Navigate to fetcher-mcp"
+  - button "Navigate to Kubernetes"
+  - button "Navigate to vuesage"
+  - button "Navigate to Ragavi-ImmoBricks"
+  - button "Navigate to twitter-mcp"
+  - button "Navigate to Solana Forum Summarizer MCP Server"
+  - button "Navigate to Solana Limit Order MCP Server"
+  - button "Navigate to duckdb-hybrid-doc-search"
+  - button "Navigate to Whois MCP"
+  - button "Navigate to mcp-server-gitlab"
+  - button "Navigate to mcp-terminal-client"
+  - button "Navigate to Garak-MCP"
+  - button "Navigate to MCP-Storybook-Image-Generator"
+  - button "Navigate to Deep-Fusion-Research-"
+  - button "Navigate to MCP-timeserver"
+  - button "Navigate to location-mcp-server"
+  - button "Navigate to NihFix.Postgres.Mcp"
+  - button "Navigate to openweather-mcp"
+  - button "Navigate to imagen3-mcp"
+  - button "Navigate to mcp_safe_local_python_executor"
+  - button "Navigate to mcp-hk-transport-eta"
+  - button "Navigate to 302_web_search_mcp"
+  - button "Navigate to Minima"
+  - button "Navigate to Cursor-MCP-test"
+  - button "Navigate to shardeum-mcp-server"
+  - button "Navigate to remote-mcp-server"
+  - button "Navigate to AWS EC2 Pricing"
+  - button "Navigate to remote-mcp-server"
+  - button "Navigate to webhook-trigger"
+  - button "Navigate to remote-mcp-server"
+  - button "Navigate to atomgit-mcp-server"
+  - button "Navigate to ddg_search"
+  - button "Navigate to remote-mcp-server"
+  - button "Navigate to genius-mcp-server"
+  - button "Navigate to cyberchef-api-mcp-server"
+  - button "Navigate to Tencent Cloud COS MCP"
+  - button "Navigate to bing-cn-mcp-server"
+  - button "Navigate to jupyter-mcp-server"
+  - button "Navigate to mcp-remote-call-ping-pong"
+  - button "Navigate to podcast-xyzrank-mcp"
+  - button "Navigate to PGYER"
+  - button "Navigate to mcp-server-jdbc"
+  - button "Navigate to Squad AI"
+  - button "Navigate to handsome-server-python"
+  - button "Navigate to bilibili-mcp-js"
+  - button "Navigate to Offensive-MCP-AI"
+  - button "Navigate to xhs-mcp"
+  - button "Navigate to mcp_server_filesystem_01"
+  - button "Navigate to remote-mcp"
+  - button "Navigate to playlist-mcp"
+  - button "Navigate to metoro-mcp-server"
+  - button "Navigate to Weather-MCP-ClaudeDesktop"
+  - button "Navigate to mcgravity"
+  - button "Navigate to grasp"
+  - button "Navigate to lipsync-mcp"
+  - button "Navigate to octolis-tech-support"
+  - button "Navigate to mcp-mtg-assistant"
+  - button "Navigate to filesystem-mcp"
+  - button "Navigate to my-crypto-mcp"
+  - button "Navigate to GhidraMCP"
+  - button "Navigate to mcp-server-google-search"
+  - button "Navigate to consul-mcp-server"
+  - button "Navigate to mcp-kql-server"
+  - button "Navigate to mcp-server"
+  - button "Navigate to mcp-bazel"
+  - button "Navigate to code-context-provider-mcp"
+  - button "Navigate to bitcoin-mcp"
+  - button "Navigate to nostr-mcp"
+  - button "Navigate to manim-mcp-server"
+  - button "Navigate to mcp-file-server"
+  - button "Navigate to mcp_ev_assistant_server"
+  - button "Navigate to mcp-investec-sapb-simple"
+  - button "Navigate to mcp-mongo"
+  - button "Navigate to OmniTaskAgent"
+  - button "Navigate to neon-mcp-loc"
+  - button "Navigate to mcp-server-learn"
+  - button "Navigate to mcp-git-ingest"
+  - button "Navigate to mcp-twikit"
+  - button "Navigate to gitlab-mcp"
+  - button "Navigate to mcpserver"
+  - button "Navigate to git-mcp-options"
+  - button "Navigate to simple-mcp-fileserver"
+  - button "Navigate to MCP-Server-with-Claude-Ai"
+  - button "Navigate to dank-mcp"
+  - button "Navigate to AgentRPC"
+  - button "Navigate to Agentset"
+  - button "Navigate to version_checker_mcp"
+  - text: 200 stars visible
+  - heading "Discover the Best MCP Servers" [level=1]
+  - paragraph: Your gateway to enhanced AI capabilities. Explore, integrate, and supercharge your applications with Model Context Protocol servers.
+  - searchbox "Search for MCP servers, categories, or features..."
+  - button "Search"
+  - text: 1842+ MCP Servers 11 Categories 50K+ Downloads 72% Quality Score
+  - button "Database & Storage 129 servers"
+  - button "Development Tools 306 servers"
+  - button "Cloud & Infrastructure 140 servers"
+  - button "Business & Productivity 215 servers"
+  - button "AI & Machine Learning 153 servers"
+  - button "Communication & Collaboration 39 servers"
+  - button "Content & Media 121 servers"
+  - button "Finance & Payments 108 servers"
+  - button "Utilities & Tools 323 servers"
+  - button "Specialized Domains 2 servers"
+  - heading "Database & Storage" [level=2]
+  - paragraph: Database connectivity, querying, and data storage services
+  - link "More":
+    - /url: /categories/database
+  - link "@1Levick3 postgresql-mcp-server 0 Facilitates direct SQL query execution on PostgreSQL databases with parameterized queries and configurable timeouts. parameters database +5 0 1d ago":
+    - /url: /servers/d4a0d1209082
+    - text: "@1Levick3"
+    - heading "postgresql-mcp-server" [level=3]
+    - text: "0"
+    - paragraph: Facilitates direct SQL query execution on PostgreSQL databases with parameterized queries and configurable timeouts.
+    - text: parameters database +5 0 1d ago
+  - link "@4R9UN mcp-kql-server 0 Facilitates the execution of KQL queries against Azure Data Explorer within Claude Desktop, leveraging Azure CLI for secure authentication and structured data output. data explorer azure +6 0 1d ago":
+    - /url: /servers/1ab3dcb8f3e7
+    - text: "@4R9UN"
+    - heading "mcp-kql-server" [level=3]
+    - text: "0"
+    - paragraph: Facilitates the execution of KQL queries against Azure Data Explorer within Claude Desktop, leveraging Azure CLI for secure authentication and structured data output.
+    - text: data explorer azure +6 0 1d ago
+  - link "@achrekarom12 mcp-mongo 0 Facilitates natural language interactions with MongoDB databases through a Model Context Protocol server, enabling LLMs to perform queries, schema exploration, and data operations. schema database +5 0 1d ago":
+    - /url: /servers/2c04b1d2289b
+    - text: "@achrekarom12"
+    - heading "mcp-mongo" [level=3]
+    - text: "0"
+    - paragraph: Facilitates natural language interactions with MongoDB databases through a Model Context Protocol server, enabling LLMs to perform queries, schema exploration, and data operations.
+    - text: schema database +5 0 1d ago
+  - link "@adam2211 neon-mcp-loc 0 Facilitates natural language interaction with Neon Postgres databases, enabling seamless database management and migrations through intuitive commands. database postgresql +5 0 1d ago":
+    - /url: /servers/2c479ec5efef
+    - text: "@adam2211"
+    - heading "neon-mcp-loc" [level=3]
+    - text: "0"
+    - paragraph: Facilitates natural language interaction with Neon Postgres databases, enabling seamless database management and migrations through intuitive commands.
+    - text: database postgresql +5 0 1d ago
+  - link "@affannahmed MCP-Server-with-Claude-Ai 0 Facilitates secure interaction between AI applications and MySQL databases through a controlled MCP interface. ai database +5 0 1d ago":
+    - /url: /servers/5d3fec1bd6a2
+    - text: "@affannahmed"
+    - heading "MCP-Server-with-Claude-Ai" [level=3]
+    - text: "0"
+    - paragraph: Facilitates secure interaction between AI applications and MySQL databases through a controlled MCP interface.
+    - text: ai database +5 0 1d ago
+  - link "Airtable 0 📇 🏠 - Airtable database integration with schema inspection, read and write capabilities schema integration +5 0 1d ago":
+    - /url: /servers/45ea943950a4
+    - heading "Airtable" [level=3]
+    - text: "0"
+    - paragraph: 📇 🏠 - Airtable database integration with schema inspection, read and write capabilities
+    - text: schema integration +5 0 1d ago
+  - link "Aiven 0 🐍 ☁️ 🎖️ - Navigate your [Aiven projects](https://go.aiven.io/mcp-server) and interact with the PostgreSQL®, Apache Kafka®, ClickHouse® and OpenSearch® services aiven kafka +6 0 1d ago":
+    - /url: /servers/753592a8b63f
+    - heading "Aiven" [level=3]
+    - text: "0"
+    - paragraph: 🐍 ☁️ 🎖️ - Navigate your [Aiven projects](https://go.aiven.io/mcp-server) and interact with the PostgreSQL®, Apache Kafka®, ClickHouse® and OpenSearch® services
+    - text: aiven kafka +6 0 1d ago
+  - link "@AlekseyKapustyanenko NihFix.Postgres.Mcp 0 Facilitates real-time AI agent interactions with PostgreSQL databases using SSE and STDIO protocols. database postgresql +5 0 1d ago":
+    - /url: /servers/a84495f987fa
+    - text: "@AlekseyKapustyanenko"
+    - heading "NihFix.Postgres.Mcp" [level=3]
+    - text: "0"
+    - paragraph: Facilitates real-time AI agent interactions with PostgreSQL databases using SSE and STDIO protocols.
+    - text: database postgresql +5 0 1d ago
+  - link "@alexanderzuev supabase-mcp-server 0 Supabase MCP Server with support for SQL query execution and database exploration tools cloud database +5 0 1d ago":
+    - /url: /servers/4eae4293988a
+    - text: "@alexanderzuev"
+    - heading "supabase-mcp-server" [level=3]
+    - text: "0"
+    - paragraph: Supabase MCP Server with support for SQL query execution and database exploration tools
+    - text: cloud database +5 0 1d ago
+  - link "@alexxx-db databricks-genie-mcp 0 Integrate Databricks' AI/BI assistant features with other applications through a standardized interface for natural language querying of data. ai data querying +6 0 1d ago":
+    - /url: /servers/9379141a0452
+    - text: "@alexxx-db"
+    - heading "databricks-genie-mcp" [level=3]
+    - text: "0"
+    - paragraph: Integrate Databricks' AI/BI assistant features with other applications through a standardized interface for natural language querying of data.
+    - text: ai data querying +6 0 1d ago
+  - heading "Development Tools" [level=2]
+  - paragraph: Software development, version control, and development environment tools
+  - link "More":
+    - /url: /categories/development
+  - link "@0010aor mcp-pr-pilot 0 Enhances pull request workflows by generating PR descriptions, commit messages, and code reviews using LLMs based on code changes. automation code review +5 0 1d ago":
+    - /url: /servers/623cce320584
+    - text: "@0010aor"
+    - heading "mcp-pr-pilot" [level=3]
+    - text: "0"
+    - paragraph: Enhances pull request workflows by generating PR descriptions, commit messages, and code reviews using LLMs based on code changes.
+    - text: automation code review +5 0 1d ago
+  - link "@0xdaef0f job-searchoor 0 📇 🏠 - An MCP server for searching job listings with filters for date, keywords, remote work options, and more. listings remote work +5 0 1d ago":
+    - /url: /servers/35bf718a90ec
+    - text: "@0xdaef0f"
+    - heading "job-searchoor" [level=3]
+    - text: "0"
+    - paragraph: 📇 🏠 - An MCP server for searching job listings with filters for date, keywords, remote work options, and more.
+    - text: listings remote work +5 0 1d ago
+  - link "@4workspace Cursor-MCP-test 0 Facilitates GitHub integration within Cursor IDE using the Model Control Protocol for streamlined repository management. integration development +5 0 1d ago":
+    - /url: /servers/7eb3613cc977
+    - text: "@4workspace"
+    - heading "Cursor-MCP-test" [level=3]
+    - text: "0"
+    - paragraph: Facilitates GitHub integration within Cursor IDE using the Model Control Protocol for streamlined repository management.
+    - text: integration development +5 0 1d ago
+  - link "@aaomidi mcp-bazel 0 Facilitates Bazel project interactions by providing build, test, and dependency analysis tools. bazel project +5 0 1d ago":
+    - /url: /servers/e83db874b792
+    - text: "@aaomidi"
+    - heading "mcp-bazel" [level=3]
+    - text: "0"
+    - paragraph: Facilitates Bazel project interactions by providing build, test, and dependency analysis tools.
+    - text: bazel project +5 0 1d ago
+  - link "@adhikasp mcp-git-ingest 0 🐍 🏠 - Read and analyze GitHub repositories with your LLM development-tools git +5 0 1d ago":
+    - /url: /servers/ef2e0b90ec3e
+    - text: "@adhikasp"
+    - heading "mcp-git-ingest" [level=3]
+    - text: "0"
+    - paragraph: 🐍 🏠 - Read and analyze GitHub repositories with your LLM
+    - text: development-tools git +5 0 1d ago
+  - link "@Adit-999 gitlab-mcp 0 Facilitates AI-driven interactions with GitLab, enabling operations on repositories, issues, and merge requests with both synchronous and asynchronous execution. automation issues +5 0 1d ago":
+    - /url: /servers/dc265a77f6e3
+    - text: "@Adit-999"
+    - heading "gitlab-mcp" [level=3]
+    - text: "0"
+    - paragraph: Facilitates AI-driven interactions with GitLab, enabling operations on repositories, issues, and merge requests with both synchronous and asynchronous execution.
+    - text: automation issues +5 0 1d ago
+  - link "@ai-wes version_checker_mcp 0 A specialized MCP server that aids developers in managing React Native and Expo projects by analyzing dependencies, checking compatibility, and reviewing changelogs. changelogs compatibility +5 0 1d ago":
+    - /url: /servers/55385baa8366
+    - text: "@ai-wes"
+    - heading "version_checker_mcp" [level=3]
+    - text: "0"
+    - paragraph: A specialized MCP server that aids developers in managing React Native and Expo projects by analyzing dependencies, checking compatibility, and reviewing changelogs.
+    - text: changelogs compatibility +5 0 1d ago
+  - link "@aidalinfo mcp-clean-code 0 Facilitates the planning and creation of clean, well-structured code with comprehensive English comments, focusing on readability and maintainability. code quality structure +5 0 1d ago":
+    - /url: /servers/76763fec4b20
+    - text: "@aidalinfo"
+    - heading "mcp-clean-code" [level=3]
+    - text: "0"
+    - paragraph: Facilitates the planning and creation of clean, well-structured code with comprehensive English comments, focusing on readability and maintainability.
+    - text: code quality structure +5 0 1d ago
+  - link "@albertdow mcp-datapi 0 Facilitates access to ECMWF's Climate Data Store catalogues and job statuses through an MCP server interface. ecmwf jobs +5 0 1d ago":
+    - /url: /servers/a0f402ab6df6
+    - text: "@albertdow"
+    - heading "mcp-datapi" [level=3]
+    - text: "0"
+    - paragraph: Facilitates access to ECMWF's Climate Data Store catalogues and job statuses through an MCP server interface.
+    - text: ecmwf jobs +5 0 1d ago
+  - link "@alesr gh-self-reviewer 0 A Go-based Anthropic MCP server facilitating self-review of GitHub pull requests with Claude AI integration. automation code review +5 0 1d ago":
+    - /url: /servers/9273fd03828a
+    - text: "@alesr"
+    - heading "gh-self-reviewer" [level=3]
+    - text: "0"
+    - paragraph: A Go-based Anthropic MCP server facilitating self-review of GitHub pull requests with Claude AI integration.
+    - text: automation code review +5 0 1d ago
+  - heading "Cloud & Infrastructure" [level=2]
+  - paragraph: Cloud platforms, containerization, and infrastructure management services
+  - link "More":
+    - /url: /categories/cloud-infrastructure
+  - link "@AdLibML mcpserver 0 Deploys math, weather, and Brave search services using FastAPI and Docker for remote access via MCP protocol. search fastapi +5 0 1d ago":
+    - /url: /servers/0278ce241d78
+    - text: "@AdLibML"
+    - heading "mcpserver" [level=3]
+    - text: "0"
+    - paragraph: Deploys math, weather, and Brave search services using FastAPI and Docker for remote access via MCP protocol.
+    - text: search fastapi +5 0 1d ago
+  - link "@akr4 claude-code-mcp-docker 0 A Docker container for running Claude Code MCP server with enhanced security features, including a network firewall to prevent unauthorized outbound connections. cloud-infrastructure docker +5 0 1d ago":
+    - /url: /servers/38d501f30bfd
+    - text: "@akr4"
+    - heading "claude-code-mcp-docker" [level=3]
+    - text: "0"
+    - paragraph: A Docker container for running Claude Code MCP server with enhanced security features, including a network firewall to prevent unauthorized outbound connections.
+    - text: cloud-infrastructure docker +5 0 1d ago
+  - link "Alertmanager 0 A Model Context Protocol (MCP) server that enables AI assistants to integrate with Prometheus Alertmanager monitoring alertmanager +5 0 1d ago":
+    - /url: /servers/43ea47cf70ec
+    - heading "Alertmanager" [level=3]
+    - text: "0"
+    - paragraph: A Model Context Protocol (MCP) server that enables AI assistants to integrate with Prometheus Alertmanager
+    - text: monitoring alertmanager +5 0 1d ago
+  - 'link "@alexei-led k8s-mcp-server 0 🐍 - A lightweight yet robust server that empowers AI assistants to securely execute Kubernetes CLI commands (`kubectl`, `helm`, `istioctl`, and `argocd`) using Unix pipes in a safe Docker environment ... argocd kubectl +5 0 1d ago"':
+    - /url: /servers/335183836749
+    - text: "@alexei-led"
+    - heading "k8s-mcp-server" [level=3]
+    - text: "0"
+    - paragraph: "🐍 - A lightweight yet robust server that empowers AI assistants to securely execute Kubernetes CLI commands (`kubectl`, `helm`, `istioctl`, and `argocd`) using Unix pipes in a safe Docker environment ..."
+    - text: argocd kubectl +5 0 1d ago
+  - link "@alfonsograziano node-code-sandbox-mcp 0 📇 🏠 – A Node.js MCP server that spins up isolated Docker-based sandboxes for executing JavaScript snippets with on-the-fly npm dependency installation and clean teardown automation javascript +6 0 1d ago":
+    - /url: /servers/0e1f119766ef
+    - text: "@alfonsograziano"
+    - heading "node-code-sandbox-mcp" [level=3]
+    - text: "0"
+    - paragraph: 📇 🏠 – A Node.js MCP server that spins up isolated Docker-based sandboxes for executing JavaScript snippets with on-the-fly npm dependency installation and clean teardown
+    - text: automation javascript +6 0 1d ago
+  - link "@aliyun alibaba-cloud-ops-mcp-server 0 🎖️ 🐍 ☁️ - A MCP server that enables AI assistants to operation resources on Alibaba Cloud, supporting ECS, Cloud Monitor, OOS and widely used cloud products. oos ai +5 0 1d ago":
+    - /url: /servers/98ac9ce40171
+    - text: "@aliyun"
+    - heading "alibaba-cloud-ops-mcp-server" [level=3]
+    - text: "0"
+    - paragraph: 🎖️ 🐍 ☁️ - A MCP server that enables AI assistants to operation resources on Alibaba Cloud, supporting ECS, Cloud Monitor, OOS and widely used cloud products.
+    - text: oos ai +5 0 1d ago
+  - link "@aliyun alibabacloud-observability-mcp-server 0 Facilitates seamless integration with Alibaba Cloud's observability products, offering tools for efficient log and application monitoring. cloud monitoring +5 0 1d ago":
+    - /url: /servers/98f8df51f4b6
+    - text: "@aliyun"
+    - heading "alibabacloud-observability-mcp-server" [level=3]
+    - text: "0"
+    - paragraph: Facilitates seamless integration with Alibaba Cloud's observability products, offering tools for efficient log and application monitoring.
+    - text: cloud monitoring +5 0 1d ago
+  - link "@anandkumarpatel remote-mcp-server 0 Deploy a remote MCP server on Cloudflare Workers with OAuth login, enabling seamless integration with tools like Claude Desktop. integration cloud-infrastructure +5 0 1d ago":
+    - /url: /servers/a2fbf971d739
+    - text: "@anandkumarpatel"
+    - heading "remote-mcp-server" [level=3]
+    - text: "0"
+    - paragraph: Deploy a remote MCP server on Cloudflare Workers with OAuth login, enabling seamless integration with tools like Claude Desktop.
+    - text: integration cloud-infrastructure +5 0 1d ago
+  - link "@antymijaljevic k8s-doc-mcp 0 A Python-based MCP server for managing and summarizing sticky notes using the Model Context Protocol SDK. summarizing business-productivity +5 0 1d ago":
+    - /url: /servers/8340bbddd3bf
+    - text: "@antymijaljevic"
+    - heading "k8s-doc-mcp" [level=3]
+    - text: "0"
+    - paragraph: A Python-based MCP server for managing and summarizing sticky notes using the Model Context Protocol SDK.
+    - text: summarizing business-productivity +5 0 1d ago
+  - link "@Arodoid FastlyMCP 0 Fastly MCP integrates Fastly's API with AI assistants, enabling seamless management of CDN services, caching, security, and performance monitoring through the Model Context Protocol. cdn monitoring +5 0 1d ago":
+    - /url: /servers/361899b65b70
+    - text: "@Arodoid"
+    - heading "FastlyMCP" [level=3]
+    - text: "0"
+    - paragraph: Fastly MCP integrates Fastly's API with AI assistants, enabling seamless management of CDN services, caching, security, and performance monitoring through the Model Context Protocol.
+    - text: cdn monitoring +5 0 1d ago
+  - heading "Business & Productivity" [level=2]
+  - paragraph: Project management, office collaboration, and business application tools
+  - link "More":
+    - /url: /categories/business-productivity
+  - link "@1yhy oss-mcp 0 Facilitates seamless file uploads to Alibaba Cloud OSS, integrating with various MCP tools for enhanced workflow automation. automation workflow +5 0 1d ago":
+    - /url: /servers/71db5ecae92b
+    - text: "@1yhy"
+    - heading "oss-mcp" [level=3]
+    - text: "0"
+    - paragraph: Facilitates seamless file uploads to Alibaba Cloud OSS, integrating with various MCP tools for enhanced workflow automation.
+    - text: automation workflow +5 0 1d ago
+  - link "@3loka consul-mcp-server 0 Facilitates AI-driven analysis and management of Consul service discovery and mesh through natural language interaction. service discovery mesh +5 0 1d ago":
+    - /url: /servers/664c22899a21
+    - text: "@3loka"
+    - heading "consul-mcp-server" [level=3]
+    - text: "0"
+    - paragraph: Facilitates AI-driven analysis and management of Consul service discovery and mesh through natural language interaction.
+    - text: service discovery mesh +5 0 1d ago
+  - link "@93minki weather-forecast-mcp-server 0 A TypeScript-based MCP server that manages and summarizes text notes using URIs and metadata. automation uri +6 0 1d ago":
+    - /url: /servers/1d1a541e9806
+    - text: "@93minki"
+    - heading "weather-forecast-mcp-server" [level=3]
+    - text: "0"
+    - paragraph: A TypeScript-based MCP server that manages and summarizes text notes using URIs and metadata.
+    - text: automation uri +6 0 1d ago
+  - link "@@ragieai mcp-server 0 📇 ☁️ - Retrieve context from your [Ragie](https://www.ragie.ai) (RAG) knowledge base connected to integrations like Google Drive, Notion, JIRA and more. knowledge base rag +5 0 1d ago":
+    - /url: /servers/6b4e8846c556
+    - text: "@@ragieai"
+    - heading "mcp-server" [level=3]
+    - text: "0"
+    - paragraph: 📇 ☁️ - Retrieve context from your [Ragie](https://www.ragie.ai) (RAG) knowledge base connected to integrations like Google Drive, Notion, JIRA and more.
+    - text: knowledge base rag +5 0 1d ago
+  - link "@AB498 computer-control-mcp 0 Enables comprehensive computer control through mouse, keyboard, and OCR functionalities using PyAutoGUI and RapidOCR, with zero external dependencies. automation keyboard +5 0 1d ago":
+    - /url: /servers/e0153fa333a1
+    - text: "@AB498"
+    - heading "computer-control-mcp" [level=3]
+    - text: "0"
+    - paragraph: Enables comprehensive computer control through mouse, keyboard, and OCR functionalities using PyAutoGUI and RapidOCR, with zero external dependencies.
+    - text: automation keyboard +5 0 1d ago
+  - link "@AbdelStark nostr-mcp 0 ☁️ - A Nostr MCP server that allows to interact with Nostr, enabling posting notes, and more. protocol social media +5 0 1d ago":
+    - /url: /servers/704c8e944455
+    - text: "@AbdelStark"
+    - heading "nostr-mcp" [level=3]
+    - text: "0"
+    - paragraph: ☁️ - A Nostr MCP server that allows to interact with Nostr, enabling posting notes, and more.
+    - text: protocol social media +5 0 1d ago
+  - link "@ACNet-AI OmniTaskAgent 0 OmniTaskAgent is a versatile multi-model task management system that integrates with various task management solutions and editors via the MCP protocol, enhancing intelligent workflow processes. automation integration +5 0 1d ago":
+    - /url: /servers/1cad839bb7ae
+    - text: "@ACNet-AI"
+    - heading "OmniTaskAgent" [level=3]
+    - text: "0"
+    - paragraph: OmniTaskAgent is a versatile multi-model task management system that integrates with various task management solutions and editors via the MCP protocol, enhancing intelligent workflow processes.
+    - text: automation integration +5 0 1d ago
+  - link "@agentmail-toolkit mcp 0 🐍 💬 - An MCP server to create inboxes on the fly to send, receive, and take actions on email. We aren't AI agents for email, but email for AI Agents. communication automation +5 0 1d ago":
+    - /url: /servers/08e7b33b27bb
+    - text: "@agentmail-toolkit"
+    - heading "mcp" [level=3]
+    - text: "0"
+    - paragraph: 🐍 💬 - An MCP server to create inboxes on the fly to send, receive, and take actions on email. We aren't AI agents for email, but email for AI Agents.
+    - text: communication automation +5 0 1d ago
+  - link "@aircodelabs grasp 0 📇 🏠 - Self-hosted browser using agent with built-in MCP and A2A support. automation web +5 0 1d ago":
+    - /url: /servers/f4736b00cb1d
+    - text: "@aircodelabs"
+    - heading "grasp" [level=3]
+    - text: "0"
+    - paragraph: 📇 🏠 - Self-hosted browser using agent with built-in MCP and A2A support.
+    - text: automation web +5 0 1d ago
+  - link "@akseyh bear-mcp-server 0 Allows the AI to read from your Bear Notes (macOS only) bear notes ai +5 0 1d ago":
+    - /url: /servers/79bed3a91231
+    - text: "@akseyh"
+    - heading "bear-mcp-server" [level=3]
+    - text: "0"
+    - paragraph: Allows the AI to read from your Bear Notes (macOS only)
+    - text: bear notes ai +5 0 1d ago
+  - heading "AI & Machine Learning" [level=2]
+  - paragraph: AI services, large language models, and machine learning platforms
+  - link "More":
+    - /url: /categories/ai-ml
+  - link "@13bm GhidraMCP 0 🐍 ☕ 🏠 - MCP server for integrating Ghidra with AI assistants. This plugin enables binary analysis, providing tools for function inspection, decompilation, memory exploration, and import/export analysi... decompilation development-tools +5 0 1d ago":
+    - /url: /servers/a5a801c4cd93
+    - text: "@13bm"
+    - heading "GhidraMCP" [level=3]
+    - text: "0"
+    - paragraph: 🐍 ☕ 🏠 - MCP server for integrating Ghidra with AI assistants. This plugin enables binary analysis, providing tools for function inspection, decompilation, memory exploration, and import/export analysi...
+    - text: decompilation development-tools +5 0 1d ago
+  - link "@302ai 302_web_search_mcp 0 Facilitates web search integration with Claude Desktop through a configurable MCP server. configurable integration +4 0 1d ago":
+    - /url: /servers/3d2c263ee9e5
+    - text: "@302ai"
+    - heading "302_web_search_mcp" [level=3]
+    - text: "0"
+    - paragraph: Facilitates web search integration with Claude Desktop through a configurable MCP server.
+    - text: configurable integration +4 0 1d ago
+  - link "@4kk11 mcp-gpt-image 0 Generates and edits images using OpenAI API, providing scalable previews and Docker integration. ai ai-machine-learning +5 0 1d ago":
+    - /url: /servers/d2996a9da4f0
+    - text: "@4kk11"
+    - heading "mcp-gpt-image" [level=3]
+    - text: "0"
+    - paragraph: Generates and edits images using OpenAI API, providing scalable previews and Docker integration.
+    - text: ai ai-machine-learning +5 0 1d ago
+  - link "@AgentDank dank-mcp 0 A specialized MCP server for querying and analyzing cannabis datasets, designed for integration with LLMs like Claude Desktop. datasets cannabis +6 0 1d ago":
+    - /url: /servers/052d3c496fa5
+    - text: "@AgentDank"
+    - heading "dank-mcp" [level=3]
+    - text: "0"
+    - paragraph: A specialized MCP server for querying and analyzing cannabis datasets, designed for integration with LLMs like Claude Desktop.
+    - text: datasets cannabis +6 0 1d ago
+  - link "@AleksanStark mcp-ipfs-server 0 A server leveraging IPFS for decentralized data storage and retrieval, integrated with Claude AI for enhanced MCP interactions. storage data-storage +6 0 1d ago":
+    - /url: /servers/cd52fe4fe27e
+    - text: "@AleksanStark"
+    - heading "mcp-ipfs-server" [level=3]
+    - text: "0"
+    - paragraph: A server leveraging IPFS for decentralized data storage and retrieval, integrated with Claude AI for enhanced MCP interactions.
+    - text: storage data-storage +6 0 1d ago
+  - link "@AlexShan2008 mcp-claude-weather 0 Provides real-time weather alerts and forecasts from the US National Weather Service, seamlessly integrating with Claude for Desktop. national weather service real-time +5 0 1d ago":
+    - /url: /servers/7421b3616834
+    - text: "@AlexShan2008"
+    - heading "mcp-claude-weather" [level=3]
+    - text: "0"
+    - paragraph: Provides real-time weather alerts and forecasts from the US National Weather Service, seamlessly integrating with Claude for Desktop.
+    - text: national weather service real-time +5 0 1d ago
+  - link "@amanasmuei mcp-server-malaysia-prayer-time 0 Provides real-time Islamic prayer times for Malaysia, integrating seamlessly with Claude Desktop via MCP. prayer times religious +5 0 1d ago":
+    - /url: /servers/aed2e56553d5
+    - text: "@amanasmuei"
+    - heading "mcp-server-malaysia-prayer-time" [level=3]
+    - text: "0"
+    - paragraph: Provides real-time Islamic prayer times for Malaysia, integrating seamlessly with Claude Desktop via MCP.
+    - text: prayer times religious +5 0 1d ago
+  - link "Amazon Bedrock Nova Canvas 0 📇 ☁️ - Use Amazon Nova Canvas model for image generation. computer vision ai +5 0 1d ago":
+    - /url: /servers/e58b1c9c1d92
+    - heading "Amazon Bedrock Nova Canvas" [level=3]
+    - text: "0"
+    - paragraph: 📇 ☁️ - Use Amazon Nova Canvas model for image generation.
+    - text: computer vision ai +5 0 1d ago
+  - link "@amidabuddha unichat-mcp-server 0 🐍/📇 ☁️ - Send requests to OpenAI, MistralAI, Anthropic, xAI, Google AI or DeepSeek using MCP protocol via tool or predefined prompts. Vendor API key required anthropic ai-machine-learning +5 0 1d ago":
+    - /url: /servers/19870be10f32
+    - text: "@amidabuddha"
+    - heading "unichat-mcp-server" [level=3]
+    - text: "0"
+    - paragraph: 🐍/📇 ☁️ - Send requests to OpenAI, MistralAI, Anthropic, xAI, Google AI or DeepSeek using MCP protocol via tool or predefined prompts. Vendor API key required
+    - text: anthropic ai-machine-learning +5 0 1d ago
+  - link "@amith-vp indian-railway-mcp 0 Facilitates seamless access to Indian Railway data, including train searches, seat availability, and live status updates, through Claude Desktop integration. indian railway seat availability +5 0 1d ago":
+    - /url: /servers/d57221586031
+    - text: "@amith-vp"
+    - heading "indian-railway-mcp" [level=3]
+    - text: "0"
+    - paragraph: Facilitates seamless access to Indian Railway data, including train searches, seat availability, and live status updates, through Claude Desktop integration.
+    - text: indian railway seat availability +5 0 1d ago
+  - heading "Communication & Collaboration" [level=2]
+  - paragraph: Messaging, email, and team collaboration tools
+  - link "More":
+    - /url: /categories/communication
+  - link "@beylessai hiworks-mcp 0 Facilitates email retrieval and sending through Hiworks Mail integration using MCP. mail integration +5 0 1d ago":
+    - /url: /servers/55fc1ebc453f
+    - text: "@beylessai"
+    - heading "hiworks-mcp" [level=3]
+    - text: "0"
+    - paragraph: Facilitates email retrieval and sending through Hiworks Mail integration using MCP.
+    - text: mail integration +5 0 1d ago
+  - link "@carterlasalle mac_messages_mcp 0 🏠 🍎 🚀 - An MCP server that securely interfaces with your iMessage database via the Model Context Protocol (MCP), allowing LLMs to query and analyze iMessage conversations. It includes robust phone num... database business-productivity +6 0 1d ago":
+    - /url: /servers/ed807247c3f5
+    - text: "@carterlasalle"
+    - heading "mac_messages_mcp" [level=3]
+    - text: "0"
+    - paragraph: 🏠 🍎 🚀 - An MCP server that securely interfaces with your iMessage database via the Model Context Protocol (MCP), allowing LLMs to query and analyze iMessage conversations. It includes robust phone num...
+    - text: database business-productivity +6 0 1d ago
+  - link "@chaindead telegram-mcp 0 🏎️ 🏠 - Telegram API integration for accessing user data, managing dialogs (chats, channels, groups), retrieving messages, and handling read status api business-productivity +6 0 1d ago":
+    - /url: /servers/9e9ff650dbd0
+    - text: "@chaindead"
+    - heading "telegram-mcp" [level=3]
+    - text: "0"
+    - paragraph: 🏎️ 🏠 - Telegram API integration for accessing user data, managing dialogs (chats, channels, groups), retrieving messages, and handling read status
+    - text: api business-productivity +6 0 1d ago
+  - link "@chigwell telegram-mcp 0 🐍 🏠 - Telegram API integration for accessing user data, managing dialogs (chats, channels, groups), retrieving messages, sending messages and handling read status. api business-productivity +6 0 1d ago":
+    - /url: /servers/922b35b6fe78
+    - text: "@chigwell"
+    - heading "telegram-mcp" [level=3]
+    - text: "0"
+    - paragraph: 🐍 🏠 - Telegram API integration for accessing user data, managing dialogs (chats, channels, groups), retrieving messages, sending messages and handling read status.
+    - text: api business-productivity +6 0 1d ago
+  - link "@deuslirio mcp-server-whatsapp-message 0 Facilitates sending WhatsApp messages through the Meta WhatsApp Business API using MCP. communication whatsapp +4 0 1d ago":
+    - /url: /servers/5ff007d77997
+    - text: "@deuslirio"
+    - heading "mcp-server-whatsapp-message" [level=3]
+    - text: "0"
+    - paragraph: Facilitates sending WhatsApp messages through the Meta WhatsApp Business API using MCP.
+    - text: communication whatsapp +4 0 1d ago
+  - link "Email 0 This server enables users to send emails through various email providers, including Gmail, Outlook, Yahoo, Sina, Sohu, 126, 163, and QQ Mail. It also supports attaching files from specified directorie... gmail business-productivity +5 0 1d ago":
+    - /url: /servers/de0b4f283427
+    - heading "Email" [level=3]
+    - text: "0"
+    - paragraph: This server enables users to send emails through various email providers, including Gmail, Outlook, Yahoo, Sina, Sohu, 126, 163, and QQ Mail. It also supports attaching files from specified directorie...
+    - text: gmail business-productivity +5 0 1d ago
+  - link "@Escorza07 mcp-gmail-extension 0 Facilitates seamless Gmail management through natural language interactions with automatic authentication support. gmail business-productivity +6 0 1d ago":
+    - /url: /servers/9fde488c878b
+    - text: "@Escorza07"
+    - heading "mcp-gmail-extension" [level=3]
+    - text: "0"
+    - paragraph: Facilitates seamless Gmail management through natural language interactions with automatic authentication support.
+    - text: gmail business-productivity +6 0 1d ago
+  - link "@Escorza07 whatsapp-mcp 0 Facilitates seamless interaction with WhatsApp through Claude by leveraging a Go bridge and Python MCP server for message management and contact search. whatsapp business-productivity +5 0 1d ago":
+    - /url: /servers/b9803bd3f76e
+    - text: "@Escorza07"
+    - heading "whatsapp-mcp" [level=3]
+    - text: "0"
+    - paragraph: Facilitates seamless interaction with WhatsApp through Claude by leveraging a Go bridge and Python MCP server for message management and contact search.
+    - text: whatsapp business-productivity +5 0 1d ago
+  - link "@falahgs Gemini-Email-Subject-Generator-MCP 0 Leverages Google's Gemini Flash 2 AI model to generate engaging email subjects and detailed thinking processes, integrating seamlessly with Claude Desktop. ai subject +5 0 1d ago":
+    - /url: /servers/d3084aaa2dfa
+    - text: "@falahgs"
+    - heading "Gemini-Email-Subject-Generator-MCP" [level=3]
+    - text: "0"
+    - paragraph: Leverages Google's Gemini Flash 2 AI model to generate engaging email subjects and detailed thinking processes, integrating seamlessly with Claude Desktop.
+    - text: ai subject +5 0 1d ago
+  - link "@futuyu Discord-webhook-MCP 0 Facilitates message delivery to Discord using webhooks through the Model Context Protocol, with integration support for Claude Desktop. communication integration +5 0 1d ago":
+    - /url: /servers/39f67c3aea17
+    - text: "@futuyu"
+    - heading "Discord-webhook-MCP" [level=3]
+    - text: "0"
+    - paragraph: Facilitates message delivery to Discord using webhooks through the Model Context Protocol, with integration support for Claude Desktop.
+    - text: communication integration +5 0 1d ago
+  - heading "Content & Media" [level=2]
+  - paragraph: Document processing, media conversion, and content management tools
+  - link "More":
+    - /url: /categories/content-media
+  - link "@1282saa news_se 0 Facilitates AI model access to Seoul Economic Daily's stylebook data with advanced search and authentication features. stylebook content-media +6 0 1d ago":
+    - /url: /servers/a98ec9e03580
+    - text: "@1282saa"
+    - heading "news_se" [level=3]
+    - text: "0"
+    - paragraph: Facilitates AI model access to Seoul Economic Daily's stylebook data with advanced search and authentication features.
+    - text: stylebook content-media +6 0 1d ago
+  - link "21st.dev Magic 0 Create crafted UI components inspired by the best 21st.dev design engineers. design content-media +5 0 1d ago":
+    - /url: /servers/7a145e980655
+    - heading "21st.dev Magic" [level=3]
+    - text: "0"
+    - paragraph: Create crafted UI components inspired by the best 21st.dev design engineers.
+    - text: design content-media +5 0 1d ago
+  - link "@34892002 bilibili-mcp-js 0 📇 🏠 - A MCP server that supports searching for Bilibili content. Provides LangChain integration examples and test scripts. automation video +6 0 1d ago":
+    - /url: /servers/c0fb957377d5
+    - text: "@34892002"
+    - heading "bilibili-mcp-js" [level=3]
+    - text: "0"
+    - paragraph: 📇 🏠 - A MCP server that supports searching for Bilibili content. Provides LangChain integration examples and test scripts.
+    - text: automation video +6 0 1d ago
+  - link "@8tako8tako8 sample_mcp_pokemon 0 Retrieve Pokémon data using a dedicated MCP server that interfaces with PokeAPI. api gaming +5 0 1d ago":
+    - /url: /servers/8a3cd238d336
+    - text: "@8tako8tako8"
+    - heading "sample_mcp_pokemon" [level=3]
+    - text: "0"
+    - paragraph: Retrieve Pokémon data using a dedicated MCP server that interfaces with PokeAPI.
+    - text: api gaming +5 0 1d ago
+  - link "@abhiemj manim-mcp-server 0 🐍 🏠 🪟 🐧 - A local MCP server that generates animations using Manim. visualization video +5 0 1d ago":
+    - /url: /servers/fcdc07d2169d
+    - text: "@abhiemj"
+    - heading "manim-mcp-server" [level=3]
+    - text: "0"
+    - paragraph: 🐍 🏠 🪟 🐧 - A local MCP server that generates animations using Manim.
+    - text: visualization video +5 0 1d ago
+  - link "@adhikasp mcp-twikit 0 🐍 ☁️ - Interact with Twitter search and timeline social media interaction +5 0 1d ago":
+    - /url: /servers/0464ad9d7c50
+    - text: "@adhikasp"
+    - heading "mcp-twikit" [level=3]
+    - text: "0"
+    - paragraph: 🐍 ☁️ - Interact with Twitter search and timeline
+    - text: social media interaction +5 0 1d ago
+  - link "@aguaitech Elementor-MCP 0 Facilitates CRUD operations on Elementor data within WordPress using a simple MCP server. cms content-media +5 0 1d ago":
+    - /url: /servers/3f5cd885fe0e
+    - text: "@aguaitech"
+    - heading "Elementor-MCP" [level=3]
+    - text: "0"
+    - paragraph: Facilitates CRUD operations on Elementor data within WordPress using a simple MCP server.
+    - text: cms content-media +5 0 1d ago
+  - link "@aimino imagemagic-mcp 0 Enhance images with binarization, color adjustment, and resizing using ImageMagick via the MCP protocol. enhancement image processing +5 0 1d ago":
+    - /url: /servers/223368eb6bcf
+    - text: "@aimino"
+    - heading "imagemagic-mcp" [level=3]
+    - text: "0"
+    - paragraph: Enhance images with binarization, color adjustment, and resizing using ImageMagick via the MCP protocol.
+    - text: enhancement image processing +5 0 1d ago
+  - link "@andrzejsliwa 6510emu_in_c 0 A modern C implementation of a 6510/6502 CPU emulator with disassembly support, used in the Commodore 64. 6510 emulator +5 0 1d ago":
+    - /url: /servers/2d875c59f778
+    - text: "@andrzejsliwa"
+    - heading "6510emu_in_c" [level=3]
+    - text: "0"
+    - paragraph: A modern C implementation of a 6510/6502 CPU emulator with disassembly support, used in the Commodore 64.
+    - text: 6510 emulator +5 0 1d ago
+  - link "AniList 0 📇 ☁️ - A MCP server integrating AniList API for anime and manga information manga media +5 0 1d ago":
+    - /url: /servers/60053c8f2d60
+    - heading "AniList" [level=3]
+    - text: "0"
+    - paragraph: 📇 ☁️ - A MCP server integrating AniList API for anime and manga information
+    - text: manga media +5 0 1d ago
+  - heading "Finance & Payments" [level=2]
+  - paragraph: Payment processing, financial services, and cryptocurrency tools
+  - link "More":
+    - /url: /categories/finance-payments
+  - link "@0xanpham my-crypto-mcp 0 Provides real-time cryptocurrency data through Claude Desktop by connecting to the CoinMarketCap API. cryptocurrency coinmarketcap +5 0 1d ago":
+    - /url: /servers/bd814966c3fb
+    - text: "@0xanpham"
+    - heading "my-crypto-mcp" [level=3]
+    - text: "0"
+    - paragraph: Provides real-time cryptocurrency data through Claude Desktop by connecting to the CoinMarketCap API.
+    - text: cryptocurrency coinmarketcap +5 0 1d ago
+  - link "@2geonhyup dart-mcp 0 Facilitates financial analysis and visualization of listed companies using DART API and Claude. visualization dart api +5 0 1d ago":
+    - /url: /servers/77b86445eb35
+    - text: "@2geonhyup"
+    - heading "dart-mcp" [level=3]
+    - text: "0"
+    - paragraph: Facilitates financial analysis and visualization of listed companies using DART API and Claude.
+    - text: visualization dart api +5 0 1d ago
+  - link "@aaronjmars web3-research-mcp 0 📇 ☁️ - Deep Research for crypto - free & fully local local finance-crypto +5 0 1d ago":
+    - /url: /servers/e67d4ea95a70
+    - text: "@aaronjmars"
+    - heading "web3-research-mcp" [level=3]
+    - text: "0"
+    - paragraph: 📇 ☁️ - Deep Research for crypto - free & fully local
+    - text: local finance-crypto +5 0 1d ago
+  - link "@AbdelStark bitcoin-mcp 0 ₿ A Model Context Protocol (MCP) server that enables AI models to interact with Bitcoin, allowing them to generate keys, validate addresses, decode transactions, query the blockchain, and more. database bitcoin +6 0 1d ago":
+    - /url: /servers/fba486ec2fb2
+    - text: "@AbdelStark"
+    - heading "bitcoin-mcp" [level=3]
+    - text: "0"
+    - paragraph: ₿ A Model Context Protocol (MCP) server that enables AI models to interact with Bitcoin, allowing them to generate keys, validate addresses, decode transactions, query the blockchain, and more.
+    - text: database bitcoin +6 0 1d ago
+  - link "@abdulazeem-tk4vr shardeum-mcp-server 0 Facilitates seamless interaction with the Shardeum blockchain using standardized RPC methods, enhancing AI and application integration. integration ai +5 0 1d ago":
+    - /url: /servers/a46e0371444c
+    - text: "@abdulazeem-tk4vr"
+    - heading "shardeum-mcp-server" [level=3]
+    - text: "0"
+    - paragraph: Facilitates seamless interaction with the Shardeum blockchain using standardized RPC methods, enhancing AI and application integration.
+    - text: integration ai +5 0 1d ago
+  - link "@acambitsis mcp-investec-sapb-simple 0 Facilitates seamless interaction with Investec SA Private Banking API through a streamlined MCP server implementation. investec finance +5 0 1d ago":
+    - /url: /servers/a0c40e506b0e
+    - text: "@acambitsis"
+    - heading "mcp-investec-sapb-simple" [level=3]
+    - text: "0"
+    - paragraph: Facilitates seamless interaction with Investec SA Private Banking API through a streamlined MCP server implementation.
+    - text: investec finance +5 0 1d ago
+  - link "@adrianmonad MonDeployer 0 Facilitates the deployment of Solidity contracts to the Monad testnet using AI and MCP integration. solidity finance-crypto +5 0 1d ago":
+    - /url: /servers/6f6f23a447af
+    - text: "@adrianmonad"
+    - heading "MonDeployer" [level=3]
+    - text: "0"
+    - paragraph: Facilitates the deployment of Solidity contracts to the Monad testnet using AI and MCP integration.
+    - text: solidity finance-crypto +5 0 1d ago
+  - link "@ahnlabio bicscan-mcp 0 Leverages the BICScan API to deliver real-time blockchain address risk scoring and asset information. asset finance-crypto +5 0 1d ago":
+    - /url: /servers/7ec14aac019f
+    - text: "@ahnlabio"
+    - heading "bicscan-mcp" [level=3]
+    - text: "0"
+    - paragraph: Leverages the BICScan API to deliver real-time blockchain address risk scoring and asset information.
+    - text: asset finance-crypto +5 0 1d ago
+  - link "@AI-Strategy-Enablement mcp-economic 0 Facilitates seamless interaction with e-conomic's API for comprehensive financial management through standardized MCP commands. finance api +5 0 1d ago":
+    - /url: /servers/b9dc8b4069fc
+    - text: "@AI-Strategy-Enablement"
+    - heading "mcp-economic" [level=3]
+    - text: "0"
+    - paragraph: Facilitates seamless interaction with e-conomic's API for comprehensive financial management through standardized MCP commands.
+    - text: finance api +5 0 1d ago
+  - link "@aixbt mcp-server 0 Facilitates cryptocurrency data retrieval and analysis through a Model Context Protocol server for AIXBT API. cryptocurrency api +5 0 1d ago":
+    - /url: /servers/1d92468f4d26
+    - text: "@aixbt"
+    - heading "mcp-server" [level=3]
+    - text: "0"
+    - paragraph: Facilitates cryptocurrency data retrieval and analysis through a Model Context Protocol server for AIXBT API.
+    - text: cryptocurrency api +5 0 1d ago
+  - heading "Utilities & Tools" [level=2]
+  - paragraph: Calculators, file systems, and other general-purpose tools
+  - link "More":
+    - /url: /categories/utilities
+  - link "@0kenx filesystem-mcp 0 A Python-based MCP server for secure and efficient filesystem operations, featuring advanced file manipulation, directory management, and search capabilities. search file manipulation +5 0 1d ago":
+    - /url: /servers/2122800757d0
+    - text: "@0kenx"
+    - heading "filesystem-mcp" [level=3]
+    - text: "0"
+    - paragraph: A Python-based MCP server for secure and efficient filesystem operations, featuring advanced file manipulation, directory management, and search capabilities.
+    - text: search file manipulation +5 0 1d ago
+  - link "@AB498 code-context-provider-mcp 0 Provides code context and analysis for AI assistants by extracting directory structures and code symbols using WebAssembly Tree-sitter parsers. code analysis context +5 0 1d ago":
+    - /url: /servers/dc8dfca8e6f7
+    - text: "@AB498"
+    - heading "code-context-provider-mcp" [level=3]
+    - text: "0"
+    - paragraph: Provides code context and analysis for AI assistants by extracting directory structures and code symbols using WebAssembly Tree-sitter parsers.
+    - text: code analysis context +5 0 1d ago
+  - link "@abhishekloiwal mcp-file-server 0 Facilitates local file system operations for AI assistants via an MCP server, enabling file reading, writing, and management. local management +5 0 1d ago":
+    - /url: /servers/4ba213457507
+    - text: "@abhishekloiwal"
+    - heading "mcp-file-server" [level=3]
+    - text: "0"
+    - paragraph: Facilitates local file system operations for AI assistants via an MCP server, enabling file reading, writing, and management.
+    - text: local management +5 0 1d ago
+  - link "@Aeron-cell git-mcp-options 0 Enhances Git operations with a standardized interface for AI assistants, integrating seamlessly with the MCP ecosystem. integration workflow +5 0 1d ago":
+    - /url: /servers/a36a3a63f618
+    - text: "@Aeron-cell"
+    - heading "git-mcp-options" [level=3]
+    - text: "0"
+    - paragraph: Enhances Git operations with a standardized interface for AI assistants, integrating seamlessly with the MCP ecosystem.
+    - text: integration workflow +5 0 1d ago
+  - link "@aezizhu simple-mcp-fileserver 0 Facilitates AI agents' interaction with local file systems via JSON-RPC for autonomous coding and code repair. automation coding +5 0 1d ago":
+    - /url: /servers/10576547b3ab
+    - text: "@aezizhu"
+    - heading "simple-mcp-fileserver" [level=3]
+    - text: "0"
+    - paragraph: Facilitates AI agents' interaction with local file systems via JSON-RPC for autonomous coding and code repair.
+    - text: automation coding +5 0 1d ago
+  - link "@alexissinglaire filesystemcustom-test 0 Node.js server for executing filesystem operations via Model Context Protocol, enabling file manipulation, directory management, and metadata retrieval. operations file manipulation +5 0 1d ago":
+    - /url: /servers/09dc99b11e11
+    - text: "@alexissinglaire"
+    - heading "filesystemcustom-test" [level=3]
+    - text: "0"
+    - paragraph: Node.js server for executing filesystem operations via Model Context Protocol, enabling file manipulation, directory management, and metadata retrieval.
+    - text: operations file manipulation +5 0 1d ago
+  - link "@alexissinglaire filesystemcustom_final 0 Node.js server for executing filesystem operations via Model Context Protocol, enabling file manipulation and directory management within specified boundaries. boundaries file manipulation +5 0 1d ago":
+    - /url: /servers/bfe248b67e05
+    - text: "@alexissinglaire"
+    - heading "filesystemcustom_final" [level=3]
+    - text: "0"
+    - paragraph: Node.js server for executing filesystem operations via Model Context Protocol, enabling file manipulation and directory management within specified boundaries.
+    - text: boundaries file manipulation +5 0 1d ago
+  - link "@anurag-dhamala os-info-mcp-server 0 Provides real-time operating system information through an MCP server interface. monitoring information +5 0 1d ago":
+    - /url: /servers/c9767b498fc8
+    - text: "@anurag-dhamala"
+    - heading "os-info-mcp-server" [level=3]
+    - text: "0"
+    - paragraph: Provides real-time operating system information through an MCP server interface.
+    - text: monitoring information +5 0 1d ago
+  - link "@ArisaTaki MCP-study 0 A TypeScript-based MCP server offering basic arithmetic operations and dynamic resource management. automation resource management +6 0 1d ago":
+    - /url: /servers/70cc9cacc9cf
+    - text: "@ArisaTaki"
+    - heading "MCP-study" [level=3]
+    - text: "0"
+    - paragraph: A TypeScript-based MCP server offering basic arithmetic operations and dynamic resource management.
+    - text: automation resource management +6 0 1d ago
+  - link "@arunjavagithub MCPJavaFileSystem 0 A Java-based MCP server enabling LLM agents to perform filesystem operations and web content retrieval. llm agents web content +5 0 1d ago":
+    - /url: /servers/192cfafa249a
+    - text: "@arunjavagithub"
+    - heading "MCPJavaFileSystem" [level=3]
+    - text: "0"
+    - paragraph: A Java-based MCP server enabling LLM agents to perform filesystem operations and web content retrieval.
+    - text: llm agents web content +5 0 1d ago
+  - heading "Specialized Domains" [level=2]
+  - paragraph: Customized tools for specific industries and professional domains
+  - link "More":
+    - /url: /categories/specialized
+  - link "Google Admin MCP 0 cloud management +4 0 1d ago":
+    - /url: /servers/fc865f9037ba
+    - heading "Google Admin MCP" [level=3]
+    - text: "0"
+    - paragraph
+    - text: cloud management +4 0 1d ago
+  - link "mcp-server-hcp-terraform 0 MCP server for working with HashiCorp Cloud Platform (HCP) Terraform hcp infrastructure +3 0 1d ago":
+    - /url: /servers/b80a8a75d3a2
+    - heading "mcp-server-hcp-terraform" [level=3]
+    - text: "0"
+    - paragraph: MCP server for working with HashiCorp Cloud Platform (HCP) Terraform
+    - text: hcp infrastructure +3 0 1d ago
+  - link "Browse All Servers":
+    - /url: /servers
+  - heading "Ready to Enhance Your AI Applications?" [level=2]
+  - paragraph: Join thousands of developers using MCP servers to build more capable and intelligent applications.
+  - link "Get Started":
+    - /url: /servers
+  - link "Read Documentation":
+    - /url: /docs
+- contentinfo:
+  - text: M MCP Hub
+  - paragraph: Your gateway to discover and integrate the best Model Context Protocol servers, empowering AI capabilities.
+  - heading "Quick Links" [level=3]
+  - list:
+    - listitem:
+      - link "Home":
+        - /url: /
+    - listitem:
+      - link "Browse Servers":
+        - /url: /servers
+    - listitem:
+      - link "Categories":
+        - /url: /categories
+    - listitem:
+      - link "Documentation":
+        - /url: /docs
+  - heading "Resources" [level=3]
+  - list:
+    - listitem:
+      - link "API Reference":
+        - /url: https://modelcontextprotocol.io/docs
+    - listitem:
+      - link "Developer Guide":
+        - /url: https://modelcontextprotocol.io/introduction
+    - listitem:
+      - link "Community":
+        - /url: https://github.com/modelcontextprotocol
+    - listitem:
+      - link "Support":
+        - /url: /about
+  - paragraph: © 2024 MCP Hub. Built with ❤️ for the AI community
+```

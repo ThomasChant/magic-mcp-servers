@@ -68,17 +68,28 @@ export interface MCPServer {
         npm?: string;
         pip?: string;
         docker?: string;
+        uv?: string;
         manual?: string;
+        instructions?: Array<{
+            type: string;
+            content: string;
+            description: string;
+        }>;
     };
     documentation: {
         readme: string;
         examples?: string;
         api?: string;
+        overview?: ExtractedSection | null;
+        installation?: ExtractedSection | null;
+        api_reference?: ExtractedSection | null;
+        structured?: ProcessedREADME | null;
     };
     compatibility: {
         platforms: string[];
         nodeVersion?: string;
         pythonVersion?: string;
+        requirements?: string[];
     };
     quality: {
         score: number;

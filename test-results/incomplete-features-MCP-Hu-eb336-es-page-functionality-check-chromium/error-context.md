@@ -1,0 +1,146 @@
+# Page snapshot
+
+```yaml
+- navigation:
+  - link "M MCP Hub":
+    - /url: /
+  - link "Home":
+    - /url: /
+  - link "Servers":
+    - /url: /servers
+  - link "Categories":
+    - /url: /categories
+  - link "Documentation":
+    - /url: /docs
+  - link "About":
+    - /url: /about
+  - searchbox "Search servers..."
+  - button "Toggle Theme"
+  - button "en"
+- main:
+  - heading "Server Categories" [level=1]
+  - paragraph: Explore MCP servers organized by functionality and use case. Find the perfect server for your AI application needs.
+  - text: 10 Categories 127 Total Servers 45K+ Downloads 98% Uptime 25 servers
+  - heading "File System" [level=3]
+  - paragraph: File operations, directory management, and cloud storage integration
+  - text: "Local Files Cloud Storage File Search Most Popular: Filesystem MCP"
+  - link "Browse":
+    - /url: /servers?category=filesystem
+  - text: 30 servers
+  - heading "Database" [level=3]
+  - paragraph: SQL and NoSQL database connections, queries, and data management
+  - text: "SQL NoSQL Analytics Most Popular: PostgreSQL MCP"
+  - link "Browse":
+    - /url: /servers?category=database
+  - text: 18 servers
+  - heading "Communication" [level=3]
+  - paragraph: Messaging, notifications, email, and chat platform integrations
+  - text: "Slack Email SMS Most Popular: Slack MCP"
+  - link "Browse":
+    - /url: /servers?category=communication
+  - text: 22 servers
+  - heading "Development Tools" [level=3]
+  - paragraph: Git operations, CI/CD, code analysis, and development utilities
+  - text: "Git CI/CD Code Analysis Most Popular: GitHub MCP"
+  - link "Browse":
+    - /url: /servers?category=development
+  - text: 15 servers
+  - heading "AI/ML" [level=3]
+  - paragraph: Machine learning models, data processing, and AI service integrations
+  - text: "ML Models Data Processing Inference Most Popular: OpenAI MCP"
+  - link "Browse":
+    - /url: /servers?category=ai-ml
+  - text: 12 servers
+  - heading "Search" [level=3]
+  - paragraph: Web search, document search, and information retrieval services
+  - text: "Web Search Elasticsearch Vector Search Most Popular: Brave Search MCP"
+  - link "Browse":
+    - /url: /servers?category=search
+  - heading "All Categories" [level=2]
+  - link "Monitoring 8 servers System monitoring, logging, and performance analytics":
+    - /url: /servers?category=monitoring
+    - heading "Monitoring" [level=3]
+    - text: 8 servers
+    - paragraph: System monitoring, logging, and performance analytics
+  - link "API Integration 14 servers Third-party API wrappers and service integrations":
+    - /url: /servers?category=api-integration
+    - heading "API Integration" [level=3]
+    - text: 14 servers
+    - paragraph: Third-party API wrappers and service integrations
+  - link "Productivity 10 servers Task management, calendar, and productivity tools":
+    - /url: /servers?category=productivity
+    - heading "Productivity" [level=3]
+    - text: 10 servers
+    - paragraph: Task management, calendar, and productivity tools
+  - link "Security 6 servers Security scanning, authentication, and encryption tools":
+    - /url: /servers?category=security
+    - heading "Security" [level=3]
+    - text: 6 servers
+    - paragraph: Security scanning, authentication, and encryption tools
+  - link "Content Management 9 servers CMS integration, content processing, and publishing":
+    - /url: /servers?category=content
+    - heading "Content Management" [level=3]
+    - text: 9 servers
+    - paragraph: CMS integration, content processing, and publishing
+  - link "Utilities 11 servers General utilities, converters, and helper tools":
+    - /url: /servers?category=utilities
+    - heading "Utilities" [level=3]
+    - text: 11 servers
+    - paragraph: General utilities, converters, and helper tools
+  - heading "Featured Servers by Category" [level=2]
+  - paragraph: Top-rated servers from each major category
+  - button "File System"
+  - button "Database"
+  - button "Communication"
+  - button "Development Tools"
+  - button "AI/ML"
+  - heading "Filesystem MCP" [level=3]
+  - text: Official 4.8
+  - paragraph: Comprehensive file system operations with cloud storage support
+  - link "View Details":
+    - /url: /servers/filesystem-mcp
+  - heading "AWS S3 MCP" [level=3]
+  - text: Featured 4.6
+  - paragraph: AWS S3 integration for cloud file storage and management
+  - link "View Details":
+    - /url: /servers/filesystem-mcp
+  - heading "File Search MCP" [level=3]
+  - text: Popular 4.4
+  - paragraph: Advanced file search and indexing capabilities
+  - link "View Details":
+    - /url: /servers/filesystem-mcp
+  - link "Browse All Servers":
+    - /url: /servers
+- contentinfo:
+  - text: M MCP Hub
+  - paragraph: Your gateway to discover and integrate the best Model Context Protocol servers, empowering AI capabilities.
+  - heading "Quick Links" [level=3]
+  - list:
+    - listitem:
+      - link "Home":
+        - /url: /
+    - listitem:
+      - link "Browse Servers":
+        - /url: /servers
+    - listitem:
+      - link "Categories":
+        - /url: /categories
+    - listitem:
+      - link "Documentation":
+        - /url: /docs
+  - heading "Resources" [level=3]
+  - list:
+    - listitem:
+      - link "API Reference":
+        - /url: https://modelcontextprotocol.io/docs
+    - listitem:
+      - link "Developer Guide":
+        - /url: https://modelcontextprotocol.io/introduction
+    - listitem:
+      - link "Community":
+        - /url: https://github.com/modelcontextprotocol
+    - listitem:
+      - link "Support":
+        - /url: /about
+  - paragraph: © 2024 MCP Hub. Built with ❤️ for the AI community
+```

@@ -5,11 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npm run optimize-data && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "todo:watch": "node todo-monitor.js",
-    "todo:check": "node todo-monitor.js --once"
+    "todo:check": "node todo-monitor.js --once",
+    "integrate-data": "node scripts/integrate-data.js",
+    "optimize-data": "node scripts/optimize-data.js",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@playwright/test": "^1.53.1",
