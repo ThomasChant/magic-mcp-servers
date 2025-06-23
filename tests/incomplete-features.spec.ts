@@ -1,9 +1,11 @@
 import { test, expect } from '@playwright/test';
+import fs from 'fs';
+import path from 'path';
 
 let incompleteFeatures: string[] = [];
 
 test.describe('MCP Hub Feature Completeness Analysis', () => {
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async () => {
     incompleteFeatures = [];
   });
 
@@ -224,9 +226,13 @@ test.describe('MCP Hub Feature Completeness Analysis', () => {
     await page.goto('/');
     const errorBoundary = page.locator('.error-boundary, [data-testid*="error-boundary"]');
     const hasErrorBoundary = await errorBoundary.count() > 0;
+    if (!hasErrorBoundary) {
+      incompleteFeatures.push('Error handling - Error boundary components missing');
+    }
     // Note: This is hard to test without actually triggering an error
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   test.afterEach(async ({ page }, testInfo) => {
     if (incompleteFeatures.length > 0) {
       console.log(`Test: ${testInfo.title}`);
@@ -234,10 +240,8 @@ test.describe('MCP Hub Feature Completeness Analysis', () => {
     }
   });
 
-  test('Write findings to todo.md', async ({ page }) => {
+  test('Write findings to todo.md', async () => {
     // Collect all findings and write to file
-    const fs = require('fs');
-    const path = require('path');
     
     const todoPath = path.join(process.cwd(), 'todo.md');
     let content = '# TODO - Incomplete Features Found by Playwright Analysis\n\n';

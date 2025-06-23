@@ -202,7 +202,7 @@ const ServerDetail: React.FC = () => {
                                     to={`/categories/${server.category}`}
                                     className="text-gray-500 hover:text-gray-700"
                                 >
-                                    File System
+                                    {server.category}
                                 </Link>
                             </li>
                             <li>
@@ -243,7 +243,7 @@ const ServerDetail: React.FC = () => {
                                     </div>
                                 </div>
                                 <p className="text-lg text-gray-600 mb-4">
-                                    {server.fullDescription || server.description["zh-CN"]}
+                                    {server.fullDescription || server.description.en || server.description["zh-CN"]}
                                 </p>
                                 <div className="flex items-center space-x-6 text-sm text-gray-500">
                                     <div className="flex items-center">
@@ -271,7 +271,7 @@ const ServerDetail: React.FC = () => {
                                     </div>
                                     <div className="flex items-center">
                                         <Calendar className="h-4 w-4 mr-1" />
-                                        <span>Updated 2 days ago</span>
+                                        <span>Updated {server.stats.lastUpdated ? new Date(server.stats.lastUpdated).toLocaleDateString() : 'Recently'}</span>
                                     </div>
                                 </div>
                             </div>
@@ -422,7 +422,7 @@ const ServerDetail: React.FC = () => {
                                 ) : (
                                     <div>
                                         <p className="text-gray-600 mb-6">
-                                            {server.fullDescription || server.description["zh-CN"]}
+                                            {server.fullDescription || server.description.en || server.description["zh-CN"]}
                                         </p>
                                         
                                         <div className="bg-blue-50 p-4 rounded-lg">
@@ -822,17 +822,17 @@ const ServerDetail: React.FC = () => {
                                 <dl className="space-y-3">
                                     <div>
                                         <dt className="text-sm font-medium text-gray-500">
-                                            Version
+                                            Category
                                         </dt>
                                         <dd className="text-sm text-gray-900">
-                                            v2.1.4
+                                            {server.category}
                                         </dd>
                                     </div>
                                     <div>
                                         <dt className="text-sm font-medium text-gray-500">
-                                            License
+                                            Maturity
                                         </dt>
-                                        <dd className="text-sm text-gray-900">MIT</dd>
+                                        <dd className="text-sm text-gray-900">{server.metadata.maturity}</dd>
                                     </div>
                                     <div>
                                         <dt className="text-sm font-medium text-gray-500">
@@ -888,10 +888,7 @@ const ServerDetail: React.FC = () => {
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                             >
-                                                {server.repository.openIssues !== undefined 
-                                                    ? `${server.repository.openIssues} open issues`
-                                                    : '12 open issues'
-                                                }
+                                                View Issues
                                             </a>
                                         </dd>
                                     </div>
@@ -904,48 +901,75 @@ const ServerDetail: React.FC = () => {
                                     Installation
                                 </h3>
                                 <div className="space-y-3">
-                                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                                        <div className="flex items-center">
-                                            <Package className="h-4 w-4 text-red-500 mr-2" />
-                                            <span className="text-sm font-medium">
-                                                NPM
-                                            </span>
+                                    {server.installation.npm && (
+                                        <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                            <div className="flex items-center">
+                                                <Package className="h-4 w-4 text-red-500 mr-2" />
+                                                <span className="text-sm font-medium">
+                                                    NPM
+                                                </span>
+                                            </div>
+                                            <button
+                                                onClick={() => copyToClipboard(`npm install ${server.installation.npm}`, "sidebar-npm")}
+                                                className="text-xs bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+                                            >
+                                                {copiedStates["sidebar-npm"] ? "Copied!" : "Copy"}
+                                            </button>
                                         </div>
-                                        <button
-                                            onClick={() => copyToClipboard("npx @modelcontextprotocol/server-filesystem", "sidebar-npm")}
-                                            className="text-xs bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
-                                        >
-                                            {copiedStates["sidebar-npm"] ? "Copied!" : "Copy"}
-                                        </button>
-                                    </div>
-                                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                                        <div className="flex items-center">
-                                            <Package className="h-4 w-4 text-blue-500 mr-2" />
-                                            <span className="text-sm font-medium">
-                                                Python
-                                            </span>
+                                    )}
+                                    {server.installation.pip && (
+                                        <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                            <div className="flex items-center">
+                                                <Package className="h-4 w-4 text-blue-500 mr-2" />
+                                                <span className="text-sm font-medium">
+                                                    Python
+                                                </span>
+                                            </div>
+                                            <button
+                                                onClick={() => copyToClipboard(`pip install ${server.installation.pip}`, "sidebar-python")}
+                                                className="text-xs bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+                                            >
+                                                {copiedStates["sidebar-python"] ? "Copied!" : "Copy"}
+                                            </button>
                                         </div>
-                                        <button
-                                            onClick={() => copyToClipboard("pip install mcp-server-filesystem", "sidebar-python")}
-                                            className="text-xs bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
-                                        >
-                                            {copiedStates["sidebar-python"] ? "Copied!" : "Copy"}
-                                        </button>
-                                    </div>
-                                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                                        <div className="flex items-center">
-                                            <Package className="h-4 w-4 text-blue-600 mr-2" />
-                                            <span className="text-sm font-medium">
-                                                Docker
-                                            </span>
+                                    )}
+                                    {server.installation.docker && (
+                                        <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                            <div className="flex items-center">
+                                                <Package className="h-4 w-4 text-blue-600 mr-2" />
+                                                <span className="text-sm font-medium">
+                                                    Docker
+                                                </span>
+                                            </div>
+                                            <button
+                                                onClick={() => copyToClipboard(server.installation.docker!, "sidebar-docker")}
+                                                className="text-xs bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+                                            >
+                                                {copiedStates["sidebar-docker"] ? "Copied!" : "Copy"}
+                                            </button>
                                         </div>
-                                        <button
-                                            onClick={() => copyToClipboard("docker run mcphub/filesystem-server", "sidebar-docker")}
-                                            className="text-xs bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
-                                        >
-                                            {copiedStates["sidebar-docker"] ? "Copied!" : "Copy"}
-                                        </button>
-                                    </div>
+                                    )}
+                                    {server.installation.uv && (
+                                        <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                            <div className="flex items-center">
+                                                <Package className="h-4 w-4 text-purple-500 mr-2" />
+                                                <span className="text-sm font-medium">
+                                                    UV
+                                                </span>
+                                            </div>
+                                            <button
+                                                onClick={() => copyToClipboard(server.installation.uv!, "sidebar-uv")}
+                                                className="text-xs bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+                                            >
+                                                {copiedStates["sidebar-uv"] ? "Copied!" : "Copy"}
+                                            </button>
+                                        </div>
+                                    )}
+                                    {!server.installation.npm && !server.installation.pip && !server.installation.docker && !server.installation.uv && (
+                                        <div className="text-center p-4 bg-gray-50 rounded-lg">
+                                            <p className="text-sm text-gray-500">See installation tab for detailed instructions</p>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
 
@@ -987,9 +1011,11 @@ const ServerDetail: React.FC = () => {
                                                     Node.js {server.compatibility.nodeVersion}
                                                 </span>
                                             )}
-                                            <span className="inline-flex items-center px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded">
-                                                TypeScript
-                                            </span>
+                                            {server.techStack.map(tech => (
+                                                <span key={tech} className="inline-flex items-center px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded">
+                                                    {tech}
+                                                </span>
+                                            ))}
                                         </div>
                                     </div>
                                 </div>

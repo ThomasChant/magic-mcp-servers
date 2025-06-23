@@ -17,7 +17,7 @@ const FeaturedServerCard: React.FC<FeaturedServerCardProps> = React.memo(({
     formatLastUpdated
 }) => {
     return (
-        <div className="bg-white dark:bg-gray-700 rounded-xl shadow-sm border border-gray-200 dark:border-gray-600 p-6 transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg">
+        <div className="bg-white dark:bg-gray-700 rounded-xl shadow-sm border border-gray-200 dark:border-gray-600 p-6 transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg server-card" data-testid={`featured-server-result-${server.id}`}>
             <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center min-w-0 flex-1 mr-4">
                     <div className={`w-10 h-10 ${getCategoryColor(server.category)} rounded-lg flex items-center justify-center mr-3 flex-shrink-0`}>

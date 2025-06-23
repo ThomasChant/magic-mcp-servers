@@ -54,7 +54,8 @@ const CategorySection: React.FC<CategorySectionProps> = ({
                     <Link
                         key={server.id}
                         to={`/servers/${server.id}`}
-                        className="block group"
+                        className="block group server-card"
+                        data-testid={`server-result-${server.id}`}
                     >
                         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-lg hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-300 group-hover:transform group-hover:scale-[1.02]">
                             <div className="flex items-start justify-between mb-4">

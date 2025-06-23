@@ -94,6 +94,7 @@ const Home: React.FC = () => {
     
     // Memoize expensive calculations
     const statistics = useMemo(() => {
+        // Use all servers for overall statistics, not filtered ones
         if (!allServers || allServers.length === 0) {
             return {
                 totalServers: 0,
@@ -118,17 +119,33 @@ const Home: React.FC = () => {
         };
     }, [allServers]);
 
+    // Filter servers based on search query
+    const filteredServers = useMemo(() => {
+        if (!allServers || !searchQuery.trim()) return allServers;
+        
+        const query = searchQuery.toLowerCase().trim();
+        return allServers.filter(server => 
+            server.name.toLowerCase().includes(query) ||
+            server.description["zh-CN"].toLowerCase().includes(query) ||
+            server.description.en.toLowerCase().includes(query) ||
+            (server.fullDescription && server.fullDescription.toLowerCase().includes(query)) ||
+            server.tags.some(tag => tag.toLowerCase().includes(query)) ||
+            server.category.toLowerCase().includes(query) ||
+            (server.owner && server.owner.toLowerCase().includes(query))
+        );
+    }, [allServers, searchQuery]);
+
     // Group servers by category
     const serversByCategory = useMemo(() => {
-        if (!allServers || !categories) return {};
+        if (!filteredServers || !categories) return {};
         
-        const grouped: Record<string, typeof allServers> = {};
+        const grouped: Record<string, typeof filteredServers> = {};
         categories.forEach(category => {
-            grouped[category.id] = allServers.filter(server => server.category === category.id);
+            grouped[category.id] = filteredServers.filter(server => server.category === category.id);
         });
         
         return grouped;
-    }, [allServers, categories]);
+    }, [filteredServers, categories]);
 
     return (
         <div className="min-h-screen bg-white dark:bg-gray-900">
@@ -159,11 +176,12 @@ const Home: React.FC = () => {
                                 boxShadow: '0 8px 32px rgba(100, 255, 218, 0.1)'
                             }}>
                                 <input
-                                    type="text"
+                                    type="search"
                                     placeholder="Search for MCP servers, categories, or features..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     className="w-full px-6 py-4 bg-white dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 rounded-lg border-0 focus:ring-2 focus:ring-blue-400 text-lg"
+                                    data-testid="home-search-input"
                                 />
                                 <button className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-6 py-2 rounded-lg hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 shadow-lg hover:shadow-cyan-500/25">
                                     <Search className="h-4 w-4 mr-2 inline" />
@@ -286,7 +304,7 @@ const Home: React.FC = () => {
                         })
                     ) : (
                         <div className="text-center">
-                            <div className="animate-pulse">
+                            <div className="animate-pulse loading spinner" data-testid="loading-skeleton">
                                 <div className="h-8 bg-gray-300 dark:bg-gray-600 rounded w-64 mx-auto mb-4"></div>
                                 <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-96 mx-auto mb-8"></div>
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
