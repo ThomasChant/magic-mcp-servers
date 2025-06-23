@@ -16,7 +16,7 @@ import {
     Shield,
 } from "lucide-react";
 import { useAppStore } from "../store/useAppStore";
-import CosmicBackground from "../components/CosmicBackground";
+import InteractiveStarField from "../components/InteractiveStarField";
 import { useServers, useCategories } from "../hooks/useData";
 import CategorySection from "../components/Home/CategorySection";
 
@@ -104,10 +104,10 @@ const Home: React.FC = () => {
         }
         
         const totalServers = allServers.length;
-        const totalDownloads = allServers.reduce((sum, server) => sum + server.usage.downloads, 0);
+        const totalDownloads = allServers.reduce((sum, server) => sum + (server.usage?.downloads || 0), 0);
         const uniqueCategories = new Set(allServers.map(server => server.category)).size;
         const averageQualityScore = Math.round(
-            allServers.reduce((sum, server) => sum + server.quality.score, 0) / allServers.length
+            allServers.reduce((sum, server) => sum + (server.quality?.score || 90), 0) / allServers.length
         );
         
         return {
@@ -134,7 +134,11 @@ const Home: React.FC = () => {
         <div className="min-h-screen bg-white dark:bg-gray-900">
             {/* Hero Section */}
             <section className="relative overflow-hidden cosmic-bg h-[80vh] flex items-center">
-                <CosmicBackground />
+                <InteractiveStarField 
+                    servers={allServers || []}
+                    searchQuery={searchQuery}
+                    maxStars={200}
+                />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black opacity-30" style={{ zIndex: 5 }}></div>
                 <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32" style={{ zIndex: 10 }}>
                     <div className="text-center animate-fade-in-up">

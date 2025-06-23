@@ -243,7 +243,7 @@ const ServerDetail: React.FC = () => {
                                     </div>
                                 </div>
                                 <p className="text-lg text-gray-600 mb-4">
-                                    {server.longDescription || server.description}
+                                    {server.fullDescription || server.description["zh-CN"]}
                                 </p>
                                 <div className="flex items-center space-x-6 text-sm text-gray-500">
                                     <div className="flex items-center">
@@ -422,7 +422,7 @@ const ServerDetail: React.FC = () => {
                                 ) : (
                                     <div>
                                         <p className="text-gray-600 mb-6">
-                                            {server.longDescription || server.description}
+                                            {server.fullDescription || server.description["zh-CN"]}
                                         </p>
                                         
                                         <div className="bg-blue-50 p-4 rounded-lg">
