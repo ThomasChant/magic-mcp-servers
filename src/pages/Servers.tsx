@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { useServers } from "../hooks/useData";
 import type { MCPServer } from "../types";
+import ProgressiveEllipsis from "../components/ProgressiveEllipsis";
 
 // Extended interface for JSON data structure
 interface ServerData extends Omit<MCPServer, 'verified'> {
@@ -226,11 +227,13 @@ const Servers: React.FC = () => {
                                 @{server.owner}
                             </div>
                         )}
-                        <h3 
-                            className="text-lg font-semibold text-gray-900 dark:text-white break-words"
-                            title={server.name}
-                        >
-                            {server.name}
+                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                            <ProgressiveEllipsis 
+                                text={server.name}
+                                maxLength={30}
+                                preserveStart={12}
+                                preserveEnd={8}
+                            />
                         </h3>
                         <div className="flex items-center space-x-2 mt-1">
                             {server.official && (
