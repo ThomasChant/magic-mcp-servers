@@ -154,6 +154,7 @@ const CategoryDetail: React.FC = () => {
                                     <Link
                                         to={`/servers/${server.id}`}
                                         className="text-lg font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors truncate"
+                                        title={server.name}
                                     >
                                         {server.name}
                                     </Link>
@@ -253,6 +254,7 @@ const CategoryDetail: React.FC = () => {
                                 <Link
                                     to={`/servers/${server.id}`}
                                     className="text-lg font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors truncate"
+                                    title={server.name}
                                 >
                                     {server.name}
                                 </Link>

@@ -17,6 +17,7 @@ import {
     FileText,
 } from "lucide-react";
 import { useServers } from "../hooks/useData";
+import AdaptiveText from "../components/AdaptiveText";
 import type { MCPServer } from "../types";
 
 // Extended interface for JSON data structure
@@ -226,9 +227,13 @@ const Servers: React.FC = () => {
                                 @{server.owner}
                             </div>
                         )}
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white truncate">
-                            {server.name}
-                        </h3>
+                        <AdaptiveText
+                            text={server.name}
+                            className="text-lg font-semibold text-gray-900 dark:text-white"
+                            maxSize={18}
+                            minSize={14}
+                            title={server.name}
+                        />
                         <div className="flex items-center space-x-2 mt-1">
                             {server.official && (
                                 <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-2 py-1 rounded-full">
