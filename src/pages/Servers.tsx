@@ -230,9 +230,9 @@ const Servers: React.FC = () => {
                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                             <ProgressiveEllipsis 
                                 text={server.name}
-                                maxLength={30}
-                                preserveStart={12}
-                                preserveEnd={8}
+                                maxLength={15}
+                                preserveStart={6}
+                                preserveEnd={4}
                             />
                         </h3>
                         <div className="flex items-center space-x-2 mt-1">

@@ -36,6 +36,7 @@ const ProgressiveEllipsis: React.FC<ProgressiveEllipsisProps> = ({
         <span 
             className={`${className} ${isEllipsed ? 'cursor-help' : ''}`}
             title={isEllipsed ? (title || text) : undefined}
+            style={{ display: 'inline-block' }}
         >
             {displayText}
         </span>
