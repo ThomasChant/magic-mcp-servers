@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Star, Download, Calendar, ArrowRight } from 'lucide-react';
 import type { MCPServer } from '../../types';
-import SmartBreakText from '../SmartBreakText';
 
 interface FeaturedServerCardProps {
     server: MCPServer;
@@ -30,12 +29,12 @@ const FeaturedServerCard: React.FC<FeaturedServerCardProps> = React.memo(({
                                 @{server.owner}
                             </div>
                         )}
-                        <SmartBreakText
-                            text={server.name}
-                            className="text-lg font-semibold text-gray-900 dark:text-white"
-                            maxLines={2}
-                            title={server.name}
-                        />
+                        <h3 
+                            className="text-lg font-semibold text-gray-900 dark:text-white text-clamp-2 hover-tooltip"
+                            data-tooltip={server.name}
+                        >
+                            {server.name}
+                        </h3>
                         <div className="flex items-center space-x-2 mt-1">
                             {server.verified && (
                                 <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-xs px-2 py-1 rounded-full">

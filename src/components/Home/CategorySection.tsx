@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Star, Download, Calendar } from "lucide-react";
 import type { MCPServer, Category } from "../../types";
-import ProgressiveEllipsis from "../ProgressiveEllipsis";
 
 interface CategorySectionProps {
     category: Category;
@@ -69,14 +68,11 @@ const CategorySection: React.FC<CategorySectionProps> = ({
                                                 @{server.owner}
                                             </div>
                                         )}
-                                        <h3 className="font-semibold text-gray-900 dark:text-white text-sm group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                                            <ProgressiveEllipsis
-                                                text={server.name}
-                                                maxLength={18}
-                                                preserveStart={8}
-                                                preserveEnd={5}
-                                                title={server.name}
-                                            />
+                                        <h3 
+                                            className="font-semibold text-gray-900 dark:text-white text-sm group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors text-truncate-improved hover-tooltip"
+                                            data-tooltip={server.name}
+                                        >
+                                            {server.name}
                                         </h3>
                                         <div className="flex items-center text-xs text-gray-500 dark:text-gray-400 mt-1">
                                             <Star className="h-3 w-3 mr-1" />
