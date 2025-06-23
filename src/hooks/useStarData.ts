@@ -147,7 +147,7 @@ export const useStarData = (
         y: positions[index].y,
         size,
         brightness,
-        color: categoryColor,
+        color: '#ffffff',
         categoryColor,
         zIndex,
       };

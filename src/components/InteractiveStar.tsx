@@ -57,20 +57,19 @@ const InteractiveStar: React.FC<InteractiveStarProps> = ({
     };
   };
 
-  // Generate box-shadow based on category color and state
+  // Generate box-shadow based on white color and state
   const getBoxShadow = () => {
-    const color = starData.color;
+    const color = 'rgba(255, 255, 255, 0.8)';
     const intensity = isHovered || isHighlighted ? 1.5 : 1;
-    const baseGlow = `0 0 ${8 * intensity}px ${color}`;
-    const mediumGlow = `0 0 ${16 * intensity}px ${color}`;
-    const largeGlow = `0 0 ${24 * intensity}px ${color}`;
     
     if (starData.size === 'extra-large') {
-      return `${baseGlow}, ${mediumGlow}, ${largeGlow}`;
+      return `0 0 ${8 * intensity}px ${color}`;
     } else if (starData.size === 'large') {
-      return `${baseGlow}, ${mediumGlow}`;
+      return `0 0 ${6 * intensity}px ${color}`;
+    } else if (starData.size === 'medium') {
+      return `0 0 ${4 * intensity}px ${color}`;
     } else {
-      return baseGlow;
+      return `0 0 ${3 * intensity}px ${color}`;
     }
   };
 
@@ -110,7 +109,7 @@ const InteractiveStar: React.FC<InteractiveStarProps> = ({
             width: starData.size === 'extra-large' ? '16px' : starData.size === 'large' ? '12px' : '8px',
             height: starData.size === 'extra-large' ? '16px' : starData.size === 'large' ? '12px' : '8px',
             borderRadius: '50%',
-            border: `1px solid ${starData.color}`,
+            border: `1px solid rgba(255, 255, 255, 0.6)`,
             transform: 'translate(-50%, -50%)',
             animation: 'star-pulse 2s ease-in-out infinite',
             opacity: 0.6,
