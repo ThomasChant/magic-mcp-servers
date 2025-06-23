@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import type { Category, MCPServer } from "../types";
-import categoriesData from "../data/categories.json";
+import type { Category, MCPServer, ProcessedREADME } from "../types";
+// import categoriesData from "../data/categories.json";
 import serversData from "../data/servers.json";
+import categoriesData from "../data/categories.json";
 
 // 定义JSON数据结构接口
 interface CategoryJson {
@@ -39,6 +40,8 @@ interface ServerJson {
         stars: number;
         lastUpdate: string;
         forks?: number;
+        watchers?: number;
+        openIssues?: number;
     };
     installation: Record<string, string | undefined>;
     documentation: {
@@ -144,6 +147,9 @@ const transformServerData = (server: ServerJson): MCPServer => ({
         name: server.repository.name,
         stars: server.repository.stars,
         lastUpdated: server.repository.lastUpdate,
+        forks: server.repository.forks,
+        watchers: server.repository.watchers,
+        openIssues: server.repository.openIssues,
     },
     installation: {
         npm: server.installation.npm,
@@ -243,5 +249,28 @@ export const useServersByCategory = (categoryId: string) => {
         },
         enabled: !!categoryId && !!servers,
         staleTime: 5 * 60 * 1000,
+    });
+};
+
+// Hook to load structured README data
+export const useServerReadme = (serverId: string) => {
+    return useQuery({
+        queryKey: ["readme", serverId],
+        queryFn: async (): Promise<ProcessedREADME | null> => {
+            try {
+                // Load structured README data from the processed directory
+                const response = await fetch(`/structured_readme_data/${serverId}.json`);
+                if (!response.ok) {
+                    return null;
+                }
+                const data: ProcessedREADME = await response.json();
+                return data;
+            } catch (error) {
+                console.error(`Failed to load README for ${serverId}:`, error);
+                return null;
+            }
+        },
+        enabled: !!serverId,
+        staleTime: 10 * 60 * 1000, // 10 minutes
     });
 };

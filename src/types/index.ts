@@ -12,6 +12,9 @@ export interface MCPServer {
         name: string;
         stars: number;
         lastUpdated: string;
+        forks?: number;
+        watchers?: number;
+        openIssues?: number;
     };
     installation: {
         npm?: string;
@@ -125,4 +128,28 @@ export interface PaginationInfo {
     current: number;
     total: number;
     perPage: number;
+}
+
+// Structured README data interfaces
+export interface ExtractedSection {
+    title: string;
+    content: string;
+    code_blocks: Array<{
+        language: string;
+        code: string;
+    }>;
+    subsections: Array<{
+        title: string;
+        content: string;
+    }>;
+}
+
+export interface ProcessedREADME {
+    filename: string;
+    project_name: string;
+    overview?: ExtractedSection;
+    installation?: ExtractedSection;
+    examples?: ExtractedSection;
+    api_reference?: ExtractedSection;
+    raw_content: string;
 }
