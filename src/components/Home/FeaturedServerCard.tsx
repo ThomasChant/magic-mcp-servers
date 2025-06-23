@@ -19,12 +19,17 @@ const FeaturedServerCard: React.FC<FeaturedServerCardProps> = React.memo(({
     return (
         <div className="bg-white dark:bg-gray-700 rounded-xl shadow-sm border border-gray-200 dark:border-gray-600 p-6 transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg">
             <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center">
-                    <div className={`w-10 h-10 ${getCategoryColor(server.category)} rounded-lg flex items-center justify-center mr-3`}>
+                <div className="flex items-center min-w-0 flex-1 mr-4">
+                    <div className={`w-10 h-10 ${getCategoryColor(server.category)} rounded-lg flex items-center justify-center mr-3 flex-shrink-0`}>
                         {getCategoryIcon(server.category)}
                     </div>
-                    <div>
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    <div className="min-w-0 flex-1">
+                        {server.owner && (
+                            <div className="text-sm text-gray-500 dark:text-gray-400 mb-1 truncate">
+                                @{server.owner}
+                            </div>
+                        )}
+                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white truncate">
                             {server.name}
                         </h3>
                         <div className="flex items-center space-x-2 mt-1">
@@ -41,7 +46,7 @@ const FeaturedServerCard: React.FC<FeaturedServerCardProps> = React.memo(({
                         </div>
                     </div>
                 </div>
-                <div className="text-right">
+                <div className="text-right flex-shrink-0">
                     <div className="flex items-center text-yellow-500">
                         <Star className="w-4 h-4 fill-current" />
                         <span className="ml-1 text-gray-900 dark:text-white font-medium">
@@ -57,7 +62,7 @@ const FeaturedServerCard: React.FC<FeaturedServerCardProps> = React.memo(({
             </div>
 
             <p className="text-gray-600 dark:text-gray-300 mb-4">
-                {server.longDescription || server.description}
+                {server.fullDescription || server.description["zh-CN"]}
             </p>
 
             <div className="flex flex-wrap gap-2 mb-4">

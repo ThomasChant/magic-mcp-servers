@@ -148,7 +148,7 @@ const Servers: React.FC = () => {
             if (sidebarSearch) {
                 const query = sidebarSearch.toLowerCase();
                 const serverData = server as ServerData;
-                const description = serverData.descriptionEn || server.description || "";
+                const description = serverData.descriptionEn || server.description["zh-CN"] || "";
                 if (
                     !server.name.toLowerCase().includes(query) &&
                     !description.toLowerCase().includes(query) &&
@@ -216,12 +216,17 @@ const Servers: React.FC = () => {
     const ServerCard: React.FC<{ server: ServerData }> = ({ server }) => (
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover-lift">
             <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center">
-                    <div className={`w-10 h-10 ${getServerIconBg(server)} rounded-lg flex items-center justify-center mr-3`}>
+                <div className="flex items-center min-w-0 flex-1 mr-4">
+                    <div className={`w-10 h-10 ${getServerIconBg(server)} rounded-lg flex items-center justify-center mr-3 flex-shrink-0`}>
                         {getServerIcon(server)}
                     </div>
-                    <div>
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    <div className="min-w-0 flex-1">
+                        {server.owner && (
+                            <div className="text-sm text-gray-500 dark:text-gray-400 mb-1 truncate">
+                                @{server.owner}
+                            </div>
+                        )}
+                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white truncate">
                             {server.name}
                         </h3>
                         <div className="flex items-center space-x-2 mt-1">
@@ -243,7 +248,7 @@ const Servers: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                <div className="text-right">
+                <div className="text-right flex-shrink-0">
                     <div className="flex items-center text-yellow-500">
                         <Star className="h-4 w-4 fill-current" />
                         <span className="ml-1 text-gray-900 dark:text-white font-medium text-sm">
@@ -257,7 +262,7 @@ const Servers: React.FC = () => {
             </div>
 
             <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
-                {server.descriptionEn || server.description}
+                {server.descriptionEn || server.description["zh-CN"]}
             </p>
 
             <div className="flex flex-wrap gap-1 mb-4">

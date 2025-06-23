@@ -52,7 +52,7 @@ const CategoryDetail: React.FC = () => {
                 const query = searchQuery.toLowerCase();
                 if (
                     !server.name.toLowerCase().includes(query) &&
-                    !server.description.toLowerCase().includes(query) &&
+                    !server.description["zh-CN"].toLowerCase().includes(query) &&
                     !server.tags.some((tag) =>
                         tag.toLowerCase().includes(query)
                     )
@@ -112,8 +112,8 @@ const CategoryDetail: React.FC = () => {
                     bValue = b.quality.score;
                     break;
                 case "updated":
-                    aValue = new Date(a.updatedAt).getTime();
-                    bValue = new Date(b.updatedAt).getTime();
+                    aValue = new Date(a.updatedAt || a.stats.lastUpdated || new Date()).getTime();
+                    bValue = new Date(b.updatedAt || b.stats.lastUpdated || new Date()).getTime();
                     break;
                 default:
                     return 0;
@@ -145,10 +145,15 @@ const CategoryDetail: React.FC = () => {
                                 <Package className="h-6 w-6" />
                             </div>
                             <div className="flex-1 min-w-0">
+                                {server.owner && (
+                                    <div className="text-sm text-gray-500 dark:text-gray-400 mb-1 truncate">
+                                        @{server.owner}
+                                    </div>
+                                )}
                                 <div className="flex items-center gap-2 mb-2">
                                     <Link
                                         to={`/servers/${server.id}`}
-                                        className="text-lg font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                                        className="text-lg font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors truncate"
                                     >
                                         {server.name}
                                     </Link>
@@ -164,7 +169,7 @@ const CategoryDetail: React.FC = () => {
                                     )}
                                 </div>
                                 <p className="text-gray-600 dark:text-gray-300 mb-3 text-sm">
-                                    {server.description}
+                                    {server.description["zh-CN"]}
                                 </p>
                                 <div className="flex flex-wrap gap-2 mb-3">
                                     {server.tags.slice(0, 4).map((tag) => (
@@ -190,7 +195,7 @@ const CategoryDetail: React.FC = () => {
                                     <div className="flex items-center">
                                         <Calendar className="h-4 w-4 mr-1" />
                                         <span>
-                                            {new Date(server.updatedAt).toLocaleDateString()}
+                                            {new Date(server.updatedAt || server.stats.lastUpdated || new Date()).toLocaleDateString()}
                                         </span>
                                     </div>
                                 </div>
@@ -238,11 +243,16 @@ const CategoryDetail: React.FC = () => {
                         >
                             <Package className="h-6 w-6" />
                         </div>
-                        <div>
+                        <div className="min-w-0 flex-1">
+                            {server.owner && (
+                                <div className="text-sm text-gray-500 dark:text-gray-400 mb-1 truncate">
+                                    @{server.owner}
+                                </div>
+                            )}
                             <div className="flex items-center gap-2 mb-1">
                                 <Link
                                     to={`/servers/${server.id}`}
-                                    className="text-lg font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                                    className="text-lg font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors truncate"
                                 >
                                     {server.name}
                                 </Link>
@@ -272,7 +282,7 @@ const CategoryDetail: React.FC = () => {
                 </div>
                 
                 <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
-                    {server.description}
+                    {server.description["zh-CN"]}
                 </p>
                 
                 <div className="flex flex-wrap gap-2 mb-4">

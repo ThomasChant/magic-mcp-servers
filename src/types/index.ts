@@ -1,11 +1,59 @@
 export interface MCPServer {
     id: string;
     name: string;
-    description: string;
-    longDescription?: string;
+    owner: string;
+    slug: string;
+    description: {
+        "zh-CN": string,
+        en: string,
+        "zh-TW": string,
+        fr: string,
+        ja: string,
+        ko: string,
+        ru: string
+    },
+    fullDescription: string;
+    icon: string;
+    badges: Array<{
+        type: string;
+        label: string;
+        color: string;
+        icon: string;
+    }>;
+    tags: string[];
     category: string;
     subcategory: string;
-    tags: string[];
+    serviceTypes: Array<{
+        type: string;
+        label: string;
+        icon: string;
+        description: string;
+    }>;
+    techStack: string[];
+    links: {
+        github: string;
+        demo?: string | null;
+        docs?: string | null;
+    };
+    stats: {
+        stars: number;
+        forks: number;
+        lastUpdated: string;
+        createdAt: string;
+    };
+    metadata: {
+        complexity: string;
+        maturity: string;
+        deployment: string[];
+        featured: boolean;
+        verified: boolean;
+    };
+    categorization?: {
+        confidence: number;
+        reason: string;
+        matched_keywords: string[];
+    };
+    // Legacy interface compatibility - made required to avoid undefined errors
     repository: {
         url: string;
         owner: string;
@@ -38,18 +86,18 @@ export interface MCPServer {
             documentation: number;
             maintenance: number;
             community: number;
-            performance: number;
+            performance?: number;
         };
     };
     usage: {
         downloads: number;
         dependents: number;
-        weeklyDownloads: number;
+        weeklyDownloads?: number;
     };
-    featured: boolean;
-    verified: boolean;
-    createdAt: string;
-    updatedAt: string;
+    featured?: boolean;
+    verified?: boolean;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export interface Category {

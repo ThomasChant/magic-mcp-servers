@@ -63,6 +63,11 @@ const CategorySection: React.FC<CategorySectionProps> = ({
                                         {getCategoryIcon(server.category)}
                                     </div>
                                     <div className="min-w-0 flex-1">
+                                        {server.owner && (
+                                            <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">
+                                                @{server.owner}
+                                            </div>
+                                        )}
                                         <h3 className="font-semibold text-gray-900 dark:text-white text-sm truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                                             {server.name}
                                         </h3>
@@ -80,7 +85,7 @@ const CategorySection: React.FC<CategorySectionProps> = ({
                             </div>
 
                             <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
-                                {server.description}
+                                {server.description["zh-CN"]}
                             </p>
 
                             <div className="flex flex-wrap gap-1 mb-4">
