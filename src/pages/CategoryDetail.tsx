@@ -153,7 +153,7 @@ const CategoryDetail: React.FC = () => {
                                 <div className="flex items-center gap-2 mb-2">
                                     <Link
                                         to={`/servers/${server.id}`}
-                                        className="text-lg font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors truncate"
+                                        className="text-lg font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors break-words"
                                         title={server.name}
                                     >
                                         {server.name}
@@ -253,7 +253,7 @@ const CategoryDetail: React.FC = () => {
                             <div className="flex items-center gap-2 mb-1">
                                 <Link
                                     to={`/servers/${server.id}`}
-                                    className="text-lg font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors truncate"
+                                    className="text-lg font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors break-words"
                                     title={server.name}
                                 >
                                     {server.name}

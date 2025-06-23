@@ -227,8 +227,8 @@ const Servers: React.FC = () => {
                             </div>
                         )}
                         <h3 
-                            className="text-lg font-semibold text-gray-900 dark:text-white text-smart-wrap hover-tooltip"
-                            data-tooltip={server.name}
+                            className="text-lg font-semibold text-gray-900 dark:text-white break-words"
+                            title={server.name}
                         >
                             {server.name}
                         </h3>

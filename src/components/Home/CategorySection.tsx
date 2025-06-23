@@ -69,8 +69,8 @@ const CategorySection: React.FC<CategorySectionProps> = ({
                                             </div>
                                         )}
                                         <h3 
-                                            className="font-semibold text-gray-900 dark:text-white text-sm group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors text-truncate-improved hover-tooltip"
-                                            data-tooltip={server.name}
+                                            className="font-semibold text-gray-900 dark:text-white text-sm group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate"
+                                            title={server.name}
                                         >
                                             {server.name}
                                         </h3>

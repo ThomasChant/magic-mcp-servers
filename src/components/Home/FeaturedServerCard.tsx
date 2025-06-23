@@ -30,8 +30,8 @@ const FeaturedServerCard: React.FC<FeaturedServerCardProps> = React.memo(({
                             </div>
                         )}
                         <h3 
-                            className="text-lg font-semibold text-gray-900 dark:text-white text-clamp-2 hover-tooltip"
-                            data-tooltip={server.name}
+                            className="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2"
+                            title={server.name}
                         >
                             {server.name}
                         </h3>
