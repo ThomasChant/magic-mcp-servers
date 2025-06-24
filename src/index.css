@@ -437,10 +437,14 @@ html {
 
 /* Particle Hero Specific Styles */
 .particle-hero-container {
-  position: relative;
+  position: absolute !important;
+  inset: 0;
   overflow: hidden;
   isolation: isolate;
-  contain: layout style paint;
+  contain: layout style paint !important;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* Ensure all child elements stay within hero container */
@@ -584,12 +588,33 @@ html {
   transform: translateZ(0);
   backface-visibility: hidden;
   perspective: 1000px;
+  width: 100% !important;
+  height: 100% !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .particles-container canvas {
-  display: block;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Ensure particle hero canvas is visible */
+#particle-hero {
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 1 !important;
+}
+
+#particle-hero canvas {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
 }
 
 /* Mobile optimization for particles */

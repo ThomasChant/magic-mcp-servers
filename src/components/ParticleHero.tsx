@@ -27,29 +27,55 @@ const ParticleHero: React.FC<ParticleHeroProps> = ({
   const [hoveredStar, setHoveredStar] = useState<StarData | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  // Get star data for interactive particles
-  const starData = useStarData(servers, {
+  // Force minimum particles even with no servers
+  const particleServers = servers.length > 0 ? servers : [
+    { 
+      id: 'demo', 
+      name: 'Demo Server', 
+      stats: { stars: 10, forks: 5 }, 
+      category: 'development', 
+      description: { en: 'Demo server for particle effects', 'zh-CN': 'Demo server for particle effects' }, 
+      tags: ['demo', 'particle'],
+      slug: 'demo-server',
+      owner: 'demo'
+    }
+  ] as MCPServer[];
+
+  // Get star data for interactive particles - always try to use real servers for stars
+  const starData = useStarData(particleServers, {
     maxStars,
     enableCategoryFilter,
     selectedCategory,
     searchQuery,
   });
 
+  console.log('ParticleHero - servers count:', servers.length, 'starData count:', starData.length);
+
   // Get optimized particle configuration
   const { particleOptions, deviceCapabilities } = useParticleConfig({
-    servers,
+    servers: particleServers,
     searchQuery,
   });
 
   // Initialize particles engine
   const particlesInit = useCallback(async (engine: Engine) => {
-    await loadSlim(engine);
+    try {
+      await loadSlim(engine);
+      console.log('Particles engine initialized successfully');
+    } catch (error) {
+      console.error('Failed to initialize particles engine:', error);
+    }
   }, []);
 
   // Handle particles container load  
   const particlesLoaded = useCallback(async (container: Container | undefined) => {
-    // Container loaded - could be used for future particle manipulation
-    console.log('Particles loaded:', !!container);
+    if (container) {
+      console.log('Particles container loaded successfully:', container.id);
+      // Force a refresh to ensure particles are visible
+      container.refresh();
+    } else {
+      console.warn('Particles container failed to load');
+    }
   }, []);
 
   // Handle mouse movement for tooltip positioning
@@ -82,6 +108,7 @@ const ParticleHero: React.FC<ParticleHeroProps> = ({
 
   // Interactive stars overlays
   const renderInteractiveStars = () => {
+    console.log('Rendering interactive stars:', starData.length);
     return starData.map((star) => {
       const isHighlighted = highlightedStars.has(star.id);
       const sizeMultiplier = deviceCapabilities.isMobile ? 0.8 : 1;
@@ -143,15 +170,15 @@ const ParticleHero: React.FC<ParticleHeroProps> = ({
   };
 
   return (
-    <div className="absolute inset-0 overflow-hidden particle-hero-container" style={{ zIndex: 0, contain: 'layout style paint' }}>
+    <div className="absolute inset-0 overflow-hidden particle-hero-container" style={{ zIndex: 0, contain: 'layout style paint', visibility: 'visible', opacity: 1, position: 'absolute' }}>
       {/* Particles background */}
       <Particles
         id="particle-hero"
         init={particlesInit}
         loaded={particlesLoaded}
         options={particleOptions}
-        className="absolute inset-0"
-        style={{ zIndex: 1 }}
+        className="absolute inset-0 particles-container"
+        style={{ zIndex: 1, visibility: 'visible', opacity: 1 }}
       />
       
       {/* Cosmic background gradient overlay */}

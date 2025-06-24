@@ -49,6 +49,8 @@ export const useParticleConfig = ({
   // Get category colors for particles
   const getCategoryColors = () => {
     const colors = [
+      '#ffffff', // white - most visible
+      '#64ffda', // cyan/teal - bright
       '#3b82f6', // blue
       '#8b5cf6', // purple  
       '#10b981', // green
@@ -57,10 +59,8 @@ export const useParticleConfig = ({
       '#ec4899', // pink
       '#84cc16', // lime
       '#22c55e', // green
-      '#6b7280', // gray
       '#f97316', // orange
-      '#64748b', // slate
-      '#ffffff', // white
+      '#fbbf24', // yellow
     ];
     return colors;
   };
@@ -75,6 +75,7 @@ export const useParticleConfig = ({
         color: {
           value: 'transparent',
         },
+        opacity: 0,
       },
       fpsLimit: deviceCapabilities.isLowEndDevice ? 30 : 60,
       interactivity: {
@@ -154,12 +155,12 @@ export const useParticleConfig = ({
           value: particleCount,
         },
         opacity: {
-          value: 0.7,
+          value: { min: 0.3, max: 0.9 },
           random: true,
           animation: {
             enable: !deviceCapabilities.isLowEndDevice,
             speed: 1,
-            minimumValue: 0.1,
+            minimumValue: 0.3,
             sync: false,
           },
         },
