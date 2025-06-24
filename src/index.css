@@ -434,3 +434,181 @@ html {
 }
 
 /* 简化的文本处理 - 使用Tailwind基础类 */
+
+/* Particle Hero Specific Styles */
+.particle-hero-container {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  contain: layout style paint;
+}
+
+/* Ensure all child elements stay within hero container */
+.particle-hero-container * {
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+/* Strict containment for cosmic background */
+.cosmic-bg {
+  isolation: isolate;
+  contain: layout style;
+}
+
+/* Enhanced particle glow effects */
+@keyframes particle-glow {
+  0%, 100% { 
+    opacity: 0.6; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.2); 
+  }
+}
+
+.particle-glow {
+  animation: particle-glow 3s ease-in-out infinite;
+}
+
+/* Interactive star effects */
+.interactive-star-container {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.interactive-star-container:hover {
+  transform: scale(1.1);
+}
+
+.interactive-star-container:active {
+  transform: scale(0.95);
+}
+
+/* Enhanced shooting star for particles */
+@keyframes enhanced-shooting-star {
+  0% { 
+    transform: translateX(-100px) translateY(-100px) rotate(45deg); 
+    opacity: 0; 
+    width: 2px;
+    height: 2px;
+    box-shadow: 0 0 0px transparent;
+  }
+  10% { 
+    opacity: 1; 
+    width: 80px;
+    height: 2px;
+    box-shadow: 0 0 10px rgba(100, 255, 218, 0.8);
+  }
+  90% { 
+    opacity: 1; 
+    width: 80px;
+    height: 2px;
+    box-shadow: 0 0 10px rgba(100, 255, 218, 0.8);
+  }
+  100% { 
+    transform: translateX(100vw) translateY(100vh) rotate(45deg); 
+    opacity: 0; 
+    width: 2px;
+    height: 2px;
+    box-shadow: 0 0 0px transparent;
+  }
+}
+
+.enhanced-shooting-star {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, #ffffff, #64ffda, rgba(100, 255, 218, 0.8), transparent);
+  border-radius: 2px;
+  animation: enhanced-shooting-star 4s linear infinite;
+  z-index: 4;
+}
+
+/* Particle attraction effect */
+@keyframes particle-attract {
+  0% { 
+    transform: scale(1); 
+    opacity: 0.7; 
+  }
+  50% { 
+    transform: scale(1.3); 
+    opacity: 1; 
+  }
+  100% { 
+    transform: scale(1); 
+    opacity: 0.7; 
+  }
+}
+
+.particle-attract {
+  animation: particle-attract 0.6s ease-out;
+}
+
+/* Category-based particle colors */
+.particle-blue { color: #3b82f6; }
+.particle-purple { color: #8b5cf6; }
+.particle-green { color: #10b981; }
+.particle-cyan { color: #06b6d4; }
+.particle-amber { color: #f59e0b; }
+.particle-pink { color: #ec4899; }
+.particle-lime { color: #84cc16; }
+.particle-orange { color: #f97316; }
+.particle-gray { color: #6b7280; }
+.particle-white { color: #ffffff; }
+
+/* Enhanced cosmic overlay for particles */
+.particle-cosmic-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(100, 255, 218, 0.03) 0%,
+    rgba(147, 51, 234, 0.05) 30%,
+    rgba(59, 130, 246, 0.03) 60%,
+    transparent 100%
+  );
+  pointer-events: none;
+  animation: cosmic-breathe 8s ease-in-out infinite;
+}
+
+@keyframes cosmic-breathe {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* Performance optimizations for particles */
+.particles-container {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.particles-container canvas {
+  display: block;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* Mobile optimization for particles */
+@media (max-width: 768px) {
+  .particle-hero-container {
+    --particle-density: 0.6;
+  }
+  
+  .interactive-star-container {
+    transform: scale(0.8);
+  }
+  
+  .interactive-star-container:hover {
+    transform: scale(0.9);
+  }
+}
+
+@media (max-width: 480px) {
+  .particle-hero-container {
+    --particle-density: 0.4;
+  }
+}

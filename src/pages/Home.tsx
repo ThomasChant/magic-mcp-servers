@@ -16,7 +16,7 @@ import {
     Shield,
 } from "lucide-react";
 import { useAppStore } from "../store/useAppStore";
-import InteractiveStarField from "../components/InteractiveStarField";
+import ParticleHero from "../components/ParticleHero";
 import { useServers, useCategories } from "../hooks/useData";
 import CategorySection from "../components/Home/CategorySection";
 
@@ -150,8 +150,8 @@ const Home: React.FC = () => {
     return (
         <div className="min-h-screen bg-white dark:bg-gray-900">
             {/* Hero Section */}
-            <section className="relative overflow-hidden cosmic-bg h-[80vh] flex items-center">
-                <InteractiveStarField 
+            <section className="relative overflow-hidden cosmic-bg h-[80vh] flex items-center" style={{ isolation: 'isolate' }}>
+                <ParticleHero 
                     servers={allServers || []}
                     searchQuery={searchQuery}
                     maxStars={200}
