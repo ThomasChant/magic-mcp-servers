@@ -84,10 +84,6 @@ interface RawCategoryData {
   subcategories?: RawSubcategory[];
 }
 
-interface CategoryFeatureServer {
-  category: string;
-  featureServer: FeaturedServer[];
-}
 
 /**
  * 将来自JSON的原始分类数据转换为类型化的Category数组，
