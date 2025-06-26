@@ -30,7 +30,7 @@ interface ServerData extends Omit<MCPServer, 'verified'> {
 }
 
 const Servers: React.FC = () => {
-    const { data: servers, isLoading: serversLoading } = useServers();
+    const { data: servers, isLoading: serversLoading, error: serversError } = useServers();
 
     // State management
     const [sidebarSearch, setSidebarSearch] = useState("");
@@ -150,10 +150,12 @@ const Servers: React.FC = () => {
                 const query = sidebarSearch.toLowerCase();
                 const serverData = server as ServerData;
                 const description = serverData.descriptionEn || server.description["zh-CN"] || "";
+                const category = Array.isArray(server.category) ? server.category.join(" ") : server.category;
                 if (
                     !server.name.toLowerCase().includes(query) &&
                     !description.toLowerCase().includes(query) &&
-                    !server.tags.some((tag) => tag.toLowerCase().includes(query))
+                    !server.tags.some((tag) => tag.toLowerCase().includes(query)) &&
+                    !category.toLowerCase().includes(query)
                 ) {
                     return false;
                 }
@@ -215,7 +217,11 @@ const Servers: React.FC = () => {
     const paginatedServers = filteredAndSortedServers.slice(0, 6); // Show first 6 servers
 
     const ServerCard: React.FC<{ server: ServerData }> = ({ server }) => (
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover-lift">
+        <Link to={`/servers/${server.id}`}>
+            <div 
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover-lift cursor-pointer"
+                data-testid="server-card"
+            >
             <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center min-w-0 flex-1 mr-4">
                     <div className={`w-10 h-10 ${getServerIconBg(server)} rounded-lg flex items-center justify-center mr-3 flex-shrink-0`}>
@@ -227,7 +233,7 @@ const Servers: React.FC = () => {
                                 @{server.owner}
                             </div>
                         )}
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                        <h3 className="server-name text-lg font-semibold text-gray-900 dark:text-white" data-testid="server-name">
                             <ProgressiveEllipsis 
                                 text={server.name}
                                 maxLength={15}
@@ -267,7 +273,7 @@ const Servers: React.FC = () => {
                 </div>
             </div>
 
-            <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
+            <p className="server-description text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
                 {server.descriptionEn || server.description["zh-CN"]}
             </p>
 
@@ -283,7 +289,7 @@ const Servers: React.FC = () => {
             </div>
 
             <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3 text-xs text-gray-500 dark:text-gray-400">
+                <div className="server-stats flex items-center space-x-3 text-xs text-gray-500 dark:text-gray-400">
                     <span className="flex items-center">
                         <Download className="h-3 w-3 mr-1" />
                         {formatNumber(server.usage.downloads)}
@@ -293,20 +299,18 @@ const Servers: React.FC = () => {
                         {formatTimeAgo(server.repository.lastUpdate || server.repository.lastUpdated || "")}
                     </span>
                 </div>
-                <Link
-                    to={`/servers/${server.id}`}
-                    className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium text-sm flex items-center"
-                >
+                <span className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium text-sm flex items-center">
                     View Details
                     <ArrowRight className="h-3 w-3 ml-1" />
-                </Link>
+                </span>
             </div>
         </div>
+        </Link>
     );
 
     if (serversLoading) {
         return (
-            <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
+            <div className="bg-gray-50 dark:bg-gray-900 min-h-screen" data-testid="loading">
                 {/* Page Header */}
                 <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -359,6 +363,36 @@ const Servers: React.FC = () => {
                                 ))}
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    if (serversError) {
+        return (
+            <div className="bg-gray-50 dark:bg-gray-900 min-h-screen flex items-center justify-center">
+                <div className="text-center">
+                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Error loading servers</h1>
+                    <p className="text-gray-600 dark:text-gray-400 mb-4">Failed to load server data. Please try again later.</p>
+                    <div className="text-red-500 mb-4">Error: {String(serversError)}</div>
+                    <button 
+                        onClick={() => window.location.reload()} 
+                        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                    >
+                        Retry
+                    </button>
+                </div>
+            </div>
+        );
+    }
+
+    if (serversLoading) {
+        return (
+            <div className="bg-gray-50 dark:bg-gray-900 min-h-screen" data-testid="loading">
+                <div className="flex items-center justify-center h-screen">
+                    <div className="animate-pulse text-lg text-gray-600 dark:text-gray-400">
+                        Loading servers...
                     </div>
                 </div>
             </div>
@@ -437,7 +471,7 @@ const Servers: React.FC = () => {
                                 </label>
                                 <div className="relative">
                                     <input
-                                        type="text"
+                                        type="search"
                                         placeholder="Filter by name or description..."
                                         value={sidebarSearch}
                                         onChange={(e) => setSidebarSearch(e.target.value)}

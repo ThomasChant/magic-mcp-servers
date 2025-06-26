@@ -7,15 +7,7 @@ interface CoreServerData {
     name: string;
     owner: string;
     slug: string;
-    description: {
-        "zh-CN": string;
-        en: string;
-        "zh-TW": string;
-        fr: string;
-        ja: string;
-        ko: string;
-        ru: string;
-    };
+    description: string; // Updated to match actual data structure
     category: string;
     subcategory?: string;
     featured: boolean;
@@ -126,7 +118,7 @@ function mergeServerData(coreData: CoreServerData[], extendedData: ExtendedServe
             name: core.name,
             owner: core.owner,
             slug: core.slug,
-            fullDescription: extended.fullDescription || core.description["zh-CN"],
+            fullDescription: extended.fullDescription || core.description,
             icon: extended.icon || "",
             badges: (extended.badges || []).map(badge => ({
                 type: badge.type || "default",
@@ -152,22 +144,30 @@ function mergeServerData(coreData: CoreServerData[], extendedData: ExtendedServe
                 docs: extended.documentation?.api || core.links.docs || null
             },
             
-            // 多语言描述
-            description: core.description,
+            // 多语言描述 - 转换单个描述到多语言格式
+            description: {
+                "zh-CN": core.description,
+                en: core.description,
+                "zh-TW": core.description,
+                fr: core.description,
+                ja: core.description,
+                ko: core.description,
+                ru: core.description,
+            },
             
             // 统计信息
             stats: {
                 ...core.stats,
-                createdAt: (extended.metadata as any)?.createdAt || new Date(2024, 0, 1).toISOString()
+                createdAt: (extended.metadata as Record<string, unknown>)?.createdAt as string || new Date(2024, 0, 1).toISOString()
             },
             metadata: {
-                complexity: (extended.metadata as any)?.complexity || "medium",
-                maturity: (extended.metadata as any)?.maturity || "stable",
-                deployment: (extended.metadata as any)?.deployment || ["cloud", "local"],
+                complexity: (extended.metadata as Record<string, unknown>)?.complexity as string || "medium",
+                maturity: (extended.metadata as Record<string, unknown>)?.maturity as string || "stable",
+                deployment: (extended.metadata as Record<string, unknown>)?.deployment as string[] || ["cloud", "local"],
                 featured: core.featured,
                 verified: core.verified
             },
-            categorization: extended.categorization as any || {
+            categorization: extended.categorization || {
                 confidence: 0.8,
                 reason: "Automatically categorized",
                 matched_keywords: []
@@ -201,7 +201,7 @@ function mergeServerData(coreData: CoreServerData[], extendedData: ExtendedServe
             
             // 文档信息
             documentation: {
-                readme: extended.fullDescription || core.description["zh-CN"],
+                readme: extended.fullDescription || core.description,
                 overview: undefined,
                 installation: undefined,
                 examples: undefined,
@@ -239,7 +239,7 @@ function mergeServerData(coreData: CoreServerData[], extendedData: ExtendedServe
             // 兼容性字段
             featured: core.featured,
             verified: core.verified,
-            createdAt: (extended.metadata as any)?.createdAt || new Date(2024, 0, 1).toISOString(),
+            createdAt: (extended.metadata as Record<string, unknown>)?.createdAt as string || new Date(2024, 0, 1).toISOString(),
             updatedAt: core.stats.lastUpdated,
         };
     });
@@ -339,12 +339,15 @@ export const useExtendedServers = () => {
 
 // 主要的服务器数据 Hook - 合并核心和扩展数据
 export const useServers = () => {
-    const { data: coreData } = useCoreServers();
+    const { data: coreData, error: coreError } = useCoreServers();
     const { data: extendedData } = useExtendedServers();
 
     return useQuery({
         queryKey: ["servers", "merged", !!coreData, !!extendedData],
         queryFn: async (): Promise<MCPServer[]> => {
+            if (coreError) {
+                throw coreError;
+            }
             if (!coreData) {
                 throw new Error("Core data not available");
             }
@@ -353,7 +356,7 @@ export const useServers = () => {
             const extended = extendedData || {};
             return mergeServerData(coreData, extended);
         },
-        enabled: !!coreData,
+        enabled: !!coreData || !!coreError,
         staleTime: 5 * 60 * 1000,
     });
 };
