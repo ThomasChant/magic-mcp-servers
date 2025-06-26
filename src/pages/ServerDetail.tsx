@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import { useServer, useServerReadme } from "../hooks/useData";
 import StructuredReadme from "../components/StructuredReadme";
+import ServerComments from "../components/ServerComments";
 
 const ServerDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -636,6 +637,11 @@ const ServerDetail: React.FC = () => {
                             </div>
                         </div>
                     </div>
+                </div>
+                
+                {/* Comments Section */}
+                <div className="mt-8">
+                    <ServerComments serverId={server.id} />
                 </div>
             </div>
 
