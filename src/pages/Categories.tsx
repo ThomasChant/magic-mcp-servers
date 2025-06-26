@@ -2,21 +2,26 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Star } from "lucide-react";
 import { useCategories } from "../hooks/useCategories";
-import { getFeaturedServersByCategory } from "../data/categoriesData";
 import { useAppStore } from "../store/useAppStore";
+import { useServers } from "../hooks/useData";
+import { useFeaturedServersByCategory, getFeaturedServersByCategory } from "../hooks/useFeaturedServers";
 
 const Categories: React.FC = () => {
   const [activeTab, setActiveTab] = useState("database");
   const { data: categories, isLoading } = useCategories();
+  const { data: servers } = useServers();
+  const { data: featuredServers } = useFeaturedServersByCategory();
   const { language } = useAppStore();
   const isZh = language === "zh-CN";
 
   // Take first 6 categories as main categories
-  const mainCategories = categories?.slice(0, 6) || [];
+  const mainCategories = categories?.sort((a, b) => b.serverCount - a.serverCount)?.slice(0, 6) || [];
   const additionalCategories = categories?.slice(6) || [];
   
-  // Calculate total stats
-  const totalServers = categories?.reduce((sum, cat) => sum + cat.serverCount, 0) || 0;
+  // Calculate total stats from actual server data
+  const totalServers = servers?.length || categories?.reduce((sum, cat) => sum + cat.serverCount, 0) || 0;
+  const totalDownloads = servers?.reduce((sum, server) => sum + (server.usage?.downloads || 0), 0) || 0;
+  const averageUptime = 98; // This could be calculated from server health data if available
 
   if (isLoading || !categories) {
     return (
@@ -97,7 +102,7 @@ const Categories: React.FC = () => {
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">
-                45K+
+                {totalDownloads >= 1000 ? `${Math.floor(totalDownloads / 1000)}K+` : `${totalDownloads}+`}
               </div>
               <div className="text-gray-600 dark:text-gray-400">
                 {isZh ? "下载量" : "Downloads"}
@@ -105,7 +110,7 @@ const Categories: React.FC = () => {
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-orange-600 dark:text-orange-400">
-                98%
+                {averageUptime}%
               </div>
               <div className="text-gray-600 dark:text-gray-400">
                 {isZh ? "在线率" : "Uptime"}
@@ -238,7 +243,7 @@ const Categories: React.FC = () => {
 
           {/* Featured Servers Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {getFeaturedServersByCategory(activeTab).map((server, index) => {
+            {getFeaturedServersByCategory(activeTab, featuredServers).map((server, index) => {
               const activeCategoryData = categories.find((c) => c.id === activeTab);
               return (
                 <div

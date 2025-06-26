@@ -47,32 +47,80 @@ const Servers: React.FC = () => {
 
     // const ITEMS_PER_PAGE = 6; // Not used in static demo mode
 
-    // Filter categories data - matching demo exactly
-    const filterCategories = [
-        { id: "file-system", name: "File System", count: 25 },
-        { id: "database", name: "Database", count: 30 },
-        { id: "communication", name: "Communication", count: 18 },
-        { id: "development", name: "Development", count: 22 },
-        { id: "ai-ml", name: "AI/ML", count: 15 },
-    ];
+    // Calculate filter categories dynamically from server data
+    const filterCategories = useMemo(() => {
+        if (!servers) return [];
+        
+        const categoryCount: Record<string, number> = {};
+        servers.forEach(server => {
+            const category = server.category;
+            categoryCount[category] = (categoryCount[category] || 0) + 1;
+        });
+        
+        return Object.entries(categoryCount)
+            .map(([id, count]) => ({
+                id,
+                name: id.charAt(0).toUpperCase() + id.slice(1).replace(/-/g, ' '),
+                count
+            }))
+            .sort((a, b) => b.count - a.count)
+            .slice(0, 10); // Show top 10 categories
+    }, [servers]);
 
-    const platformFilters = [
-        { id: "linux", name: "Linux" },
-        { id: "macos", name: "macOS" },
-        { id: "windows", name: "Windows" },
-    ];
+    const platformFilters = useMemo(() => {
+        if (!servers) return [];
+        
+        const platforms = new Set<string>();
+        servers.forEach(server => {
+            server.compatibility?.platforms?.forEach(platform => {
+                platforms.add(platform);
+            });
+        });
+        
+        return Array.from(platforms)
+            .map(platform => ({
+                id: platform.toLowerCase(),
+                name: platform.charAt(0).toUpperCase() + platform.slice(1)
+            }))
+            .sort((a, b) => a.name.localeCompare(b.name));
+    }, [servers]);
 
-    const languageFilters = [
-        { id: "python", name: "Python" },
-        { id: "typescript", name: "TypeScript" },
-        { id: "javascript", name: "JavaScript" },
-    ];
+    const languageFilters = useMemo(() => {
+        if (!servers) return [];
+        
+        const languages = new Set<string>();
+        servers.forEach(server => {
+            server.techStack?.forEach(tech => {
+                if (typeof tech === 'string') {
+                    const lang = tech.toLowerCase();
+                    if (['python', 'typescript', 'javascript', 'node.js', 'go', 'rust', 'java'].includes(lang)) {
+                        languages.add(lang === 'node.js' ? 'javascript' : lang);
+                    }
+                }
+            });
+        });
+        
+        return Array.from(languages)
+            .map(lang => ({
+                id: lang,
+                name: lang.charAt(0).toUpperCase() + lang.slice(1)
+            }))
+            .sort((a, b) => a.name.localeCompare(b.name));
+    }, [servers]);
 
-    const statusFilters = [
-        { id: "official", name: "Official" },
-        { id: "featured", name: "Featured" },
-        { id: "popular", name: "Popular" },
-    ];
+    const statusFilters = useMemo(() => {
+        if (!servers) return [];
+        
+        const officialCount = servers.filter(s => (s as ServerData).official).length;
+        const featuredCount = servers.filter(s => s.featured).length;
+        const popularCount = servers.filter(s => s.usage.downloads >= 10000).length;
+        
+        return [
+            { id: "official", name: "Official", count: officialCount },
+            { id: "featured", name: "Featured", count: featuredCount },
+            { id: "popular", name: "Popular", count: popularCount },
+        ].filter(status => status.count > 0); // Only show statuses that have servers
+    }, [servers]);
 
     // Get server icon based on category or tags
     const getServerIcon = (server: ServerData) => {
@@ -169,8 +217,28 @@ const Servers: React.FC = () => {
 
             // Category filters
             if (filters.categories.length > 0) {
-                const serverCategories = server.tags.map(tag => tag.toLowerCase());
-                if (!filters.categories.some(cat => serverCategories.includes(cat))) {
+                const serverCategory = server.category.toLowerCase();
+                if (!filters.categories.includes(serverCategory)) {
+                    return false;
+                }
+            }
+
+            // Platform filters
+            if (filters.platforms.length > 0) {
+                const serverPlatforms = server.compatibility?.platforms?.map(p => p.toLowerCase()) || [];
+                if (!filters.platforms.some(platform => serverPlatforms.includes(platform))) {
+                    return false;
+                }
+            }
+
+            // Language filters
+            if (filters.languages.length > 0) {
+                const serverLanguages = server.techStack?.map(tech => 
+                    typeof tech === 'string' ? tech.toLowerCase() : ''
+                ).filter(Boolean) || [];
+                if (!filters.languages.some(lang => 
+                    serverLanguages.some(serverLang => serverLang.includes(lang))
+                )) {
                     return false;
                 }
             }
@@ -411,6 +479,11 @@ const Servers: React.FC = () => {
                             </h1>
                             <p className="text-lg text-gray-600 dark:text-gray-300">
                                 Discover and integrate powerful Model Context Protocol servers
+                                {servers && (
+                                    <span className="block text-sm mt-1">
+                                        {servers.length} servers available across {filterCategories.length} categories
+                                    </span>
+                                )}
                             </p>
                         </div>
 
@@ -610,7 +683,7 @@ const Servers: React.FC = () => {
                                                 className="rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-blue-600 focus:ring-blue-500"
                                             />
                                             <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-                                                {status.name}
+                                                {status.name} ({status.count || 0})
                                             </span>
                                         </label>
                                     ))}
@@ -639,8 +712,8 @@ const Servers: React.FC = () => {
                         {/* Results Summary */}
                         <div className="flex items-center justify-between mb-6">
                             <div className="text-sm text-gray-600 dark:text-gray-400">
-                                Showing <span className="font-medium">1-12</span> of{" "}
-                                <span className="font-medium">127</span> servers
+                                Showing <span className="font-medium">{Math.min(filteredAndSortedServers.length, 6)}</span> of{" "}
+                                <span className="font-medium">{filteredAndSortedServers.length}</span> servers
                             </div>
 
                             {/* Quick Filters */}
@@ -685,8 +758,8 @@ const Servers: React.FC = () => {
                         {/* Pagination */}
                         <div className="mt-8 flex items-center justify-between">
                             <div className="text-sm text-gray-600 dark:text-gray-400">
-                                Showing <span className="font-medium">1-6</span> of{" "}
-                                <span className="font-medium">127</span> results
+                                Showing <span className="font-medium">{Math.min(filteredAndSortedServers.length, 6)}</span> of{" "}
+                                <span className="font-medium">{filteredAndSortedServers.length}</span> results
                             </div>
 
                             <div className="flex items-center space-x-2">

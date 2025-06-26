@@ -18,8 +18,9 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-import categoriesJson from "./categories.json";
-import featuredServersJson from "./featured-servers.json";
+// Note: These imports will be removed as we use data from public/data directory
+// import categoriesJson from "./categories.json";
+// import featuredServersJson from "./featured-servers.json";
 
 export interface Category {
   id: string;
@@ -63,89 +64,62 @@ const iconMap: { [key: string]: LucideIcon } = {
   layers: Layers,
 };
 
-// 从JSON导入的原始分类数据的类型
-interface RawSubcategory {
-  id: string;
-  name: string;
-  nameEn?: string;
-  description: string;
-  descriptionEn?: string;
-}
+// Types for raw category data - kept for reference
+// interface RawSubcategory {
+//   id: string;
+//   name: string;
+//   nameEn?: string;
+//   description: string;
+//   descriptionEn?: string;
+// }
 
-interface RawCategoryData {
-  id: string;
-  name: string;
-  nameEn?: string;
-  description: string;
-  descriptionEn?: string;
-  icon: string;
-  color: string;
-  serverCount: number;
-  subcategories?: RawSubcategory[];
-}
+// interface RawCategoryData {
+//   id: string;
+//   name: string;
+//   nameEn?: string;
+//   description: string;
+//   descriptionEn?: string;
+//   icon: string;
+//   color: string;
+//   serverCount: number;
+//   subcategories?: RawSubcategory[];
+// }
 
 
-/**
- * 将来自JSON的原始分类数据转换为类型化的Category数组，
- * 将基于字符串的图标名称映射到其对应的LucideIcon组件。
- * @param rawCategories - 来自JSON文件的原始分类对象数组。
- * @returns 带有LucideIcon组件的类型化Category对象数组。
- */
-function convertCategoryJsonToCategories(
-  rawCategories: RawCategoryData[]
-): Category[] {
-  return rawCategories.map((category) => {
-    const iconComponent = iconMap[category.icon];
-    if (!iconComponent) {
-      console.warn(`未找到分类 "${category.name}" 的图标 "${category.icon}"。将使用默认图标。`);
-    }
-    return {
-      id: category.id,
-      name: category.name,
-      description: category.description,
-      icon: iconComponent || FileText, // 使用映射的图标或默认使用FileText
-      gradient: `category-gradient-${category.id}`, // 根据ID生成渐变类名
-      serverCount: category.serverCount,
-      tags: [], // 从JSON数据中没有tags字段，使用空数组
-      color: category.color.replace('#', ''), // 移除颜色值中的#号
-    };
-  });
-}
+// These functions are kept for backward compatibility but are no longer used
+// The actual data loading happens in the hooks
 
-export const categories: Category[] = convertCategoryJsonToCategories(categoriesJson);
+// Categories will be loaded from public/data/categories.json via useCategories hook
+export const categories: Category[] = [];
 
-/**
- * 将来自JSON的特色服务器数据转换为类型化的FeaturedServer数组，
- * 将基于字符串的图标名称映射到其对应的LucideIcon组件。
- */
-function convertFeaturedServersJson(): Record<string, FeaturedServer[]> {
-  const result: Record<string, FeaturedServer[]> = {};
-  
-  // 创建反向映射：从大写图标名到LucideIcon组件
-  const iconNameMap: { [key: string]: LucideIcon } = {
-    'Database': Database,
-    'Code': Code,
-    'Search': Search,
-    'MessageCircle': MessageCircle,
-    'Brain': Brain,
-    'Wrench': Wrench,
-    'CheckSquare': CheckSquare,
-    'Shield': Shield,
-    'FileText': FileText,
-    'Cloud': Cloud,
-    'Briefcase': Briefcase,
-    'DollarSign': DollarSign,
-    'Layers': Layers,
-    'Folder': Folder,
-    'BarChart3': BarChart3,
-    'Plug': Plug
-  };
-  
-  Object.entries(featuredServersJson).forEach(([category, servers]) => {
-    result[category] = servers.map(server => {
-      const iconComponent = iconNameMap[server.icon] || FileText;
-      
-      // 确保 badge 值符合联合类型
+
+// Featured servers will be loaded from public/data/featured-servers.json
+export const featuredServers: Record<string, FeaturedServer[]> = {};
+
+
+
+// Statistics will be calculated dynamically from server data
+export const categoryStats = {
+  totalCategories: 0,
+  totalServers: 0,
+  totalDownloads: "0",
+  uptime: "0%",
+};
+
+// Helper functions - These need to be updated to use dynamic data
+export const getMainCategories = () => [];
+export const getAdditionalCategories = () => [];
+export const getCategoryById = (/* id: string */) => undefined;
+
+// This function will be used to get featured servers from the loaded data
+export const getFeaturedServersByCategory = (categoryId: string): FeaturedServer[] => {
+  // This will be populated when featured servers are loaded
+  // For now, fetch from the global featuredServers object if available
+  if (typeof window !== 'undefined' && (window as { __featuredServers?: Record<string, FeaturedServer[]> }).__featuredServers) {
+    const windowWithServers = window as { __featuredServers?: Record<string, FeaturedServer[]> };
+    const servers = windowWithServers.__featuredServers?.[categoryId] || [];
+    return servers.map((server) => {
+      const iconComponent = iconMap[server.icon?.toLowerCase()] || FileText;
       const validBadge: "Official" | "Featured" | "Popular" = 
         server.badge === "Official" || server.badge === "Featured" || server.badge === "Popular" 
           ? server.badge 
@@ -157,24 +131,6 @@ function convertFeaturedServersJson(): Record<string, FeaturedServer[]> {
         badge: validBadge
       };
     });
-  });
-  
-  return result;
-}
-
-export const featuredServers: Record<string, FeaturedServer[]> = convertFeaturedServersJson();
-
-
-
-export const categoryStats = {
-  totalCategories: categories.length,
-  totalServers: categories.reduce((sum, cat) => sum + cat.serverCount, 0),
-  totalDownloads: "45K+",
-  uptime: "98%",
+  }
+  return [];
 };
-
-// Helper functions
-export const getMainCategories = () => categories.filter((cat) => cat.featured);
-export const getAdditionalCategories = () => categories.filter((cat) => !cat.featured);
-export const getCategoryById = (id: string) => categories.find((cat) => cat.id === id);
-export const getFeaturedServersByCategory = (categoryId: string) => featuredServers[categoryId] || [];

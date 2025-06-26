@@ -12,9 +12,18 @@ import {
     Twitter,
     MessageCircle,
 } from "lucide-react";
+import { useServers, useCategories } from "../hooks/useData";
 
 const About: React.FC = () => {
     const statsRef = useRef<HTMLDivElement>(null);
+    const { data: servers } = useServers();
+    const { data: categories } = useCategories();
+    
+    // Calculate dynamic statistics
+    const totalServers = servers?.length || 0;
+    const totalDownloads = servers?.reduce((sum, server) => sum + (server.usage?.downloads || 0), 0) || 0;
+    const uniqueCountries = 25; // This could be calculated from server data if country info is available
+    const activeDevelopers = Math.floor((servers?.reduce((sum, server) => sum + (server.repository?.watchers || 0), 0) || 0) / 2);
 
     useEffect(() => {
         // Animate stats on scroll
@@ -202,8 +211,8 @@ const About: React.FC = () => {
                                 </h3>
                                 <p className="text-gray-600 dark:text-gray-300 mb-4">
                                     Today, MCP Hub serves thousands of developers
-                                    worldwide, hosting hundreds of high-quality MCP
-                                    servers across dozens of categories. But we're
+                                    worldwide, hosting {totalServers > 0 ? totalServers : 'hundreds of'} high-quality MCP
+                                    servers across {categories?.length || 'dozens of'} categories. But we're
                                     just getting started.
                                 </p>
                                 <p className="text-gray-600 dark:text-gray-300">
@@ -408,25 +417,25 @@ const About: React.FC = () => {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8" ref={statsRef}>
                         <div className="text-center">
                             <div className="stats-number text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">
-                                200+
+                                {totalServers}+
                             </div>
                             <div className="text-gray-600 dark:text-gray-300">MCP Servers</div>
                         </div>
                         <div className="text-center">
                             <div className="stats-number text-4xl font-bold text-green-600 dark:text-green-400 mb-2">
-                                50K+
+                                {totalDownloads >= 1000 ? `${Math.floor(totalDownloads / 1000)}K+` : `${totalDownloads}+`}
                             </div>
                             <div className="text-gray-600 dark:text-gray-300">Monthly Downloads</div>
                         </div>
                         <div className="text-center">
                             <div className="stats-number text-4xl font-bold text-purple-600 dark:text-purple-400 mb-2">
-                                10K+
+                                {activeDevelopers >= 1000 ? `${Math.floor(activeDevelopers / 1000)}K+` : `${activeDevelopers}+`}
                             </div>
                             <div className="text-gray-600 dark:text-gray-300">Active Developers</div>
                         </div>
                         <div className="text-center">
                             <div className="stats-number text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">
-                                25
+                                {uniqueCountries}
                             </div>
                             <div className="text-gray-600 dark:text-gray-300">Countries</div>
                         </div>
