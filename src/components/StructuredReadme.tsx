@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import ReactMarkdown from 'react-markdown';
 import { Copy, CheckCircle, Code, Book, Wrench, Settings, FileText, List, Hash, Link2 } from 'lucide-react';
 import type { ProcessedREADME } from '../types';
 
@@ -87,21 +88,86 @@ const StructuredReadme: React.FC<StructuredReadmeProps> = ({
     return features;
   }, [readmeData.examples?.content]);
 
-  // Parse markdown links
-  const parseMarkdownLinks = (text: string) => {
-    return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, url) => {
-      return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">${linkText}</a>`;
-    });
-  };
-
-  // Render formatted content
+  // Render markdown content with proper formatting
   const renderContent = (content: string) => {
-    const formattedContent = parseMarkdownLinks(content);
     return (
-      <div 
-        className="prose prose-gray max-w-none"
-        dangerouslySetInnerHTML={{ __html: formattedContent.replace(/\n/g, '<br/>') }}
-      />
+      <div className="prose prose-gray max-w-none dark:prose-invert">
+        <ReactMarkdown
+          components={{
+            // Custom link component
+            a: ({ ...props }) => (
+              <a
+                {...props}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline"
+              />
+            ),
+            // Custom pre component for code blocks
+            pre: ({ children, ...props }) => (
+              <div className="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 my-4 overflow-x-auto">
+                <pre className="text-green-400 text-sm font-mono leading-relaxed" {...props}>
+                  {children}
+                </pre>
+              </div>
+            ),
+            // Custom code component for inline code and code blocks
+            code: ({ className, children, ...props }) => {
+              // If this code element is inside a pre block, render as block code
+              if (className && className.includes('language-')) {
+                return (
+                  <code className="text-green-400 font-mono" {...props}>
+                    {children}
+                  </code>
+                );
+              }
+              // Otherwise render as inline code
+              return (
+                <code
+                  className="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-1 py-0.5 rounded text-sm font-mono"
+                  {...props}
+                >
+                  {children}
+                </code>
+              );
+            },
+            // Custom strong/bold component
+            strong: ({ ...props }) => (
+              <strong className="font-semibold text-gray-900 dark:text-white" {...props} />
+            ),
+            // Custom paragraph component
+            p: ({ ...props }) => (
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4" {...props} />
+            ),
+            // Custom list components
+            ul: ({ ...props }) => (
+              <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300" {...props} />
+            ),
+            ol: ({ ...props }) => (
+              <ol className="list-decimal list-inside space-y-2 text-gray-600 dark:text-gray-300" {...props} />
+            ),
+            li: ({ ...props }) => (
+              <li className="ml-4" {...props} />
+            ),
+            // Custom heading components
+            h1: ({ ...props }) => (
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4" {...props} />
+            ),
+            h2: ({ ...props }) => (
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3" {...props} />
+            ),
+            h3: ({ ...props }) => (
+              <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2" {...props} />
+            ),
+            // Block quote component
+            blockquote: ({ ...props }) => (
+              <blockquote className="border-l-4 border-blue-500 pl-4 italic text-gray-600 dark:text-gray-300" {...props} />
+            ),
+          }}
+        >
+          {content}
+        </ReactMarkdown>
+      </div>
     );
   };
 
@@ -156,13 +222,13 @@ const StructuredReadme: React.FC<StructuredReadmeProps> = ({
                 <Book className="h-6 w-6 mr-2" />
                 Overview
               </h2>
-              <div className="text-gray-600 dark:text-gray-300 space-y-4">
+              <div className="space-y-4">
                 {renderContent(readmeData.overview.content)}
                 
                 {readmeData.overview.code_blocks.length > 0 && (
                   <div className="space-y-4 mt-6">
                     {readmeData.overview.code_blocks.map((block, index) => (
-                      <div key={index} className="bg-gray-900 rounded-lg p-4 relative">
+                      <div key={index} className="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 relative overflow-x-auto">
                         <button
                           onClick={() => onCopy(block.code, `overview-code-${index}`)}
                           className="absolute top-2 right-2 bg-gray-700 text-white px-3 py-1 rounded text-sm hover:bg-gray-600 transition-colors"
@@ -179,7 +245,7 @@ const StructuredReadme: React.FC<StructuredReadmeProps> = ({
                             </>
                           )}
                         </button>
-                        <pre className="text-green-400 text-sm">
+                        <pre className="text-green-400 text-sm font-mono leading-relaxed">
                           <code>{block.code}</code>
                         </pre>
                       </div>
@@ -227,7 +293,7 @@ const StructuredReadme: React.FC<StructuredReadmeProps> = ({
                 {readmeData.installation.code_blocks.length > 0 && (
                   <div className="space-y-6">
                     {readmeData.installation.code_blocks.map((block, index) => (
-                      <div key={index} className="bg-gray-900 rounded-lg p-4 relative">
+                      <div key={index} className="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 relative overflow-x-auto">
                         <span className="absolute top-2 left-2 text-xs text-gray-400 bg-gray-800 px-2 py-1 rounded">
                           {block.language}
                         </span>
@@ -247,7 +313,7 @@ const StructuredReadme: React.FC<StructuredReadmeProps> = ({
                             </>
                           )}
                         </button>
-                        <pre className="text-green-400 text-sm mt-6">
+                        <pre className="text-green-400 text-sm font-mono leading-relaxed mt-6">
                           <code>{block.code}</code>
                         </pre>
                       </div>
@@ -329,7 +395,7 @@ const StructuredReadme: React.FC<StructuredReadmeProps> = ({
               </h2>
               <div className="space-y-6">
                 {readmeData.examples.code_blocks.map((block, index) => (
-                  <div key={index} className="bg-gray-900 rounded-lg p-4 relative">
+                  <div key={index} className="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 relative overflow-x-auto">
                     <span className="absolute top-2 left-2 text-xs text-gray-400 bg-gray-800 px-2 py-1 rounded">
                       {block.language}
                     </span>
@@ -349,7 +415,7 @@ const StructuredReadme: React.FC<StructuredReadmeProps> = ({
                         </>
                       )}
                     </button>
-                    <pre className="text-green-400 text-sm mt-6">
+                    <pre className="text-green-400 text-sm font-mono leading-relaxed mt-6">
                       <code>{block.code}</code>
                     </pre>
                   </div>
@@ -373,7 +439,7 @@ const StructuredReadme: React.FC<StructuredReadmeProps> = ({
                 {readmeData.api_reference.code_blocks.length > 0 && (
                   <div className="space-y-6">
                     {readmeData.api_reference.code_blocks.map((block, index) => (
-                      <div key={index} className="bg-gray-900 rounded-lg p-4 relative">
+                      <div key={index} className="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 relative overflow-x-auto">
                         <span className="absolute top-2 left-2 text-xs text-gray-400 bg-gray-800 px-2 py-1 rounded">
                           {block.language}
                         </span>
@@ -393,7 +459,7 @@ const StructuredReadme: React.FC<StructuredReadmeProps> = ({
                             </>
                           )}
                         </button>
-                        <pre className="text-green-400 text-sm mt-6">
+                        <pre className="text-green-400 text-sm font-mono leading-relaxed mt-6">
                           <code>{block.code}</code>
                         </pre>
                       </div>

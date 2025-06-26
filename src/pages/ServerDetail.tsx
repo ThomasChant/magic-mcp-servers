@@ -13,7 +13,6 @@ import {
     Heart,
     Share,
     Calendar,
-    Package,
     Database,
     Cloud,
     Search,
@@ -258,24 +257,24 @@ const ServerDetail: React.FC = () => {
                             </div>
                         </div>
 
-                        <div className="flex flex-col sm:flex-row gap-3 min-w-fit">
+                        <div className="flex flex-row sm:flex-row gap-3 min-w-fit">
                             <a
                                 href={server.repository.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center px-6 py-3 bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition-all duration-200 shadow-lg hover:shadow-xl font-medium min-w-[140px]"
+                                className="inline-flex items-center justify-center px-2 py-3 bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition-all duration-200 shadow-lg hover:shadow-xl font-sm min-w-[140px]"
                             >
                                 <GitBranch className="mr-2 h-5 w-5" />
                                 View on GitHub
                             </a>
-                            <button className="inline-flex items-center justify-center px-6 py-3 border-2 border-gray-200 bg-white text-gray-700 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md font-medium min-w-[140px]">
+                            <button className="inline-flex items-center justify-center px-6 py-3 border-2 border-gray-200 bg-white text-gray-700 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md font-sm min-w-[140px]">
                                 <Heart className="mr-2 h-5 w-5" />
                                 Add to Favorites
                             </button>
                             <div className="relative" ref={shareMenuRef}>
                                 <button 
                                     onClick={() => setShowShareMenu(!showShareMenu)}
-                                    className="inline-flex items-center justify-center px-6 py-3 border-2 border-gray-200 bg-white text-gray-700 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md font-medium min-w-[100px]"
+                                    className="inline-flex items-center justify-center px-6 py-3 border-2 border-gray-200 bg-white text-gray-700 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md font-sm min-w-[100px]"
                                 >
                                     <Share className="mr-2 h-5 w-5" />
                                     Share
@@ -448,7 +447,7 @@ const ServerDetail: React.FC = () => {
                             </div>
 
                             {/* Installation Options */}
-                            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            {/* <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                                 <h3 className="text-lg font-semibold text-gray-900 mb-4">
                                     Installation
                                 </h3>
@@ -523,7 +522,7 @@ const ServerDetail: React.FC = () => {
                                         </div>
                                     )}
                                 </div>
-                            </div>
+                            </div> */}
 
                             {/* Compatibility */}
                             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">

@@ -1,22 +1,4 @@
-import {
-  Folder,
-  Database,
-  MessageCircle,
-  Code,
-  Brain,
-  Search,
-  BarChart3,
-  Plug,
-  CheckSquare,
-  Shield,
-  FileText,
-  Wrench,
-  Cloud,
-  Briefcase,
-  DollarSign,
-  Layers,
-  type LucideIcon,
-} from "lucide-react";
+import { type LucideIcon } from "lucide-react";
 
 // Note: These imports will be removed as we use data from public/data directory
 // import categoriesJson from "./categories.json";
@@ -45,24 +27,7 @@ export interface FeaturedServer {
   slug?: string;
 }
 
-const iconMap: { [key: string]: LucideIcon } = {
-  folder: Folder,
-  database: Database,
-  messageCircle: MessageCircle,
-  code: Code,
-  brain: Brain,
-  search: Search,
-  barChart3: BarChart3,
-  plug: Plug,
-  checkSquare: CheckSquare,
-  shield: Shield,
-  fileText: FileText,
-  wrench: Wrench,
-  cloud: Cloud,
-  briefcase: Briefcase,
-  dollarSign: DollarSign,
-  layers: Layers,
-};
+// Icon mapping is now handled in useFeaturedServers.ts for better maintainability
 
 // Types for raw category data - kept for reference
 // interface RawSubcategory {
@@ -113,24 +78,13 @@ export const getCategoryById = (/* id: string */) => undefined;
 
 // This function will be used to get featured servers from the loaded data
 export const getFeaturedServersByCategory = (categoryId: string): FeaturedServer[] => {
-  // This will be populated when featured servers are loaded
-  // For now, fetch from the global featuredServers object if available
+  // This function is deprecated and kept for backward compatibility
+  // Use useFeaturedServers hook instead for better data management
   if (typeof window !== 'undefined' && (window as { __featuredServers?: Record<string, FeaturedServer[]> }).__featuredServers) {
     const windowWithServers = window as { __featuredServers?: Record<string, FeaturedServer[]> };
     const servers = windowWithServers.__featuredServers?.[categoryId] || [];
-    return servers.map((server) => {
-      const iconComponent = iconMap[server.icon?.toLowerCase()] || FileText;
-      const validBadge: "Official" | "Featured" | "Popular" = 
-        server.badge === "Official" || server.badge === "Featured" || server.badge === "Popular" 
-          ? server.badge 
-          : "Featured";
-      
-      return {
-        ...server,
-        icon: iconComponent,
-        badge: validBadge
-      };
-    });
+    // Servers are already transformed with LucideIcon components
+    return servers;
   }
   return [];
 };

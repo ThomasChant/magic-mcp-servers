@@ -12,7 +12,8 @@ interface ServerCommentsProps {
   serverId: string;
 }
 
-const ServerComments: React.FC<ServerCommentsProps> = ({ serverId }) => { // eslint-disable-line @typescript-eslint/no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const ServerComments: React.FC<ServerCommentsProps> = ({ serverId: _serverId }) => {
   const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState<Comment[]>([]);
 

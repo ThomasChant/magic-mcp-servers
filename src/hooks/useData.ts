@@ -41,7 +41,11 @@ interface ExtendedServerData {
             };
         };
         metadata: Record<string, unknown>;
-        categorization: Record<string, unknown>;
+        categorization?: {
+            confidence: number;
+            reason: string;
+            matched_keywords: string[];
+        };
         usage: {
             downloads: number;
             dependents: number;
