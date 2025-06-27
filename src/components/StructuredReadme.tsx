@@ -42,9 +42,9 @@ const StructuredReadme: React.FC<StructuredReadmeProps> = ({readme, copiedStates
                 };
               
               const codeText = getCodeText(children);
-              const buttonId = `code-${Math.random().toString(36).substr(2, 9)}`;
+              // 使用代码内容生成稳定的标识符
+              const buttonId = `code-${btoa(codeText).replace(/[^a-zA-Z0-9]/g, '').substring(0, 12)}`;
               const isCopied = copiedStates[buttonId];
-              
               return (
                 <div className="bg-gray-900 dark:bg-gray-950 rounded-lg my-4 overflow-hidden relative group">
                   {/* 复制按钮 */}
@@ -55,7 +55,7 @@ const StructuredReadme: React.FC<StructuredReadmeProps> = ({readme, copiedStates
                         ? 'bg-green-600 hover:bg-green-700 text-white' 
                         : 'bg-gray-700 hover:bg-gray-600 text-gray-300'
                     }`}
-                    title={isCopied ? '已复制!' : '复制代码'}
+                    title={isCopied ? 'Copied!' : 'Copy'}
                   >
                     {isCopied ? (
                       <>
