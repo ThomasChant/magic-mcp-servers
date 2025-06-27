@@ -18,7 +18,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Source data paths
-const sourceDataDir = '/Users/fanchen/AIProjects/mcp-servers/data';
+const sourceDataDir = path.join(__dirname, '../src/data');
 const serverDataPath = path.join(sourceDataDir, 'serversnew.json');
 const categoriesDataPath = path.join(sourceDataDir, 'categories_full_updated.json');
 const readmeDataDir = path.join(sourceDataDir, 'structured_readme_data');

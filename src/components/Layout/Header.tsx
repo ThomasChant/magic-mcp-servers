@@ -36,11 +36,6 @@ const Header: React.FC = () => {
             current: location.pathname === "/favorites",
         },
         { name: "Documentation", href: "/docs", current: location.pathname === "/docs" },
-        {
-            name: "About",
-            href: "/about",
-            current: location.pathname === "/about",
-        },
     ];
 
     const languages = [

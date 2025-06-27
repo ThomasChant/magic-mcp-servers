@@ -10,7 +10,6 @@ import ServerDetailPage from "./pages/ServerDetail";
 import CategoriesPage from "./pages/Categories";
 import CategoryDetailPage from "./pages/CategoryDetail";
 import DocsPage from "./pages/Docs";
-import AboutPage from "./pages/About";
 import ProfilePage from "./pages/Profile";
 import FavoritesPage from "./pages/Favorites";
 import { useAppStore } from "./store/useAppStore";
@@ -72,7 +71,6 @@ function App() {
                                 element={<CategoryDetailPage />}
                             />
                             <Route path="docs" element={<DocsPage />} />
-                            <Route path="about" element={<AboutPage />} />
                             <Route 
                                 path="profile" 
                                 element={

@@ -83,7 +83,7 @@ export interface MCPServer {
         overview?: ExtractedSection | null;
         installation?: ExtractedSection | null;
         api_reference?: ExtractedSection | null;
-        structured?: ProcessedREADME | null;
+        structured?: any | null;
     };
     compatibility: {
         platforms: string[];

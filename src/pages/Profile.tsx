@@ -177,7 +177,7 @@ const ProfilePage: React.FC = () => {
                                     <p className="text-gray-900 dark:text-white">
                                         {user.externalAccounts && user.externalAccounts.length > 0 ? (
                                             <span className="text-sm">
-                                                {user.externalAccounts.map((account, index) => (
+                                                {user.externalAccounts.map((account) => (
                                                     <span key={account.id} className="inline-flex items-center px-2 py-1 mr-2 text-xs bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 rounded">
                                                         {account.provider}
                                                     </span>

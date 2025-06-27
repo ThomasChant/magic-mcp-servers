@@ -94,14 +94,6 @@ const Footer: React.FC = () => {
                                     Community
                                 </a>
                             </li>
-                            <li>
-                                <Link
-                                    to="/about"
-                                    className="text-gray-300 dark:text-gray-400 hover:text-white dark:hover:text-gray-100 transition-colors duration-200"
-                                >
-                                    Support
-                                </Link>
-                            </li>
                         </ul>
                     </div>
                 </div>

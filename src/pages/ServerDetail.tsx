@@ -10,7 +10,6 @@ import {
     AlertCircle,
     ChevronRight,
     Folder,
-    Heart,
     Share,
     Calendar,
     Database,
