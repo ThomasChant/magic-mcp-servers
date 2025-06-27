@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Search, Menu, X, Globe, Sun, Moon } from "lucide-react";
+import { Search, Menu, X, Globe, Sun, Moon, User } from "lucide-react";
+import { useUser, UserButton, SignInButton } from "@clerk/clerk-react";
 import { useAppStore } from "../../store/useAppStore";
 import type { Language } from "../../types/language";
 
 const Header: React.FC = () => {
     const location = useLocation();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const { isSignedIn, user } = useUser();
     const {
         language,
         theme,
@@ -102,6 +104,34 @@ const Header: React.FC = () => {
                             </div>
                         </div>
 
+                        {/* Auth Section */}
+                        <div className="flex items-center space-x-3">
+                            {isSignedIn ? (
+                                <div className="flex items-center space-x-3">
+                                    <Link
+                                        to="/profile"
+                                        className="text-sm font-medium text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors"
+                                    >
+                                        Profile
+                                    </Link>
+                                    <UserButton 
+                                        appearance={{
+                                            elements: {
+                                                avatarBox: "h-8 w-8"
+                                            }
+                                        }}
+                                    />
+                                </div>
+                            ) : (
+                                <SignInButton mode="modal">
+                                    <button className="flex items-center px-4 py-2 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-colors">
+                                        <User className="h-4 w-4 mr-2" />
+                                        Sign In
+                                    </button>
+                                </SignInButton>
+                            )}
+                        </div>
+
                         {/* Theme Toggle */}
                         <button
                             onClick={toggleTheme}
@@ -177,6 +207,40 @@ const Header: React.FC = () => {
                                 <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
                             </div>
 
+                            {/* Mobile Auth Section */}
+                            <div className="px-3 py-2 mb-3">
+                                {isSignedIn ? (
+                                    <div className="flex flex-col space-y-3">
+                                        <div className="flex items-center space-x-3">
+                                            <UserButton 
+                                                appearance={{
+                                                    elements: {
+                                                        avatarBox: "h-8 w-8"
+                                                    }
+                                                }}
+                                            />
+                                            <span className="text-sm text-gray-600 dark:text-gray-300">
+                                                {user?.firstName || user?.emailAddresses[0]?.emailAddress}
+                                            </span>
+                                        </div>
+                                        <Link
+                                            to="/profile"
+                                            onClick={() => setMobileMenuOpen(false)}
+                                            className="block px-3 py-2 text-sm font-medium text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors"
+                                        >
+                                            View Profile
+                                        </Link>
+                                    </div>
+                                ) : (
+                                    <SignInButton mode="modal">
+                                        <button className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-colors">
+                                            <User className="h-4 w-4 mr-2" />
+                                            Sign In
+                                        </button>
+                                    </SignInButton>
+                                )}
+                            </div>
+
                             {/* Mobile Menu Items */}
                             {navigation.map((item) => (
                                 <Link
@@ -185,8 +249,8 @@ const Header: React.FC = () => {
                                     onClick={() => setMobileMenuOpen(false)}
                                     className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
                                         item.current
-                                            ? "text-primary-600 bg-primary-50"
-                                            : "text-gray-700 hover:text-primary-600 hover:bg-gray-50"
+                                            ? "text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-primary-900/50"
+                                            : "text-gray-700 hover:text-primary-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:text-primary-400 dark:hover:bg-gray-800"
                                     }`}
                                 >
                                     {item.name}
