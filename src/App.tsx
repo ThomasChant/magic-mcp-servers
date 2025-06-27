@@ -13,6 +13,7 @@ import DocsPage from "./pages/Docs";
 import ProfilePage from "./pages/Profile";
 import FavoritesPage from "./pages/Favorites";
 import { useAppStore } from "./store/useAppStore";
+import { useFavoritesSync } from "./hooks/useFavoritesSync";
 
 // Get Clerk publishable key
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
@@ -42,8 +43,11 @@ const NotFoundPage = () => (
     </div>
 );
 
-function App() {
+function AppContent() {
     const theme = useAppStore((state) => state.theme);
+    
+    // Initialize favorites sync (now inside ClerkProvider)
+    useFavoritesSync();
 
     useEffect(() => {
         if (theme === 'dark') {
@@ -54,37 +58,43 @@ function App() {
     }, [theme]);
 
     return (
+        <QueryClientProvider client={queryClient}>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<Layout />}>
+                        <Route index element={<Home />} />
+                        <Route path="servers" element={<ServersPage />} />
+                        <Route
+                            path="servers/:id"
+                            element={<ServerDetailPage />}
+                        />
+                        <Route path="categories" element={<CategoriesPage />} />
+                        <Route
+                            path="categories/:id"
+                            element={<CategoryDetailPage />}
+                        />
+                        <Route path="docs" element={<DocsPage />} />
+                        <Route 
+                            path="profile" 
+                            element={
+                                <ProtectedRoute>
+                                    <ProfilePage />
+                                </ProtectedRoute>
+                            } 
+                        />
+                        <Route path="favorites" element={<FavoritesPage />} />
+                        <Route path="*" element={<NotFoundPage />} />
+                    </Route>
+                </Routes>
+            </Router>
+        </QueryClientProvider>
+    );
+}
+
+function App() {
+    return (
         <ClerkProvider publishableKey={clerkPubKey}>
-            <QueryClientProvider client={queryClient}>
-                <Router>
-                    <Routes>
-                        <Route path="/" element={<Layout />}>
-                            <Route index element={<Home />} />
-                            <Route path="servers" element={<ServersPage />} />
-                            <Route
-                                path="servers/:id"
-                                element={<ServerDetailPage />}
-                            />
-                            <Route path="categories" element={<CategoriesPage />} />
-                            <Route
-                                path="categories/:id"
-                                element={<CategoryDetailPage />}
-                            />
-                            <Route path="docs" element={<DocsPage />} />
-                            <Route 
-                                path="profile" 
-                                element={
-                                    <ProtectedRoute>
-                                        <ProfilePage />
-                                    </ProtectedRoute>
-                                } 
-                            />
-                            <Route path="favorites" element={<FavoritesPage />} />
-                            <Route path="*" element={<NotFoundPage />} />
-                        </Route>
-                    </Routes>
-                </Router>
-            </QueryClientProvider>
+            <AppContent />
         </ClerkProvider>
     );
 }

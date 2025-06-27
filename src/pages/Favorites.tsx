@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
     Star,
@@ -11,11 +11,16 @@ import {
     MessageCircle,
     Bot,
     FileText,
+    Cloud,
+    CloudOff,
+    AlertCircle,
+    RefreshCw,
 } from "lucide-react";
 import { useServers } from "../hooks/useData";
 import { useAppStore } from "../store/useAppStore";
 import { FavoriteButton } from "../components/FavoriteButton";
 import ProgressiveEllipsis from "../components/ProgressiveEllipsis";
+import { useFavoritesSync } from "../hooks/useFavoritesSync";
 import type { MCPServer } from "../types";
 
 interface ServerData extends Omit<MCPServer, 'verified'> {
@@ -29,11 +34,25 @@ interface ServerData extends Omit<MCPServer, 'verified'> {
 const Favorites: React.FC = () => {
     const { data: servers, isLoading, error } = useServers();
     const { favorites } = useAppStore();
+    const syncData = useFavoritesSync();
+    const { isOnline, favoritesError, retrySync, isSignedIn } = syncData;
+
+    // 使用ref跟踪favorites的实际内容，避免Set对象引用变化导致的重渲染
+    const favoritesContentRef = useRef<string>('');
+    const stableFavoritesRef = useRef<Set<string>>(new Set());
+    
+    // 只在favorites内容实际变化时更新
+    const currentContent = Array.from(favorites).sort().join(',');
+    if (currentContent !== favoritesContentRef.current) {
+        favoritesContentRef.current = currentContent;
+        stableFavoritesRef.current = new Set(favorites);
+    }
 
     const favoriteServers = useMemo(() => {
         if (!servers) return [];
-        return servers.filter((server) => favorites.has(server.id));
-    }, [servers, favorites]);
+        return servers.filter((server) => stableFavoritesRef.current.has(server.id));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [servers, currentContent]);
 
     const getServerIcon = (server: ServerData) => {
         const tags = server.tags.join(" ").toLowerCase();
@@ -255,13 +274,58 @@ const Favorites: React.FC = () => {
         <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="mb-8">
-                    <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                        My Favorites
-                    </h1>
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
+                        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-0">
+                            My Favorites
+                        </h1>
+                        
+                        {/* Sync Status */}
+                        {isSignedIn && (
+                            <div className="flex items-center gap-3">
+                                {favoritesError ? (
+                                    <div className="flex items-center gap-2 text-red-600 dark:text-red-400 text-sm">
+                                        <AlertCircle className="h-4 w-4" />
+                                        <span>Sync failed</span>
+                                        <button
+                                            onClick={retrySync}
+                                            className="flex items-center gap-1 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                                        >
+                                            <RefreshCw className="h-3 w-3" />
+                                            Retry
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <div className={`flex items-center gap-2 text-sm ${
+                                        isOnline 
+                                            ? "text-green-600 dark:text-green-400" 
+                                            : "text-amber-600 dark:text-amber-400"
+                                    }`}>
+                                        {isOnline ? (
+                                            <>
+                                                <Cloud className="h-4 w-4" />
+                                                <span>Synced</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <CloudOff className="h-4 w-4" />
+                                                <span>Local only</span>
+                                            </>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </div>
+                    
                     <p className="text-lg text-gray-600 dark:text-gray-300">
                         Your saved MCP servers for quick access
                         <span className="block text-sm mt-1">
                             {favoriteServers.length} server{favoriteServers.length !== 1 ? 's' : ''} in your favorites
+                            {!isSignedIn && (
+                                <span className="text-amber-600 dark:text-amber-400 ml-2">
+                                    • Sign in to sync across devices
+                                </span>
+                            )}
                         </span>
                     </p>
                 </div>

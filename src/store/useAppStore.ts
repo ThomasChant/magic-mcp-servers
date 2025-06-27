@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import type { SearchFilters, SortOption } from "../types";
 import type { Language } from "../types/language";
+import type { FavoritesService } from "../services/favorites";
 
 /**
  * @interface AppStore
@@ -31,6 +32,14 @@ interface AppStore {
 
     /** @property {Set<string>} favorites - 用户收藏的服务器ID集合。 */
     favorites: Set<string>;
+    /** @property {boolean} favoritesLoading - 收藏操作进行中的状态。 */
+    favoritesLoading: boolean;
+    /** @property {string | null} favoritesError - 收藏操作的错误信息。 */
+    favoritesError: string | null;
+    /** @property {string | null} lastSynced - 上次同步时间。 */
+    lastSynced: string | null;
+    /** @property {boolean} isOnline - 是否已同步到云端。 */
+    isOnline: boolean;
 
     // --- 操作函数 ---
 
@@ -52,15 +61,21 @@ interface AppStore {
     // --- 收藏功能操作函数 ---
 
     /** @method addToFavorites - 将服务器添加到收藏列表。 */
-    addToFavorites: (serverId: string) => void;
+    addToFavorites: (serverId: string, favoritesService?: FavoritesService | null) => Promise<void>;
     /** @method removeFromFavorites - 从收藏列表中移除服务器。 */
-    removeFromFavorites: (serverId: string) => void;
+    removeFromFavorites: (serverId: string, favoritesService?: FavoritesService | null) => Promise<void>;
     /** @method toggleFavorite - 切换服务器的收藏状态。 */
-    toggleFavorite: (serverId: string) => void;
+    toggleFavorite: (serverId: string, favoritesService?: FavoritesService | null) => Promise<void>;
     /** @method isFavorite - 检查服务器是否已收藏。 */
     isFavorite: (serverId: string) => boolean;
     /** @method clearFavorites - 清空所有收藏。 */
-    clearFavorites: () => void;
+    clearFavorites: (favoritesService?: FavoritesService | null) => Promise<void>;
+    /** @method syncFavorites - 同步收藏数据。 */
+    syncFavorites: (favoritesService?: FavoritesService | null) => Promise<void>;
+    /** @method setFavorites - 设置收藏列表（用于同步）。 */
+    setFavorites: (favorites: string[]) => void;
+    /** @method clearFavoritesError - 清除收藏错误状态。 */
+    clearFavoritesError: () => void;
 }
 
 /**
@@ -94,6 +109,10 @@ export const useAppStore = create<AppStore>()(
                 direction: "desc",
             },
             favorites: new Set<string>(),
+            favoritesLoading: false,
+            favoritesError: null,
+            lastSynced: null,
+            isOnline: false,
 
             // 操作函数的具体实现
             setLanguage: (language) => set({ language }),
@@ -121,24 +140,88 @@ export const useAppStore = create<AppStore>()(
                 }),
 
             // 收藏功能的具体实现
-            addToFavorites: (serverId) =>
+            addToFavorites: async (serverId, favoritesService) => {
+                const state = get();
+                
+                // 避免重复添加
+                if (state.favorites.has(serverId)) {
+                    return;
+                }
+
+                // 立即更新本地状态
                 set((state) => ({
                     favorites: new Set([...state.favorites, serverId]),
-                })),
+                    favoritesLoading: true,
+                    favoritesError: null,
+                }));
 
-            removeFromFavorites: (serverId) =>
-                set((state) => {
-                    const newFavorites = new Set(state.favorites);
-                    newFavorites.delete(serverId);
-                    return { favorites: newFavorites };
-                }),
+                // 如果有服务且用户已登录，同步到云端
+                if (favoritesService) {
+                    try {
+                        await favoritesService.addToFavorites(serverId);
+                        set({
+                            favoritesLoading: false,
+                            lastSynced: new Date().toISOString(),
+                            isOnline: true,
+                        });
+                    } catch (error) {
+                        console.error("Failed to sync favorite to cloud:", error);
+                        set({
+                            favoritesLoading: false,
+                            favoritesError: error instanceof Error ? error.message : "Failed to sync to cloud",
+                            isOnline: false,
+                        });
+                    }
+                } else {
+                    set({ favoritesLoading: false });
+                }
+            },
 
-            toggleFavorite: (serverId) => {
+            removeFromFavorites: async (serverId, favoritesService) => {
+                const state = get();
+                
+                // 如果不存在，直接返回
+                if (!state.favorites.has(serverId)) {
+                    return;
+                }
+
+                // 立即更新本地状态
+                const newFavorites = new Set(state.favorites);
+                newFavorites.delete(serverId);
+                set({
+                    favorites: newFavorites,
+                    favoritesLoading: true,
+                    favoritesError: null,
+                });
+
+                // 如果有服务且用户已登录，同步到云端
+                if (favoritesService) {
+                    try {
+                        await favoritesService.removeFromFavorites(serverId);
+                        set({
+                            favoritesLoading: false,
+                            lastSynced: new Date().toISOString(),
+                            isOnline: true,
+                        });
+                    } catch (error) {
+                        console.error("Failed to sync favorite removal to cloud:", error);
+                        set({
+                            favoritesLoading: false,
+                            favoritesError: error instanceof Error ? error.message : "Failed to sync to cloud",
+                            isOnline: false,
+                        });
+                    }
+                } else {
+                    set({ favoritesLoading: false });
+                }
+            },
+
+            toggleFavorite: async (serverId, favoritesService) => {
                 const state = get();
                 if (state.favorites.has(serverId)) {
-                    state.removeFromFavorites(serverId);
+                    await state.removeFromFavorites(serverId, favoritesService);
                 } else {
-                    state.addToFavorites(serverId);
+                    await state.addToFavorites(serverId, favoritesService);
                 }
             },
 
@@ -147,7 +230,70 @@ export const useAppStore = create<AppStore>()(
                 return state.favorites.has(serverId);
             },
 
-            clearFavorites: () => set({ favorites: new Set<string>() }),
+            clearFavorites: async (favoritesService) => {
+                set({
+                    favorites: new Set<string>(),
+                    favoritesLoading: true,
+                    favoritesError: null,
+                });
+
+                // 如果有服务且用户已登录，同步到云端
+                if (favoritesService) {
+                    try {
+                        await favoritesService.clearFavorites();
+                        set({
+                            favoritesLoading: false,
+                            lastSynced: new Date().toISOString(),
+                            isOnline: true,
+                        });
+                    } catch (error) {
+                        console.error("Failed to sync clear favorites to cloud:", error);
+                        set({
+                            favoritesLoading: false,
+                            favoritesError: error instanceof Error ? error.message : "Failed to sync to cloud",
+                            isOnline: false,
+                        });
+                    }
+                } else {
+                    set({ favoritesLoading: false });
+                }
+            },
+
+            syncFavorites: async (favoritesService) => {
+                if (!favoritesService) {
+                    set({ isOnline: false });
+                    return;
+                }
+
+                set({ favoritesLoading: true, favoritesError: null });
+
+                try {
+                    const currentFavoritesArray = Array.from(get().favorites);
+                    const syncedFavorites = await favoritesService.syncWithLocal(currentFavoritesArray);
+                    
+                    set({
+                        favorites: new Set(syncedFavorites),
+                        favoritesLoading: false,
+                        lastSynced: new Date().toISOString(),
+                        isOnline: true,
+                    });
+                } catch (error) {
+                    console.error("Failed to sync favorites:", error);
+                    set({
+                        favoritesLoading: false,
+                        favoritesError: error instanceof Error ? error.message : "Failed to sync favorites",
+                        isOnline: false,
+                    });
+                }
+            },
+
+            setFavorites: (favorites) => {
+                set({ favorites: new Set(favorites) });
+            },
+
+            clearFavoritesError: () => {
+                set({ favoritesError: null });
+            },
         }),
         {
             /** @property {string} name - 用于在存储中保存数据的键名。 */
@@ -169,6 +315,8 @@ export const useAppStore = create<AppStore>()(
                 filters: state.filters,
                 sortBy: state.sortBy,
                 favorites: Array.from(state.favorites),
+                lastSynced: state.lastSynced,
+                isOnline: state.isOnline,
             }),
 
             /**
@@ -177,8 +325,14 @@ export const useAppStore = create<AppStore>()(
              * 用于将数组形式的收藏列表转换回Set类型。
              */
             onRehydrateStorage: () => (state) => {
-                if (state && Array.isArray(state.favorites)) {
-                    state.favorites = new Set(state.favorites);
+                if (state) {
+                    // 将数组形式的收藏列表转换回Set类型
+                    if (Array.isArray(state.favorites)) {
+                        state.favorites = new Set(state.favorites);
+                    }
+                    // 初始化运行时状态（不持久化的状态）
+                    state.favoritesLoading = false;
+                    state.favoritesError = null;
                 }
             },
         }
