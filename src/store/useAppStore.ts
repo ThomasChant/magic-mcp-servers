@@ -27,6 +27,11 @@ interface AppStore {
     /** @property {SortOption} sortBy - 服务器列表的当前排序选项。 */
     sortBy: SortOption;
 
+    // --- 收藏功能状态 ---
+
+    /** @property {Set<string>} favorites - 用户收藏的服务器ID集合。 */
+    favorites: Set<string>;
+
     // --- 操作函数 ---
 
     /** @method setLanguage - 设置应用语言。 */
@@ -43,6 +48,19 @@ interface AppStore {
     setSortBy: (sortBy: SortOption) => void;
     /** @method clearFilters - 将所有过滤器和搜索查询重置为其默认状态。 */
     clearFilters: () => void;
+
+    // --- 收藏功能操作函数 ---
+
+    /** @method addToFavorites - 将服务器添加到收藏列表。 */
+    addToFavorites: (serverId: string) => void;
+    /** @method removeFromFavorites - 从收藏列表中移除服务器。 */
+    removeFromFavorites: (serverId: string) => void;
+    /** @method toggleFavorite - 切换服务器的收藏状态。 */
+    toggleFavorite: (serverId: string) => void;
+    /** @method isFavorite - 检查服务器是否已收藏。 */
+    isFavorite: (serverId: string) => boolean;
+    /** @method clearFavorites - 清空所有收藏。 */
+    clearFavorites: () => void;
 }
 
 /**
@@ -63,7 +81,7 @@ export const useAppStore = create<AppStore>()(
          * @param {Function} set - Zustand 的状态设置函数。
          * @returns {Object} store 的初始状态和操作。
          */
-        (set) => ({
+        (set, get) => ({
             // 初始状态定义
             language: "en",
             theme: "light",
@@ -75,6 +93,7 @@ export const useAppStore = create<AppStore>()(
                 label: "Quality Score",
                 direction: "desc",
             },
+            favorites: new Set<string>(),
 
             // 操作函数的具体实现
             setLanguage: (language) => set({ language }),
@@ -100,6 +119,35 @@ export const useAppStore = create<AppStore>()(
                     filters: {},
                     searchQuery: "",
                 }),
+
+            // 收藏功能的具体实现
+            addToFavorites: (serverId) =>
+                set((state) => ({
+                    favorites: new Set([...state.favorites, serverId]),
+                })),
+
+            removeFromFavorites: (serverId) =>
+                set((state) => {
+                    const newFavorites = new Set(state.favorites);
+                    newFavorites.delete(serverId);
+                    return { favorites: newFavorites };
+                }),
+
+            toggleFavorite: (serverId) => {
+                const state = get();
+                if (state.favorites.has(serverId)) {
+                    state.removeFromFavorites(serverId);
+                } else {
+                    state.addToFavorites(serverId);
+                }
+            },
+
+            isFavorite: (serverId) => {
+                const state = get();
+                return state.favorites.has(serverId);
+            },
+
+            clearFavorites: () => set({ favorites: new Set<string>() }),
         }),
         {
             /** @property {string} name - 用于在存储中保存数据的键名。 */
@@ -120,7 +168,19 @@ export const useAppStore = create<AppStore>()(
                 theme: state.theme,
                 filters: state.filters,
                 sortBy: state.sortBy,
+                favorites: Array.from(state.favorites),
             }),
+
+            /**
+             * @function onRehydrateStorage
+             * @description 在从存储恢复状态时的回调函数。
+             * 用于将数组形式的收藏列表转换回Set类型。
+             */
+            onRehydrateStorage: () => (state) => {
+                if (state && Array.isArray(state.favorites)) {
+                    state.favorites = new Set(state.favorites);
+                }
+            },
         }
     )
 );

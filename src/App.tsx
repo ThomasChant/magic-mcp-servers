@@ -9,6 +9,7 @@ import CategoriesPage from "./pages/Categories";
 import CategoryDetailPage from "./pages/CategoryDetail";
 import DocsPage from "./pages/Docs";
 import AboutPage from "./pages/About";
+import FavoritesPage from "./pages/Favorites";
 import { useAppStore } from "./store/useAppStore";
 
 // Create Query Client
@@ -59,6 +60,7 @@ function App() {
                             path="categories/:id"
                             element={<CategoryDetailPage />}
                         />
+                        <Route path="favorites" element={<FavoritesPage />} />
                         <Route path="docs" element={<DocsPage />} />
                         <Route path="about" element={<AboutPage />} />
                         <Route path="*" element={<NotFoundPage />} />

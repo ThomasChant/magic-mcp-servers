@@ -19,6 +19,7 @@ import {
 import { useServers } from "../hooks/useData";
 import type { MCPServer } from "../types";
 import ProgressiveEllipsis from "../components/ProgressiveEllipsis";
+import { FavoriteButton } from "../components/FavoriteButton";
 
 // Extended interface for JSON data structure
 interface ServerData extends Omit<MCPServer, 'verified'> {
@@ -328,7 +329,12 @@ const Servers: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                <div className="text-right flex-shrink-0">
+                <div className="text-right flex-shrink-0 space-y-2">
+                    <FavoriteButton 
+                        serverId={server.id} 
+                        size="sm"
+                        className="mb-2"
+                    />
                     <div className="flex items-center text-yellow-500">
                         <Star className="h-4 w-4 fill-current" />
                         <span className="ml-1 text-gray-900 dark:text-white font-medium text-sm">
