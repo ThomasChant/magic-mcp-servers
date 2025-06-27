@@ -203,12 +203,9 @@ export interface ExtractedSection {
     }>;
 }
 
-export interface ProcessedREADME {
+
+export interface ServerReadme {
     filename: string;
-    project_name: string;
-    overview?: ExtractedSection;
-    installation?: ExtractedSection;
-    examples?: ExtractedSection;
-    api_reference?: ExtractedSection;
-    raw_content: string;
+    projectName: string;
+    rawContent: string;
 }

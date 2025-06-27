@@ -31,7 +31,7 @@ import ServerComments from "../components/ServerComments";
 const ServerDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const { data: server, isLoading, error } = useServer(id!);
-    const { data: readmeData } = useServerReadme(id!);
+    const { data: readmeData } = useServerReadme(server?.owner+"_"+server?.name|| '');
     // Remove activeTab state as we're using StructuredReadme component
     const [copiedStates, setCopiedStates] = useState<{ [key: string]: boolean }>({});
     const [showShareMenu, setShowShareMenu] = useState(false);
@@ -110,9 +110,9 @@ const ServerDetail: React.FC = () => {
     const copyToClipboard = (text: string, buttonId?: string) => {
         navigator.clipboard.writeText(text).then(() => {
             if (buttonId) {
-                setCopiedStates({ ...copiedStates, [buttonId]: true });
+                setCopiedStates(prev => ({ ...prev, [buttonId]: true }));
                 setTimeout(() => {
-                    setCopiedStates({ ...copiedStates, [buttonId]: false });
+                    setCopiedStates(prev => ({ ...prev, [buttonId]: false }));
                 }, 2000);
             }
         });
@@ -328,8 +328,7 @@ const ServerDetail: React.FC = () => {
                         {/* Documentation Content */}
                         {readmeData ? (
                             <StructuredReadme 
-                                readmeData={readmeData}
-                                server={server}
+                                readme={readmeData}
                                 copiedStates={copiedStates}
                                 onCopy={copyToClipboard}
                             />

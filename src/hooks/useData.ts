@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { Category, MCPServer, ProcessedREADME } from "../types";
+import type { Category, MCPServer, ServerReadme } from "../types";
 
 // 定义优化后的数据结构接口
 interface CoreServerData {
@@ -85,7 +85,12 @@ interface ExtendedServerData {
         allTags: string[];
         badges: Array<{ name?: string; type?: string; color?: string }>;
         icon?: string;
-    };
+        readme: {
+            overview: {
+                content: string
+            }
+        };
+    }
 }
 
 interface CategoryJson {
@@ -413,25 +418,30 @@ export const useServersByCategory = (categoryId: string) => {
 };
 
 // 优化的 README 数据加载 Hook
-export const useServerReadme = (serverId: string) => {
+export const useServerReadme = (mcpId: string) => {
     return useQuery({
-        queryKey: ["readme", serverId],
-        queryFn: async (): Promise<ProcessedREADME | null> => {
-            if (!serverId) return null;
+        queryKey: ["readme", mcpId],
+        queryFn: async (): Promise<ServerReadme | null> => {
+            if (!mcpId) return null;
             
             try {
-                const response = await fetch(`/data/readme/${serverId}.json`);
+                console.log(mcpId)
+                const response = await fetch(`/data/reporeadmes/${mcpId}.md`);
+                console.log(response)
                 if (!response.ok) {
                     return null;
+                }                
+                return {
+                    filename: mcpId,
+                    projectName: mcpId,
+                    rawContent: await response.text(),
                 }
-                const data: ProcessedREADME = await response.json();
-                return data;
             } catch (error) {
-                console.error(`Failed to load README for ${serverId}:`, error);
+                console.error(`Failed to load README for ${mcpId}:`, error);
                 return null;
             }
         },
-        enabled: !!serverId,
+        enabled: !!mcpId,
         staleTime: 10 * 60 * 1000, // 10 minutes
     });
 };
