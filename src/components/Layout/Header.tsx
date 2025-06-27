@@ -30,6 +30,11 @@ const Header: React.FC = () => {
             href: "/categories",
             current: location.pathname === "/categories",
         },
+        {
+            name: "Favorites",
+            href: "/favorites",
+            current: location.pathname === "/favorites",
+        },
         { name: "Documentation", href: "/docs", current: location.pathname === "/docs" },
         {
             name: "About",

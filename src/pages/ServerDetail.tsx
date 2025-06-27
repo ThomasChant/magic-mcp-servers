@@ -27,6 +27,7 @@ import {
 import { useServer, useServerReadme } from "../hooks/useData";
 import StructuredReadme from "../components/StructuredReadme";
 import ServerComments from "../components/ServerComments";
+import { FavoriteButton } from "../components/FavoriteButton";
 
 const ServerDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -268,10 +269,12 @@ const ServerDetail: React.FC = () => {
                                 <GitBranch className="mr-2 h-5 w-5" />
                                 View on GitHub
                             </a>
-                            <button className="inline-flex items-center justify-center px-6 py-3 border-2 border-gray-200 bg-white text-gray-700 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md font-sm min-w-[140px]">
-                                <Heart className="mr-2 h-5 w-5" />
-                                Add to Favorites
-                            </button>
+                            <FavoriteButton 
+                                serverId={server.id}
+                                showText={true}
+                                size="lg"
+                                className="min-w-[140px] border-2 shadow-sm hover:shadow-md"
+                            />
                             <div className="relative" ref={shareMenuRef}>
                                 <button 
                                     onClick={() => setShowShareMenu(!showShareMenu)}

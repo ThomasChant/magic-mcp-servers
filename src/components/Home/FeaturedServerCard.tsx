@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Star, Download, Calendar, ArrowRight } from 'lucide-react';
 import type { MCPServer } from '../../types';
+import { FavoriteButton } from '../FavoriteButton';
 
 interface FeaturedServerCardProps {
     server: MCPServer;
@@ -49,7 +50,12 @@ const FeaturedServerCard: React.FC<FeaturedServerCardProps> = React.memo(({
                         </div>
                     </div>
                 </div>
-                <div className="text-right flex-shrink-0">
+                <div className="text-right flex-shrink-0 space-y-2">
+                    <FavoriteButton 
+                        serverId={server.id} 
+                        size="sm"
+                        className="mb-2"
+                    />
                     <div className="flex items-center text-yellow-500">
                         <Star className="w-4 h-4 fill-current" />
                         <span className="ml-1 text-gray-900 dark:text-white font-medium">

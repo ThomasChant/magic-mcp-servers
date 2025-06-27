@@ -11,7 +11,11 @@ import CategoriesPage from "./pages/Categories";
 import CategoryDetailPage from "./pages/CategoryDetail";
 import DocsPage from "./pages/Docs";
 import AboutPage from "./pages/About";
+<<<<<<< HEAD
 import ProfilePage from "./pages/Profile";
+=======
+import FavoritesPage from "./pages/Favorites";
+>>>>>>> favorites
 import { useAppStore } from "./store/useAppStore";
 
 // Get Clerk publishable key
@@ -54,6 +58,7 @@ function App() {
     }, [theme]);
 
     return (
+<<<<<<< HEAD
         <ClerkProvider publishableKey={clerkPubKey}>
             <QueryClientProvider client={queryClient}>
                 <Router>
@@ -86,6 +91,31 @@ function App() {
                 </Router>
             </QueryClientProvider>
         </ClerkProvider>
+=======
+        <QueryClientProvider client={queryClient}>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<Layout />}>
+                        <Route index element={<Home />} />
+                        <Route path="servers" element={<ServersPage />} />
+                        <Route
+                            path="servers/:id"
+                            element={<ServerDetailPage />}
+                        />
+                        <Route path="categories" element={<CategoriesPage />} />
+                        <Route
+                            path="categories/:id"
+                            element={<CategoryDetailPage />}
+                        />
+                        <Route path="favorites" element={<FavoritesPage />} />
+                        <Route path="docs" element={<DocsPage />} />
+                        <Route path="about" element={<AboutPage />} />
+                        <Route path="*" element={<NotFoundPage />} />
+                    </Route>
+                </Routes>
+            </Router>
+        </QueryClientProvider>
+>>>>>>> favorites
     );
 }
 
