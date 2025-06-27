@@ -42,8 +42,24 @@ const StructuredReadme: React.FC<StructuredReadmeProps> = ({readme, copiedStates
                 };
               
               const codeText = getCodeText(children);
-              // 使用代码内容生成稳定的标识符
-              const buttonId = `code-${btoa(codeText).replace(/[^a-zA-Z0-9]/g, '').substring(0, 12)}`;
+              // 使用代码内容生成稳定的标识符，处理非 Latin1 字符
+              const generateButtonId = (text: string) => {
+                try {
+                  // 使用 encodeURIComponent 然后 btoa 来处理非 Latin1 字符
+                  const encoded = btoa(encodeURIComponent(text));
+                  return `code-${encoded.replace(/[^a-zA-Z0-9]/g, '').substring(0, 12)}`;
+                } catch {
+                  // 如果编码失败，使用简单的哈希算法
+                  let hash = 0;
+                  for (let i = 0; i < text.length; i++) {
+                    const char = text.charCodeAt(i);
+                    hash = ((hash << 5) - hash) + char;
+                    hash = hash & hash; // 转换为32位整数
+                  }
+                  return `code-${Math.abs(hash).toString(36).substring(0, 12)}`;
+                }
+              };
+              const buttonId = generateButtonId(codeText);
               const isCopied = copiedStates[buttonId];
               return (
                 <div className="bg-gray-900 dark:bg-gray-950 rounded-lg my-4 overflow-hidden relative group">
