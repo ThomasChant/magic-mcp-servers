@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ClerkProvider } from "@clerk/clerk-react";
 import Layout from "./components/Layout/Layout";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import ServersPage from "./pages/Servers";
 import ServerDetailPage from "./pages/ServerDetail";
@@ -9,7 +11,15 @@ import CategoriesPage from "./pages/Categories";
 import CategoryDetailPage from "./pages/CategoryDetail";
 import DocsPage from "./pages/Docs";
 import AboutPage from "./pages/About";
+import ProfilePage from "./pages/Profile";
 import { useAppStore } from "./store/useAppStore";
+
+// Get Clerk publishable key
+const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
+if (!clerkPubKey) {
+    throw new Error("Missing Clerk publishable key");
+}
 
 // Create Query Client
 const queryClient = new QueryClient({
@@ -44,28 +54,38 @@ function App() {
     }, [theme]);
 
     return (
-        <QueryClientProvider client={queryClient}>
-            <Router>
-                <Routes>
-                    <Route path="/" element={<Layout />}>
-                        <Route index element={<Home />} />
-                        <Route path="servers" element={<ServersPage />} />
-                        <Route
-                            path="servers/:id"
-                            element={<ServerDetailPage />}
-                        />
-                        <Route path="categories" element={<CategoriesPage />} />
-                        <Route
-                            path="categories/:id"
-                            element={<CategoryDetailPage />}
-                        />
-                        <Route path="docs" element={<DocsPage />} />
-                        <Route path="about" element={<AboutPage />} />
-                        <Route path="*" element={<NotFoundPage />} />
-                    </Route>
-                </Routes>
-            </Router>
-        </QueryClientProvider>
+        <ClerkProvider publishableKey={clerkPubKey}>
+            <QueryClientProvider client={queryClient}>
+                <Router>
+                    <Routes>
+                        <Route path="/" element={<Layout />}>
+                            <Route index element={<Home />} />
+                            <Route path="servers" element={<ServersPage />} />
+                            <Route
+                                path="servers/:id"
+                                element={<ServerDetailPage />}
+                            />
+                            <Route path="categories" element={<CategoriesPage />} />
+                            <Route
+                                path="categories/:id"
+                                element={<CategoryDetailPage />}
+                            />
+                            <Route path="docs" element={<DocsPage />} />
+                            <Route path="about" element={<AboutPage />} />
+                            <Route 
+                                path="profile" 
+                                element={
+                                    <ProtectedRoute>
+                                        <ProfilePage />
+                                    </ProtectedRoute>
+                                } 
+                            />
+                            <Route path="*" element={<NotFoundPage />} />
+                        </Route>
+                    </Routes>
+                </Router>
+            </QueryClientProvider>
+        </ClerkProvider>
     );
 }
 
