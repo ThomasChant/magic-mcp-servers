@@ -16,7 +16,7 @@ import {
     AlertCircle,
     RefreshCw,
 } from "lucide-react";
-import { useServers } from "../hooks/useData";
+import { useServers } from "../hooks/useUnifiedData";
 import { useAppStore } from "../store/useAppStore";
 import { FavoriteButton } from "../components/FavoriteButton";
 import ProgressiveEllipsis from "../components/ProgressiveEllipsis";

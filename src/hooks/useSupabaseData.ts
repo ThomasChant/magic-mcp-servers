@@ -1,0 +1,461 @@
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "../lib/supabase";
+import type { Category, MCPServer, ServerReadme } from "../types";
+import { type LucideIcon, Database, Code, Search, MessageCircle, Brain, Wrench, CheckSquare, Shield, FileText, Cloud, Briefcase, DollarSign, Layers, Folder, BarChart3, Plug } from "lucide-react";
+import type { FeaturedServer } from "./useFeaturedServers";
+
+// Icon name mapping for featured servers
+const iconNameMap: { [key: string]: LucideIcon } = {
+  'Database': Database,
+  'Code': Code,
+  'Search': Search,
+  'MessageCircle': MessageCircle,
+  'Brain': Brain,
+  'Wrench': Wrench,
+  'CheckSquare': CheckSquare,
+  'Shield': Shield,
+  'FileText': FileText,
+  'Cloud': Cloud,
+  'Briefcase': Briefcase,
+  'DollarSign': DollarSign,
+  'Layers': Layers,
+  'Folder': Folder,
+  'BarChart3': BarChart3,
+  'Plug': Plug
+};
+
+// Helper function to transform database category to app Category type
+function transformCategory(dbCategory: Record<string, unknown>, subcategories: Record<string, unknown>[] = []): Category {
+  return {
+    id: dbCategory.id as string,
+    name: {
+      "zh-CN": dbCategory.name_zh_cn as string,
+      en: dbCategory.name_en as string,
+      "zh-TW": (dbCategory.name_zh_tw || dbCategory.name_en) as string,
+      fr: (dbCategory.name_fr || dbCategory.name_en) as string,
+      ja: (dbCategory.name_ja || dbCategory.name_en) as string,
+      ko: (dbCategory.name_ko || dbCategory.name_en) as string,
+      ru: (dbCategory.name_ru || dbCategory.name_en) as string,
+    },
+    description: {
+      "zh-CN": dbCategory.description_zh_cn as string,
+      en: dbCategory.description_en as string,
+      "zh-TW": (dbCategory.description_zh_tw || dbCategory.description_en) as string,
+      fr: (dbCategory.description_fr || dbCategory.description_en) as string,
+      ja: (dbCategory.description_ja || dbCategory.description_en) as string,
+      ko: (dbCategory.description_ko || dbCategory.description_en) as string,
+      ru: (dbCategory.description_ru || dbCategory.description_en) as string,
+    },
+    icon: iconNameMap[dbCategory.icon as string] || FileText,
+    color: (dbCategory.color || "#6B7280") as string,
+    serverCount: dbCategory.server_count as number,
+    subcategories: subcategories.map(sub => ({
+      id: sub.id as string,
+      name: {
+        "zh-CN": sub.name_zh_cn as string,
+        en: sub.name_en as string,
+        "zh-TW": (sub.name_zh_tw || sub.name_en) as string,
+        fr: (sub.name_fr || sub.name_en) as string,
+        ja: (sub.name_ja || sub.name_en) as string,
+        ko: (sub.name_ko || sub.name_en) as string,
+        ru: (sub.name_ru || sub.name_en) as string,
+      },
+      description: {
+        "zh-CN": sub.description_zh_cn as string,
+        en: sub.description_en as string,
+        "zh-TW": (sub.description_zh_tw || sub.description_en) as string,
+        fr: (sub.description_fr || sub.description_en) as string,
+        ja: (sub.description_ja || sub.description_en) as string,
+        ko: (sub.description_ko || sub.description_en) as string,
+        ru: (sub.description_ru || sub.description_en) as string,
+      },
+    })),
+  };
+}
+
+// Helper function to transform database server to app MCPServer type
+function transformServer(dbServer: Record<string, unknown>): MCPServer {
+  return {
+    id: dbServer.id as string,
+    name: dbServer.name as string,
+    owner: dbServer.owner as string,
+    slug: dbServer.slug as string,
+    description: {
+      "zh-CN": (dbServer.description_zh_cn as string) || "",
+      en: (dbServer.description_en as string) || "",
+      "zh-TW": (dbServer.description_zh_tw as string) || (dbServer.description_en as string) || "",
+      fr: (dbServer.description_fr as string) || (dbServer.description_en as string) || "",
+      ja: (dbServer.description_ja as string) || (dbServer.description_en as string) || "",
+      ko: (dbServer.description_ko as string) || (dbServer.description_en as string) || "",
+      ru: (dbServer.description_ru as string) || (dbServer.description_en as string) || "",
+    },
+    fullDescription: (dbServer.full_description as string) || "",
+    icon: (dbServer.icon as string) || "",
+    badges: [], // Will be populated separately if needed
+    tags: (dbServer.tags as string[]) || [],
+    category: (dbServer.category_id as string) || "",
+    subcategory: (dbServer.subcategory_id as string) || "",
+    serviceTypes: [],
+    techStack: (dbServer.tech_stack as string[]) || [],
+    links: {
+      github: (dbServer.github_url as string) || "",
+      demo: (dbServer.demo_url as string) || null,
+      docs: (dbServer.docs_url as string) || null,
+    },
+    stats: {
+      stars: (dbServer.stars as number) || 0,
+      forks: (dbServer.forks as number) || 0,
+      lastUpdated: (dbServer.last_updated as string) || new Date().toISOString(),
+      createdAt: (dbServer.repo_created_at as string) || new Date().toISOString(),
+    },
+    metadata: {
+      complexity: (dbServer.complexity as string) || "medium",
+      maturity: (dbServer.maturity as string) || "stable",
+      deployment: [], // Will be populated separately if needed
+      featured: (dbServer.featured as boolean) || false,
+      verified: (dbServer.verified as boolean) || false,
+    },
+    categorization: {
+      confidence: (dbServer.categorization_confidence as number) || 0.8,
+      reason: (dbServer.categorization_reason as string) || "",
+      matched_keywords: (dbServer.categorization_keywords as string[]) || [],
+    },
+    repository: {
+      url: (dbServer.github_url as string) || "",
+      owner: (dbServer.repository_owner as string) || "",
+      name: (dbServer.repository_name as string) || "",
+      stars: (dbServer.stars as number) || 0,
+      lastUpdated: (dbServer.last_updated as string) || new Date().toISOString(),
+      forks: (dbServer.forks as number) || 0,
+      watchers: (dbServer.watchers as number) || 0,
+      openIssues: (dbServer.open_issues as number) || 0,
+    },
+    installation: {
+      instructions: [], // Will be populated separately if needed
+    },
+    documentation: {
+      readme: (dbServer.readme_content as string) || "",
+      api: (dbServer.api_reference as string) || undefined,
+      overview: null,
+      installation: null,
+      examples: undefined,
+      api_reference: undefined,
+      structured: undefined,
+    },
+    compatibility: {
+      platforms: (dbServer.platforms as string[]) || [],
+      nodeVersion: (dbServer.node_version as string) || undefined,
+      pythonVersion: (dbServer.python_version as string) || undefined,
+      requirements: (dbServer.requirements as string[]) || [],
+    },
+    quality: {
+      score: (dbServer.quality_score as number) || 0,
+      factors: {
+        documentation: (dbServer.quality_documentation as number) || 0,
+        maintenance: (dbServer.quality_maintenance as number) || 0,
+        community: (dbServer.quality_community as number) || 0,
+        performance: (dbServer.quality_performance as number) || 0,
+      },
+    },
+    usage: {
+      downloads: (dbServer.downloads as number) || 0,
+      dependents: (dbServer.dependents as number) || 0,
+      weeklyDownloads: (dbServer.weekly_downloads as number) || 0,
+    },
+    featured: (dbServer.featured as boolean) || false,
+    verified: (dbServer.verified as boolean) || false,
+    createdAt: (dbServer.repo_created_at as string) || new Date().toISOString(),
+    updatedAt: (dbServer.last_updated as string) || new Date().toISOString(),
+  };
+}
+
+// Helper function to transform database server to FeaturedServer type
+function transformToFeaturedServer(dbServer: Record<string, unknown>): FeaturedServer | null {
+  // Only transform servers that have complete featured server data
+  if (!dbServer.featured || !dbServer.featured_icon || !dbServer.featured_rating || !dbServer.featured_badge) {
+    return null;
+  }
+
+  const iconComponent = iconNameMap[dbServer.featured_icon as string] || FileText;
+  
+  // Ensure badge value conforms to union type
+  const validBadge: "Official" | "Featured" | "Popular" = 
+    dbServer.featured_badge === "Official" || dbServer.featured_badge === "Featured" || dbServer.featured_badge === "Popular" 
+      ? dbServer.featured_badge as "Official" | "Featured" | "Popular"
+      : "Featured";
+
+  return {
+    name: dbServer.name as string,
+    icon: iconComponent,
+    rating: parseFloat(dbServer.featured_rating as string) || 3.5,
+    badge: validBadge,
+    badgeColor: (dbServer.featured_badge_color as string) || "green",
+    description: (dbServer.description_en as string) || (dbServer.full_description as string) || "",
+    slug: dbServer.slug as string
+  };
+}
+
+// Categories hook
+export const useSupabaseCategories = () => {
+  return useQuery({
+    queryKey: ["supabase", "categories"],
+    queryFn: async (): Promise<Category[]> => {
+      const [categoriesResult, subcategoriesResult] = await Promise.all([
+        supabase.from('categories').select('*').order('name_en'),
+        supabase.from('subcategories').select('*').order('name_en'),
+      ]);
+
+      if (categoriesResult.error) {
+        throw new Error(`Failed to fetch categories: ${categoriesResult.error.message}`);
+      }
+
+      if (subcategoriesResult.error) {
+        throw new Error(`Failed to fetch subcategories: ${subcategoriesResult.error.message}`);
+      }
+
+      const categories = categoriesResult.data || [];
+      const subcategories = subcategoriesResult.data || [];
+
+      return categories.map(category => {
+        const categorySubcategories = subcategories.filter(
+          sub => sub.category_id === category.id
+        );
+        return transformCategory(category, categorySubcategories);
+      });
+    },
+    staleTime: 5 * 60 * 1000, // 5 minutes
+  });
+};
+
+// Servers hook with enhanced data
+export const useSupabaseServers = () => {
+  return useQuery({
+    queryKey: ["supabase", "servers"],
+    queryFn: async (): Promise<MCPServer[]> => {
+      const { data, error } = await supabase
+        .from('servers_with_details')
+        .select('*')
+        .order('stars', { ascending: false });
+
+      if (error) {
+        throw new Error(`Failed to fetch servers: ${error.message}`);
+      }
+
+      return (data || []).map(transformServer);
+    },
+    staleTime: 5 * 60 * 1000,
+  });
+};
+
+// Single server hook
+export const useSupabaseServer = (id: string) => {
+  return useQuery({
+    queryKey: ["supabase", "server", id],
+    queryFn: async (): Promise<MCPServer | null> => {
+      if (!id) return null;
+
+      const { data, error } = await supabase
+        .from('servers_with_details')
+        .select('*')
+        .eq('id', id)
+        .single();
+
+      if (error) {
+        if (error.code === 'PGRST116') { // Not found
+          return null;
+        }
+        throw new Error(`Failed to fetch server: ${error.message}`);
+      }
+
+      return data ? transformServer(data) : null;
+    },
+    enabled: !!id,
+    staleTime: 5 * 60 * 1000,
+  });
+};
+
+// Featured servers hook
+export const useSupabaseFeaturedServers = () => {
+  return useQuery({
+    queryKey: ["supabase", "servers", "featured"],
+    queryFn: async (): Promise<MCPServer[]> => {
+      const { data, error } = await supabase
+        .from('featured_servers')
+        .select('*')
+        .limit(6);
+
+      if (error) {
+        throw new Error(`Failed to fetch featured servers: ${error.message}`);
+      }
+
+      return (data || []).map(transformServer);
+    },
+    staleTime: 5 * 60 * 1000,
+  });
+};
+
+// Servers by category hook
+export const useSupabaseServersByCategory = (categoryId: string) => {
+  return useQuery({
+    queryKey: ["supabase", "servers", "category", categoryId],
+    queryFn: async (): Promise<MCPServer[]> => {
+      if (!categoryId) return [];
+
+      const { data, error } = await supabase
+        .from('servers_with_details')
+        .select('*')
+        .eq('category_id', categoryId)
+        .order('stars', { ascending: false });
+
+      if (error) {
+        throw new Error(`Failed to fetch servers by category: ${error.message}`);
+      }
+
+      return (data || []).map(transformServer);
+    },
+    enabled: !!categoryId,
+    staleTime: 5 * 60 * 1000,
+  });
+};
+
+// Popular servers hook
+export const useSupabasePopularServers = () => {
+  return useQuery({
+    queryKey: ["supabase", "servers", "popular"],
+    queryFn: async (): Promise<MCPServer[]> => {
+      const { data, error } = await supabase
+        .from('popular_servers')
+        .select('*')
+        .limit(10);
+
+      if (error) {
+        throw new Error(`Failed to fetch popular servers: ${error.message}`);
+      }
+
+      return (data || []).map(transformServer);
+    },
+    staleTime: 5 * 60 * 1000,
+  });
+};
+
+// Recent servers hook
+export const useSupabaseRecentServers = () => {
+  return useQuery({
+    queryKey: ["supabase", "servers", "recent"],
+    queryFn: async (): Promise<MCPServer[]> => {
+      const { data, error } = await supabase
+        .from('recent_servers')
+        .select('*')
+        .limit(10);
+
+      if (error) {
+        throw new Error(`Failed to fetch recent servers: ${error.message}`);
+      }
+
+      return (data || []).map(transformServer);
+    },
+    staleTime: 5 * 60 * 1000,
+  });
+};
+
+// Search servers hook
+export const useSupabaseSearchServers = (query: string) => {
+  return useQuery({
+    queryKey: ["supabase", "servers", "search", query],
+    queryFn: async (): Promise<MCPServer[]> => {
+      if (!query.trim()) return [];
+
+      const { data, error } = await supabase
+        .from('servers_with_details')
+        .select('*')
+        .or(`name.ilike.%${query}%,description_en.ilike.%${query}%,full_description.ilike.%${query}%`)
+        .order('stars', { ascending: false });
+
+      if (error) {
+        throw new Error(`Failed to search servers: ${error.message}`);
+      }
+
+      return (data || []).map(transformServer);
+    },
+    enabled: !!query.trim(),
+    staleTime: 2 * 60 * 1000, // 2 minutes for search results
+  });
+};
+
+// Server README hook
+export const useSupabaseServerReadme = (serverId: string) => {
+  return useQuery({
+    queryKey: ["supabase", "readme", serverId],
+    queryFn: async (): Promise<ServerReadme | null> => {
+      if (!serverId || serverId.trim() === '') {
+        return null;
+      }
+
+      const { data, error } = await supabase
+        .from('server_readmes')
+        .select('*')
+        .eq('server_id', serverId)
+        .single();
+
+      if (error) {
+        if (error.code === 'PGRST116') { // Not found
+          return null;
+        }
+        throw new Error(`Failed to fetch README: ${error.message}`);
+      }
+
+      if (!data) {
+        return null;
+      }
+
+      return {
+        filename: data.filename,
+        projectName: data.project_name,
+        rawContent: data.raw_content,
+      };
+    },
+    enabled: !!serverId && serverId.trim() !== '',
+    staleTime: 10 * 60 * 1000, // 10 minutes
+  });
+};
+
+// Featured servers by category hook
+export const useSupabaseFeaturedServersByCategory = () => {
+  return useQuery({
+    queryKey: ["supabase", "featured-servers-by-category"],
+    queryFn: async (): Promise<Record<string, FeaturedServer[]>> => {
+      const { data, error } = await supabase
+        .from('featured_servers_by_category')
+        .select('*')
+        .order('category_id')
+        .order('featured_rating', { ascending: false });
+
+      if (error) {
+        throw new Error(`Failed to fetch featured servers by category: ${error.message}`);
+      }
+
+      const result: Record<string, FeaturedServer[]> = {};
+      
+      (data || []).forEach(dbServer => {
+        const featuredServer = transformToFeaturedServer(dbServer);
+        if (featuredServer && dbServer.category_id) {
+          if (!result[dbServer.category_id]) {
+            result[dbServer.category_id] = [];
+          }
+          result[dbServer.category_id].push(featuredServer);
+        }
+      });
+
+      return result;
+    },
+    staleTime: 10 * 60 * 1000, // 10 minutes
+  });
+};
+
+// Get featured servers by category ID (utility function)
+export const getSupabaseFeaturedServersByCategory = (categoryId: string, featuredData?: Record<string, FeaturedServer[]>): FeaturedServer[] => {
+  if (featuredData) {
+    return featuredData[categoryId] || [];
+  }
+  return [];
+};

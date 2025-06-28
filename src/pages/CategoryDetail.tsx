@@ -14,7 +14,7 @@ import {
     List,
     ChevronDown,
 } from "lucide-react";
-import { useServersByCategory, useCategories } from "../hooks/useData";
+import { useServersByCategory, useCategories } from "../hooks/useUnifiedData";
 import type { MCPServer, SearchFilters, SortOption } from "../types";
 
 const CategoryDetail: React.FC = () => {

@@ -17,6 +17,7 @@ MCP Hub 是一个专为 Model Context Protocol (MCP) 生态系统设计的服务
 - **样式**: Tailwind CSS
 - **状态管理**: Zustand
 - **数据获取**: TanStack Query (React Query)
+- **数据存储**: JSON 文件 / Supabase (PostgreSQL)
 - **图标**: Lucide React
 - **路由**: React Router
 
@@ -54,6 +55,30 @@ npm run build
 ```
 
 构建后的文件将在 `dist` 目录中。
+
+### 数据源配置
+
+本项目支持两种数据源：
+
+#### 1. JSON 文件（默认）
+无需额外配置，直接使用本地 JSON 文件。
+
+#### 2. Supabase 数据库
+```bash
+# 1. 复制环境变量示例
+cp .env.example .env
+
+# 2. 配置 Supabase 连接
+# 编辑 .env 文件，填入你的 Supabase 配置
+VITE_USE_SUPABASE=true
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key
+
+# 3. 使用 Supabase 模式启动
+npm run supabase:dev
+```
+
+详细的 Supabase 配置说明请参考 [SUPABASE_INTEGRATION.md](./SUPABASE_INTEGRATION.md)。
 
 ## 📁 项目结构
 

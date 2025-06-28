@@ -1,3 +1,5 @@
+import { type LucideIcon } from "lucide-react";
+
 export interface MCPServer {
     id: string;
     name: string;
@@ -131,7 +133,7 @@ export interface Category {
         ko: string;
         ru: string;
     };
-    icon: string;
+    icon: LucideIcon;
     color: string;
     subcategories: Subcategory[];
     serverCount: number;

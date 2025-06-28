@@ -23,7 +23,7 @@ import {
     Linkedin,
     Link2,
 } from "lucide-react";
-import { useServer, useServerReadme } from "../hooks/useData";
+import { useServer, useServerReadme } from "../hooks/useUnifiedData";
 import StructuredReadme from "../components/StructuredReadme";
 import ServerCommentsWithReplies from "../components/ServerCommentsWithReplies";
 import { FavoriteButton } from "../components/FavoriteButton";

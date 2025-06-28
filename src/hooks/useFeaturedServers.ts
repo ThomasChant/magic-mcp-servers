@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { type LucideIcon, Database, Code, Search, MessageCircle, Brain, Wrench, CheckSquare, Shield, FileText, Cloud, Briefcase, DollarSign, Layers, Folder, BarChart3, Plug } from "lucide-react";
+import { useSupabaseFeaturedServersByCategory, getSupabaseFeaturedServersByCategory } from "./useSupabaseData";
 
 export interface FeaturedServer {
   name: string;
@@ -41,7 +42,11 @@ const iconNameMap: { [key: string]: LucideIcon } = {
   'Plug': Plug
 };
 
-export const useFeaturedServersByCategory = () => {
+// Feature flag to toggle between JSON and Supabase
+const USE_SUPABASE = import.meta.env.VITE_USE_SUPABASE === 'true';
+
+// JSON-only implementation (original)
+export const useJsonFeaturedServersByCategory = () => {
   return useQuery({
     queryKey: ["featured-servers"],
     queryFn: async (): Promise<Record<string, FeaturedServer[]>> => {
@@ -84,16 +89,30 @@ export const useFeaturedServersByCategory = () => {
   });
 };
 
+// Unified featured servers by category hook (supports both data sources)
+export const useFeaturedServersByCategory = () => {
+  const supabaseResult = useSupabaseFeaturedServersByCategory();
+  const jsonResult = useJsonFeaturedServersByCategory();
+  
+  return USE_SUPABASE ? supabaseResult : jsonResult;
+};
+
+// Enhanced getFeaturedServersByCategory function for compatibility
 export const getFeaturedServersByCategory = (categoryId: string, featuredData?: Record<string, FeaturedServer[]>): FeaturedServer[] => {
-  if (featuredData) {
-    return featuredData[categoryId] || [];
+  if (USE_SUPABASE) {
+    return getSupabaseFeaturedServersByCategory(categoryId, featuredData);
+  } else {
+    // Original JSON implementation
+    if (featuredData) {
+      return featuredData[categoryId] || [];
+    }
+    
+    // Fallback to window object if data was loaded
+    if (typeof window !== 'undefined') {
+      const windowWithServers = window as { __featuredServers?: Record<string, FeaturedServer[]> };
+      return windowWithServers.__featuredServers?.[categoryId] || [];
+    }
+    
+    return [];
   }
-  
-  // Fallback to window object if data was loaded
-  if (typeof window !== 'undefined') {
-    const windowWithServers = window as { __featuredServers?: Record<string, FeaturedServer[]> };
-    return windowWithServers.__featuredServers?.[categoryId] || [];
-  }
-  
-  return [];
 };

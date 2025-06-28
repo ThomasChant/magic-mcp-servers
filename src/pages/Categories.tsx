@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Star } from "lucide-react";
-import { useCategories } from "../hooks/useCategories";
+import { useCategories } from "../hooks/useUnifiedData";
 import { useAppStore } from "../store/useAppStore";
-import { useServers } from "../hooks/useData";
+import { useServers } from "../hooks/useUnifiedData";
 import { useFeaturedServersByCategory, getFeaturedServersByCategory } from "../hooks/useFeaturedServers";
 
 const Categories: React.FC = () => {
@@ -19,7 +19,9 @@ const Categories: React.FC = () => {
   const additionalCategories = categories?.slice(6) || [];
   
   // Calculate total stats from actual server data
-  const totalServers = servers?.length || categories?.reduce((sum, cat) => sum + cat.serverCount, 0) || 0;
+  console.log('servers count0', servers?.length);
+  console.log('servers count1', categories?.reduce((sum, cat) => sum + cat.serverCount, 0));
+  const totalServers = categories?.reduce((sum, cat) => sum + cat.serverCount, 0) || 0;
   const totalDownloads = servers?.reduce((sum, server) => sum + (server.usage?.downloads || 0), 0) || 0;
   const averageUptime = 98; // This could be calculated from server health data if available
 
@@ -140,10 +142,10 @@ const Categories: React.FC = () => {
                     </span>
                   </div>
                   <h3 className="text-xl font-bold mb-2">
-                    {isZh ? category.name : category.nameEn}
+                    {isZh ? category.name["zh-CN"] : category.name.en}
                   </h3>
                   <p className="text-white/90 text-sm">
-                    {isZh ? category.description : category.descriptionEn}
+                    {isZh ? category.description["zh-CN"] : category.description.en}
                   </p>
                 </div>
                 <div className="p-6">
@@ -153,7 +155,7 @@ const Categories: React.FC = () => {
                         key={sub.id}
                         className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded"
                       >
-                        {isZh ? sub.name : sub.nameEn}
+                        {isZh ? sub.name["zh-CN"] : sub.name.en}
                       </span>
                     ))}
                   </div>
@@ -195,7 +197,7 @@ const Categories: React.FC = () => {
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900 dark:text-white">
-                        {isZh ? category.name : category.nameEn}
+                        {isZh ? category.name["zh-CN"] : category.name.en}
                       </h3>
                       <span className="text-sm text-gray-500 dark:text-gray-400">
                         {category.serverCount} {isZh ? "个服务器" : "servers"}
@@ -203,7 +205,7 @@ const Categories: React.FC = () => {
                     </div>
                   </div>
                   <p className="text-sm text-gray-600 dark:text-gray-300">
-                    {isZh ? category.description : category.descriptionEn}
+                    {isZh ? category.description["zh-CN"] : category.description.en}
                   </p>
                 </Link>
               ))}
@@ -236,7 +238,7 @@ const Categories: React.FC = () => {
                     : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
                 }`}
               >
-                {isZh ? category.name : category.nameEn}
+                {isZh ? category.name["zh-CN"] : category.name.en}
               </button>
             ))}
           </div>

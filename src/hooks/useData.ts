@@ -466,33 +466,3 @@ export const useServerReadme = (mcpId: string) => {
         staleTime: 10 * 60 * 1000, // 10 minutes
     });
 };
-
-// 搜索索引 Hook - 用于快速客户端搜索
-export const useSearchIndex = () => {
-    return useQuery({
-        queryKey: ["search", "index"],
-        queryFn: async () => {
-            const response = await fetch("/data/search-index.json");
-            if (!response.ok) {
-                throw new Error("Failed to fetch search index");
-            }
-            return response.json();
-        },
-        staleTime: 10 * 60 * 1000, // 10 minutes
-    });
-};
-
-// README 索引 Hook - 用于了解哪些服务器有文档
-export const useReadmeIndex = () => {
-    return useQuery({
-        queryKey: ["readme", "index"],
-        queryFn: async () => {
-            const response = await fetch("/data/readme/index.json");
-            if (!response.ok) {
-                throw new Error("Failed to fetch README index");
-            }
-            return response.json();
-        },
-        staleTime: 10 * 60 * 1000, // 10 minutes
-    });
-};

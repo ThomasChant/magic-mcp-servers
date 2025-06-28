@@ -16,7 +16,7 @@ import {
     Bot,
     FileText,
 } from "lucide-react";
-import { useServers } from "../hooks/useData";
+import { useServers } from "../hooks/useUnifiedData";
 import type { MCPServer } from "../types";
 import ProgressiveEllipsis from "../components/ProgressiveEllipsis";
 import { FavoriteButton } from "../components/FavoriteButton";

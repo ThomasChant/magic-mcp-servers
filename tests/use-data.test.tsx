@@ -16,12 +16,10 @@ import { ReactNode } from 'react';
 import {
   useServers,
   useCoreServers,
-  useExtendedServers,
   useServer,
   useFeaturedServers,
   useServersByCategory,
   useServerReadme,
-  useSearchIndex,
   useCategories
 } from '../src/hooks/useData';
 
@@ -285,24 +283,6 @@ const mockCategories = [
   }
 ];
 
-const mockSearchIndex = {
-  servers: {
-    server1: {
-      name: 'Test Server 1',
-      description: 'A test server for API integration',
-      tags: ['api', 'testing', 'integration'],
-      owner: 'testowner'
-    },
-    server2: {
-      name: 'Test Server 2',
-      description: 'Another test server for database operations',
-      tags: ['database', 'sql', 'storage'],
-      owner: 'testowner2'
-    }
-  },
-  categories: ['web-network', 'data-storage'],
-  tags: ['api', 'testing', 'integration', 'database', 'sql', 'storage']
-};
 
 const mockReadmeData = {
   serverId: 'server1',
@@ -364,25 +344,6 @@ describe('useData hooks', () => {
     });
   });
 
-  describe('useExtendedServers', () => {
-    it('should fetch extended server data successfully', async () => {
-      const mockFetch = vi.mocked(fetch);
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: async () => mockExtendedData,
-      } as Response);
-
-      const wrapper = createWrapper();
-      const { result } = renderHook(() => useExtendedServers(), { wrapper });
-
-      await waitFor(() => {
-        expect(result.current.isSuccess).toBe(true);
-      });
-
-      expect(result.current.data).toEqual(mockExtendedData);
-      expect(mockFetch).toHaveBeenCalledWith('/data/servers-extended.json');
-    });
-  });
 
   describe('useServers', () => {
     it('should merge core and extended data correctly', async () => {
@@ -582,25 +543,6 @@ describe('useData hooks', () => {
     });
   });
 
-  describe('useSearchIndex', () => {
-    it('should fetch search index successfully', async () => {
-      const mockFetch = vi.mocked(fetch);
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: async () => mockSearchIndex,
-      } as Response);
-
-      const wrapper = createWrapper();
-      const { result } = renderHook(() => useSearchIndex(), { wrapper });
-
-      await waitFor(() => {
-        expect(result.current.isSuccess).toBe(true);
-      });
-
-      expect(result.current.data).toEqual(mockSearchIndex);
-      expect(mockFetch).toHaveBeenCalledWith('/data/search-index.json');
-    });
-  });
 
   describe('useServerReadme', () => {
     it('should fetch README data for specific server', async () => {

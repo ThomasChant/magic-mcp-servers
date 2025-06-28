@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { useAppStore } from "../store/useAppStore";
 import ParticleHero from "../components/ParticleHero";
-import { useServers, useCategories } from "../hooks/useData";
+import { useServers, useCategories } from "../hooks/useUnifiedData";
 import CategorySection from "../components/Home/CategorySection";
 
 // Helper functions moved outside component to prevent recreation on every render
@@ -104,9 +104,9 @@ const Home: React.FC = () => {
             };
         }
         
-        const totalServers = allServers.length;
+        const totalServers = categories?.reduce((sum, cat) => sum + cat.serverCount, 0) || 0;
         const totalDownloads = allServers.reduce((sum, server) => sum + (server.usage?.downloads || 0), 0);
-        const uniqueCategories = new Set(allServers.map(server => server.category)).size;
+        const uniqueCategories = categories?.length || 0;
         const averageQualityScore = Math.round(
             allServers.reduce((sum, server) => sum + (server.quality?.score || 90), 0) / allServers.length
         );
@@ -117,7 +117,7 @@ const Home: React.FC = () => {
             uniqueCategories,
             averageQualityScore
         };
-    }, [allServers]);
+    }, [allServers, categories]);
 
     // Filter servers based on search query
     const filteredServers = useMemo(() => {
