@@ -125,7 +125,7 @@ const Header: React.FC = () => {
                             ) : (
                                 <SignInButton mode="modal">
                                     <button className="flex items-center px-4 py-2 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-colors">
-                                        <User className="h-4 w-4 mr-2" />
+                                        <User className="h-4 w-4" />
                                         Sign In
                                     </button>
                                 </SignInButton>

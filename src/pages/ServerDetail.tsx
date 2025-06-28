@@ -25,7 +25,7 @@ import {
 } from "lucide-react";
 import { useServer, useServerReadme } from "../hooks/useData";
 import StructuredReadme from "../components/StructuredReadme";
-import ServerComments from "../components/ServerComments";
+import ServerCommentsWithReplies from "../components/ServerCommentsWithReplies";
 import { FavoriteButton } from "../components/FavoriteButton";
 
 const ServerDetail: React.FC = () => {
@@ -643,7 +643,7 @@ const ServerDetail: React.FC = () => {
                 
                 {/* Comments Section */}
                 <div className="mt-8">
-                    <ServerComments serverId={server.id} />
+                    <ServerCommentsWithReplies serverId={server.id} />
                 </div>
             </div>
 
