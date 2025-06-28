@@ -1,0 +1,79 @@
+{
+  "mcp_name": "Jite-J/-mysql_mcp_server",
+  "mcp_description": "Facilitates secure interaction between AI applications and MySQL databases through a structured MCP interface.",
+  "mcp_id": "Jite-J_-mysql_mcp_server",
+  "fetch_timestamp": "2025-06-23T05:26:25.199176Z",
+  "github_url": "https://github.com/Jite-J/-mysql_mcp_server",
+  "repository": {
+    "name": "-mysql_mcp_server",
+    "full_name": "Jite-J/-mysql_mcp_server",
+    "description": null,
+    "html_url": "https://github.com/Jite-J/-mysql_mcp_server",
+    "created_at": "2025-04-23T06:20:44Z",
+    "updated_at": "2025-04-23T06:22:30Z",
+    "pushed_at": "2025-04-23T06:22:22Z",
+    "size": 70,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "Jite-J",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/208751819?v=4",
+      "html_url": "https://github.com/Jite-J"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 9928,
+      "Dockerfile": 827
+    },
+    "language_percentages": {
+      "Python": 92.31,
+      "Dockerfile": 7.69
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 4,
+    "tags": [
+      {
+        "name": "v0.2.2",
+        "commit_sha": "4faad30a64c88da2458e4ff17ddf3e61356f690c"
+      },
+      {
+        "name": "v0.2.1",
+        "commit_sha": "5cf9d7e5a3c1bd046d5a09243369aaeadc9d6f75"
+      },
+      {
+        "name": "v0.2.0",
+        "commit_sha": "d58622269099b77e22d569a51b0d852e672c9c4f"
+      },
+      {
+        "name": "v0.1.2",
+        "commit_sha": "3362a0ff6f5d18f733ce5758075b770fbfb77b02"
+      },
+      {
+        "name": "v0.1.1",
+        "commit_sha": "3a6f59b8885e0572d3d6ab6d0200e0a3c6f9e1fc"
+      },
+      {
+        "name": "v0.1.0",
+        "commit_sha": "43a43ce2509c0fbf0557efedd49c6b8e9f9d88f0"
+      }
+    ],
+    "latest_version": "v0.2.2"
+  },
+  "readme": "![Tests](https://github.com/designcomputer/mysql_mcp_server/actions/workflows/test.yml/badge.svg)\n![PyPI - Downloads](https://img.shields.io/pypi/dm/mysql-mcp-server)\n[![smithery badge](https://smithery.ai/badge/mysql-mcp-server)](https://smithery.ai/server/mysql-mcp-server)\n# MySQL MCP Server\nA Model Context Protocol (MCP) implementation that enables secure interaction with MySQL databases. This server component facilitates communication between AI applications (hosts/clients) and MySQL databases, making database exploration and analysis safer and more structured through a controlled interface.\n\n> **Note**: MySQL MCP Server is not designed to be used as a standalone server, but rather as a communication protocol implementation between AI applications and MySQL databases.\n\n## Features\n- List available MySQL tables as resources\n- Read table contents\n- Execute SQL queries with proper error handling\n- Secure database access through environment variables\n- Comprehensive logging\n\n## Installation\n### Manual Installation\n```bash\npip install mysql-mcp-server\n```\n\n### Installing via Smithery\nTo install MySQL MCP Server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/mysql-mcp-server):\n```bash\nnpx -y @smithery/cli install mysql-mcp-server --client claude\n```\n\n## Configuration\nSet the following environment variables:\n```bash\nMYSQL_HOST=localhost     # Database host\nMYSQL_PORT=3306         # Optional: Database port (defaults to 3306 if not specified)\nMYSQL_USER=your_username\nMYSQL_PASSWORD=your_password\nMYSQL_DATABASE=your_database\n```\n\n## Usage\n### With Claude Desktop\nAdd this to your `claude_desktop_config.json`:\n```json\n{\n  \"mcpServers\": {\n    \"mysql\": {\n      \"command\": \"uv\",\n      \"args\": [\n        \"--directory\", \n        \"path/to/mysql_mcp_server\",\n        \"run\",\n        \"mysql_mcp_server\"\n      ],\n      \"env\": {\n        \"MYSQL_HOST\": \"localhost\",\n        \"MYSQL_PORT\": \"3306\",\n        \"MYSQL_USER\": \"your_username\",\n        \"MYSQL_PASSWORD\": \"your_password\",\n        \"MYSQL_DATABASE\": \"your_database\"\n      }\n    }\n  }\n}\n```\n\n### With Visual Studio Code\nAdd this to your `mcp.json`:\n```json\n{\n  \"servers\": {\n      \"mysql\": {\n            \"type\": \"stdio\",\n            \"command\": \"uvx\",\n            \"args\": [\n                \"--from\",\n                \"mysql-mcp-server\",\n                \"mysql_mcp_server\"\n            ],\n      \"env\": {\n        \"MYSQL_HOST\": \"localhost\",\n        \"MYSQL_PORT\": \"3306\",\n        \"MYSQL_USER\": \"your_username\",\n        \"MYSQL_PASSWORD\": \"your_password\",\n        \"MYSQL_DATABASE\": \"your_database\"\n      }\n  }\n}\n```\nNote: Will need to install uv for this to work\n\n### Debugging with MCP Inspector\nWhile MySQL MCP Server isn't intended to be run standalone or directly from the command line with Python, you can use the MCP Inspector to debug it.\n\nThe MCP Inspector provides a convenient way to test and debug your MCP implementation:\n\n```bash\n# Install dependencies\npip install -r requirements.txt\n# Use the MCP Inspector for debugging (do not run directly with Python)\n```\n\nThe MySQL MCP Server is designed to be integrated with AI applications like Claude Desktop and should not be run directly as a standalone Python program.\n\n## Development\n```bash\n# Clone the repository\ngit clone https://github.com/yourusername/mysql_mcp_server.git\ncd mysql_mcp_server\n# Create virtual environment\npython -m venv venv\nsource venv/bin/activate  # or `venv\\Scripts\\activate` on Windows\n# Install development dependencies\npip install -r requirements-dev.txt\n# Run tests\npytest\n```\n\n## Security Considerations\n- Never commit environment variables or credentials\n- Use a database user with minimal required permissions\n- Consider implementing query whitelisting for production use\n- Monitor and log all database operations\n\n## Security Best Practices\nThis MCP implementation requires database access to function. For security:\n1. **Create a dedicated MySQL user** with minimal permissions\n2. **Never use root credentials** or administrative accounts\n3. **Restrict database access** to only necessary operations\n4. **Enable logging** for audit purposes\n5. **Regular security reviews** of database access\n\nSee [MySQL Security Configuration Guide](https://github.com/designcomputer/mysql_mcp_server/blob/main/SECURITY.md) for detailed instructions on:\n- Creating a restricted MySQL user\n- Setting appropriate permissions\n- Monitoring database access\n- Security best practices\n\n⚠️ IMPORTANT: Always follow the principle of least privilege when configuring database access.\n\n## License\nMIT License - see LICENSE file for details.\n\n## Contributing\n1. Fork the repository\n2. Create your feature branch (`git checkout -b feature/amazing-feature`)\n3. Commit your changes (`git commit -m 'Add some amazing feature'`)\n4. Push to the branch (`git push origin feature/amazing-feature`)\n5. Open a Pull Request\n"
+}

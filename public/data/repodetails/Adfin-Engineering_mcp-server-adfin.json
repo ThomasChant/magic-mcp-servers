@@ -1,0 +1,50 @@
+{
+  "mcp_name": "Adfin",
+  "mcp_description": "The only platform you need to get paid - all payments in one place, invoicing and accounting reconciliations with [Adfin](https://www.adfin.com/).",
+  "mcp_id": "Adfin-Engineering_mcp-server-adfin",
+  "fetch_timestamp": "2025-06-23T00:14:43.628441Z",
+  "github_url": "https://github.com/Adfin-Engineering/mcp-server-adfin",
+  "repository": {
+    "name": "mcp-server-adfin",
+    "full_name": "Adfin-Engineering/mcp-server-adfin",
+    "description": "A Model Context Protocol Server for connecting with Adfin APIs ",
+    "html_url": "https://github.com/Adfin-Engineering/mcp-server-adfin",
+    "created_at": "2025-03-19T14:22:05Z",
+    "updated_at": "2025-06-17T05:20:57Z",
+    "pushed_at": "2025-03-20T14:09:47Z",
+    "size": 19,
+    "stargazers_count": 6,
+    "watchers_count": 6,
+    "forks_count": 4,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "Adfin-Engineering",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/204034320?v=4",
+      "html_url": "https://github.com/Adfin-Engineering"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 4,
+    "subscribers_count": 2,
+    "languages": {
+      "Python": 10971
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 2
+  },
+  "readme": "## Requirements:\n1. Python 3.10 or higher\n\n## Step 1. Install uv:\n   - MacOS/Linux: curl -LsSf https://astral.sh/uv/install.sh | sh\n   - Windows: powershell -ExecutionPolicy ByPass -c \"irm https://astral.sh/uv/install.ps1 | iex\"\n\n## Step 2. Configure Claude Desktop\n1. Download [Claude Desktop](https://claude.ai/download).\n2. Launch Claude and go to Settings > Developer > Edit Config.\n3. Modify `claude_desktop_config.json` with:\n```json\n{\n  \"mcpServers\": {\n    \"Adfin\": {\n      \"command\": \"<home_path>/.local/bin/uv\",\n      \"args\": [\n        \"--directory\",\n        \"<absolute_path_to_adfin_mcp_folder>\",\n        \"run\",\n        \"main_adfin_mcp.py\"\n      ],\n      \"env\": {\n        \"ADFIN_EMAIL\": \"<email>\",\n        \"ADFIN_PASSWORD\": \"<password>\"\n      }\n    },\n    \"filesystem\": {\n      \"command\": \"<home_path>/.local/bin/uv\",\n      \"args\": [\n        \"--directory\",\n        \"<absolute_path_to_adfin_mcp_folder>\",\n        \"run\",\n        \"filesystem.py\"\n      ]\n    }\n  }\n}\n```\n4. Relaunch Claude Desktop.\n\nThe first time you open Claude Desktop with these setting it may take\n10-20 seconds before the Adfin tools appear in the interface due to\nthe installation of the required packages and the download of the most \nrecent Adfin API documentation.\n\nEverytime you launch Claude Desktop, the most recent Adfin API tools are made available \nto your AI assistant.\n\n## Step 3. Launch Claude Desktop and let your assistant help you\n### Examples\n**Request a credit control status**\n```text\nGive me a credit control status check.\n```\n**Create a new invoice**\n```text\nCreate a new invoice for 60 GBP for Abc Def that is due in a week. His email is abc.def@example.com.\n```\n**Ask the assistant to upload multiple invoices from your folder**\n```text\nUpload all pdf invoices from the invoices folder from my Desktop.\n```\n"
+}

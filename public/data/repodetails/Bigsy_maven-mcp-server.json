@@ -1,0 +1,53 @@
+{
+  "mcp_name": "Maven",
+  "mcp_description": "Tools to query latest Maven dependency information",
+  "mcp_id": "Bigsy_maven-mcp-server",
+  "fetch_timestamp": "2025-06-23T06:28:57.826163Z",
+  "github_url": "https://github.com/Bigsy/maven-mcp-server",
+  "repository": {
+    "name": "maven-mcp-server",
+    "full_name": "Bigsy/maven-mcp-server",
+    "description": "An MCP (Model Context Protocol) server that provides tools for checking Maven dependency versions.",
+    "html_url": "https://github.com/Bigsy/maven-mcp-server",
+    "created_at": "2024-12-17T21:09:30Z",
+    "updated_at": "2025-06-21T06:16:05Z",
+    "pushed_at": "2025-04-24T21:01:56Z",
+    "size": 43,
+    "stargazers_count": 10,
+    "watchers_count": 10,
+    "forks_count": 6,
+    "open_issues_count": 1,
+    "language": "JavaScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "Bigsy",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/354898?v=4",
+      "html_url": "https://github.com/Bigsy"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 6,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 9778,
+      "Dockerfile": 781
+    },
+    "language_percentages": {
+      "JavaScript": 92.6,
+      "Dockerfile": 7.4
+    },
+    "pull_requests_count": 3,
+    "contributors_count": 3,
+    "package_json_version": "0.1.3"
+  },
+  "readme": "<a href=\"https://www.npmjs.com/package/mcp-maven-deps\"><img src=\"https://img.shields.io/npm/v/mcp-maven-deps.svg\" alt=\"npm version\" /></a>\n# Maven Dependencies MCP Server\n\nAn MCP (Model Context Protocol) server that provides tools for checking Maven dependency versions. This server enables LLMs to verify Maven dependencies and retrieve their latest versions from Maven Central Repository.\n\n<a href=\"https://glama.ai/mcp/servers/juuo2ye0qi\"><img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/juuo2ye0qi/badge\" alt=\"maven-mcp-server MCP server\" /></a> \n\n\n## Installation\n\nYou can install this MCP server globally using npm:\n\n```bash\nnpm install -g mcp-maven-deps\n```\n\nOr run it directly using npx:\n\n```bash\nnpx mcp-maven-deps\n```\n\n### Installing via Smithery\n\nTo install Maven Dependencies Server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/maven-deps-server):\n\n```bash\nnpx -y @smithery/cli install maven-deps-server --client claude\n```\n\n## Features\n\n- Query the latest version of any Maven dependency\n- Verify if a Maven dependency exists\n- Check if a specific version of a dependency exists\n- Support for full Maven coordinates including packaging and classifier\n- Real-time access to Maven Central Repository data\n- Compatible with multiple build tool formats (Maven, Gradle, SBT, Mill)\n\n\n\nFor development:\n\n1. Clone this repository\n2. Install dependencies: `npm install`\n3. Build the server: `npm run build`\n\n## Configuration\n\nAdd the server to your MCP settings configuration file:\n\n```json\n{\n  \"mcpServers\": {\n    \"maven-deps-server\": {\n      \"command\": \"npx\",\n      \"args\": [\"mcp-maven-deps\"]\n    }\n  }\n}\n```\n\nIf installed globally, you can also use:\n\n```json\n{\n  \"mcpServers\": {\n    \"maven-deps-server\": {\n      \"command\": \"mcp-maven-deps\"\n    }\n  }\n}\n```\n\n## Transport Options\n\nThe server supports two transport modes:\n\n1. **stdio** (default) - Standard input/output communication\n2. **SSE** (Server-Sent Events) - HTTP-based communication with optional remote access\n\nTo use SSE transport, you can specify both host and port:\n\n```bash\n# Local access only (default host: localhost)\nnpx mcp-maven-deps --port=3000\n\n# Remote access\nnpx mcp-maven-deps --host=0.0.0.0 --port=3000\n```\n\nWhen using SSE transport in your MCP settings:\n\n```json\n{\n  \"mcpServers\": {\n    \"maven-deps-server\": {\n      \"command\": \"npx\",\n      \"args\": [\"mcp-maven-deps\", \"--port=3000\"]\n    }\n  }\n}\n```\n\nFor remote access, use the server's IP or hostname in your client configuration:\n\n```json\n{\n  \"mcpServers\": {\n    \"maven-deps-server\": {\n      \"command\": \"npx\",\n      \"args\": [\"mcp-maven-deps\", \"--host=your-server-ip\", \"--port=3000\"]\n    }\n  }\n}\n```\n\n## Available Tools\n\n### get_maven_latest_version\n\nRetrieves the latest version of a Maven dependency.\n\n**Input Schema:**\n```json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"dependency\": {\n      \"type\": \"string\",\n      \"description\": \"Maven coordinate in format \\\"groupId:artifactId[:version][:packaging][:classifier]\\\" (e.g. \\\"org.springframework:spring-core\\\" or \\\"org.springframework:spring-core:5.3.20:jar\\\")\"\n    }\n  },\n  \"required\": [\"dependency\"]\n}\n```\n\n**Example Usage:**\n```typescript\nconst result = await mcpClient.callTool(\"maven-deps-server\", \"get_maven_latest_version\", {\n  dependency: \"org.springframework:spring-core\"\n});\n// Returns: \"6.2.2\"\n```\n\n### check_maven_version_exists\n\nChecks if a specific version of a Maven dependency exists. The version can be provided either in the dependency string or as a separate parameter.\n\n**Input Schema:**\n```json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"dependency\": {\n      \"type\": \"string\",\n      \"description\": \"Maven coordinate in format \\\"groupId:artifactId[:version][:packaging][:classifier]\\\" (e.g. \\\"org.springframework:spring-core\\\" or \\\"org.springframework:spring-core:5.3.20:jar\\\")\"\n    },\n    \"version\": {\n      \"type\": \"string\",\n      \"description\": \"Version to check if not included in dependency string\"\n    }\n  },\n  \"required\": [\"dependency\"]\n}\n```\n\n**Example Usage:**\n```typescript\n// Using version in dependency string\nconst result1 = await mcpClient.callTool(\"maven-deps-server\", \"check_maven_version_exists\", {\n  dependency: \"org.springframework:spring-core:5.3.20\"\n});\n\n// Using separate version parameter\nconst result2 = await mcpClient.callTool(\"maven-deps-server\", \"check_maven_version_exists\", {\n  dependency: \"org.springframework:spring-core\",\n  version: \"5.3.20\"\n});\n```\n\n## Implementation Details\n\n- Uses Maven Central's REST API to fetch dependency information\n- Supports full Maven coordinates (groupId:artifactId:version:packaging:classifier)\n- Sorts results by timestamp to ensure the latest version is returned\n- Includes error handling for invalid dependencies and API issues\n- Returns clean, parseable version strings for valid dependencies\n- Provides boolean responses for version existence checks\n\n## Error Handling\n\nThe server handles various error cases:\n- Invalid dependency format\n- Invalid version format\n- Non-existent dependencies\n- API connection issues\n- Malformed responses\n- Missing version information\n\n## Development\n\nTo modify or extend the server:\n\n1. Make changes to `src/index.ts`\n2. Rebuild using `npm run build`\n3. Restart the MCP server to apply changes\n\n## License\n\nMIT\n"
+}

@@ -1,0 +1,113 @@
+{
+  "id": "efc9effb0603",
+  "owner": "kukapay",
+  "repoName": "thegraph-mcp",
+  "fullDescription": "🐍 ☁️ -  An MCP server that powers AI agents with indexed blockchain data from The Graph.",
+  "techStack": [
+    {
+      "name": "typescript",
+      "icon": "📘",
+      "color": "#3178c6"
+    }
+  ],
+  "serviceTypes": [
+    {
+      "type": "data",
+      "label": "Data",
+      "icon": "📊",
+      "description": "Manages, processes, or analyzes data"
+    },
+    {
+      "type": "ai",
+      "label": "Ai",
+      "icon": "🤖",
+      "description": "Leverages AI and machine learning"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "moderate",
+    "maturity": "stable",
+    "deployment": [
+      "local"
+    ],
+    "featured": false,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 3.9,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "crypto",
+      "blockchain"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/kukapay/thegraph-mcp",
+    "owner": "kukapay",
+    "name": "thegraph-mcp",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.281Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "finance-crypto",
+    "data",
+    "indexing",
+    "blockchain",
+    "the graph"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Moderate",
+      "color": "#eab308",
+      "icon": "🟡"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    }
+  ],
+  "icon": "📊",
+  "readme": null
+}

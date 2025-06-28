@@ -1,0 +1,82 @@
+{
+  "mcp_name": "Keycloak",
+  "mcp_description": "MCP server implementation for managing Keycloak users, groups, and realms using natural language queries.",
+  "mcp_id": "ChristophEnglisch_keycloak-model-context-protocol",
+  "fetch_timestamp": "2025-06-23T05:47:27.779527Z",
+  "github_url": "https://github.com/ChristophEnglisch/keycloak-model-context-protocol",
+  "repository": {
+    "name": "keycloak-model-context-protocol",
+    "full_name": "ChristophEnglisch/keycloak-model-context-protocol",
+    "description": "MCP server implementation for Keycloak user management. Enables AI-powered administration of Keycloak users and realms through the Model Context Protocol (MCP). Seamlessly integrates with Claude Desktop and other MCP clients for automated user operations.",
+    "html_url": "https://github.com/ChristophEnglisch/keycloak-model-context-protocol",
+    "created_at": "2025-01-06T13:24:02Z",
+    "updated_at": "2025-06-22T21:33:21Z",
+    "pushed_at": "2025-02-09T21:21:14Z",
+    "size": 13,
+    "stargazers_count": 24,
+    "watchers_count": 24,
+    "forks_count": 9,
+    "open_issues_count": 5,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [
+      "ai-tools",
+      "authentication",
+      "claude-desktop",
+      "identity-management",
+      "keycloak",
+      "keycloak-admin",
+      "mcp",
+      "model-context-protocol",
+      "node",
+      "typescript",
+      "user-management"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "ChristophEnglisch",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/58257386?v=4",
+      "html_url": "https://github.com/ChristophEnglisch"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 9,
+    "subscribers_count": 2,
+    "languages": {
+      "TypeScript": 5028
+    },
+    "language_percentages": {
+      "TypeScript": 100
+    },
+    "pull_requests_count": 5,
+    "contributors_count": 3,
+    "latest_release": {
+      "tag_name": "v0.0.2",
+      "name": "v0.0.2",
+      "published_at": "2025-01-08T21:26:50Z",
+      "body": "# Release Notes\r\n\r\n## Version 0.0.2\r\nReleased on January 8, 2025\r\n\r\n### Changes\r\n- Fixed binary name in package.json to match npm package name\r\n- Enhanced installation and usage documentation\r\n  - Added npm remote installation instructions\r\n  - Improved configuration examples for both remote and local development\r\n  - Added testing section with MCP Inspector instructions\r\n- Updated documentation structure for better readability\r\n\r\n### Breaking Changes\r\nNone\r\n\r\n### Known Issues\r\nNone\r\n\r\n### Installation\r\n```bash\r\nnpm install -g keycloak-model-context-protocol\r\n```\r\n\r\n### Configuration in Claude Desktop\r\n```json\r\n{\r\n  \"mcpServers\": {\r\n    \"keycloak\": {\r\n      \"command\": \"npx\",\r\n      \"args\": [\"-y\", \"keycloak-model-context-protocol\"],\r\n      \"env\": {\r\n        \"KEYCLOAK_URL\": \"http://localhost:8080\",\r\n        \"KEYCLOAK_ADMIN\": \"admin\",\r\n        \"KEYCLOAK_ADMIN_PASSWORD\": \"admin\"\r\n      }\r\n    }\r\n  }\r\n}\r\n```\r\n\r\n**Full Changelog**: https://github.com/ChristophEnglisch/keycloak-model-context-protocol/compare/v0.0.1...v0.0.2",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.0.2",
+        "commit_sha": "9dba6f09e83c04ee6e411476add409025b631d86"
+      },
+      {
+        "name": "v0.0.1",
+        "commit_sha": "0784bb988485877f562bb5bb6d5afe7eb1949552"
+      }
+    ],
+    "latest_version": "v0.0.2",
+    "package_json_version": "0.0.2"
+  },
+  "readme": "# Keycloak MCP Server\n\n[![smithery badge](https://smithery.ai/badge/keycloak-model-context-protocol)](https://smithery.ai/server/keycloak-model-context-protocol)\n\nA Model Context Protocol server for Keycloak administration, providing tools to manage users and realms.\n\n## Features\n\n- Create new users in specific realms\n- Delete users from realms\n- List available realms\n- List users in specific realms\n\n## Installation\n\n### Installing via Smithery\n\nTo install Keycloak for Claude Desktop automatically via [Smithery](https://smithery.ai/server/keycloak-model-context-protocol):\n\n```bash\nnpx -y @smithery/cli install keycloak-model-context-protocol --client claude\n```\n\n### Via NPM (Recommended)\n\nThe server is available as an NPM package:\n```bash\n# Direct usage with npx\nnpx -y keycloak-model-context-protocol\n\n# Or global installation\nnpm install -g keycloak-model-context-protocol\n```\n\n### Local Development Setup\n\nIf you want to develop or modify the server:\n\n```bash\ngit clone <repository-url>\ncd keycloak-model-context-protocol\nnpm install\nnpm run build\n```\n\n## Configuration\n\n### Using NPM Package (Recommended)\nConfigure the server in your Claude Desktop configuration file:\n\n```json\n{\n  \"mcpServers\": {\n    \"keycloak\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"keycloak-model-context-protocol\"],\n      \"env\": {\n        \"KEYCLOAK_URL\": \"http://localhost:8080\",\n        \"KEYCLOAK_ADMIN\": \"admin\",\n        \"KEYCLOAK_ADMIN_PASSWORD\": \"admin\"\n      }\n    }\n  }\n}\n```\n\n### For Local Development\n```json\n{\n  \"mcpServers\": {\n    \"keycloak\": {\n      \"command\": \"node\",\n      \"args\": [\"path/to/dist/index.js\"],\n      \"env\": {\n        \"KEYCLOAK_URL\": \"http://localhost:8080\",\n        \"KEYCLOAK_ADMIN\": \"admin\",\n        \"KEYCLOAK_ADMIN_PASSWORD\": \"admin\"\n      }\n    }\n  }\n}\n```\n\n## Available Tools\n\n### create-user\nCreates a new user in a specified realm.\n\n**Inputs**:\n- `realm`: The realm name\n- `username`: Username for the new user\n- `email`: Email address for the user\n- `firstName`: User's first name\n- `lastName`: User's last name\n\n### delete-user\nDeletes a user from a specified realm.\n\n**Inputs**:\n- `realm`: The realm name\n- `userId`: The ID of the user to delete\n\n### list-realms\nLists all available realms.\n\n### list-users\nLists all users in a specified realm.\n\n**Inputs**:\n- `realm`: The realm name\n\n## Development\n\n```bash\nnpm run watch\n```\n\n## Testing\n\nTo test the server using MCP Inspector:\n\n```bash\nnpx -y @modelcontextprotocol/inspector npx -y keycloak-model-context-protocol\n```\n\n## Deployment\n\n### NPM Package\n\nThis project is automatically published to [NPM](https://www.npmjs.com/package/keycloak-model-context-protocol) via GitHub Actions when a new release is published on GitHub.\n\n#### Setup Requirements for Deployment\n\n1. Create NPM account and get access token\n2. Add NPM_TOKEN secret to GitHub repository\n   - Go to repository Settings > Secrets\n   - Add new secret named `NPM_TOKEN`\n   - Paste your NPM access token as the value\n\n## Prerequisites\n\n- Node.js 18 or higher\n- Running Keycloak instance\n"
+}

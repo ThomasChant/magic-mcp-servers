@@ -1,0 +1,58 @@
+{
+  "mcp_name": "Audiense Insights",
+  "mcp_description": "Marketing insights and audience analysis from [Audiense](https://www.audiense.com/products/audiense-insights) reports, covering demographic, cultural, influencer, and content engagement analysis.",
+  "mcp_id": "AudienseCo_mcp-audiense-insights",
+  "fetch_timestamp": "2025-06-23T01:22:15.987207Z",
+  "github_url": "https://github.com/AudienseCo/mcp-audiense-insights",
+  "repository": {
+    "name": "mcp-audiense-insights",
+    "full_name": "AudienseCo/mcp-audiense-insights",
+    "description": "Audiense Insights MCP Server is a server based on the Model Context Protocol (MCP) that allows Claude and other MCP-compatible clients to interact with your Audiense Insights account",
+    "html_url": "https://github.com/AudienseCo/mcp-audiense-insights",
+    "created_at": "2025-01-31T16:14:54Z",
+    "updated_at": "2025-06-20T23:06:27Z",
+    "pushed_at": "2025-06-16T14:35:07Z",
+    "size": 164,
+    "stargazers_count": 13,
+    "watchers_count": 13,
+    "forks_count": 8,
+    "open_issues_count": 2,
+    "language": "TypeScript",
+    "license": "Apache License 2.0",
+    "topics": [
+      "mcp",
+      "modelcontextprotocol"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "AudienseCo",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2454008?v=4",
+      "html_url": "https://github.com/AudienseCo"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 8,
+    "subscribers_count": 10,
+    "languages": {
+      "TypeScript": 111398,
+      "JavaScript": 14179,
+      "Dockerfile": 1147
+    },
+    "language_percentages": {
+      "TypeScript": 87.91,
+      "JavaScript": 11.19,
+      "Dockerfile": 0.91
+    },
+    "pull_requests_count": 4,
+    "contributors_count": 5,
+    "package_json_version": "0.2.0"
+  },
+  "readme": "## ⚠️ **Deprecated**\n\n## 🚫 This repository is no longer maintained.\n\n>The Audiense Insights MCP has been migrated to a remote model. For more information on how to use the new remote MCP, please reach us at [support@audiense.com](mailto:support@audiense.com).\n\n---\n---\n\n## 🏆 Audiense Insights MCP Server\n\nThis server, based on the [Model Context Protocol (MCP)](https://github.com/modelcontextprotocol), allows **Claude** or any other MCP-compatible client to interact with your [Audiense Insights](https://www.audiense.com/) account. It extracts **marketing insights and audience analysis** from Audiense reports, covering **demographic, cultural, influencer, and content engagement analysis**.\n\n\n## 🚀 Prerequisites\n\nBefore using this server, ensure you have:\n\n- **Node.js** (v18 or higher)\n- **Claude Desktop App**\n- **Audiense Insights Account** with API credentials\n- **X/Twitter API Bearer Token** _(optional, for enriched influencer data)_\n\n---\n\n## ⚙️ Configuring Claude Desktop\n\n1. Open the configuration file for Claude Desktop:\n\n   - **MacOS:**\n     ```bash\n     code ~/Library/Application\\ Support/Claude/claude_desktop_config.json\n     ```\n   - **Windows:**\n     ```bash\n     code %AppData%\\Claude\\claude_desktop_config.json\n     ```\n\n2. Add or update the following configuration:\n\n   ```json\n   \"mcpServers\": {\n     \"audiense-insights\": {\n       \"command\": \"npx\",\n       \"args\": [\n        \"-y\",\n         \"mcp-audiense-insights\"\n       ],\n       \"env\": {\n         \"AUDIENSE_CLIENT_ID\": \"your_client_id_here\",\n         \"AUDIENSE_CLIENT_SECRET\": \"your_client_secret_here\",\n         \"TWITTER_BEARER_TOKEN\": \"your_token_here\"\n       }          \n     }     \n   }\n\n3.\tSave the file and restart Claude Desktop.\n\n## 🛠️ Available Tools\n### 📌 `get-reports`\n**Description**: Retrieves the list of **Audiense insights reports** owned by the authenticated user.\n\n- **Parameters**: _None_\n- **Response**:\n  - List of reports in JSON format.\n\n---\n\n### 📌 `get-report-info`\n**Description**: Fetches detailed information about a **specific intelligence report**, including:\n  - Status\n  - Segmentation type\n  - Audience size\n  - Segments\n  - Access links\n\n- **Parameters**:\n  - `report_id` _(string)_: The ID of the intelligence report.\n\n- **Response**:\n  - Full report details in JSON format.\n  - If the report is still processing, returns a message indicating the pending status.\n\n---\n\n### 📌 `get-audience-insights`\n**Description**: Retrieves **aggregated insights** for a given **audience**, including:\n  - **Demographics**: Gender, age, country.\n  - **Behavioral traits**: Active hours, platform usage.\n  - **Psychographics**: Personality traits, interests.\n  - **Socioeconomic factors**: Income, education status.\n\n- **Parameters**:\n  - `audience_insights_id` _(string)_: The ID of the audience insights.\n  - `insights` _(array of strings, optional)_: List of specific insight names to filter.\n\n- **Response**:\n  - Insights formatted as a structured text list.\n\n---\n\n### 📌 `get-baselines`\n**Description**: Retrieves available **baseline audiences**, optionally filtered by **country**.\n\n- **Parameters**:\n  - `country` _(string, optional)_: ISO country code to filter by.\n\n- **Response**:\n  - List of baseline audiences in JSON format.\n\n---\n\n### 📌 `get-categories`\n**Description**: Retrieves the list of **available affinity categories** that can be used in influencer comparisons.\n\n- **Parameters**: _None_\n- **Response**:\n  - List of categories in JSON format.\n\n---\n\n### 📌 `compare-audience-influencers`\n**Description**: Compares **influencers** of a given audience with a **baseline audience**. The baseline is determined as follows:\n  - If a **single country** represents more than 50% of the audience, that country is used as the baseline.\n  - Otherwise, the **global baseline** is used.\n  - If a **specific segment** is selected, the full audience is used as the baseline.\n\nEach influencer comparison includes:\n  - **Affinity (%)** – How well the influencer aligns with the audience.\n  - **Baseline Affinity (%)** – The influencer’s affinity within the baseline audience.\n  - **Uniqueness Score** – How distinct the influencer is compared to the baseline.\n\n- **Parameters**:\n  - `audience_influencers_id` _(string)_: ID of the audience influencers.\n  - `baseline_audience_influencers_id` _(string)_: ID of the baseline audience influencers.\n  - `cursor` _(number, optional)_: Pagination cursor.\n  - `count` _(number, optional)_: Number of items per page (default: 200).\n  - `bio_keyword` _(string, optional)_: Filter influencers by **bio keyword**.\n  - `entity_type` _(enum: `person` | `brand`, optional)_: Filter by entity type.\n  - `followers_min` _(number, optional)_: Minimum number of followers.\n  - `followers_max` _(number, optional)_: Maximum number of followers.\n  - `categories` _(array of strings, optional)_: Filter influencers by **categories**.\n  - `countries` _(array of strings, optional)_: Filter influencers by **country ISO codes**.\n\n- **Response**:\n  - List of influencers with **affinity scores, baseline comparison, and uniqueness scores** in JSON format.\n\n---\n\n### 📌 `get-audience-content`\n**Description**: Retrieves **audience content engagement details**, including:\n  - **Liked Content**: Most popular posts, domains, emojis, hashtags, links, media, and a word cloud.\n  - **Shared Content**: Most shared content categorized similarly.\n  - **Influential Content**: Content from influential accounts.\n\nEach category contains:\n  - `popularPost`: Most engaged posts.\n  - `topDomains`: Most mentioned domains.\n  - `topEmojis`: Most used emojis.\n  - `topHashtags`: Most used hashtags.\n  - `topLinks`: Most shared links.\n  - `topMedia`: Shared media.\n  - `wordcloud`: Most frequently used words.\n\n- **Parameters**:\n  - `audience_content_id` _(string)_: The ID of the audience content.\n\n- **Response**:\n  - Content engagement data in JSON format.\n\n---\n\n### 📌 `report-summary`\n**Description**: Generates a **comprehensive summary** of an Audiense report, including:\n  - Report metadata (title, segmentation type)\n  - Full audience size\n  - Detailed segment information\n  - **Top insights** for each segment (bio keywords, demographics, interests)\n  - **Top influencers** for each segment with comparison metrics\n\n- **Parameters**:\n  - `report_id` _(string)_: The ID of the intelligence report to summarize.\n\n- **Response**:\n  - Complete report summary in JSON format with structured data for each segment\n  - For pending reports: Status message indicating the report is still processing\n  - For reports without segments: Message indicating there are no segments to analyze\n\n## 💡 Predefined Prompts\n\nThis server includes a preconfigured prompts\n- `audiense-demo`: Helps analyze Audiense reports interactively.\n- `segment-matching`: A prompt to match and compare audience segments across Audiense reports, identifying similarities, unique traits, and key insights based on demographics, interests, influencers, and engagement patterns.\n\n\n**Usage:**\n- Accepts a reportName argument to find the most relevant report.\n- If an ID is provided, it searches by report ID instead.\n\nUse case: Structured guidance for audience analysis.\n\n## 🛠️ Troubleshooting\n\n### Tools Not Appearing in Claude\n1.\tCheck Claude Desktop logs:\n\n```\ntail -f ~/Library/Logs/Claude/mcp*.log\n```\n2.\tVerify environment variables are set correctly.\n3.\tEnsure the absolute path to index.js is correct.\n\n### Authentication Issues\n- Double-check OAuth credentials.\n- Ensure the refresh token is still valid.\n- Verify that the required API scopes are enabled.\n\n## 📜 Viewing Logs\n\nTo check server logs:\n\n### For MacOS/Linux:\n```\ntail -n 20 -f ~/Library/Logs/Claude/mcp*.log\n```\n\n### For Windows:\n```\nGet-Content -Path \"$env:AppData\\Claude\\Logs\\mcp*.log\" -Wait -Tail 20\n```\n\n## 🔐 Security Considerations\n\n- Keep API credentials secure – never expose them in public repositories.\n- Use environment variables to manage sensitive data.\n\n## 📄 License\n\nThis project is licensed under the Apache 2.0 License. See the LICENSE file for more details.\n"
+}

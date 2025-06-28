@@ -1,0 +1,114 @@
+{
+  "mcp_name": "FrankfurterMCP",
+  "mcp_description": "MCP server acting as an interface to the [Frankfurter API](https://frankfurter.dev/) for currency exchange data.",
+  "mcp_id": "anirbanbasu_frankfurtermcp",
+  "fetch_timestamp": "2025-06-23T03:35:23.887831Z",
+  "github_url": "https://github.com/anirbanbasu/frankfurtermcp",
+  "repository": {
+    "name": "frankfurtermcp",
+    "full_name": "anirbanbasu/frankfurtermcp",
+    "description": "A MCP server for the Frankfurter API for currency exchange rates.",
+    "html_url": "https://github.com/anirbanbasu/frankfurtermcp",
+    "created_at": "2025-06-07T08:31:11Z",
+    "updated_at": "2025-06-21T09:25:37Z",
+    "pushed_at": "2025-06-21T09:28:03Z",
+    "size": 5182,
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 1,
+    "open_issues_count": 1,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [
+      "currency-converter",
+      "currency-exchange-rates",
+      "fastmcp",
+      "finance",
+      "frankfurter-api",
+      "mcp",
+      "mcp-composition",
+      "mcp-server",
+      "model-context-protocol",
+      "model-context-protocol-server"
+    ],
+    "default_branch": "master",
+    "owner": {
+      "login": "anirbanbasu",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/625357?v=4",
+      "html_url": "https://github.com/anirbanbasu"
+    },
+    "has_issues": true,
+    "has_projects": false,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 0,
+    "languages": {
+      "Python": 38632,
+      "Dockerfile": 1092
+    },
+    "language_percentages": {
+      "Python": 97.25,
+      "Dockerfile": 2.75
+    },
+    "pull_requests_count": 7,
+    "contributors_count": 2,
+    "latest_release": {
+      "tag_name": "v.0.2.5",
+      "name": "0.2.5",
+      "published_at": "2025-06-21T09:28:03Z",
+      "body": " * Added _experimental_ metadata in MCP responses.\r\n\r\n**Full Changelog**: https://github.com/anirbanbasu/frankfurtermcp/compare/v.0.2.4...v.0.2.5",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v.0.2.5",
+        "commit_sha": "0ebd2371400cada30c2e45d43287eab74fd2f4c8"
+      },
+      {
+        "name": "v.0.2.4",
+        "commit_sha": "e8ad3be55ccd68391b8792f19c62ba9ae1834737"
+      },
+      {
+        "name": "v.0.2.3",
+        "commit_sha": "bc49b18f8dd6b0e9cd57cd41f1b7f621173be547"
+      },
+      {
+        "name": "v.0.2.2",
+        "commit_sha": "7e0c6d98641703b6051c974540e6677a7cf79872"
+      },
+      {
+        "name": "v.0.2.1",
+        "commit_sha": "707cd22069aa190f9150b83becd4a0653938c0af"
+      },
+      {
+        "name": "v.0.2.0",
+        "commit_sha": "2f2d7fd2e5e2dbc7b3f7fda723659cde6402c7f3"
+      },
+      {
+        "name": "v.0.1.8",
+        "commit_sha": "501ab120532adb494e8f30d0aadd05845aef8559"
+      },
+      {
+        "name": "v.0.1.6",
+        "commit_sha": "06875787d03158dfc649e036efa8c9018155621f"
+      },
+      {
+        "name": "v.0.1.5",
+        "commit_sha": "3161483cc20e833f24a33243df4700de90f0336e"
+      },
+      {
+        "name": "v.0.1.2",
+        "commit_sha": "3040c2cb0e45037a37355a17e5b7ecb7402fdb7c"
+      }
+    ],
+    "latest_version": "v.0.2.5"
+  },
+  "readme": "[![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue?logo=python&logoColor=3776ab&labelColor=e4e4e4)](https://www.python.org/downloads/release/python-3120/) [![pytest](https://github.com/anirbanbasu/frankfurtermcp/actions/workflows/uv-pytest.yml/badge.svg)](https://github.com/anirbanbasu/frankfurtermcp/actions/workflows/uv-pytest.yml) [![PyPI](https://img.shields.io/pypi/v/frankfurtermcp?label=pypi%20package)](https://pypi.org/project/frankfurtermcp/#history)\n[![PyPI - Downloads](https://img.shields.io/pypi/dm/frankfurtermcp?label=pypi%20downloads)](https://pypi.org/project/frankfurtermcp/)\n\n# Frankfurter MCP\n\n[Frankfurter](https://frankfurter.dev/) is a useful API for latest currency exchange rates, historical data, or time series published by sources such as the European Central Bank. Should you have to access the Frankfurter API as tools for language model agents exposed over the Model Context Protocol (MCP), Frankfurter MCP is what you need.\n\n## Project status\n\nFollowing is a table of some updates regarding the project status. Note that these do not correspond to specific commits or milestones.\n\n| Date     |  Status   |  Notes or observations   |\n|----------|:-------------:|----------------------|\n| June 13, 2025 |  active |  Added LlamaIndex tool listing for demonstration only. (The `--all-extras` flag is necessary to install LlamaIndex, which is not installed by default.) |\n| June 9, 2025 |  active |  Added containerisation, support for self-signed, proxies. |\n| June 8, 2025 |  active |  Added dynamic composition. |\n| June 7, 2025 |  active |  Added tools to cover all the functionalities of the Frankfurter API. |\n| June 7, 2025 |  active |  Project started.  |\n\n## Installation\n\nThe directory where you clone this repository will be referred to as the _working directory_ or _WD_ hereinafter.\n\nInstall [uv](https://docs.astral.sh/uv/getting-started/installation/). To install the project with its minimal dependencies in a virtual environment, run the following in the _WD_. To install all non-essential dependencies (_which are required for developing and testing_), replace the `--no-dev` with the `--all-groups` flag in the following command.\n\n```bash\nuv sync --no-dev\n```\n\n## Environment variables\n\nFollowing is a list of environment variables that can be used to configure the application. A template of environment variables is provided in the file `.env.template`.\n\nThe following environment variables can be specified, prefixed with `FASTMCP_`: `HOST`, `PORT`, `DEBUG` and `LOG_LEVEL`. See [global configuration options](https://gofastmcp.com/servers/fastmcp#global-settings) for FastMCP. Note that `on_duplicate_` prefixed options specified as environment variables _will be ignored_.\n\nThe underlying HTTP client also respects some environment variables, as documented in [the HTTPX library](https://www.python-httpx.org/environment_variables/). In addition, `SSL_CERT_FILE` and `SSL_CERT_DIR` can be configured to so that\n\n| Variable |  [Default value] and description   |\n|--------------|----------------|\n| `HTTPX_TIMEOUT` | [5.0] The time for the underlying HTTP client to wait, in seconds, for a response. |\n| `HTTPX_VERIFY_SSL` | [True] This variable can be set to False to turn off SSL certificate verification, if, for instance, you are using a proxy server with a self-signed certificate. However, setting this to False _is advised against_: instead, use the `SSL_CERT_FILE` and `SSL_CERT_DIR` variables to properly configure self-signed certificates. |\n| `FAST_MCP_HOST` | [0.0.0.0] This variable specifies which host the MCP server must bind to unless the server transport (see below) is set to `stdio`. |\n| `FAST_MCP_PORT` | [8000] This variable specifies which port the MCP server must listen on unless the server transport (see below) is set to `stdio`. |\n| `MCP_SERVER_TRANSPORT` | [streamable-http] The acceptable options are `stdio`, `sse` or `streamable-http`. Given the use-case of running this MCP server as a remotely accessible endpoint, there is no real reason to choose `stdio`. |\n| `MCP_SERVER_INCLUDE_METADATA_IN_RESPONSE` | [True] An _experimental feature_ to include additional metadata to the MCP type `TextContent` that wraps the response data from each tool call. The additional metadata, for example, will include (as of June 21, 2025) the API URL of the Frankfurter server that is used to obtain the responses. |\n| `FRANKFURTER_API_URL` | [https://api.frankfurter.dev/v1] If you are [self-hosting the Frankfurter API](https://hub.docker.com/r/lineofflight/frankfurter), you should change this to the API endpoint address of your deployment. |\n\n## Usage (with `pip`)\n\nAdd this package from PyPI using `pip` in a virtual environment (possibly managed by `conda` or `pyenv`) and then start the server by running the following.\n\nAdd a `.env` file with the contents of the `.env.template` file if you wish to modify the default values of the aforementioned environment variables. Or, on your shell, you can export the environment variables that you wish to modify.\n\n```bash\npip install frankfurtermcp\npython -m frankfurtermcp.server\n```\n\n## Usage (self-hosted server using `uv`)\n\nCopy the `.env.template` file to a `.env` file in the _WD_, to modify the aforementioned environment variables, if you want to use anything other than the default settings. Or, on your shell, you can export the environment variables that you wish to modify.\n\nRun the following in the _WD_ to start the MCP server.\n\n```bash\nuv run frankfurtermcp\n```\n\nIf you want to run it without `uv`, assuming that the appropriate virtual environment has been created in the `.venv` within the _WD_, you can start the server calling the following.\n\n```bash\n./.venv/bin/python -m frankfurtermcp.server\n```\n\nThe MCP endpoint will be available over HTTP at [http://localhost:8000/sse](http://localhost:8000/sse) for the Server Sent Events (SSE) transport, or [http://localhost:8000/mcp](http://localhost:8000/mcp) for the streamable HTTP transport. To exit the server, use the Ctrl+C key combination.\n\n## Usage (self-hosted server using Docker)\n\nThere is one Dockerfile provided in this repository.\n\n - `local.dockerfile` for using the latest version, which can contain your edits to the code if you do make edits.\n\nTo build the image, create the container and start it, run the following in _WD_. _Choose shorter names for the image and container if you prefer._\n\nIf you change the port to anything other than 8000 in `.env.template`, _do remember to change the port number references in the following command_. Instead of passing all the environment variables using the `--env-file` option, you can also pass individual environment variables using the `-e` option.\n\n```bash\ndocker build -f local.dockerfile -t frankfurtermcp .\ndocker create -p 8000:8000/tcp --env-file .env.template --expose 8000 --name frankfurtermcp-container frankfurtermcp\ndocker start frankfurtermcp-container\n```\n\nUpon successful build and container start, the MCP server will be available over HTTP at [http://localhost:8000/sse](http://localhost:8000/sse) for the Server Sent Events (SSE) transport, or [http://localhost:8000/mcp](http://localhost:8000/mcp) for the streamable HTTP transport.\n\n## Usage (dynamic mounting with FastMCP)\n\nTo see how to use the MCP server by mounting it dynamically with [FastMCP](https://gofastmcp.com/), check the file [`src/frankfurtermcp/composition.py`](https://github.com/anirbanbasu/frankfurtermcp/blob/master/src/frankfurtermcp/composition.py).\n\n## List of available tools\n\nThe following table lists the names of the tools as exposed by the FrankfurterMCP server. It does not list the tool(s) exposed through [the composition example](https://github.com/anirbanbasu/frankfurtermcp/blob/master/src/frankfurtermcp/composition.py). The descriptions shown here are for documentation purposes, which may differ from the actual descriptions exposed over the model context protocol.\n\n| Name         |  Description   |\n|--------------|----------------|\n| `get_supported_currencies` | Get a list of currencies supported by the Frankfurter API. |\n| `get_latest_exchange_rates` | Get latest exchange rates in specific currencies for a given base currency. |\n| `convert_currency_latest` | Convert an amount from one currency to another using the latest exchange rates. |\n| `get_historical_exchange_rates` | Get historical exchange rates for a specific date or date range in specific currencies for a given base currency. |\n| `convert_currency_specific_date` | Convert an amount from one currency to another using the exchange rates for a specific date. |\n\nThe required and optional arguments for each tool are not listed in the following table for brevity but are available to the MCP client over the protocol.\n\nIf you want to see the detailed schema for a particular tool, you can do so using the `tools-info` commmand from the command line interface. The command line interface is available as the script `cli`. You can invoke its help to see the available commands as follows.\n\n```bash\nuv run cli --help\n```\n\nThis will produce an output similar to the screenshot below.\n\n![cli-help-screenshot](https://raw.githubusercontent.com/anirbanbasu/frankfurtermcp/master/screenshots/cli-help.png \"FrankfurterMCP CLI help\")\n\nBefore calling the `tools-info` command, you **MUST** have the server running in `streamable-http` or `sse` transport mode, preferably locally, e.g., by invoking `uv run frankfurtermcp`. A successful call of the `tools-info` command will generate an output similar to the screenshot shown below.\n\n![cli-tools-info-screenshot](https://raw.githubusercontent.com/anirbanbasu/frankfurtermcp/master/screenshots/cli-tools-info.png \"FrankfurterMCP CLI tools-info\")\n\nAlternative to the `tools-info` command, you can also run call the `llamaindex-tools-list` command to display the names of the tools without the respective function schemas. This functionality is provided only to optionally demonstrate that the LlamaIndex MCP client can read the tools list from this MCP server. In order for this to function, you must install LlamaIndex MCP client by calling `uv sync --extra opt`. The output of calling this command will look like the following.\n\n![cli-llamaindex-tools-list-screenshot](https://raw.githubusercontent.com/anirbanbasu/frankfurtermcp/master/screenshots/cli-llamaindex-tools-list.png \"FrankfurterMCP CLI llamaindex-tools-list\")\n\n## Contributing\n\nInstall [`pre-commit`](https://pre-commit.com/) for Git and [`ruff`](https://docs.astral.sh/ruff/installation/). Then enable `pre-commit` by running the following in the _WD_.\n\n```bash\npre-commit install\n```\nPull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.\n\n## Testing\n\nTo run the provided test cases, execute the following. Add the flag `--capture=tee-sys` to the command to display further console output.\n\n_Note that for the tests to succeed, the environment variable `MCP_SERVER_TRANSPORT` must be set to either `sse` or `streamable-http`, or not set at all, in which case it will default to `streamable-http`_.\n\n```bash\nuv run --group test pytest tests/\n```\n\n## License\n\n[MIT](https://choosealicense.com/licenses/mit/).\n"
+}

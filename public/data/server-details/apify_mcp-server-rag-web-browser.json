@@ -1,0 +1,111 @@
+{
+  "id": "ef09e74b4cb7",
+  "owner": "apify",
+  "repoName": "mcp-server-rag-web-browser",
+  "fullDescription": "📇 ☁️ - An MCP server for Apify's open-source RAG Web Browser Actor to perform web searches, scrape URLs, and return content in Markdown.",
+  "techStack": [],
+  "serviceTypes": [
+    {
+      "type": "integration",
+      "label": "Integration",
+      "icon": "🔗",
+      "description": "Connects to external APIs and services"
+    },
+    {
+      "type": "content",
+      "label": "Content",
+      "icon": "📝",
+      "description": "Manages and processes content"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "simple",
+    "maturity": "stable",
+    "deployment": [
+      "saas"
+    ],
+    "featured": true,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 1.95,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "markdown"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/apify/mcp-server-rag-web-browser",
+    "owner": "RAG Web Browser",
+    "name": "RAG Web Browser",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.281Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "mcp",
+    "utilities-tools",
+    "api",
+    "server"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Simple",
+      "color": "#22c55e",
+      "icon": "🟢"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    },
+    {
+      "type": "featured",
+      "label": "Featured",
+      "color": "#3b82f6",
+      "icon": "⭐"
+    }
+  ],
+  "icon": "🔗",
+  "readme": null
+}

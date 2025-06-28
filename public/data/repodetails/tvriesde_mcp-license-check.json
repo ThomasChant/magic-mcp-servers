@@ -1,0 +1,53 @@
+{
+  "mcp_name": "tvriesde/mcp-license-check",
+  "mcp_description": "Provides vehicle data based on Dutch license plates through a simple MCP server.",
+  "mcp_id": "tvriesde_mcp-license-check",
+  "fetch_timestamp": "2025-06-23T09:08:26.764801Z",
+  "github_url": "https://github.com/tvriesde/mcp-license-check",
+  "repository": {
+    "name": "mcp-license-check",
+    "full_name": "tvriesde/mcp-license-check",
+    "description": null,
+    "html_url": "https://github.com/tvriesde/mcp-license-check",
+    "created_at": "2025-04-24T13:25:35Z",
+    "updated_at": "2025-06-05T08:21:42Z",
+    "pushed_at": "2025-06-05T08:21:40Z",
+    "size": 16,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "JavaScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "tvriesde",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/14925251?v=4",
+      "html_url": "https://github.com/tvriesde"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 3394,
+      "TypeScript": 2125
+    },
+    "language_percentages": {
+      "JavaScript": 61.5,
+      "TypeScript": 38.5
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# MCP License Check\n\nSimple MCP Server which provides vehicle data based on dutch license plates.\n\n## How to Use with Claude Desktop\n\n1. Ensure [Node.js](https://nodejs.org/) is installed locally.\n\n2. Configure your `mcpServers` in your settings:\n\n    ```json\n    {\n      \"mcpServers\": {\n        \"vehicle-information\": {\n          \"command\": \"node\",\n          \"args\": [\n            \"C:/ABSOLUTE/PATH/TO/BUILD/DIRECTORY/index.js\"\n          ]\n        }\n      }\n    }\n    ```\n\n- Replace `C:/ABSOLUTE/PATH/TO/BUILD/DIRECTORY/index.js` with the actual path to your build directory."
+}

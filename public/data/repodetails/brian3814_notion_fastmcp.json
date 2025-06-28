@@ -1,0 +1,50 @@
+{
+  "mcp_name": "brian3814/notion_fastmcp",
+  "mcp_description": "Facilitates task management in Notion through an MCP server integration with Cursor IDE.",
+  "mcp_id": "brian3814_notion_fastmcp",
+  "fetch_timestamp": "2025-06-23T01:46:25.953509Z",
+  "github_url": "https://github.com/brian3814/notion_fastmcp",
+  "repository": {
+    "name": "notion_fastmcp",
+    "full_name": "brian3814/notion_fastmcp",
+    "description": null,
+    "html_url": "https://github.com/brian3814/notion_fastmcp",
+    "created_at": "2025-04-28T08:06:07Z",
+    "updated_at": "2025-05-13T13:00:07Z",
+    "pushed_at": "2025-05-13T13:00:04Z",
+    "size": 24,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "brian3814",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30696379?v=4",
+      "html_url": "https://github.com/brian3814"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 8605
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "## Prerequisites\n\n- Python 3.10 or higher\n- A Notion account with an API integration set up\n- Notion database with tasks (required properties: \"Task\", \"Checkbox\", \"Deadline\")\n- Cursor IDE\n\n## Installation\n1. Create a virtual environment and install dependencies:\n   ```bash\n   uv venv\n   source .venv/bin/activate  # On Windows: .venv\\Scripts\\activate\n   uv pip install -e .\n   ```\n\n2. Set up `.env` file in the project root:\n   ```\n   NOTION_API_KEY=your_notion_api_key\n   NOTION_DATABASE_ID=your_database_id\n   NOTION_BASE_URL=https://api.notion.com/v1\n   NOTION_VERSION=2022-06-28\n   ```\n\n## Setting Up Notion Integration\n\n1. Go to [Notion Integrations](https://www.notion.so/my-integrations)\n2. Create a new integration and note the API key\n3. Share your database with the integration\n4. Get your database ID from the URL (it's the part after the workspace name and before the question mark)\n\n## Adding to Cursor Settings\n\n1. Open Cursor IDE\n2. Open Settings (⌘+shift+p), navigate to \"MCP\" tab\n4. Click \"Add new global MCP server\"\n5. Configure the Notion MCP with the following settings:\n  ```json\n    {\n      \"mcpServers\": {\n        \"myNotionMcp\":{\n          \"command\": \"{path-to-venv-python}\",\n          \"args\": [\"-m\", \"notion_mcp\"]\n        }\n      }\n    }\n  ```\n6. Save the settings\n\n## Usage\n\nOnce configured, you can use the Notion MCP in Cursor by asking the AI assistant questions like:\n\n- \"What tasks should I complete this week?\"\n- \"Show me my todos for today\"\n- \"What are all my pending tasks?\"\n\n## Troubleshooting\n\n- Ensure your `.env` file is properly configured with the correct Notion API key and database ID\n- Check that your Notion database has the required properties: \"Task\", \"Checkbox\", and \"Deadline\"\n- Make sure your Notion integration has been granted access to your database\n- If you encounter any issues, try restarting Cursor\n\n## License\n\nMIT\n"
+}

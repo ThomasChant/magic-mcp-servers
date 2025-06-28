@@ -1,0 +1,53 @@
+{
+  "mcp_name": "Clojars",
+  "mcp_description": "📇 ☁️ - Clojars MCP Server for upto date dependency information of Clojure libraries",
+  "mcp_id": "Bigsy_Clojars-MCP-Server",
+  "fetch_timestamp": "2025-06-23T02:09:23.015919Z",
+  "github_url": "https://github.com/Bigsy/Clojars-MCP-Server",
+  "repository": {
+    "name": "Clojars-MCP-Server",
+    "full_name": "Bigsy/Clojars-MCP-Server",
+    "description": "A Model Context Protocol (MCP) server that provides tools for fetching dependency information from Clojars, the Clojure community's artifact repository.",
+    "html_url": "https://github.com/Bigsy/Clojars-MCP-Server",
+    "created_at": "2024-12-14T20:21:55Z",
+    "updated_at": "2025-06-07T20:50:30Z",
+    "pushed_at": "2025-01-30T19:48:38Z",
+    "size": 29,
+    "stargazers_count": 5,
+    "watchers_count": 5,
+    "forks_count": 5,
+    "open_issues_count": 1,
+    "language": "JavaScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "Bigsy",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/354898?v=4",
+      "html_url": "https://github.com/Bigsy"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 5,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 7028,
+      "Dockerfile": 813
+    },
+    "language_percentages": {
+      "JavaScript": 89.63,
+      "Dockerfile": 10.37
+    },
+    "pull_requests_count": 3,
+    "contributors_count": 3,
+    "package_json_version": "0.1.1"
+  },
+  "readme": "# Clojars MCP Server\n\n[![npm version](https://img.shields.io/npm/v/clojars-deps-server.svg)](https://www.npmjs.com/package/clojars-deps-server)\n\nA [Model Context Protocol (MCP)](https://github.com/ModelContext/protocol) server that provides tools for fetching dependency information from [Clojars](https://clojars.org/), the Clojure community's artifact repository for Cline, Roo Code, Cody, Claude Desktop etc.\n\n<a href=\"https://glama.ai/mcp/servers/i37857er6w\"><img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/i37857er6w/badge\" alt=\"Clojars-MCP-Server MCP server\" /></a>\n\n## Installation\n\n### Installing via npx\n\nThe quickest way to use the Clojars MCP Server is to run it directly with npx:\n\n```bash\nnpx clojars-deps-server\n```\n\nYou can also install it globally:\n\n```bash\nnpm install -g clojars-deps-server\n```\n\n### Installing via Smithery\n\nTo install Clojars Dependency Server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/clojars-deps-server):\n\n```bash\nnpx -y @smithery/cli install clojars-deps-server --client claude\n```\n\n### Manual Installation\n1. Clone this repository:\n```bash\ngit clone https://github.com/yourusername/clojars-deps-server.git\ncd clojars-deps-server\n```\n\n2. Install dependencies:\n```bash\nnpm install\n```\n\n3. Build the server:\n```bash\nnpm run build\n```\n\n4. Add the server to your Claude configuration:\n\nFor VSCode Claude extension, add to `cline_mcp_settings.json` (typically located at `~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/` on macOS):\n```json\n{\n  \"mcpServers\": {\n    \"clojars-deps-server\": {\n      \"command\": \"node\",\n      \"args\": [\"/path/to/clojars-deps-server/build/index.js\"]\n    }\n  }\n}\n```\n\nFor Claude desktop app, add to `claude_desktop_config.json` (typically located at `~/Library/Application Support/Claude/` on macOS):\n```json\n{\n  \"mcpServers\": {\n    \"clojars-deps-server\": {\n      \"command\": \"node\",\n      \"args\": [\"/path/to/clojars-deps-server/build/index.js\"]\n    }\n  }\n}\n```\n\nAfter adding the server configuration, Claude will automatically detect and connect to the server on startup. The server's capabilities will be listed in Claude's system prompt under \"Connected MCP Servers\", making them available for use.\n\n\n## Features\n\n- Get the latest version of any Clojars dependency\n- Check if a specific version of a dependency exists\n- Simple, focused responses\n- Easy integration with Claude through MCP\n\n## How It Works\n\nWhen this MCP server is configured in Claude's settings, it automatically becomes available in Claude's system prompt under the \"Connected MCP Servers\" section. This makes Claude aware of the server's capabilities and allows it to use the provided tools through the `use_mcp_tool` command.\n\nThe server exposes two tools:\n\n### get_clojars_latest_version\n```json\n{\n  \"name\": \"get_clojars_latest_version\",\n  \"description\": \"Get the latest version of a Clojars dependency (Maven artifact)\",\n  \"inputSchema\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"dependency\": {\n        \"type\": \"string\",\n        \"description\": \"Clojars dependency name in format \\\"group/artifact\\\" (e.g. \\\"metosin/reitit\\\")\"\n      }\n    },\n    \"required\": [\"dependency\"]\n  }\n}\n```\n\n### check_clojars_version_exists\n```json\n{\n  \"name\": \"check_clojars_version_exists\",\n  \"description\": \"Check if a specific version of a Clojars dependency exists\",\n  \"inputSchema\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"dependency\": {\n        \"type\": \"string\",\n        \"description\": \"Clojars dependency name in format \\\"group/artifact\\\" (e.g. \\\"metosin/reitit\\\")\"\n      },\n      \"version\": {\n        \"type\": \"string\",\n        \"description\": \"Version to check (e.g. \\\"0.7.2\\\")\"\n      }\n    },\n    \"required\": [\"dependency\", \"version\"]\n  }\n}\n```\n\nThe tool names and descriptions are specifically designed to help Claude understand that these tools are for retrieving version information from Clojars. When users ask about Clojars dependencies, Claude can recognize that these tools are appropriate for the task based on:\n- The tool names explicitly indicate their purpose\n- The descriptions specify they're for \"Clojars dependency (Maven artifact)\"\n- The example formats show typical Clojars dependency patterns\n\n"
+}

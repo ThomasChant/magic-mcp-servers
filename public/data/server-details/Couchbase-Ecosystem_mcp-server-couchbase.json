@@ -1,0 +1,103 @@
+{
+  "id": "4e69723024aa",
+  "owner": "Couchbase-Ecosystem",
+  "repoName": "mcp-server-couchbase",
+  "fullDescription": "🎖️ 🐍 ☁️ 🏠 - Couchbase MCP server provides unfied access to both Capella cloud and self-managed clusters for document operations, SQL++ queries and natural language data analysis.",
+  "techStack": [],
+  "serviceTypes": [
+    {
+      "type": "data",
+      "label": "Data",
+      "icon": "📊",
+      "description": "Manages, processes, or analyzes data"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "moderate",
+    "maturity": "stable",
+    "deployment": [
+      "cloud"
+    ],
+    "featured": false,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 2.4,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "cloud database"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/Couchbase-Ecosystem/mcp-server-couchbase",
+    "owner": "Couchbase",
+    "name": "Couchbase",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.279Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "sql++",
+    "cloud",
+    "database",
+    "nosql",
+    "capella",
+    "data-storage",
+    "document",
+    "couchbase"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Moderate",
+      "color": "#eab308",
+      "icon": "🟡"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    }
+  ],
+  "icon": "📊",
+  "readme": null
+}

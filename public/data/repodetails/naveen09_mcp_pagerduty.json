@@ -1,0 +1,50 @@
+{
+  "mcp_name": "naveen09/mcp_pagerduty",
+  "mcp_description": "Facilitates PagerDuty integration for on-call management queries via an MCP server, compatible with Claude.",
+  "mcp_id": "naveen09_mcp_pagerduty",
+  "fetch_timestamp": "2025-06-23T07:00:54.711774Z",
+  "github_url": "https://github.com/naveen09/mcp_pagerduty",
+  "repository": {
+    "name": "mcp_pagerduty",
+    "full_name": "naveen09/mcp_pagerduty",
+    "description": "An Model Context Protocol (MCP) server with PagerDuty support",
+    "html_url": "https://github.com/naveen09/mcp_pagerduty",
+    "created_at": "2025-04-04T08:29:40Z",
+    "updated_at": "2025-04-04T08:49:34Z",
+    "pushed_at": "2025-04-04T08:49:29Z",
+    "size": 203,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "naveen09",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1057807?v=4",
+      "html_url": "https://github.com/naveen09"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 4209
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "### Model Context Protocol - with PagerDuty\n\nThis is an MCP server has integration with PagerDuty.\nThe integration supports basic queries like\n\n    \"who is oncall for NASA team right now ?\"\n\nThe server can be happily integrated with Claude. With few simpel steps\n\n\n### Integration with PD\nYou should update the token, just run\n\n    export PAGERDUTY_API_KEY=your_api_key_here\n\n### Integration with Claude\nFirst, make sure you have Claude for Desktop installed. You can install the latest version [here](https://claude.ai/download).\n\nWe’ll need to configure Claude for Desktop for whichever MCP servers you want to use. \nTo do this, open your Claude for Desktop App configuration at \n\n    ~/Library/Application Support/Claude/claude_desktop_config.json\n\nin a text editor. Make sure to create the file if it doesn’t exist. Refer [here](https://modelcontextprotocol.io/quickstart/server) for more.\nUpdated the config with below entry\n\n```json\n{\n    \"mcpServers\": {\n        \"weather\": {\n            \"command\": \"uv\",\n            \"args\": [\n                \"--directory\",\n                \"/ABSOLUTE/PATH/TO/PARENT/FOLDER/server/pagerduty\",\n                \"run\",\n                \"pagerduty.py\"\n            ]\n        }\n    }\n}\n```\n\nYou may need to put the full path to the `uv` executable in the command field. You can get this by running which uv on MacOS/Linux\n\n### Configuration Testing\nAt the end, once you've configured Claude. Select the tools button, to verify 3 MCP tools are available.\n\n- The prompt should show something as below:\n<img src=\"mcp_tools_installed.png\"  width=\"300\" height=\"200\"/>\n\n### Demo\n  <img src=\"mcp_results.png\" alt=\"results\" width=\"400\"/>\n\n"
+}

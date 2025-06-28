@@ -1,0 +1,127 @@
+{
+  "mcp_name": "weibaohui/k8m",
+  "mcp_description": "🏎️ ☁️/🏠 - Provides MCP multi-cluster Kubernetes management and operations, featuring a management interface, logging, and nearly 50 built-in tools covering common DevOps and development scenarios. Supports both standard and CRD resources.",
+  "mcp_id": "weibaohui_k8m",
+  "fetch_timestamp": "2025-06-23T09:25:06.227769Z",
+  "github_url": "https://github.com/weibaohui/k8m",
+  "repository": {
+    "name": "k8m",
+    "full_name": "weibaohui/k8m",
+    "description": "一款轻量级、跨平台的 Mini Kubernetes AI Dashboard，支持大模型+智能体+MCP(支持设置操作权限)，集成多集群管理、智能分析、实时异常检测等功能，支持多架构并可单文件部署，助力高效集群管理与运维优化。",
+    "html_url": "https://github.com/weibaohui/k8m",
+    "created_at": "2024-10-11T01:39:31Z",
+    "updated_at": "2025-06-23T09:22:05Z",
+    "pushed_at": "2025-06-23T08:14:55Z",
+    "size": 25051,
+    "stargazers_count": 508,
+    "watchers_count": 508,
+    "forks_count": 83,
+    "open_issues_count": 21,
+    "language": "Go",
+    "license": "MIT License",
+    "topics": [
+      "2fa",
+      "ai",
+      "apigateway",
+      "chatgpt",
+      "dashboard",
+      "k8s",
+      "k8s-gpt",
+      "mcp",
+      "ollama",
+      "openai",
+      "openkruise"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "weibaohui",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/27042034?v=4",
+      "html_url": "https://github.com/weibaohui"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 83,
+    "subscribers_count": 13,
+    "languages": {
+      "Go": 844972,
+      "TypeScript": 299971,
+      "Makefile": 5666,
+      "SCSS": 4676,
+      "Shell": 3927,
+      "Dockerfile": 779,
+      "HTML": 315,
+      "CSS": 48
+    },
+    "language_percentages": {
+      "Go": 72.82,
+      "TypeScript": 25.85,
+      "Makefile": 0.49,
+      "SCSS": 0.4,
+      "Shell": 0.34,
+      "Dockerfile": 0.07,
+      "HTML": 0.03,
+      "CSS": 0
+    },
+    "pull_requests_count": 163,
+    "contributors_count": 11,
+    "latest_release": {
+      "tag_name": "v0.0.133",
+      "name": "v0.0.133 🌈",
+      "published_at": "2025-06-22T03:55:21Z",
+      "body": "## What’s Changed\r\n* OpenKruise支持 (#213) @weibaohui\r\n* feat(ui): 添加工作负载分布菜单项和页面配置 (#212) @weibaohui\r\n\r\n\r\nadvancedcronjobs.apps.kruise.io                \r\nbroadcastjobs.apps.kruise.io                   \r\nclonesets.apps.kruise.io                       \r\ncontainerrecreaterequests.apps.kruise.io       \r\ndaemonsets.apps.kruise.io                      \r\nimagelistpulljobs.apps.kruise.io               \r\nimagepulljobs.apps.kruise.io                   \r\nnodeimages.apps.kruise.io                      \r\nnodepodprobes.apps.kruise.io                   \r\npersistentpodstates.apps.kruise.io             \r\npodprobemarkers.apps.kruise.io                 \r\npodunavailablebudgets.policy.kruise.io         \r\nresourcedistributions.apps.kruise.io           \r\nsidecarsets.apps.kruise.io                     \r\nstatefulsets.apps.kruise.io                    \r\nuniteddeployments.apps.kruise.io               \r\nworkloadspreads.apps.kruise.io                 ",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.0.133",
+        "commit_sha": "f5ddf69f7a83f938f3930452b7eaf24b80cafdd0"
+      },
+      {
+        "name": "v0.0.132",
+        "commit_sha": "3e445c8bc4791febfa964490d19c70c53c93b29d"
+      },
+      {
+        "name": "v0.0.131",
+        "commit_sha": "5be623dfd4e19855db514ad249037441a18638ba"
+      },
+      {
+        "name": "v0.0.130",
+        "commit_sha": "0d18ec5f36bed25d88881a3fc3d1bfc49ee21eae"
+      },
+      {
+        "name": "v0.0.129",
+        "commit_sha": "d259ffcae2db7672588a86f88ccb2393842ce94f"
+      },
+      {
+        "name": "v0.0.128",
+        "commit_sha": "86a87ca48d7662935c3d31f3925e84f644f0be21"
+      },
+      {
+        "name": "v0.0.127",
+        "commit_sha": "d627ad00f9bc0d5073c63f6f0a9596532189d2ba"
+      },
+      {
+        "name": "v0.0.126",
+        "commit_sha": "f9eb2db5fd955e0b6b47e2b3cfefc9bc058408c2"
+      },
+      {
+        "name": "v0.0.125",
+        "commit_sha": "7fe08aca1b05f79fa35aeda52d886816ff9bd04c"
+      },
+      {
+        "name": "v0.0.124",
+        "commit_sha": "0cb0fb62f9a65fd1cb1f11d7406dc0005b43e12d"
+      }
+    ],
+    "latest_version": "v0.0.133"
+  },
+  "readme": "<div align=\"center\">\n<h1>K8M</h1>\n</div>\n\n\n[English](README_en.md) | [中文](README.md)\n\n[![k8m](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](https://github.com/weibaohui/k8m/blob/master/LICENSE)\n\n![Alt](https://repobeats.axiom.co/api/embed/9fde094e5c9a1d4c530e875864ee7919b17d0690.svg \"Repobeats analytics image\")\n\n**k8m** 是一款AI驱动的 Mini Kubernetes AI Dashboard 轻量级控制台工具，专为简化集群管理设计。它基于 AMIS 构建，并通过  [\n`kom`](https://github.com/weibaohui/kom)  作为 Kubernetes API 客户端，**k8m** 内置了\nQwen2.5-Coder-7B，支持deepseek-ai/DeepSeek-R1-Distill-Qwen-7B模型\n模型交互能力，同时支持接入您自己的私有化大模型（包括ollama）。\n\n### 演示DEMO\n\n[DEMO](http://107.150.119.151:3618)\n用户名密码 demo/demo\n\n### 文档\n\n- 详细的配置和使用说明请参考[文档](docs/README.md)。\n- 更新日志请参考[更新日志](CHANGELOG.md)。\n- 如需自定义大模型参数、配置私有化大模型，请参考[自托管/自定义大模型支持](docs/use-self-hosted-ai.md)\n  和 [Ollama配置](docs/ollama.md)。\n- 详细的配置选项说明请参考[配置选项说明](docs/config.md)。\n- 数据库配置请参考[数据库配置说明](docs/database.md)。\n- DeepWiki 文档：[开发设计文档](https://deepwiki.com/weibaohui/k8m)\n\n### 主要特点\n\n- **迷你化设计**：所有功能整合在一个单一的可执行文件中，部署便捷，使用简单。\n- **简便易用**：友好的用户界面和直观的操作流程，让 Kubernetes 管理更加轻松。\n- **高效性能**：后端采用 Golang 构建，前端基于百度 AMIS，保证资源利用率高、响应速度快。\n- **AI驱动融合**\n  ：基于ChatGPT实现划词解释、资源指南、YAML属性自动翻译、Describe信息解读、日志AI问诊、运行命令推荐,并集成了[k8s-gpt](https://github.com/k8sgpt-ai/k8sgpt)\n  功能，实现中文展现，为管理k8s提供智能化支持。\n- **MCP集成**:可视化管理MCP，实现大模型调用Tools，内置k8s多集群MCP工具49种，可组合实现超百种集群操作，可作为MCP Server\n  供其他大模型软件使用。轻松实现大模型管理k8s。可详细记录每一次MCP调用。支持mcp.so主流服务。\n- **MCP权限打通**:多集群管理权限与MCP大模型调用权限打通，一句话概述：谁使用大模型，就用谁的权限执行MCP。安全使用，无后顾之忧，避免操作越权。\n- **多集群管理**：自动识别集群内部使用InCluster模式，配置kubeconfig路径后自动扫描同级目录下的配置文件，同时注册管理多个集群。\n- **多集群权限管理**：支持对用户、用户组进行授权，可按集群授权，包括集群只读、Exec命令、集群管理员三种权限。对用户组授权后，组内用户均获得相应授权。支持设置命名空间黑白名单。\n- **支持k8s最新特性**:支持APIGateway、OpenKruise等功能特性。\n- **Pod 文件管理**：支持 Pod 内文件的浏览、编辑、上传、下载、删除，简化日常操作。\n- **Pod 运行管理**：支持实时查看 Pod 日志，下载日志，并在 Pod 内直接执行 Shell 命令。支持grep -A -B高亮搜索\n- **API开放**:支持创建API KEY，从第三方外部访问，提供swagger接口管理页面。\n- **集群巡检支持**：支持定时巡检、自定义巡检规则，支持lua脚本规则。\n- **CRD 管理**：可自动发现并管理 CRD 资源，提高工作效率。\n- **Helm 市场**：支持Helm自由添加仓库，一键安装、卸载、升级 Helm 应用。\n- **跨平台支持**：兼容 Linux、macOS 和 Windows，并支持 x86、ARM 等多种架构，确保多平台无缝运行。\n- **多数据库支持**：支持SQLite、MySql、PostgreSql等多种数据库。\n- **完全开源**：开放所有源码，无任何限制，可自由定制和扩展，可商业使用。\n\n**k8m** 的设计理念是“AI驱动，轻便高效，化繁为简”，它帮助开发者和运维人员快速上手，轻松管理 Kubernetes 集群。\n\n![](https://github.com/user-attachments/assets/0951d6c1-389c-49cb-b247-84de15b6ec0e)\n\n## **运行**\n\n1. **下载**：从 [GitHub release](https://github.com/weibaohui/k8m/releases) 下载最新版本。\n2. **运行**：使用 `./k8m` 命令启动,访问[http://127.0.0.1:3618](http://127.0.0.1:3618)。\n3. **登录用户名密码**：\n    - 用户名：`k8m`\n    - 密码：`k8m`\n    - 请注意上线后修改用户名密码、启用两步验证。\n4. **参数**：\n\n```shell\nUsage of ./k8m:\n      --enable-temp-admin                是否启用临时管理员账户配置，默认关闭\n      --admin-password string            管理员密码，启用临时管理员账户配置后生效 \n      --admin-username string            管理员用户名，启用临时管理员账户配置后生效\n      --print-config                     是否打印配置信息 (default false)\n      --connect-cluster                  启动集群是是否自动连接现有集群，默认关闭\n  -d, --debug                            调试模式\n      --in-cluster                       是否自动注册纳管宿主集群，默认启用\n      --jwt-token-secret string          登录后生成JWT token 使用的Secret (default \"your-secret-key\")\n  -c, --kubeconfig string                kubeconfig文件路径 (default \"/root/.kube/config\")\n      --kubectl-shell-image string       Kubectl Shell 镜像。默认为 bitnami/kubectl:latest，必须包含kubectl命令 (default \"bitnami/kubectl:latest\")\n      --log-v int                        klog的日志级别klog.V(2) (default 2)\n      --login-type string                登录方式，password, oauth, token等,default is password (default \"password\")\n      --image-pull-timeout               Node Shell、Kubectl Shell 镜像拉取超时时间。默认为 30 秒\n      --node-shell-image string          NodeShell 镜像。 默认为 alpine:latest，必须包含`nsenter`命令 (default \"alpine:latest\")\n  -p, --port int                         监听端口 (default 3618)\n  -v, --v Level                          klog的日志级别 (default 2)\n```\n\n也可以直接通过docker-compose(推荐)启动：\n\n```yaml\nservices:\n  k8m:\n    container_name: k8m\n    image: registry.cn-hangzhou.aliyuncs.com/minik8m/k8m\n    restart: always\n    ports:\n      - \"3618:3618\"\n    environment:\n      TZ: Asia/Shanghai\n    volumes:\n      - ./data:/app/data\n```\n\n启动之后，访问`3618`端口，默认用户：`k8m`，默认密码`k8m`。\n如果你想通过在线环境快速拉起体验，可以访问：[k8m](https://cnb.cool/znb/qifei/-/tree/main/letsfly/justforfun/k8m)\n\n## **ChatGPT 配置指南**\n\n### 内置GPT\n\n从v0.0.8版本开始，将内置GPT，无需配置。\n如果您需要使用自己的GPT，请参考以下文档。\n\n- [自托管/自定义大模型支持](use-self-hosted-ai.md) - 如何使用自托管的\n- [Ollama配置](ollama.md) - 如何配置使用Ollama大模型。\n\n### **ChatGPT 状态调试**\n\n如果设置参数后，依然没有效果，请尝试使用`./k8m -v 6`获取更多的调试信息。\n会输出以下信息，通过查看日志，确认是否启用ChatGPT。\n\n```go\nChatGPT 开启状态:true\nChatGPT 启用 key:sk-hl**********************************************, url:https: // api.siliconflow.cn/v1\nChatGPT 使用环境变量中设置的模型:Qwen/Qwen2.5-7B-Instruc\n```\n\n### **ChatGPT 账户**\n\n本项目集成了[github.com/sashabaranov/go-openai](https://github.com/sashabaranov/go-openai)SDK。\n国内访问推荐使用[硅基流动](https://cloud.siliconflow.cn/)的服务。\n登录后，在[https://cloud.siliconflow.cn/account/ak](https://cloud.siliconflow.cn/account/ak)创建API_KEY\n\n## **k8m 支持环境变量设置**\n\nk8m 支持通过环境变量和命令行参数灵活配置，主要参数如下：\n\n| 环境变量                  | 默认值                      | 说明                                    |\n|-----------------------|--------------------------|---------------------------------------|\n| `PORT`                | `3618`                   | 监听的端口号                                |\n| `KUBECONFIG`          | `~/.kube/config`         | `kubeconfig` 文件路径，会自动扫描识别同级目录下所有的配置文件 |\n| `ANY_SELECT`          | `\"true\"`                 | 是否开启任意选择划词解释，默认开启 (default true)      |\n| `LOGIN_TYPE`          | `\"password\"`             | 登录方式（如 `password`, `oauth`, `token`）  |\n| `ENABLE_TEMP_ADMIN`   | `\"false\"`                | 是否启用临时管理员账户配置，默认关闭。初次登录、忘记密码时使用       |\n| `ADMIN_USERNAME`      |                          | 管理员用户名，启用临时管理员账户配置后生效                 |\n| `ADMIN_PASSWORD`      |                          | 管理员密码，启用临时管理员账户配置后生效                  |\n| `DEBUG`               | `\"false\"`                | 是否开启 `debug` 模式                       |\n| `LOG_V`               | `\"2\"`                    | log输出日志，同klog用法                       |\n| `JWT_TOKEN_SECRET`    | `\"your-secret-key\"`      | 用于 JWT Token 生成的密钥                    |\n| `KUBECTL_SHELL_IMAGE` | `bitnami/kubectl:latest` | kubectl shell 镜像地址                    |\n| `NODE_SHELL_IMAGE`    | `alpine:latest`          | Node shell 镜像地址                       |\n| `IMAGE_PULL_TIMEOUT`  | `30`                     | Node shell、kubectl shell 镜像拉取超时时间（秒）  |\n| `CONNECT_CLUSTER`     | `\"false\"`                | 启动程序后，是否自动连接发现的集群，默认关闭                |\n| `PRINT_CONFIG`        | `\"false\"`                | 是否打印配置信息                              |\n\n详细参数说明和更多配置方式请参考 [docs/readme.md](docs/README.md)。\n\n这些环境变量可以通过在运行应用程序时设置，例如：\n\n```sh\nexport PORT=8080\nexport GIN_MODE=\"release\"\n./k8m\n```\n\n其他参数请参考 [docs/readme.md](docs/README.md)。\n\n## 容器化k8s集群方式运行\n\n使用[KinD](https://kind.sigs.k8s.io/docs/user/quick-start/)、[MiniKube](https://minikube.sigs.k8s.io/docs/start/)\n安装一个小型k8s集群\n\n## KinD方式\n\n* 创建 KinD Kubernetes 集群\n\n```\nbrew install kind\n```\n\n* 创建新的 Kubernetes 集群：\n\n```\nkind create cluster --name k8sgpt-demo\n```\n\n## 将k8m部署到集群中体验\n\n### 安装脚本\n\n```docker\nkubectl apply -f https://raw.githubusercontent.com/weibaohui/k8m/refs/heads/main/deploy/k8m.yaml\n```\n\n* 访问：\n  默认使用了nodePort开放，请访问31999端口。或自行配置Ingress\n  http://NodePortIP:31999\n\n### 修改配置\n\n首选建议通过修改环境变量方式进行修改。 例如增加deploy.yaml中的env参数\n\n\n## 开发调试\n如果你想在本地开发调试，请先执行一次本地前端构建，自动生成dist目录。因为本项目采用了二进制嵌入，没有dist前端会报错。\n#### 第一步编译前端\n```bash \ncd ui\npnpm run build\n```\n\n#### 编译调试后端\n```bash\nair\n#或者\ngo run main.go \n# 监听localhost:3618端口\n```\n\n#### 前端热加载\n```bash\ncd ui\npnpm run dev\n#Vite服务会监听在localhost:3000端口\n#Vite转发后端访问到3618端口\n```\n访问http://localhost:3000\n\n\n### HELP & SUPPORT\n\n如果你有任何进一步的问题或需要额外的帮助，请随时与我联系！\n\n### 特别鸣谢\n\n[zhaomingcheng01](https://github.com/zhaomingcheng01)：提出了诸多非常高质量的建议，为k8m的易用好用做出了卓越贡献~\n\n[La0jin](https://github.com/La0jin):提供在线资源及维护，极大提升了k8m的展示效果\n\n[eryajf](https://github.com/eryajf):为我们提供了非常好用的github actions，为k8m增加了自动化的发版、构建、发布等功能\n\n## 联系我\n\n微信（大罗马的太阳） 搜索ID：daluomadetaiyang,备注k8m。\n<br><img width=\"214\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/166db141-42c5-42c4-9964-8e25cf12d04c\" />\n\n## 微信群\n\n![输入图片说明](https://foruda.gitee.com/images/1750260119732715094/a1ed9e5b_77493.png \"屏幕截图\")\n"
+}

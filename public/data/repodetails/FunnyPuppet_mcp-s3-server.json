@@ -1,0 +1,50 @@
+{
+  "mcp_name": "FunnyPuppet/mcp-s3-server",
+  "mcp_description": "Facilitates object storage operations with a comprehensive set of commands for managing buckets and objects.",
+  "mcp_id": "FunnyPuppet_mcp-s3-server",
+  "fetch_timestamp": "2025-06-23T03:37:11.714308Z",
+  "github_url": "https://github.com/FunnyPuppet/mcp-s3-server",
+  "repository": {
+    "name": "mcp-s3-server",
+    "full_name": "FunnyPuppet/mcp-s3-server",
+    "description": "MCP server for object storage, supporting a range of operations for object storage",
+    "html_url": "https://github.com/FunnyPuppet/mcp-s3-server",
+    "created_at": "2025-04-20T01:07:27Z",
+    "updated_at": "2025-04-20T15:22:22Z",
+    "pushed_at": "2025-04-20T01:11:20Z",
+    "size": 16,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "FunnyPuppet",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/88126376?v=4",
+      "html_url": "https://github.com/FunnyPuppet"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 16412
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# 对象存储服务MCP\n\n用于对象存储的MCP(模型上下文协议)服务器，支持对象存储的一系列操作\n\n## 环境要求\n\nPython >= 3.11\n\n## 使用方法\n\n1、拉取本项目到本地\n\n2、安装依赖\n\n```\nuv sync\n```\n\n3、在mcp客户端中配置server\n\n```\n{\n  \"mcpServers\": {\n    \"bilibili\": {\n      \"command\": \"uv\",\n      \"args\": [\n        \"--directory\",\n        \"/your-project-path/src/s3-server\",\n        \"run\",\n        \"server.py\"\n      ],\n      \"env\": {\n        \"ENDPOINT\": \"endpoint\",\n        \"ACCESS_KEY_ID\": \"your access key\",\n        \"ACCESS_KEY_SECRET\": \"your access secret\"\n      }\n    }\n  }\n}\n```\n\n## 支持操作\n\n* list-buckets\n\n  列出所有桶\n\n* exists-bucket\n\n  判断桶是否存在\n\n* create-bucket\n\n  创建一个新的桶\n\n* delete-bucket\n\n  删除桶\n\n* list-objects\n\n  查询桶下面的对象\n\n* get-object\n\n  获取对象，保存到本地文件\n\n* put-object\n\n  上传本地文件到桶中\n\n* delete-object\n\n  删除对象\n\n* get-object-metadata\n\n  获取对象元数据"
+}

@@ -1,0 +1,112 @@
+{
+  "id": "f5e6579fdf6a",
+  "owner": "flinstonedev",
+  "repoName": "queryartisan",
+  "fullDescription": "A server application that helps AI agents interact with GraphQL APIs through structured tools",
+  "techStack": [
+    {
+      "name": "typescript",
+      "icon": "📘",
+      "color": "#3178c6"
+    }
+  ],
+  "serviceTypes": [
+    {
+      "type": "integration",
+      "label": "Integration",
+      "icon": "🔗",
+      "description": "Connects to external APIs and services"
+    },
+    {
+      "type": "ai",
+      "label": "Ai",
+      "icon": "🤖",
+      "description": "Leverages AI and machine learning"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "simple",
+    "maturity": "stable",
+    "deployment": [
+      "saas"
+    ],
+    "featured": false,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 3.9,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "api",
+      "graphql"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/flinstonedev/queryartisan",
+    "owner": "QueryArtisan",
+    "name": "QueryArtisan",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.281Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "tool",
+    "utilities-tools",
+    "api",
+    "server"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Simple",
+      "color": "#22c55e",
+      "icon": "🟢"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    }
+  ],
+  "icon": "🔗",
+  "readme": null
+}

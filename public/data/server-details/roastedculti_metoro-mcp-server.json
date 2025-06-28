@@ -1,0 +1,105 @@
+{
+  "id": "868353d83a78",
+  "owner": "roastedculti",
+  "repoName": "metoro-mcp-server",
+  "fullDescription": "Facilitates interaction with Kubernetes clusters through the Claude Desktop App by leveraging the Model Context Protocol.",
+  "techStack": [],
+  "serviceTypes": [
+    {
+      "type": "utility",
+      "label": "Utility",
+      "icon": "🛠️",
+      "description": "Provides general utility functions"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "simple",
+    "maturity": "stable",
+    "deployment": [
+      "local"
+    ],
+    "featured": true,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 1.95,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "kubernetes"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/roastedculti/metoro-mcp-server",
+    "owner": "roastedculti",
+    "name": "metoro-mcp-server",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.281Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "mcp",
+    "utilities-tools",
+    "metoro",
+    "server"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Simple",
+      "color": "#22c55e",
+      "icon": "🟢"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    },
+    {
+      "type": "featured",
+      "label": "Featured",
+      "color": "#3b82f6",
+      "icon": "⭐"
+    }
+  ],
+  "icon": "🛠️",
+  "readme": null
+}

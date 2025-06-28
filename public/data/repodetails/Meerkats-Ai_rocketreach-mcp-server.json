@@ -1,0 +1,53 @@
+{
+  "mcp_name": "Meerkats-Ai/rocketreach-mcp-server",
+  "mcp_description": "Integrates with RocketReach API to provide email, phone number finding, and company enrichment capabilities.",
+  "mcp_id": "Meerkats-Ai_rocketreach-mcp-server",
+  "fetch_timestamp": "2025-06-23T06:39:21.902924Z",
+  "github_url": "https://github.com/Meerkats-Ai/rocketreach-mcp-server",
+  "repository": {
+    "name": "rocketreach-mcp-server",
+    "full_name": "Meerkats-Ai/rocketreach-mcp-server",
+    "description": "rocketreach-mcp-server",
+    "html_url": "https://github.com/Meerkats-Ai/rocketreach-mcp-server",
+    "created_at": "2025-04-23T11:40:26Z",
+    "updated_at": "2025-04-23T11:52:35Z",
+    "pushed_at": "2025-04-23T11:52:31Z",
+    "size": 18,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 1,
+    "open_issues_count": 1,
+    "language": "JavaScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "Meerkats-Ai",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/208632199?v=4",
+      "html_url": "https://github.com/Meerkats-Ai"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 0,
+    "languages": {
+      "JavaScript": 33154,
+      "Dockerfile": 344
+    },
+    "language_percentages": {
+      "JavaScript": 98.97,
+      "Dockerfile": 1.03
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 1,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# RocketReach MCP Server\n\nThis is a Model Context Protocol (MCP) server that integrates with the RocketReach API to provide email finding, phone number finding, and company enrichment capabilities.\n\n## Features\n\n- Find professional emails for individuals\n- Find personal emails for individuals\n- Enrich company data\n- Find phone numbers for individuals\n\n## Setup\n\n### Local Setup\n\n1. Clone this repository\n2. Install dependencies:\n   ```\n   npm install\n   ```\n3. Create a `.env` file based on `.env.example` and add your RocketReach API key:\n   ```\n   ROCKETREACH_API_KEY=your_api_key_here\n   ```\n4. Build the server:\n   ```\n   npm run build\n   ```\n5. Start the server:\n   ```\n   npm start\n   ```\n\n### Docker Setup\n\n1. Clone this repository\n2. Create a `.env` file with your RocketReach API key\n3. Build and run using Docker Compose:\n   ```\n   docker-compose up -d\n   ```\n\n## MCP Configuration\n\nTo use this server with an MCP client, add the following configuration to your MCP settings file:\n\n```json\n{\n  \"mcpServers\": {\n    \"rocketreach\": {\n      \"command\": \"node\",\n      \"args\": [\"path/to/rocketreach/dist/index.js\"],\n      \"env\": {\n        \"ROCKETREACH_API_KEY\": \"your_api_key_here\"\n      },\n      \"disabled\": false,\n      \"autoApprove\": []\n    }\n  }\n}\n```\n\n## Available Tools\n\n- `rocketreach_find_professional_email`: Find a professional email for an individual\n- `rocketreach_find_personal_email`: Find a personal email for an individual\n- `rocketreach_enrich_company`: Enrich company data\n- `rocketreach_find_phone`: Find a phone number for an individual\n\n## License\n\nISC\n"
+}

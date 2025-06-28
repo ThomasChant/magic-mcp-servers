@@ -1,0 +1,51 @@
+{
+  "mcp_name": "Codeshark-NET/climate-triage-mcp",
+  "mcp_description": "Integrates with the ClimateTriage API to facilitate searching for open source issues related to climate change and sustainability.",
+  "mcp_id": "Codeshark-NET_climate-triage-mcp",
+  "fetch_timestamp": "2025-06-23T02:12:16.026307Z",
+  "github_url": "https://github.com/Codeshark-NET/climate-triage-mcp",
+  "repository": {
+    "name": "climate-triage-mcp",
+    "full_name": "Codeshark-NET/climate-triage-mcp",
+    "description": null,
+    "html_url": "https://github.com/Codeshark-NET/climate-triage-mcp",
+    "created_at": "2025-04-08T14:49:00Z",
+    "updated_at": "2025-04-09T07:17:11Z",
+    "pushed_at": "2025-04-08T16:28:01Z",
+    "size": 24,
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 2,
+    "open_issues_count": 1,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "Codeshark-NET",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5020508?v=4",
+      "html_url": "https://github.com/Codeshark-NET"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 2,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 8099
+    },
+    "language_percentages": {
+      "TypeScript": 100
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 1,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# ClimateTriage MCP Server\n\nAn MCP server implementation that integrates with the ClimateTriage API, providing tools to search for open source issues related to climate change and sustainability.\n\n## Features\n\n- **Issue Search**: Find open source issues in climate-related projects\n- **Multiple Filters**: Filter by category, programming language, keywords, and more\n- **Sorting Options**: Sort issues by creation date, update date, or stars\n\n## Tools\n\n### search_climate_issues\n\nSearches for open source issues related to climate change and sustainability.\n\n**Inputs:**\n- `category` (string, optional): Filter issues by project category (e.g., 'Climate Change', 'Energy Systems')\n- `language` (string, optional): Filter issues by programming language (e.g., 'JavaScript', 'Python')\n- `keyword` (string, optional): Filter issues by project keyword (e.g., 'good first issue', 'help wanted')\n- `page` (number, optional): Pagination page number (starts at 1)\n- `per_page` (number, optional): Number of records per page (default: 10)\n- `sort` (string, optional): Field to sort by ('created_at', 'updated_at', 'stars', default: 'created_at')\n- `order` (string, optional): Sort order ('asc' or 'desc', default: 'desc' for most recent first)\n\n## Configuration\n\nBy default, the server connects to the ClimateTriage API at `https://ost.ecosyste.ms/api/v1`.\n\n## Usage with Claude Desktop\n\nAdd this to your `claude_desktop_config.json`:\n\n```json\n{\n  \"mcpServers\": {\n    \"climate-triage\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"git+https://github.com/Codeshark-NET/climate-triage-mcp.git\"]\n    }\n  }\n}\n```\n\n## License\nThis MCP server is licensed under the MIT License. This means you are free to use, modify, and distribute the software, subject to the terms and conditions of the MIT License."
+}

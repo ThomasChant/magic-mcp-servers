@@ -1,0 +1,54 @@
+{
+  "mcp_name": "OceanBase",
+  "mcp_description": "MCP Server for OceanBase database and its tools",
+  "mcp_id": "oceanbase_mcp-oceanbase",
+  "fetch_timestamp": "2025-06-23T07:14:44.039099Z",
+  "github_url": "https://github.com/oceanbase/mcp-oceanbase",
+  "repository": {
+    "name": "mcp-oceanbase",
+    "full_name": "oceanbase/mcp-oceanbase",
+    "description": "MCP Server for OceanBase database and its tools",
+    "html_url": "https://github.com/oceanbase/mcp-oceanbase",
+    "created_at": "2025-03-19T09:24:59Z",
+    "updated_at": "2025-06-23T06:02:55Z",
+    "pushed_at": "2025-06-23T06:02:51Z",
+    "size": 408,
+    "stargazers_count": 15,
+    "watchers_count": 15,
+    "forks_count": 16,
+    "open_issues_count": 5,
+    "language": "Python",
+    "license": "Apache License 2.0",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "oceanbase",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/82347605?v=4",
+      "html_url": "https://github.com/oceanbase"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 16,
+    "subscribers_count": 7,
+    "languages": {
+      "Python": 80993,
+      "TypeScript": 16158,
+      "JavaScript": 1146
+    },
+    "language_percentages": {
+      "Python": 82.4,
+      "TypeScript": 16.44,
+      "JavaScript": 1.17
+    },
+    "pull_requests_count": 23,
+    "contributors_count": 7
+  },
+  "readme": "# mcp-oceanbase\n\nMCP Server for OceanBase database and its tools\n\nEnglish | [简体中文](README_CN.md)\n\n## Features\n\nThis repository contains MCP Servers as following:\n\n| MCP Server           | Description                                                                                            | Document                                |\n| -------------------- | ------------------------------------------------------------------------------------------------------ | --------------------------------------- |\n| OceanBase MCP Server | A Model Context Protocol (MCP) server that enables secure interaction with OceanBase databases.        | [Doc](doc/oceanbase_mcp_server.md)      |\n| OCP MCP Server       | A Model Context Protocol (MCP) server that enables secure interaction with OCP.                        | [Doc](doc/ocp_mcp_server.md)            |\n| OBCloud MCP Server   | A Model Context Protocol (MCP) server that enables secure interaction with OBCloud.                    | [Doc](src/obcloud_mcp_server/README.md) |\n| OKCTL MCP Server     | A Model Context Protocol (MCP) server that enables secure interaction with OceanBase resources in k8s. | [Doc](doc/okctl_mcp_server.md)          |\n\n## Community\n\nDon’t hesitate to ask!\n\nContact the developers and community at [https://ask.oceanbase.com](https://ask.oceanbase.com) if you need any help.\n\n[Open an issue](https://github.com/oceanbase/mcp-oceanbase/issues) if you found a bug.\n\n## Licensing\n\nSee [LICENSE](LICENSE) for more information.\n"
+}

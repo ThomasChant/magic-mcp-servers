@@ -1,0 +1,54 @@
+{
+  "mcp_name": "amphora/patentsafe-mcp",
+  "mcp_description": "Connects to PatentSafe to retrieve documents using raw Lucene queries.",
+  "mcp_id": "amphora_patentsafe-mcp",
+  "fetch_timestamp": "2025-06-23T01:05:12.851210Z",
+  "github_url": "https://github.com/amphora/patentsafe-mcp",
+  "repository": {
+    "name": "patentsafe-mcp",
+    "full_name": "amphora/patentsafe-mcp",
+    "description": "PatentSafe MCP server",
+    "html_url": "https://github.com/amphora/patentsafe-mcp",
+    "created_at": "2025-04-23T18:10:31Z",
+    "updated_at": "2025-04-28T11:53:42Z",
+    "pushed_at": "2025-04-28T11:53:38Z",
+    "size": 1041,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 1,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "amphora",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/114305?v=4",
+      "html_url": "https://github.com/amphora"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 3,
+    "languages": {
+      "Python": 10087,
+      "Dockerfile": 298,
+      "Shell": 192
+    },
+    "language_percentages": {
+      "Python": 95.37,
+      "Dockerfile": 2.82,
+      "Shell": 1.82
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 2
+  },
+  "readme": "# PatentSafe MCP\n\nThis is a MCP server for PatentSafe. It is used to connect to PatentSafe and retrieve documents.\n\n## Installation\n\nFor Claude, you can install the MCP server having a `~/Users/simonc~/Library/Application Support/Claude/claude_desktop_config.json`file which looks something like this on macOS with Homebrew and `uv` installed:\n\n```yml\n{\n  \"mcpServers\": {\n    \"USEFULNAME\": {\n      \"command\": \"/opt/homebrew/bin/uvx\",\n      \"args\": [\n        \"--from\",\n        \"git+ssh://git@github.com/amphora/patentsafe-mcp.git\",\n        \"patentsafe-mcp\",\n        \"PATENTSAFE_BASE_URL\",\n        \"PATENTSAFE_AUTH_TOKEN\"\n      ]\n    }\n  }\n}\n```\n\nYou'll need to replace:\n\n- `USEFULNAME` with a useful name for the server (e.g. `patentsafe`)\n- `PATENTSAFE_BASE_URL` with the base URL of your PatentSafe instance (e.g. `https://demo.morescience.com`)\n- `PATENTSAFE_AUTH_TOKEN` with your PatentSafe authentication token you can get from your user settings.\n\n## Usage\n\nWe've tested it with Claude, but it should work with any MCP client.\n\n## How it works (and debugging)\n\nThe MCP server does raw Lucene queries against the PatentSafe database, which is not something users often do. If you want to do a Lucene query, you can use the following URL:\n\n```\nhttps://PATENTSAFE_BASE_URL/ps/read/search.html?pq=1\n```\n\n## Limits \n\nOur initial testing shows that PatentSafe can easily return more documents than the LLM can process. So there's a `--max-chars` flag to limit the number of characters returned, default 500k.\n\n\n## Support\n\nThis is very much a work in progress. It works for us, and will likely work for you, but it's not production ready and is under active development.\n\nYou can raise issues directly with Amphora's support team in the usual way, or contribute to this GitHub project with pull requests, issues, discussion etc.\n\n## Future Work\n\n- Add support for exposing Metadata fields\n- Move the MCO server natively into PatentSafe (if that's the way clients evolve) \n  "
+}

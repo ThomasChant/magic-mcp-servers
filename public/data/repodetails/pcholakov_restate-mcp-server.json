@@ -1,0 +1,52 @@
+{
+  "mcp_name": "pcholakov/restate-mcp-server",
+  "mcp_description": "Facilitates management and deployment of Restate services through an MCP server interface.",
+  "mcp_id": "pcholakov_restate-mcp-server",
+  "fetch_timestamp": "2025-06-23T07:28:27.544896Z",
+  "github_url": "https://github.com/pcholakov/restate-mcp-server",
+  "repository": {
+    "name": "restate-mcp-server",
+    "full_name": "pcholakov/restate-mcp-server",
+    "description": "Restate Admin MCP server",
+    "html_url": "https://github.com/pcholakov/restate-mcp-server",
+    "created_at": "2025-04-20T19:05:53Z",
+    "updated_at": "2025-04-22T00:15:25Z",
+    "pushed_at": "2025-04-20T19:08:02Z",
+    "size": 102,
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 0,
+    "open_issues_count": 1,
+    "language": "TypeScript",
+    "license": "Apache License 2.0",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "pcholakov",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/115803?v=4",
+      "html_url": "https://github.com/pcholakov"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 2,
+    "languages": {
+      "TypeScript": 32356,
+      "JavaScript": 743
+    },
+    "language_percentages": {
+      "TypeScript": 97.76,
+      "JavaScript": 2.24
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# Restate operations MCP server\n\nThis is an MCP server that exposes the Restate Admin API as tools over MCP.\n\n## Running\n\nBuild the server:\n\n```sh\nnpm run clean-install && npm run build\n```\n\nRegister the MCP server:\n\n```json\n{\n  \"mcpServers\": {\n    \"restate\": {\n      \"command\": \"node\",\n      \"args\": [\".../restate-mcp-server/dist/index.js\"]\n    }\n  }\n}\n```\n\n## What can it do?\n\nAt the moment, support is still very basic - tools cover the most common\n\n- Manage services and deployments, including updating configuration settings\n- List, cancel/kill service invocations\n- Query KV state and other attributes exposed via the introspection schema\n\nThings to try:\n\n> Can you list my Restate services?\n\n> Deploy a service running at ...\n\n> Update idempotency retention to ...\n"
+}

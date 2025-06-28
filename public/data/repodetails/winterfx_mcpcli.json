@@ -1,0 +1,65 @@
+{
+  "mcp_name": "winterfx/mcpcli",
+  "mcp_description": "A command-line interface for managing and interacting with multiple MCP servers, offering features like tool invocation and server inspection.",
+  "mcp_id": "winterfx_mcpcli",
+  "fetch_timestamp": "2025-06-23T09:28:34.672622Z",
+  "github_url": "https://github.com/winterfx/mcpcli",
+  "repository": {
+    "name": "mcpcli",
+    "full_name": "winterfx/mcpcli",
+    "description": "cli tool for inspect mcp server",
+    "html_url": "https://github.com/winterfx/mcpcli",
+    "created_at": "2025-04-16T07:46:11Z",
+    "updated_at": "2025-04-17T02:37:32Z",
+    "pushed_at": "2025-04-17T08:09:00Z",
+    "size": 1166,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Go",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "winterfx",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/136159170?v=4",
+      "html_url": "https://github.com/winterfx"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Go": 17094
+    },
+    "language_percentages": {
+      "Go": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "latest_release": {
+      "tag_name": "0.1.0",
+      "name": "mcpcli release",
+      "published_at": "2025-04-17T08:09:00Z",
+      "body": "",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "0.1.0",
+        "commit_sha": "4ff0f3763db86485f177559dad4b72eb0a7dabd3"
+      }
+    ],
+    "latest_version": "0.1.0"
+  },
+  "readme": "# MCP-CLI\n\nMCP-CLI is a command-line tool for managing and interacting with MCP (Machine Conversation Protocol) servers.\n\n## Features\n\n- Manage multiple MCP servers\n- Interactive command-line interface\n- Support for viewing and calling server Tools\n- Support for viewing server Prompts and Resources\n- Support for tool invocation\n\n## Installation\n```bash\ngo install github.com/yourusername/mcp-cli@latest\n```\n\n## Configuration\n\nCreate configuration file `~/.mcp-cli.json`:\n\n```json\n{\n  \"mcpServers\": {\n    \"playwright\": {\n      \"command\": \"npx\",\n      \"args\": [\"@playwright/mcp@latest\"]\n    }\n    ...\n  }\n}\n```\n\n## Usage\n\n### List All Servers\n```bash\n$ mcp-cli server list\n```\n\n| Server Name | Command | Args | Environment |\n|------------|---------|------|-------------|\n| playwright | npx | @playwright/mcp@latest | |\n\n### Inspect Server\n```bash\n$ ./mcp-cli server inspect -n playwright\nInspecting server: {Command:npx Args:[@playwright/mcp@latest] Env:map[]}\nInitializing MCP client...\nEntering interactive shell for server: playwright\nType 'help' for available commands, 'exit' to quit\n\nplaywright> tools\ntotal 21 tools\n```\n\n| NAME | DESCRIPTION | PARAMETERS |\n|------|------------|------------|\n| browser_close | Close the page | `{\"type\": \"object\", \"properties\": {}}` |\n| browser_wait | Wait for a specified time in seconds | `{\"type\": \"object\", \"properties\": {\"time\": {\"description\": \"The time to wait in seconds\", \"type\": \"number\"}}, \"required\": [\"time\"]}` |\n\n### Interactive Commands\n```bash\n> tools     # Show available tools\n> prompts   # Show available prompts\n> resources # Show available resources\n> call tool-name {\"param\": \"value\"}  # Call a tool\n> help      # Show help information\n> exit      # Exit\n```\n\n### Tool Call Example\n![](./doc/tool.png)\n\n## License\n\nMIT License\n"
+}

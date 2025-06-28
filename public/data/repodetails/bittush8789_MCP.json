@@ -1,0 +1,50 @@
+{
+  "mcp_name": "bittush8789/MCP",
+  "mcp_description": "Fetches weather data from the National Weather Service API, providing tools for retrieving active alerts and short-term forecasts.",
+  "mcp_id": "bittush8789_MCP",
+  "fetch_timestamp": "2025-06-23T01:41:46.689782Z",
+  "github_url": "https://github.com/bittush8789/MCP",
+  "repository": {
+    "name": "MCP",
+    "full_name": "bittush8789/MCP",
+    "description": "Creating MCP (Model Context Protocol) weather-related projects involves setting up an MCP server that can fetch and provide weather data.",
+    "html_url": "https://github.com/bittush8789/MCP",
+    "created_at": "2025-04-15T09:47:31Z",
+    "updated_at": "2025-04-15T09:48:48Z",
+    "pushed_at": "2025-04-15T09:48:45Z",
+    "size": 10,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "bittush8789",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/126468408?v=4",
+      "html_url": "https://github.com/bittush8789"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 2960
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# Weather MCP Server\n\nThis MCP server fetches weather data from the National Weather Service API. It provides two tools:\n\n- **get_alerts(state: str)**  \n  Returns active weather alerts for a given US state (using its two-letter code).\n\n- **get_forecast(latitude: float, longitude: float)**  \n  Returns a short-term weather forecast for a specified location.\n\n## Requirements\n\n- Python 3.7+\n- [httpx](https://www.python-httpx.org/)\n- MCP Framework mcp[cli]\n\nso install, run:\n\n```bash\nuv add mcp[cli] httpx requests\n```\n\n## Usage\n\nRun the server with:\n\n```bash\nuv run weather.py\n```\n\nThe server uses standard I/O for communication.\n\n## MCP Client Configuration\n\nconfiguration snippet for your MCP client (`config.json`):\n\n```json\n{\n  \"mcpServers\": {\n    \"weather\": {\n      \"command\": \"C:/path/to/your/uv\",\n      \"args\": [\n        \"--directory\",\n        \"C:/path/to/your/project\",\n        \"run\",\n        \"weather.py\"\n      ]\n    }\n  }\n}\n```\n"
+}

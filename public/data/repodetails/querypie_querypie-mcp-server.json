@@ -1,0 +1,93 @@
+{
+  "mcp_name": "querypie/querypie-mcp-server",
+  "mcp_description": "QueryPie MCP server empowers administrators with real-time data visualization, resource monitoring, and security auditing capabilities.",
+  "mcp_id": "querypie_querypie-mcp-server",
+  "fetch_timestamp": "2025-06-23T07:44:58.871043Z",
+  "github_url": "https://github.com/querypie/querypie-mcp-server",
+  "repository": {
+    "name": "querypie-mcp-server",
+    "full_name": "querypie/querypie-mcp-server",
+    "description": "The MCP server for QueryPie for administrators to manage it.",
+    "html_url": "https://github.com/querypie/querypie-mcp-server",
+    "created_at": "2025-04-08T02:08:26Z",
+    "updated_at": "2025-05-08T04:32:31Z",
+    "pushed_at": "2025-05-08T04:39:18Z",
+    "size": 45907,
+    "stargazers_count": 8,
+    "watchers_count": 8,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Go",
+    "license": "Apache License 2.0",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "querypie",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/177301290?v=4",
+      "html_url": "https://github.com/querypie"
+    },
+    "has_issues": true,
+    "has_projects": false,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Go": 22476,
+      "Shell": 2127,
+      "Dockerfile": 637
+    },
+    "language_percentages": {
+      "Go": 89.05,
+      "Shell": 8.43,
+      "Dockerfile": 2.52
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 3,
+    "latest_release": {
+      "tag_name": "v0.0.7",
+      "name": "v0.0.7",
+      "published_at": "2025-05-08T04:39:18Z",
+      "body": "- fix: schema string is not lowercase\r\n\r\n**Full Changelog**: https://github.com/querypie/querypie-mcp-server/compare/v0.0.6...v0.0.7",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.0.7",
+        "commit_sha": "ae4312ffa97dd9ae1bd4db1b2b3b70ea61b8389f"
+      },
+      {
+        "name": "v0.0.6",
+        "commit_sha": "28885ab2c542830d137dea21fd89b8c9819a0f51"
+      },
+      {
+        "name": "v0.0.5",
+        "commit_sha": "26e0bf0c85664fd43f999acda85edb0e51550992"
+      },
+      {
+        "name": "v0.0.4",
+        "commit_sha": "57aee6075d78ae19e5b9453f370459727078322a"
+      },
+      {
+        "name": "v0.0.3",
+        "commit_sha": "8a05b9801af85a596ee6589388f83f85ac1b9fc4"
+      },
+      {
+        "name": "v0.0.2",
+        "commit_sha": "65aab77001a4d41b9fd56057fe19b6308b0ba863"
+      },
+      {
+        "name": "v0.0.1",
+        "commit_sha": "6fb826e58b2ccd99923cba34d35346ead8b47485"
+      }
+    ],
+    "latest_version": "v0.0.7"
+  },
+  "readme": "# QueryPie MCP\n\nThe MCP server for QueryPie for administrators to manage it.\n\n<a href=\"https://www.youtube.com/watch?v=uJ8u9oHCiIM\">\n  <img src=\"https://raw.githubusercontent.com/querypie/querypie-mcp-server/main/assets/querypie-ai-hub.png\" width=\"60%\" alt=\"QueryPie Agent Demo\">\n</a>\n\n<br />\n\n## Key Usage Demo\n\n**📊 Dashboard with Instant Charts**\n\nVisualize your data instantly by turning query results into live charts and dashboards—without writing a single line of code.\n\n<img src=\"https://raw.githubusercontent.com/querypie/querypie-mcp-server/main/assets/chart.gif\" width=\"800\" alt=\"QueryPie Demo\">\n\n<br />\n\n**💽 Monitor Disk & Memory Usage**\n\nTrack server resource usage like disk space and memory in real time, and identify the most resource-intensive processes at a glance.\n\n<img src=\"https://raw.githubusercontent.com/querypie/querypie-mcp-server/main/assets/usage.gif\" width=\"800\" alt=\"QueryPie Demo\">\n\n<br />\n\n**🕵️‍♂️ Detect Suspicious Behavior**\n\nReview access logs and detect abnormal user behavior, such as risky SQL commands or unauthorized server activity.\n\n<img src=\"https://raw.githubusercontent.com/querypie/querypie-mcp-server/main/assets/logs.gif\" width=\"800\" alt=\"QueryPie Demo\">\n\n<br />\n\n**✨ And That’s Just the Beginning...**\n\nThere’s so much more you can do—register assets, manage access, automate audits, and more. \n\nIt all depends on how you use QueryPie.  Start exploring and make it yours.\n\n<br />\n\n## Installation\n\nPrepare your QueryPie API key and URL.\n\nYou can find the API key on <kbd>General</kbd> > <kbd>System</kbd> > <kbd>API Token</kbd> in the QueryPie web console.\n\n### Docker\n\n```bash\n# Stdio example\nexport QUERYPIE_API_KEY=your_token\nexport QUERYPIE_URL=https://your_querypie_url\n\ndocker run --rm \\\n    -e \"QUERYPIE_API_KEY=${QUERYPIE_API_KEY}\" \\\n    ghcr.io/querypie/querypie-mcp-server \"${QUERYPIE_URL}\"\n```\n\n```bash\n# SSE example\nexport QUERYPIE_API_KEY=your_token\nexport QUERYPIE_URL=https://your_querypie_url\n\ndocker run --rm \\\n    -e \"QUERYPIE_API_KEY=${QUERYPIE_API_KEY}\" \\\n    ghcr.io/querypie/querypie-mcp-server \"${QUERYPIE_URL}\" \\\n    --transport sse \\\n    --port 8000\n```\n\n### Linux/macOS\n\n```bash\n# Install the querypie-mcp-server binary to ~/.local/bin\ncurl -L https://github.com/querypie/querypie-mcp-server/releases/latest/download/install.sh | sh\n```\n\n```bash\n# Stdio example\nexport QUERYPIE_API_KEY=your_token\nquerypie-mcp-server https://your_querypie_url\n```\n\n```bash\n# SSE example\nexport QUERYPIE_API_KEY=your_token\nquerypie-mcp-server https://your_querypie_url \\\n    --transport sse \\\n    --port 8000\n```\n\n### Claude Desktop\n\nAdd this into your `claude_desktop_config.json` (either at `~/Library/Application Support/Claude` on macOS or `C:\\Users\\NAME\\AppData\\Roaming\\Claude` on Windows):\n\n```json\n{\n    \"mcpServers\": {\n        \"querypie\": {\n            \"command\": \"docker\",\n            \"args\": [\n                \"run\",\n                \"--rm\",\n                \"-e\",\n                \"QUERYPIE_API_KEY=${QUERYPIE_API_KEY}\",\n                \"-it\",\n                \"ghcr.io/querypie/querypie-mcp-server\",\n                \"https://your_querypie_url\"\n            ],\n            \"env\": {\n                \"QUERYPIE_API_KEY\": \"your_token\"\n            }\n        }\n    }\n}\n```\n\n### Cursor\n\nAdd this into your `~/cursor/mcp.json`\n\n```json\n{\n  \"mcpServers\": {\n    \"querypie\": {\n      \"command\": \"docker\",\n      \"type\": \"stdio\",\n      \"args\": [\n        \"run\",\n        \"--rm\",\n        \"-e\",\n        \"QUERYPIE_API_KEY=${QUERYPIE_API_KEY}\",\n        \"-it\",\n        \"ghcr.io/querypie/querypie-mcp-server\",\n        \"https://your_querypie_url\"\n      ],\n      \"env\": {\n        \"QUERYPIE_API_KEY\": \"your_token\"\n      }\n    }\n  }\n}\n```\n"
+}

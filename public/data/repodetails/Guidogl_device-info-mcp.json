@@ -1,0 +1,53 @@
+{
+  "mcp_name": "Guidogl/device-info-mcp",
+  "mcp_description": "Facilitates device information retrieval and troubleshooting through a Model Context Protocol server.",
+  "mcp_id": "Guidogl_device-info-mcp",
+  "fetch_timestamp": "2025-06-23T04:15:42.597691Z",
+  "github_url": "https://github.com/Guidogl/device-info-mcp",
+  "repository": {
+    "name": "device-info-mcp",
+    "full_name": "Guidogl/device-info-mcp",
+    "description": null,
+    "html_url": "https://github.com/Guidogl/device-info-mcp",
+    "created_at": "2025-04-04T21:47:30Z",
+    "updated_at": "2025-04-04T21:48:36Z",
+    "pushed_at": "2025-04-04T21:48:32Z",
+    "size": 53,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "Guidogl",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6173458?v=4",
+      "html_url": "https://github.com/Guidogl"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 25947,
+      "JavaScript": 1582
+    },
+    "language_percentages": {
+      "TypeScript": 94.25,
+      "JavaScript": 5.75
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# Device Info MCP Server\n\nThis project implements a Model Context Protocol (MCP) server that provides information about electronic devices. It allows searching for devices by model number and retrieving detailed information about them.\n\n## Setup\n\nTo run the Device Info MCP server using npx, use the following command:\n\n```bash\nnpx -y device-info-mcp@latest\n```\n\n## Usage with Cursor or Claude Desktop\n\nAdd the following configuration. For more information, read the [Cursor MCP documentation](https://docs.cursor.com/context/model-context-protocol) or the [Claude Desktop MCP guide](https://modelcontextprotocol.io/quickstart/user).\n\n```json\n{\n  \"mcpServers\": {\n    \"device-info-mcp\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"device-info-mcp@latest\"]\n    }\n  }\n}\n```\n\nOn Windows, you might need to use this alternative configuration:\n\n```json\n{\n  \"mcpServers\": {\n    \"device-info-mcp\": {\n      \"command\": \"cmd\",\n      \"args\": [\"/k\", \"npx\", \"-y\", \"device-info-mcp@latest\"]\n    }\n  }\n}\n```\n\n## Available tools\n\nThis MCP server provides the following tools:\n\n| Tool Name              | Description                                              |\n| ---------------------- | -------------------------------------------------------- |\n| search_devices         | Search for devices by model number or other criteria     |\n| get_device_details     | Retrieve detailed information about a specific device    |\n| get_device_manual      | Retrieve the user manual for a specific device           |\n\n## Available prompts\n\nThis MCP server provides the following prompts:\n\n| Prompt Name           | Description                                              |\n| --------------------- | -------------------------------------------------------- |\n| device_troubleshoot   | Help with troubleshooting a specific device issue        |\n\n## Development\n\nThe server is built using the MCP SDK and provides device information from a local database.\n\n1. `npm install`\n2. Modify source files\n3. Run `npm run build` to compile\n4. Run `npm run test` to run tests\n5. Add an MCP server that runs this command: `node <absolute_path_of_project>/dist/index.js`\n\n## License\n\nMIT\n"
+}

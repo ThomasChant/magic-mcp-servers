@@ -1,0 +1,103 @@
+{
+  "mcp_name": "carterlasalle/mac_messages_mcp",
+  "mcp_description": "🏠 🍎 🚀 - An MCP server that securely interfaces with your iMessage database via the Model Context Protocol (MCP), allowing LLMs to query and analyze iMessage conversations. It includes robust phone number validation, attachment processing, contact management, group chat handling, and full support for sending and receiving messages.",
+  "mcp_id": "carterlasalle_mac_messages_mcp",
+  "fetch_timestamp": "2025-06-23T01:58:07.913367Z",
+  "github_url": "https://github.com/carterlasalle/mac_messages_mcp",
+  "repository": {
+    "name": "mac_messages_mcp",
+    "full_name": "carterlasalle/mac_messages_mcp",
+    "description": "An MCP server that securely interfaces with your iMessage database via the Model Context Protocol (MCP), allowing LLMs to query and analyze iMessage conversations. It includes robust phone number validation, attachment processing, contact management, group chat handling, and full support for sending and receiving messages.",
+    "html_url": "https://github.com/carterlasalle/mac_messages_mcp",
+    "created_at": "2025-03-13T04:24:07Z",
+    "updated_at": "2025-06-22T19:52:08Z",
+    "pushed_at": "2025-06-22T19:52:04Z",
+    "size": 172,
+    "stargazers_count": 120,
+    "watchers_count": 120,
+    "forks_count": 13,
+    "open_issues_count": 4,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [
+      "applescript",
+      "claude",
+      "contacts",
+      "cursor",
+      "imessage",
+      "mac",
+      "macos",
+      "mcp",
+      "mcp-server"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "carterlasalle",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/50027436?v=4",
+      "html_url": "https://github.com/carterlasalle"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 13,
+    "subscribers_count": 2,
+    "languages": {
+      "Python": 79158
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 4,
+    "contributors_count": 3,
+    "tags": [
+      {
+        "name": "v0.7.3",
+        "commit_sha": "c80b5aaf35f41ea0dfb123c8f83c6ca537e79723"
+      },
+      {
+        "name": "v0.7.2",
+        "commit_sha": "b9b51cc0e10c1d5fcce8f6fef33fff91b26ae6fc"
+      },
+      {
+        "name": "v0.7.1",
+        "commit_sha": "cfe43dbd73f2deac5b941c2d708b216e4314c61d"
+      },
+      {
+        "name": "v0.7.0",
+        "commit_sha": "0cdb75782f2c75c5cc8637e8ace5fdc7c29bdf47"
+      },
+      {
+        "name": "v0.6.8",
+        "commit_sha": "0cdb75782f2c75c5cc8637e8ace5fdc7c29bdf47"
+      },
+      {
+        "name": "v0.6.6",
+        "commit_sha": "7a15f2647c70543034974add8bec0e15f80621c2"
+      },
+      {
+        "name": "v0.6.5",
+        "commit_sha": "72f2e57a3b82869793e2b8312537d5a0b4ab0de5"
+      },
+      {
+        "name": "v0.6.4",
+        "commit_sha": "c133aed2d9f4f4a138b5f0fe6f475e4b044ab085"
+      },
+      {
+        "name": "v0.6.3",
+        "commit_sha": "92e1bf9189e6ae3f1693937b7bf54c878d59fee9"
+      },
+      {
+        "name": "v0.6.2",
+        "commit_sha": "0e9c9080c4577ccc9e60569f824e9d927140ace8"
+      }
+    ],
+    "latest_version": "v0.7.3"
+  },
+  "readme": "# Mac Messages MCP\n\nA Python bridge for interacting with the macOS Messages app using MCP (Multiple Context Protocol). \n\n[![PyPI Downloads](https://static.pepy.tech/badge/mac-messages-mcp)](https://pepy.tech/projects/mac-messages-mcp)\n\n![a-diagram-of-a-mac-computer-with-the-tex_FvvnmbaBTFeKy6F2GMlLqA_IfCBMgJARcia1WTH7FaqwA](https://github.com/user-attachments/assets/dbbdaa14-fadd-434d-a265-9e0c0071c11d)\n\n[![Verified on MseeP](https://mseep.ai/badge.svg)](https://mseep.ai/app/fdc62324-6ac9-44e2-8926-722d1157759a)\n\n\n<a href=\"https://glama.ai/mcp/servers/gxvaoc9znc\">\n  <img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/gxvaoc9znc/badge\" />\n</a>\n\n## Quick Install\n\n### For Cursor Users\n\n[![Install MCP Server](https://cursor.com/deeplink/mcp-install-light.svg)](https://cursor.com/install-mcp?name=mac-messages-mcp&config=eyJjb21tYW5kIjoidXZ4IG1hYy1tZXNzYWdlcy1tY3AifQ%3D%3D)\n\n*Click the button above to automatically add Mac Messages MCP to Cursor*\n\n### For Claude Desktop Users\n\nSee the [Integration section](#integration) below for setup instructions.\n\n## Features\n\n- **Universal Message Sending**: Automatically sends via iMessage or SMS/RCS based on recipient availability\n- **Smart Fallback**: Seamless fallback to SMS when iMessage is unavailable (perfect for Android users)\n- **Message Reading**: Read recent messages from the macOS Messages app\n- **Contact Filtering**: Filter messages by specific contacts or phone numbers\n- **Fuzzy Search**: Search through message content with intelligent matching\n- **iMessage Detection**: Check if recipients have iMessage before sending\n- **Cross-Platform**: Works with both iPhone/Mac users (iMessage) and Android users (SMS/RCS)\n\n## Prerequisites\n\n- macOS (tested on macOS 11+)\n- Python 3.10+\n- **uv package manager**\n\n### Installing uv\n\nIf you're on Mac, install uv using Homebrew:\n\n```bash\nbrew install uv\n```\n\nOtherwise, follow the installation instructions on the [uv website](https://github.com/astral-sh/uv).\n\n⚠️ **Do not proceed before installing uv**\n\n## Installation\n\n### Full Disk Access Permission\n\n⚠️ This application requires **Full Disk Access** permission for your terminal or application to access the Messages database. \n\nTo grant Full Disk Access:\n1. Open **System Preferences/Settings** > **Security & Privacy/Privacy** > **Full Disk Access**\n2. Click the lock icon to make changes\n3. Add your terminal app (Terminal, iTerm2, etc.) or Claude Desktop/Cursor to the list\n4. Restart your terminal or application after granting permission\n\n## Integration\n\n### Claude Desktop Integration\n\n1. Go to **Claude** > **Settings** > **Developer** > **Edit Config** > **claude_desktop_config.json**\n2. Add the following configuration:\n\n```json\n{\n    \"mcpServers\": {\n        \"messages\": {\n            \"command\": \"uvx\",\n            \"args\": [\n                \"mac-messages-mcp\"\n            ]\n        }\n    }\n}\n```\n\n### Cursor Integration\n\n#### Option 1: One-Click Install (Recommended)\n\n[![Install MCP Server](https://cursor.com/deeplink/mcp-install-light.svg)](https://cursor.com/install-mcp?name=mac-messages-mcp&config=eyJjb21tYW5kIjoidXZ4IG1hYy1tZXNzYWdlcy1tY3AifQ%3D%3D)\n\n#### Option 2: Manual Setup\n\nGo to **Cursor Settings** > **MCP** and paste this as a command:\n\n```\nuvx mac-messages-mcp\n```\n\n⚠️ Only run one instance of the MCP server (either on Cursor or Claude Desktop), not both\n\n\n### Option 1: Install from PyPI\n\n```bash\nuv pip install mac-messages-mcp\n```\n\n### Option 2: Install from source\n\n```bash\n# Clone the repository\ngit clone https://github.com/carterlasalle/mac_messages_mcp.git\ncd mac_messages_mcp\n\n# Install dependencies\nuv install -e .\n```\n\n\n## Usage\n\n### Smart Message Delivery\n\nMac Messages MCP automatically handles message delivery across different platforms:\n\n- **iMessage Users** (iPhone, iPad, Mac): Messages sent via iMessage\n- **Android Users**: Messages automatically fall back to SMS/RCS\n- **Mixed Groups**: Optimal delivery method chosen per recipient\n\n```python\n# Send to iPhone user - uses iMessage\nsend_message(\"+1234567890\", \"Hey! This goes via iMessage\")\n\n# Send to Android user - automatically uses SMS\nsend_message(\"+1987654321\", \"Hey! This goes via SMS\") \n\n# Check delivery method before sending\ncheck_imessage_availability(\"+1234567890\")  # Returns availability status\n```\n\n### As a Module\n\n```python\nfrom mac_messages_mcp import get_recent_messages, send_message\n\n# Get recent messages\nmessages = get_recent_messages(hours=48)\nprint(messages)\n\n# Send a message (automatically chooses iMessage or SMS)\nresult = send_message(recipient=\"+1234567890\", message=\"Hello from Mac Messages MCP!\")\nprint(result)  # Shows whether sent via iMessage or SMS\n```\n\n### As a Command-Line Tool\n\n```bash\n# Run the MCP server directly\nmac-messages-mcp\n```\n\n## Development\n\n### Versioning\n\nThis project uses semantic versioning. See [VERSIONING.md](VERSIONING.md) for details on how the versioning system works and how to release new versions.\n\nTo bump the version:\n\n```bash\npython scripts/bump_version.py [patch|minor|major]\n```\n\n## Security Notes\n\nThis application accesses the Messages database directly, which contains personal communications. Please use it responsibly and ensure you have appropriate permissions.\n\n[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/carterlasalle-mac-messages-mcp-badge.png)](https://mseep.ai/app/carterlasalle-mac-messages-mcp)\n\n## License\n\nMIT\n\n## Contributing\n\nContributions are welcome! Please feel free to submit a Pull Request. \n## Star History\n\n[![Star History Chart](https://api.star-history.com/svg?repos=carterlasalle/mac_messages_mcp&type=Date)](https://www.star-history.com/#carterlasalle/mac_messages_mcp&Date)\n"
+}

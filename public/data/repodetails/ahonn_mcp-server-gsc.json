@@ -1,0 +1,55 @@
+{
+  "mcp_name": "Google Search Console",
+  "mcp_description": "A Model Context Protocol (MCP) server providing access to Google Search Console.",
+  "mcp_id": "ahonn_mcp-server-gsc",
+  "fetch_timestamp": "2025-06-23T04:11:21.512066Z",
+  "github_url": "https://github.com/ahonn/mcp-server-gsc",
+  "repository": {
+    "name": "mcp-server-gsc",
+    "full_name": "ahonn/mcp-server-gsc",
+    "description": "A Model Context Protocol (MCP) server providing access to Google Search Console",
+    "html_url": "https://github.com/ahonn/mcp-server-gsc",
+    "created_at": "2024-12-04T04:10:53Z",
+    "updated_at": "2025-06-22T12:07:00Z",
+    "pushed_at": "2025-03-08T09:55:13Z",
+    "size": 31,
+    "stargazers_count": 29,
+    "watchers_count": 29,
+    "forks_count": 15,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "ahonn",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9718515?v=4",
+      "html_url": "https://github.com/ahonn"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 15,
+    "subscribers_count": 2,
+    "languages": {
+      "TypeScript": 6376,
+      "JavaScript": 5987,
+      "Dockerfile": 905
+    },
+    "language_percentages": {
+      "TypeScript": 48.06,
+      "JavaScript": 45.12,
+      "Dockerfile": 6.82
+    },
+    "pull_requests_count": 2,
+    "contributors_count": 2,
+    "package_json_version": "0.2.0"
+  },
+  "readme": "# Google Search Console MCP Server\n[![smithery badge](https://smithery.ai/badge/mcp-server-gsc)](https://smithery.ai/server/mcp-server-gsc)\n\nA Model Context Protocol (MCP) server providing access to Google Search Console.\n\n## Features\n\n- Search analytics data retrieval with dimensions support\n- Rich data analysis with customizable reporting periods\n\n## Prerequisites\n\n- Node.js 18 or later\n- Google Cloud Project with Search Console API enabled\n- Service Account credentials with Search Console access\n\n## Installation\n\n### Installing via Smithery\n\nTo install Google Search Console for Claude Desktop automatically via [Smithery](https://smithery.ai/server/mcp-server-gsc):\n\n```bash\nnpx -y @smithery/cli install mcp-server-gsc --client claude\n```\n\n### Manual Installation\n```bash\nnpm install mcp-server-gsc\n```\n\n## Authentication Setup\n\nTo obtain Google Search Console API credentials:\n\n1. Visit the [Google Cloud Console](https://console.cloud.google.com/)\n2. Create a new project or select an existing one\n3. Enable the API:\n\n- Go to \"APIs & Services\" > \"Library\"\n- Search for and enable [\"Search Console API\"](https://console.cloud.google.com/marketplace/product/google/searchconsole.googleapis.com)\n\n4. Create credentials:\n\n- Navigate to [\"APIs & Services\" > \"Credentials\"](https://console.cloud.google.com/apis/credentials)\n- Click \"Create Credentials\" > \"Service Account\"\n- Fill in the service account details\n- Create a new key in JSON format\n- The credentials file (.json) will download automatically\n\n5. Grant access:\n\n- Open Search Console\n- Add the service account email (format: name@project.iam.gserviceaccount.com) as a property administrator\n\n## Usage\n\n### Claude Desktop Configuration\n\n```json\n{\n  \"mcpServers\": {\n    \"gsc\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"mcp-server-gsc\"],\n      \"env\": {\n        \"GOOGLE_APPLICATION_CREDENTIALS\": \"/path/to/credentials.json\"\n      }\n    }\n  }\n}\n```\n\n## Available Tools\n\n### search_analytics\n\nGet search performance data from Google Search Console with customizable parameters:\n\n**Required Parameters:**\n\n- `siteUrl`: Site URL (format: `http://www.example.com/` or `sc-domain:example.com`)\n- `startDate`: Start date (YYYY-MM-DD)\n- `endDate`: End date (YYYY-MM-DD)\n\n**Optional Parameters:**\n\n- `dimensions`: Comma-separated list (`query,page,country,device,searchAppearance`)\n- `type`: Search type (`web`, `image`, `video`, `news`)\n- `aggregationType`: Aggregation method (`auto`, `byNewsShowcasePanel`, `byProperty`, `byPage`)\n- `rowLimit`: Maximum rows to return (default: 1000)\n\nExample:\n\n```json\n{\n  \"siteUrl\": \"https://example.com\",\n  \"startDate\": \"2024-01-01\",\n  \"endDate\": \"2024-01-31\",\n  \"dimensions\": \"query,country\",\n  \"type\": \"web\",\n  \"rowLimit\": 500\n}\n```\n\n## License\n\nMIT\n\n## Contributing\n\nContributions are welcome! Please read our contributing guidelines before submitting pull requests.\n"
+}

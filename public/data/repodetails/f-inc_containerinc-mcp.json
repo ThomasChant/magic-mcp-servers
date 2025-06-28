@@ -1,0 +1,51 @@
+{
+  "mcp_name": "f-inc/containerinc-mcp",
+  "mcp_description": "Automates deployments to Container Inc. with ephemeral and free deployment capabilities.",
+  "mcp_id": "f-inc_containerinc-mcp",
+  "fetch_timestamp": "2025-06-23T02:57:47.186891Z",
+  "github_url": "https://github.com/f-inc/containerinc-mcp",
+  "repository": {
+    "name": "containerinc-mcp",
+    "full_name": "f-inc/containerinc-mcp",
+    "description": "MCP Server for automated deployments onto Container Inc.",
+    "html_url": "https://github.com/f-inc/containerinc-mcp",
+    "created_at": "2025-04-01T17:54:26Z",
+    "updated_at": "2025-05-05T00:52:34Z",
+    "pushed_at": "2025-04-03T01:48:34Z",
+    "size": 25,
+    "stargazers_count": 8,
+    "watchers_count": 8,
+    "forks_count": 2,
+    "open_issues_count": 1,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "f-inc",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/61232470?v=4",
+      "html_url": "https://github.com/f-inc"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 2,
+    "subscribers_count": 2,
+    "languages": {
+      "TypeScript": 23830
+    },
+    "language_percentages": {
+      "TypeScript": 100
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 1,
+    "package_json_version": "1.1.0"
+  },
+  "readme": "# @container-inc/mcp\n\nMCP Server for deploying to [Container Inc.](https://container.inc)\n\n> [!TIP]\n> For now deployments are ephemneral and free. The platform is update coming soon to support more.\n\n## Usage\n\n```jsonc\n// .cursor/mcp.json\n{\n  \"mcpServers\": {\n    \"@container-inc/mcp\": {\n      \"command\": \"npx\",\n      \"args\": [\"@container-inc/mcp\"]\n    }\n  }\n}\n```\n\n1. Place the above in a `.cursor/mcp.json` (or your editor's equivalent) file in your home directory.\n2. Check the editor's settings to ensure it is enabled.\n3. Just ask to deploy to Container Inc.\n\n## Notes\n* You'll be asked to login with GitHub this is so that:\n  1. We can create a repository if needed\n  2. Publish the docker image to ghcr.io\n  3. Pull the code in the builder\n* Ensure your project has a `Dockerfile` so it can be built\n"
+}

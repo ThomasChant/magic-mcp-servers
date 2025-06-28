@@ -1,0 +1,53 @@
+{
+  "mcp_name": "tlaukkanen/nysse-mcp-server",
+  "mcp_description": "Facilitates AI agents in accessing real-time bus traffic information for Tampere's public transport system.",
+  "mcp_id": "tlaukkanen_nysse-mcp-server",
+  "fetch_timestamp": "2025-06-23T08:58:33.572466Z",
+  "github_url": "https://github.com/tlaukkanen/nysse-mcp-server",
+  "repository": {
+    "name": "nysse-mcp-server",
+    "full_name": "tlaukkanen/nysse-mcp-server",
+    "description": "Nysse bus tracking MCP server for LLM AI agents",
+    "html_url": "https://github.com/tlaukkanen/nysse-mcp-server",
+    "created_at": "2025-04-14T19:41:29Z",
+    "updated_at": "2025-04-18T18:48:48Z",
+    "pushed_at": "2025-04-15T17:57:53Z",
+    "size": 519,
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "tlaukkanen",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/65841?v=4",
+      "html_url": "https://github.com/tlaukkanen"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 7139694,
+      "JavaScript": 7402
+    },
+    "language_percentages": {
+      "TypeScript": 99.9,
+      "JavaScript": 0.1
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "1.0.1"
+  },
+  "readme": "# Tampere Bus MCP Server\r\n\r\nThis is a Model Context Protocol (MCP) server that provides tools for AI agents to access bus traffic information for Tampere's public transport system. This enables AI assistants to answer questions like \"When is the next bus stopping at Tuotekatu bus stop?\"\r\n\r\n## Features\r\n\r\n- Search for bus stops by name\r\n- Get real-time information about upcoming bus arrivals at specific stops\r\n- Access to complete Tampere region bus stop database\r\n\r\n## Prerequisites\r\n\r\n- Node.js 18 or higher\r\n- Access credentials for the Waltti GTFS-RT API (optional for development)\r\n\r\n## Setup for VS Code as NPX MCP Server\r\n\r\nAdd to your MCP servers:\r\n\r\n```\r\n{\r\n  \"mcpServers\": {\r\n    \"nysse-bus-tracker\": {\r\n      \"command\": \"npx\",\r\n      \"args\": [\r\n        \"-y\",\r\n        \"nysse-mcp-server\"\r\n      ],\r\n      \"env\": {\r\n        \"WALTTI_CLIENT_ID\": \"YOUR_CLIENT_ID_HERE\",\r\n        \"WALTTI_CLIENT_SECRET\": \"YOUR_CLIENT_SECRET_HERE\"\r\n      }\r\n    }\r\n  }\r\n}\r\n```\r\n\r\n## Running the Server with inspector\r\n\r\nAdd the WALTTI credentials to package.json command line or to your environment variables and build and run with inspector task:\r\n```\r\nnpm run inspector\r\n```\r\n\r\n## Available Tools\r\n\r\nThe server provides the following MCP tools for AI agents:\r\n\r\n## License\r\n\r\nISC\r\n"
+}

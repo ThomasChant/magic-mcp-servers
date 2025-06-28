@@ -1,0 +1,112 @@
+{
+  "id": "4516f52e1ce8",
+  "owner": "redis",
+  "repoName": "mcp-redis-cloud",
+  "fullDescription": "📇 ☁️ - Manage your Redis Cloud resources effortlessly using natural language. Create databases, monitor subscriptions, and configure cloud deployments with simple commands.",
+  "techStack": [
+    {
+      "name": "typescript",
+      "icon": "📘",
+      "color": "#3178c6"
+    }
+  ],
+  "serviceTypes": [
+    {
+      "type": "data",
+      "label": "Data",
+      "icon": "📊",
+      "description": "Manages, processes, or analyzes data"
+    },
+    {
+      "type": "automation",
+      "label": "Automation",
+      "icon": "⚡",
+      "description": "Automates tasks and workflows"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "simple",
+    "maturity": "stable",
+    "deployment": [
+      "cloud"
+    ],
+    "featured": false,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 1.95,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "redis"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/redis/mcp-redis-cloud",
+    "owner": "redis",
+    "name": "mcp-redis-cloud",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.281Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "automation",
+    "cloud",
+    "redis",
+    "mcp",
+    "utilities-tools"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Simple",
+      "color": "#22c55e",
+      "icon": "🟢"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    }
+  ],
+  "icon": "📊",
+  "readme": null
+}

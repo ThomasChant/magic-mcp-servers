@@ -1,0 +1,55 @@
+{
+  "mcp_name": "ravi-accolite/mcpserver",
+  "mcp_description": "Facilitates seamless integration between LLM applications and version control systems like GitHub and GitLab, enhancing automation and management capabilities.",
+  "mcp_id": "ravi-accolite_mcpserver",
+  "fetch_timestamp": "2025-06-23T07:52:51.907526Z",
+  "github_url": "https://github.com/ravi-accolite/mcpserver",
+  "repository": {
+    "name": "mcpserver",
+    "full_name": "ravi-accolite/mcpserver",
+    "description": "MCP Server repository for managing GitHub operations",
+    "html_url": "https://github.com/ravi-accolite/mcpserver",
+    "created_at": "2025-04-10T18:53:13Z",
+    "updated_at": "2025-04-16T22:26:05Z",
+    "pushed_at": "2025-04-16T22:26:02Z",
+    "size": 56,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "ravi-accolite",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/189272636?v=4",
+      "html_url": "https://github.com/ravi-accolite"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 84852,
+      "JavaScript": 2164,
+      "Dockerfile": 574
+    },
+    "language_percentages": {
+      "TypeScript": 96.87,
+      "JavaScript": 2.47,
+      "Dockerfile": 0.66
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 2,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# Bounteous MCP Server\n\nA Model Context Protocol (MCP) server implementation for Bounteous organization, enabling seamless integration between LLM applications and version control systems (GitHub and GitLab).\n\n## Overview\n\nThis MCP server provides a standardized way to connect Large Language Models (LLMs) with version control systems, enabling powerful automation and integration capabilities. Built following the [Model Context Protocol](https://github.com/modelcontextprotocol) specifications.\n\n## Features\n\n### Version Control Integration\n- **GitHub Integration**\n  - Repository management\n  - Issue tracking\n  - Pull request handling\n  - Code review workflows\n  - Advanced search capabilities\n  - Branch management\n  - File operations\n\n- **GitLab Integration**\n  - Project management\n  - Issue tracking\n  - Merge request handling\n  - Code review workflows\n  - Repository operations\n  - Branch management\n  - File operations\n\n### Common Features\n- Automatic branch creation\n- Comprehensive error handling\n- Git history preservation\n- Batch operations support\n- File and directory management\n- Code search capabilities\n\n## Getting Started\n\n### Prerequisites\n\n- Node.js (v16 or higher)\n- npm or yarn package manager\n- GitLab or GitHub account with appropriate permissions\n- Personal Access Token for the respective service\n\n### Installation\n\n1. Clone the repository:\n```bash\ngit clone https://github.com/ravi-accolite/mcpserver.git\ncd mcpserver\n```\n\n2. Install dependencies:\n```bash\nnpm install\n# or\nyarn install\n```\n\n3. Configure environment variables:\n```bash\ncp .env.example .env\n# Edit .env with your configuration\n```\n\n### Usage\n\n#### Docker\n```bash\n# Build and run GitHub MCP Server\ndocker build -t mcp/github -f packages/bounteous-hulk/src/github/Dockerfile .\ndocker run -e GITHUB_PERSONAL_ACCESS_TOKEN=<your_token> mcp/github\n\n# Build and run GitLab MCP Server\ndocker build -t mcp/gitlab -f packages/bounteous-hulk/src/gitlab/Dockerfile .\ndocker run -e GITLAB_PERSONAL_ACCESS_TOKEN=<your_token> -e GITLAB_API_URL=https://gitlab.com/api/v4 mcp/gitlab\n```\n\n#### NPX\n```bash\n# Run GitHub MCP Server\nnpx -y bounteous-hulk --github-token <your_token>\n\n# Run GitLab MCP Server\nnpx -y bounteous-hulk --gitlab-token <your_token> --gitlab-api-url https://gitlab.com/api/v4\n```\n\n### Configuration (Local Setup)\n\nAdd the following to your `.cursor/mcp.json` (project level mcp server) or global level:\n\n```json\n{\n    \"mcpServers\": {\n        \"bounteous-hulk\": {\n            \"command\": \"node\",\n            \"args\": [\n                \"<ABSOLUTE_PATH>/mcpserver/packages/bounteous-hulk/dist/index.js\"\n            ],\n            \"env\": {\n                \"GITHUB_PERSONAL_ACCESS_TOKEN\": \"<GITHUB_TOKEN>\",\n                \"VERSION_CONTROL\": \"<OPTION>\",\n                \"GITLAB_PERSONAL_ACCESS_TOKEN\": \"<GITLAB_TOKEN>\",\n                \"GITLAB_API_URL\": \"<API_URL>\"\n            }\n        }\n    }\n}\n```\nDifferent `VERSION_CONTROL` value possible: `github`, `gitlab`\n\n\n### Configuration with Docker\n\nAdd the following to your `claude_desktop_config.json`:\n\n```json\n{\n  \"mcpServers\": {\n    \"github\": {\n      \"command\": \"docker\",\n      \"args\": [\n        \"run\",\n        \"-i\",\n        \"--rm\",\n        \"-e\",\n        \"GITHUB_PERSONAL_ACCESS_TOKEN\",\n        \"mcp/github\"\n      ],\n      \"env\": {\n        \"GITHUB_PERSONAL_ACCESS_TOKEN\": \"<YOUR_TOKEN>\"\n      }\n    },\n    \"gitlab\": {\n      \"command\": \"docker\",\n      \"args\": [\n        \"run\",\n        \"--rm\",\n        \"-i\",\n        \"-e\",\n        \"GITLAB_PERSONAL_ACCESS_TOKEN\",\n        \"-e\",\n        \"GITLAB_API_URL\",\n        \"mcp/gitlab\"\n      ],\n      \"env\": {\n        \"GITLAB_PERSONAL_ACCESS_TOKEN\": \"<YOUR_TOKEN>\",\n        \"GITLAB_API_URL\": \"https://gitlab.com/api/v4\"\n      }\n    }\n  }\n}\n```\n\n## Documentation\n\nDetailed documentation for each MCP server is available in their respective directories:\n\n- [GitHub MCP Server Documentation](packages/bounteous-hulk/README.md#github-mcp-server)\n- [GitLab MCP Server Documentation](packages/bounteous-hulk/README.md#gitlab-mcp-server)\n\n## Contributing\n\n1. Fork the repository\n2. Create your feature branch (`git checkout -b feature/amazing-feature`)\n3. Commit your changes (`git commit -m 'Add some amazing feature'`)\n4. Push to the branch (`git push origin feature/amazing-feature`)\n5. Open a Pull Request\n\n## License\n\nThis project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.\n\n## Acknowledgments\n\n- Built using the [Model Context Protocol](https://github.com/modelcontextprotocol) specification\n- Inspired by the MCP reference implementation and community servers\n\n## Support\n\nFor support and questions, please create an issue in the repository or contact the Bounteous development team.\n\n---\nBuilt with ❤️ by Bounteous Development Team"
+}

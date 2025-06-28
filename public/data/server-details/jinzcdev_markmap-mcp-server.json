@@ -1,0 +1,114 @@
+{
+  "id": "91137cb3bc64",
+  "owner": "jinzcdev",
+  "repoName": "markmap-mcp-server",
+  "fullDescription": "📇 🏠 - An MCP server built on [markmap](https://github.com/markmap/markmap) that converts **Markdown** to interactive **mind maps**. Supports multi-format exports (PNG/JPG/SVG), live browser preview, one-click Markdown copy, and dynamic visualization features.",
+  "techStack": [
+    {
+      "name": "typescript",
+      "icon": "📘",
+      "color": "#3178c6"
+    },
+    {
+      "name": "python",
+      "icon": "🐍",
+      "color": "#3776ab"
+    }
+  ],
+  "serviceTypes": [
+    {
+      "type": "development",
+      "label": "Development",
+      "icon": "👨‍💻",
+      "description": "Assists with software development"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "moderate",
+    "maturity": "beta",
+    "deployment": [
+      "local"
+    ],
+    "featured": false,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 4.55,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "git",
+      "github",
+      "pr"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/jinzcdev/markmap-mcp-server",
+    "owner": "jinzcdev",
+    "name": "markmap-mcp-server",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.280Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "visualization",
+    "markmap",
+    "markdown",
+    "export",
+    "mindmaps",
+    "utilities-tools"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Moderate",
+      "color": "#eab308",
+      "icon": "🟡"
+    },
+    {
+      "type": "maturity",
+      "label": "Beta",
+      "color": "#f59e0b",
+      "icon": "🚧"
+    }
+  ],
+  "icon": "👨‍💻",
+  "readme": null
+}

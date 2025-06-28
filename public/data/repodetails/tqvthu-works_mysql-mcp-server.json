@@ -1,0 +1,51 @@
+{
+  "mcp_name": "tqvthu-works/mysql-mcp-server",
+  "mcp_description": "Facilitates interaction with MySQL databases in Cursor IDE through a Model Context Protocol server.",
+  "mcp_id": "tqvthu-works_mysql-mcp-server",
+  "fetch_timestamp": "2025-06-23T09:02:19.429687Z",
+  "github_url": "https://github.com/tqvthu-works/mysql-mcp-server",
+  "repository": {
+    "name": "mysql-mcp-server",
+    "full_name": "tqvthu-works/mysql-mcp-server",
+    "description": null,
+    "html_url": "https://github.com/tqvthu-works/mysql-mcp-server",
+    "created_at": "2025-04-21T16:43:15Z",
+    "updated_at": "2025-04-23T03:28:46Z",
+    "pushed_at": "2025-04-23T03:28:42Z",
+    "size": 30,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "tqvthu-works",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/132663408?v=4",
+      "html_url": "https://github.com/tqvthu-works"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 3812
+    },
+    "language_percentages": {
+      "TypeScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# MySQL MCP Server\n\nA Model Context Protocol (MCP) server for interacting with MySQL databases in Cursor IDE.\n\n## Features\n- Execute SQL queries (read-only by default).\n- Inspect database schemas.\n- Configurable write permissions.\n\n## Installation\n```bash\nnpm install\n```\n\n## Configuration\n``` bash\nCreate .env with:\nMYSQL_HOST=localhost\nMYSQL_PORT=3306\nMYSQL_USER=your_username\nMYSQL_PASS=your_password\nMYSQL_DB=your_database\nALLOW_INSERT_OPERATION=false\nALLOW_UPDATE_OPERATION=false\nALLOW_DELETE_OPERATION=false\n```\n\n## Usage in Cursor\n``` bash\nAdd to .cursor/mcp.json\n{\n  \"mcpServers\": {\n    \"mysqlMcpServer\": {\n      \"command\": \"npx\",\n      \"args\": [\"ts-node\", \"path/to/src/index.ts\"],\n      \"env\": {\n        \"MYSQL_HOST\": \"<host>\",\n        \"MYSQL_PORT\": \"<port>\",\n        \"MYSQL_USER\": \"<user>\",\n        \"MYSQL_PASS\": \"<pass>\",\n        \"MYSQL_DB\": \"db\",\n        \"ALLOW_INSERT_OPERATION\": \"false\",\n        \"ALLOW_UPDATE_OPERATION\": \"false\",\n        \"ALLOW_DELETE_OPERATION\": \"false\"\n      }\n    }\n  }\n}\n```\n## License\nMIT\n"
+}

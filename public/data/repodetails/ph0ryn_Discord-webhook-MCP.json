@@ -1,0 +1,51 @@
+{
+  "mcp_name": "futuyu/Discord-webhook-MCP",
+  "mcp_description": "Facilitates message delivery to Discord using webhooks through the Model Context Protocol, with integration support for Claude Desktop.",
+  "mcp_id": "ph0ryn_Discord-webhook-MCP",
+  "fetch_timestamp": "2025-06-23T03:38:45.596756Z",
+  "github_url": "https://github.com/futuyu/Discord-webhook-MCP",
+  "repository": {
+    "name": "Discord-webhook-MCP",
+    "full_name": "ph0ryn/Discord-webhook-MCP",
+    "description": null,
+    "html_url": "https://github.com/ph0ryn/Discord-webhook-MCP",
+    "created_at": "2025-04-23T07:59:26Z",
+    "updated_at": "2025-04-23T08:00:09Z",
+    "pushed_at": "2025-04-23T08:00:05Z",
+    "size": 20,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "ph0ryn",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/208665755?v=4",
+      "html_url": "https://github.com/ph0ryn"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 8057
+    },
+    "language_percentages": {
+      "TypeScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# Discord Webhook MCP\n\nA Model Context Protocol (MCP) server for sending messages to Discord via Webhook.\n\n## Features\n\n- Send messages to Discord through a webhook\n- Communicate via the MCP protocol (for Claude Desktop integration)\n\n## Installation & Setup\n\n```bash\nnpm install\nnpm run build\n```\n\n### Environment Variables\n\n- `DISCORD_WEBHOOK_URL`: The Discord Webhook URL to which messages will be sent.\n\n### Claude Desktop Integration\n\nAdd the following configuration to your `claude_desktop_config.json`:\n\n```json\n{\n  \"mcpServers\": {\n    \"discordWebhook\": {\n      \"command\": \"node\",\n      \"args\": [\n        \"<PROJECT_PATH>/build/index.js\"\n      ],\n      \"env\": {\n        \"DISCORD_WEBHOOK_URL\": \"<YOUR_DISCORD_WEBHOOK_URL>\"\n      }\n    }\n  }\n}\n```\n\n## API Reference\n\n### send_discord_webhook\nSends a message to Discord via webhook.\n\n#### Parameters\n- `content` (string, required): The message content to send to Discord.\n\n#### Returns\n- `ok` (boolean): Whether the operation succeeded.\n- `message` (string): Result message.\n- `discordResponse` (object, optional): Discord API response object.\n- `error` (object, optional): Error information if failed.\n\n## Tech Stack\n\n- TypeScript\n- Model Context Protocol SDK\n- discord.js\n- Zod (validation)\n"
+}

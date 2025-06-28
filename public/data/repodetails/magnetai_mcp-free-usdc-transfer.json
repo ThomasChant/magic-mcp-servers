@@ -1,0 +1,56 @@
+{
+  "mcp_name": "mcp-free-usdc-transfer",
+  "mcp_description": "Send USDC on Base for free using Claude AI",
+  "mcp_id": "magnetai_mcp-free-usdc-transfer",
+  "fetch_timestamp": "2025-06-23T06:34:53.148142Z",
+  "github_url": "https://github.com/magnetai/mcp-free-usdc-transfer",
+  "repository": {
+    "name": "mcp-free-usdc-transfer",
+    "full_name": "magnetai/mcp-free-usdc-transfer",
+    "description": "MCP (Model Context Protocol) server - free usdc transfer powered by Coinbase CDP",
+    "html_url": "https://github.com/magnetai/mcp-free-usdc-transfer",
+    "created_at": "2025-01-10T06:27:00Z",
+    "updated_at": "2025-05-25T06:10:24Z",
+    "pushed_at": "2025-01-17T09:25:59Z",
+    "size": 64,
+    "stargazers_count": 15,
+    "watchers_count": 15,
+    "forks_count": 6,
+    "open_issues_count": 3,
+    "language": "JavaScript",
+    "license": "MIT License",
+    "topics": [
+      "claude",
+      "coinbase",
+      "magnet",
+      "modelcontextprotocol"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "magnetai",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/118964128?v=4",
+      "html_url": "https://github.com/magnetai"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 6,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 8543
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 5,
+    "contributors_count": 2,
+    "package_json_version": "0.1.5"
+  },
+  "readme": "# Free USDC Transfer MCP Server\n\nAn MCP server implementation enabling free USDC transfers on **[Base](https://base.org)** with **[Coinbase CDP](https://docs.cdp.coinbase.com/)** MPC Wallet integration.\n\n<img width=\"1374\" alt=\"image\" src=\"https://github.com/user-attachments/assets/3a58a720-8489-4f02-9075-19c8f264e3cc\" />\n\n## Features\n\n- Free USDC Transfers: Send USDC to any address or ENS/BaseName domain on Base - no fees, just simple transfers\n- Coinbase MPC Wallet: Create and manage your Coinbase MPC wallet for secure, feeless transactions\n- Name Resolution: Automatic support for **ENS** and **BaseName** domains\n\n## Functions\n\n### `tranfer-usdc`\n- Description: Analyze the value of the purchased items and transfer USDC to the recipient via the Base chain. Due to the uncertainty of blockchain transaction times, the transaction is only scheduled here and will not wait for the transaction to be completed.\n- Inputs:\n    - usdc_amount (number): USDC amount, greater than 0.\n    - recipient (string): Recipient's on-chain address or ENS domain (e.g., example.eth).\n- Behavior:\n    - Verifies the recipient's address or resolves ENS domains.\n    - Schedules a USDC transfer on the Base chain.\n    - Provides a link to view transaction details on BaseScan.\n\n### `create_coinbase_mpc_wallet`\n- Description: Create a Coinbase MPC wallet address.\n- Behavior:\n    - Creates a new Coinbase MPC wallet and saves the seed to a secure file.\n    - If a wallet already exists, returns the existing wallet address.\n    - The seed file for Coinbase MPC wallets is stored in the Documents directory under the file name mpc_info.json.\n\n## Configuration\n\n### Getting an API Key\n1. Sign up for a [Coinbase CDP account](https://portal.cdp.coinbase.com/)\n2. Generate your API key from the developer dashboard\n\n### Usage with Claude Desktop\n\n1. Add this to your `claude_desktop_config.json`:\n```json\n{\n  \"mcpServers\": {\n    \"free-usdc-transfer\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"-y\",\n        \"@magnetai/free-usdc-transfer\"\n      ],\n      \"env\": {\n        \"COINBASE_CDP_API_KEY_NAME\": \"YOUR_COINBASE_CDP_API_KEY_NAME\",\n        \"COINBASE_CDP_PRIVATE_KEY\": \"YOUR_COINBASE_CDP_PRIVATE_KEY\"\n      }\n    }\n  }\n}\n```\n\n2. Or install the server with **[magnet-desktop](https://github.com/magnetai/magnet-desktop)**\n\n## License\n\nThis MCP server is licensed under the MIT License. This means you are free to use, modify, and distribute the software, subject to the terms and conditions of the MIT License. For more details, please see the LICENSE file in the project repository.\n\n---\n\nCrafted by [Magnet Labs](https://magnetlabs.xyz) with our vibrant AI & Crypto community\n"
+}

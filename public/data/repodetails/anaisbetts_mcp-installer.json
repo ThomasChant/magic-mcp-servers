@@ -1,0 +1,58 @@
+{
+  "mcp_name": "MCP Installer",
+  "mcp_description": "🐍 🏠 -  An MCP server that installs other MCP servers for you.",
+  "mcp_id": "anaisbetts_mcp-installer",
+  "fetch_timestamp": "2025-06-23T06:31:23.795038Z",
+  "github_url": "https://github.com/anaisbetts/mcp-installer",
+  "repository": {
+    "name": "mcp-installer",
+    "full_name": "anaisbetts/mcp-installer",
+    "description": "An MCP server that installs other MCP servers for you",
+    "html_url": "https://github.com/anaisbetts/mcp-installer",
+    "created_at": "2024-11-26T18:01:53Z",
+    "updated_at": "2025-06-22T08:14:21Z",
+    "pushed_at": "2024-11-26T20:05:09Z",
+    "size": 30,
+    "stargazers_count": 1226,
+    "watchers_count": 1226,
+    "forks_count": 158,
+    "open_issues_count": 12,
+    "language": "JavaScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "anaisbetts",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1396?v=4",
+      "html_url": "https://github.com/anaisbetts"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 158,
+    "subscribers_count": 11,
+    "languages": {
+      "JavaScript": 9917
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 8,
+    "contributors_count": 1,
+    "tags": [
+      {
+        "name": "v0.5.0",
+        "commit_sha": "cd9cdb6e1518486515f5c20d5aadc56854cbb408"
+      }
+    ],
+    "latest_version": "v0.5.0",
+    "package_json_version": "0.5.0"
+  },
+  "readme": "# mcp-installer - A MCP Server to install MCP Servers\n\nThis server is a server that installs other MCP servers for you. Install it, and you can ask Claude to install MCP servers hosted in npm or PyPi for you. Requires `npx` and `uv` to be installed for node and Python servers respectively.\n\n![image](https://github.com/user-attachments/assets/d082e614-b4bc-485c-a7c5-f80680348793)\n\n### How to install:\n\nPut this into your `claude_desktop_config.json` (either at `~/Library/Application Support/Claude` on macOS or `C:\\Users\\NAME\\AppData\\Roaming\\Claude` on Windows):\n\n```json\n  \"mcpServers\": {\n    \"mcp-installer\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"@anaisbetts/mcp-installer\"\n      ]\n    }\n  }\n```\n\n### Example prompts\n\n> Hey Claude, install the MCP server named mcp-server-fetch\n\n> Hey Claude, install the @modelcontextprotocol/server-filesystem package as an MCP server. Use ['/Users/anibetts/Desktop'] for the arguments\n\n> Hi Claude, please install the MCP server at /Users/anibetts/code/mcp-youtube, I'm too lazy to do it myself.\n\n> Install the server @modelcontextprotocol/server-github. Set the environment variable GITHUB_PERSONAL_ACCESS_TOKEN to '1234567890'\n"
+}

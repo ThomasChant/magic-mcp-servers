@@ -1,0 +1,57 @@
+{
+  "mcp_name": "andybrandt/mcp-simple-timeserver",
+  "mcp_description": "🐍 🏠☁️ - An MCP server that allows checking local time on the client machine or current UTC time from an NTP server",
+  "mcp_id": "andybrandt_mcp-simple-timeserver",
+  "fetch_timestamp": "2025-06-23T01:07:45.030099Z",
+  "github_url": "https://github.com/andybrandt/mcp-simple-timeserver",
+  "repository": {
+    "name": "mcp-simple-timeserver",
+    "full_name": "andybrandt/mcp-simple-timeserver",
+    "description": "Simple solution to give Claude ability to check current time via MCP",
+    "html_url": "https://github.com/andybrandt/mcp-simple-timeserver",
+    "created_at": "2024-12-01T16:54:06Z",
+    "updated_at": "2025-06-21T20:58:57Z",
+    "pushed_at": "2025-05-05T15:10:51Z",
+    "size": 15,
+    "stargazers_count": 16,
+    "watchers_count": 16,
+    "forks_count": 10,
+    "open_issues_count": 1,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [
+      "claude",
+      "claude-ai",
+      "mcp",
+      "model-context-protocol"
+    ],
+    "default_branch": "master",
+    "owner": {
+      "login": "andybrandt",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5551980?v=4",
+      "html_url": "https://github.com/andybrandt"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 10,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 3582,
+      "Dockerfile": 576
+    },
+    "language_percentages": {
+      "Python": 86.15,
+      "Dockerfile": 13.85
+    },
+    "pull_requests_count": 2,
+    "contributors_count": 4
+  },
+  "readme": "[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/andybrandt-mcp-simple-timeserver-badge.png)](https://mseep.ai/app/andybrandt-mcp-simple-timeserver)\n\n# MCP Simple Timeserver\n[![smithery badge](https://smithery.ai/badge/mcp-simple-timeserver)](https://smithery.ai/server/mcp-simple-timeserver)\n\n*One of the strange design decisions Anthropic made was depriving Claude of timestamps for messages sent by the user or current time in general. Poor Claude can't tell what time it is! `mcp-simple-timeserver` is a simple MCP server that fixes that.*\n\nThis server provides two tools:\n - `get_time` provides the current local time and timezone information from the user's machine. This way Claude can know what time it is at the user's location. He can also calculate how much time passed since his last interaction with the user should he want to do so. \n - `get_utc` provides current UTC time obtained from an [NTP time server](https://en.wikipedia.org/wiki/Network_Time_Protocol). \n\n## Installation\n\n### Installing via Smithery\n\nTo install Simple Timeserver for Claude Desktop automatically via [Smithery](https://smithery.ai/server/mcp-simple-timeserver):\n\n```bash\nnpx -y @smithery/cli install mcp-simple-timeserver --client claude\n```\n\n### Manual Installation\nFirst install the module using:\n\n```bash\npip install mcp-simple-timeserver\n\n```\n\nThen configure in MCP client - the [Claude desktop app](https://claude.ai/download).\n\nUnder Mac OS this will look like this:\n\n```json\n\"mcpServers\": {\n  \"simple-timeserver\": {\n    \"command\": \"python\",\n    \"args\": [\"-m\", \"mcp_simple_timeserver\"]\n  }\n}\n```\n\nUnder Windows you have to check the path to your Python executable using `where python` in the `cmd` (Windows command line). \n\nTypical configuration would look like this:\n\n```json\n\"mcpServers\": {\n  \"simple-timeserver\": {\n    \"command\": \"C:\\\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python311\\\\python.exe\",\n    \"args\": [\"-m\", \"mcp_simple_timeserver\"]\n  }\n}\n```\n\n"
+}

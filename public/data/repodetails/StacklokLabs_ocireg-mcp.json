@@ -1,0 +1,77 @@
+{
+  "mcp_name": "ocireg",
+  "mcp_description": "An SSE-based MCP server that allows LLM-powered applications to interact with OCI registries. It provides tools for retrieving information about container images, listing tags, and more.",
+  "mcp_id": "StacklokLabs_ocireg-mcp",
+  "fetch_timestamp": "2025-06-23T07:15:01.813399Z",
+  "github_url": "https://github.com/StacklokLabs/ocireg-mcp",
+  "repository": {
+    "name": "ocireg-mcp",
+    "full_name": "StacklokLabs/ocireg-mcp",
+    "description": "An MCP (Model Context Protocol) server that provides tools for querying OCI registries and image references.",
+    "html_url": "https://github.com/StacklokLabs/ocireg-mcp",
+    "created_at": "2025-05-06T07:51:01Z",
+    "updated_at": "2025-06-20T07:08:42Z",
+    "pushed_at": "2025-06-17T07:48:42Z",
+    "size": 65,
+    "stargazers_count": 3,
+    "watchers_count": 3,
+    "forks_count": 0,
+    "open_issues_count": 1,
+    "language": "Go",
+    "license": "Apache License 2.0",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "StacklokLabs",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158105196?v=4",
+      "html_url": "https://github.com/StacklokLabs"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 4,
+    "languages": {
+      "Go": 22017
+    },
+    "language_percentages": {
+      "Go": 100
+    },
+    "pull_requests_count": 11,
+    "contributors_count": 6,
+    "latest_release": {
+      "tag_name": "v0.0.4",
+      "name": "v0.0.4",
+      "published_at": "2025-05-26T13:28:50Z",
+      "body": "## What's Changed\r\n* start MCP server on port from env MCP_PORT by @amirejaz in https://github.com/StacklokLabs/ocireg-mcp/pull/6\r\n\r\n## New Contributors\r\n* @amirejaz made their first contribution in https://github.com/StacklokLabs/ocireg-mcp/pull/6\r\n\r\n**Full Changelog**: https://github.com/StacklokLabs/ocireg-mcp/compare/v0.0.3...v0.0.4",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.0.4",
+        "commit_sha": "88a984b026ea2c6c03aab9128ca0cf2f46fe4b67"
+      },
+      {
+        "name": "v0.0.3",
+        "commit_sha": "b5246477231386f0eb5974f95a1f6d8401524f9d"
+      },
+      {
+        "name": "v0.0.2",
+        "commit_sha": "8bdd775e5b3fbb461fb95c1362fb7a6cb0bf88ed"
+      },
+      {
+        "name": "v0.0.1",
+        "commit_sha": "2356033464a216f68a2b4bebaf9eed466b9038f7"
+      }
+    ],
+    "latest_version": "v0.0.4"
+  },
+  "readme": "# OCI Registry MCP Server\n\nAn MCP (Model Context Protocol) server that provides tools for querying OCI registries and image references.\n\n## Overview\n\nThis project implements an SSE-based MCP server that allows LLM-powered applications to interact with OCI registries. It provides tools for retrieving information about container images, listing tags, and more.\n\n## Features\n\n- Get information about OCI images\n- List tags for repositories\n- Get image manifests\n- Get image configs\n\n## MCP Tools\n\nThe server provides the following MCP tools:\n\n### get_image_info\n\nGet information about an OCI image.\n\n**Input:**\n- `image_ref`: The image reference (e.g., docker.io/library/alpine:latest)\n\n**Output:**\n- Image information including digest, size, architecture, OS, creation date, and number of layers\n\n### list_tags\n\nList tags for a repository.\n\n**Input:**\n- `repository`: The repository name (e.g., docker.io/library/alpine)\n\n**Output:**\n- List of tags for the repository\n\n### get_image_manifest\n\nGet the manifest for an OCI image.\n\n**Input:**\n- `image_ref`: The image reference (e.g., docker.io/library/alpine:latest)\n\n**Output:**\n- The image manifest\n\n### get_image_config\n\nGet the config for an OCI image.\n\n**Input:**\n- `image_ref`: The image reference (e.g., docker.io/library/alpine:latest)\n\n**Output:**\n- The image config\n\n## Usage\n\n### Running with ToolHive (Recommended)\n\nThe easiest way to run the OCI Registry MCP server is using [ToolHive](https://github.com/stacklok/toolhive), which provides secure, containerized deployment of MCP servers:\n\n```bash\n# Install ToolHive (if not already installed)\n# See: https://github.com/stacklok/toolhive#installation\n\n# Enable auto-discovery to automatically configure supported clients\nthv config auto-discovery true\n\n# Run the OCI Registry MCP server (packaged as 'oci-registry' in ToolHive)\nthv run oci-registry\n\n# List running servers\nthv list\n\n# Get detailed information about the server\nthv registry info oci-registry\n```\n\nThe server will be available to your MCP-compatible clients and can query OCI registries for image information.\n\n#### Authentication with ToolHive\n\nIf you need to access private registries, you can provide authentication credentials using ToolHive's secret management:\n\n```bash\n# For bearer token authentication\nthv secret set oci-token\n# Enter your bearer token when prompted\n\nthv run --secret oci-token,target=OCI_TOKEN oci-registry\n\n# For username/password authentication\nthv secret set oci-username\nthv secret set oci-password\n# Enter your credentials when prompted\n\nthv run --secret oci-username,target=OCI_USERNAME --secret oci-password,target=OCI_PASSWORD oci-registry\n```\n\n## Development\n\n### Prerequisites\n\n- Go 1.21 or later\n- Access to OCI registries\n\n### Authentication\n\nThe server supports the following authentication methods for accessing private OCI registries:\n\n1. **Bearer Token**: Set the following environment variable:\n   - `OCI_TOKEN`: Bearer token for registry authentication\n\n2. **Username and Password**: Set the following environment variables:\n   - `OCI_USERNAME`: Username for registry authentication\n   - `OCI_PASSWORD`: Password for registry authentication\n\n3. **Docker Config**: If no token or username/password is provided, the server will use the default Docker keychain, which reads credentials from `~/.docker/config.json`.\n\nExamples:\n```bash\n# Bearer token authentication\nexport OCI_TOKEN=mytoken\n\n# Username/password authentication\nexport OCI_USERNAME=myuser\nexport OCI_PASSWORD=mypassword\n```\n\n### Port Configuration\n\nThe server can be configured to listen on a specific port using either:\n\n1. **Environment Variable**:\n   - `MCP_PORT`: The port number to listen on (must be between 0 and 65535)\n   - If not set or invalid, defaults to port 8080\n\n2. **Command-line Flag**:\n   - `-port`: Overrides the environment variable setting (must be between 0 and 65535)\n   - If invalid port provided it defaults to port 8080\n   - Example: `./ocireg-mcp -port 9090`\n\n\n### Testing\n\n```bash\ngo test ./...\n```\n\n### Linting\n\n```bash\ngolangci-lint run\n\n## Contributing\n\nWe welcome contributions to this MCP server! If you'd like to contribute, please review\nthe [CONTRIBUTING guide](./CONTRIBUTING.md) for details on how to get started.\n\nIf you run into a bug or have a feature request, please\n[open an issue](https://github.com/StacklokLabs/ocireg-mcp/issues) in the\nrepository or join us in the `#mcp-servers` channel on our\n[community Discord server](https://discord.gg/stacklok).\n\n## License\n\nThis project is licensed under the Apache v2 License - see the LICENSE file for details.\n\n"
+}

@@ -1,0 +1,52 @@
+{
+  "mcp_name": "thunderboltsid/mcp-nutanix",
+  "mcp_description": "🏎️ 🏠/☁️ - Go-based MCP Server for interfacing with Nutanix Prism Central resources.",
+  "mcp_id": "thunderboltsid_mcp-nutanix",
+  "fetch_timestamp": "2025-06-23T08:55:27.862407Z",
+  "github_url": "https://github.com/thunderboltsid/mcp-nutanix",
+  "repository": {
+    "name": "mcp-nutanix",
+    "full_name": "thunderboltsid/mcp-nutanix",
+    "description": "MCP Server for Nutanix",
+    "html_url": "https://github.com/thunderboltsid/mcp-nutanix",
+    "created_at": "2025-03-27T18:51:17Z",
+    "updated_at": "2025-06-17T22:44:15Z",
+    "pushed_at": "2025-04-15T20:18:46Z",
+    "size": 85,
+    "stargazers_count": 9,
+    "watchers_count": 9,
+    "forks_count": 3,
+    "open_issues_count": 1,
+    "language": "Go",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "thunderboltsid",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6081171?v=4",
+      "html_url": "https://github.com/thunderboltsid"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 3,
+    "subscribers_count": 1,
+    "languages": {
+      "Go": 95175,
+      "Makefile": 514
+    },
+    "language_percentages": {
+      "Go": 99.46,
+      "Makefile": 0.54
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# MCP Nutanix\n\nA Model Context Protocol (MCP) server for interacting with Nutanix Prism Central APIs through Large Language Models (LLMs).\n\n## ⚠️ Disclaimer\n\n**THIS IS AN EXPERIMENTAL PROJECT**\n\nThis project was created as a personal project to explore the capabilities of the Model Context Protocol frameworks in Go. It is:\n\n- **NOT** an official Nutanix product or tool\n- **NOT** supported, endorsed, or maintained by Nutanix\n- **NOT** suitable for production environments\n- **PROVIDED AS-IS** with no warranties or guarantees\n\n**USE AT YOUR OWN RISK**: The author takes no responsibility for any issues, damages, or outages that may result from using this code.\n\n## Overview\n\nThis MCP server allows LLMs to interact with Nutanix Prism Central by:\n\n1. Connecting to a Prism Central instance with user credentials\n2. Listing various resources (VMs, Clusters, Hosts, etc.)\n3. Retrieving specific resource details via URI-based access\n\nThe implementation uses the [Prism Go Client](https://github.com/nutanix-cloud-native/prism-go-client) to communicate with Prism Central and the [MCP Go library](https://github.com/mark3labs/mcp-go) to implement the Model Context Protocol.\n\n## Getting Started\n\n### Prerequisites\n\n- Go 1.23 or higher\n- Access to a Nutanix Prism Central instance\n- Tools like `make` and `go fmt` for building\n\n### Building\n\n```bash\n# Clone the repository\ngit clone https://github.com/thunderboltsid/mcp-nutanix.git\ncd mcp-nutanix\n\n# Build the MCP server\nmake build\n```\n\n### Running\n\n```bash\n./bin/mcp-nutanix\n```\n\nThe server will start and prompt for Prism Central credentials.\n\n## Usage\n\nOnce the MCP server is running and connected to your Prism Central instance, LLMs can interact with it through the MCP protocol.\n\n### Resource Listing\n\nTo list resources, use the appropriate tool:\n\n```\nvms\nclusters\nhosts\nimages\nsubnets\n```\n\nThe LLM will receive a JSON list of resources that it can parse and analyze.\n\n### Resource Access\n\nTo access a specific resource, use a resource URI:\n\n```\nvm://{uuid}\ncluster://{uuid}\nhost://{uuid}\n```\n\nThe LLM will receive detailed JSON information about the specific resource.\n\n## Development\n\n### Project Structure\n\n```\nmcp-nutanix/\n├── bin/                  # Compiled binaries\n├── internal/             # Internal packages\n│   ├── client/           # Prism Central client handling\n│   ├── codegen/          # Code generation utilities\n│   └── json/             # JSON helpers\n├── pkg/                  # components\n│   ├── prompts/          # MCP prompt implementations\n│   ├── resources/        # Resource handlers\n│   └── tools/            # Tool handlers\n└── Makefile              # Build and utility commands\n```\n\n### Code Generation\n\nThe project uses code generation to create resource and tool handlers. To update these:\n\n```bash\nmake generate\n```\n\n## Limitations\n\n- Response size is limited by the MCP protocol\n- Some resources with large response sizes may cause errors\n- No pagination support in the current implementation\n- Only supports read operations, no create/update/delete\n\n## License\n\nThis project is licensed under the MIT License - see the LICENSE file for details.\n\n## Acknowledgments\n\n- [Nutanix](https://www.nutanix.com/) for creating the Prism API\n- [Mark3Labs](https://github.com/mark3labs) for the MCP Go library\n- [Nutanix Cloud Native](https://github.com/nutanix-cloud-native) for the Prism Go Client\n\n## Contributing\n\nThis is an experimental project with no formal contribution process. Feel free to create issues or pull requests."
+}

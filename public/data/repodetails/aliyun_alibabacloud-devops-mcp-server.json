@@ -1,0 +1,58 @@
+{
+  "mcp_name": "AlibabaCloud DevOps MCP",
+  "mcp_description": "Yunxiao MCP Server provides AI assistants with the ability to interact with the [Yunxiao platform](https://devops.aliyun.com).",
+  "mcp_id": "aliyun_alibabacloud-devops-mcp-server",
+  "fetch_timestamp": "2025-06-23T01:00:31.713495Z",
+  "github_url": "https://github.com/aliyun/alibabacloud-devops-mcp-server",
+  "repository": {
+    "name": "alibabacloud-devops-mcp-server",
+    "full_name": "aliyun/alibabacloud-devops-mcp-server",
+    "description": "Yunxiao MCP Server provides AI assistants with the ability to interact with the Yunxiao platform. It provides a set of tools that interact with Yunxiao's API, allowing AI assistants to manage Codeup repository, Project, Pipeline, Packages etc.",
+    "html_url": "https://github.com/aliyun/alibabacloud-devops-mcp-server",
+    "created_at": "2025-04-25T03:05:11Z",
+    "updated_at": "2025-06-17T08:06:40Z",
+    "pushed_at": "2025-06-17T08:06:36Z",
+    "size": 11326,
+    "stargazers_count": 5,
+    "watchers_count": 5,
+    "forks_count": 5,
+    "open_issues_count": 2,
+    "language": "TypeScript",
+    "license": "Apache License 2.0",
+    "topics": [
+      "alibabacloud-devops",
+      "devops-mcp"
+    ],
+    "default_branch": "master",
+    "owner": {
+      "login": "aliyun",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/941070?v=4",
+      "html_url": "https://github.com/aliyun"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 5,
+    "subscribers_count": 3,
+    "languages": {
+      "TypeScript": 216353,
+      "JavaScript": 68619,
+      "Dockerfile": 714
+    },
+    "language_percentages": {
+      "TypeScript": 75.73,
+      "JavaScript": 24.02,
+      "Dockerfile": 0.25
+    },
+    "pull_requests_count": 5,
+    "contributors_count": 5,
+    "package_json_version": "0.1.26"
+  },
+  "readme": "<p align=\"center\">English | <a href=\"README.zh-cn.md\">中文</a><br></p>\n\n# alibabacloud-devops-mcp-server\n[![smithery badge](https://smithery.ai/badge/@aliyun/alibabacloud-devops-mcp-server)](https://smithery.ai/server/@aliyun/alibabacloud-devops-mcp-server)\n\n[AlibabaCloud Devops](https://www.aliyun.com/product/yunxiao) MCP Server provides AI assistants with the ability to interact with the Yunxiao platform, enabling them to read work item contents in projects, automatically write code after understanding requirements, and submit code merge requests. Enterprise development teams can use it to assist with code reviews, optimize task management, reduce repetitive operations, and thus focus on more important innovation and product delivery.\n\n## Features\n\nalibabacloud-devops-mcp-server provides the following capabilities for AI assistants:\n\n* **Code Repository Management**: Query code repositories and their branches, create branches\n* **File Operations**: Create, update, delete, and retrieve code file content\n* **Code Review**: Create and manage code review processes\n* **Project Management**: Search projects, get project details\n* **Pipeline Management**: Get pipeline details, get pipeline list, create a pipeline run instance, get the latest pipeline run instance, get pipeline run details, get pipeline run list, Query / Run a pipeline deployment task\n* **Package Management**: Get package repository details list, Get artifacts details list, Get single artifact details\n\n## Tools\n\nalibabacloud-devops-mcp-server integrates various tools, including:\n\n### Organization Management\n\n- `get_current_organization_Info`: Get current user's organization information\n- `get_user_organizations`: Get the list of organizations the current user has joined\n- `get_organization_role`: Get information about an organization role\n- `get_organization_departments`: Get the list of departments in an organization\n- `get_organization_department_info`: Get information about a department in an organization\n- `get_organization_department_ancestors`: Get the ancestors of a department in an organization\n- `get_organization_members`: Get the list of members in an organization\n- `get_organization_member_info`: Get information about a member in an organization\n- `get_organization_member_info_by_user_id`: Get information about a member in an organization by user ID\n- `search_organization_members`: Search for organization members\n- `list_organization_roles`: List organization roles\n- `get_organization_role`: Get information about an organization role\n\n### Code Management Tools\n\n- `create_branch`: Create a branch\n- `delete_branch`: Delete a branch\n- `get_branch`: Get branch information\n- `list_branches`: Get branch list\n- `create_file`: Create a file\n- `delete_file`: Delete a file\n- `get_file_blobs`: Get file content\n- `list_files`: Query file tree\n- `update_file`: Update file content\n- `create_change_request`: Create a merge request\n- `create_change_request_comment`: Create a comment on a merge request\n- `get_change_request`: Query merge request\n- `list_change_request_patch_sets`: Query merge request version list\n- `list_change_request`: Query merge request list\n- `list_change_request_comments`: Query merge request comment list\n- `get_compare`: Compare code\n- `get_repository`: Get repository details\n- `list_repositories`: Get repository list\n\n### Project Management Tools\n\n- `get_project`: Get project details\n- `search_projects`: Search projects\n- `get_work_item`: Get work item details\n- `search_workitems`: Search work items\n- `get_work_item_types`: get work item types\n- `create_work_item`: create work item\n\n### Pipeline Management Tools\n\n- `get_pipeline`: Get pipeline details\n- `list_pipelines`: Get pipeline list\n- `smart_list_pipelines`: Smart pipeline search with natural language time references\n- `create_pipeline_run`: Create a pipeline run instance\n- `get_latest_pipeline_run`: Get the latest pipeline run instance\n- `get_pipeline_run`: Get pipeline run details\n- `list_pipeline_runs`: Get pipeline run list\n- `list_pipeline_jobs_by_category`: Get pipeline execution tasks by category\n- `list_pipeline_job_historys`: Get the execution history of a pipeline task\n- `execute_pipeline_job_run`: Manually run a pipeline task\n- `get_pipeline_job_run_log`: Get the execution logs of a pipeline job\n- `list_service_connections`: List service connections in organization\n- `create_pipeline_from_description`: Automatically generates YAML configuration and creates pipeline\n- `update_pipeline`: Update an existing pipeline in Yunxiao by pipelineId. Use this to update pipeline YAML, stages, jobs, etc.\n\n### Packages Management Tools\n\n- `list_package_repositories`: Get package repositories details list\n- `list_artifacts`: Get artifacts details list\n- `get_artifact`: Get single artifact details\n\n## Usage\n\n### Prerequisites\n* node version >= 16.0.0\n* [AlibabaCloud Devops](https://www.aliyun.com/product/yunxiao) Personal Access Token, [click here to obtain](https://help.aliyun.com/zh/yunxiao/developer-reference/obtain-personal-access-token). Grant read and write permissions to all APIs under organization management, project collaboration, code management, pipeline management, artifact repository management, application delivery and testing management.\n\n  ![The personal token authorization page](https://agent-install-beijing.oss-cn-beijing.aliyuncs.com/alibabacloud-devops-mcp-server/img_8.jpg)\n\n### Installing via Smithery\n\nTo install [AlibabaCloud DevOps](https://www.aliyun.com/product/yunxiao) Server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@aliyun/alibabacloud-devops-mcp-server):\n\n```bash\nnpx -y @smithery/cli install @aliyun/alibabacloud-devops-mcp-server --client claude\n```\n\n### Install Yunxiao MCP server via MCP marketplace\nThe MCP market built into Lingma (AlibabaCloud Tongyi Lingma) has already provided the AlibabaCloud Devops MCP service. To install it, simply enter the MCP market in Lingma and search for \"Yunxiao DevOps\", then click install.\n\n![Install AlibabaCloud Devops MCP Service from the MCP Market](https://agent-install-beijing.oss-cn-beijing.aliyuncs.com/alibabacloud-devops-mcp-server/img_9.png)\n\n### Run MCP Server via NPX\n```json\n{\n  \"mcpServers\": {\n    \"yunxiao\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"-y\",\n        \"alibabacloud-devops-mcp-server\"\n      ],\n      \"env\": {\n        \"YUNXIAO_ACCESS_TOKEN\": \"<YOUR_TOKEN>\"\n      }\n    }\n  }\n}\n```\n\n### Run MCP Server via Docker Container\n1. Docker build\n```shell\ndocker build -t alibabacloud/alibabacloud-devops-mcp-server .\n```\n2. Configure MCP Server\n```json\n{\n  \"mcpServers\": {\n    \"yunxiao\": {\n      \"command\": \"docker\",\n      \"args\": [\n        \"run\",\n        \"-i\",\n        \"--rm\",\n        \"-e\",\n        \"YUNXIAO_ACCESS_TOKEN\",\n        \"alibabacloud/alibabacloud-devops-mcp-server\"\n      ],\n      \"env\": {\n        \"YUNXIAO_ACCESS_TOKEN\": \"<YOUR_TOKEN>\"\n      }\n    }\n  }\n}\n```\n\n## Contact Us\nIf you have any questions, please join the Alibaba Cloud Devops discussion group (134400004101) for discussion.\n\n![Alibaba Cloud Devops MCP Server Group](https://agent-install-beijing.oss-cn-beijing.aliyuncs.com/alibabacloud-devops-mcp-server/1750147152464.png)\n\n\n## Related Links\n- [AlibabaCloud DevOps](https://www.aliyun.com/product/yunxiao)\n- [MCP market](https://modelscope.cn/mcp/servers/@aliyun/alibabacloud-devops-mcp-server)\n- [Example Use Cases](https://mp.weixin.qq.com/s/KQsN6dQlnNeCNATC-QD7pg)\n"
+}

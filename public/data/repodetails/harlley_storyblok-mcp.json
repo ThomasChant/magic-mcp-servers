@@ -1,0 +1,53 @@
+{
+  "mcp_name": "harlley/storyblok-mcp",
+  "mcp_description": "Manage Storyblok components using natural language descriptions with this MCP implementation.",
+  "mcp_id": "harlley_storyblok-mcp",
+  "fetch_timestamp": "2025-06-23T04:35:59.524380Z",
+  "github_url": "https://github.com/harlley/storyblok-mcp",
+  "repository": {
+    "name": "storyblok-mcp",
+    "full_name": "harlley/storyblok-mcp",
+    "description": "A Model Context Protocol (MCP) implementation for Storyblok that allows you to manage components through natural language descriptions.",
+    "html_url": "https://github.com/harlley/storyblok-mcp",
+    "created_at": "2025-03-28T21:16:44Z",
+    "updated_at": "2025-05-23T19:00:49Z",
+    "pushed_at": "2025-05-03T11:54:10Z",
+    "size": 113,
+    "stargazers_count": 7,
+    "watchers_count": 7,
+    "forks_count": 1,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "harlley",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/52423?v=4",
+      "html_url": "https://github.com/harlley"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 13484,
+      "JavaScript": 335
+    },
+    "language_percentages": {
+      "TypeScript": 97.58,
+      "JavaScript": 2.42
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 2,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# Storyblok MCP\n\nA Model Context Protocol (MCP) implementation for Storyblok that allows you to manage components through natural language descriptions.\n\n## Features\n\n- Create Storyblok components using natural language descriptions\n- Update existing components with new fields and properties\n- List all available components\n- Smart schema generation from descriptions\n- Support for various field types (text, richtext, asset, multilink, etc.)\n\n## Setup\n\n1. Clone the repository:\n```bash\ngit clone [repository-url]\ncd storyblok-mcp\n```\n\n2. Install dependencies:\n```bash\nnpm install\n```\n\n3. Configure environment variables:\n```bash\ncp .env.example .env\n```\nEdit `.env` and add your Storyblok credentials:\n- `STORYBLOK_SPACE_ID`: Your Storyblok space ID\n- `STORYBLOK_API_KEY`: Your Storyblok API key\n\n## Usage\n\nStart the MCP server:\n```bash\nnpm start\n```\n\n### Creating Components\n\nCreate components by providing a description with display name and schema:\n\n```\ndisplay:Component Name\n\nschema:\nfield1 (text)\nfield2 (richtext)\nfield3 (asset)\nfield4 (multilink)\n```\n\n### Updating Components\n\nUpdate components by specifying their ID and new properties:\n\n```\ndisplay:New Display Name\n\nschema:\nnewField1 (text)\nnewField2 (richtext)\n```\n\n### Supported Field Types\n\n- text: Simple text field\n- textarea: Multi-line text field\n- richtext: Rich text editor\n- markdown: Markdown editor\n- number: Numeric input\n- datetime: Date and time picker\n- boolean: True/false toggle\n- asset: File/image selector\n- multilink: Link selector\n- bloks: Nested components\n\n## Development\n\nRun in development mode with auto-reload:\n```bash\nnpm run dev\n```\n\nRun tests:\n```bash\nnpm test\n```\n\n## Cursor MCP Setup\n\nTo use this MCP in Cursor, you need to configure it in your Cursor MCP settings:\n\n```json\n{\n  \"mcpServers\": {\n    \"Storyblok MCP\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"tsx\",\n        \"/path/to/your/storyblok-mcp/src/main.ts\"\n      ],\n      \"env\": {\n        \"STORYBLOK_SPACE_ID\": \"your_space_id\",\n        \"STORYBLOK_API_KEY\": \"your_api_key\"\n      }\n    }\n  }\n}\n```\n\nReplace:\n- `/path/to/your/storyblok-mcp` with the actual path where you cloned this repository\n- `your_space_id` with your Storyblok space ID\n- `your_api_key` with your Storyblok API key\n\nAfter saving the configuration, restart Cursor for the changes to take effect. You can then use natural language commands to manage your Storyblok components directly from Cursor. \n"
+}

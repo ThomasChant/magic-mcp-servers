@@ -1,0 +1,55 @@
+{
+  "mcp_name": "Jira Context MCP",
+  "mcp_description": "MCP server to provide Jira Tickets information to AI coding agents like Cursor.",
+  "mcp_id": "rahulthedevil_Jira-Context-MCP",
+  "fetch_timestamp": "2025-06-23T05:26:10.420369Z",
+  "github_url": "https://github.com/rahulthedevil/Jira-Context-MCP",
+  "repository": {
+    "name": "Jira-Context-MCP",
+    "full_name": "rahulthedevil/Jira-Context-MCP",
+    "description": "MCP server to provide Jira Tickets information to AI coding agents like Cursor",
+    "html_url": "https://github.com/rahulthedevil/Jira-Context-MCP",
+    "created_at": "2025-02-25T11:33:18Z",
+    "updated_at": "2025-06-13T21:29:35Z",
+    "pushed_at": "2025-02-25T12:55:09Z",
+    "size": 32,
+    "stargazers_count": 17,
+    "watchers_count": 17,
+    "forks_count": 11,
+    "open_issues_count": 3,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "rahulthedevil",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47867691?v=4",
+      "html_url": "https://github.com/rahulthedevil"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 11,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 14456,
+      "JavaScript": 2308,
+      "Dockerfile": 514
+    },
+    "language_percentages": {
+      "TypeScript": 83.67,
+      "JavaScript": 13.36,
+      "Dockerfile": 2.97
+    },
+    "pull_requests_count": 4,
+    "contributors_count": 3,
+    "package_json_version": "0.1.0"
+  },
+  "readme": "# Jira Context MCP\r\n[![CodeQL Advanced](https://github.com/rahulthedevil/Jira-Context-MCP/actions/workflows/codeql.yml/badge.svg)](https://github.com/rahulthedevil/Jira-Context-MCP/actions/workflows/codeql.yml)\r\n[![smithery badge](https://smithery.ai/badge/@rahulthedevil/Jira-Context-MCP)](https://smithery.ai/server/@rahulthedevil/Jira-Context-MCP)\r\n<figure>\r\n    <a href=\"https://glama.ai/mcp/servers/a8ob8depqc\">\r\n     <img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/a8ob8depqc/badge\" />\r\n   </a>\r\n</figure>\r\n\r\nA Model Context Protocol (MCP) implementation for Jira that allows you to:\r\n\r\n- Input a Jira ticket link to fetch issue details and instruct Cursor to fix it\r\n- Retrieve all tickets assigned to you within a specified Jira project \r\n- Filter Jira issues based on a specific issue type and automatically direct Cursor to resolve them\r\n- Integrate seamlessly with Jira's API for automation and efficiency\r\n\r\n## Setup\r\n\r\n### Prerequisites\r\n\r\n- Node.js 20.17.0 or higher\r\n- A Jira account with API access\r\n- A Jira API token (can be generated at [Atlassian API Tokens](https://id.atlassian.com/manage-profile/security/api-tokens))\r\n\r\n### Installation\r\n\r\n#### Installing via Smithery\r\n\r\nTo install Jira Context MCP for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@rahulthedevil/Jira-Context-MCP):\r\n\r\n```bash\r\nnpx -y @smithery/cli install @rahulthedevil/Jira-Context-MCP --client claude\r\n```\r\n\r\n#### Installing manually\r\n\r\n1. Clone this repository:\r\n   ```bash\r\n   git clone https://github.com/yourusername/Jira-Context-MCP.git\r\n   cd Jira-Context-MCP\r\n   ```\r\n\r\n2. Install dependencies:\r\n   ```bash\r\n   npm install\r\n   # or if you use pnpm\r\n   pnpm install\r\n   ```\r\n\r\n3. Create a `.env` file based on the example:\r\n   ```bash\r\n   cp .env.example .env\r\n   ```\r\n\r\n4. Edit the `.env` file with your Jira details:\r\n   ```\r\n   JIRA_BASE_URL=https://your-domain.atlassian.net\r\n   JIRA_USERNAME=your-email@example.com\r\n   JIRA_API_TOKEN=your-api-token-here\r\n   HTTP_PORT=3000\r\n   ```\r\n\r\n### Build\r\n\r\nBuild the project with:\r\n\r\n```bash\r\nnpm run build\r\n# or\r\npnpm build\r\n```\r\n\r\n## Usage\r\n\r\n### Starting the Server\r\n\r\nStart the HTTP server:\r\n\r\n```bash\r\nnpm start\r\n# or\r\npnpm start\r\n```\r\n\r\nOr use the CLI mode:\r\n\r\n```bash\r\nnpm run start:cli\r\n# or\r\npnpm start:cli\r\n```\r\n\r\n### Connecting with Cursor\r\n\r\n1. In Cursor, open the Command Palette (Ctrl+Shift+P or Cmd+Shift+P)\r\n2. Type **\"Connect to MCP Server\"**\r\n3. Select **\"Connect to MCP Server\"**\r\n4. Enter the server URL (default: `http://localhost:3000/sse`)\r\n\r\n## Available Tools\r\n\r\nOnce connected, you can use the following tools in Cursor:\r\n\r\n### 1. Get Jira Issue Details\r\n\r\nFetch detailed information about a specific Jira issue:\r\n```\r\n/get_issue issueKey:PROJECT-123\r\n```\r\n\r\n### 2. Get Assigned Issues\r\n\r\nRetrieve issues assigned to you in a specific project:\r\n```\r\n/get_assigned_issues projectKey:PROJECT maxResults:10\r\n```\r\n\r\n### 3. Get Issues by Type\r\n\r\nFilter issues by type (Bug, Story, Epic, etc.):\r\n```\r\n/get_issues_by_type issueType:Bug projectKey:PROJECT maxResults:10\r\n```\r\n\r\n### 4. Get Projects\r\n\r\nList all available projects:\r\n```\r\n/get_projects\r\n```\r\n\r\n### 5. Get Issue Types\r\n\r\nList all available issue types:\r\n```\r\n/get_issue_types\r\n```\r\n\r\n### 6. Get Recent Ticket Changes\r\n\r\nRetrieve changes made in tickets over a specified period (e.g., the last 7 days) in a project:\r\n```\r\n/get_recent_changes projectKey:PROJECT maxDays:7\r\n```\r\n\r\n## Command Examples\r\n\r\n🚀 **Jira MCP Server + Cursor IDE = Your AI-powered Jira assistant!** Here’s how it makes devs work smarter:\r\n\r\n📂 **\"List all Jira projects I have access to\"**  \r\n→ AI fetches all available projects instantly  \r\nNo more searching manually!\r\n\r\n📋 **\"List all issues in PROJECT\"**  \r\n→ AI retrieves all open tickets  \r\nStay organized without effort!\r\n\r\n🐛 **\"Filter only Bugs or Change Requests and fix them\"**  \r\n→ AI identifies & directs Cursor to resolve them  \r\nFix issues faster with automation!\r\n\r\n✅ **\"Find all tickets assigned to me and fix them\"**  \r\n→ AI pulls your tasks & lets Cursor handle them  \r\nStay on top of your work with zero hassle!\r\n\r\n🔍 **\"Get details for Jira issue PROJECT-123\"**  \r\n→ AI fetches full issue info in seconds  \r\nNo more switching tabs!\r\n\r\n📊 **\"What changed in tickets in the last 7 days in PROJECT?\"**  \r\n→ AI tracks recent updates & highlights key changes  \r\nNo more manually checking ticket histories!\r\n\r\n🔥 **TL;DR:** Your AI now speaks Jira + Cursor! Fetch projects, filter issues, track changes & fix bugs—all inside your IDE.  \r\nFrom backlog to bug fixes, MCP Server makes Jira work for you!\r\n\r\n## Example Workflows\r\n\r\n### Fix a Specific Bug\r\n\r\n1. Connect to the Jira MCP server in Cursor.\r\n2. Get the issue details:\r\n   ```\r\n   /get_issue issueKey:PROJECT-123\r\n   ```\r\n3. Review the issue details and instruct Cursor to fix it:\r\n   ```\r\n   Fix the bug described in PROJECT-123\r\n   ```\r\n\r\n### Work on Your Assigned Issues\r\n\r\n1. Connect to the Jira MCP server in Cursor.\r\n2. Retrieve your assigned issues:\r\n   ```\r\n   /get_assigned_issues projectKey:PROJECT\r\n   ```\r\n3. Ask Cursor to help with one of the issues:\r\n   ```\r\n   Help me solve the first issue in my assigned list\r\n   ```\r\n\r\n### Fix All Bugs in a Project\r\n\r\n1. Connect to the Jira MCP server in Cursor.\r\n2. Retrieve all bug issues:\r\n   ```\r\n   /get_issues_by_type issueType:Bug projectKey:PROJECT\r\n   ```\r\n3. Instruct Cursor:\r\n   ```\r\n   Help me fix these bugs one by one\r\n   ```\r\n\r\n### Review Recent Changes\r\n\r\n1. Connect to the Jira MCP server in Cursor.\r\n2. Retrieve recent ticket updates:\r\n   ```\r\n   /get_recent_changes projectKey:PROJECT maxDays:7\r\n   ```\r\n3. Review the changes to stay updated on modifications.\r\n\r\n## Development\r\n\r\n### Project Structure\r\n\r\n- `src/` - Source code\r\n  - `services/` - Jira API service\r\n  - `types/` - TypeScript type definitions\r\n  - `utils/` - Utility functions\r\n  - `server.ts` - MCP server implementation\r\n  - `index.ts` - Application entry point\r\n  - `cli.ts` - CLI entry point\r\n\r\n### Adding New Tools\r\n\r\nTo add new tools, edit the `src/server.ts` file and add new tool definitions in the `registerTools` method.\r\n\r\n## License\r\n\r\nMIT\r\n\r\n## Author\r\n\r\nRahul Dey - [@rahulthedevil](https://github.com/rahulthedevil)\r\n"
+}

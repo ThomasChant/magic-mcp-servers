@@ -1,0 +1,93 @@
+{
+  "mcp_name": "Vectorize",
+  "mcp_description": "☁️ 📇 - [Vectorize](https://vectorize.io) MCP server for advanced retrieval, Private Deep Research, Anything-to-Markdown file extraction and text chunking.",
+  "mcp_id": "vectorize-io_vectorize-mcp-server",
+  "fetch_timestamp": "2025-06-23T09:16:17.667704Z",
+  "github_url": "https://github.com/vectorize-io/vectorize-mcp-server/",
+  "repository": {
+    "name": "vectorize-mcp-server",
+    "full_name": "vectorize-io/vectorize-mcp-server",
+    "description": "Official Vectorize MCP Server",
+    "html_url": "https://github.com/vectorize-io/vectorize-mcp-server",
+    "created_at": "2025-03-10T14:43:02Z",
+    "updated_at": "2025-06-22T22:05:27Z",
+    "pushed_at": "2025-06-12T15:53:33Z",
+    "size": 33,
+    "stargazers_count": 68,
+    "watchers_count": 68,
+    "forks_count": 13,
+    "open_issues_count": 3,
+    "language": "JavaScript",
+    "license": "MIT License",
+    "topics": [
+      "mcp",
+      "mcp-server"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "vectorize-io",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/81837244?v=4",
+      "html_url": "https://github.com/vectorize-io"
+    },
+    "has_issues": true,
+    "has_projects": false,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 13,
+    "subscribers_count": 3,
+    "languages": {
+      "JavaScript": 8279
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 16,
+    "contributors_count": 6,
+    "latest_release": {
+      "tag_name": "0.4.3",
+      "name": "0.4.3",
+      "published_at": "2025-04-07T08:34:51Z",
+      "body": "## What's Changed\r\n* Add VS Code installation instructions to README by @mbaiza27 in https://github.com/vectorize-io/vectorize-mcp-server/pull/10\r\n* fix: show server error on failures by @nicoloboschi in https://github.com/vectorize-io/vectorize-mcp-server/pull/11\r\n\r\n## New Contributors\r\n* @mbaiza27 made their first contribution in https://github.com/vectorize-io/vectorize-mcp-server/pull/10\r\n\r\n**Full Changelog**: https://github.com/vectorize-io/vectorize-mcp-server/compare/0.4.2...0.4.3",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "0.4.3",
+        "commit_sha": "bea6442bf77165ff26fc66fb4107b741811ae1a9"
+      },
+      {
+        "name": "0.4.2",
+        "commit_sha": "85fcd6a636edd3c1a73f94c851ff88df33450b96"
+      },
+      {
+        "name": "0.4.1",
+        "commit_sha": "bd7038f21ce4f54fc614559f70397fd7838fecbc"
+      },
+      {
+        "name": "0.4.0",
+        "commit_sha": "4724623ecf315cf580a9e01a71fc3cf44657c693"
+      },
+      {
+        "name": "0.3.0",
+        "commit_sha": "8b6062de5913f3b0a529f0913d5e71773cbab9a8"
+      },
+      {
+        "name": "0.2.0",
+        "commit_sha": "b2ef938c79543739f21c21e135732f9c49f52c02"
+      },
+      {
+        "name": "0.1.0",
+        "commit_sha": "bca0a7a5e57c1d0c896411c8b7187c092c30d9e2"
+      }
+    ],
+    "latest_version": "0.4.3",
+    "package_json_version": "0.4.3"
+  },
+  "readme": "# Vectorize MCP Server\n\nA Model Context Protocol (MCP) server implementation that integrates with [Vectorize](https://vectorize.io/) for advanced Vector retrieval and text extraction.\n\n<a href=\"https://glama.ai/mcp/servers/pxwbgk0kzr\">\n  <img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/pxwbgk0kzr/badge\" alt=\"Vectorize MCP server\" />\n</a>\n\n\n## Installation\n\n### Running with npx\n\n```bash\nexport VECTORIZE_ORG_ID=YOUR_ORG_ID\nexport VECTORIZE_TOKEN=YOUR_TOKEN\nexport VECTORIZE_PIPELINE_ID=YOUR_PIPELINE_ID\n\nnpx -y @vectorize-io/vectorize-mcp-server@latest\n```\n\n### VS Code Installation\n\nFor one-click installation, click one of the install buttons below:\n\n[![Install with NPX in VS Code](https://img.shields.io/badge/VS_Code-NPM-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=vectorize&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40vectorize-io%2Fvectorize-mcp-server%40latest%22%5D%2C%22env%22%3A%7B%22VECTORIZE_ORG_ID%22%3A%22%24%7Binput%3Aorg_id%7D%22%2C%22VECTORIZE_TOKEN%22%3A%22%24%7Binput%3Atoken%7D%22%2C%22VECTORIZE_PIPELINE_ID%22%3A%22%24%7Binput%3Apipeline_id%7D%22%7D%7D&inputs=%5B%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22org_id%22%2C%22description%22%3A%22Vectorize+Organization+ID%22%7D%2C%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22token%22%2C%22description%22%3A%22Vectorize+Token%22%2C%22password%22%3Atrue%7D%2C%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22pipeline_id%22%2C%22description%22%3A%22Vectorize+Pipeline+ID%22%7D%5D) [![Install with NPX in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-NPM-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=vectorize&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40vectorize-io%2Fvectorize-mcp-server%40latest%22%5D%2C%22env%22%3A%7B%22VECTORIZE_ORG_ID%22%3A%22%24%7Binput%3Aorg_id%7D%22%2C%22VECTORIZE_TOKEN%22%3A%22%24%7Binput%3Atoken%7D%22%2C%22VECTORIZE_PIPELINE_ID%22%3A%22%24%7Binput%3Apipeline_id%7D%22%7D%7D&inputs=%5B%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22org_id%22%2C%22description%22%3A%22Vectorize+Organization+ID%22%7D%2C%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22token%22%2C%22description%22%3A%22Vectorize+Token%22%2C%22password%22%3Atrue%7D%2C%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22pipeline_id%22%2C%22description%22%3A%22Vectorize+Pipeline+ID%22%7D%5D&quality=insiders)\n\n### Manual Installation\n\nFor the quickest installation, use the one-click install buttons at the top of this section.\n\nTo install manually, add the following JSON block to your User Settings (JSON) file in VS Code. You can do this by pressing `Ctrl + Shift + P` and typing `Preferences: Open User Settings (JSON)`.\n\n```json\n{\n  \"mcp\": {\n    \"inputs\": [\n      {\n        \"type\": \"promptString\",\n        \"id\": \"org_id\",\n        \"description\": \"Vectorize Organization ID\"\n      },\n      {\n        \"type\": \"promptString\",\n        \"id\": \"token\",\n        \"description\": \"Vectorize Token\",\n        \"password\": true\n      },\n      {\n        \"type\": \"promptString\",\n        \"id\": \"pipeline_id\",\n        \"description\": \"Vectorize Pipeline ID\"\n      }\n    ],\n    \"servers\": {\n      \"vectorize\": {\n        \"command\": \"npx\",\n        \"args\": [\"-y\", \"@vectorize-io/vectorize-mcp-server@latest\"],\n        \"env\": {\n          \"VECTORIZE_ORG_ID\": \"${input:org_id}\",\n          \"VECTORIZE_TOKEN\": \"${input:token}\",\n          \"VECTORIZE_PIPELINE_ID\": \"${input:pipeline_id}\"\n        }\n      }\n    }\n  }\n}\n```\n\nOptionally, you can add the following to a file called `.vscode/mcp.json` in your workspace to share the configuration with others:\n\n```json\n{\n  \"inputs\": [\n    {\n      \"type\": \"promptString\",\n      \"id\": \"org_id\",\n      \"description\": \"Vectorize Organization ID\"\n    },\n    {\n      \"type\": \"promptString\",\n      \"id\": \"token\",\n      \"description\": \"Vectorize Token\",\n      \"password\": true\n    },\n    {\n      \"type\": \"promptString\",\n      \"id\": \"pipeline_id\",\n      \"description\": \"Vectorize Pipeline ID\"\n    }\n  ],\n  \"servers\": {\n    \"vectorize\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@vectorize-io/vectorize-mcp-server@latest\"],\n      \"env\": {\n        \"VECTORIZE_ORG_ID\": \"${input:org_id}\",\n        \"VECTORIZE_TOKEN\": \"${input:token}\",\n        \"VECTORIZE_PIPELINE_ID\": \"${input:pipeline_id}\"\n      }\n    }\n  }\n}\n```\n\n## Configuration on Claude/Windsurf/Cursor/Cline\n\n```json\n{\n  \"mcpServers\": {\n    \"vectorize\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@vectorize-io/vectorize-mcp-server@latest\"],\n      \"env\": {\n        \"VECTORIZE_ORG_ID\": \"your-org-id\",\n        \"VECTORIZE_TOKEN\": \"your-token\",\n        \"VECTORIZE_PIPELINE_ID\": \"your-pipeline-id\"\n      }\n    }\n  }\n}\n```\n\n## Tools\n\n### Retrieve documents\n\nPerform vector search and retrieve documents (see official [API](https://docs.vectorize.io/api/api-pipelines/api-retrieval)):\n\n```json\n{\n  \"name\": \"retrieve\",\n  \"arguments\": {\n    \"question\": \"Financial health of the company\",\n    \"k\": 5\n  }\n}\n```\n\n### Text extraction and chunking (Any file to Markdown)\n\nExtract text from a document and chunk it into Markdown format (see official [API](https://docs.vectorize.io/api/api-extraction)):\n\n```json\n{\n  \"name\": \"extract\",\n  \"arguments\": {\n    \"base64document\": \"base64-encoded-document\",\n    \"contentType\": \"application/pdf\"\n  }\n}\n```\n\n### Deep Research\n\nGenerate a Private Deep Research from your pipeline (see official [API](https://docs.vectorize.io/api/api-pipelines/api-deep-research)):\n\n```json\n{\n  \"name\": \"deep-research\",\n  \"arguments\": {\n    \"query\": \"Generate a financial status report about the company\",\n    \"webSearch\": true\n  }\n}\n```\n\n## Development\n\n```bash\nnpm install\nnpm run dev\n```\n\n### Release\nChange the package.json version and then:\n```bash\ngit commit -am \"x.y.z\"\ngit tag x.y.z\ngit push origin\ngit push origin --tags\n```\n\n### Contributing\n\n1. Fork the repository\n2. Create your feature branch\n3. Submit a pull request\n\n"
+}

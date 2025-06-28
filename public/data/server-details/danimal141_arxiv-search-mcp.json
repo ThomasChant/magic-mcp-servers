@@ -1,0 +1,102 @@
+{
+  "id": "77894a0f54a2",
+  "owner": "danimal141",
+  "repoName": "arxiv-search-mcp",
+  "fullDescription": "Facilitates searching and retrieving academic papers from arXiv.org with customizable parameters.",
+  "techStack": [],
+  "serviceTypes": [
+    {
+      "type": "utility",
+      "label": "Utility",
+      "icon": "🛠️",
+      "description": "Provides general utility functions"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "moderate",
+    "maturity": "stable",
+    "deployment": [
+      "local"
+    ],
+    "featured": false,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 1,
+    "reason": "Specialized category: search-engines",
+    "matched_keywords": [
+      "search"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/danimal141/arxiv-search-mcp",
+    "owner": "danimal141",
+    "name": "arxiv-search-mcp",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.279Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "search",
+    "scientific",
+    "science-research",
+    "academic",
+    "papers",
+    "research",
+    "arxiv"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Moderate",
+      "color": "#eab308",
+      "icon": "🟡"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    }
+  ],
+  "icon": "🛠️",
+  "readme": null
+}

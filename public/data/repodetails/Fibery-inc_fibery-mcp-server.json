@@ -1,0 +1,52 @@
+{
+  "mcp_name": "Fibery",
+  "mcp_description": "Perform queries and entity operations in your [Fibery](https://fibery.io) workspace.",
+  "mcp_id": "Fibery-inc_fibery-mcp-server",
+  "fetch_timestamp": "2025-06-23T03:17:10.677859Z",
+  "github_url": "https://github.com/Fibery-inc/fibery-mcp-server",
+  "repository": {
+    "name": "fibery-mcp-server",
+    "full_name": "Fibery-inc/fibery-mcp-server",
+    "description": null,
+    "html_url": "https://github.com/Fibery-inc/fibery-mcp-server",
+    "created_at": "2025-03-13T09:34:09Z",
+    "updated_at": "2025-06-15T17:50:59Z",
+    "pushed_at": "2025-05-24T19:32:09Z",
+    "size": 89,
+    "stargazers_count": 20,
+    "watchers_count": 20,
+    "forks_count": 9,
+    "open_issues_count": 3,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "Fibery-inc",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/72027989?v=4",
+      "html_url": "https://github.com/Fibery-inc"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 9,
+    "subscribers_count": 5,
+    "languages": {
+      "Python": 43099,
+      "Dockerfile": 419
+    },
+    "language_percentages": {
+      "Python": 99.04,
+      "Dockerfile": 0.96
+    },
+    "pull_requests_count": 4,
+    "contributors_count": 3
+  },
+  "readme": "# Fibery MCP Server\n[![smithery badge](https://smithery.ai/badge/@Fibery-inc/fibery-mcp-server)](https://smithery.ai/server/@Fibery-inc/fibery-mcp-server)\n<a href=\"https://github.com/Fibery-inc/fibery-mcp-server/blob/main/LICENSE\"><img src=\"https://img.shields.io/badge/license-MIT-blue\" /></a>\n\nThis MCP (Model Context Protocol) server provides integration between Fibery and any LLM provider supporting the MCP protocol (e.g., Claude for Desktop), allowing you to interact with your Fibery workspace using natural language.\n\n## ✨ Features\n- Query Fibery entities using natural language\n- Get information about your Fibery databases and their fields\n- Create and update Fibery entities through conversational interfaces\n\n## 📦 Installation\n\n### Installing via Smithery\n\nTo install Fibery MCP Server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@Fibery-inc/fibery-mcp-server):\n\n```bash\nnpx -y @smithery/cli install @Fibery-inc/fibery-mcp-server --client claude\n```\n\n### Installing via UV\n#### Pre-requisites:\n- A Fibery account with an API token\n- Python 3.10 or higher\n- [uv](https://github.com/astral-sh/uv)\n\n#### Installation Steps:\n1. Install the tool using uv:\n```bash\nuv tool install fibery-mcp-server\n```\n\n2. Then, add this configuration to your MCP client config file. In Claude Desktop, you can access the config in **Settings → Developer → Edit Config**:\n```json\n{\n    \"mcpServers\": {\n        \"fibery-mcp-server\": {\n            \"command\": \"uv\",\n            \"args\": [\n                 \"tool\",\n                 \"run\",\n                 \"fibery-mcp-server\",\n                 \"--fibery-host\",\n                 \"your-domain.fibery.io\",\n                 \"--fibery-api-token\",\n                 \"your-api-token\"\n            ]\n        }\n    }\n}\n```\nNote: If \"uv\" command does not work, try absolute path (i.e. /Users/username/.local/bin/uv)\n\n**For Development:**\n\n```json\n{\n    \"mcpServers\": {\n        \"fibery-mcp-server\": {\n            \"command\": \"uv\",\n            \"args\": [\n                \"--directory\",\n                \"path/to/cloned/fibery-mcp-server\",\n                \"run\",\n                \"fibery-mcp-server\",\n                \"--fibery-host\",\n                 \"your-domain.fibery.io\",\n                 \"--fibery-api-token\",\n                 \"your-api-token\"\n            ]\n        }\n    }\n}\n```\n\n## 🚀 Available Tools\n\n#### 1. List Databases (`list_databases`)\n\nRetrieves a list of all databases available in your Fibery workspace.\n\n#### 2. Describe Database (`describe_database`)\n\nProvides a detailed breakdown of a specific database's structure, showing all fields with their titles, names, and types.\n\n#### 3. Query Database (`query_database`)\n\nOffers powerful, flexible access to your Fibery data through the Fibery API.\n\n#### 4. Create Entity (`create_entity`)\n\nCreates new entities in your Fibery workspace with specified field values.\n\n#### 5. Create Entities (`create_entities_batch`)\n\nCreates multiple new entities in your Fibery workspace with specified field values.\n\n#### 6. Update Entity (`update_entity`)\n\nUpdates existing entities in your Fibery workspace with new field values.\n"
+}

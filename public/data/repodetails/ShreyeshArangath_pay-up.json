@@ -1,0 +1,52 @@
+{
+  "mcp_name": "ShreyeshArangath/pay-up",
+  "mcp_description": "PayUp facilitates trip expense management as a MCP server, offering a personalized alternative to Splitwise.",
+  "mcp_id": "ShreyeshArangath_pay-up",
+  "fetch_timestamp": "2025-06-23T08:25:28.600492Z",
+  "github_url": "https://github.com/ShreyeshArangath/pay-up",
+  "repository": {
+    "name": "pay-up",
+    "full_name": "ShreyeshArangath/pay-up",
+    "description": "pay up your trips",
+    "html_url": "https://github.com/ShreyeshArangath/pay-up",
+    "created_at": "2025-04-16T04:36:55Z",
+    "updated_at": "2025-04-26T04:11:32Z",
+    "pushed_at": "2025-04-26T04:10:52Z",
+    "size": 9511,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Go",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "ShreyeshArangath",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47700876?v=4",
+      "html_url": "https://github.com/ShreyeshArangath"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Go": 17525,
+      "Makefile": 360
+    },
+    "language_percentages": {
+      "Go": 97.99,
+      "Makefile": 2.01
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# pay-up\nPayUp is a MCP server that is meant to be a replacement for Splitwise for all my future trips. \n\n\n## How to use it? \n1. Clone the repo\n2. Run make \n3. Add the following to your `claude_desktop_config.json` file, and it should just work.   \n```\n{\n  \"mcpServers\": {\n    \"weather\": {\n         }, \n    \"payup\": {\n        \"command\" : \"/Users/shreyesh/projects/payup/payup\"\n    }\n  }\n}\n```\n\n## Improvements\n\nThis definitely needs a better client than the existing one because right now my prompts have to be too long for it to understand what it needs to do. Ideally, the MCP client should have the prompts built in for each of the use-cases and then it just calls the relevant MCP server tools as required. \n\n\n## Some Screenshots \n\n![My chat with Claude](assets/chat_claude.png)\n![My DB entry](assets/mysql_sc.png)\n"
+}

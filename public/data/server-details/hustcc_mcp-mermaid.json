@@ -1,0 +1,107 @@
+{
+  "id": "403b02b216ae",
+  "owner": "hustcc",
+  "repoName": "mcp-mermaid",
+  "fullDescription": "Generate [mermaid](https://mermaid.js.org/) diagram and chart with AI MCP dynamically.",
+  "techStack": [
+    {
+      "name": "javascript",
+      "icon": "📄",
+      "color": "#f7df1e"
+    }
+  ],
+  "serviceTypes": [
+    {
+      "type": "ai",
+      "label": "Ai",
+      "icon": "🤖",
+      "description": "Leverages AI and machine learning"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "moderate",
+    "maturity": "stable",
+    "deployment": [
+      "local"
+    ],
+    "featured": false,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 3.25,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "http",
+      "https"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/hustcc/mcp-mermaid",
+    "owner": "Mermaid",
+    "name": "Mermaid",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.281Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "visualization",
+    "mermaid",
+    "diagram",
+    "business-productivity",
+    "chart"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Moderate",
+      "color": "#eab308",
+      "icon": "🟡"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    }
+  ],
+  "icon": "🤖",
+  "readme": null
+}

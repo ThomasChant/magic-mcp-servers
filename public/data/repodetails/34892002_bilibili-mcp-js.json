@@ -1,0 +1,52 @@
+{
+  "mcp_name": "34892002/bilibili-mcp-js",
+  "mcp_description": "📇 🏠 - A MCP server that supports searching for Bilibili content. Provides LangChain integration examples and test scripts.",
+  "mcp_id": "34892002_bilibili-mcp-js",
+  "fetch_timestamp": "2025-06-23T00:08:08.601683Z",
+  "github_url": "https://github.com/34892002/bilibili-mcp-js",
+  "repository": {
+    "name": "bilibili-mcp-js",
+    "full_name": "34892002/bilibili-mcp-js",
+    "description": null,
+    "html_url": "https://github.com/34892002/bilibili-mcp-js",
+    "created_at": "2025-03-24T10:27:50Z",
+    "updated_at": "2025-06-19T03:27:39Z",
+    "pushed_at": "2025-04-23T05:44:33Z",
+    "size": 264,
+    "stargazers_count": 101,
+    "watchers_count": 101,
+    "forks_count": 16,
+    "open_issues_count": 2,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "34892002",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26450489?v=4",
+      "html_url": "https://github.com/34892002"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 16,
+    "subscribers_count": 3,
+    "languages": {
+      "TypeScript": 8177,
+      "JavaScript": 6975
+    },
+    "language_percentages": {
+      "TypeScript": 53.97,
+      "JavaScript": 46.03
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# Bilibili MCP\n\n[![English](https://img.shields.io/badge/English-Click-yellow)](README-en.md)\n[![中文文档](https://img.shields.io/badge/中文文档-点击查看-orange)](README.md)\n[![日本語](https://img.shields.io/badge/日本語-クリック-青)](README-ja.md)\n\n## 简介\n这是一个基于 Model Context Protocol (MCP) 的 B站视频搜索服务器。该服务器提供了简单的 API 接口，允许用户搜索 B站 的视频内容。提供LangChain调用示例、测试脚本。\n\n## 鸣谢\n- LangChain 示例代码参考自 [mcp-langchain-ts-client](https://github.com/isaacwasserman/mcp-langchain-ts-client)\n\n## 功能特点\n- B站视频搜索\n- 支持分页查询\n- 返回视频信息（标题、作者、播放量、时长等）\n- 基于 MCP 协议的标准化接口\n\n## 系统要求\n- Node.js >= 20.12.0\n\n## npm package\n感谢[HQHC](https://github.com/HQHC)发布的npm包\n```json\n{\n  \"mcpServers\": {\n    \"bilibili-search\": {\n    \"command\": \"npx\",\n    \"args\": [\"bilibili-mcp\"],\n    \"description\": \"B站视频搜索 MCP 服务，可以在AI应用中搜索B站视频内容。\"\n    }\n  }\n}\n```\n\n## 快速开始\n> 如果要运行langchain例子，请先配置llm模型，修改.\\example.ts文件。\n```javascript\nconst llm = new ChatOpenAI({\n  modelName: \"gpt-4o-mini\",\n  temperature: 0,\n  openAIApiKey: \"your_api_key\", // 替换成你模型的密钥\n  configuration: {\n    baseURL: \"https://www.api.com/v1\", // 替换成你模型的API地址\n  },\n});\n```\n\nbun:\n\n```bash\nbun i\nbun index.ts\n# 测试脚本\nbun test.js\n# MCP Inspector\nbun run inspector\n# 运行langchain例子\nbun build:bun\nbun example.ts\n```\n\nnpm:\n\n```bash\nnpm i\nnpm run start\n# 测试脚本\nnpm run test\n# MCP Inspector\nnpm run inspector\n# 运行langchain例子\nnpm run build\nnode dist/example.js\n```\n\n## 截图\n![](./imgs/test-01.png)\n![](./imgs/test-02.png)\n\n"
+}

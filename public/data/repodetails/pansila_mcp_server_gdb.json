@@ -1,0 +1,83 @@
+{
+  "mcp_name": "GDB",
+  "mcp_description": "A GDB/MI protocol server based on the MCP protocol, providing remote application debugging capabilities with AI assistants.",
+  "mcp_id": "pansila_mcp_server_gdb",
+  "fetch_timestamp": "2025-06-23T03:43:22.311071Z",
+  "github_url": "https://github.com/pansila/mcp_server_gdb",
+  "repository": {
+    "name": "mcp_server_gdb",
+    "full_name": "pansila/mcp_server_gdb",
+    "description": "MCP Server to expose the GDB debugging capabilities",
+    "html_url": "https://github.com/pansila/mcp_server_gdb",
+    "created_at": "2025-03-15T14:11:42Z",
+    "updated_at": "2025-06-16T20:58:33Z",
+    "pushed_at": "2025-04-21T14:59:07Z",
+    "size": 127,
+    "stargazers_count": 29,
+    "watchers_count": 29,
+    "forks_count": 4,
+    "open_issues_count": 4,
+    "language": "Rust",
+    "license": "MIT License",
+    "topics": [
+      "agent",
+      "ai",
+      "llm",
+      "mcp",
+      "mcp-server"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "pansila",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5125601?v=4",
+      "html_url": "https://github.com/pansila"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 4,
+    "subscribers_count": 1,
+    "languages": {
+      "Rust": 151805
+    },
+    "language_percentages": {
+      "Rust": 100
+    },
+    "pull_requests_count": 26,
+    "contributors_count": 1,
+    "latest_release": {
+      "tag_name": "v0.2.3",
+      "name": "v0.2.3",
+      "published_at": "2025-04-02T13:09:47Z",
+      "body": "more tools and bug fixes",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.2.3",
+        "commit_sha": "e2d8cb19badf57841cf1945383f531bedbf5a9e2"
+      },
+      {
+        "name": "v0.2.2",
+        "commit_sha": "e1e7cb774254bfc2c153d83884a5458a355006a3"
+      },
+      {
+        "name": "v0.2.1",
+        "commit_sha": "821732ab6406a0c19512fad83e9f69b23c62c943"
+      },
+      {
+        "name": "v0.2.0",
+        "commit_sha": "01f173325b763ff7b899ae3c3391729fb0ebac3d"
+      }
+    ],
+    "latest_version": "v0.2.3"
+  },
+  "readme": "# MCP Server GDB\n\nA GDB/MI protocol server based on the MCP protocol, providing remote application debugging capabilities with AI assistants.\n\n## Features\n\n- Create and manage GDB debug sessions\n- Set and manage breakpoints\n- View stack information and variables\n- Control program execution (run, pause, step, etc.)\n- Support concurrent multi-session debugging\n- A built-in TUI to inspect agent behaviors so that you can improve your prompt (WIP)\n\n## Installation\n\n### Pre-built Binaries\nFind the binaries in the release page, choose one per your working platform, then you can run it directly.\n\n### Build From Source\nClone the repository and build it by cargo\n```\ncargo build --release\ncargo run\n```\n\n## Usage\n\n1. Just run it directly: `./mcp-server-gdb`\n2. The server supports two transport modes:\n   - Stdio (default): Standard input/output transport\n   - SSE: Server-Sent Events transport, default at `http://127.0.0.1:8080`\n\n## Configuration\n\nYou can adjust server configuration by modifying the `src/config.rs` file or by environment variables:\n\n- Server IP Address\n- Server port\n- GDB command timeout time (in seconds)\n\n## Supported MCP Tools\n\n### Session Management\n\n- `create_session` - Create a new GDB debugging session\n- `get_session` - Get specific session information\n- `get_all_sessions` - Get all sessions\n- `close_session` - Close session\n\n### Debug Control\n\n- `start_debugging` - Start debugging\n- `stop_debugging` - Stop debugging\n- `continue_execution` - Continue execution\n- `step_execution` - Step into next line\n- `next_execution` - Step over next line\n\n### Breakpoint Management\n\n- `get_breakpoints` - Get breakpoint list\n- `set_breakpoint` - Set breakpoint\n- `delete_breakpoint` - Delete breakpoint\n\n### Debug Information\n\n- `get_stack_frames` - Get stack frame information\n- `get_local_variables` - Get local variables\n- `get_registers` - Get registers\n- `read_memory` - Read memory contents\n\n## License\n\nMIT\n"
+}

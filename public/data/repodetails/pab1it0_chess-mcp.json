@@ -1,0 +1,52 @@
+{
+  "mcp_name": "pab1ito/chess-mcp",
+  "mcp_description": "🐍 ☁️ - Access Chess.com player data, game records, and other public information through standardized MCP interfaces, allowing AI assistants to search and analyze chess information.",
+  "mcp_id": "pab1it0_chess-mcp",
+  "fetch_timestamp": "2025-06-23T07:26:08.298663Z",
+  "github_url": "https://github.com/pab1it0/chess-mcp",
+  "repository": {
+    "name": "chess-mcp",
+    "full_name": "pab1it0/chess-mcp",
+    "description": "A Model Context Protocol server for Chess.com's Published Data API.  This provides access to Chess.com player data, game records, and other public information through standardized MCP interfaces, allowing AI assistants to search and analyze chess information.",
+    "html_url": "https://github.com/pab1it0/chess-mcp",
+    "created_at": "2025-03-29T08:32:00Z",
+    "updated_at": "2025-06-13T20:19:14Z",
+    "pushed_at": "2025-06-01T11:18:25Z",
+    "size": 10395,
+    "stargazers_count": 42,
+    "watchers_count": 42,
+    "forks_count": 9,
+    "open_issues_count": 3,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "pab1it0",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11724759?v=4",
+      "html_url": "https://github.com/pab1it0"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 9,
+    "subscribers_count": 2,
+    "languages": {
+      "Python": 20734,
+      "Dockerfile": 1501
+    },
+    "language_percentages": {
+      "Python": 93.25,
+      "Dockerfile": 6.75
+    },
+    "pull_requests_count": 21,
+    "contributors_count": 1
+  },
+  "readme": "# Chess.com MCP Server\n\nA [Model Context Protocol][mcp] (MCP) server for Chess.com's Published Data API.\n\nThis provides access to Chess.com player data, game records, and other public information through standardized MCP interfaces, allowing AI assistants to search and analyze chess information.\n\nhttps://github.com/user-attachments/assets/3b33361b-b604-465c-9f6a-3699b6907757\n\n[mcp]: https://modelcontextprotocol.io/introduction/introduction\n\n## Features\n\n- [x] Access player profiles, stats, and game records\n- [x] Search games by date and player\n- [x] Check player online status\n- [x] Get information about clubs and titled players\n- [x] No authentication required (uses Chess.com's public API)\n- [x] Docker containerization support\n- [x] Provide interactive tools for AI assistants\n\nThe list of tools is configurable, so you can choose which tools you want to make available to the MCP client.\n\n## Usage\n\n### Docker (Recommended)\n\nThe easiest way to run chess-mcp with [Claude Desktop](https://claude.ai/desktop) is using Docker. If you don't have Docker installed, you can get it from [Docker's official website](https://www.docker.com/get-started/).\n\n\nEdit your Claude Desktop config file:\n* Mac: `~/Library/Application Support/Claude/claude_desktop_config.json`\n* Windows: `%APPDATA%/Claude/claude_desktop_config.json`\n* Linux: `~/.config/Claude/claude_desktop_config.json`\n\nThen add the following configuration:\n\n```json\n{\n  \"mcpServers\": {\n    \"chess\": {\n      \"command\": \"docker\",\n      \"args\": [\n        \"run\",\n        \"--rm\",\n        \"-i\",\n        \"pab1it0/chess-mcp\"\n      ]\n    }\n  }\n}\n```\n\n### Running with UV\n\nAlternatively, you can run the server directly using UV. Edit your Claude Desktop config file (locations listed above) and add the server configuration:\n\n```json\n{\n  \"mcpServers\": {\n    \"chess\": {\n      \"command\": \"uv\",\n      \"args\": [\n        \"--directory\",\n        \"<full path to chess-mcp directory>\",\n        \"run\",\n        \"src/chess_mcp/main.py\"\n      ]\n    }\n  }\n}\n```\n\n> Note: if you see `Error: spawn uv ENOENT` in [Claude Desktop](https://claude.ai/desktop), you may need to specify the full path to `uv` or set the environment variable `NO_UV=1` in the configuration.\n\n## Development\n\nContributions are welcome! Please open an issue or submit a pull request if you have any suggestions or improvements.\n\nThis project uses [`uv`](https://github.com/astral-sh/uv) to manage dependencies. Install `uv` following the instructions for your platform:\n\n```bash\ncurl -LsSf https://astral.sh/uv/install.sh | sh\n```\n\nYou can then create a virtual environment and install the dependencies with:\n\n```bash\nuv venv\nsource .venv/bin/activate  # On Unix/macOS\n.venv\\Scripts\\activate     # On Windows\nuv pip install -e .\n```\n\n### Testing\n\nThe project includes a test suite that ensures functionality and helps prevent regressions.\n\nRun the tests with pytest:\n\n```bash\n# Install development dependencies\nuv pip install -e \".[dev]\"\n\n# Run the tests\npytest\n\n# Run with coverage report\npytest --cov=src --cov-report=term-missing\n```\n\n## Available Tools\n\n### Player Information\n- `get_player_profile` - Get a player's profile from Chess.com\n- `get_player_stats` - Get a player's stats from Chess.com\n- `is_player_online` - Check if a player is currently online on Chess.com\n- `get_titled_players` - Get a list of titled players from Chess.com\n\n### Games\n- `get_player_current_games` - Get a player's ongoing games on Chess.com\n- `get_player_games_by_month` - Get a player's games for a specific month from Chess.com\n- `get_player_game_archives` - Get a list of available monthly game archives for a player on Chess.com\n- `download_player_games_pgn` - Download PGN files for all games in a specific month from Chess.com\n\n### Clubs\n- `get_club_profile` - Get information about a club on Chess.com\n- `get_club_members` - Get members of a club on Chess.com\n\n## License\n\nMIT\n\n---\n\n[mcp]: https://modelcontextprotocol.io"
+}

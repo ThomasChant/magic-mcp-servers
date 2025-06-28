@@ -1,0 +1,50 @@
+{
+  "mcp_name": "Google Keep",
+  "mcp_description": "🐍 ☁️ - Read, create, update and delete Google Keep notes.",
+  "mcp_id": "feuerdev_keep-mcp",
+  "fetch_timestamp": "2025-06-23T04:10:18.712686Z",
+  "github_url": "https://github.com/feuerdev/keep-mcp",
+  "repository": {
+    "name": "keep-mcp",
+    "full_name": "feuerdev/keep-mcp",
+    "description": "MCP server for Google Keep",
+    "html_url": "https://github.com/feuerdev/keep-mcp",
+    "created_at": "2025-03-31T23:22:45Z",
+    "updated_at": "2025-06-23T03:52:45Z",
+    "pushed_at": "2025-04-12T14:46:41Z",
+    "size": 46,
+    "stargazers_count": 16,
+    "watchers_count": 16,
+    "forks_count": 3,
+    "open_issues_count": 1,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "feuerdev",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4758617?v=4",
+      "html_url": "https://github.com/feuerdev"
+    },
+    "has_issues": true,
+    "has_projects": false,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 3,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 5638
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 2
+  },
+  "readme": "# keep-mcp\n\nMCP server for Google Keep\n\n![keep-mcp](https://github.com/user-attachments/assets/f50c4ae6-4d35-4bb6-a494-51c67385f1b6)\n\n## How to use\n\n1. Add the MCP server to your MCP servers:\n\n```json\n  \"mcpServers\": {\n    \"keep-mcp-pipx\": {\n      \"command\": \"pipx\",\n      \"args\": [\n        \"run\",\n        \"keep-mcp\"\n      ],\n      \"env\": {\n        \"GOOGLE_EMAIL\": \"Your Google Email\",\n        \"GOOGLE_MASTER_TOKEN\": \"Your Google Master Token - see README.md\"\n      }\n    }\n  }\n```\n\n2. Add your credentials:\n* `GOOGLE_EMAIL`: Your Google account email address\n* `GOOGLE_MASTER_TOKEN`: Your Google account master token\n\nCheck https://gkeepapi.readthedocs.io/en/latest/#obtaining-a-master-token and https://github.com/simon-weber/gpsoauth?tab=readme-ov-file#alternative-flow for more information.\n\n## Features\n\n* `find`: Search for notes based on a query string\n* `create_note`: Create a new note with title and text (automatically adds keep-mcp label)\n* `update_note`: Update a note's title and text\n* `delete_note`: Mark a note for deletion\n\nBy default, all destructive and modification operations are restricted to notes that have were created by the MCP server (i.e. have the keep-mcp label). Set `UNSAFE_MODE` to `true` to bypass this restriction.\n\n```\n\"env\": {\n  ...\n  \"UNSAFE_MODE\": \"true\"\n}\n```\n\n## Publishing\n\nTo publish a new version to PyPI:\n\n1. Update the version in `pyproject.toml`\n2. Build the package:\n   ```bash\n   pipx run build\n   ```\n3. Upload to PyPI:\n   ```bash\n   pipx run twine upload --repository pypi dist/*\n   ```\n\n## Troubleshooting\n\n* If you get \"DeviceManagementRequiredOrSyncDisabled\" check https://admin.google.com/ac/devices/settings/general and turn \"Turn off mobile management (Unmanaged)\"\n"
+}

@@ -1,0 +1,56 @@
+{
+  "mcp_name": "Aldrin Labs Solana MCP Server",
+  "mcp_description": "A comprehensive MCP server providing 21 essential Solana RPC methods",
+  "mcp_id": "aldrin-labs_solana-mcp-server",
+  "fetch_timestamp": "2025-06-23T03:09:31.300758Z",
+  "github_url": "https://github.com/Aldrin-labs/solana-mcp-server",
+  "repository": {
+    "name": "solana-mcp-server",
+    "full_name": "aldrin-labs/solana-mcp-server",
+    "description": "solana mcp sever to enable solana rpc methods",
+    "html_url": "https://github.com/aldrin-labs/solana-mcp-server",
+    "created_at": "2025-01-01T16:30:43Z",
+    "updated_at": "2025-05-09T06:33:21Z",
+    "pushed_at": "2025-04-16T11:18:05Z",
+    "size": 24,
+    "stargazers_count": 20,
+    "watchers_count": 20,
+    "forks_count": 8,
+    "open_issues_count": 3,
+    "language": "Rust",
+    "license": "The Unlicense",
+    "topics": [
+      "mcp",
+      "mcp-server",
+      "mcp-servers",
+      "solana",
+      "solana-rpc"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "aldrin-labs",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60558183?v=4",
+      "html_url": "https://github.com/aldrin-labs"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 8,
+    "subscribers_count": 1,
+    "languages": {
+      "Rust": 5497
+    },
+    "language_percentages": {
+      "Rust": 100
+    },
+    "pull_requests_count": 4,
+    "contributors_count": 3
+  },
+  "readme": "# Solana MCP Server\n\nA Model Context Protocol (MCP) server that provides comprehensive access to Solana blockchain data through Cline. This server implements a wide range of Solana RPC methods, making it easy to query blockchain information directly through natural language conversations.\n\n<a href=\"https://glama.ai/mcp/servers/bp6d6p1sp3\"><img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/bp6d6p1sp3/badge\" alt=\"solana-mcp-server MCP server\" /></a>\n\n## Features\n\nThe server provides 21 essential Solana RPC methods across different categories:\n\n### Account & Balance Operations\n- `get_sol_balance`: Get SOL balance for an address\n- `get_token_balance`: Get SPL token balance\n- `get_account_info`: Get account information\n- `get_largest_accounts`: Get largest accounts on network\n\n### Block & Transaction Information\n- `get_slot`: Get current slot\n- `get_block`: Get block information\n- `get_block_time`: Get block production time\n- `get_transaction`: Get transaction details\n- `get_recent_blockhash`: Get recent blockhash\n\n### Token Operations\n- `get_token_accounts_by_owner`: Get token accounts by owner\n- `get_token_accounts_by_delegate`: Get delegated token accounts\n- `get_token_supply`: Get token supply information\n\n### System Information\n- `get_epoch_info`: Get current epoch information\n- `get_version`: Get node version\n- `get_health`: Get node health status\n- `get_supply`: Get current supply\n- `get_inflation_rate`: Get inflation rate\n- `get_cluster_nodes`: Get cluster node information\n- `get_minimum_balance_for_rent_exemption`: Get minimum rent-exempt balance\n\n### Staking & Governance\n- `get_vote_accounts`: Get vote accounts\n- `get_leader_schedule`: Get leader schedule\n\n## Setup in Cline\n\n1. Add the following configuration to your Cline MCP settings file (`~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json` on macOS):\n\n```json\n{\n  \"mcpServers\": {\n    \"solana\": {\n      \"command\": \"cargo\",\n      \"args\": [\"run\"],\n      \"cwd\": \"/path/to/solana-mcp-server\",\n      \"env\": {\n        \"SOLANA_RPC_URL\": \"https://api.mainnet-beta.solana.com\"  // Or your preferred RPC endpoint\n      }\n    }\n  }\n}\n```\n\n2. Restart Cline to load the new MCP server.\n\n## Usage Examples\n\nOnce configured, you can interact with the Solana blockchain through natural language in Cline. Here are some example queries:\n\n- \"What's the SOL balance of address Gh9ZwEmdLJ8DscKNTkTqPbNwLNNBjuSzaG9Vp2KGtKJr?\"\n- \"Show me the current slot number\"\n- \"Get information about the latest block\"\n- \"What's the current inflation rate?\"\n- \"Show me the token accounts owned by address ...\"\n\n## Environment Variables\n\n- `SOLANA_RPC_URL`: (Optional) The Solana RPC endpoint to use. Defaults to \"https://api.mainnet-beta.solana.com\" if not specified.\n\n## Development\n\n### Prerequisites\n- Rust and Cargo\n- Solana CLI tools (optional, for testing)\n\n### Building\n```bash\ncargo build\n```\n\n### Running\n```bash\ncargo run\n```\n\n## License\n\nMIT License\n"
+}

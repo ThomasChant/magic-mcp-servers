@@ -1,0 +1,53 @@
+{
+  "mcp_name": "catinair/aipower-rpa-mcp-server",
+  "mcp_description": "Facilitates seamless interaction between YindDao AI Power and RPA tools, enabling AI-driven automation workflows.",
+  "mcp_id": "catinair_aipower-rpa-mcp-server",
+  "fetch_timestamp": "2025-06-23T01:58:28.145908Z",
+  "github_url": "https://github.com/catinair/aipower-rpa-mcp-server",
+  "repository": {
+    "name": "aipower-rpa-mcp-server",
+    "full_name": "catinair/aipower-rpa-mcp-server",
+    "description": "a mcp server for 影刀RPA",
+    "html_url": "https://github.com/catinair/aipower-rpa-mcp-server",
+    "created_at": "2025-04-25T03:58:09Z",
+    "updated_at": "2025-04-25T03:58:09Z",
+    "pushed_at": "2025-04-25T03:43:40Z",
+    "size": 153,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 1,
+    "open_issues_count": 0,
+    "language": null,
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "catinair",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/58415673?v=4",
+      "html_url": "https://github.com/catinair"
+    },
+    "has_issues": false,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 0,
+    "languages": {
+      "TypeScript": 32317,
+      "JavaScript": 775
+    },
+    "language_percentages": {
+      "TypeScript": 97.66,
+      "JavaScript": 2.34
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 2,
+    "package_json_version": "0.0.1"
+  },
+  "readme": "<p>\n<img src=\"src/assets/aipower_logo.svg\" width=\"64\"/>\n</p>\n# YindDao AI Power - RPA MCP Server\n\n<p>\n  <a href=\"README.md\">[English]</a> |\n  <a href=\"README.zh.md\">[Chinese]</a>\n</p>\n\n[YingDao AI Power](https://www.yingdao.com/ai-power): An AI low-code platform that quickly creates AI agents and AI workflows, helping users leverage AI effectively.\n<br/>\n\n[YingDao RPA](https://www.yingdao.com): An RPA low-code platform, a user-friendly RPA automation product that frees people from repetitive labor.\n\nYingdao RPA MCP Server is implemented based on the Model Context Protocol (MCP), providing a bridge for interaction between YindDao AI Power and other tools that can serve as MCP Hosts (such as Claude Desktop, Cursor, etc.). It enables AI to utilize RPA capabilities.\n\nIt supports both SSE Server and Stdio Server modes.\n\n# Getting Started\n\nThere are two ways to run YindDao RPA:\n\n## Local Mode\n\nSet environment variables:\n\n```bash\nRPA_MODEL=local\nSHADOWBOT_PATH={your_shadowbot_path} //Path to YindDao RPA executable\nUSER_FOLDER={your_user_folder}       //Path to YindDao RPA user folder\n```\n\n### Path to YindDao RPA executable\n\nWindows\n\n```bash\nD:\\Program Files\\{installation directory}\\ShadowBot.exe\n```\n\nMac\n\n```bash\n/Applications/影刀.app\n```\n\n### Path to YindDao RPA user folder\n\nFind the user folder option in YindDao RPA settings\n\n![User folder settings](src/assets/user_folder.png)\n\n## Open API Mode (Enterprise users only)\n\nSet environment variables:\n\n```bash\nRPA_MODEL=openApi\nACCESS_KEY_ID={your_access_key_id}\nACCESS_KEY_SECRET={your_access_key_secret}\n```\n\n### How to obtain\n\nEnterprise administrators can obtain this by logging into the YindDao RPA console. Please refer to [YindDao RPA Help Documentation - Authentication](https://www.yingdao.com/yddoc/rpa/710499792859115520)\n\n# Stdio Server Startup\n\nConfigure in the client:\n\n```json\n{\n  \"mcpServers\": {\n    \"YingDao RPA MCP Server\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@automa-ai-power/rpa-mcp-servers\", \"-stdio\"],\n      \"env\":{\n        \"RPA_MODEL\":\"openApi\",\n        \"ACCESS_KEY_ID\":\"{your_access_key_id}\",\n        \"ACCESS_KEY_SECRET\":\"{your_access_key_secret}\"\n      }\n    }\n  }\n}\n```\n\n# SSE Server Configuration\n\n## Build\n\nClone the repository and build:\n\n```bash\ngit clone https://github.com/AutomaApp/aipower-rpa-mcp-server.git\ncd aipower-rpa-mcp-servers\nnpm install\nnpm run build\n```\n\n## Configuration\n\nAdd a .env file with configuration items as described above\n\n## Startup\n\n```bash\nnpm run start:server\n```\n\n## Client Configuration\n\nAI Power client configuration:\n\n```json\n{\n  \"mcpServers\": {\n    \"YingDao RPA MCP Server\": {\n      \"url\": \"http://localhost:3000/sse\",\n      \"description\": \"Yingdao RPA MCP Server\"\n    }\n  }\n}\n```\n\nThe default port is 3000\n\n# Capabilities\n\n## Local Mode\n\n1. **queryRobotParam**: Query RPA application parameters\n2. **queryApplist**: Query RPA application list\n3. **runApp**: Run RPA application\n\n## Open API Mode\n\n1. **uploadFile**: Upload files to the RPA platform\n2. **queryRobotParam**: Query RPA application parameters\n3. **queryApplist**: Get paginated RPA application list\n4. **startJob**: Start an RPA job\n5. **queryJob**: Query RPA job status\n6. **queryClientList**: Query the list of RPA robot clients\n\n### License\n\nMIT"
+}

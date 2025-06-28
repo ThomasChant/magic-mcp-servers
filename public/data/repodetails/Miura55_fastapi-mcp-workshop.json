@@ -1,0 +1,50 @@
+{
+  "mcp_name": "Miura55/fastapi-mcp-workshop",
+  "mcp_description": "A workshop sample code for implementing MCP using FastAPI, facilitating integration with mcp-proxy.",
+  "mcp_id": "Miura55_fastapi-mcp-workshop",
+  "fetch_timestamp": "2025-06-23T06:49:04.192878Z",
+  "github_url": "https://github.com/Miura55/fastapi-mcp-workshop",
+  "repository": {
+    "name": "fastapi-mcp-workshop",
+    "full_name": "Miura55/fastapi-mcp-workshop",
+    "description": "FastAPI でMCP",
+    "html_url": "https://github.com/Miura55/fastapi-mcp-workshop",
+    "created_at": "2025-04-15T13:26:12Z",
+    "updated_at": "2025-05-26T06:12:08Z",
+    "pushed_at": "2025-04-21T05:36:07Z",
+    "size": 31,
+    "stargazers_count": 4,
+    "watchers_count": 4,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "Miura55",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/24681988?v=4",
+      "html_url": "https://github.com/Miura55"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 1660
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# FastAPI MCP Workshop\nこのレポジトリはMCP(Model Context Protocol)をFastAPIで実装するためのワークショップ用のサンプルコードです。\n\n## セットアップ\n以下のコマンドを実行して、Pythonのパッケージ管理ツールのuv (https://docs.astral.sh/uv/getting-started/installation/) をインストールします。\n\n### MacOS/Linux\n\n```bash\ncurl -LsSf https://astral.sh/uv/install.sh | sh\n```\n\n### Windows\n\n```bash\npowershell -ExecutionPolicy ByPass -c \"irm https://astral.sh/uv/install.ps1 | iex\"\n```\n\n## プロジェクトのセットアップ\n以下のコマンドでソースコードをクローンします。\n\n```bash\ngit clone https://github.com/Miura55/fastapi-mcp-workshop\ncd fastapi-mcp-workshop\n```\n\n仮想環境を用意します。\n\n```bash\nuv venv\n```\n\n## アプリケーションの起動\n以下のコマンドでアプリケーションを起動します。\n\n```bash\nuv run uvicorn main:api.app --host 0.0.0.0 --reload\n```\n\n## mcp-proxyを使って接続\n\n追加でmcp-proxyをインストールします。\n\n```bash\nuv tool install mcp-proxy\n```\n\nClaude Desktopの設定ファイル( `claude_desktop_config.json`) を開き、お使いのOSに合わせて以下の設定を行います。\n\n- Windows\n\n```json\n{\n  \"mcpServers\": {\n    \"my-api-mcp-proxy\": {\n        \"command\": \"mcp-proxy\",\n        \"args\": [\"http://127.0.0.1:8000/mcp\"]\n    }\n  }\n}\n```\n\n- MacOS\nMacOSの場合、mcp=proxyのパスをフルパスで指定する必要があります。 `which mcp-proxy` でフルパスを確認できます。\n\n```json\n{\n  \"mcpServers\": {\n    \"my-api-mcp-proxy\": {\n        \"command\": \"/Full/Path/To/Your/Executable/mcp-proxy\",\n        \"args\": [\"http://127.0.0.1:8000/mcp\"]\n    }\n  }\n}\n```\n"
+}

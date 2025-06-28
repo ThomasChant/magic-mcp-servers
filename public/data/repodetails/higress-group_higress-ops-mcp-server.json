@@ -1,0 +1,50 @@
+{
+  "mcp_name": "higress-group/higress-ops-mcp-server",
+  "mcp_description": "🐍 🏠 - MCP server that provides comprehensive tools for managing [Higress](https://github.com/alibaba/higress) gateway configurations and operations.",
+  "mcp_id": "higress-group_higress-ops-mcp-server",
+  "fetch_timestamp": "2025-06-23T04:45:38.980097Z",
+  "github_url": "https://github.com/higress-group/higress-ops-mcp-server",
+  "repository": {
+    "name": "higress-ops-mcp-server",
+    "full_name": "higress-group/higress-ops-mcp-server",
+    "description": "A Model Context Protocol (MCP) server implementation that enables comprehensive configuration and management of Higress.",
+    "html_url": "https://github.com/higress-group/higress-ops-mcp-server",
+    "created_at": "2025-03-29T03:03:37Z",
+    "updated_at": "2025-06-08T05:18:14Z",
+    "pushed_at": "2025-03-29T03:04:45Z",
+    "size": 276,
+    "stargazers_count": 18,
+    "watchers_count": 18,
+    "forks_count": 7,
+    "open_issues_count": 3,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "higress-group",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/116630909?v=4",
+      "html_url": "https://github.com/higress-group"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 7,
+    "subscribers_count": 7,
+    "languages": {
+      "Python": 43474
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 2,
+    "contributors_count": 1
+  },
+  "readme": "# Higress OPS MCP Server\n\nA Model Context Protocol (MCP) server implementation that enables comprehensive configuration and management of [Higress](https://higress.cn/). This repository also provides an MCP client built on top of [LangGraph](https://www.langchain.com/langgraph) and [LangChain MCP Adapters](https://github.com/langchain-ai/langchain-mcp-adapters), facilitating interaction with the Higress MCP Server through a well-designed agent flow architecture.\n\n## Demo\n\nhttps://github.com/user-attachments/assets/bae66b77-a158-452e-9196-98060bac0df7\n\n## Config Environment Variables\n\nCopy the `.env.example` file to `.env` and fill in the corresponding values.\n\n## Start MCP Client and MCP Server\n\nIn stdio mode, the MCP server process is started by the MCP client program. Run the following command to start the MCP client and MCP server:\n\n```python\nuv run client.py\n```\n\n## Add a new tool\n\n**Step 1: Create a new tool class or extend an existing one**\n\n- Create a new file in the tools directory if adding a completely new tool category\n- Or add your tool to an existing class if it fits an existing category\n\n```python\nfrom typing import Dict, List, Any\nfrom fastmcp import FastMCP\n\nclass YourTools:\n    def register_tools(self, mcp: FastMCP):\n        @mcp.tool()\n        async def your_tool_function(arg1: str, arg2: int) -> List[Dict]:\n            \"\"\"\n            Your tool description.\n            \n            Args:\n                arg1: Description of arg1\n                arg2: Description of arg2\n\n            Returns:\n                Description of the return value\n            \n            Raises:\n                ValueError: If the request fails\n            \"\"\"\n            # Implementation using self.higress_client to make API calls\n            return self.higress_client.your_api_method(arg1, arg2)\n```\n\n\n**Step 2: Add a new method to HigressClient if your tool needs to interact with the Higress Console API**\n\n- Add methods to utils/higress_client.py that encapsulate API calls\n- Use the existing HTTP methods (get, put, post) for actual API communication\n\n\n```python\ndef your_api_method(self, arg1: str, arg2: int) -> List[Dict]:\n    \"\"\"\n    Description of what this API method does.\n    \n    Args:\n        arg1: Description of arg1\n        arg2: Description of arg2\n        \n    Returns:\n        Response data\n        \n    Raises:\n        ValueError: If the request fails\n    \"\"\"\n    path = \"/v1/your/api/endpoint\"\n    data = {\"arg1\": arg1, \"arg2\": arg2}\n    return self.put(path, data)  # or self.get(path) or self.post(path, data)\n```\n\n**Step 3: Register your tool class in the server**\n\n- Add your tool class to the tool_classes list in server.py\n- This list is used by ToolsRegister to instantiate and register all tools\n- The ToolsRegister will automatically set logger and higress_client attributes\n\n```python\ntool_classes = [\n    CommonTools,\n    RequestBlockTools,\n    RouteTools,\n    ServiceSourceTools,\n    YourTools  # Add your tool class here\n]\n```\n\n**Step 4: Add your tool to `SENSITIVE_TOOLS` if it requires human confirmation**\n\n- Tools in this list will require human confirmation before execution\n\n```python\n# Define write operations that require human confirmation\nSENSITIVE_TOOLS = [\n    \"add_route\", \n    \"add_service_source\",\n    \"update_route\",\n    \"update_request_block_plugin\", \n    \"update_service_source\",\n    \"your_tool_function\"  # Add your tool name here if it requires confirmation\n]\n```\n"
+}

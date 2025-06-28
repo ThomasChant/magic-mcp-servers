@@ -1,0 +1,50 @@
+{
+  "mcp_name": "HuggingAGI/mcp-baostock-server",
+  "mcp_description": "🐍 ☁️ - MCP server based on baostock, providing access and analysis capabilities for Chinese stock market data.",
+  "mcp_id": "HuggingAGI_mcp-baostock-server",
+  "fetch_timestamp": "2025-06-23T04:51:44.038519Z",
+  "github_url": "https://github.com/HuggingAGI/mcp-baostock-server",
+  "repository": {
+    "name": "mcp-baostock-server",
+    "full_name": "HuggingAGI/mcp-baostock-server",
+    "description": null,
+    "html_url": "https://github.com/HuggingAGI/mcp-baostock-server",
+    "created_at": "2025-04-08T00:30:12Z",
+    "updated_at": "2025-06-16T08:37:55Z",
+    "pushed_at": "2025-04-08T06:32:30Z",
+    "size": 137,
+    "stargazers_count": 18,
+    "watchers_count": 18,
+    "forks_count": 8,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "HuggingAGI",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26061728?v=4",
+      "html_url": "https://github.com/HuggingAGI"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 8,
+    "subscribers_count": 2,
+    "languages": {
+      "Python": 23308
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# MCP BaoStock Server\n\n一个基于BaoStock的股票数据服务器，提供了多个接口用于获取股票市场数据。\n\n## 功能特点\n\n- 提供股票基本信息查询\n- 支持K线历史数据获取\n- 行业分类数据查询\n- 分红派息数据查询\n- 季度财务指标数据（盈利能力、营运能力、成长能力）\n- 指数数据查询\n- 估值指标数据查询\n\n## 安装与使用\n\n### 依赖要求\n\n- Python 3.10+\n- baostock\n- pandas\n\n### 使用说明\n\n安装使用\n```bash\nuv run mcp-baostock-server\n```\n\n![](./assets/demo.png)\n\n## 接口测试用例\n\n以下是各个接口的测试用例示例：\n\n### 1. 获取股票基本信息\n```python\n# 获取贵州茅台(sh.600519)的基本信息，包括上市日期、行业分类等基础数据\n```\n\n### 2. 获取K线历史数据\n```python\n获取平安银行(sz.000001)从2023年1月1日到2023年1月31日的日K线数据，使用前复权方式\n```\n\n### 3. 获取行业分类数据\n```python\n查询中国平安(sh.601318)所属的行业分类信息\n```\n\n### 4. 获取分红派息数据\n```python\n查看工商银行(sh.601398)在2022年的分红派息详细信息\n```\n\n### 5. 获取季度盈利能力数据\n```python\n获取贵州茅台2023年第一季度的盈利能力数据，包括净利润、毛利率等指标\n```\n\n### 6. 获取季度营运能力数据\n```python\n分析招商银行(sh.600036)2023年第二季度的营运能力指标，包括应收账款周转率和存货周转率\n```\n\n### 7. 获取季度成长能力数据\n```python\n评估比亚迪(sz.002594)2023年第三季度的成长能力，包括营收增长率和净利润增长率\n```\n\n### 8. 获取指数数据\n```python\n获取沪深300指数(sh.000300)从2023年1月1日到2023年12月31日的日线行情数据\n```\n\n### 9. 获取估值指标数据\n```python\n分析阿里巴巴(sh.688699)从2023年初至今的估值指标变化，包括市盈率、市净率等数据\n```\n\n## 技术交流\n\n- 微信: iamxxn886\n"
+}

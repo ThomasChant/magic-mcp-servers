@@ -1,0 +1,127 @@
+{
+  "mcp_name": "Cua",
+  "mcp_description": "MCP server for the Computer-Use Agent (CUA), allowing you to run CUA through Claude Desktop or other MCP clients.",
+  "mcp_id": "trycua_cua",
+  "fetch_timestamp": "2025-06-23T02:22:04.916798Z",
+  "github_url": "https://github.com/trycua/cua/tree/main/libs/mcp-server",
+  "repository": {
+    "name": "cua",
+    "full_name": "trycua/cua",
+    "description": "c/ua is the Docker Container for Computer-Use AI Agents.",
+    "html_url": "https://github.com/trycua/cua",
+    "created_at": "2025-01-31T15:02:49Z",
+    "updated_at": "2025-06-23T01:31:46Z",
+    "pushed_at": "2025-06-21T16:57:33Z",
+    "size": 11850,
+    "stargazers_count": 8734,
+    "watchers_count": 8734,
+    "forks_count": 385,
+    "open_issues_count": 58,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [
+      "agent",
+      "ai-agent",
+      "apple",
+      "computer-use",
+      "containerization",
+      "cua",
+      "lume",
+      "macos",
+      "manus",
+      "operator",
+      "swift",
+      "virtualization",
+      "virtualization-framework",
+      "windows",
+      "windows-sandbox"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "trycua",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/191107687?v=4",
+      "html_url": "https://github.com/trycua"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 385,
+    "subscribers_count": 49,
+    "languages": {
+      "Python": 1194335,
+      "Swift": 480646,
+      "Shell": 80393,
+      "Jupyter Notebook": 56835,
+      "PowerShell": 4623,
+      "Dockerfile": 3561
+    },
+    "language_percentages": {
+      "Python": 65.61,
+      "Swift": 26.4,
+      "Shell": 4.42,
+      "Jupyter Notebook": 3.12,
+      "PowerShell": 0.25,
+      "Dockerfile": 0.2
+    },
+    "pull_requests_count": 126,
+    "contributors_count": 19,
+    "latest_release": {
+      "tag_name": "lume-v0.2.22",
+      "name": "lume-v0.2.22",
+      "published_at": "2025-06-17T00:48:04Z",
+      "body": "b5c75af6e42058ad4bfe27a2a5eb2e00f86c105793747ea977185139da89dd1c  lume-0.2.22-darwin-arm64.pkg.tar.gz\nc52047945a192950d785064c1174ee33829b625ddd40ee85bfda17793dd246a1  lume-0.2.22-darwin-arm64.tar.gz\n\n### Installation with script\n\n/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/trycua/cua/main/libs/lume/scripts/install.sh)\"\n```\n\n\n**Full Changelog**: https://github.com/trycua/cua/compare/lume-v0.2.16...lume-v0.2.22",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.1.13",
+        "commit_sha": "5be6b583b982969e71fb1bd7994d1017741ddb95"
+      },
+      {
+        "name": "v0.1.12",
+        "commit_sha": "140867af94e6adbade69f135ea724cbdadd5e79f"
+      },
+      {
+        "name": "v0.1.11",
+        "commit_sha": "6744de160140669bb0c995867ee5ed272c10ce54"
+      },
+      {
+        "name": "v0.1.10",
+        "commit_sha": "bd27e7e05e78784a348fd3a5422f7255f50551c3"
+      },
+      {
+        "name": "v0.1.9",
+        "commit_sha": "7f7ea81d24d412636fd59c6b9abcabec22c196d4"
+      },
+      {
+        "name": "v0.1.8",
+        "commit_sha": "4093248d9c2417d75a7b41701302439123a9295d"
+      },
+      {
+        "name": "v0.1.7",
+        "commit_sha": "4c89d488a275c2ee4ef7900befe910d5afeb1082"
+      },
+      {
+        "name": "v0.1.6",
+        "commit_sha": "51ba0f590fbdce9419b558fb8460ea315af78f0f"
+      },
+      {
+        "name": "v0.1.5",
+        "commit_sha": "9a163fbbb453b0acf814d56b208c0ea55bb4e4ed"
+      },
+      {
+        "name": "v0.1.4",
+        "commit_sha": "f244cb3dbdee8bb966f33356a8a32331396443e0"
+      }
+    ],
+    "latest_version": "v0.1.13"
+  },
+  "readme": "<div align=\"center\">\n  <picture>\n    <source media=\"(prefers-color-scheme: dark)\" alt=\"Cua logo\" height=\"150\" srcset=\"img/logo_white.png\">\n    <source media=\"(prefers-color-scheme: light)\" alt=\"Cua logo\" height=\"150\" srcset=\"img/logo_black.png\">\n    <img alt=\"Cua logo\" height=\"150\" src=\"img/logo_black.png\">\n  </picture>\n\n  [![Python](https://img.shields.io/badge/Python-333333?logo=python&logoColor=white&labelColor=333333)](#)\n  [![Swift](https://img.shields.io/badge/Swift-F05138?logo=swift&logoColor=white)](#)\n  [![macOS](https://img.shields.io/badge/macOS-000000?logo=apple&logoColor=F0F0F0)](#)\n  [![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?&logo=discord&logoColor=white)](https://discord.com/invite/mVnXXpdE85)\n  <br>\n  <a href=\"https://trendshift.io/repositories/13685\" target=\"_blank\"><img src=\"https://trendshift.io/api/badge/repositories/13685\" alt=\"trycua%2Fcua | Trendshift\" style=\"width: 250px; height: 55px;\" width=\"250\" height=\"55\"/></a>\n</div>\n\n**c/ua** (\"koo-ah\") is Docker for [Computer-Use Agents](https://www.oneusefulthing.org/p/when-you-give-a-claude-a-mouse) - it enables AI agents to control full operating systems in virtual containers and deploy them locally or to the cloud.\n\n<div align=\"center\">\n  <video src=\"https://github.com/user-attachments/assets/c619b4ea-bb8e-4382-860e-f3757e36af20\" width=\"800\" controls></video>\n</div>\n<details>\n<summary><b>Check out more demos of the Computer-Use Agent in action\n</b></summary>\n\n<details open>\n<summary><b>MCP Server: Work with Claude Desktop and Tableau</b></summary>\n<br>\n<div align=\"center\">\n    <video src=\"https://github.com/user-attachments/assets/9f573547-5149-493e-9a72-396f3cff29df\" width=\"800\" controls></video>\n</div>\n</details>\n\n<details>\n<summary><b>AI-Gradio: Multi-app workflow with browser, VS Code and terminal</b></summary>\n<br>\n<div align=\"center\">\n    <video src=\"https://github.com/user-attachments/assets/723a115d-1a07-4c8e-b517-88fbdf53ed0f\" width=\"800\" controls></video>\n</div>\n</details>\n\n<details>\n<summary><b>Notebook: Fix GitHub issue in Cursor</b></summary>\n<br>\n<div align=\"center\">\n    <video src=\"https://github.com/user-attachments/assets/f67f0107-a1e1-46dc-aa9f-0146eb077077\" width=\"800\" controls></video>\n</div>\n</details>\n</details><br/>\n\n# 🚀 Quick Start with a Computer-Use Agent UI\n\n**Need to automate desktop tasks? Launch the Computer-Use Agent UI with a single command.**\n\n\n\n### Option 1: Fully-managed install with Docker (recommended)\n*Docker-based guided install for quick use*\n\n**macOS/Linux/Windows (via WSL):**\n```bash\n# Requires Docker\n/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/trycua/cua/main/scripts/playground-docker.sh)\"\n```\nThis script will guide you through setup using Docker containers and launch the Computer-Use Agent UI.\n\n---\n\n### Option 2: [Dev Container](./.devcontainer/README.md)\n*Best for contributors and development*\n\nThis repository includes a [Dev Container](./.devcontainer/README.md) configuration that simplifies setup to a few steps:\n\n1. **Install the Dev Containers extension ([VS Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) or [WindSurf](https://docs.windsurf.com/windsurf/advanced#dev-containers-beta))**\n2. **Open the repository in the Dev Container:**\n    - Press `Ctrl+Shift+P` (or `⌘+Shift+P` on macOS)\n    - Select `Dev Containers: Clone Repository in Container Volume...` and paste the repository URL: `https://github.com/trycua/cua.git` (if not cloned) or `Dev Containers: Open Folder in Container...` (if git cloned).\n     > **Note**: On WindSurf, the post install hook might not run automatically. If so, run `/bin/bash .devcontainer/post-install.sh` manually.\n3. **Open the VS Code workspace:** Once the post-install.sh is done running, open the `.vscode/py.code-workspace` workspace and press ![Open Workspace](https://github.com/user-attachments/assets/923bdd43-8c8f-4060-8d78-75bfa302b48c)\n.\n4. **Run the Agent UI example:** Click ![Run Agent UI](https://github.com/user-attachments/assets/7a61ef34-4b22-4dab-9864-f86bf83e290b)\n to start the Gradio UI. If prompted to install **debugpy (Python Debugger)** to enable remote debugging, select 'Yes' to proceed.\n5. **Access the Gradio UI:** The Gradio UI will be available at `http://localhost:7860` and will automatically forward to your host machine.\n\n---\n\n### Option 3: PyPI\n*Direct Python package installation*\n\n```bash\n# conda create -yn cua python==3.12\n\npip install -U \"cua-computer[all]\" \"cua-agent[all]\"\npython -m agent.ui # Start the agent UI\n```\n\nOr check out the [Usage Guide](#-usage-guide) to learn how to use our Python SDK in your own code.\n\n---\n\n## Supported [Agent Loops](https://github.com/trycua/cua/blob/main/libs/agent/README.md#agent-loops)\n- [UITARS-1.5](https://github.com/trycua/cua/blob/main/libs/agent/README.md#agent-loops) - Run locally on Apple Silicon with MLX, or use cloud providers\n- [OpenAI CUA](https://github.com/trycua/cua/blob/main/libs/agent/README.md#agent-loops) - Use OpenAI's Computer-Use Preview model\n- [Anthropic CUA](https://github.com/trycua/cua/blob/main/libs/agent/README.md#agent-loops) - Use Anthropic's Computer-Use capabilities\n- [OmniParser-v2.0](https://github.com/trycua/cua/blob/main/libs/agent/README.md#agent-loops) - Control UI with [Set-of-Marks prompting](https://som-gpt4v.github.io/) using any vision model\n\n## 🖥️ Compatibility\n\nFor detailed compatibility information including host OS support, VM emulation capabilities, and model provider compatibility, see the [Compatibility Matrix](./COMPATIBILITY.md).\n\n<br/>\n<br/>\n\n# 🐍 Usage Guide\n\nFollow these steps to use C/ua in your own Python code. See [Developer Guide](./docs/Developer-Guide.md) for building from source.\n\n### Step 1: Install Lume CLI\n\n```bash\n/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/trycua/cua/main/libs/lume/scripts/install.sh)\"\n```\n\nLume CLI manages high-performance macOS/Linux VMs with near-native speed on Apple Silicon.\n\n### Step 2: Pull the macOS CUA Image\n\n```bash\nlume pull macos-sequoia-cua:latest\n```\n\nThe macOS CUA image contains the default Mac apps and the Computer Server for easy automation.\n\n### Step 3: Install Python SDK\n\n```bash\npip install \"cua-computer[all]\" \"cua-agent[all]\"\n```\n\n### Step 4: Use in Your Code\n\n```python\nfrom computer import Computer\nfrom agent import ComputerAgent, LLM\n\nasync def main():\n    # Start a local macOS VM\n    computer = Computer(os_type=\"macos\")\n    await computer.run()\n\n    # Or with C/ua Cloud Container\n    computer = Computer(\n      os_type=\"linux\",\n      api_key=\"your_cua_api_key_here\",\n      name=\"your_container_name_here\"\n    )\n\n    # Example: Direct control of a macOS VM with Computer\n    await computer.interface.left_click(100, 200)\n    await computer.interface.type_text(\"Hello, world!\")\n    screenshot_bytes = await computer.interface.screenshot()\n    \n    # Example: Create and run an agent locally using mlx-community/UI-TARS-1.5-7B-6bit\n    agent = ComputerAgent(\n      computer=computer,\n      loop=\"uitars\",\n      model=LLM(provider=\"mlxvlm\", name=\"mlx-community/UI-TARS-1.5-7B-6bit\")\n    )\n    async for result in agent.run(\"Find the trycua/cua repository on GitHub and follow the quick start guide\"):\n        print(result)\n\nif __name__ == \"__main__\":\n    asyncio.run(main())\n```\n\nFor ready-to-use examples, check out our [Notebooks](./notebooks/) collection.\n\n### Lume CLI Reference\n\n```bash\n# Install Lume CLI and background service\ncurl -fsSL https://raw.githubusercontent.com/trycua/cua/main/libs/lume/scripts/install.sh | bash\n\n# List all VMs\nlume ls\n\n# Pull a VM image\nlume pull macos-sequoia-cua:latest\n\n# Create a new VM\nlume create my-vm --os macos --cpu 4 --memory 8GB --disk-size 50GB\n\n# Run a VM (creates and starts if it doesn't exist)\nlume run macos-sequoia-cua:latest\n\n# Stop a VM\nlume stop macos-sequoia-cua_latest\n\n# Delete a VM\nlume delete macos-sequoia-cua_latest\n```\n\n### Lumier CLI Reference\n\nFor advanced container-like virtualization, check out [Lumier](./libs/lumier/README.md) - a Docker interface for macOS and Linux VMs.\n\n```bash\n# Install Lume CLI and background service\ncurl -fsSL https://raw.githubusercontent.com/trycua/cua/main/libs/lume/scripts/install.sh | bash\n\n# Run macOS in a Docker container\ndocker run -it --rm \\\n    --name lumier-vm \\\n    -p 8006:8006 \\\n    -v $(pwd)/storage:/storage \\\n    -v $(pwd)/shared:/shared \\\n    -e VM_NAME=lumier-vm \\\n    -e VERSION=ghcr.io/trycua/macos-sequoia-cua:latest \\\n    -e CPU_CORES=4 \\\n    -e RAM_SIZE=8192 \\\n    -e HOST_STORAGE_PATH=$(pwd)/storage \\\n    -e HOST_SHARED_PATH=$(pwd)/shared \\\n    trycua/lumier:latest\n```\n\n## Resources\n\n- [How to use the MCP Server with Claude Desktop or other MCP clients](./libs/mcp-server/README.md) - One of the easiest ways to get started with C/ua\n- [How to use OpenAI Computer-Use, Anthropic, OmniParser, or UI-TARS for your Computer-Use Agent](./libs/agent/README.md)\n- [How to use Lume CLI for managing desktops](./libs/lume/README.md)\n- [Training Computer-Use Models: Collecting Human Trajectories with C/ua (Part 1)](https://www.trycua.com/blog/training-computer-use-models-trajectories-1)\n- [Build Your Own Operator on macOS (Part 1)](https://www.trycua.com/blog/build-your-own-operator-on-macos-1)\n\n## Modules\n\n| Module | Description | Installation |\n|--------|-------------|---------------|\n| [**Lume**](./libs/lume/README.md) | VM management for macOS/Linux using Apple's Virtualization.Framework | `curl -fsSL https://raw.githubusercontent.com/trycua/cua/main/libs/lume/scripts/install.sh \\| bash` |\n| [**Lumier**](./libs/lumier/README.md) | Docker interface for macOS and Linux VMs | `docker pull trycua/lumier:latest` |\n| [**Computer**](./libs/computer/README.md) | Interface for controlling virtual machines | `pip install \"cua-computer[all]\"` |\n| [**Agent**](./libs/agent/README.md) | AI agent framework for automating tasks | `pip install \"cua-agent[all]\"` |\n| [**MCP Server**](./libs/mcp-server/README.md) | MCP server for using CUA with Claude Desktop | `pip install cua-mcp-server` |\n| [**SOM**](./libs/som/README.md) | Self-of-Mark library for Agent | `pip install cua-som` |\n| [**Computer Server**](./libs/computer-server/README.md) | Server component for Computer | `pip install cua-computer-server` |\n| [**Core**](./libs/core/README.md) | Core utilities | `pip install cua-core` |\n\n## Computer Interface Reference\n\nFor complete examples, see [computer_examples.py](./examples/computer_examples.py) or [computer_nb.ipynb](./notebooks/computer_nb.ipynb)\n\n```python\n# Shell Actions\nawait computer.interface.run_command(cmd)       # Run shell command\n\n# Mouse Actions\nawait computer.interface.left_click(x, y)       # Left click at coordinates\nawait computer.interface.right_click(x, y)      # Right click at coordinates\nawait computer.interface.double_click(x, y)     # Double click at coordinates\nawait computer.interface.move_cursor(x, y)      # Move cursor to coordinates\nawait computer.interface.drag_to(x, y, duration)  # Drag to coordinates\nawait computer.interface.get_cursor_position()  # Get current cursor position\nawait computer.interface.mouse_down(x, y, button=\"left\")  # Press and hold a mouse button\nawait computer.interface.mouse_up(x, y, button=\"left\")    # Release a mouse button\n\n# Keyboard Actions\nawait computer.interface.type_text(\"Hello\")     # Type text\nawait computer.interface.press_key(\"enter\")     # Press a single key\nawait computer.interface.hotkey(\"command\", \"c\") # Press key combination\nawait computer.interface.key_down(\"command\")    # Press and hold a key\nawait computer.interface.key_up(\"command\")      # Release a key\n\n# Scrolling Actions\nawait computer.interface.scroll(x, y)           # Scroll the mouse wheel\nawait computer.interface.scroll_down(clicks)    # Scroll down\nawait computer.interface.scroll_up(clicks)      # Scroll up\n\n# Screen Actions\nawait computer.interface.screenshot()           # Take a screenshot\nawait computer.interface.get_screen_size()      # Get screen dimensions\n\n# Clipboard Actions\nawait computer.interface.set_clipboard(text)    # Set clipboard content\nawait computer.interface.copy_to_clipboard()    # Get clipboard content\n\n# File System Operations\nawait computer.interface.file_exists(path)      # Check if file exists\nawait computer.interface.directory_exists(path) # Check if directory exists\nawait computer.interface.read_text(path)        # Read file content\nawait computer.interface.write_text(path, content) # Write file content\nawait computer.interface.read_bytes(path)       # Read file content as bytes\nawait computer.interface.write_bytes(path, content) # Write file content as bytes\nawait computer.interface.delete_file(path)      # Delete file\nawait computer.interface.create_dir(path)       # Create directory\nawait computer.interface.delete_dir(path)       # Delete directory\nawait computer.interface.list_dir(path)         # List directory contents\n\n# Accessibility\nawait computer.interface.get_accessibility_tree() # Get accessibility tree\n\n# Python Virtual Environment Operations\nawait computer.venv_install(\"demo_venv\", [\"requests\", \"macos-pyxa\"]) # Install packages in a virtual environment\nawait computer.venv_cmd(\"demo_venv\", \"python -c 'import requests; print(requests.get(`https://httpbin.org/ip`).json())'\") # Run a shell command in a virtual environment\nawait computer.venv_exec(\"demo_venv\", python_function_or_code, *args, **kwargs) # Run a Python function in a virtual environment and return the result / raise an exception\n\n# Example: Use sandboxed functions to execute code in a C/ua Container\nfrom computer.helpers import sandboxed\n\n@sandboxed(\"demo_venv\")\ndef greet_and_print(name):\n    \"\"\"Get the HTML of the current Safari tab\"\"\"\n    import PyXA\n    safari = PyXA.Application(\"Safari\")\n    html = safari.current_document.source()\n    print(f\"Hello from inside the container, {name}!\")\n    return {\"greeted\": name, \"safari_html\": html}\n\n# When a @sandboxed function is called, it will execute in the container\nresult = await greet_and_print(\"C/ua\")\n# Result: {\"greeted\": \"C/ua\", \"safari_html\": \"<html>...</html>\"}\n# stdout and stderr are also captured and printed / raised\nprint(\"Result from sandboxed function:\", result)\n```\n\n## ComputerAgent Reference\n\nFor complete examples, see [agent_examples.py](./examples/agent_examples.py) or [agent_nb.ipynb](./notebooks/agent_nb.ipynb)\n\n```python\n# Import necessary components\nfrom agent import ComputerAgent, LLM, AgentLoop, LLMProvider\n\n# UI-TARS-1.5 agent for local execution with MLX\nComputerAgent(loop=AgentLoop.UITARS, model=LLM(provider=LLMProvider.MLXVLM, name=\"mlx-community/UI-TARS-1.5-7B-6bit\"))   \n# OpenAI Computer-Use agent using OPENAI_API_KEY  \nComputerAgent(loop=AgentLoop.OPENAI, model=LLM(provider=LLMProvider.OPENAI, name=\"computer-use-preview\"))\n# Anthropic Claude agent using ANTHROPIC_API_KEY\nComputerAgent(loop=AgentLoop.ANTHROPIC, model=LLM(provider=LLMProvider.ANTHROPIC))\n\n# OmniParser loop for UI control using Set-of-Marks (SOM) prompting and any vision LLM\nComputerAgent(loop=AgentLoop.OMNI, model=LLM(provider=LLMProvider.OLLAMA, name=\"gemma3:12b-it-q4_K_M\"))      \n# OpenRouter example using OAICOMPAT provider\nComputerAgent(\n    loop=AgentLoop.OMNI,\n    model=LLM(\n        provider=LLMProvider.OAICOMPAT, \n        name=\"openai/gpt-4o-mini\",\n        provider_base_url=\"https://openrouter.ai/api/v1\"\n    ),\n    api_key=\"your-openrouter-api-key\"\n)\n```\n\n\n## Community\n\nJoin our [Discord community](https://discord.com/invite/mVnXXpdE85) to discuss ideas, get assistance, or share your demos!\n\n## License\n\nCua is open-sourced under the MIT License - see the [LICENSE](LICENSE) file for details.\n\nMicrosoft's OmniParser, which is used in this project, is licensed under the Creative Commons Attribution 4.0 International License (CC-BY-4.0) - see the [OmniParser LICENSE](https://github.com/microsoft/OmniParser/blob/master/LICENSE) file for details.\n\n## Contributing\n\nWe welcome contributions to CUA! Please refer to our [Contributing Guidelines](CONTRIBUTING.md) for details.\n\n## Trademarks\n\nApple, macOS, and Apple Silicon are trademarks of Apple Inc. Ubuntu and Canonical are registered trademarks of Canonical Ltd. Microsoft is a registered trademark of Microsoft Corporation. This project is not affiliated with, endorsed by, or sponsored by Apple Inc., Canonical Ltd., or Microsoft Corporation.\n\n## Stargazers\n\nThank you to all our supporters!\n\n[![Stargazers over time](https://starchart.cc/trycua/cua.svg?variant=adaptive)](https://starchart.cc/trycua/cua)\n\n## Contributors\n\n<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->\n<!-- prettier-ignore-start -->\n<!-- markdownlint-disable -->\n<table>\n  <tbody>\n    <tr>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"https://github.com/f-trycua\"><img src=\"https://avatars.githubusercontent.com/u/195596869?v=4?s=100\" width=\"100px;\" alt=\"f-trycua\"/><br /><sub><b>f-trycua</b></sub></a><br /><a href=\"#code-f-trycua\" title=\"Code\">💻</a></td>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"http://pepicrft.me\"><img src=\"https://avatars.githubusercontent.com/u/663605?v=4?s=100\" width=\"100px;\" alt=\"Pedro Piñera Buendía\"/><br /><sub><b>Pedro Piñera Buendía</b></sub></a><br /><a href=\"#code-pepicrft\" title=\"Code\">💻</a></td>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"https://iamit.in\"><img src=\"https://avatars.githubusercontent.com/u/5647941?v=4?s=100\" width=\"100px;\" alt=\"Amit Kumar\"/><br /><sub><b>Amit Kumar</b></sub></a><br /><a href=\"#code-aktech\" title=\"Code\">💻</a></td>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"https://productsway.com/\"><img src=\"https://avatars.githubusercontent.com/u/870029?v=4?s=100\" width=\"100px;\" alt=\"Dung Duc Huynh (Kaka)\"/><br /><sub><b>Dung Duc Huynh (Kaka)</b></sub></a><br /><a href=\"#code-jellydn\" title=\"Code\">💻</a></td>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"http://zaydkrunz.com\"><img src=\"https://avatars.githubusercontent.com/u/70227235?v=4?s=100\" width=\"100px;\" alt=\"Zayd Krunz\"/><br /><sub><b>Zayd Krunz</b></sub></a><br /><a href=\"#code-ShrootBuck\" title=\"Code\">💻</a></td>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"https://github.com/PrashantRaj18198\"><img src=\"https://avatars.githubusercontent.com/u/23168997?v=4?s=100\" width=\"100px;\" alt=\"Prashant Raj\"/><br /><sub><b>Prashant Raj</b></sub></a><br /><a href=\"#code-PrashantRaj18198\" title=\"Code\">💻</a></td>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"https://www.mobile.dev\"><img src=\"https://avatars.githubusercontent.com/u/847683?v=4?s=100\" width=\"100px;\" alt=\"Leland Takamine\"/><br /><sub><b>Leland Takamine</b></sub></a><br /><a href=\"#code-Leland-Takamine\" title=\"Code\">💻</a></td>\n    </tr>\n    <tr>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"https://github.com/ddupont808\"><img src=\"https://avatars.githubusercontent.com/u/3820588?v=4?s=100\" width=\"100px;\" alt=\"ddupont\"/><br /><sub><b>ddupont</b></sub></a><br /><a href=\"#code-ddupont808\" title=\"Code\">💻</a></td>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"https://github.com/Lizzard1123\"><img src=\"https://avatars.githubusercontent.com/u/46036335?v=4?s=100\" width=\"100px;\" alt=\"Ethan Gutierrez\"/><br /><sub><b>Ethan Gutierrez</b></sub></a><br /><a href=\"#code-Lizzard1123\" title=\"Code\">💻</a></td>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"https://ricterz.me\"><img src=\"https://avatars.githubusercontent.com/u/5282759?v=4?s=100\" width=\"100px;\" alt=\"Ricter Zheng\"/><br /><sub><b>Ricter Zheng</b></sub></a><br /><a href=\"#code-RicterZ\" title=\"Code\">💻</a></td>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"https://www.trytruffle.ai/\"><img src=\"https://avatars.githubusercontent.com/u/50844303?v=4?s=100\" width=\"100px;\" alt=\"Rahul Karajgikar\"/><br /><sub><b>Rahul Karajgikar</b></sub></a><br /><a href=\"#code-rahulkarajgikar\" title=\"Code\">💻</a></td>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"https://github.com/trospix\"><img src=\"https://avatars.githubusercontent.com/u/81363696?v=4?s=100\" width=\"100px;\" alt=\"trospix\"/><br /><sub><b>trospix</b></sub></a><br /><a href=\"#code-trospix\" title=\"Code\">💻</a></td>\n      <td align=\"center\" valign=\"top\" width=\"14.28%\"><a href=\"https://github.com/evnsnclr\"><img src=\"https://avatars.githubusercontent.com/u/139897548?v=4?s=100\" width=\"100px;\" alt=\"Evan smith\"/><br /><sub><b>Evan smith</b></sub></a><br /><a href=\"#code-evnsnclr\" title=\"Code\">💻</a></td>\n    </tr>\n  </tbody>\n</table>\n\n<!-- markdownlint-restore -->\n<!-- prettier-ignore-end -->\n\n<!-- ALL-CONTRIBUTORS-LIST:END -->\n"
+}

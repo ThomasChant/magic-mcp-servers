@@ -1,0 +1,112 @@
+{
+  "id": "67fbc4c9adb3",
+  "owner": "ricocf",
+  "repoName": "mcp-wolframalpha",
+  "fullDescription": "🐍 🏠 ☁️ - An MCP server lets AI assistants use the Wolfram Alpha API for real-time access to computational knowledge and data.",
+  "techStack": [
+    {
+      "name": "typescript",
+      "icon": "📘",
+      "color": "#3178c6"
+    }
+  ],
+  "serviceTypes": [
+    {
+      "type": "integration",
+      "label": "Integration",
+      "icon": "🔗",
+      "description": "Connects to external APIs and services"
+    },
+    {
+      "type": "data",
+      "label": "Data",
+      "icon": "📊",
+      "description": "Manages, processes, or analyzes data"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "moderate",
+    "maturity": "beta",
+    "deployment": [
+      "saas"
+    ],
+    "featured": false,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 1.95,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "api"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/ricocf/mcp-wolframalpha",
+    "owner": "ricocf",
+    "name": "mcp-wolframalpha",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.281Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "api",
+    "server",
+    "wolframalpha",
+    "mcp",
+    "utilities-tools"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Moderate",
+      "color": "#eab308",
+      "icon": "🟡"
+    },
+    {
+      "type": "maturity",
+      "label": "Beta",
+      "color": "#f59e0b",
+      "icon": "🚧"
+    }
+  ],
+  "icon": "🔗",
+  "readme": null
+}

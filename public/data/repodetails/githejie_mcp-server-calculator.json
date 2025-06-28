@@ -1,0 +1,52 @@
+{
+  "mcp_name": "Calculator",
+  "mcp_description": "🐍 🏠 - This server enables LLMs to use calculator for precise numerical calculations",
+  "mcp_id": "githejie_mcp-server-calculator",
+  "fetch_timestamp": "2025-06-23T01:53:54.882595Z",
+  "github_url": "https://github.com/githejie/mcp-server-calculator",
+  "repository": {
+    "name": "mcp-server-calculator",
+    "full_name": "githejie/mcp-server-calculator",
+    "description": "A Model Context Protocol server for calculating.",
+    "html_url": "https://github.com/githejie/mcp-server-calculator",
+    "created_at": "2025-03-19T11:36:59Z",
+    "updated_at": "2025-06-18T20:20:53Z",
+    "pushed_at": "2025-05-10T02:23:00Z",
+    "size": 36,
+    "stargazers_count": 70,
+    "watchers_count": 70,
+    "forks_count": 13,
+    "open_issues_count": 4,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "githejie",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/27050116?v=4",
+      "html_url": "https://github.com/githejie"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 13,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 5803,
+      "Dockerfile": 674
+    },
+    "language_percentages": {
+      "Python": 89.59,
+      "Dockerfile": 10.41
+    },
+    "pull_requests_count": 10,
+    "contributors_count": 1
+  },
+  "readme": "# Calculator MCP Server\n\nA Model Context Protocol server for calculating. This server enables LLMs to use calculator for precise numerical calculations.\n\n### Available Tools\n\n- `calculate` - Calculates/evaluates the given expression.\n  - `expression` (string, required): Expression to be calculated\n\n## Installation\n\n### Using uv (recommended)\n\nWhen using [`uv`](https://docs.astral.sh/uv/) no specific installation is needed. We will\nuse [`uvx`](https://docs.astral.sh/uv/guides/tools/) to directly run *mcp-server-calculator*.\n\n```bash\ncurl -LsSf https://astral.sh/uv/install.sh | sh\n```\n\n### Using PIP\n\nAlternatively you can install `mcp-server-calculator` via pip:\n\n```bash\npip install mcp-server-calculator\n```\n\nAfter installation, you can run it as a script using:\n\n```bash\npython -m mcp_server_calculator\n```\n\n## Configuration\n\n### Using uv (recommended)\n\nAdd this to your MCP client settings:\n\n```json\n\"mcpServers\": {\n  \"calculator\": {\n    \"command\": \"uvx\",\n    \"args\": [\"mcp-server-calculator\"]\n  }\n}\n```\n\n### Using PIP\n\nAlternatively add this to your MCP client settings:\n\n```json\n\"mcpServers\": {\n  \"calculator\": {\n    \"command\": \"python\",\n    \"args\": [\"-m\", \"mcp_server_calculator\"]\n  }\n}\n```\n\n## License\n\nmcp-server-calculator is licensed under the MIT License. This means you are free to use, modify, and distribute the software, subject to the terms and conditions of the MIT License. For more details, please see the LICENSE file in the project repository.\n"
+}

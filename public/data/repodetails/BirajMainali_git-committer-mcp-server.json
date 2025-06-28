@@ -1,0 +1,53 @@
+{
+  "mcp_name": "BirajMainali/git-committer-mcp-server",
+  "mcp_description": "Facilitates automated generation and staging of commit messages by analyzing Git changes.",
+  "mcp_id": "BirajMainali_git-committer-mcp-server",
+  "fetch_timestamp": "2025-06-23T01:40:54.731971Z",
+  "github_url": "https://github.com/BirajMainali/git-committer-mcp-server",
+  "repository": {
+    "name": "git-committer-mcp-server",
+    "full_name": "BirajMainali/git-committer-mcp-server",
+    "description": null,
+    "html_url": "https://github.com/BirajMainali/git-committer-mcp-server",
+    "created_at": "2025-04-17T14:59:55Z",
+    "updated_at": "2025-04-17T15:36:30Z",
+    "pushed_at": "2025-04-17T15:36:26Z",
+    "size": 28,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "BirajMainali",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/71131016?v=4",
+      "html_url": "https://github.com/BirajMainali"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 5761,
+      "JavaScript": 5674
+    },
+    "language_percentages": {
+      "TypeScript": 50.38,
+      "JavaScript": 49.62
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# MCP Server to Generate commit or free !!\n\nThis implementation provides a Git changes analyzer that generates commit messages and commits all for free.\n\n\n## Features\n\n- Analyzes git changes in your repository (both staged and unstaged)\n- Stage and commit the changes to github\n\n## Project Structure\n\n```\ngit-committer-mcp-server/\n├── index.ts        \n├── package.json    \n├── tsconfig.json   \n└── build/         \n```\n\n## Prerequisites\n\n- Node.js installed\n- Git repository to analyze\n- pnpm package manager\n\n## Getting Started\n\n1. Clone this repository:\n```bash\ngit clone https://github.com/BirajMainali/git-committer-mcp-server.git\ncd git-committer-mcp-server\n```\n\n2. Install dependencies:\n```bash\npnpm install\n```\n\n4. Build the project:\n```bash\npnpm run build\n```\n\nThis will generate the `/build/index.js` file - your compiled MCP server script.\n\n## Using with Cursor\n\n1. Go to Cursor Settings -> MCP -> Add new MCP server\n2. Configure your MCP:\n   - Name: git-committer-mcp-server\n   - Type: command\n   - Command: `node CLONED_FULL_PATH/build/index.js\n\n## Using with Claude Desktop\n\nAdd the following MCP config to your Claude Desktop configuration:\n\n```json\n{\n  \"mcpServers\": {\n    \"git-commit-generator\": {\n      \"command\": \"node\",\n      \"args\": [\n        \"C:\\\\MCP\\\\git-commit-generator-mcp\\\\build\\\\index.js\"\n      ],\n      \"env\": {\n        \"REPOSITORY_PATH\": \"C:\\\\MCP\\\\portainer-ce-mcp\"\n      }\n    }\n  }\n}\n```\n\n## Contributing\n\nFeel free to submit issues and enhancement requests!\n\n## License\n\nMIT"
+}

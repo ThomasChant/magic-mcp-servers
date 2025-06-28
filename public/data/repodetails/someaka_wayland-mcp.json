@@ -1,0 +1,56 @@
+{
+  "mcp_name": "someaka/wayland-mcp",
+  "mcp_description": "Wayland MCP Server offers screenshot, analysis, and input control tools tailored for modern Linux desktops.",
+  "mcp_id": "someaka_wayland-mcp",
+  "fetch_timestamp": "2025-06-23T08:33:42.412438Z",
+  "github_url": "https://github.com/someaka/wayland-mcp",
+  "repository": {
+    "name": "wayland-mcp",
+    "full_name": "someaka/wayland-mcp",
+    "description": "MCP Server for Wayland",
+    "html_url": "https://github.com/someaka/wayland-mcp",
+    "created_at": "2025-04-10T22:01:56Z",
+    "updated_at": "2025-06-04T15:30:01Z",
+    "pushed_at": "2025-04-15T16:55:41Z",
+    "size": 16793,
+    "stargazers_count": 3,
+    "watchers_count": 3,
+    "forks_count": 1,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [
+      "computer-use",
+      "computer-use-agent",
+      "computer-vision"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "someaka",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/84462932?v=4",
+      "html_url": "https://github.com/someaka"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 60463,
+      "Shell": 1793
+    },
+    "language_percentages": {
+      "Python": 97.12,
+      "Shell": 2.88
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "\n\n# 🚀 Wayland MCP Server\n\n[![Status: WIP](https://img.shields.io/badge/status-WIP-yellow)](https://github.com/someaka/wayland-mcp)\n[![License: GPL3](https://img.shields.io/badge/license-GPL3-blue)](#license)\n\n> **Note:** This package was created because existing screenshot solutions didn't work reliably on my Wayland setup.\n> **Wayland MCP** provides screenshot, analysis, mouse and keyboard control tools for modern Linux desktops.\n\n---\n\n## ✨ Features\n\n- **📸 Screenshot & Analysis**\n  - Custom VLM integration for image analysis\n  - Image comparison capabilities\n\n- **🖱️ Input Simulation**\n  - Mouse control (move, click, drag, scroll)\n  - Keyboard input (typing, key presses)\n  - Action chaining for complex sequences\n\n---\n\n## ⚠️ Security Warning\n\n> **WARNING:** Enabling input control gives the MCP server full access to your mouse and keyboard.\n> Only use with trusted MCP servers and models.\n\n---\n\n## 🚀 Quick Start\n\n### 🔧 Input Control Setup\n```bash\n./setup.sh\n```\n[View setup.sh on GitHub](https://github.com/someaka/wayland-mcp/blob/main/setup.sh)\n\nConfigures permissions for `evemu-event` to control input devices.\n\n### ⚙️ MCP Server Configuration\nAdd to your MCP server config (`.roo/mcp.json`):\n```json\n{\n  \"mcpServers\": {\n    \"wayland-screenshot\": {\n      \"command\": \"uvx\",\n      \"args\": [\"wayland-mcp\"],\n      \"env\": {\n        \"OPENROUTER_API_KEY\": \"your-api-key\",\n        \"VLM_MODEL\": \"qwen/qwen2.5-vl-72b-instruct:free\",\n        \"XDG_RUNTIME_DIR\": \"/run/user/1000\",\n        \"WAYLAND_MCP_PORT\": \"4999\",\n        \"DISPLAY\": \":0\",\n        \"WAYLAND_DISPLAY\": \"wayland-0\",\n        \"XDG_SESSION_TYPE\": \"wayland\"\n      }\n    }\n  }\n}\n```\n\n---\n\n## 🛠️ Development\n```bash\ngit clone https://github.com/someaka/wayland-mcp\ncd wayland-mcp\npip install -e .\n```\n\n---\n\n## 📜 License\n\nGPL 3\n"
+}

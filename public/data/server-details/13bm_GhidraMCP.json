@@ -1,0 +1,155 @@
+{
+  "id": "a5a801c4cd93",
+  "owner": "13bm",
+  "repoName": "GhidraMCP",
+  "fullDescription": "🐍 ☕ 🏠 - MCP server for integrating Ghidra with AI assistants. This plugin enables binary analysis, providing tools for function inspection, decompilation, memory exploration, and import/export analysis via the Model Context Protocol.",
+  "techStack": [
+    {
+      "name": "typescript",
+      "icon": "📘",
+      "color": "#3178c6"
+    }
+  ],
+  "serviceTypes": [
+    {
+      "type": "security",
+      "label": "Security",
+      "icon": "🔐",
+      "description": "Provides security and authentication features"
+    },
+    {
+      "type": "ai",
+      "label": "Ai",
+      "icon": "🤖",
+      "description": "Leverages AI and machine learning"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "moderate",
+    "maturity": "stable",
+    "deployment": [
+      "local"
+    ],
+    "featured": false,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 1.6,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "ai assistant"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/13bm/GhidraMCP",
+    "owner": "13bm",
+    "name": "GhidraMCP",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.279Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "decompilation",
+    "development-tools",
+    "ghidra",
+    "forensics",
+    "reverse engineering",
+    "security",
+    "binary analysis"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Moderate",
+      "color": "#eab308",
+      "icon": "🟡"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    }
+  ],
+  "icon": "🔐",
+  "readme": {
+    "overview": {
+      "title": "Overview",
+      "content": "Warning: Target URL returned error 404: Not Found\nMarkdown Content:\nFile not found · GitHub\n===============\n[Skip to content](https://github.com/13bm/GhidraMCP/blob/main/readme.md#start-of-content)\nNavigation Menu\n---------------\nToggle navigation\n[Sign in](https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2F13bm%2FGhidraMCP%2Fblob%2Fmain%2FREADME.md)\nAppearance settings\n*    Product \n    *   [GitHub Copilot Write better code with AI](https://github.com/features/copilot)\n    *   [GitHub Models New Manage and compare prompts](https://github.com/features/models)\n    *   [GitHub Advanced Security Find and fix vulnerabilities](https://github.com/security/advanced-security)\n    *   [Actions Automate any workflow](https://github.com/features/actions)\n    *   [Codespaces Instant dev environments](https://github.com/features/codespaces)\n    *   [Issues Plan and track work](https://github.com/features/issues)\n    *   [Code Review Manage code changes](https://github.com/features/code-review)\n    *   [Discussions Collaborate outside of code](https://github.com/features/discussions)\n    *   [Code Search Find more, search less](https://github.com/features/code-search)\nExplore\n    *   [Why GitHub](https://github.com/why-github)\n    *   [All features](https://github.com/features)\n    *   [Documentation](https://docs.github.com/)\n    *   [GitHub Skills](https://skills.github.com/)\n    *   [Blog](https://github.blog/)\n*    Solutions \nBy company size\n    *   [Enterprises](https://github.com/enterprise)\n    *   [Small and medium teams](https://github.com/team)\n    *   [Startups](https://github.com/enterprise/startups)\n    *   [Nonprofits](https://github.com/solutions/industry/nonprofits)\nBy use case\n    *   [DevSecOps](https://github.com/solutions/use-case/devsecops)\n    *   [DevOps](https://github.com/solutions/use-case/devops)\n    *   [CI/CD](https://github.com/solutions/use-case/ci-cd)\n    *   [View all use cases](https://github.com/solutions/use-case)\nBy industry\n    *   [Healthcare](https://github.com/solutions/industry/healthcare)\n    *   [Financial services](https://github.com/solutions/industry/financial-services)\n    *   [Manufacturing](https://github.com/solutions/industry/manufacturing)\n    *   [Government](https://github.com/solutions/industry/government)\n    *   [View all industries](https://github.com/solutions/industry)\n[View all solutions](https://github.com/solutions)\n*    Resources \nTopics\n    *   [AI](https://github.com/resources/articles/ai)\n    *   [DevOps](https://github.com/resources/articles/devops)\n    *   [Security](https://github.com/resources/articles/security)\n    *   [Software Development](https://github.com/resources/articles/software-development)\n    *   [View all](https://github.com/resources/articles)\nExplore\n    *   [Learning Pathways](https://resources.github.com/learn/pathways)\n    *   [Events & Webinars](https://resources.github.com/)\n    *   [Ebooks & Whitepapers](https://github.com/resources/whitepapers)\n    *   [Customer Stories](https://github.com/customer-stories)\n    *   [Partners](https://partner.github.com/)\n    *   [Executive Insights](https://github.com/solutions/executive-insights)\n*    Open Source \n    *   [GitHub Sponsors Fund open source developers](https://github.com/sponsors)\n    *   [The ReadME Project GitHub community articles](https://github.com/readme)\nRepositories\n    *   [Topics](https://github.com/topics)\n    *   [Trending](https://github.com/trending)\n    *   [Collections](https://github.com/collections)\n*    Enterprise \n    *   [Enterprise platform AI-powered developer platform](https://github.com/enterprise)\nAvailable add-ons\n    *   [GitHub Advanced Security Enterprise-grade security features](https://github.com/security/advanced-security)\n    *   [Copilot for business Enterprise-grade AI features](https://github.com/features/copilot/copilot-business)\n    *   [Premium Support Enterprise-grade 24/7 support](https://github.com/premium-support)\n*   [Pricing](https://github.com/pricing)\nSearch or jump to...\nSearch code, repositories, users, issues, pull requests...\n==========================================================\n Search  \nClear\n[Search syntax tips](https://docs.github.com/search-github/github-code-search/understanding-github-code-search-syntax)\nProvide feedback\n================\nWe read every piece of feedback, and take your input very seriously.\n- [x] Include my email address so I can be contacted \n Cancel  Submit feedback \nSaved searches\n==============\nUse saved searches to filter your results more quickly\n------------------------------------------------------\nName \nQuery \nTo see all available qualifiers, see our [documentation](https://docs.github.com/search-github/github-code-search/understanding-github-code-search-syntax).\n Cancel  Create saved search \n[Sign in](https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2F13bm%2FGhidraMCP%2Fblob%2Fmain%2FREADME.md)\n#### Sign in to GitHub\n Username or email address  \n Password  [Forgot password?](https://github.com/password_reset)\n[or continue with passkeys](https://github.com/login?passkey=true&return_to=https%3A%2F%2Fgithub.com%2F13bm%2FGhidraMCP%2Fblob%2Fmain%2FREADME.md)\n[Sign up](https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E%2Fblob%2Fshow&source=header-repo&source_repo=13bm%2FGhidraMCP)\nAppearance settings\nResetting focus\nYou signed in with another tab or window. Reload to refresh your session.You signed out in another tab or window. Reload to refresh your session.You switched accounts on another tab or window. Reload to refresh your session.Dismiss alert\n{{ message }}\n[13bm](https://github.com/13bm)/**[GhidraMCP](https://github.com/13bm/GhidraMCP)**Public\n*   [Notifications](https://github.com/login?return_to=%2F13bm%2FGhidraMCP)You must be signed in to change notification settings\n*   [Fork 8](https://github.com/login?return_to=%2F13bm%2FGhidraMCP)\n*   [Star 55](https://github.com/login?return_to=%2F13bm%2FGhidraMCP) \n*   [Code](https://github.com/13bm/GhidraMCP)\n*   [Issues 0](https://github.com/13bm/GhidraMCP/issues)\n*   [Pull requests 0](https://github.com/13bm/GhidraMCP/pulls)\n*   [Actions](https://github.com/13bm/GhidraMCP/actions)\n*   [Projects 0](https://github.com/13bm/GhidraMCP/projects)\n*   [Security](https://github.com/13bm/GhidraMCP/security)[### Uh oh!](https://github.com/13bm/GhidraMCP/security)\n[There was an error while loading.](https://github.com/13bm/GhidraMCP/security)Please reload this page.    \n*   [Insights](https://github.com/13bm/GhidraMCP/pulse)\nAdditional navigation options\n*   [Code](https://github.com/13bm/GhidraMCP)\n*   [Issues](https://github.com/13bm/GhidraMCP/issues)\n*   [Pull requests](https://github.com/13bm/GhidraMCP/pulls)\n*   [Actions](https://github.com/13bm/GhidraMCP/actions)\n*   [Projects](https://github.com/13bm/GhidraMCP/projects)\n*   [Security](https://github.com/13bm/GhidraMCP/security)\n*   [Insights](https://github.com/13bm/GhidraMCP/pulse)\nCollapse file tree\n------------------\nFiles\n-----\nmain/README.md\nSearch this repository\nRef is invalid\nBreadcrumbs\n-----------\n1.   [GhidraMCP](https://github.com/13bm/GhidraMCP/tree/main/README.md)\n404 - page not found\nCannot find a valid ref in\nmain/README.md\n[Go to default branch](https://github.com/13bm/GhidraMCP?files=1)\nFooter\n------\n © 2025 GitHub,Inc. \n### Footer navigation\n*   [Terms](https://docs.github.com/site-policy/github-terms/github-terms-of-service)\n*   [Privacy](https://docs.github.com/site-policy/privacy-policies/github-privacy-statement)\n*   [Security](https://github.com/security)\n*   [Status](https://www.githubstatus.com/)\n*   [Docs](https://docs.github.com/)\n*   [Contact](https://support.github.com/?tags=dotcom-footer)\n*    Manage cookies \n*    Do not share my personal information \n You can’t perform that action at this time.",
+      "code_blocks": [],
+      "subsections": []
+    },
+    "installation": {
+      "title": "",
+      "content": "",
+      "code_blocks": [],
+      "subsections": []
+    },
+    "examples": {
+      "title": "",
+      "content": "",
+      "code_blocks": [],
+      "subsections": []
+    },
+    "api_reference": {
+      "title": "",
+      "content": "",
+      "code_blocks": [],
+      "subsections": []
+    },
+    "metadata": {
+      "hasContent": true,
+      "sections": [
+        "overview"
+      ],
+      "codeBlocks": 0,
+      "filename": "GhidraMCP.md",
+      "project_name": "GhidraMCP",
+      "server_id": "a5a801c4cd93",
+      "github_url": "https://github.com/13bm/GhidraMCP",
+      "processed_at": "2025-06-27",
+      "originalFilename": "GhidraMCP.md",
+      "processedAt": "2025-06-27T01:56:19.339Z",
+      "processedWith": "Jina MCP + AI",
+      "version": "2.0"
+    }
+  }
+}

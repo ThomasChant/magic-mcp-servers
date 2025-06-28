@@ -1,0 +1,72 @@
+{
+  "mcp_name": "Square",
+  "mcp_description": "A Model Context Protocol (MCP) server for square",
+  "mcp_id": "square_square-mcp-server",
+  "fetch_timestamp": "2025-06-23T08:35:33.524672Z",
+  "github_url": "https://github.com/square/square-mcp-server",
+  "repository": {
+    "name": "square-mcp-server",
+    "full_name": "square/square-mcp-server",
+    "description": "A Model Context Protocol (MCP) server for square",
+    "html_url": "https://github.com/square/square-mcp-server",
+    "created_at": "2025-04-23T17:52:10Z",
+    "updated_at": "2025-06-17T15:54:21Z",
+    "pushed_at": "2025-05-13T21:52:18Z",
+    "size": 356,
+    "stargazers_count": 64,
+    "watchers_count": 64,
+    "forks_count": 10,
+    "open_issues_count": 3,
+    "language": "TypeScript",
+    "license": "Apache License 2.0",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "square",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/82592?v=4",
+      "html_url": "https://github.com/square"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 10,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 2718814,
+      "JavaScript": 21447
+    },
+    "language_percentages": {
+      "TypeScript": 99.22,
+      "JavaScript": 0.78
+    },
+    "pull_requests_count": 9,
+    "contributors_count": 3,
+    "latest_release": {
+      "tag_name": "0.1.2",
+      "name": "",
+      "published_at": "2025-04-25T20:39:10Z",
+      "body": "",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "0.1.2",
+        "commit_sha": "9ce4bef75d5f8c4a3e5564f1d5901f9384853d1c"
+      },
+      {
+        "name": "0.1.1",
+        "commit_sha": "ea7e4b1b24abdac7a29ba541ac1b267fe2ed119f"
+      }
+    ],
+    "latest_version": "0.1.2",
+    "package_json_version": "0.1.2"
+  },
+  "readme": "# Square Model Context Protocol Server (Beta)\n\nThis project follows the [Model Context Protocol](https://modelcontextprotocol.com/) standard, allowing AI assistants to interact with Square's connect API.\n\n## Quick Start\n\nGet up and running with the Square MCP server using npx:\n\n```bash\n# Basic startup\nnpx square-mcp-server start\n\n# With environment configuration\nACCESS_TOKEN=YOUR_SQUARE_ACCESS_TOKEN SANDBOX=true npx square-mcp-server start\n\n# local runs\nnpx /path/to/project/square-mcp-server\n```\n\nReplace `YOUR_SQUARE_ACCESS_TOKEN` with your actual Square access token. You can obtain your access token by following the guide at [Square Access Tokens](https://developer.squareup.com/docs/build-basics/access-tokens). You can also set environment variables before running the command.\n\n## Remote MCP Server\n\nSquare now offers a hosted remote MCP server at:\n\n```\nhttps://mcp.squareup.com/sse\n```\n\nThe remote MCP is recommended as it uses OAuth authentication, allowing you to log in with your Square account directly without having to create or manage access tokens manually.\n\n## Configuration Options\n\n| Environment Variable | Purpose | Example |\n|---------------------|---------|---------|\n| `ACCESS_TOKEN` | Your Square API access token | `ACCESS_TOKEN=sq0atp-...` |\n| `SANDBOX` | Use Square sandbox environment | `SANDBOX=true` |\n| `PRODUCTION` | Use Square production environment | `PRODUCTION=true` |\n| `DISALLOW_WRITES` | Restrict to read-only operations | `DISALLOW_WRITES=true` |\n| `SQUARE_VERSION` | Specify Square API version | `SQUARE_VERSION=2025-04-16` |\n\n## Integration with AI Assistants\n\n### Goose Integration\n\nTo configure the Square MCP Server with [Goose](https://block.github.io/goose/):\n\n#### Remote MCP\nTo install the Square remote MCP in Goose, click this URL on a computer where Goose is installed:\n\n[goose://extension?cmd=npx&arg=mcp-remote&arg=https%3A%2F%2Fmcp.squareup.com%2Fsse&id=square_mcp_production_remote&name=Square%20MCP%20Remote&description=Square%20Production%20MCP%20Remote](goose://extension?cmd=npx&arg=mcp-remote&arg=https%3A%2F%2Fmcp.squareup.com%2Fsse&id=square_mcp_production_remote&name=Square%20MCP%20Remote&description=Square%20Production%20MCP%20Remote)\n\nOr copy and paste the URL into your browser's address bar.\n\n```bash\n# Automatic installation\nnpx square-mcp-server install\n\n# Get URL for manual installation\nnpx square-mcp-server get-goose-url\n```\n\nThe `install` command automatically updates your Goose configuration.\n\n### Claude Desktop Integration\n\nFor Claude Desktop integration, see the [Model Context Protocol Quickstart Guide](https://modelcontextprotocol.io/quickstart/user). Add this configuration to your `claude_desktop_config.json`:\n\n#### Remote MCP\n```json\n{\n  \"mcpServers\": {\n    \"mcp_square_api\": {\n      \"command\": \"npx\",\n      \"args\": [\"mcp-remote\", \"https://mcp.squareup.com/sse\"]\n    }\n  }\n}\n```\n\nThis approach allows you to authenticate directly with your Square account credentials without needing to manage access tokens.\n\n#### Local MCP\n```json\n{\n  \"mcpServers\": {\n    \"mcp_square_api\": {\n      \"command\": \"npx\",\n      \"args\": [\"square-mcp-server\", \"start\"],\n      \"env\": {\n        \"ACCESS_TOKEN\": \"YOUR_SQUARE_ACCESS_TOKEN\",\n        \"SANDBOX\": \"true\"\n      }\n    }\n  }\n}\n```\n\n## Tool Reference\n\nThe Square MCP Server provides a streamlined set of tools for interacting with Square APIs:\n\n| Tool | Description | Primary Use |\n|------|-------------|------------|\n| `get_service_info` | Discover methods available for a service | Exploration and discovery |\n| `get_type_info` | Get detailed parameter requirements | Request preparation |\n| `make_api_request` | Execute API calls to Square | Performing operations |\n\n## Service Catalog\n\nSquare MCP Server provides access to Square's complete [API ecosystem](https://developer.squareup.com/reference/square). Check out the [Square API Documentation](https://developer.squareup.com/docs) for detailed information about each service:\n\n| Service | Description |\n|---------|-------------|\n| `applepay` | Apple Pay integration |\n| `bankaccounts` | Bank account management |\n| `bookingcustomattributes` | Custom attributes for bookings |\n| `bookings` | Appointment booking management |\n| `cards` | Payment card management |\n| `cashdrawers` | Cash drawer management |\n| `catalog` | Catalog management (items, categories, etc.) |\n| `checkout` | Checkout and payment processing |\n| `customercustomattributes` | Custom attributes for customers |\n| `customergroups` | Customer grouping |\n| `customersegments` | Customer segmentation |\n| `customers` | Customer management |\n| `devices` | Square device management |\n| `disputes` | Payment dispute handling |\n| `events` | Event tracking |\n| `giftcardactivities` | Gift card activity tracking |\n| `giftcards` | Gift card management |\n| `inventory` | Inventory tracking |\n| `invoices` | Invoice management |\n| `labor` | Workforce management |\n| `locationcustomattributes` | Custom attributes for locations |\n| `locations` | Location management |\n| `loyalty` | Loyalty program management |\n| `merchantcustomattributes` | Custom attributes for merchants |\n| `merchants` | Merchant account management |\n| `oauth` | Authentication |\n| `ordercustomattributes` | Custom attributes for orders |\n| `orders` | Order management |\n| `payments` | Payment processing |\n| `payouts` | Payout management |\n| `refunds` | Refund management |\n| `sites` | Website integration |\n| `snippets` | Square Online Code integration |\n| `subscriptions` | Subscription management |\n| `team` | Staff management |\n| `terminal` | Square Terminal management |\n| `vendors` | Supplier management |\n| `webhooksubscriptions` | Event notifications |\n\n## Usage Pattern\n\nFor optimal interaction with the Square API through MCP:\n\n1. **Discover**: Use `get_service_info` to explore available methods\n   ```\n   get_service_info(service: \"catalog\")\n   ```\n\n2. **Understand**: Use `get_type_info` to learn parameter requirements\n   ```\n   get_type_info(service: \"catalog\", method: \"list\")\n   ```\n\n3. **Execute**: Use `make_api_request` to perform the operation\n   ```\n   make_api_request(service: \"catalog\", method: \"list\", request: {})\n   ```\n\n## Development and Debugging\n\n### Using MCP Inspector\n\nThe [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) provides a visual interface for testing:\n\n```bash\n# Build the project\nnpm run build\n\n# Start the inspector with the Square MCP Server\nnpx @modelcontextprotocol/inspector node dist/index.js start\n```\n\n### Development Workflow\n\n1. Clone the repository\n2. Install dependencies: `npm install`\n3. Start development mode: `npm run watch`\n4. Run the server: `node dist/index.js start`\n5. Test your changes using the MCP Inspector\n\n## Contributing\n\nThis repository is auto-generated from Square's OpenAPI Specification. While contributions are welcome, please note that changes will need to be incorporated into the generator that produces this code. Please open an issue to discuss proposed changes before submitting a pull request.\n"
+}

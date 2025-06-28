@@ -1,0 +1,53 @@
+{
+  "mcp_name": "beylessai/hiworks-mcp",
+  "mcp_description": "Facilitates email retrieval and sending through Hiworks Mail integration using MCP.",
+  "mcp_id": "beylessai_hiworks-mcp",
+  "fetch_timestamp": "2025-06-23T01:37:02.921250Z",
+  "github_url": "https://github.com/beylessai/hiworks-mcp",
+  "repository": {
+    "name": "hiworks-mcp",
+    "full_name": "beylessai/hiworks-mcp",
+    "description": null,
+    "html_url": "https://github.com/beylessai/hiworks-mcp",
+    "created_at": "2025-04-23T07:31:24Z",
+    "updated_at": "2025-05-22T04:19:52Z",
+    "pushed_at": "2025-05-22T04:19:49Z",
+    "size": 18,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 1,
+    "open_issues_count": 0,
+    "language": "JavaScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "beylessai",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/70870770?v=4",
+      "html_url": "https://github.com/beylessai"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 11767,
+      "TypeScript": 2609
+    },
+    "language_percentages": {
+      "JavaScript": 81.85,
+      "TypeScript": 18.15
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 1,
+    "package_json_version": "1.0.12"
+  },
+  "readme": "<a href=\"https://glama.ai/mcp/servers/@beylessai/hiworks-mcp\">\n  <img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/@beylessai/hiworks-mcp/badge\" />\n</a>\n\n# Hiworks Mail MCP\n\n하이웍스 메일 시스템과 연동하여 메일 조회 및 전송을 할 수 있는 MCP(Model Context Protocol) 서버입니다.\n\n## MCP 설정\n\nClaude Desktop이나 Cursor AI의 MCP 서버 설정에 아래와 같이 추가합니다.\n\n```json\n{\n  \"mcpServers\": {\n    \"hiworks-mail-mcp\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"hiworks-mail-mcp@latest\"],\n      \"env\": {\n        \"HIWORKS_USERNAME\": \"your.email@hiworks.com\",\n        \"HIWORKS_PASSWORD\": \"your_password\"\n      }\n    }\n  }\n}\n```\n\n- `HIWORKS_USERNAME`: 하이웍스 이메일 주소\n- `HIWORKS_PASSWORD`: 하이웍스 계정 비밀번호\n\n## 서버 설정\n\n기본적으로 다음 서버 설정을 사용합니다:\n\n- POP3: pop3s.hiworks.com:995 (SSL)\n- SMTP: smtps.hiworks.com:465 (SSL/TLS)\n\n## 주의사항\n\n- 계정 정보는 안전하게 관리해주세요.\n- 대량 메일 발송 시 하이웍스의 정책을 준수해주세요.\n\n## 라이선스\n\n이 프로젝트는 MIT 라이선스 하에 배포됩니다.  \n자세한 내용은 [LICENSE](./LICENSE) 파일을 참고하세요.\n"
+}

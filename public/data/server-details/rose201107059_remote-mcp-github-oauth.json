@@ -1,0 +1,116 @@
+{
+  "id": "35a604ed5e81",
+  "owner": "rose201107059",
+  "repoName": "remote-mcp-github-oauth",
+  "fullDescription": "A remote MCP server with integrated GitHub OAuth, deployable on Cloudflare, enabling secure user authentication and tool access for connected clients.",
+  "techStack": [
+    {
+      "name": "typescript",
+      "icon": "📘",
+      "color": "#3178c6"
+    }
+  ],
+  "serviceTypes": [
+    {
+      "type": "development",
+      "label": "Development",
+      "icon": "👨‍💻",
+      "description": "Assists with software development"
+    },
+    {
+      "type": "integration",
+      "label": "Integration",
+      "icon": "🔗",
+      "description": "Connects to external APIs and services"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "moderate",
+    "maturity": "stable",
+    "deployment": [
+      "cloud"
+    ],
+    "featured": false,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 3.25,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "git",
+      "github"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/rose201107059/remote-mcp-github-oauth",
+    "owner": "rose201107059",
+    "name": "remote-mcp-github-oauth",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.281Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "tool",
+    "server",
+    "github",
+    "security",
+    "mcp",
+    "client",
+    "remote",
+    "utilities-tools"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Moderate",
+      "color": "#eab308",
+      "icon": "🟡"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    }
+  ],
+  "icon": "👨‍💻",
+  "readme": null
+}

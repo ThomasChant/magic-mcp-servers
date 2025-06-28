@@ -1,0 +1,109 @@
+{
+  "id": "5116f4cf7629",
+  "owner": "higress-group",
+  "repoName": "higress-ops-mcp-server",
+  "fullDescription": "🐍 🏠 - MCP server that provides comprehensive tools for managing [Higress](https://github.com/alibaba/higress) gateway configurations and operations.",
+  "techStack": [],
+  "serviceTypes": [
+    {
+      "type": "development",
+      "label": "Development",
+      "icon": "👨‍💻",
+      "description": "Assists with software development"
+    },
+    {
+      "type": "utility",
+      "label": "Utility",
+      "icon": "🛠️",
+      "description": "Provides general utility functions"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "advanced",
+    "maturity": "stable",
+    "deployment": [
+      "local"
+    ],
+    "featured": false,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 4.55,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "git",
+      "github",
+      "pr"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/higress-group/higress-ops-mcp-server",
+    "owner": "higress-group",
+    "name": "higress-ops-mcp-server",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.280Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "cloud-infrastructure",
+    "management",
+    "higress",
+    "configurations",
+    "operations",
+    "gateway"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Advanced",
+      "color": "#ef4444",
+      "icon": "🔴"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    }
+  ],
+  "icon": "👨‍💻",
+  "readme": null
+}

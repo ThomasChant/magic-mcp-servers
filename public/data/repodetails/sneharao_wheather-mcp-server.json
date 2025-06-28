@@ -1,0 +1,52 @@
+{
+  "mcp_name": "sneharao/wheather-mcp-server",
+  "mcp_description": "Connects with Claude Desktop to provide weather alerts and information using the MCP protocol.",
+  "mcp_id": "sneharao_wheather-mcp-server",
+  "fetch_timestamp": "2025-06-23T08:31:20.381043Z",
+  "github_url": "https://github.com/sneharao/wheather-mcp-server",
+  "repository": {
+    "name": "wheather-mcp-server",
+    "full_name": "sneharao/wheather-mcp-server",
+    "description": "A custom weather mcp server , which can be connected through claude desktop , to extract wheather alerts or information just by prompting with name of location .",
+    "html_url": "https://github.com/sneharao/wheather-mcp-server",
+    "created_at": "2025-04-13T05:25:09Z",
+    "updated_at": "2025-04-13T06:00:22Z",
+    "pushed_at": "2025-04-13T06:00:18Z",
+    "size": 22,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "sneharao",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8778180?v=4",
+      "html_url": "https://github.com/sneharao"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 6873,
+      "JavaScript": 5706
+    },
+    "language_percentages": {
+      "TypeScript": 54.64,
+      "JavaScript": 45.36
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "\r\n<h3 align=\"center\">MCP Weather Server</h3>\r\n\r\n<div align=\"center\">\r\n\r\n[![Status](https://img.shields.io/badge/status-active-success.svg)]()\r\n[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/sneharao/wheather-mcp-server/issues)\r\n[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/sneharao/wheather-mcp-server/pulls)\r\n[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)\r\n\r\n</div>\r\n\r\n---\r\n\r\n<p align=\"center\"> This project is to use MCP server protocol of Anthropic to retrieve wheather alerts or details about the wheather using Claude Desktop app\r\n    <br> \r\n</p>\r\n\r\n## 📝 Table of Contents\r\n\r\n- [About](#about)\r\n- [Getting Started & Usage](#getting_started)\r\n- [Built Using](#built_using)\r\n- [References](#references)\r\n\r\n## 🧐 About <a name = \"about\"></a>\r\n\r\nMCP is an open protocol that standardizes how applications provide context to LLMs. Think of MCP like a USB-C port for AI applications. Just as USB-C provides a standardized way to connect your devices to various peripherals and accessories, MCP provides a standardized way to connect AI models to different data sources and tools.\r\n\r\n​\r\nWhy MCP?\r\nMCP helps you build agents and complex workflows on top of LLMs. LLMs frequently need to integrate with data and tools, and MCP provides:\r\n\r\nA growing list of pre-built integrations that your LLM can directly plug into\r\nThe flexibility to switch between LLM providers and vendors\r\nBest practices for securing your data within your infrastructure\r\n\r\nThis project creates one such MCP server , which you can interact with claude desktop client.\r\n\r\n## 🏁 Getting Started <a name = \"getting_started\"></a>\r\n\r\nThese instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.\r\n\r\n1. Do a \"npm i\"\r\n2. Build the project using \"npm build\"\r\n3. Run the MCP server using node build/index.js\r\n4. Modify CLAUDE_DESKTOP_CONFIG.json (found in Library/Application Support/Claude)\r\n   If not available make a new one and paste below code.\r\n   // {\r\n   // \"mcpServers\": {\r\n   // \"weather\": {\r\n   // \"command\": \"node\",\r\n   // \"args\": [\r\n   // \"/Users/spidugu/Downloads/my-projectspace/wheather/build/index.js\"\r\n   // ]\r\n   // }\r\n   // }\r\n   // }\r\n5. Restart claude desktop\r\n   THE HAMMER ICON WOULD SHOW THE INSTALLED MCP, CHECK THE LOGS IF THERE IS ISSUE\r\n\r\n### Prerequisites\r\n\r\nWhat things you need to install the software and how to install them.\r\n\r\nClaude Desktop (https://claude.ai/download)\r\nNode version 20 and above (https://nodejs.org/en/download)\r\n\r\n### Usage\r\n<img width=\"758\" alt=\"Screenshot 2025-04-13 at 07 39 51\" src=\"https://github.com/user-attachments/assets/cf9c2b49-3911-42d0-a33e-7adaa1a49b04\" />\r\n\r\n\r\n## ⛏️ Built Using <a name = \"built_using\"></a>\r\n\r\n- [NodeJs](https://nodejs.org/en/) - Server Environment\r\n\r\n## ✍️ References <a name = \"references\"></a>\r\n\r\nhttps://modelcontextprotocol.io/quickstart/server\r\n"
+}

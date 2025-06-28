@@ -1,0 +1,68 @@
+{
+  "mcp_name": "aradtamako/DnfApiServer",
+  "mcp_description": "Facilitates interaction with DNF APIs through an MCP server setup, enabling seamless integration with tools like Copilot and Claude.",
+  "mcp_id": "aradtamako_DnfApiServer",
+  "fetch_timestamp": "2025-06-23T01:14:29.790659Z",
+  "github_url": "https://github.com/aradtamako/DnfApiServer",
+  "repository": {
+    "name": "DnfApiServer",
+    "full_name": "aradtamako/DnfApiServer",
+    "description": null,
+    "html_url": "https://github.com/aradtamako/DnfApiServer",
+    "created_at": "2025-04-15T11:50:35Z",
+    "updated_at": "2025-04-20T04:07:04Z",
+    "pushed_at": "2025-04-20T04:07:00Z",
+    "size": 27,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "aradtamako",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/40272766?v=4",
+      "html_url": "https://github.com/aradtamako"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 17619,
+      "JavaScript": 109
+    },
+    "language_percentages": {
+      "TypeScript": 99.39,
+      "JavaScript": 0.61
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "latest_release": {
+      "tag_name": "1.0.0",
+      "name": "1.0.0",
+      "published_at": "2025-04-15T11:59:13Z",
+      "body": "",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "1.0.0",
+        "commit_sha": "29b2b1eaccab459ce9cf0738ae551640d8d1abdd"
+      }
+    ],
+    "latest_version": "1.0.0",
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# DNF MCP Server\n![image](https://github.com/user-attachments/assets/926a47c5-db5f-471f-ac66-00b4e1fd0c5f)\n\n# 使い方\n1. [Node.js](https://nodejs.org/ja) をインストールする\n2. [Releases](https://github.com/aradtamako/DnfApiServer/releases) から build.zip をダウンロードする\n3. Copilot や Claude などで MCP サーバを指定する\n\n```json\n{\n  \"mcpServers\": {\n    \"dnfApiServer\": {\n      \"command\": \"node\",\n      \"args\": [\n        \"C:\\\\Users\\\\user01\\\\Downloads\\\\build\\\\index.js\"\n      ]\n    }\n  }\n}\n```\n\n以上\n\n# Official API Docs\n- https://developers.neople.co.kr/contents/apiDocs/df\n- https://www.dfoneople.com/developers/contents/apiDocs\n"
+}

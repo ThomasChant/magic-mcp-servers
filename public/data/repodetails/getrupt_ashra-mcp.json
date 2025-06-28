@@ -1,0 +1,51 @@
+{
+  "mcp_name": "getrupt/ashra-mcp",
+  "mcp_description": "🐍 🏠 - Extract structured data from any website. Just prompt and get JSON.",
+  "mcp_id": "getrupt_ashra-mcp",
+  "fetch_timestamp": "2025-06-23T03:45:26.377804Z",
+  "github_url": "https://github.com/getrupt/ashra-mcp",
+  "repository": {
+    "name": "ashra-mcp",
+    "full_name": "getrupt/ashra-mcp",
+    "description": "A Model Context Protocol server for Ashra",
+    "html_url": "https://github.com/getrupt/ashra-mcp",
+    "created_at": "2025-03-20T17:47:50Z",
+    "updated_at": "2025-06-18T05:29:07Z",
+    "pushed_at": "2025-03-26T14:55:03Z",
+    "size": 37,
+    "stargazers_count": 26,
+    "watchers_count": 26,
+    "forks_count": 5,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "getrupt",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/124938870?v=4",
+      "html_url": "https://github.com/getrupt"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 5,
+    "subscribers_count": 0,
+    "languages": {
+      "TypeScript": 5863
+    },
+    "language_percentages": {
+      "TypeScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# Ashra MCP\n\nA Model Context Protocol server for Ashra.\n\n## Usage\n\nInstall dependencies:\n\n`yarn`\n\nBuild the project:\n\n`yarn build`\n\n## Claude Configuration\n\nDownload the latest version of [Claude](https://claude.ai/download).\n\nAdd to or create the following file `claude_desktop_config.json` in `cd ~/Library/Application\\ Support/Claude`:\n\n```json\n{\n  \"mcpServers\": {\n    \"ashra\": {\n      \"command\": \"node\",\n      // OR if you're using nvm and the version picked is not preferred/working\n      // \"command\": \"/Users/<user>/.nvm/versions/node/<version>/bin/node\",\n      \"args\": [\"<path/to/ashra-mcp>/build/index.js\"],\n      \"env\": {\n        \"ASHRA_API_KEY\": \"<YOUR-API-KEY>\"\n      }\n    }\n  }\n}\n```\n\n## Troubleshooting\n\nConsult the [MCP server documentation](https://modelcontextprotocol.io/quickstart/server) for more information.\n"
+}

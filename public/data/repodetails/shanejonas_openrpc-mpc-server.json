@@ -1,0 +1,51 @@
+{
+  "mcp_name": "OpenRPC",
+  "mcp_description": "A Model Context Protocol server that provides JSON-RPC functionality through OpenRPC.",
+  "mcp_id": "shanejonas_openrpc-mpc-server",
+  "fetch_timestamp": "2025-06-23T07:21:06.331787Z",
+  "github_url": "https://github.com/shanejonas/openrpc-mpc-server",
+  "repository": {
+    "name": "openrpc-mpc-server",
+    "full_name": "shanejonas/openrpc-mpc-server",
+    "description": "A Model Context Protocol (MCP) server that provides JSON-RPC functionality through OpenRPC.",
+    "html_url": "https://github.com/shanejonas/openrpc-mpc-server",
+    "created_at": "2024-12-03T03:34:12Z",
+    "updated_at": "2025-06-03T14:48:10Z",
+    "pushed_at": "2025-04-23T17:48:43Z",
+    "size": 16,
+    "stargazers_count": 34,
+    "watchers_count": 34,
+    "forks_count": 10,
+    "open_issues_count": 4,
+    "language": "JavaScript",
+    "license": "Apache License 2.0",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "shanejonas",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/364566?v=4",
+      "html_url": "https://github.com/shanejonas"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 10,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 4189
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 3,
+    "contributors_count": 1,
+    "package_json_version": "0.1.2"
+  },
+  "readme": "# OpenRPC MCP Server\n\nA Model Context Protocol (MCP) server that provides JSON-RPC functionality through [OpenRPC](https://open-rpc.org).\n\nhttps://github.com/user-attachments/assets/3447175a-f921-4ded-8250-b611edb2fb67\n\n## Features\n\n### Tools\n\n- `rpc_call` - Call arbitrary JSON-RPC methods\n  - Specify server URL, method name, and parameters\n  - Returns JSON-formatted results\n- `rpc_discover` - Discover available JSON-RPC methods\n  - Uses OpenRPC's `rpc.discover` specification\n  - Lists all methods on a given server\n\n## Development\n\nInstall dependencies:\n\n```bash\nnpm install\n```\n\nBuild the server:\n\n```bash\nnpm run build\n```\n\nFor development with auto-rebuild:\n\n```bash\nnpm run watch\n```\n\n## Installation\n\nTo use with Claude Desktop, add the server config:\n\nOn MacOS: `~/Library/Application Support/Claude/claude_desktop_config.json`\nOn Windows: `%APPDATA%/Claude/claude_desktop_config.json`\n\n```json\n{\n  \"mcpServers\": {\n    \"openrpc\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"openrpc-mcp-server\"]\n    }\n  }\n}\n```\n\n### Debugging\n\nSince MCP servers communicate over stdio, debugging can be challenging. We recommend using the [MCP Inspector](https://github.com/modelcontextprotocol/inspector):\n\n```bash\nnpm run inspector\n```\n\nThe Inspector will provide a URL to access debugging tools in your browser.\n"
+}

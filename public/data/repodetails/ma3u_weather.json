@@ -1,0 +1,51 @@
+{
+  "mcp_name": "ma3u/weather",
+  "mcp_description": "Provides a TypeScript-based weather service for integration with Claude Desktop using MCP.",
+  "mcp_id": "ma3u_weather",
+  "fetch_timestamp": "2025-06-23T06:19:11.662007Z",
+  "github_url": "https://github.com/ma3u/weather",
+  "repository": {
+    "name": "weather",
+    "full_name": "ma3u/weather",
+    "description": "Simple Weather MCP in Type Script",
+    "html_url": "https://github.com/ma3u/weather",
+    "created_at": "2025-04-07T12:10:19Z",
+    "updated_at": "2025-04-07T12:14:02Z",
+    "pushed_at": "2025-04-07T12:13:58Z",
+    "size": 5697,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "ma3u",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17936678?v=4",
+      "html_url": "https://github.com/ma3u"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 5990
+    },
+    "language_percentages": {
+      "TypeScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# Simple Weather MCP in Type Script\n\nNode tutorial based on the Quickstart guide\nhttps://modelcontextprotocol.io/quickstart/server#core-mcp-concepts\n\n\nClaude Desktop:Type in: How is the weather in Redmond (Microsoft)?\n\n1. Build the server:\n```bash\nnpm run build\n```\n\n2. Run the server:\n```bash\nnpm run start\n```\n\n3. Run the inspector + server:\n```bash \nnpx @modelcontextprotocol/inspector node build/index.js\n```\n\n![alt text](image.png)\n\n4. Add the server to Claude Desktop (MacOS) in file `~/.claudia/claude_desktop_config.json`:\n```json\n{\n  \"mcpServers\": {\n    \"weather\": {\n      \"command\": \"node\",\n      \"args\": [\n        \"/Users/ma3u/projects/weather/build/index.js\"\n      ]\n    }\n  }\n}\n```\n\n5. Restart Claude Desktop.\n"
+}

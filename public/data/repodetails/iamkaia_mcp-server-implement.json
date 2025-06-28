@@ -1,0 +1,50 @@
+{
+  "mcp_name": "iamkaia/mcp-server-implement",
+  "mcp_description": "A collection of five MCP servers for integration with Claude Desktop, offering functionalities like email management, web page fetching, document manipulation, and filesystem operations.",
+  "mcp_id": "iamkaia_mcp-server-implement",
+  "fetch_timestamp": "2025-06-23T04:54:34.278891Z",
+  "github_url": "https://github.com/iamkaia/mcp-server-implement",
+  "repository": {
+    "name": "mcp-server-implement",
+    "full_name": "iamkaia/mcp-server-implement",
+    "description": null,
+    "html_url": "https://github.com/iamkaia/mcp-server-implement",
+    "created_at": "2025-04-20T12:04:19Z",
+    "updated_at": "2025-04-20T16:10:35Z",
+    "pushed_at": "2025-04-20T16:10:32Z",
+    "size": 19,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "iamkaia",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/182495207?v=4",
+      "html_url": "https://github.com/iamkaia"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 4046
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# MCP Servers Collection\n\nThis repository hosts five Model Context Protocol (MCP) servers you can mount into Claude Desktop:\n\n1. **line-bot**  \n2. **email_mcp**  \n3. **fetch**  \n4. **word-document-service**  \n5. **filesystem**  \n\n## 🚀 Quick Start\n\n1. **line-bot(in different terminal)**  \n  ```\n  git clone https://github.com/iamkaia/email-mcp-server-simple.git\n  cd email-mcp-server-simple\n\n  ## **Set up Python env and install requirement thing(for _email_mcp_, )**  \n  python -m venv .venv\n  source .venv/bin/activate      # Windows: .\\.venv\\Scripts\\activate\n  pip install -r requirements.txt\n\n  ### Fill `.env`** (for `email_mcp` only—do **not** commit):\n  # SMTP\n  SMTP_SERVER=smtp.example.com\n  SMTP_PORT=587\n  SMTP_USERNAME=you@example.com\n  SMTP_PASSWORD=your_smtp_password\n\n  # IMAP\n  IMAP_SERVER=imap.example.com\n  IMAP_PORT=993\n  IMAP_USERNAME=you@example.com\n  IMAP_PASSWORD=your_imap_password\n\n  ## start\n  uvicorn main:app --reload --host 0.0.0.0 --port 8000\n  ```\n\n2. **line-bot-mcp(in different terminal)** :\n  ```\n  # Clone the repository\n  git clone git@github.com:line/line-bot-mcp-server.git\n  cd line-bot-mcp-server && npm install && npm run build\n  ```\n\n3. **fetch(in different terminal)**:\n  ```\n  pip install mcp-server-fetch\n  python -m mcp_server_fetch\n  ```\n\n4. **Word-MCP-Server(in different terminal)**:\n  ```\n  # Clone the repository\n  git clone https://github.com/GongRzhe/Office-Word-MCP-Server.git\n  cd Office-Word-MCP-Server\n\n  # Install dependencies\n  pip install -r requirements.txt\n\n  #start\n  python setup_mcp.py\n  ```\n5. **filesystem(in different terminal)**:\n  ```\n  # filesystem (via NPX) (you can ignore this step if you have nide and npx)\n  npx -y @modelcontextprotocol/server-filesystem \\\n    \"/Users/username/Desktop\" \\\n    \"/path/to/other/allowed/dir\"\n  ```\n\n---\n\n## 🔧 Claude Desktop Configuration\n\nEdit your `claude_desktop_config.json` to spawn each MCP tool:\n\n```jsonc\n{\n  \"mcpServers\": {\n    \"line-bot\": {\n      \"command\": \"node\",\n      \"args\": [\n        \"to\\\\the\\\\path\\\\line-bot-mcp-server\\\\dist\\\\index.js\"\n      ],\n      \"env\": {\n        \"CHANNEL_ACCESS_TOKEN\" : \"xxx\",\n        \"DESTINATION_USER_ID\" : \"xxx\"\n      }\n    },\n    \"email_mcp\": {\n      \"command\": \"to\\\\the\\\\path\\\\mcp-proxy.exe\",\n      \"args\": [\n        \"http://localhost:9000/mcp\"      \n      ]\n    },\n    \"fetch\": {\n      \"command\": \"python\",\n      \"args\": [\"-m\", \"mcp_server_fetch\"]\n    },\n    \"word-document-server\": {\n      \"command\": \"to\\\\the\\\\path\\\\python.exe\",\n      \"args\": [\n        \"to\\\\the\\\\path\\\\word_server.py\"\n      ],\n      \"env\": {\n        \"PYTHONPATH\": \"to\\\\the\\\\path\\\\Office-Word-MCP-Server\"\n      }\n    },\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"--yes\",\n        \"@modelcontextprotocol/server-filesystem\",\n        \"/Users/username/Desktop\",\n        \"/path/to/other/allowed/dir\"\n      ]\n    }\n  }\n}\n```\n\nAfter saving, **quit & restart** Claude Desktop. The 🔨 Tools menu will list all available MCP tools.\n\n---\n\n## 📦 Servers & Tools\n\n### 1. **line-bot**  \n- **Tools**: `send_line_message`, `broadcast_flex_message`, `broadcast_text_message`…\n- **Push** messages into a Line chat.\n\n### 2. **email_mcp**  \n- **Tools**: `send_email`, `list_recent_emails`\n\n### 3. **fetch**  \n- **Tools**: `fetch_page`\n- **Input**: `url` ⇒ **Output**: title, headings, snippet.\n\n### 4. **word-document-service**  \n- **Tools**:  \n  - `create_document`, `add_heading`, `insert_table`, `format_text`, `search_replace`, …  \n- **Manipulate** DOCX files programmatically.\n\n### 5. **filesystem**  \n- **Tools**:  \n  - `read_file`, `write_file`, `list_directory`, `search_files`, `get_file_info`, …  \n- **Operate** only within the mounted directories.\n\n#### detailed intro of tool_list [tools.md](./tools.md) \n\n---\n\n## 🎯 Example JSON‑RPC Calls (for reference only)\n\n```json\n// send_email\n{\n  \"tool\":\"send_email\",\n  \"input\":{\"params\":{\n    \"to\":[\"friend@example.com\"],\n    \"subject\":\"Hello\",\n    \"body\":\"This is a test.\",\n    \"html\":false\n  }}\n}\n\n// list_recent_emails\n{\n  \"tool\":\"list_recent_emails\",\n  \"input\":{\"params\":{\n    \"limit\":3\n  }}\n}\n\n// fetch_page\n{\n  \"tool\":\"fetch_page\",\n  \"input\":{\"params\":{\"url\":\"https://example.com\"}}\n}\n\n// create a Word doc\n{\n  \"tool\":\"create_document\",\n  \"input\":{\"params\":{\"filename\":\"report.docx\",\"title\":\"Sales Report\"}}\n}\n\n// filesystem read\n{\n  \"tool\":\"read_file\",\n  \"input\":{\"params\":{\"path\":\"to//the//path//notes.txt\"}}\n}\n```\n\n## 📃 License\n\nAll servers are MIT‑licensed. See each subfolder’s LICENSE for details."
+}

@@ -1,0 +1,114 @@
+{
+  "id": "f19db7fce1b7",
+  "owner": "yuna0x0",
+  "repoName": "hackmd-mcp",
+  "fullDescription": "A Model Context Protocol server for integrating [HackMD](https://hackmd.io)'s note-taking platform with AI assistants.",
+  "techStack": [
+    {
+      "name": "typescript",
+      "icon": "📘",
+      "color": "#3178c6"
+    }
+  ],
+  "serviceTypes": [
+    {
+      "type": "communication",
+      "label": "Communication",
+      "icon": "💬",
+      "description": "Facilitates communication and collaboration"
+    },
+    {
+      "type": "ai",
+      "label": "Ai",
+      "icon": "🤖",
+      "description": "Leverages AI and machine learning"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "moderate",
+    "maturity": "stable",
+    "deployment": [
+      "local"
+    ],
+    "featured": false,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 3.9,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "documentation",
+      "notes"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/yuna0x0/hackmd-mcp",
+    "owner": "HackMD",
+    "name": "HackMD",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.280Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "collaboration",
+    "documentation",
+    "business-productivity",
+    "notes",
+    "markdown",
+    "hackmd"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Moderate",
+      "color": "#eab308",
+      "icon": "🟡"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    }
+  ],
+  "icon": "💬",
+  "readme": null
+}

@@ -1,0 +1,122 @@
+{
+  "id": "e46d547b9de0",
+  "owner": "base",
+  "repoName": "base-mcp",
+  "fullDescription": "🎖️ 📇 ☁️ - Base Network integration for onchain tools, allowing interaction with Base Network and Coinbase API for wallet management, fund transfers, smart contracts, and DeFi operations",
+  "techStack": [
+    {
+      "name": "typescript",
+      "icon": "📘",
+      "color": "#3178c6"
+    }
+  ],
+  "serviceTypes": [
+    {
+      "type": "integration",
+      "label": "Integration",
+      "icon": "🔗",
+      "description": "Connects to external APIs and services"
+    },
+    {
+      "type": "ai",
+      "label": "Ai",
+      "icon": "🤖",
+      "description": "Leverages AI and machine learning"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "moderate",
+    "maturity": "stable",
+    "deployment": [
+      "saas"
+    ],
+    "featured": true,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 12.65,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "crypto",
+      "blockchain",
+      "wallet"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/base/base-mcp",
+    "owner": "base",
+    "name": "base-mcp",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.279Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "wallet",
+    "coinbase",
+    "finance-crypto",
+    "smart contracts",
+    "blockchain",
+    "base network",
+    "defi"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Moderate",
+      "color": "#eab308",
+      "icon": "🟡"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    },
+    {
+      "type": "featured",
+      "label": "Featured",
+      "color": "#3b82f6",
+      "icon": "⭐"
+    }
+  ],
+  "icon": "🔗",
+  "readme": null
+}

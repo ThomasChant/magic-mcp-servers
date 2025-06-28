@@ -1,0 +1,51 @@
+{
+  "mcp_name": "vitolrosario/http-request-mcp",
+  "mcp_description": "Facilitates HTTP requests using the MCP server, supporting various HTTP methods for streamlined web interactions.",
+  "mcp_id": "vitolrosario_http-request-mcp",
+  "fetch_timestamp": "2025-06-23T09:19:40.230867Z",
+  "github_url": "https://github.com/vitolrosario/http-request-mcp",
+  "repository": {
+    "name": "http-request-mcp",
+    "full_name": "vitolrosario/http-request-mcp",
+    "description": null,
+    "html_url": "https://github.com/vitolrosario/http-request-mcp",
+    "created_at": "2025-04-25T20:05:35Z",
+    "updated_at": "2025-04-25T21:16:30Z",
+    "pushed_at": "2025-04-25T21:16:27Z",
+    "size": 9,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "JavaScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "vitolrosario",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/40066144?v=4",
+      "html_url": "https://github.com/vitolrosario"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 2599
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "1.0.6"
+  },
+  "readme": "# http-request-mcp\n\n## Overview\n\n`http-request-mcp` is a simple tool designed for making HTTP requests. It uses the MCP (Model Context Protocol) server to handle requests and supports various HTTP methods.\n\n## Installation\n\nTo install the necessary dependencies, use the following command:\n\n```bash\npnpm install\n```\n\n## Usage\n\nTo start the server, run:\n\n```bash\npnpm start\n```\n\n## Example config\nNPX \n```json\n{\n    \"mcpServers\": {\n        \"http-request\": {\n            \"command\": \"npx\",\n            \"args\": [\n                \"-y\",\n                \"@vrosario/http-request-mcp\",\n            ]\n        }\n    }\n}\n```\n\nAlternatively, you can install the HTTP Request MCP server using the VS Code CLI:\n\n```bash\n# For VS Code\ncode --add-mcp '{\"name\":\"http-request\",\"command\":\"npx\",\"args\":[\"-y\", \"@vrosario/http-request-mcp\"]}'\n```\n\n## Parameters\n\n- **URL**: The URL to make the request to.\n- **Method**: The HTTP method to use (GET, POST, PUT, DELETE).\n- **Headers**: Optional headers to include in the request.\n- **Body**: Optional body of the request.\n\n## License\n\nThis project is licensed under the ISC License.\n"
+}

@@ -1,0 +1,110 @@
+{
+  "id": "b0533622c88e",
+  "owner": "ddukbg",
+  "repoName": "github-enterprise-mcp",
+  "fullDescription": "📇 ☁️ 🏠 - MCP server for GitHub Enterprise API integration",
+  "techStack": [],
+  "serviceTypes": [
+    {
+      "type": "integration",
+      "label": "Integration",
+      "icon": "🔗",
+      "description": "Connects to external APIs and services"
+    },
+    {
+      "type": "development",
+      "label": "Development",
+      "icon": "👨‍💻",
+      "description": "Assists with software development"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "advanced",
+    "maturity": "stable",
+    "deployment": [
+      "saas"
+    ],
+    "featured": false,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 7.6,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "git",
+      "github",
+      "version control"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/ddukbg/github-enterprise-mcp",
+    "owner": "ddukbg",
+    "name": "github-enterprise-mcp",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.279Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "integration",
+    "api",
+    "development-tools",
+    "git",
+    "version control",
+    "github",
+    "enterprise"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Advanced",
+      "color": "#ef4444",
+      "icon": "🔴"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    }
+  ],
+  "icon": "🔗",
+  "readme": null
+}

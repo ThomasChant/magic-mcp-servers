@@ -1,0 +1,54 @@
+{
+  "mcp_name": "openMF/mcp-mifosx",
+  "mcp_description": "☁️ 🏠 -  A core banking integration for managing clients, loans, savings, shares, financial transactions and generating financial reports.",
+  "mcp_id": "openMF_mcp-mifosx",
+  "fetch_timestamp": "2025-06-23T07:20:51.094013Z",
+  "github_url": "https://github.com/openMF/mcp-mifosx",
+  "repository": {
+    "name": "mcp-mifosx",
+    "full_name": "openMF/mcp-mifosx",
+    "description": "Model Context Protocol - MCP for Mifos X",
+    "html_url": "https://github.com/openMF/mcp-mifosx",
+    "created_at": "2025-03-26T18:04:18Z",
+    "updated_at": "2025-06-21T01:56:45Z",
+    "pushed_at": "2025-06-21T01:57:02Z",
+    "size": 465,
+    "stargazers_count": 7,
+    "watchers_count": 7,
+    "forks_count": 8,
+    "open_issues_count": 1,
+    "language": "Java",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "openMF",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3473607?v=4",
+      "html_url": "https://github.com/openMF"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 8,
+    "subscribers_count": 3,
+    "languages": {
+      "Java": 82215,
+      "JavaScript": 16452,
+      "Python": 10701
+    },
+    "language_percentages": {
+      "Java": 75.17,
+      "JavaScript": 15.04,
+      "Python": 9.78
+    },
+    "pull_requests_count": 145,
+    "contributors_count": 7
+  },
+  "readme": "# Mifos X - AI - Model Context Protocol (MCP) for Apache Fineract®\n\nThis project provides Model Context Protocol (MCP) servers for interacting with the Apache Fineract API, enabling AI agents to access financial data and operations. Implementations are available in **Python**, **Java (Quarkus)**, and **Node.js**.\n\n---\n\n## MCP Developer Tools\n\nUse the **MCP Inspector** to test and debug your server:\n\n```bash\nnpx @modelcontextprotocol/inspector\n```\n\nThis starts a local web UI to connect to your MCP server via STDIO or SSE.\n\n---\n\n## Getting Started\n\n### 1. Choose Your Implementation\n\n#### **Python (Flask)**\n**Prerequisites**: Python 3.8+, `flask`, `mcp.server.fastmcp`\n\n**Steps**:\n1. Install dependencies:\n   ```bash\n   pip install mcp[cli] uv flask\n   ```\n\n   > **Note for zsh users**: If you're using zsh, be sure to quote extras to avoid shell expansion errors:\n   >\n   > ```bash\n   > pip install 'mcp[cli]' uv flask\n   > ```\n2. Run the server:\n   ```bash\n   mcp dev app.py\n   ```\n\n#### **Java (Quarkus)**\n**Prerequisites**: JDK 17+, Maven\n\n**Steps**:\n1. Configure environment variables in your shell or IDE:\n   ```bash\n   export MIFOSX_BASE_URL=\"https://your-fineract-instance\"\n   export MIFOSX_BASIC_AUTH_TOKEN=\"your_api_token\"\n   export MIFOS_TENANT_ID=\"default\"\n   ```\n2. Run via JBang (for quick execution):\n   ```bash\n   jbang --quiet org.mifos.community.ai:mcp-server:1.0.0-SNAPSHOT:runner\n   ```\n3. (Optional) Build a native executable:\n   ```bash\n   ./mvnw package -Dnative\n   ./target/mcp-server-1.0.0-SNAPSHOT-runner\n   ```\n\n#### **Node.js**\n**Prerequisites**: Node.js 16+, npm\n\n**Steps**:\n1. Install dependencies:\n   ```bash\n   cd nodejs && npm install\n   ```\n2. Configure environment variables in `.env`:\n   ```bash\n   cp .env.example .env\n   ```\n3. Run the server:\n   ```bash\n   npm run dev\n   ```\n4. Test with the built-in `inspect` script:\n   ```bash\n   npm run inspect\n   ```\n\n---\n\n## Configuration\n\nAll implementations require the following environment variables:\n\n| Variable               | Description                          |\n|------------------------|--------------------------------------|\n| `FINERACT_BASE_URL`    | Base URL of your Fineract instance   |\n| `FINERACT_BASIC_AUTH_TOKEN` | API authentication token |\n| `FINERACT_TENANT_ID`   | Tenant identifier (default: `default`) |\n\n**Note**: Java uses `MIFOSX_` prefixed variables (e.g., `MIFOSX_BASE_URL`).\n\n---\n\n## Available Resources\n\nThe MCP server exposes these resources:\n\n### Core Resources\n- `fineract://clients`  \n  List all clients\n- `fineract://clients/{clientId}`  \n  Get details for a specific client\n- `fineract://loans`  \n  List all loans\n- `fineract://loans/{loanId}`  \n  Get details for a specific loan\n\n### Tools\n- `search_clients`  \n  Search clients by name/attributes\n- `create_client`  \n  Create a new client (Node.js/Python only)\n- `update_loan_status`  \n  Update loan status (Java/Python only)\n\n---\n\n## Building Native Executables (Java Only)\n\nFor Java (Quarkus), create a native executable:\n```bash\n./mvnw package -Dnative -Dquarkus.native.container-build=true\n./target/mcp-server-1.0.0-SNAPSHOT-runner\n```\n\n---\n\n## Testing with MCP Inspector\n\n1. Start your MCP server (Python/Java/Node.js).\n2. Run the inspector:\n   ```bash\n   npx @modelcontextprotocol/inspector\n   ```\n3. Connect to the server using the `STDIO` transport.\n\n---\n\n## Contributing\n\n- **Python**: Modify `python/app.py` and `server.js` for new resources.\n- **Java**: Extend `src/main/java/org/mifos/community/ai/...` for new endpoints.\n- **Node.js**: Update `nodejs/src/server.js` and add Zod schemas for validation.\n\n---\n\n## Contact\n\n- Apache Fineract Community: [https://community.apache.org/](https://community.apache.org/)\n- MCP Specification: [https://modelcontextprotocol.org](https://modelcontextprotocol.org)\n\n---\n\n## Guides\n\n- **Java/Quarkus**: [Quarkus MCP Guide](https://docs.quarkiverse.io/quarkus-mcp-server/dev/index.html)\n- **Node.js**: Use `npm run inspect` for live reloading\n- **Python**: Run with `python app.py` and configure `.env`\n\n---\n\n\n### Key Features:\n- **Standardized API access** via `fineract://` URIs\n- **MCP-compliant** with STDIO/SSE transports\n- **Environment-agnostic** configuration\n\n"
+}

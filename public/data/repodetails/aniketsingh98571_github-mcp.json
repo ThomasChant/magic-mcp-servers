@@ -1,0 +1,57 @@
+{
+  "mcp_name": "aniketsingh98571/github-mcp",
+  "mcp_description": "Facilitates seamless interaction with GitHub's API through a Model Control Protocol interface, enabling efficient repository management and user information retrieval.",
+  "mcp_id": "aniketsingh98571_github-mcp",
+  "fetch_timestamp": "2025-06-23T01:08:45.078873Z",
+  "github_url": "https://github.com/aniketsingh98571/github-mcp",
+  "repository": {
+    "name": "github-mcp",
+    "full_name": "aniketsingh98571/github-mcp",
+    "description": "GitHub MCP (Model Control Protocol)",
+    "html_url": "https://github.com/aniketsingh98571/github-mcp",
+    "created_at": "2025-04-16T13:17:52Z",
+    "updated_at": "2025-04-16T13:32:15Z",
+    "pushed_at": "2025-04-16T13:30:42Z",
+    "size": 15,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "JavaScript",
+    "license": null,
+    "topics": [
+      "ai",
+      "github",
+      "mcp",
+      "mcp-server",
+      "octokit"
+    ],
+    "default_branch": "master",
+    "owner": {
+      "login": "aniketsingh98571",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/63097956?v=4",
+      "html_url": "https://github.com/aniketsingh98571"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 8063
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# GitHub MCP (Model Control Protocol)\n\nThis is a GitHub integration service that provides a Model Control Protocol (MCP) interface for interacting with GitHub's API.\n\n## Setup and Configuration\n\n### Prerequisites\n\n- Node.js installed on your system\n- A GitHub Personal Access Token (PAT)\n\n### Environment Setup\n\nThe MCP server uses environment variables configured directly in your Cursor/Claude Desktop MCP settings. No separate `.env` file is needed.\n\n## Running the MCP Server\n\nConfigure Cursor/Claude Desktop to use the MCP server by adding the following to your MCP configuration:\n\n```json\n{\n  \"mcpServers\": {\n    \"GitHub MCP\": {\n      \"command\": \"node\",\n      \"args\": [\"/path/to/your/github-mcp/src/index.js\"],\n      \"env\": {\n        \"GITHUB_TOKEN\": \"your_github_token_here\"\n      }\n    }\n  }\n}\n```\n\nReplace `/path/to/your/github-mcp` with the actual path to your GitHub MCP project directory.\n\n## Features\n\nThe GitHub MCP provides the following capabilities:\n\n- User information retrieval\n- Repository management\n- Repository name updates\n- And more GitHub API integrations\n\n## Development\n\n### Project Structure\n\n```\ngithub-mcp/\n├── src/\n│   └── index.js\n├── .env\n├── package.json\n└── Readme.md\n```\n"
+}

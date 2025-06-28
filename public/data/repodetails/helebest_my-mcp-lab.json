@@ -1,0 +1,50 @@
+{
+  "mcp_name": "helebest/my-mcp-lab",
+  "mcp_description": "Facilitates the setup and execution of an SSE MCP server for seamless integration with various desktop applications.",
+  "mcp_id": "helebest_my-mcp-lab",
+  "fetch_timestamp": "2025-06-23T04:44:06.697367Z",
+  "github_url": "https://github.com/helebest/my-mcp-lab",
+  "repository": {
+    "name": "my-mcp-lab",
+    "full_name": "helebest/my-mcp-lab",
+    "description": null,
+    "html_url": "https://github.com/helebest/my-mcp-lab",
+    "created_at": "2025-04-26T10:35:33Z",
+    "updated_at": "2025-04-28T02:55:23Z",
+    "pushed_at": "2025-04-28T02:55:20Z",
+    "size": 185,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 1,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "helebest",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1274641?v=4",
+      "html_url": "https://github.com/helebest"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 16425
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 2
+  },
+  "readme": "# Setup Environment\n```bash\nuv init <project_name>\ncd <project_name>\nuv add \"mcp[cli]\" httpx\n```\n\n# Run MCP Inspector\n## Option 1\n```bash\nnpx @modelcontextprotocol/inspector\n```\n## Option 2\n```bash\nuv run mcp dev <mcp_sse_server.py>\n```\n\n# Start SSE MCP Server\n```bash\nuv run <mcp_sse_server.py>\n```\n\n# Config SSE MCP Server\n\n## For Trae, Claude Desktop\n```json\n{\n  \"mcpServers\": {\n    \"<mcp_sse_server>\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"mcp-remote\",\n        \"http://localhost:8080/sse\"\n      ]\n    }\n  }\n}\n```\n\n## For Cursor, Cherry Studio\n\n```text\nhttp://localhost:8080/sse\n```"
+}

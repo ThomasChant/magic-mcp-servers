@@ -1,0 +1,75 @@
+{
+  "mcp_name": "seekrays/mcp-monitor",
+  "mcp_description": "🏎️ 🏠 - A system monitoring tool that exposes system metrics via the Model Context Protocol (MCP). This tool allows LLMs to retrieve real-time system information through an MCP-compatible interface.（support CPU、Memory、Disk、Network、Host、Process）",
+  "mcp_id": "seekrays_mcp-monitor",
+  "fetch_timestamp": "2025-06-23T08:18:37.282618Z",
+  "github_url": "https://github.com/seekrays/mcp-monitor",
+  "repository": {
+    "name": "mcp-monitor",
+    "full_name": "seekrays/mcp-monitor",
+    "description": "A system monitoring tool that exposes system metrics via the Model Context Protocol (MCP). This tool allows LLMs to retrieve real-time system information through an MCP-compatible interface.",
+    "html_url": "https://github.com/seekrays/mcp-monitor",
+    "created_at": "2025-03-19T06:05:52Z",
+    "updated_at": "2025-06-21T14:16:00Z",
+    "pushed_at": "2025-04-08T14:57:26Z",
+    "size": 692,
+    "stargazers_count": 42,
+    "watchers_count": 42,
+    "forks_count": 9,
+    "open_issues_count": 1,
+    "language": "Go",
+    "license": "Apache License 2.0",
+    "topics": [
+      "computer",
+      "mcp",
+      "mcp-server",
+      "monitor",
+      "monitoring",
+      "pc-monitor",
+      "system-monitoring"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "seekrays",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/200639714?v=4",
+      "html_url": "https://github.com/seekrays"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 9,
+    "subscribers_count": 2,
+    "languages": {
+      "Go": 15785,
+      "Makefile": 1626
+    },
+    "language_percentages": {
+      "Go": 90.66,
+      "Makefile": 9.34
+    },
+    "pull_requests_count": 2,
+    "contributors_count": 2,
+    "latest_release": {
+      "tag_name": "v0.0.1",
+      "name": "v0.0.1 release",
+      "published_at": "2025-03-19T07:16:19Z",
+      "body": "## Features\r\n\r\nThis tool provides the following monitoring capabilities:\r\n\r\n- **CPU Information**: Usage percentage, core count, and detailed CPU info\r\n- **Memory Information**: Virtual and swap memory usage\r\n- **Disk Information**: Disk usage, partitions, and I/O statistics\r\n- **Network Information**: Network interfaces, connections, and traffic statistics\r\n- **Host Information**: System details, uptime, boot time, and users\r\n- **Process Information**: Process listing, sorting, and detailed per-process statistics",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.0.1",
+        "commit_sha": "5663ccf2349df7ede388b4f64c5556ce1c7cda84"
+      }
+    ],
+    "latest_version": "v0.0.1"
+  },
+  "readme": "# MCP System Monitor\n\n[![Discord](https://img.shields.io/badge/Discord-Join%20Chat-blue?style=flat&logo=discord)](https://discord.gg/kbMJ9Qpf)\n\nA system monitoring tool that exposes system metrics via the Model Context Protocol (MCP). This tool allows LLMs to retrieve real-time system information through an MCP-compatible interface.\n\n![](./doc/snapshot-1.png)\n\n## Features\n\nThis tool provides the following monitoring capabilities:\n\n- **CPU Information**: Usage percentage, core count, and detailed CPU info\n- **Memory Information**: Virtual and swap memory usage\n- **Disk Information**: Disk usage, partitions, and I/O statistics\n- **Network Information**: Network interfaces, connections, and traffic statistics\n- **Host Information**: System details, uptime, boot time, and users\n- **Process Information**: Process listing, sorting, and detailed per-process statistics\n\n\n## Available Tools\n\n### 1. CPU Information\n\n```\nTool: get_cpu_info\nDescription: Get CPU information and usage\nParameters:\n  - per_cpu (boolean, default: false): Whether to return data for each core\n```\n\n### 2. Memory Information\n\n```\nTool: get_memory_info\nDescription: Get system memory usage information\nParameters: None\n```\n\n### 3. Disk Information\n\n```\nTool: get_disk_info\nDescription: Get disk usage information\nParameters:\n  - path (string, default: \"/\"): Specify the disk path to query\n  - all_partitions (boolean, default: false): Whether to return information for all partitions\n```\n\n### 4. Network Information\n\n```\nTool: get_network_info\nDescription: Get network interface and traffic information\nParameters:\n  - interface (string, optional): Specify the network interface name to query\n```\n\n### 5. Host Information\n\n```\nTool: get_host_info\nDescription: Get host system information\nParameters: None\n```\n\n### 6. Process Information\n\n```\nTool: get_process_info\nDescription: Get process information\nParameters:\n  - pid (number, optional): Process ID to get detailed information for a specific process\n  - limit (number, default: 10): Limit the number of processes returned\n  - sort_by (string, default: \"cpu\"): Sort field (cpu, memory, pid, name)\n```\n\n\n## Installation\n\n```bash\ngit clone https://github.com/seekrays/mcp-monitor.git\ncd mcp-monitor\nmake build\n```\n\n## Usage\n\nRun the compiled binary:\n\n```bash\n./mcp-monitor\n```\n\nThe server starts in stdio mode, ready to communicate with an MCP-compatible LLM client.\n\n\n## Contributing\n\nContributions are welcome! Please feel free to submit a Pull Request. "
+}

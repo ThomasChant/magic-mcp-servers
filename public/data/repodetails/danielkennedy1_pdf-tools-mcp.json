@@ -1,0 +1,63 @@
+{
+  "mcp_name": "danielkennedy1/pdf-tools-mcp",
+  "mcp_description": "🐍 - PDF download, view & manipulation utilities.",
+  "mcp_id": "danielkennedy1_pdf-tools-mcp",
+  "fetch_timestamp": "2025-06-23T02:26:24.036912Z",
+  "github_url": "https://github.com/danielkennedy1/pdf-tools-mcp",
+  "repository": {
+    "name": "pdf-tools-mcp",
+    "full_name": "danielkennedy1/pdf-tools-mcp",
+    "description": null,
+    "html_url": "https://github.com/danielkennedy1/pdf-tools-mcp",
+    "created_at": "2025-04-19T17:25:47Z",
+    "updated_at": "2025-06-21T19:50:09Z",
+    "pushed_at": "2025-05-17T13:05:26Z",
+    "size": 1174,
+    "stargazers_count": 18,
+    "watchers_count": 18,
+    "forks_count": 3,
+    "open_issues_count": 1,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "danielkennedy1",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/82839929?v=4",
+      "html_url": "https://github.com/danielkennedy1"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 3,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 14895,
+      "Dockerfile": 406
+    },
+    "language_percentages": {
+      "Python": 97.35,
+      "Dockerfile": 2.65
+    },
+    "pull_requests_count": 4,
+    "contributors_count": 3,
+    "tags": [
+      {
+        "name": "0.3.0",
+        "commit_sha": "78f3225eb7c7861660e0d74d84ba0558698299b1"
+      },
+      {
+        "name": "0.2.0",
+        "commit_sha": "5cdcf5954bd6a1540d7038b563ffb7ce67cb0e39"
+      }
+    ],
+    "latest_version": "0.3.0"
+  },
+  "readme": "# PDF Tools MCP\n\n[![smithery badge](https://smithery.ai/badge/@danielkennedy1/pdf-tools-mcp)](https://smithery.ai/server/@danielkennedy1/pdf-tools-mcp)\n\nA comprehensive set of PDF manipulation tools built with the Model Context Protocol (MCP) framework.\n\n## Features\n\n### Local PDF Operations\n- **Display**: Render PDF pages as images\n- **Merge**: Combine multiple pages into a single long page\n- **Metadata**: Extract document metadata\n- **Text**: Extract text blocks and detailed text information\n- **Snippets**: Create freeform or full-width snippets from PDF pages\n- **Fuse**: Combine pages from multiple documents into a single document\n\n### Remote PDF Operations\n- **Display**: Render remote PDF pages as images\n- **Download**: Fetch PDFs from URLs to local storage\n\n## Installation\n\n### Installing via Smithery\n\nTo install PDF Tools for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@danielkennedy1/pdf-tools-mcp):\n\n```bash\nnpx -y @smithery/cli install @danielkennedy1/pdf-tools-mcp --client claude\n```\n\n### Manual Installation\n```bash\n# Clone the repository\ngit clone https://github.com/yourusername/pdf-tools-mcp.git\ncd pdf-tools-mcp\n\n# Install dependencies\nuv pip install -e .\n```\n\n## Usage\n\nStart the MCP server:\n\n```bash\npython -m src.main\n```\n\nThe server provides PDF manipulation endpoints through the MCP protocol.\n\n## Development\n\n- Python 3.12+ required\n- Uses the MCP framework for tool registration\n- PDF documents are stored with UUID4 filenames for security\n\n```bash\n# Update dependencies\nuv pip install -e . --upgrade\n\n# Commit changes (uses conventional commit format)\ncz commit\n```\n\n## Dependencies\n\n- [MCP Framework](https://github.com/modelcontextprotocol/python-sdk)\n- [PyMuPDF](https://github.com/pymupdf/PyMuPDF)\n- aiohttp/aiofiles for async operations\n- python-magic-bin for file type detection\n\n## License\n\nMIT. See [LICENSE](LICENSE).\n"
+}

@@ -1,0 +1,103 @@
+{
+  "mcp_name": "Linear",
+  "mcp_description": "📇 ☁️ 🍎 🪟 🐧 - Integrates with Linear project management system",
+  "mcp_id": "tacticlaunch_mcp-linear",
+  "fetch_timestamp": "2025-06-23T06:11:10.832553Z",
+  "github_url": "https://github.com/tacticlaunch/mcp-linear",
+  "repository": {
+    "name": "mcp-linear",
+    "full_name": "tacticlaunch/mcp-linear",
+    "description": "MCP server that enables AI assistants to interact with Linear project management system through natural language, allowing users to retrieve, create, and update issues, projects, and teams.",
+    "html_url": "https://github.com/tacticlaunch/mcp-linear",
+    "created_at": "2025-03-23T15:27:19Z",
+    "updated_at": "2025-06-20T01:34:59Z",
+    "pushed_at": "2025-04-02T11:25:52Z",
+    "size": 751,
+    "stargazers_count": 83,
+    "watchers_count": 83,
+    "forks_count": 10,
+    "open_issues_count": 5,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [
+      "claude",
+      "cursor",
+      "linear",
+      "mcp"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "tacticlaunch",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/162846290?v=4",
+      "html_url": "https://github.com/tacticlaunch"
+    },
+    "has_issues": true,
+    "has_projects": false,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 10,
+    "subscribers_count": 4,
+    "languages": {
+      "TypeScript": 125124,
+      "JavaScript": 2913,
+      "Dockerfile": 653
+    },
+    "language_percentages": {
+      "TypeScript": 97.23,
+      "JavaScript": 2.26,
+      "Dockerfile": 0.51
+    },
+    "pull_requests_count": 6,
+    "contributors_count": 3,
+    "latest_release": {
+      "tag_name": "v1.0.9",
+      "name": "v1.0.9",
+      "published_at": "2025-04-02T11:25:53Z",
+      "body": "## What's Changed\n* fix: allow tool calls with no arguments by @Talljoe in https://github.com/tacticlaunch/mcp-linear/pull/7\n\n## New Contributors\n* @Talljoe made their first contribution in https://github.com/tacticlaunch/mcp-linear/pull/7\n\n**Full Changelog**: https://github.com/tacticlaunch/mcp-linear/compare/v1.0.8...v1.0.9",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v1.0.9",
+        "commit_sha": "ec0975efcee5ecb6653c125045ed735a828fa6ff"
+      },
+      {
+        "name": "v1.0.8",
+        "commit_sha": "e3d328395e1c01a9ae01423a6effd7dbf58741f9"
+      },
+      {
+        "name": "v1.0.7",
+        "commit_sha": "14bd2d831085bd68e8326c77ea62827516ecb466"
+      },
+      {
+        "name": "v1.0.6",
+        "commit_sha": "b152eedc0fbd3ecc7c18c2fb9c498ecb9060f82b"
+      },
+      {
+        "name": "v1.0.5",
+        "commit_sha": "eb8a955cf8e55258231f406a7cadcdbe1ea26acc"
+      },
+      {
+        "name": "v1.0.4",
+        "commit_sha": "7ddfc010103ffd5b9171f0e35486a7c18d44d30d"
+      },
+      {
+        "name": "v1.0.3",
+        "commit_sha": "270c8b3147b8057d24091fdfc5b1527e9743bcff"
+      },
+      {
+        "name": "v1.0.2",
+        "commit_sha": "1d1a5587624896946160384fa030bc1d229d4140"
+      }
+    ],
+    "latest_version": "v1.0.9",
+    "package_json_version": "1.0.9"
+  },
+  "readme": "<p align=\"center\">\n  <img src=\"https://github.com/tacticlaunch/mcp-linear/blob/main/docs/linear-app-icon.png?raw=true\" alt=\"Linear App Icon\" width=\"250\" height=\"250\">\n</p>\n\n# MCP Linear\n\nA Model Context Protocol (MCP) server implementation for the Linear GraphQL API that enables AI assistants to interact with Linear project management systems.\n\n![MCP Linear](https://img.shields.io/badge/MCP-Linear-blue)\n[![npm version](https://img.shields.io/npm/v/@tacticlaunch/mcp-linear.svg)](https://www.npmjs.com/package/@tacticlaunch/mcp-linear)\n[![smithery badge](https://smithery.ai/badge/@tacticlaunch/mcp-linear)](https://smithery.ai/server/@tacticlaunch/mcp-linear)\n\n<a href=\"https://glama.ai/mcp/servers/@tacticlaunch/mcp-linear\">\n  <img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/@tacticlaunch/mcp-linear/badge\" />\n</a>\n\n## Features\n\nMCP Linear bridges the gap between AI assistant and Linear (project management tool) by implementing the MCP protocol. This allows to:\n\n- Retrieve issues, projects, teams, and other data from Linear\n- Create and update issues\n- Change issue status\n- Assign issues to team members\n- Add comments\n- Create projects and teams\n\n## Example prompts\n\nOnce connected, you can use prompts like:\n\n- \"Show me all my Linear issues\"\n- \"Create a new issue titled 'Fix login bug' in the Frontend team\"\n- \"Change the status of issue FE-123 to 'In Progress'\"\n- \"Assign issue BE-456 to John Smith\"\n- \"Add a comment to issue UI-789: 'This needs to be fixed by Friday'\"\n\n## Installation\n\n### Getting Your Linear API Token\n\nTo use MCP Linear, you'll need a Linear API token. Here's how to get one:\n\n1. Log in to your Linear account at [linear.app](https://linear.app)\n2. Click on organization avatar (in the top-left corner)\n3. Select **Settings**\n4. Navigate to **Security & access** in the left sidebar\n5. Under **Personal API Keys** click **New API Key**\n6. Give your key a name (e.g., `MCP Linear Integration`)\n7. Copy the generated API token and store it securely - you won't be able to see it again!\n\n### Installing via [Smithery](https://smithery.ai/server/@tacticlaunch/mcp-linear) (Recommended)\n\n- To install MCP Linear for Cursor:\n\n```bash\nnpx -y @smithery/cli install @tacticlaunch/mcp-linear --client cursor\n```\n\n- To install MCP Linear for Claude Desktop:\n\n```bash\nnpx -y @smithery/cli install @tacticlaunch/mcp-linear --client claude\n```\n\n### Manual Configuration\n\nAdd the following to your MCP settings file:\n\n```json\n{\n  \"mcpServers\": {\n    \"linear\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@tacticlaunch/mcp-linear\"],\n      \"env\": {\n        \"LINEAR_API_TOKEN\": \"<YOUR_TOKEN>\"\n      }\n    }\n  }\n}\n```\n\n#### Client-Specific Configuration Locations\n\n- Cursor: `~/.cursor/mcp.json`\n- Claude Desktop: `~/Library/Application Support/Claude/claude_desktop_config.json`\n- Claude VSCode Extension: `~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json`\n- GoMCP: `~/.config/gomcp/config.yaml`\n\n### Manual run\n\nPrerequisites\n\n- Node.js (v18+)\n- NPM or Yarn\n- Linear API token\n\n```bash\n# Install globally\nnpm install -g @tacticlaunch/mcp-linear\n\n# Or clone and install locally\ngit clone https://github.com/tacticlaunch/mcp-linear.git\ncd mcp-linear\nnpm install\nnpm link  # Makes the package available globally\n```\n\n#### Running the Server\n\nRun the server with your Linear API token:\n\n```bash\nmcp-linear --token YOUR_LINEAR_API_TOKEN\n```\n\nOr set the token in your environment and run without arguments:\n\n```bash\nexport LINEAR_API_TOKEN=YOUR_LINEAR_API_TOKEN\nmcp-linear\n```\n\n## Available Tools\n\nSee [TOOLS.md](https://github.com/tacticlaunch/mcp-linear/blob/main/TOOLS.md) for a complete list of available tools and planned features.\n\n## Development\n\nSee [DEVELOPMENT.md](https://github.com/tacticlaunch/mcp-linear/blob/main/DEVELOPMENT.md) for more information on how to develop locally.\n\n## Links\n\n[tacticlaunch/cursor-memory-bank](https://github.com/tacticlaunch/cursor-memory-bank) - If you are a developer seeking to enhance your workflow with Cursor, consider giving it a try.\n\n\n## License\n\nThis project is licensed under the MIT License - see the LICENSE file for details.\n"
+}

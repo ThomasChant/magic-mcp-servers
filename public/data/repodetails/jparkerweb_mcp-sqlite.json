@@ -1,0 +1,83 @@
+{
+  "mcp_name": "jparkerweb/mcp-sqlite",
+  "mcp_description": "📇 🏠 - Model Context Protocol (MCP) server that provides comprehensive SQLite database interaction capabilities.",
+  "mcp_id": "jparkerweb_mcp-sqlite",
+  "fetch_timestamp": "2025-06-23T05:35:56.705688Z",
+  "github_url": "https://github.com/jparkerweb/mcp-sqlite",
+  "repository": {
+    "name": "mcp-sqlite",
+    "full_name": "jparkerweb/mcp-sqlite",
+    "description": "🐇 Model Context Protocol (MCP) server that provides comprehensive SQLite database interaction capabilities",
+    "html_url": "https://github.com/jparkerweb/mcp-sqlite",
+    "created_at": "2025-04-05T03:28:31Z",
+    "updated_at": "2025-06-19T12:41:56Z",
+    "pushed_at": "2025-06-02T21:23:24Z",
+    "size": 435,
+    "stargazers_count": 17,
+    "watchers_count": 17,
+    "forks_count": 2,
+    "open_issues_count": 1,
+    "language": "JavaScript",
+    "license": "MIT License",
+    "topics": [
+      "aitooling",
+      "cursor",
+      "database",
+      "development",
+      "mcp",
+      "nodejs",
+      "sqlite",
+      "windsurf"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "jparkerweb",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3073864?v=4",
+      "html_url": "https://github.com/jparkerweb"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 2,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 13489
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "latest_release": {
+      "tag_name": "1.0.7",
+      "name": "v1.0.7 - ✌️ VS Code is a Freind Too",
+      "published_at": "2025-06-02T21:23:24Z",
+      "body": "## [1.0.7] - 2025-06-02\r\n### 📦 Updated\r\n- Added a \"description\" parameter to each tool definitions for better Agent selection\r\n\r\n### 🐛 Fixed\r\n- Resolved a know validation issue with VS Code that requires stricter JSON schema validation",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "1.0.7",
+        "commit_sha": "1d6662d79810a862e3914a7bf332cf70c6827c99"
+      },
+      {
+        "name": "1.0.1",
+        "commit_sha": "418430e92b08bfb155f090f022d2879786a7dc67"
+      },
+      {
+        "name": "1.0.0",
+        "commit_sha": "5d22c60c12092605328455c5c783970578ec4275"
+      }
+    ],
+    "latest_version": "1.0.7",
+    "package_json_version": "1.0.7"
+  },
+  "readme": "# 🐇 MCP SQLite Server\r\nThis is a Model Context Protocol (MCP) server that provides comprehensive SQLite database interaction capabilities.\r\n\r\n![cursor-settings](https://raw.githubusercontent.com/jparkerweb/mcp-sqlite/refs/heads/main/.readme/mcp-sqlite.jpg)\r\n\r\n#### Maintained by\r\n<a href=\"https://www.equilllabs.com\">\r\n  <img src=\"https://raw.githubusercontent.com/jparkerweb/eQuill-Labs/refs/heads/main/src/static/images/logo-text-outline.png\" alt=\"eQuill Labs\" height=\"32\">\r\n</a>\r\n\r\n## Features\r\n- Complete CRUD operations (Create, Read, Update, Delete)\r\n- Database exploration and introspection\r\n- Execute custom SQL queries\r\n\r\n## Setup\r\n\r\nDefine the command in your IDE's MCP Server settings:\r\n\r\ne.g. `Cursor`:\r\n```json\r\n{\r\n    \"mcpServers\": {\r\n        \"MCP SQLite Server\": {\r\n            \"command\": \"npx\",\r\n            \"args\": [\r\n                \"-y\",\r\n                \"mcp-sqlite\",\r\n                \"<path-to-your-sqlite-database.db>\"\r\n            ]\r\n        }\r\n    }\r\n}\r\n```\r\n\r\ne.g. `VSCode`:\r\n```json\r\n{\r\n    \"servers\": {\r\n        \"MCP SQLite Server\": {\r\n            \"type\": \"stdio\",\r\n            \"command\": \"npx\",\r\n            \"args\": [\r\n                \"-y\",\r\n                \"mcp-sqlite\",\r\n                \"<path-to-your-sqlite-database.db>\"\r\n            ]\r\n        }\r\n    }\r\n}\r\n```\r\n\r\n![cursor-settings](https://raw.githubusercontent.com/jparkerweb/mcp-sqlite/refs/heads/main/.readme/cursor-mcp-settings.jpg)\r\n\r\nYour database path must be provided as an argument.\r\n\r\n## Available Tools\r\n\r\n### Database Information\r\n\r\n#### db_info\r\n\r\nGet detailed information about the connected database.\r\n\r\nExample:\r\n```json\r\n{\r\n  \"method\": \"tools/call\",\r\n  \"params\": {\r\n    \"name\": \"db_info\",\r\n    \"arguments\": {}\r\n  }\r\n}\r\n```\r\n\r\n#### list_tables\r\n\r\nList all tables in the database.\r\n\r\nExample:\r\n```json\r\n{\r\n  \"method\": \"tools/call\",\r\n  \"params\": {\r\n    \"name\": \"list_tables\",\r\n    \"arguments\": {}\r\n  }\r\n}\r\n```\r\n\r\n#### get_table_schema\r\n\r\nGet detailed information about a table's schema.\r\n\r\nParameters:\r\n- `tableName` (string): Name of the table\r\n\r\nExample:\r\n```json\r\n{\r\n  \"method\": \"tools/call\",\r\n  \"params\": {\r\n    \"name\": \"get_table_schema\",\r\n    \"arguments\": {\r\n      \"tableName\": \"users\"\r\n    }\r\n  }\r\n}\r\n```\r\n\r\n### CRUD Operations\r\n\r\n#### create_record\r\n\r\nInsert a new record into a table.\r\n\r\nParameters:\r\n- `table` (string): Name of the table\r\n- `data` (object): Record data as key-value pairs\r\n\r\nExample:\r\n```json\r\n{\r\n  \"method\": \"tools/call\",\r\n  \"params\": {\r\n    \"name\": \"create_record\",\r\n    \"arguments\": {\r\n      \"table\": \"users\",\r\n      \"data\": {\r\n        \"name\": \"John Doe\",\r\n        \"email\": \"john@example.com\",\r\n        \"age\": 30\r\n      }\r\n    }\r\n  }\r\n}\r\n```\r\n\r\n#### read_records\r\n\r\nQuery records from a table with optional filtering.\r\n\r\nParameters:\r\n- `table` (string): Name of the table\r\n- `conditions` (object, optional): Filter conditions as key-value pairs\r\n- `limit` (number, optional): Maximum number of records to return\r\n- `offset` (number, optional): Number of records to skip\r\n\r\nExample:\r\n```json\r\n{\r\n  \"method\": \"tools/call\",\r\n  \"params\": {\r\n    \"name\": \"read_records\",\r\n    \"arguments\": {\r\n      \"table\": \"users\",\r\n      \"conditions\": {\r\n        \"age\": 30\r\n      },\r\n      \"limit\": 10,\r\n      \"offset\": 0\r\n    }\r\n  }\r\n}\r\n```\r\n\r\n#### update_records\r\n\r\nUpdate records in a table that match specified conditions.\r\n\r\nParameters:\r\n- `table` (string): Name of the table\r\n- `data` (object): New values as key-value pairs\r\n- `conditions` (object): Filter conditions as key-value pairs\r\n\r\nExample:\r\n```json\r\n{\r\n  \"method\": \"tools/call\",\r\n  \"params\": {\r\n    \"name\": \"update_records\",\r\n    \"arguments\": {\r\n      \"table\": \"users\",\r\n      \"data\": {\r\n        \"email\": \"john.updated@example.com\"\r\n      },\r\n      \"conditions\": {\r\n        \"id\": 1\r\n      }\r\n    }\r\n  }\r\n}\r\n```\r\n\r\n#### delete_records\r\n\r\nDelete records from a table that match specified conditions.\r\n\r\nParameters:\r\n- `table` (string): Name of the table\r\n- `conditions` (object): Filter conditions as key-value pairs\r\n\r\nExample:\r\n```json\r\n{\r\n  \"method\": \"tools/call\",\r\n  \"params\": {\r\n    \"name\": \"delete_records\",\r\n    \"arguments\": {\r\n      \"table\": \"users\",\r\n      \"conditions\": {\r\n        \"id\": 1\r\n      }\r\n    }\r\n  }\r\n}\r\n```\r\n\r\n### Custom Queries\r\n\r\n#### query\r\n\r\nExecute a custom SQL query against the connected SQLite database.\r\n\r\nParameters:\r\n- `sql` (string): The SQL query to execute\r\n- `values` (array, optional): Array of parameter values to use in the query\r\n\r\nExample:\r\n```json\r\n{\r\n  \"method\": \"tools/call\",\r\n  \"params\": {\r\n    \"name\": \"query\",\r\n    \"arguments\": {\r\n      \"sql\": \"SELECT * FROM users WHERE id = ?\",\r\n      \"values\": [1]\r\n    }\r\n  }\r\n}\r\n```\r\n\r\n## Built with\r\n\r\n- [Model Context Protocol SDK](https://github.com/modelcontextprotocol/typescript-sdk)\r\n- [sqlite3](https://github.com/TryGhost/node-sqlite3)\r\n\r\n---\r\n\r\n## Appreciation\r\nIf you enjoy this library please consider sending me a tip to support my work 😀\r\n### [🍵 tip me here](https://ko-fi.com/jparkerweb)\r\n"
+}

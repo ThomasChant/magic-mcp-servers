@@ -1,0 +1,50 @@
+{
+  "mcp_name": "yeonupark/mcp-naver-map",
+  "mcp_description": "Integrates with Naver Cloud's Geolocation and Directions15 APIs to provide IP-based location lookup and route finding capabilities.",
+  "mcp_id": "yeonupark_mcp-naver-map",
+  "fetch_timestamp": "2025-06-23T09:38:22.019829Z",
+  "github_url": "https://github.com/yeonupark/mcp-naver-map",
+  "repository": {
+    "name": "mcp-naver-map",
+    "full_name": "yeonupark/mcp-naver-map",
+    "description": "Naver Map MCP Server",
+    "html_url": "https://github.com/yeonupark/mcp-naver-map",
+    "created_at": "2025-04-08T18:15:45Z",
+    "updated_at": "2025-04-29T07:01:41Z",
+    "pushed_at": "2025-04-09T02:16:00Z",
+    "size": 12,
+    "stargazers_count": 5,
+    "watchers_count": 5,
+    "forks_count": 1,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "yeonupark",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/130972950?v=4",
+      "html_url": "https://github.com/yeonupark"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 3767
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# MCP-NAVER-Map\n**MCP-NAVER-Location** is an MCP server that integrates with Naver Cloud's **Geolocation API** and **Directions15 API** to provide IP-based location lookup and route finding capabilities.\n\n---\n\n## ✨ Features\n\n### 📍 IP-Based Location Lookup\nRetrieve an approximate location by providing an IP address.\n\n> \"Where am I right now (IP: xxx.xxx.xxx.xxx)?\"  \n> → 📍 Returns latitude and longitude based on the provided IP\n\n- Powered by NCP Geolocation API\n- Manual IP input required\n    \n\n         \n### 🛣️ Route Finding\nGet optimal driving directions between two specified points.\n\n> \"How do I get from City Hall to Seoul Station?\"  \n> → 🛣️ Returns route directions\n\n- Powered by NCP Directions15 API\n\n\n---\n\n## 🚀 Quick Start\n\n### Prerequisites\n- Python 3.12+\n- `uv` package manager\n- Naver Cloud Platform account and API services activated:\n  - Geolocation API\n  - Directions15 API\n- MCP-compatible client (e.g., Claude for Desktop)\n\n---\n\n### 1. Clone and Setup\n\n```bash\n# Clone the repository\ngit clone https://github.com/yourusername/mcp-naver-location.git\ncd mcp-naver-map\n\n# Install dependencies\nuv sync\n```\nCreate a .env file with your credentials:\n```\nNAVER_ACCESS_KEY_ID=your_access_key\nNAVER_SECRET_KEY=your_secret_key\nMAP_CLIENT_ID=your_map_client_id\nMAP_CLIENT_SECRET=your_map_client_secret\n```\n### 2. Configure MCP Client\nRegister this server in your MCP client (e.g., Claude for Desktop).\n\nEdit ~/Library/Application Support/Claude/claude_desktop_config.json:\n```\n{\n  \"mcpServers\": {\n    \"mcp-naver-location\": {\n      \"command\": \"uv\",\n      \"args\": [\n        \"--directory\",\n        \"/ABSOLUTE/PATH/TO/PARENT/FOLDER/mcp-naver-location\",\n        \"run\",\n        \"server\"\n      ]\n    }\n  }\n}\n```\n### 3. Launch Claude\n\n⚠️ Important: Claude must be launched from the terminal to establish a proper connection to the MCP server.\n\n  ```\n# macOS:\n/Applications/Claude.app/Contents/MacOS/Claude\n\n\n# Windows:\n\"C:\\Program Files\\Claude\\Claude.exe\"\n```\n---\n## 📝 License\n- This project is licensed under the [MIT License](LICENSE). See the LICENSE file for details.\n- Built with [Model Context Protocol](https://modelcontextprotocol.io/introduction)"
+}

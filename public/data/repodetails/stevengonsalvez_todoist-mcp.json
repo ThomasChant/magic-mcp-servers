@@ -1,0 +1,96 @@
+{
+  "mcp_name": "stevengonsalvez/todoist-mcp",
+  "mcp_description": "Facilitates advanced task and project management on Todoist through MCP-compatible clients, enhancing productivity and collaboration.",
+  "mcp_id": "stevengonsalvez_todoist-mcp",
+  "fetch_timestamp": "2025-06-23T08:40:25.764084Z",
+  "github_url": "https://github.com/stevengonsalvez/todoist-mcp",
+  "repository": {
+    "name": "todoist-mcp",
+    "full_name": "stevengonsalvez/todoist-mcp",
+    "description": "mcp server for todoist",
+    "html_url": "https://github.com/stevengonsalvez/todoist-mcp",
+    "created_at": "2025-04-16T23:05:42Z",
+    "updated_at": "2025-05-06T09:13:11Z",
+    "pushed_at": "2025-04-17T00:42:49Z",
+    "size": 82,
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 3,
+    "open_issues_count": 2,
+    "language": "JavaScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "stevengonsalvez",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9320602?v=4",
+      "html_url": "https://github.com/stevengonsalvez"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 3,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 28899,
+      "Dockerfile": 180
+    },
+    "language_percentages": {
+      "JavaScript": 99.38,
+      "Dockerfile": 0.62
+    },
+    "pull_requests_count": 3,
+    "contributors_count": 3,
+    "latest_release": {
+      "tag_name": "v1.0.7",
+      "name": "v1.0.7",
+      "published_at": "2025-04-17T00:42:20Z",
+      "body": "## [1.0.7](https://github.com/stevengonsalvez/todoist-mcp/compare/v1.0.6...v1.0.7) (2025-04-17)\n\n\n### Bug Fixes\n\n* updated bin folder for package.json ([8a9d3a7](https://github.com/stevengonsalvez/todoist-mcp/commit/8a9d3a7ca1182b9f38c8f2029b4bf6705c5af166))\n\n\n\n",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v1.0.7",
+        "commit_sha": "1ca5d2f8ac0ddea07345472814e206e7cb2957c6"
+      },
+      {
+        "name": "v1.0.6",
+        "commit_sha": "a999998076306a3035875ca5453fd5c65b48f893"
+      },
+      {
+        "name": "v1.0.5",
+        "commit_sha": "e49c568605b24d89c616d0d8443cae9d59b6aed1"
+      },
+      {
+        "name": "v1.0.4",
+        "commit_sha": "d869a080aeb60b1e2cf48a16365908ddcad375cc"
+      },
+      {
+        "name": "v1.0.3",
+        "commit_sha": "398f3d501dbba7b83e58c6e894941a49a85b6305"
+      },
+      {
+        "name": "v1.0.2",
+        "commit_sha": "6fdc66fa5054ae46af8ed9fc7f1984923345a6bb"
+      },
+      {
+        "name": "v1.0.1",
+        "commit_sha": "538f11428d714ab82737fc8aec05e733f230b8fd"
+      },
+      {
+        "name": "v1.0.0",
+        "commit_sha": "651faf831d15b32d789ae19a06b4395b2fe448e7"
+      }
+    ],
+    "latest_version": "v1.0.7",
+    "package_json_version": "1.0.7"
+  },
+  "readme": "# Todoist MCP Server\n\n[![smithery badge](https://smithery.ai/badge/@stevengonsalvez/todoist-mcp)](https://smithery.ai/server/@stevengonsalvez/todoist-mcp)\n\nA Model Context Protocol (MCP) server for Todoist, enabling advanced task and project management via Claude Desktop and other MCP-compatible clients.\n\n## Requirements\n- Node.js (v18 or higher recommended)\n- npm or yarn\n- A Todoist account\n- A Todoist API token (see https://todoist.com/prefs/integrations)\n\n## Features\n- List, create, update, complete, reopen, and delete tasks\n- List, create, update, archive, unarchive, and delete projects\n- List, create, update, and delete sections\n- List, create, update, and delete labels\n- List, create, update, and delete comments\n- Manage shared labels\n- Fetch project collaborators\n\n## All Features\n- **Tasks**: List, get, create, update, complete, reopen, delete\n- **Projects**: List, get, create, update, archive, unarchive, delete\n- **Sections**: List (by project), get, create, update, delete\n- **Labels**: List, get, create, update, delete, manage shared labels\n- **Comments**: List (by task/project), get, create, update, delete\n- **Collaborators**: List project collaborators\n\n## Installation\n\n### For Claude Desktop (JSON)\nIf published as an npm package, you can use it directly with npx in your Claude Desktop configuration:\n\n```json\n{\n  \"mcpServers\": {\n    \"todoist\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"todoist-mcp\"\n      ],\n      \"env\": {\n        \"TODOIST_API_TOKEN\": \"your_todoist_token\"\n      }\n    }\n  }\n}\n```\n- Set the `TODOIST_API_TOKEN` as shown.\n\n### Manual Installation\n1. Clone the repository:\n   ```sh\n   git clone https://github.com/yourusername/todoist-mcp.git\n   cd todoist-mcp\n   ```\n2. Install dependencies:\n   ```sh\n   npm install\n   # or\n   yarn install\n   ```\n3. Build the project:\n   ```sh\n   npm run build\n   # or\n   yarn build\n   ```\n4. Set your Todoist API token as an environment variable (see above).\n5. Run the built server:\n   ```sh\n   node dist/server.js\n   ```\n6. Configure Claude Desktop to use your local build by adding this to your config file:\n   ```json\n   {\n     \"mcpServers\": {\n       \"todoist\": {\n         \"command\": \"node\",\n         \"args\": [\n           \"/path/to/todoist-mcp/dist/server.js\"\n         ],\n         \"env\": {\n           \"TODOIST_API_TOKEN\": \"your_todoist_token\"\n         }\n       }\n     }\n   }\n   ```\n\n## Usage Examples\n- **Get top priority tasks:**\n  > \"Show me my top priority tasks.\"\n- **Create and classify labels:**\n  > \"Create labels for my tasks and classify them by project or urgency.\"\n- **Organize tasks by section:**\n  > \"Move all tasks with the label 'urgent' to the 'Today' section.\"\n- **Project management:**\n  > \"Create a new project called 'Personal Growth' and add a section 'Reading List'.\"\n- **Collaborator overview:**\n  > \"List all collaborators for the project 'Team Launch'.\"\n- **Comment management:**\n  > \"Add a comment to the task 'Prepare slides' with the content 'Remember to include Q2 results.'\"\n\n## License\nThis project is licensed under the MIT License. See [LICENSE](LICENSE) for details. "
+}

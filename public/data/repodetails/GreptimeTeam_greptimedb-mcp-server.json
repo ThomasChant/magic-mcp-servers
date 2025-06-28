@@ -1,0 +1,73 @@
+{
+  "mcp_name": "GreptimeDB",
+  "mcp_description": "Provides AI assistants with a secure and structured way to explore and analyze data in [GreptimeDB](https://github.com/GreptimeTeam/greptimedb).",
+  "mcp_id": "GreptimeTeam_greptimedb-mcp-server",
+  "fetch_timestamp": "2025-06-23T04:14:19.140363Z",
+  "github_url": "https://github.com/GreptimeTeam/greptimedb-mcp-server",
+  "repository": {
+    "name": "greptimedb-mcp-server",
+    "full_name": "GreptimeTeam/greptimedb-mcp-server",
+    "description": "A Model Context Protocol (MCP) server implementation for GreptimeDB",
+    "html_url": "https://github.com/GreptimeTeam/greptimedb-mcp-server",
+    "created_at": "2025-03-12T09:11:28Z",
+    "updated_at": "2025-06-09T14:47:39Z",
+    "pushed_at": "2025-06-09T02:48:27Z",
+    "size": 60,
+    "stargazers_count": 18,
+    "watchers_count": 18,
+    "forks_count": 8,
+    "open_issues_count": 5,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "GreptimeTeam",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103400677?v=4",
+      "html_url": "https://github.com/GreptimeTeam"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 8,
+    "subscribers_count": 6,
+    "languages": {
+      "Python": 31607
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 13,
+    "contributors_count": 4,
+    "latest_release": {
+      "tag_name": "v0.2.2",
+      "name": "v0.2.2",
+      "published_at": "2025-06-09T02:49:07Z",
+      "body": "## What's Changed\r\n* feat: supports time zone settings by @killme2008 in https://github.com/GreptimeTeam/greptimedb-mcp-server/pull/16\r\n* feat: `call_tool` supports `show`, `tql_eval`, `desc table` and `explain` etc.  by @killme2008 https://github.com/GreptimeTeam/greptimedb-mcp-server/pull/16\r\n* feat: add more security checking by @killme2008 in https://github.com/GreptimeTeam/greptimedb-mcp-server/pull/17\r\n\r\n\r\n**Full Changelog**: https://github.com/GreptimeTeam/greptimedb-mcp-server/compare/v0.2.1...v0.2.2",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.2.2",
+        "commit_sha": "c3f6b4c13c598034ce784acf42c7c0a5603d5960"
+      },
+      {
+        "name": "v0.2.1",
+        "commit_sha": "22f621cbf766ef612a8d07618370c6027e634442"
+      },
+      {
+        "name": "v0.2.0",
+        "commit_sha": "b6c665dcf42090ebce59fb961870c20d6d08263d"
+      }
+    ],
+    "latest_version": "v0.2.2"
+  },
+  "readme": "# greptimedb-mcp-server\n\n[![PyPI - Version](https://img.shields.io/pypi/v/greptimedb-mcp-server)](https://pypi.org/project/greptimedb-mcp-server/)\n![build workflow](https://github.com/GreptimeTeam/greptimedb-mcp-server/actions/workflows/python-app.yml/badge.svg)\n[![MIT License](https://img.shields.io/badge/license-MIT-green)](LICENSE.md)\n\nA Model Context Protocol (MCP) server implementation for [GreptimeDB](https://github.com/GreptimeTeam/greptimedb).\n\nThis server provides AI assistants with a secure and structured way to explore and analyze databases. It enables them to list tables, read data, and execute SQL queries through a controlled interface, ensuring responsible database access.\n\n# Project Status\nThis is an experimental project that is still under development. Data security and privacy issues have not been specifically addressed, so please use it with caution.\n\n# Capabilities\n\n* `list_resources` to list tables\n* `read_resource` to read table data\n* `list_tools` to list tools\n* `call_tool` to execute an SQL\n* `list_prompts` to list prompts\n* `get_prompt` to get the prompt by name\n\n# Installation\n\n```\npip install greptimedb-mcp-server\n```\n\n\n# Configuration\n\nSet the following environment variables:\n\n```bash\nGREPTIMEDB_HOST=localhost    # Database host\nGREPTIMEDB_PORT=4002         # Optional: Database MySQL port (defaults to 4002 if not specified)\nGREPTIMEDB_USER=root\nGREPTIMEDB_PASSWORD=\nGREPTIMEDB_DATABASE=public\nGREPTIMEDB_TIMEZONE=UTC\n```\n\nOr via command-line args:\n\n* `--host` the database host, `localhost` by default,\n* `--port` the database port, must be MySQL protocol port,  `4002` by default,\n* `--user` the database username, empty by default,\n* `--password` the database password, empty by default,\n* `--database` the database name, `public` by default.\n* `--timezone` the session time zone, empty by default(using server default time zone).\n\n# Usage\n\n## Claude Desktop Integration\n\nConfigure the MCP server in Claude Desktop's configuration file:\n\n#### MacOS\n\nLocation: `~/Library/Application Support/Claude/claude_desktop_config.json`\n\n#### Windows\n\nLocation: `%APPDATA%/Claude/claude_desktop_config.json`\n\n\n```json\n{\n  \"mcpServers\": {\n    \"greptimedb\": {\n      \"command\": \"uv\",\n      \"args\": [\n        \"--directory\",\n        \"/path/to/greptimedb-mcp-server\",\n        \"run\",\n        \"-m\",\n        \"greptimedb_mcp_server.server\"\n      ],\n      \"env\": {\n        \"GREPTIMEDB_HOST\": \"localhost\",\n        \"GREPTIMEDB_PORT\": \"4002\",\n        \"GREPTIMEDB_USER\": \"root\",\n        \"GREPTIMEDB_PASSWORD\": \"\",\n        \"GREPTIMEDB_DATABASE\": \"public\",\n        \"GREPTIMEDB_TIMEZONE\": \"\"\n      }\n    }\n  }\n}\n```\n\n# License\n\nMIT License - see LICENSE.md file for details.\n\n# Contribute\n\n## Prerequisites\n- Python with `uv` package manager\n- GreptimeDB installation\n- MCP server dependencies\n\n## Development\n\n```\n# Clone the repository\ngit clone https://github.com/GreptimeTeam/greptimedb-mcp-server.git\ncd greptimedb-mcp-server\n\n# Create virtual environment\nuv venv\nsource venv/bin/activate  # or `venv\\Scripts\\activate` on Windows\n\n# Install development dependencies\nuv sync\n\n# Run tests\npytest\n```\n\nUse [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) for debugging:\n\n```bash\nnpx @modelcontextprotocol/inspector uv \\\n  --directory \\\n  /path/to/greptimedb-mcp-server \\\n  run \\\n  -m \\\n  greptimedb_mcp_server.server\n```\n\n# Acknowledgement\nThis library's implementation was inspired by the following two repositories and incorporates their code, for which we express our gratitude：\n\n* [ktanaka101/mcp-server-duckdb](https://github.com/ktanaka101/mcp-server-duckdb)\n* [designcomputer/mysql_mcp_server](https://github.com/designcomputer/mysql_mcp_server)\n* [mikeskarl/mcp-prompt-templates](https://github.com/mikeskarl/mcp-prompt-templates)\n\nThanks!\n"
+}

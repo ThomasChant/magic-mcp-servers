@@ -1,0 +1,67 @@
+{
+  "mcp_name": "pinecone-io/assistant-mcp",
+  "mcp_description": "🎖️ 🦀 ☁️ - Connects to your Pinecone Assistant and gives the agent context from its knowledge engine.",
+  "mcp_id": "pinecone-io_assistant-mcp",
+  "fetch_timestamp": "2025-06-23T07:30:49.577975Z",
+  "github_url": "https://github.com/pinecone-io/assistant-mcp",
+  "repository": {
+    "name": "assistant-mcp",
+    "full_name": "pinecone-io/assistant-mcp",
+    "description": "Pinecone Assistant MCP server",
+    "html_url": "https://github.com/pinecone-io/assistant-mcp",
+    "created_at": "2025-02-28T07:30:56Z",
+    "updated_at": "2025-06-18T16:07:42Z",
+    "pushed_at": "2025-04-17T10:32:57Z",
+    "size": 14,
+    "stargazers_count": 21,
+    "watchers_count": 21,
+    "forks_count": 4,
+    "open_issues_count": 0,
+    "language": "Rust",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "pinecone-io",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/54333248?v=4",
+      "html_url": "https://github.com/pinecone-io"
+    },
+    "has_issues": true,
+    "has_projects": false,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 4,
+    "subscribers_count": 2,
+    "languages": {
+      "Rust": 13245,
+      "Dockerfile": 834
+    },
+    "language_percentages": {
+      "Rust": 94.08,
+      "Dockerfile": 5.92
+    },
+    "pull_requests_count": 2,
+    "contributors_count": 1,
+    "latest_release": {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "published_at": "2025-04-17T10:32:57Z",
+      "body": "## What's Changed\r\n* Fix dockerfile, remove old submodules by @avi1mizrahi in https://github.com/pinecone-io/assistant-mcp/pull/2\r\n* Improve prompts and context by @avi1mizrahi in https://github.com/pinecone-io/assistant-mcp/pull/3\r\n\r\n## New Contributors\r\n* @avi1mizrahi made their first contribution in https://github.com/pinecone-io/assistant-mcp/pull/2\r\n\r\n**Full Changelog**: https://github.com/pinecone-io/assistant-mcp/commits/v0.1.0",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.1.0",
+        "commit_sha": "7e32e35c20fe3f79d2504d4371f28e1b1eb34009"
+      }
+    ],
+    "latest_version": "v0.1.0"
+  },
+  "readme": "# Pinecone Assistant MCP Server\n\nAn MCP server implementation for retrieving information from Pinecone Assistant.\n\n## Features\n\n- Retrieves information from Pinecone Assistant\n- Supports multiple results retrieval with a configurable number of results\n\n## Prerequisites\n\n- Docker installed on your system\n- Pinecone API key - obtain from the [Pinecone Console](https://app.pinecone.io)\n- Pinecone Assistant API host - after creating an Assistant (e.g. in Pinecone Console), you can find the host in the Assistant details page\n\n## Building with Docker\n\nTo build the Docker image:\n\n```sh\ndocker build -t pinecone/assistant-mcp .\n```\n\n## Running with Docker\n\nRun the server with your Pinecone API key:\n\n```sh\ndocker run -i --rm \\\n  -e PINECONE_API_KEY=<YOUR_PINECONE_API_KEY_HERE> \\\n  -e PINECONE_ASSISTANT_HOST=<YOUR_PINECONE_ASSISTANT_HOST_HERE> \\\n  pinecone/assistant-mcp\n```\n\n### Environment Variables\n\n- `PINECONE_API_KEY` (required): Your Pinecone API key\n- `PINECONE_ASSISTANT_HOST` (optional): Pinecone Assistant API host (default: https://prod-1-data.ke.pinecone.io)\n- `LOG_LEVEL` (optional): Logging level (default: info)\n\n## Usage with Claude Desktop\n\nAdd this to your `claude_desktop_config.json`:\n\n```json\n{\n  \"mcpServers\": {\n    \"pinecone-assistant\": {\n      \"command\": \"docker\",\n      \"args\": [\n        \"run\", \n        \"-i\", \n        \"--rm\", \n        \"-e\", \n        \"PINECONE_API_KEY\", \n        \"-e\", \n        \"PINECONE_ASSISTANT_HOST\", \n        \"pinecone/assistant-mcp\"\n      ],\n      \"env\": {\n        \"PINECONE_API_KEY\": \"<YOUR_PINECONE_API_KEY_HERE>\",\n        \"PINECONE_ASSISTANT_HOST\": \"<YOUR_PINECONE_ASSISTANT_HOST_HERE>\"\n      }\n    }\n  }\n}\n```\n\n## Building from Source\n\nIf you prefer to build from source without Docker:\n\n1. Make sure you have Rust installed (https://rustup.rs/)\n2. Clone this repository\n3. Run `cargo build --release`\n4. The binary will be available at `target/release/assistant-mcp`\n\n### Testing with the inspector\n```sh\nexport PINECONE_API_KEY=<YOUR_PINECONE_API_KEY_HERE>\nexport PINECONE_ASSISTANT_HOST=<YOUR_PINECONE_ASSISTANT_HOST_HERE>\n# Run the inspector alone\nnpx @modelcontextprotocol/inspector cargo run\n# Or run with Docker directly through the inspector\nnpx @modelcontextprotocol/inspector -- docker run -i --rm -e PINECONE_API_KEY -e PINECONE_ASSISTANT_HOST pinecone/assistant-mcp\n```\n\n## License\n\nThis project is licensed under the terms specified in the LICENSE file.\n"
+}

@@ -1,0 +1,79 @@
+{
+  "mcp_name": "DAISYS",
+  "mcp_description": "Generate high-quality text-to-speech and text-to-voice outputs using the [DAISYS](https://www.daisys.ai/) platform.",
+  "mcp_id": "daisys-ai_daisys-mcp",
+  "fetch_timestamp": "2025-06-23T02:25:51.242147Z",
+  "github_url": "https://github.com/daisys-ai/daisys-mcp",
+  "repository": {
+    "name": "daisys-mcp",
+    "full_name": "daisys-ai/daisys-mcp",
+    "description": "The Daisys mcp server",
+    "html_url": "https://github.com/daisys-ai/daisys-mcp",
+    "created_at": "2025-05-01T15:43:27Z",
+    "updated_at": "2025-05-26T14:21:45Z",
+    "pushed_at": "2025-05-26T08:42:07Z",
+    "size": 138,
+    "stargazers_count": 3,
+    "watchers_count": 3,
+    "forks_count": 1,
+    "open_issues_count": 1,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "daisys-ai",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/135141934?v=4",
+      "html_url": "https://github.com/daisys-ai"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 0,
+    "languages": {
+      "Python": 21447,
+      "Dockerfile": 502
+    },
+    "language_percentages": {
+      "Python": 97.71,
+      "Dockerfile": 2.29
+    },
+    "pull_requests_count": 7,
+    "contributors_count": 3,
+    "latest_release": {
+      "tag_name": "v1.0.3",
+      "name": "daisys-mcp v1.0.3",
+      "published_at": "2025-05-12T13:20:00Z",
+      "body": "Bugfix for package architecture defined in uv.lock.",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v1.0.3",
+        "commit_sha": "712b2398bb42e23d4d7f8c43fa7d20f753a0a707"
+      },
+      {
+        "name": "v1.0.2",
+        "commit_sha": "a2b4e1bb8d5a300865bb7d5f37078001b1affe98"
+      },
+      {
+        "name": "v1.0.1",
+        "commit_sha": "2ded518ad6a8e93c4403f1cbcaeba7cfc12d2f03"
+      },
+      {
+        "name": "v1.0.0",
+        "commit_sha": "29a3c7f8c05d712aae2b65dc71ff16cf3e48abfe"
+      }
+    ],
+    "latest_version": "v1.0.3"
+  },
+  "readme": "# Daisys MCP server\n[![smithery badge](https://smithery.ai/badge/@daisys-ai/daisys-mcp)](https://smithery.ai/server/@daisys-ai/daisys-mcp)\n\nDaisys-mcp is a beta version and doesn't have a stable release yet. But you can try it out by doing the following:\n\n1. Get an account on [Daisys](https://www.daisys.ai/) and create an username and password.\n\n\nIf you run on mac os run the following command:\n```bash\nbrew install portaudio\n```\n\nIf you run on linux run the following command:\n```bash\nsudo apt install portaudio19-dev libjack-dev\n```\n\n2. Add the following configuration to the mcp config file in your MCP client ([Claude Desktop](https://claude.ai/download), [Cursor](https://www.cursor.com/), [mcp-cli](https://github.com/chrishayuk/mcp-cli), [mcp-vscode](https://code.visualstudio.com/docs/copilot/chat/mcp-servers), etc.):\n```json\n{\n  \"mcpServers\": {\n    \"daisys-mcp\": {\n      \"command\": \"uvx\",\n      \"args\": [\"daisys-mcp\"],\n      \"env\": {\n        \"DAISYS_EMAIL\": \"{Your Daisys Email}\",\n        \"DAISYS_PASSWORD\": \"{Your Daisys Password}\",\n        \"DAISYS_BASE_STORAGE_PATH\": \"{Path where you want to store your audio files}\"\n      }\n    }\n  }\n}\n```\n\n## To build from source:\n\n1. clone the repository: `git clone https://github.com/daisys-ai/daisys-mcp.git`\n\n2. cd into the repository: `cd daisys-mcp`\n\n3. Install `uv` (Python package manager), install with `curl -LsSf https://astral.sh/uv/install.sh | sh` or see the `uv` [repo](https://github.com/astral-sh/uv) for additional install methods.\n\n4. Create a virtual environment and install dependencies [using uv](https://github.com/astral-sh/uv):\n\n```bash\nuv venv\n# source .venv/Scripts/activate (Windows)\nsource .venv/bin/activate (mac and linux)\nuv pip install -e .\n```\n\n5. Add the following to your config file in your MCP client ([Claude Desktop](https://claude.ai/download), [Cursor](https://www.cursor.com/), [mcp-cli](https://github.com/chrishayuk/mcp-cli), [mcp-vscode](https://code.visualstudio.com/docs/copilot/chat/mcp-servers), etc.):\n```json\n{\n    \"mcpServers\": {\n        \"daisys-mcp\": {\n            \"command\": \"uv\",\n            \"args\": [\n                \"--directory\",\n                \"{installation_path}/daisys-mcp\",\n                \"run\",\n                \"-m\",\n                \"daisys_mcp.server\"\n            ],\n            \"env\": {\n                \"DAISYS_EMAIL\": \"{Your Daisys Email}\",\n                \"DAISYS_PASSWORD\": \"{Your Daisys Password}\",\n                \"DAISYS_BASE_STORAGE_PATH\": \"{Path where you want to store your audio files}\"\n            }\n        }\n    }\n}\n```\n\n## Common Issues\n\nIf you get any issues with portaudio on linux, you can try installing it manually:\n```bash\nsudo apt-get update\nsudo apt-get install -y portaudio19-dev\n```\n\n## Contributing\n\nIf you want to contribute or run from source:\n\n1. Clone the repository:\n\n```bash\ngit clone https://github.com/daisys-ai/daisys-mcp.git\ncd daisys_mcp\n```\n\n2. Create a virtual environment and install dependencies [using uv](https://github.com/astral-sh/uv):\n\n```bash\nuv venv\nsource .venv/bin/activate\nuv pip install -e .\nuv pip install -e \".[dev]\"\n```\n\n3. Copy `.env.example` to `.env` and add your DAISYS username and password:\n\n```bash\ncp .env.example .env\n# Edit .env and add your DAISYS username and password\n```\n\n4. Test the server by running the tests:\n\n```bash\nuv run pytest\n```\n\nyou can also run a full integration test with:\n\n```bash\nuv run pytest -m 'requires_credentials' # ⚠️ Running full integration tests does costs tokens on the Daisys platform \n```\n\n5. Debug and test locally with MCP Inspector: `uv run mcp dev daisys_mcp/server.py`\n"
+}

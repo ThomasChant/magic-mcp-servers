@@ -1,0 +1,61 @@
+{
+  "mcp_name": "github-hewei/mcp-android-adb-server",
+  "mcp_description": "Facilitates Android device management through ADB commands, enhanced with visual model integration for screen content description.",
+  "mcp_id": "github-hewei_mcp-android-adb-server",
+  "fetch_timestamp": "2025-06-23T03:48:50.136574Z",
+  "github_url": "https://github.com/github-hewei/mcp-android-adb-server",
+  "repository": {
+    "name": "mcp-android-adb-server",
+    "full_name": "github-hewei/mcp-android-adb-server",
+    "description": "通过AI大模型操作安卓设备",
+    "html_url": "https://github.com/github-hewei/mcp-android-adb-server",
+    "created_at": "2025-03-29T13:37:07Z",
+    "updated_at": "2025-05-18T02:51:21Z",
+    "pushed_at": "2025-04-12T14:49:32Z",
+    "size": 42,
+    "stargazers_count": 10,
+    "watchers_count": 10,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Go",
+    "license": "GNU General Public License v3.0",
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "github-hewei",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/28665797?v=4",
+      "html_url": "https://github.com/github-hewei"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Go": 57124,
+      "Dockerfile": 811,
+      "Makefile": 565
+    },
+    "language_percentages": {
+      "Go": 97.65,
+      "Dockerfile": 1.39,
+      "Makefile": 0.97
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "tags": [
+      {
+        "name": "v0.0.1",
+        "commit_sha": "49f67f4eab1597c5aa8de5f699568bc280c28c50"
+      }
+    ],
+    "latest_version": "v0.0.1"
+  },
+  "readme": "## 🚀 mcp-android-adb-server\n\n[![smithery badge](https://smithery.ai/badge/@github-hewei/mcp-android-adb-server)](https://smithery.ai/server/@github-hewei/mcp-android-adb-server)\n\n一个MCP服务用于通过adb操作安卓设备。\n\n2025-04-01：增加支持用视觉模型如`qwen2.5-vl`获取屏幕描述内容。\n\n### Manual Installation\n\n```sh\n# clone the repo and build\ngit clone https://github.com/github-hewei/mcp-android-adb-server.git\ncd mcp-android-adb-server\ngo build\n```\n\n### Configuration\n\n```json\n{\n  \"mcpServers\": {\n    \"mcp-android-adb-server\": {\n      \"command\": \"D:\\\\www\\\\golang\\\\mcp-android-adb-server\\\\mcp-android-adb-server.exe\",\n      \"env\": {\n        \"DEVICE_ID\": \"xxxxx\",\n        \"SCREEN_LOCK_PASSWORD\": \"123456\",\n        \"VISUAL_MODEL_ON\": \"true\",\n        \"VISUAL_MODEL_API_KEY\": \"sk-or-xxxxxxxxxxxxxxxxxxx\",\n        \"VISUAL_MODEL_BASE_URL\": \"https://openrouter.ai/api/v1/\",\n        \"VISUAL_MODEL_NAME\": \"qwen/qwen2.5-vl-72b-instruct:free\"\n      }\n    }\n  }\n}\n```\n\n### 环境变量\n\n- DEVICE_ID : 必需。Android 设备的 ID，可以通过 adb devices 命令获取。\n- SCREEN_LOCK_PASSWORD : 可选。设备的屏幕锁定密码，用于解锁屏幕。\n- VISUAL_MODEL_ON : 可选。是否启用视觉模型，默认为 false。\n- VISUAL_MODEL_API_KEY : API密钥。\n- VISUAL_MODEL_BASE_URL : API BaseURL。\n- VISUAL_MODEL_NAME : 模型名称。\n\n### 功能和工具\n\n应用管理\n- install_app : 在 Android 设备上安装应用程序\n- uninstall_app : 从 Android 设备卸载应用程序\n- terminate_app : 终止 Android 设备上运行的应用程序\n- launch_app : 启动 Android 设备上的应用程序\n- list_app : 列出 Android 设备上安装的所有应用程序\n- is_app_installed : 检查特定应用程序是否已安装\n\n屏幕控制\n- unlock_screen : 解锁 Android 设备屏幕\n- lock_screen : 锁定 Android 设备屏幕\n- is_screen_locked : 检查 Android 设备屏幕是否锁定\n- is_screen_active : 检查 Android 设备屏幕是否活跃\n\n输入控制\n\n- input_text : 在 Android 设备上输入文本\n- input_key : 在 Android 设备上输入按键\n- tap : 在屏幕上点击指定位置\n- long_tap : 在屏幕上长按指定位置\n- back : 执行返回操作\n\n手势控制\n\n- swipe_up : 在 Android 设备屏幕上执行向上滑动手势\n- swipe_down : 在 Android 设备屏幕上执行向下滑动手势\n- swipe_left : 在 Android 设备屏幕上执行向左滑动手势\n- swipe_right : 在 Android 设备屏幕上执行向右滑动手势\n\n设备信息\n\n- screen_size : 获取 Android 设备屏幕尺寸\n- screen_dpi : 获取 Android 设备屏幕 DPI\n- screenshot_description : 获取 Android 设备屏幕截图描述\n- system_info : 获取 Android 设备系统信息\n\n其他功能\n- shell_command : 在 Android 设备上执行 shell 命令\n"
+}

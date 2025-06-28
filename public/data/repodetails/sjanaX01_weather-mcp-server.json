@@ -1,0 +1,56 @@
+{
+  "mcp_name": "devilcoder01/weather-mcp-server",
+  "mcp_description": "🐍 ☁️ - Access real-time weather data for any location using the WeatherAPI.com API, providing detailed forecasts and current conditions.",
+  "mcp_id": "sjanaX01_weather-mcp-server",
+  "fetch_timestamp": "2025-06-23T02:36:43.410086Z",
+  "github_url": "https://github.com/devilcoder01/weather-mcp-server",
+  "repository": {
+    "name": "weather-mcp-server",
+    "full_name": "sjanaX01/weather-mcp-server",
+    "description": null,
+    "html_url": "https://github.com/sjanaX01/weather-mcp-server",
+    "created_at": "2025-04-26T20:36:07Z",
+    "updated_at": "2025-06-14T02:16:18Z",
+    "pushed_at": "2025-04-29T06:32:10Z",
+    "size": 18,
+    "stargazers_count": 6,
+    "watchers_count": 6,
+    "forks_count": 9,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [
+      "mcp-server",
+      "weather-api",
+      "weather-mcp-server"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "sjanaX01",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/112236564?v=4",
+      "html_url": "https://github.com/sjanaX01"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 9,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 6720,
+      "Dockerfile": 446
+    },
+    "language_percentages": {
+      "Python": 93.78,
+      "Dockerfile": 6.22
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 2
+  },
+  "readme": "# Weather MCP Server\n\n[![smithery badge](https://smithery.ai/badge/@devilcoder01/weather-mcp-server)](https://smithery.ai/server/@devilcoder01/weather-mcp-server)\n\nA Model Context Protocol (MCP) server for weather data, built with FastAPI and the MCP framework. This server provides various weather-related tools that can be used by AI assistants to retrieve current weather conditions, forecasts, air quality data, and more.\n\n## Features\n\n- Current weather conditions\n- Weather forecasts (1-14 days)\n- Historical weather data\n- Weather alerts\n- Air quality information\n- Astronomy data (sunrise, sunset, moon phases)\n- Location search\n- Timezone information\n- Sports events\n\n## Requirements\n\n- Python 3.13+\n- [uv](https://github.com/astral-sh/uv) package manager\n- [WeatherAPI](https://www.weatherapi.com/) API key\n\n## Installation\n\n### Installing via Smithery\n\nTo install Weather Data Server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@devilcoder01/weather-mcp-server):\n\n```bash\nnpx -y @smithery/cli install @devilcoder01/weather-mcp-server --client claude\n```\n\n### Manual Installation\n1. Clone this repository:\n   ```\n   git clone https://github.com/yourusername/Weather_mcp_server.git\n   cd Weather_mcp_server\n   ```\n\n2. Install dependencies using uv:\n   ```\n   uv venv\n   uv pip install -e .\n   ```\n\n3. Create a `.env` file in the project root with your WeatherAPI key:\n   ```\n   WEATHER_API_KEY=your_api_key_here\n   ```\n\n## Usage\n\nRun the server:\n\n```\npython main.py\n```\n\nThe server will start on http://localhost:8000 by default.\n\n## License\n\nThis project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.\n"
+}

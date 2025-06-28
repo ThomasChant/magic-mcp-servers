@@ -1,0 +1,72 @@
+{
+  "mcp_name": "thepragmatik/mcp-server-jvm-build-tools",
+  "mcp_description": "Facilitates natural language interaction with Apache Maven through an MCP server for streamlined project builds.",
+  "mcp_id": "thepragmatik_mcp-server-jvm-build-tools",
+  "fetch_timestamp": "2025-06-23T08:53:02.030933Z",
+  "github_url": "https://github.com/thepragmatik/mcp-server-jvm-build-tools",
+  "repository": {
+    "name": "mcp-server-jvm-build-tools",
+    "full_name": "thepragmatik/mcp-server-jvm-build-tools",
+    "description": "An Model Context Protocol based Server for build tools for the JVM. ",
+    "html_url": "https://github.com/thepragmatik/mcp-server-jvm-build-tools",
+    "created_at": "2025-04-04T12:51:42Z",
+    "updated_at": "2025-04-07T00:41:58Z",
+    "pushed_at": "2025-04-07T00:41:55Z",
+    "size": 25,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Java",
+    "license": "Apache License 2.0",
+    "topics": [
+      "mcp-build-tool",
+      "mcp-server"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "thepragmatik",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8746781?v=4",
+      "html_url": "https://github.com/thepragmatik"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Java": 15178
+    },
+    "language_percentages": {
+      "Java": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "latest_release": {
+      "tag_name": "v0.0.2",
+      "name": "v0.0.2",
+      "published_at": "2025-04-07T00:30:37Z",
+      "body": "**Full Changelog**: https://github.com/thepragmatik/mcp-server-jvm-build-tools/compare/v0.0.1...v0.0.2",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.0.2",
+        "commit_sha": "6b5fe0e97345583cec5bfef3b626ba046d979e63"
+      },
+      {
+        "name": "v0.0.1",
+        "commit_sha": "0ecc52be718044b38e98afa009501cae52750d04"
+      }
+    ],
+    "latest_version": "v0.0.2"
+  },
+  "readme": "# MCP Server - Build Tools\n\nA brief overview of what the project does and its purpose.\n\n## Table of Contents\n- [Overview](#overview)\n- [Prerequisites](#prerequisites)\n- [Features](#features)\n- [Installation](#installation)\n- [Usage](#usage)\n- [Contributing](#contributing)\n- [License](#license)\n\n## Overview\nDescribe the project, its goals, and any background context.\nFor example:\nThis project is to demonstrate an MCP server that enables users to interact with Maven (for now) using natural language.\nIt aims to showcase how build tools can be exposed via MCP and offer a natural, intuitive way of building projects.\n\n## Prerequisites\nList the software and tools needed before installing the project:\n- Java 21 or later\n- Maven\n- MCP Client (Claude, Goose etc)\n- optionally, a local LLM if you are using MCP client like Goose\n\n## Features\n- **Simple to use:** Set this up with any MCP client and LLM of your choice to invoke builds using natural language. No need to remember plugins, goals and arguments! and\n- **Supports Apache Maven:** For now it only support Apache Maven. We might extend it for other build tools if there is interest.\n\n\n## Installation (For Claude Desktop)\n1. **Add this MCP server to Claude:**\n\n   Locate the `claude_desktop_config.json` file under Claude installation directory\n \n   For MacOs, this is at:\n\n    `~/Library/Application\\ Support/Claude/claude_desktop_config.json`\n\n    Then, add something like the following to it (replace the placeholders):\n    ```\n    {\n        \"mcpServers\": {\n            \"maven-tools\": {\n                \"command\": \"<path-to-java-home-directory>/bin/java\",\n                \"args\": [\n                    \"-jar\",\n                    \"-Dmaven.home=<path-to-maven-home-directory>\",\n                    \"<path-to-the-mcp-maven-server.jar>\"\n                ]\n            }\n        }\n    }\n    ```\n\n2. You may need to restart the Claude client. This will start the MCP server for build tools.\n\n3. You should now be ready to interact with Maven via the MCP server using the Claude desktop. Go ahead submit a task in natural language to build a project.\n\n\n## Contributing\n1. Use Github Issues to open issues or feature requests.\n\n## License \nThis repo is licensed under the Apache License. See the [LICENSE](LICENSE) file for details"
+}

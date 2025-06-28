@@ -1,0 +1,110 @@
+{
+  "mcp_name": "Figma",
+  "mcp_description": "📇 🏠 - Provide coding agents direct access to Figma data to help them one-shot design implementation.",
+  "mcp_id": "GLips_Figma-Context-MCP",
+  "fetch_timestamp": "2025-06-23T03:17:25.767086Z",
+  "github_url": "https://github.com/GLips/Figma-Context-MCP",
+  "repository": {
+    "name": "Figma-Context-MCP",
+    "full_name": "GLips/Figma-Context-MCP",
+    "description": "MCP server to provide Figma layout information to AI coding agents like Cursor",
+    "html_url": "https://github.com/GLips/Figma-Context-MCP",
+    "created_at": "2025-02-13T02:55:06Z",
+    "updated_at": "2025-06-23T03:11:23Z",
+    "pushed_at": "2025-06-18T16:39:05Z",
+    "size": 494,
+    "stargazers_count": 8391,
+    "watchers_count": 8391,
+    "forks_count": 685,
+    "open_issues_count": 28,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [
+      "ai",
+      "cursor",
+      "figma",
+      "mcp",
+      "typescript"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "GLips",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/842883?v=4",
+      "html_url": "https://github.com/GLips"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 685,
+    "subscribers_count": 55,
+    "languages": {
+      "TypeScript": 67085,
+      "JavaScript": 1535
+    },
+    "language_percentages": {
+      "TypeScript": 97.76,
+      "JavaScript": 2.24
+    },
+    "pull_requests_count": 71,
+    "contributors_count": 18,
+    "latest_release": {
+      "tag_name": "v0.4.3",
+      "name": "v0.4.3",
+      "published_at": "2025-06-18T15:16:06Z",
+      "body": "### Patch Changes\n\n-   [#179](https://github.com/GLips/Figma-Context-MCP/pull/179) [`17988a0`](https://github.com/GLips/Figma-Context-MCP/commit/17988a0b5543330c6b8f7f24baa33b65a0da7957) Thanks [@GLips](https://github.com/GLips)! - Update curl command in fetchWithRetry to include error handling options, ensure errors are actually caught properly and returned to users.\n",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.5.0-beta.0",
+        "commit_sha": "5ad34110ef9e8bfd270e7cd768e1cc7af4c59d3b"
+      },
+      {
+        "name": "v0.4.3",
+        "commit_sha": "96b3852669c5eed65e4a6e20406c25504d9196f2"
+      },
+      {
+        "name": "v0.4.2",
+        "commit_sha": "8c8192799e0e2b26ddc54da793325eac22f01431"
+      },
+      {
+        "name": "v0.4.1",
+        "commit_sha": "87c6a7f42dee3cd4c7332aeaf6e2f5a3df203210"
+      },
+      {
+        "name": "v0.4.0",
+        "commit_sha": "ebee7aab0c4d478d61c791936dce1da1c278d70e"
+      },
+      {
+        "name": "v0.3.1",
+        "commit_sha": "506015ff6c403abbea15d8e44db066be20eb9c96"
+      },
+      {
+        "name": "v0.3.0",
+        "commit_sha": "6711d1cea798f636a63a7c02324bac1fad0b0e8f"
+      },
+      {
+        "name": "v0.2.2",
+        "commit_sha": "3a46e677d2bec71104439ee775220e984addae03"
+      },
+      {
+        "name": "v0.2.2-beta.1",
+        "commit_sha": "5518ae66656796afc3ab25034f666773633672d7"
+      },
+      {
+        "name": "v0.2.2-beta.0",
+        "commit_sha": "8ed1435bbbf8949f68063961d775178bce26315b"
+      }
+    ],
+    "latest_version": "v0.5.0-beta.0",
+    "package_json_version": "0.4.3"
+  },
+  "readme": "<a href=\"https://www.framelink.ai/?utm_source=github&utm_medium=referral&utm_campaign=readme\" target=\"_blank\" rel=\"noopener\">\n  <picture>\n    <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://www.framelink.ai/github/HeaderDark.png\" />\n    <img alt=\"Framelink\" src=\"https://www.framelink.ai/github/HeaderLight.png\" />\n  </picture>\n</a>\n\n<div align=\"center\">\n  <h1>Framelink Figma MCP Server</h1>\n  <p>\n    🌐 Available in:\n    <a href=\"README.ko.md\">한국어 (Korean)</a> |\n    <a href=\"README.ja.md\">日本語 (Japanese)</a> |\n    <a href=\"README.zh.md\">中文 (Chinese)</a>\n  </p>\n  <h3>Give your coding agent access to your Figma data.<br/>Implement designs in any framework in one-shot.</h3>\n  <a href=\"https://npmcharts.com/compare/figma-developer-mcp?interval=30\">\n    <img alt=\"weekly downloads\" src=\"https://img.shields.io/npm/dm/figma-developer-mcp.svg\">\n  </a>\n  <a href=\"https://github.com/GLips/Figma-Context-MCP/blob/main/LICENSE\">\n    <img alt=\"MIT License\" src=\"https://img.shields.io/github/license/GLips/Figma-Context-MCP\" />\n  </a>\n  <a href=\"https://framelink.ai/discord\">\n    <img alt=\"Discord\" src=\"https://img.shields.io/discord/1352337336913887343?color=7389D8&label&logo=discord&logoColor=ffffff\" />\n  </a>\n  <br />\n  <a href=\"https://twitter.com/glipsman\">\n    <img alt=\"Twitter\" src=\"https://img.shields.io/twitter/url?url=https%3A%2F%2Fx.com%2Fglipsman&label=%40glipsman\" />\n  </a>\n</div>\n\n<br/>\n\nGive [Cursor](https://cursor.sh/) and other AI-powered coding tools access to your Figma files with this [Model Context Protocol](https://modelcontextprotocol.io/introduction) server.\n\nWhen Cursor has access to Figma design data, it's **way** better at one-shotting designs accurately than alternative approaches like pasting screenshots.\n\n<h3><a href=\"https://www.framelink.ai/docs/quickstart?utm_source=github&utm_medium=referral&utm_campaign=readme\">See quickstart instructions →</a></h3>\n\n## Demo\n\n[Watch a demo of building a UI in Cursor with Figma design data](https://youtu.be/6G9yb-LrEqg)\n\n[![Watch the video](https://img.youtube.com/vi/6G9yb-LrEqg/maxresdefault.jpg)](https://youtu.be/6G9yb-LrEqg)\n\n## How it works\n\n1. Open your IDE's chat (e.g. agent mode in Cursor).\n2. Paste a link to a Figma file, frame, or group.\n3. Ask Cursor to do something with the Figma file—e.g. implement the design.\n4. Cursor will fetch the relevant metadata from Figma and use it to write your code.\n\nThis MCP server is specifically designed for use with Cursor. Before responding with context from the [Figma API](https://www.figma.com/developers/api), it simplifies and translates the response so only the most relevant layout and styling information is provided to the model.\n\nReducing the amount of context provided to the model helps make the AI more accurate and the responses more relevant.\n\n## Getting Started\n\nMany code editors and other AI clients use a configuration file to manage MCP servers.\n\nThe `figma-developer-mcp` server can be configured by adding the following to your configuration file.\n\n> NOTE: You will need to create a Figma access token to use this server. Instructions on how to create a Figma API access token can be found [here](https://help.figma.com/hc/en-us/articles/8085703771159-Manage-personal-access-tokens).\n\n### MacOS / Linux\n\n```json\n{\n  \"mcpServers\": {\n    \"Framelink Figma MCP\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"figma-developer-mcp\", \"--figma-api-key=YOUR-KEY\", \"--stdio\"]\n    }\n  }\n}\n```\n\n### Windows\n\n```json\n{\n  \"mcpServers\": {\n    \"Framelink Figma MCP\": {\n      \"command\": \"cmd\",\n      \"args\": [\"/c\", \"npx\", \"-y\", \"figma-developer-mcp\", \"--figma-api-key=YOUR-KEY\", \"--stdio\"]\n    }\n  }\n}\n```\n\nOr you can set `FIGMA_API_KEY` and `PORT` in the `env` field.\n\nIf you need more information on how to configure the Framelink Figma MCP server, see the [Framelink docs](https://www.framelink.ai/docs/quickstart?utm_source=github&utm_medium=referral&utm_campaign=readme).\n\n## Star History\n\n<a href=\"https://star-history.com/#GLips/Figma-Context-MCP\"><img src=\"https://api.star-history.com/svg?repos=GLips/Figma-Context-MCP&type=Date\" alt=\"Star History Chart\" width=\"600\" /></a>\n\n## Learn More\n\nThe Framelink Figma MCP server is simple but powerful. Get the most out of it by learning more at the [Framelink](https://framelink.ai?utm_source=github&utm_medium=referral&utm_campaign=readme) site.\n\n<!-- SPONSORS:LIST:START -->\n<!-- prettier-ignore-start -->\n<!-- markdownlint-disable -->\n\n## Sponsors\n\n### 🥇 Gold Sponsors\n\n<table>\n  <tr>\n   <td align=\"center\"><a href=\"https://framelink.ai/?ref=framelink-mcp&utm_source=github&utm_medium=referral&utm_campaign=framelink-mcp\"><img src=\"https://avatars.githubusercontent.com/u/204619719\" width=\"180\" alt=\"Framelink\"/><br />Framelink</a></td>\n  </tr>\n</table>\n\n### 🥈 Silver Sponsors\n\n<table>\n  <tr>\n   <!-- <td align=\"center\"><a href=\"\"><img src=\"\" width=\"150\" alt=\"tbd\"/><br />Title</a></td> -->\n  </tr>\n</table>\n\n### 🥉 Bronze Sponsors\n\n<table>\n  <tr>\n   <!-- <td align=\"center\"><a href=\"\"><img src=\"\" width=\"120\" alt=\"tbd\"/><br />tbd</a></td>-->\n  </tr>\n</table>\n\n### 😻 Smaller Backers\n\n<table>\n  <tr>\n   <!-- <td align=\"center\"><a href=\"\"><img src=\"\" width=\"100\" alt=\"tbd\"/><br />tbd</a></td>-->\n  </tr>\n  <tr>\n   <!-- <td align=\"center\"><a href=\"\"><img src=\"\" width=\"100\" alt=\"tbd\"/><br />tbd</a></td>-->\n  </tr>\n</table>\n\n<!-- markdownlint-restore -->\n<!-- prettier-ignore-end -->\n\n<!-- SPONSORS:LIST:END -->\n"
+}

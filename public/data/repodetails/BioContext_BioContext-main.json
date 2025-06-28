@@ -1,0 +1,50 @@
+{
+  "mcp_name": "BioContext/BioContext-main",
+  "mcp_description": "BioContext provides seamless integration with major biological databases through a collection of MCP servers, facilitating AI-driven data access and analysis.",
+  "mcp_id": "BioContext_BioContext-main",
+  "fetch_timestamp": "2025-06-23T01:39:44.624695Z",
+  "github_url": "https://github.com/BioContext/BioContext-main",
+  "repository": {
+    "name": "BioContext-main",
+    "full_name": "BioContext/BioContext-main",
+    "description": null,
+    "html_url": "https://github.com/BioContext/BioContext-main",
+    "created_at": "2025-04-21T17:32:40Z",
+    "updated_at": "2025-04-23T13:35:58Z",
+    "pushed_at": "2025-04-21T17:52:26Z",
+    "size": 12,
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Shell",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "BioContext",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/208044616?v=4",
+      "html_url": "https://github.com/BioContext"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 0,
+    "languages": {
+      "Shell": 1646
+    },
+    "language_percentages": {
+      "Shell": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# BioContext: Unified Biological Data Access\n\nBioContext is a collection of Model Context Protocol (MCP) servers that provide unified access to major biological databases and APIs. This repository serves as the main project that manages various BioContext components, making it easy to set up and use multiple biological data sources with AI assistants like Claude or other MCP-compatible clients.\n\n## 🌟 Features\n\n- **Unified Access**: Single setup for multiple biological databases\n- **AI-Ready**: Compatible with Claude, Cursor, and other MCP clients\n- **Modular Design**: Use only the databases you need\n- **Easy Setup**: Simple scripts for installation and configuration\n- **Docker Support**: Run services in containers\n\n## 🧬 Available MCP Servers\n\n| Server | Description | Data Source | Documentation |\n|--------|-------------|-------------|---------------|\n| OpenTargets-MCP | Drug target discovery | [Open Targets Platform](https://platform.opentargets.org/) | [Docs](modules/OpenTargets-MCP/README.md) |\n| ChemBL-MCP | Bioactive molecules | [ChEMBL](https://www.ebi.ac.uk/chembl/) | [Docs](modules/ChemBL-MCP/README.md) |\n| PubChem-MCP | Chemical compounds | [PubChem](https://pubchem.ncbi.nlm.nih.gov/) | [Docs](modules/PubChem-MCP/README.md) |\n| UniProt-MCP | Protein information | [UniProt](https://www.uniprot.org/) | [Docs](modules/UniProt-MCP/README.md) |\n\n## 🚀 Quick Start\n\n### 1. Clone the Repository\n\n```bash\n# Clone with all submodules\ngit clone --recursive https://github.com/BioContext/BioContext-main.git\ncd BioContext-main\n\n# Or if already cloned:\ngit submodule update --init --recursive\n```\n\n### 2. Choose Your Setup Method\n\n#### A. Using Docker (Recommended for Most Users)\n\n```bash\n# Start all services\ndocker-compose up -d\n\n# Or start specific services\ndocker-compose up -d chembl-mcp uniprot-mcp\n```\n\n#### B. Local Python Installation\n\n```bash\n# Run the setup script\n./setup.sh\n```\n\n### 3. Configure Your MCP Client\n\n#### For Claude Desktop\n\n1. Create or edit `claude_desktop_config.json`:\n   - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`\n   - Linux: `~/.config/Claude/claude_desktop_config.json`\n   - Windows: `%APPDATA%\\\\Claude\\\\claude_desktop_config.json`\n\n2. Add the configuration:\n```json\n{\n    \"mcpServers\": {\n        \"opentargets\": {\n            \"command\": \"python\",\n            \"args\": [\n                \"-m\",\n                \"modules.OpenTargets-MCP.opentargets\"\n            ],\n            \"cwd\": \"/path/to/BioContext-main\"\n        },\n        \"chembl\": {\n            \"command\": \"python\",\n            \"args\": [\n                \"-m\",\n                \"modules.ChemBL-MCP.mcp_server\"\n            ],\n            \"cwd\": \"/path/to/BioContext-main\"\n        },\n        \"pubchem\": {\n            \"command\": \"python\",\n            \"args\": [\n                \"-m\",\n                \"modules.PubChem-MCP.pubchem\"\n            ],\n            \"cwd\": \"/path/to/BioContext-main\"\n        },\n        \"uniprot\": {\n            \"command\": \"python\",\n            \"args\": [\n                \"-m\",\n                \"modules.UniProt-MCP.uniprot\"\n            ],\n            \"cwd\": \"/path/to/BioContext-main\"\n        }\n    }\n}\n```\n\n### Examples \n\n```\n/opentargets search BRAF\n/chembl find aspirin details\n/pubchem search caffeine\n/uniprot lookup P12345\n```\n\n### Docker Configuration\n\nSee [docker-compose.yml](docker-compose.yml) for container configurations.\n\n## 🤝 Contributing\n\nWe welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.\n\n## 📄 License\n\nThis project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.\n\n## 🔗 Related Projects\n\n- [Claude for Desktop](https://github.com/anthropic-labs/claude-desktop)\n- [Model Context Protocol Specification](https://github.com/anthropic-labs/mcp-spec)\n- [Cursor](https://cursor.sh/)\n\n## 📮 Contact & Support\n\n- GitHub Issues: [Create an issue](https://github.com/BioContext/BioContext-main/issues)\n- Documentation: [Wiki](https://github.com/BioContext/BioContext-main/wiki)\n- Community: [Discussions](https://github.com/BioContext/BioContext-main/discussions) "
+}

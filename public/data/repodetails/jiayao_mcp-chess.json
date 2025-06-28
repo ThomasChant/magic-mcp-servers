@@ -1,0 +1,50 @@
+{
+  "mcp_name": "jiayao/mcp-chess",
+  "mcp_description": "🐍 🏠 - A MCP server playing chess against LLMs.",
+  "mcp_id": "jiayao_mcp-chess",
+  "fetch_timestamp": "2025-06-23T05:24:40.232591Z",
+  "github_url": "https://github.com/jiayao/mcp-chess",
+  "repository": {
+    "name": "mcp-chess",
+    "full_name": "jiayao/mcp-chess",
+    "description": "MCP server for playing chess against AI",
+    "html_url": "https://github.com/jiayao/mcp-chess",
+    "created_at": "2025-05-03T19:08:41Z",
+    "updated_at": "2025-06-09T19:07:07Z",
+    "pushed_at": "2025-05-05T06:09:32Z",
+    "size": 958,
+    "stargazers_count": 10,
+    "watchers_count": 10,
+    "forks_count": 3,
+    "open_issues_count": 2,
+    "language": "Python",
+    "license": "Apache License 2.0",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "jiayao",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/74058?v=4",
+      "html_url": "https://github.com/jiayao"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 3,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 10083
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 1
+  },
+  "readme": "# MCP Chess Server\n\nThis MCP let's you play chess against any LLM.\n\n## Installation\n\nTo use this chess server, add the following configuration to your MCP config:\n\n```json\n{\n  \"mcpServers\": {\n    \"chess\": {\n      \"command\": \"uvx\",\n      \"args\": [\n        \"mcp-chess\"\n      ]\n    }\n  }\n}\n```\n\n## Usage\n\nPlay a game:\n![Chess starting position with black pieces](screenshots/start_black.png)\n\n![A few moves later](screenshots/acc_dragon.png)\n\nFind a position in a PGN for game analysis:\n\n![Find a position in a PGN](screenshots/find_position.png)\n\n## Available Tools\n\nThe server provides the following tools:\n\n*   `get_board_visualization()`: Provides the current state of the chessboard as an image. The board orientation automatically flips based on the user's assigned color.\n*   `get_turn()`: Indicates whose turn it is ('white' or 'black').\n*   `get_valid_moves()`: Lists all legal moves for the current player in UCI notation (e.g., 'e2e4', 'g1f3'). Returns an empty list if the game is over.\n*   `make_move(move_san: str)`: Makes a move on the board using Standard Algebraic Notation (SAN) (e.g., 'e4', 'Nf3', 'Bxe5'). Returns the move in SAN and UCI, the new board FEN, and game status.\n*   `new_game(user_plays_white: bool = True)`: Starts a new game, resetting the board. By default, the user plays white. Sets the user's color for board orientation. Returns a confirmation message.\n*   `find_position_in_pgn(pgn_string: str, condition: str)`: Finds the first board position in a PGN string matching a condition (e.g., \"bishop on a3\") and returns an image of that board state. The condition format is \"piece_type on square_name\". Valid piece types are \"pawn\", \"knight\", \"bishop\", \"rook\", \"queen\", \"king\".\n\n"
+}

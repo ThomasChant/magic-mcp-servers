@@ -1,0 +1,50 @@
+{
+  "mcp_name": "macchen-yu/HSIPL_auto_fastmcp",
+  "mcp_description": "Facilitates the setup and development of MCP servers using Python and uv on Windows PowerShell.",
+  "mcp_id": "macchen-yu_HSIPL_auto_fastmcp",
+  "fetch_timestamp": "2025-06-23T06:19:43.106510Z",
+  "github_url": "https://github.com/macchen-yu/HSIPL_auto_fastmcp",
+  "repository": {
+    "name": "HSIPL_auto_fastmcp",
+    "full_name": "macchen-yu/HSIPL_auto_fastmcp",
+    "description": null,
+    "html_url": "https://github.com/macchen-yu/HSIPL_auto_fastmcp",
+    "created_at": "2025-04-28T21:24:26Z",
+    "updated_at": "2025-04-30T00:11:08Z",
+    "pushed_at": "2025-04-30T00:11:04Z",
+    "size": 207,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "macchen-yu",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60809517?v=4",
+      "html_url": "https://github.com/macchen-yu"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 17241
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 2
+  },
+  "readme": "# HSIPL Autotool - 安裝指南\n\n本教學將指引你在 **Windows PowerShell** 上安裝必要環境，包括：\n\n- Node.js\n- Python 12  環境必須單一個\n- uv 套件管理器\n- Windsurf\n\n---\n\n## 1. 安裝 uv\n\n在 PowerShell 中執行以下指令以安裝 uv：\n\n```powershell\npowershell -ExecutionPolicy ByPass -c \"irm https://astral.sh/uv/install.ps1 | iex\"\n```\n\n如果安裝 uv 後出現 `找不到 uv` 的錯誤，可以臨時新增路徑環境變數：\n\n```powershell\necho $HOME\\.local\\bin\n```\n\n**複製上方顯示的路徑**，並手動將其新增到系統環境變數中。\n\n---\n\n## 2. 安裝 Node.js\n\n前往 [Node.js 官方網站](https://nodejs.org/en) 下載安裝檔，安裝時請記得勾選 **\"Add to PATH\"** 選項。\n\n![Node.js 安裝畫面](./pic/nodejs_install.png)\n\n---\n\n## 3.下載Windsurf\n\n前往 [Windsurf 官方網站](https://www.windsurf.io/) 下載安裝檔，安裝時請記得勾選 **\"Add to PATH\"** 選項。\n\n\n---\n\n## 4. 下載專案\n\n使用 Git 將專案下載至本地端：\n\n```powershell\ngit clone https://github.com/macchen-yu/HSIPL_auto_fastmcp.git\n```\n\n下載完成後，切換至專案資料夾：\n\n```powershell\ncd HSIPL_fastmcp\n```\n\n---\n\n## 5. 安裝 `server.py`\n\n在 **全局環境**（非虛擬環境）中先安裝 server 相關依賴：\n\n```powershell\nuv run fastmcp install server.py\npip install fastmcp   #非常關鍵的步驟\npip install spectral\n```\n\n⚠️ 注意：**必須在全局環境下執行**！\n\n---\n\n## 6. 設定 `mcpServers` 配置\n\n建立或修改設定檔（例如 `openwebui` 需要的 `openwebui.json`）：\n\n```json\n{\n  \"mcpServers\": {\n    \"hsipl_autotool\": {\n      \"command\": \"uv\",\n      \"args\": [\n        \"run\",\n        \"fastmcp\",\n        \"run\",\n        \"c:/Users/User/Desktop/HSIPL_fastmcp/server.py\"  // 這裡請改成你的實際路徑\n      ]\n    }\n  }\n}\n```\n\n---\n\n## 7. 除錯開發 MCP Server\n\n啟動 server 端服務器進行開發模式：\n\n```powershell\nuv run fastmcp dev server.py\n```\n\n啟動成功後，會看到類似下方訊息：\n\n```\nStdio transport: command=C:\\Users\\User\\.local\\bin\\uv.exe, args=run,--with,mcp,mcp,run,server.py\nSpawned stdio transport\nConnected MCP client to backing server transport\nCreated web app transport\nCreated web app transport\nSet up MCP proxy\n🔍 MCP Inspector is up and running at http://127.0.0.1:6274 🚀\n```\n\n你可以透過瀏覽器開啟 [http://127.0.0.1:6274](http://127.0.0.1:6274) 來查看 **MCP Inspector**。\n\n---\n\n## 參考資料\n\n- [oalieno - MCP 架設教學](https://oalieno.tw/posts/mcp)\n- [MCP 官方教學（miniasp 部落格）](https://blog.miniasp.com/post/2025/04/01/Write-your-own-MCP-server-using-uv-and-Python?full=1&fbclid=IwZXh0bgNhZW0CMTEAAR5BtEA-3IpXHd7eI9290Bu_P-TOSgAhOUnEfg1-uOfewPD7xgx1jBPaJdMMWQ_aem_IO-VzLI0yv-h0O69sOEvqg)\n\n- [fastmcp](https://github.com/jlowin/fastmcp.git)"
+}

@@ -1,0 +1,103 @@
+{
+  "id": "40b13587e540",
+  "owner": "emicklei",
+  "repoName": "mcp-log-proxy",
+  "fullDescription": "🏎️ 🏠 - MCP server proxy that offers a Web UI to the full message flow",
+  "techStack": [],
+  "serviceTypes": [
+    {
+      "type": "monitoring",
+      "label": "Monitoring",
+      "icon": "📈",
+      "description": "Monitors systems and applications"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "moderate",
+    "maturity": "stable",
+    "deployment": [
+      "local"
+    ],
+    "featured": false,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 3.9,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "monitoring",
+      "logging"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/emicklei/mcp-log-proxy",
+    "owner": "emicklei",
+    "name": "mcp-log-proxy",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.279Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "message flow",
+    "monitoring",
+    "development-tools",
+    "logging",
+    "proxy",
+    "debugging",
+    "web ui"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Moderate",
+      "color": "#eab308",
+      "icon": "🟡"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    }
+  ],
+  "icon": "📈",
+  "readme": null
+}

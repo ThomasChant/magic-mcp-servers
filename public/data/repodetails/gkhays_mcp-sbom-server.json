@@ -1,0 +1,54 @@
+{
+  "mcp_name": "gkhays/mcp-sbom-server",
+  "mcp_description": "Generates a Software Bill of Materials (SBOM) using Trivy scans, outputting in CycloneDX format.",
+  "mcp_id": "gkhays_mcp-sbom-server",
+  "fetch_timestamp": "2025-06-23T03:49:52.199095Z",
+  "github_url": "https://github.com/gkhays/mcp-sbom-server",
+  "repository": {
+    "name": "mcp-sbom-server",
+    "full_name": "gkhays/mcp-sbom-server",
+    "description": "MCP server to perform a scan and produce an SBOM",
+    "html_url": "https://github.com/gkhays/mcp-sbom-server",
+    "created_at": "2025-04-03T23:14:02Z",
+    "updated_at": "2025-04-04T16:37:02Z",
+    "pushed_at": "2025-04-04T16:36:59Z",
+    "size": 144,
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 3,
+    "open_issues_count": 2,
+    "language": "Python",
+    "license": null,
+    "topics": [
+      "mcp",
+      "python",
+      "uv"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "gkhays",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/773981?v=4",
+      "html_url": "https://github.com/gkhays"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 3,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 2176
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 2,
+    "contributors_count": 1
+  },
+  "readme": "# MCP SBOM Server\n\n[![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)\n[![MCP](https://img.shields.io/badge/MCP-1.6-CC5500.svg)](https://www.anthropic.com/news/model-context-protocol)\n\nMCP server to perform a Trivy scan and produce an SBOM in CycloneDX format.\n\n## Installation\n\n### Prerequisites\n\nInstall the following.\n\n- [uv](https://github.com/astral-sh/uv)\n- [trivy](https://github.com/aquasecurity/trivy)\n- [Node.js](https://nodejs.org/en)\n\n## MCP Clients\n\n### Configuration\n\n```json\n\"mcpServers\": {\n        \"mcp-sbom\": {\n            \"command\": \"uv\",\n            \"args\": [\n                \"--directory\",\n                \"/path/to/mcp-sbom\",\n                \"run\",\n                \"mcp-sbom\"\n            ]\n        }\n    }\n```\n\n## Building\n\n> [!NOTE]\n> This project employs `uv`.\n\n1. Synchronize dependencies and update the lockfile.\n```\nuv sync\n```\n\n## Debugging\n\n### MCP Inspector\n\nUse [MCP Inspector](https://github.com/modelcontextprotocol/inspector).\n\nLaunch the MCP Inspector as follows:\n\n```\nnpx @modelcontextprotocol/inspector uv --directory /path/to/mcp-sbom run mcp-sbom\n```\n\n![MCP Inspector](docs/mcp-inspector.png)\n\n### Windows\n\nWhen running on Windows, use paths of the style:\n\n```console\nC:/Users/gkh/src/mcp-sbom-server/src/mcp_sbom\n```\n"
+}

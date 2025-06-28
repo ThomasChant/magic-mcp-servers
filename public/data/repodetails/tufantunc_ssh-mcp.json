@@ -1,0 +1,86 @@
+{
+  "mcp_name": "tufantunc/ssh-mcp",
+  "mcp_description": "📇 🏠 🐧 🪟 - MCP server exposing SSH control for Linux and Windows servers via Model Context Protocol. Securely execute remote shell commands with password or SSH key authentication.",
+  "mcp_id": "tufantunc_ssh-mcp",
+  "fetch_timestamp": "2025-06-23T09:06:37.290526Z",
+  "github_url": "https://github.com/tufantunc/ssh-mcp",
+  "repository": {
+    "name": "ssh-mcp",
+    "full_name": "tufantunc/ssh-mcp",
+    "description": "MCP server exposing SSH control for Linux servers via Model Context Protocol.",
+    "html_url": "https://github.com/tufantunc/ssh-mcp",
+    "created_at": "2025-04-26T21:07:32Z",
+    "updated_at": "2025-06-22T15:14:41Z",
+    "pushed_at": "2025-04-27T00:53:24Z",
+    "size": 43,
+    "stargazers_count": 17,
+    "watchers_count": 17,
+    "forks_count": 2,
+    "open_issues_count": 1,
+    "language": "JavaScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "tufantunc",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19643687?v=4",
+      "html_url": "https://github.com/tufantunc"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 2,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 4294
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "latest_release": {
+      "tag_name": "1.0.5",
+      "name": "1.0.5",
+      "published_at": "2025-04-27T00:53:24Z",
+      "body": "**Full Changelog**: https://github.com/tufantunc/ssh-mcp/compare/1.0.4...1.0.5",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "1.0.5",
+        "commit_sha": "1e0e0c1fa070d8d9ad5ff594e54068b663318522"
+      },
+      {
+        "name": "1.0.4",
+        "commit_sha": "cda050bcbe45cb3181590f7dab22777c2d692829"
+      },
+      {
+        "name": "1.0.3",
+        "commit_sha": "6c5809465423ab709863e04de4ca84fdb2386fe5"
+      },
+      {
+        "name": "1.0.2",
+        "commit_sha": "4e47407f40b339e63c5cbcd608e73e70567601ff"
+      },
+      {
+        "name": "1.0.1",
+        "commit_sha": "3fec5184f3f88bb153cd755ee21704973f62df50"
+      },
+      {
+        "name": "1.0.0",
+        "commit_sha": "7d16f75735606737b7c245ec098c0ccb33ac9765"
+      }
+    ],
+    "latest_version": "1.0.5",
+    "package_json_version": "1.0.5"
+  },
+  "readme": "# SSH MCP Server\n\n[![License](https://img.shields.io/github/license/tufantunc/ssh-mcp)](./LICENSE)\n[![NPM Version](https://img.shields.io/npm/v/ssh-mcp)](https://www.npmjs.com/package/ssh-mcp)\n\n**SSH MCP Server** is a local Model Context Protocol (MCP) server that exposes SSH control for Linux and Windows systems, enabling LLMs and other MCP clients to execute shell commands securely via SSH.\n\n## Contents\n\n- [Quick Start](#quick-start)\n- [Features](#features)\n- [Installation](#installation)\n- [Client Setup](#client-setup)\n- [Testing](#testing)\n- [Disclaimer](#disclaimer)\n- [Support](#support)\n\n## Quick Start\n\n- [Install](#installation) SSH MCP Server\n- [Configure](#configuration) SSH MCP Server\n- [Set up](#client-setup) your MCP Client (e.g. Claude Desktop, Cursor, etc)\n- Execute remote shell commands on your Linux or Windows server via natural language\n\n## Features\n\n- MCP-compliant server exposing SSH capabilities\n- Execute shell commands on remote Linux and Windows systems\n- Secure authentication via password or SSH key\n- Built with TypeScript and the official MCP SDK\n\n### Tools\n\n- `exec`: Execute a shell command on the remote server\n\n## Installation\n\n1. **Clone the repository:**\n   ```bash\n   git clone https://github.com/tufantunc/ssh-mcp.git\n   cd ssh-mcp\n   ```\n2. **Install dependencies:**\n   ```bash\n   npm install\n   ```\n\n## Client Setup\n\nYou can configure Claude Desktop to use this MCP Server.\n   - `host`: Hostname or IP of the Linux or Windows server\n   - `port`: SSH port (default: 22)\n   - `user`: SSH username\n   - `password`: SSH password (or use `key` for key-based auth) (optional)\n   - `key`: Path to private SSH key (optional)\n\n\n```commandline\n{\n    \"mcpServers\": {\n        \"ssh-mcp\": {\n            \"command\": \"npx\",\n            \"args\": [\n                \"ssh-mcp\",\n                \"-y\",\n                \"--\",\n                \"--host=1.2.3.4\",\n                \"--port=22\",\n                \"--user=root\",\n                \"--password=pass\",\n                \"--key=path/to/key\"\n            ]\n        }\n    }\n}\n```\n\n## Testing\n\nYou can use the [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) for visual debugging of this MCP Server.\n\n```sh\nnpm run inspect\n```\n\n## Disclaimer\n\nSSH MCP Server is provided under the [MIT License](./LICENSE). Use at your own risk. This project is not affiliated with or endorsed by any SSH or MCP provider.\n\n## Support\n\nIf you find SSH MCP Server helpful, consider starring the repository or contributing! Pull requests and feedback are welcome. "
+}

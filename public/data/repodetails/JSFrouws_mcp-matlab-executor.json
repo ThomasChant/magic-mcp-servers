@@ -1,0 +1,54 @@
+{
+  "mcp_name": "JSFrouws/mcp-matlab-executor",
+  "mcp_description": "Securely execute MATLAB functions and scripts with user-approved security prompts.",
+  "mcp_id": "JSFrouws_mcp-matlab-executor",
+  "fetch_timestamp": "2025-06-23T05:36:43.312102Z",
+  "github_url": "https://github.com/JSFrouws/mcp-matlab-executor",
+  "repository": {
+    "name": "mcp-matlab-executor",
+    "full_name": "JSFrouws/mcp-matlab-executor",
+    "description": "MCP tool for safely executing MATLAB functions, scripts, and commands",
+    "html_url": "https://github.com/JSFrouws/mcp-matlab-executor",
+    "created_at": "2025-04-28T12:18:07Z",
+    "updated_at": "2025-04-28T12:44:38Z",
+    "pushed_at": "2025-04-28T12:44:18Z",
+    "size": 7,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "mean",
+    "owner": {
+      "login": "JSFrouws",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/206219348?v=4",
+      "html_url": "https://github.com/JSFrouws"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 25941,
+      "MATLAB": 652,
+      "Batchfile": 485
+    },
+    "language_percentages": {
+      "Python": 95.8,
+      "MATLAB": 2.41,
+      "Batchfile": 1.79
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# MATLAB Executor MCP Tool\n\nThis Model Context Protocol (MCP) tool allows secure execution of MATLAB code through Claude, with security prompts for user approval.\n\n## Features\n\n- Execute any MATLAB function, script, or command\n- Security prompts with options: Allow Once, Always Allow, or Deny\n- Remembers allowed commands during a session\n- Path management for MATLAB projects\n- Detailed logging of all operations\n\n## Installation\n\nInstall with `uvx`:\n\n```bash\nuvx mcp-matlab-executor\n```\n\nOr install directly from the directory:\n\n```bash\ncd matlab-executor\nuv venv\n.venv/Scripts/activate  # On Windows\nsource .venv/bin/activate  # On Linux/Mac\npip install -e .\n```\n\n## Configuration\n\nSet the MATLAB path using environment variables:\n\n1. Set the `MATLAB_PATH` environment variable to your MATLAB installation's bin directory\n2. Or create a `.env` file with: `MATLAB_PATH=C:/Program Files/MATLAB/R2022b/bin`\n\n## Usage with Claude Desktop\n\nAdd to Claude Desktop configuration file:\n\n```json\n{\n  \"mcpServers\": {\n    \"matlab-executor\": {\n      \"command\": \"uvx\",\n      \"args\": [\n        \"run\", \"git+https://github.com/JSFrouws/mcp-matlab-executor.git\"\n      ],\n      \"env\": {\n        \"MATLAB_PATH\": \"C:/Program Files/MATLAB/R2022b/bin\"\n      }\n    }\n  }\n}\n```\n\n## Usage Examples\n\nExecute a MATLAB function:\n```\nexecute_matlab_function(\"C:/path/to/matlab/project\", \"result = my_function(10, 'test')\")\n```\n\nRun arbitrary MATLAB code:\n```\nexecute_matlab_function(\"\", \"x = 1:10; y = x.^2; plot(x, y); disp('Plotted x^2')\")\n```\n\nExecute multiple commands:\n```\nexecute_matlab_function(\"\", \"a = 5; b = 10; c = a + b; disp(['Result: ' num2str(c)])\")\n```\n\n## Security\n\nA permission dialog appears with each execution request:\n- **Allow Once**: Permit this execution one time\n- **Always Allow**: Remember and allow for the current session\n- **Deny**: Block execution\n\nThe tool clearly shows what MATLAB code will be executed and lets you know which option was selected.\n"
+}

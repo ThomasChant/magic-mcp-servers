@@ -1,0 +1,149 @@
+{
+  "mcp_name": "Continue",
+  "mcp_description": "",
+  "mcp_id": "continuedev_continue",
+  "fetch_timestamp": "2025-06-23T02:16:45.937464Z",
+  "github_url": "https://github.com/continuedev/continue",
+  "repository": {
+    "name": "continue",
+    "full_name": "continuedev/continue",
+    "description": "⏩ Create, share, and use custom AI code assistants with our open-source IDE extensions and hub of models, rules, prompts, docs, and other building blocks",
+    "html_url": "https://github.com/continuedev/continue",
+    "created_at": "2023-05-24T03:39:39Z",
+    "updated_at": "2025-06-23T02:09:45Z",
+    "pushed_at": "2025-06-23T00:01:33Z",
+    "size": 678516,
+    "stargazers_count": 27240,
+    "watchers_count": 27240,
+    "forks_count": 3013,
+    "open_issues_count": 965,
+    "language": "TypeScript",
+    "license": "Apache License 2.0",
+    "topics": [
+      "ai",
+      "chatgpt",
+      "copilot",
+      "developer-tools",
+      "intellij",
+      "jetbrains",
+      "llm",
+      "open-source",
+      "openai",
+      "pycharm",
+      "software-development",
+      "visual-studio-code",
+      "vscode"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "continuedev",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/127876214?v=4",
+      "html_url": "https://github.com/continuedev"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 3013,
+    "subscribers_count": 123,
+    "languages": {
+      "TypeScript": 3609250,
+      "JavaScript": 772324,
+      "Kotlin": 322919,
+      "Python": 113477,
+      "Rust": 76465,
+      "CSS": 58277,
+      "Tree-sitter Query": 53991,
+      "Shell": 7031,
+      "Java": 4943,
+      "PowerShell": 4108,
+      "HTML": 3606,
+      "PHP": 1460,
+      "C#": 673,
+      "Jupyter Notebook": 541,
+      "Scheme": 441,
+      "Ruby": 363,
+      "Dockerfile": 347,
+      "Go": 166
+    },
+    "language_percentages": {
+      "TypeScript": 71.75,
+      "JavaScript": 15.35,
+      "Kotlin": 6.42,
+      "Python": 2.26,
+      "Rust": 1.52,
+      "CSS": 1.16,
+      "Tree-sitter Query": 1.07,
+      "Shell": 0.14,
+      "Java": 0.1,
+      "PowerShell": 0.08,
+      "HTML": 0.07,
+      "PHP": 0.03,
+      "C#": 0.01,
+      "Jupyter Notebook": 0.01,
+      "Scheme": 0.01,
+      "Ruby": 0.01,
+      "Dockerfile": 0.01,
+      "Go": 0
+    },
+    "pull_requests_count": 2839,
+    "contributors_count": 394,
+    "latest_release": {
+      "tag_name": "v1.0.14-vscode",
+      "name": "v1.0.14-vscode",
+      "published_at": "2025-06-21T03:54:47Z",
+      "body": "## What's Changed\r\n* feat: `requestRule` tool by @Patrick-Erichsen in https://github.com/continuedev/continue/pull/5867\r\n* rule for tailoring recommendations for LLM code based on which specific LLM is being used by @adarshramiyer in https://github.com/continuedev/continue/pull/5883\r\n* add rule to make the model describe the code in a bigger-picture context by @jpoly1219 in https://github.com/continuedev/continue/pull/5878\r\n* added a rule to make the model answer specifically about continue by @adarshramiyer in https://github.com/continuedev/continue/pull/5908\r\n* Jacob/feature/call-alongside-autocomplete by @jpoly1219 in https://github.com/continuedev/continue/pull/5919\r\n* Jacob/feature/call alongside autocomplete by @jpoly1219 in https://github.com/continuedev/continue/pull/5920\r\n* Revision on #5921 per PR review by @jpoly1219 in https://github.com/continuedev/continue/pull/5923\r\n* prevent markdown table from breaking on formatted nodes by @uinstinct in https://github.com/continuedev/continue/pull/5560\r\n* fix: reverted the URL of llama.cpp back to 'completion'. by @ipaddicting in https://github.com/continuedev/continue/pull/5726\r\n* Feature/nextEdit by @jpoly1219 in https://github.com/continuedev/continue/pull/5921\r\n* perf(llm): Optimize pruneLines functions in countTokens by @0x23d11 in https://github.com/continuedev/continue/pull/5310\r\n* Fix Config.yaml schema registration by @RomneyDa in https://github.com/continuedev/continue/pull/5851\r\n* Remove free trial provider by @RomneyDa in https://github.com/continuedev/continue/pull/5855\r\n* fix changing width when typing text by @uinstinct in https://github.com/continuedev/continue/pull/5874\r\n* Fix git diff caching by @RomneyDa in https://github.com/continuedev/continue/pull/5882\r\n* Add JCEF out of process vm setting by @RomneyDa in https://github.com/continuedev/continue/pull/5891\r\n* fix: mac build issues by @tomasz-stefaniak in https://github.com/continuedev/continue/pull/5925\r\n* fetch secrets from <workspace>/.continue/.env folder before <workspace>/.env by @uinstinct in https://github.com/continuedev/continue/pull/5461\r\n* update docs by @bhaktatejas922 in https://github.com/continuedev/continue/pull/5941\r\n* add claude-4-sonnet and opus to llm-info by @sestinj in https://github.com/continuedev/continue/pull/5852\r\n* Nate/fix-openai-adapters by @sestinj in https://github.com/continuedev/continue/pull/5612\r\n* feat: enable sourcemaps by @Patrick-Erichsen in https://github.com/continuedev/continue/pull/5942\r\n* fix installation and core checks due to import error by @uinstinct in https://github.com/continuedev/continue/pull/5937\r\n* Free trial popover by @sestinj in https://github.com/continuedev/continue/pull/5926\r\n* ci: :art: run prettier check for all PRs by @sestinj in https://github.com/continuedev/continue/pull/5693\r\n* Data URI for caBundlePath by @sestinj in https://github.com/continuedev/continue/pull/5963\r\n* Support completions with proxy by @sestinj in https://github.com/continuedev/continue/pull/5962\r\n* verbose logging option for our custom fetch by @sestinj in https://github.com/continuedev/continue/pull/5884\r\n* Quick pick to enter key in VS Code by @sestinj in https://github.com/continuedev/continue/pull/5952\r\n* feat: add `no-negated-condition` eslint by @Patrick-Erichsen in https://github.com/continuedev/continue/pull/5967\r\n* chore: bump versions by @Patrick-Erichsen in https://github.com/continuedev/continue/pull/5966\r\n* refactor: :recycle: Refactor CodeBaseIndexer out of core by @chezsmithy in https://github.com/continuedev/continue/pull/5894\r\n* Prompts fixes by @RomneyDa in https://github.com/continuedev/continue/pull/5946\r\n* Bump tar-fs in /core by @dependabot in https://github.com/continuedev/continue/pull/5956\r\n* fix: handle no parts returned from Gemini by @RomneyDa in https://github.com/continuedev/continue/pull/5974\r\n* bump fetch by @sestinj in https://github.com/continuedev/continue/pull/5979\r\n* Only allow completions through continue for vllm for now by @RomneyDa in https://github.com/continuedev/continue/pull/5983\r\n* bump by @sestinj in https://github.com/continuedev/continue/pull/5984\r\n* feat: :bricks: Enable terminals for additional vscode Remote Host Types by @chezsmithy in https://github.com/continuedev/continue/pull/5813\r\n* always show active file in input toolbar, not codebase by @sestinj in https://github.com/continuedev/continue/pull/5868\r\n* Delete docs/docs/customize/tutorials/build-your-own-slash-command.md by @Patrick-Erichsen in https://github.com/continuedev/continue/pull/5905\r\n* Bump vite from 5.4.18 to 6.3.5 in /gui by @dependabot in https://github.com/continuedev/continue/pull/5916\r\n* Gemini LLM Info by @RomneyDa in https://github.com/continuedev/continue/pull/5976\r\n* fix: linting error by @Patrick-Erichsen in https://github.com/continuedev/continue/pull/5994\r\n* fix: :bug: Codebase indexing is not starting on load by @chezsmithy in https://github.com/continuedev/continue/pull/5993\r\n* streamable-http support in YAML by @sestinj in https://github.com/continuedev/continue/pull/6014\r\n* Add ability to configure tabAutocompleteOptions on a per-model basis in config.yaml by @jpoly1219 in https://github.com/continuedev/continue/pull/5970\r\n* Implement #3244 by @jpoly1219 in https://github.com/continuedev/continue/pull/5973\r\n* add inception to json providers by @RomneyDa in https://github.com/continuedev/continue/pull/5854\r\n* Include mcp server names in tool names by @RomneyDa in https://github.com/continuedev/continue/pull/5991\r\n* Better notch rules section border by @RomneyDa in https://github.com/continuedev/continue/pull/5944\r\n* Node fetch Premature close patch by @RomneyDa in https://github.com/continuedev/continue/pull/6009\r\n* Bubble up config and block errors to the extension GUI by @jpoly1219 in https://github.com/continuedev/continue/pull/5990\r\n* Bump django from 3.2.7 to 4.2.22 in /manual-testing-sandbox by @dependabot in https://github.com/continuedev/continue/pull/6021\r\n* feat: skip hub onboarding in free trial by @Patrick-Erichsen in https://github.com/continuedev/continue/pull/6024\r\n* Fix tool call name merging by @RomneyDa in https://github.com/continuedev/continue/pull/6029\r\n* switch to the free trial assistant once logged in for the first time by @sestinj in https://github.com/continuedev/continue/pull/6035\r\n* feat: use correct deployment for azure by @Patrick-Erichsen in https://github.com/continuedev/continue/pull/6023\r\n* Watsonx-vi by @sestinj in https://github.com/continuedev/continue/pull/5889\r\n* feat: refactor onboarding card by @Patrick-Erichsen in https://github.com/continuedev/continue/pull/6034\r\n* docs: Rules doc improvements by @bdougie in https://github.com/continuedev/continue/pull/5969\r\n* Handle JSON Parsing errors by @RomneyDa in https://github.com/continuedev/continue/pull/5995\r\n* better premature close error, resubmit button on error dialog by @RomneyDa in https://github.com/continuedev/continue/pull/6013\r\n* feat: create markdown rules in notch by @Patrick-Erichsen in https://github.com/continuedev/continue/pull/5945\r\n* fix: :bug: Index files from save and tools by @chezsmithy in https://github.com/continuedev/continue/pull/5564\r\n* feat(scaleway): update supported models by @fpagny in https://github.com/continuedev/continue/pull/6004\r\n* fix: 🐛 Codebase Indexing still not work by @owl-app in https://github.com/continuedev/continue/pull/6032\r\n* docs: 📜 Update prompt caching docs for AWS Bedrock by @chezsmithy in https://github.com/continuedev/continue/pull/6050\r\n* fix: apply notch filename trunaction by @Patrick-Erichsen in https://github.com/continuedev/continue/pull/6058\r\n* ignore running tests inside dist directory by @jpoly1219 in https://github.com/continuedev/continue/pull/6057\r\n* fix: handle apiType for azure w/ proxy by @Patrick-Erichsen in https://github.com/continuedev/continue/pull/6071\r\n* RulesContextProvider by @sestinj in https://github.com/continuedev/continue/pull/6070\r\n* bump by @sestinj in https://github.com/continuedev/continue/pull/6072\r\n* Update extension name by @sestinj in https://github.com/continuedev/continue/pull/6073\r\n* Tomasz/rule colocation by @tomasz-stefaniak in https://github.com/continuedev/continue/pull/6048\r\n* build(deps-dev): bump brace-expansion from 1.1.11 to 1.1.12 in /core by @dependabot in https://github.com/continuedev/continue/pull/6082\r\n* feat: add `tools` in chatInteraction dev data by @uinstinct in https://github.com/continuedev/continue/pull/5812\r\n* [Updated PR] [Feature] Autocomplete context from other tabs open in the editor by @adarshramiyer in https://github.com/continuedev/continue/pull/6012\r\n* docs: markdown first rules by @bdougie in https://github.com/continuedev/continue/pull/6049\r\n* Run Prettier by @RomneyDa in https://github.com/continuedev/continue/pull/6086\r\n* Simple Context Deduplication for Autocomplete by @adarshramiyer in https://github.com/continuedev/continue/pull/6055\r\n* Fetch URL Content Tool by @RomneyDa in https://github.com/continuedev/continue/pull/6081\r\n* add \"Edit Highlighted Code\" submenu item by @TyDunn in https://github.com/continuedev/continue/pull/6087\r\n* feat: onboarding card upgrade tab by @Patrick-Erichsen in https://github.com/continuedev/continue/pull/6047\r\n* Update contributing: add note to install vite by @RomneyDa in https://github.com/continuedev/continue/pull/6085\r\n* docs: update rule properties by @Patrick-Erichsen in https://github.com/continuedev/continue/pull/6102\r\n* feat: Add shortcut to force autocomplete (VSCode) by @ShamanicArts in https://github.com/continuedev/continue/pull/6028\r\n* instructions to clean reset the plugin by @uinstinct in https://github.com/continuedev/continue/pull/5641\r\n* Feat ✨ Give the terminal color and escape sequence rendering by @chezsmithy in https://github.com/continuedev/continue/pull/6001\r\n* chore: add no-misused-promises eslint rule by @uinstinct in https://github.com/continuedev/continue/pull/6122\r\n* vscode 1.1.48 by @RomneyDa in https://github.com/continuedev/continue/pull/6104\r\n\r\n## New Contributors\r\n* @adarshramiyer made their first contribution in https://github.com/continuedev/continue/pull/5883\r\n* @jpoly1219 made their first contribution in https://github.com/continuedev/continue/pull/5878\r\n* @ipaddicting made their first contribution in https://github.com/continuedev/continue/pull/5726\r\n* @fpagny made their first contribution in https://github.com/continuedev/continue/pull/6004\r\n* @owl-app made their first contribution in https://github.com/continuedev/continue/pull/6032\r\n* @ShamanicArts made their first contribution in https://github.com/continuedev/continue/pull/6028\r\n\r\n**Full Changelog**: https://github.com/continuedev/continue/compare/v1.0.13-vscode...v1.0.14-vscode",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v1.1.49-vscode",
+        "commit_sha": "557963d6ebae13df63a47945ec32749d397499f8"
+      },
+      {
+        "name": "v1.1.48-vscode",
+        "commit_sha": "030e534098da86c649fa19add7df251ad60f6333"
+      },
+      {
+        "name": "v1.1.47-vscode",
+        "commit_sha": "13db7fe9a5bd885eb5a6d532e2694a55277d914f"
+      },
+      {
+        "name": "v1.1.46-vscode",
+        "commit_sha": "10d7423729e2644c5486cabc889fd7b369a48127"
+      },
+      {
+        "name": "v1.1.45-vscode",
+        "commit_sha": "992a6b0389041e9c4258ad1d321666d185172714"
+      },
+      {
+        "name": "v1.1.44-vscode",
+        "commit_sha": "c7e5da046e39e5fcaacf557c8b727adc31ce1436"
+      },
+      {
+        "name": "v1.1.43-vscode",
+        "commit_sha": "7722e872d4ca5d6205c900098daa931fa43fcbb5"
+      },
+      {
+        "name": "v1.1.42-vscode",
+        "commit_sha": "6d646ad3e475029b4cfc29ac8a69bda06b51cdf2"
+      },
+      {
+        "name": "v1.1.41-vscode",
+        "commit_sha": "10ba83b5eadc3bb7af9ca98110b5cdb56e6850d0"
+      },
+      {
+        "name": "v1.1.40-vscode",
+        "commit_sha": "2726f3b8757a16dc1d40aa72df2fdee700e7a90e"
+      }
+    ],
+    "latest_version": "v1.1.49-vscode"
+  },
+  "readme": "<div align=\"center\">\n\n![Continue logo](media/readme.png)\n\n</div>\n\n<h1 align=\"center\">Continue</h1>\n\n<div align=\"center\">\n\n**[Continue](https://docs.continue.dev) enables developers to create, share, and use custom AI code assistants with our\nopen-source [VS Code](https://marketplace.visualstudio.com/items?itemName=Continue.continue)\nand [JetBrains](https://plugins.jetbrains.com/plugin/22707-continue-extension) extensions\nand [hub of models, rules, prompts, docs, and other building blocks](https://hub.continue.dev)**\n\n</div>\n\n<div align=\"center\">\n\n<a target=\"_blank\" href=\"https://opensource.org/licenses/Apache-2.0\" style=\"background:none\">\n    <img src=\"https://img.shields.io/badge/License-Apache_2.0-blue.svg\" style=\"height: 22px;\" />\n</a>\n<a target=\"_blank\" href=\"https://docs.continue.dev\" style=\"background:none\">\n    <img src=\"https://img.shields.io/badge/continue_docs-%23BE1B55\" style=\"height: 22px;\" />\n</a>\n<a target=\"_blank\" href=\"https://changelog.continue.dev\" style=\"background:none\">\n    <img src=\"https://img.shields.io/badge/changelog-%96EFF3\" style=\"height: 22px;\" />\n</a>\n<a target=\"_blank\" href=\"https://discord.gg/vapESyrFmJ\" style=\"background:none\">\n    <img src=\"https://img.shields.io/badge/discord-join-continue.svg?labelColor=191937&color=6F6FF7&logo=discord\" style=\"height: 22px;\" />\n</a>\n\n<p></p>\n\n## Agent\n\n[Agent](https://continue.dev/docs/agent/how-to-use-it) enables you to make more substantial changes to your codebase\n\n![agent](docs/static/img/agent.gif)\n\n## Chat\n\n[Chat](https://continue.dev/docs/chat/how-to-use-it) makes it easy to ask for help from an LLM without needing to leave\nthe IDE\n\n![chat](docs/static/img/chat.gif)\n\n## Autocomplete\n\n[Autocomplete](https://continue.dev/docs/autocomplete/how-to-use-it) provides inline code suggestions as you type\n\n![autocomplete](docs/static/img/autocomplete.gif)\n\n## Edit\n\n[Edit](https://continue.dev/docs/edit/how-to-use-it) is a convenient way to modify code without leaving your current\nfile\n\n![edit](docs/static/img/edit.gif)\n\n</div>\n\n## Getting Started\n\nLearn about how to install and use Continue in the docs [here](https://continue.dev/docs/getting-started/install)\n\n## Contributing\n\nRead the [contributing guide](https://github.com/continuedev/continue/blob/main/CONTRIBUTING.md), and\njoin [#contribute on Discord](https://discord.gg/vapESyrFmJ).\n\n## License\n\n[Apache 2.0 © 2023-2024 Continue Dev, Inc.](./LICENSE)\n"
+}

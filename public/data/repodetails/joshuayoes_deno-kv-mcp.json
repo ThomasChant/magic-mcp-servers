@@ -1,0 +1,71 @@
+{
+  "mcp_name": "joshuayoes/deno-kv-mcp",
+  "mcp_description": "Facilitates interaction with Deno KV instances through a robust MCP server, enabling seamless key-value operations.",
+  "mcp_id": "joshuayoes_deno-kv-mcp",
+  "fetch_timestamp": "2025-06-23T05:35:24.801776Z",
+  "github_url": "https://github.com/joshuayoes/deno-kv-mcp",
+  "repository": {
+    "name": "deno-kv-mcp",
+    "full_name": "joshuayoes/deno-kv-mcp",
+    "description": "An MCP Server for chatting with Deno KV instances",
+    "html_url": "https://github.com/joshuayoes/deno-kv-mcp",
+    "created_at": "2025-04-28T00:37:19Z",
+    "updated_at": "2025-04-28T04:20:04Z",
+    "pushed_at": "2025-04-28T04:20:00Z",
+    "size": 37,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [
+      "deno"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "joshuayoes",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/37849890?v=4",
+      "html_url": "https://github.com/joshuayoes"
+    },
+    "has_issues": false,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 0,
+    "languages": {
+      "TypeScript": 12398
+    },
+    "language_percentages": {
+      "TypeScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 3,
+    "latest_release": {
+      "tag_name": "v1.1.0",
+      "name": "v1.1.0 - Node support 😱",
+      "published_at": "2025-04-28T03:42:45Z",
+      "body": "# Deno KV MCP v1.1.0\r\n\r\nThis release introduces the ability to run the Deno KV MCP server using the Node.js runtime (>= v22.7.0). This provides flexibility for users who prefer or require a Node.js environment.\r\n\r\n## How to Use with Node.js\r\n\r\nConfigure your MCP client (e.g., Cursor) to run the server using Node.js:\r\n\r\n```json\r\n {\r\n   \"mcpServers\": {\r\n     \"denokv\": {\r\n       \"command\": \"node\",\r\n       \"args\": [\r\n         \"--experimental-transform-types\",\r\n         \"/path/to/your/mcp-deno-kv/index.ts\" // Replace with the actual path\r\n       ],\r\n       \"env\": {\r\n         \"DENO_KV_PATH\": \"path/to/your/kv.db OR https://api.deno.com/databases/<UUID>/connect\",\r\n         \"DENO_KV_ACCESS_TOKEN\": \"<YOUR_DENO_DEPLOY_ACCESS_TOKEN>\" // Only needed for remote DB\r\n       }\r\n     }\r\n   }\r\n }\r\n```\r\n\r\nEnsure you have Node.js v22.7.0 or later installed and replace the placeholder paths and environment variables with your specific details.",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v1.1.0",
+        "commit_sha": "43b915a322c3dc302615d0b848b1f91d55cb26b5"
+      },
+      {
+        "name": "v1.0.0",
+        "commit_sha": "dd12f2574f922f5568ef0e3953f84070e93b797d"
+      }
+    ],
+    "latest_version": "v1.1.0"
+  },
+  "readme": "# DenoKV MCP Server\n\n[![JSR](https://jsr.io/badges/@joshuayoes/deno-kv-mcp)](https://jsr.io/@joshuayoes/deno-kv-mcp) [![Score](https://jsr.io/badges/@joshuayoes/deno-kv-mcp/score)](https://jsr.io/@joshuayoes/deno-kv-mcp)\n\n## Usage with MCP Clients\n\n### Deno (recommended)\n\nThe easiest way to integrate this server with an MCP client like Claude Desktop or Cursor is to use the published JSR package. Configure your MCP client as follows:\n\n```json\n{\n  \"mcpServers\": {\n    \"denokv\": {\n      \"command\": \"deno\",\n      \"args\": [\n        \"run\",\n        \"--unstable-kv\",\n        \"--allow-env\",\n        \"--allow-net\",\n        \"--allow-read\",\n        \"--allow-write\",\n        \"--allow-run\",\n        \"jsr:@joshuayoes/deno-kv-mcp\"\n      ],\n      \"env\": {\n        \"DENO_KV_PATH\": \"path/to/your/kv.db OR https://api.deno.com/databases/<UUID>/connect\",\n        \"DENO_KV_ACCESS_TOKEN\": \"<YOUR_DENO_DEPLOY_ACCESS_TOKEN>\" // Only needed for remote DB\n      }\n    }\n  }\n}\n```\n\nMake sure to replace the `env` values with your specific details.\n\n### Node\n\nAfter figuring out that:\n\n- [Deno has an official client library for KV that works with Node](https://docs.deno.com/deploy/kv/manual/node/)\n- Deno has a [compatibility layer with Node](https://docs.deno.com/api/node/),\n- Even though [jsr packages do not work natively with npx](https://github.com/jsr-io/jsr/issues/157), thanks to this [xjsr npm package](https://www.npmjs.com/package/xjsr), we can run jsr packages using npx and node.\n\nWe can run this in Node!\n\n```json\n{\n  \"mcpServers\": {\n    \"denokv\": {\n      \"command\": \"npx\",\n      \"args\": [\"xjsr\", \"@joshuayoes/deno-kv-mcp@latest\"],\n      \"env\": {\n        \"DENO_KV_PATH\": \"path/to/your/kv.db OR https://api.deno.com/databases/<UUID>/connect\",\n        \"DENO_KV_ACCESS_TOKEN\": \"<YOUR_DENO_DEPLOY_ACCESS_TOKEN>\" // Only needed for remote DB\n      }\n    }\n  }\n}\n```\n\nMake sure to replace the `env` values with your specific details.\n\nIf you really want to get crazy, replace `npx` with `bunx`.\n\n## Available Tools\n\nThis server provides the following tools:\n\n- **`set`**: Set a key-value pair in the Deno KV store.\n  - `key` (array of strings): The key to set.\n  - `value` (string): The value to set (JSON string).\n  - `expireIn` (number, optional): Time-to-live (TTL) for the key in milliseconds.\n- **`get`**: Get a value by key from the Deno KV store.\n  - `key` (array of strings): The key to get.\n  - `consistency` (enum: \"strong\" | \"eventual\", optional): Consistency level for the read.\n- **`delete`**: Delete a key-value pair from the Deno KV store.\n  - `key` (array of strings): The key to delete.\n- **`getMany`**: Get multiple values by keys from the Deno KV store.\n  - `keys` (array of array of strings): The keys to get.\n  - `consistency` (enum: \"strong\" | \"eventual\", optional): Consistency level for the read.\n- **`list`**: List key-value pairs based on a selector.\n  - `prefix` (array of strings, optional): Key prefix to list (e.g., `[\"users\"]`).\n  - `start` (array of strings, optional): Start key for range queries (e.g., `[\"orders\", \"2023\"]`).\n  - `end` (array of strings, optional): End key for range queries (e.g., `[\"orders\", \"2024\"]`).\n  - `limit` (integer, positive, optional): Maximum number of entries to return.\n  - `consistency` (enum: \"strong\" | \"eventual\", optional): Consistency level for the list operation.\n  - `batchSize` (integer, positive, optional): Number of entries to fetch per batch internally.\n  - `reverse` (boolean, optional): Whether to reverse the order of entries.\n  - _Note:_ Must provide `prefix`, `start`, or (`start` and `end`) parameter. `end` requires `start` or `prefix`.\n\n## Local Development Setup\n\nIf you prefer to run the server from a local clone of this repository (e.g., for development or testing), use the following configuration instead:\n\n### Deno\n\n```json\n{\n  \"mcpServers\": {\n    \"denokv\": {\n      \"command\": \"deno\",\n      \"args\": [\n        \"run\",\n        \"--unstable-kv\",\n        \"--allow-env\",\n        \"--allow-net\",\n        \"--allow-read\",\n        \"--allow-write\",\n        \"--allow-run\",\n        \"/path/to/your/mcp-deno-kv/index.ts\" // Replace with the actual path to index.ts\n      ],\n      \"env\": {\n        \"DENO_KV_PATH\": \"path/to/your/kv.db OR https://api.deno.com/databases/<UUID>/connect\",\n        \"DENO_KV_ACCESS_TOKEN\": \"<YOUR_DENO_DEPLOY_ACCESS_TOKEN>\" // Only needed for remote DB\n      }\n    }\n  }\n}\n```\n\nMake sure to replace `/path/to/your/mcp-deno-kv/index.ts` and the `env` values with your specific details.\n\n### Node\n\nUsing node ([>=v22.7.0](https://nodejs.org/api/typescript.html#:~:text=enabled%20by%20default.-,v22.7.0,-Added%20%2D%2Dexperimental%2Dtransform)), we can also run the server directly without a build step!\n\nYou may need to run `deno install` first to add a `node_modules` folder.\n\n```json\n{\n  \"mcpServers\": {\n    \"denokv\": {\n      \"command\": \"node\",\n      \"args\": [\n        \"--experimental-transform-types\",\n        \"/path/to/your/mcp-deno-kv/index.ts\" // Replace with the actual path to index.ts\n      ],\n      \"env\": {\n        \"DENO_KV_PATH\": \"path/to/your/kv.db OR https://api.deno.com/databases/<UUID>/connect\",\n        \"DENO_KV_ACCESS_TOKEN\": \"<YOUR_DENO_DEPLOY_ACCESS_TOKEN>\" // Only needed for remote DB\n      }\n    }\n  }\n}\n```\n\nMake sure to replace `/path/to/your/mcp-deno-kv/index.ts` and the `env` values with your specific details.\n\nIf you really want to get crazy, replace `npx` with `bunx`.\n\n## Environment Variables\n\nThis server requires the following environment variables to be set:\n\n- `DENO_KV_PATH`: Specifies the path to the Deno KV database.\n  - For a **local database**, this should be the file path (e.g., `./my-kv.db`).\n  - For a **remote Deno Deploy database**, this should be the connection URL (e.g., `https://api.deno.com/databases/<UUID>/connect`).\n- `DENO_KV_ACCESS_TOKEN`: Required **only if** `DENO_KV_PATH` points to a remote Deno Deploy database. This should be your Deno Deploy personal access token.\n"
+}

@@ -1,0 +1,109 @@
+{
+  "id": "892e0a3ab6d6",
+  "owner": "falahgs",
+  "repoName": "gemini-vision-art-studio",
+  "fullDescription": "Gemini Vision Art Studio harnesses Google's Gemini AI to generate 3D cartoons and transform images with artistic flair.",
+  "techStack": [
+    {
+      "name": "go",
+      "icon": "🔷",
+      "color": "#00add8"
+    }
+  ],
+  "serviceTypes": [
+    {
+      "type": "ai",
+      "label": "Ai",
+      "icon": "🤖",
+      "description": "Leverages AI and machine learning"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "moderate",
+    "maturity": "stable",
+    "deployment": [
+      "local"
+    ],
+    "featured": false,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 3.25,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "image",
+      "media"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/falahgs/gemini-vision-art-studio",
+    "owner": "falahgs",
+    "name": "gemini-vision-art-studio",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.280Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "cartoons",
+    "3d",
+    "content-media",
+    "vision",
+    "art",
+    "gemini",
+    "artistic"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Moderate",
+      "color": "#eab308",
+      "icon": "🟡"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    }
+  ],
+  "icon": "🤖",
+  "readme": null
+}

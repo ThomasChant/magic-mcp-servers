@@ -1,0 +1,54 @@
+{
+  "mcp_name": "cheukyin175/metabase-mcp",
+  "mcp_description": "Facilitates seamless integration of AI assistants with Metabase analytics, enabling direct interaction with analytics data via MCP capabilities.",
+  "mcp_id": "cheukyin175_metabase-mcp",
+  "fetch_timestamp": "2025-06-23T02:04:25.236453Z",
+  "github_url": "https://github.com/cheukyin175/metabase-mcp",
+  "repository": {
+    "name": "metabase-mcp",
+    "full_name": "cheukyin175/metabase-mcp",
+    "description": "Metabase MCP server provides integration with the Metabase API, enabling LLM with MCP capabilites to directly interact with your analytics data, this server acts as a bridge between your analytics platform and conversational AI.",
+    "html_url": "https://github.com/cheukyin175/metabase-mcp",
+    "created_at": "2025-04-16T14:13:33Z",
+    "updated_at": "2025-06-20T08:44:55Z",
+    "pushed_at": "2025-06-20T08:44:52Z",
+    "size": 155,
+    "stargazers_count": 6,
+    "watchers_count": 6,
+    "forks_count": 4,
+    "open_issues_count": 1,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "cheukyin175",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/74967329?v=4",
+      "html_url": "https://github.com/cheukyin175"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 4,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 31212,
+      "Shell": 5125,
+      "Dockerfile": 683
+    },
+    "language_percentages": {
+      "Python": 84.31,
+      "Shell": 13.84,
+      "Dockerfile": 1.84
+    },
+    "pull_requests_count": 6,
+    "contributors_count": 1
+  },
+  "readme": "# Metabase FastMCP Server\n\nA FastMCP (Model Context Protocol) server for Metabase, built with Python. This server provides tools to interact with Metabase databases, execute queries, manage cards, and work with collections.\n\n## Features\n\n- List and manage Metabase databases\n- Execute SQL queries and saved questions/cards\n- Create and manage cards (questions)\n- Work with collections\n- List tables and fields\n- Full authentication support (API Key or Session-based)\n\n## Installation\n\n### Quick Start with uv (Recommended)\n\n1. **Install uv** if not already installed:\nPlease refer to uv\n\n\n2. **Clone and setup**:\n```bash\nuv sync  # Install dependencies and create virtual environment\n```\n\n3. **Configure environment**:\n```bash\ncp .env.example .env\n# Edit .env with your Metabase configuration\n```\n\n### Alternative Installation (pip)\n\n```bash\npip install -r requirements.txt\n```\n\n## Configuration\n\nSet the following environment variables in your `.env` file:\n\n- `METABASE_URL`: Your Metabase instance URL\n- `METABASE_API_KEY`: Your Metabase API key (preferred method)\n\nOR\n\n- `METABASE_USER_EMAIL`: Your Metabase user email\n- `METABASE_PASSWORD`: Your Metabase password\n\n## Usage\n\n### Run the Server\n\n```bash\n# STDIO transport (default)\nuv run python server.py\n\n# SSE transport on port 8000\nuv run python server.py --sse\n\n# SSE transport on custom port\nuv run python server.py --sse 9000\n\n# HTTP transport on port 8000\nuv run python server.py --http\n```\n\n### FastMCP CLI Integration\n\n```bash\n# Run with FastMCP CLI\nfastmcp run server.py\n\n# Install as Claude Desktop MCP server\nfastmcp install server.py -n \"Metabase MCP\"\n```\n\n### Cursor Integration\n\nFor Cursor IDE integration:\n\n#### STDIO Transport (Default)\n```bash\nuv run python scripts/install-cursor.py\n```\n\n#### SSE Transport\n```bash\n# Install with SSE transport\nuv run python scripts/install-cursor.py --sse        # Port 8000 (default)\nuv run python scripts/install-cursor.py --sse 9000   # Custom port\n\n# Or use the dedicated SSE installer\nuv run python scripts/install-cursor-sse.py          # Port 8000\nuv run python scripts/install-cursor-sse.py 9000     # Custom port\n```\n\n**Important for SSE**: You must start the server before using Cursor:\n```bash\nuv run python server.py --sse 8000\n```\n\n## Available Tools\n\n- `list_databases`: List all databases in Metabase\n- `list_cards`: List all questions/cards in Metabase  \n- `execute_card`: Execute a Metabase question/card and get results\n- `execute_query`: Execute a SQL query against a Metabase database\n- `create_card`: Create a new question/card in Metabase\n- `list_collections`: List all collections in Metabase\n- `create_collection`: Create a new collection in Metabase\n- `list_tables`: List all tables in a database\n- `get_table_fields`: Get all fields/columns in a table\n\n## Transport Methods\n\nThe server supports multiple transport methods:\n\n- **STDIO** (default): For IDE integration (Cursor, Claude Desktop)\n- **SSE**: Server-Sent Events for web applications\n- **HTTP**: Standard HTTP for API access\n\n```bash\nuv run python server.py          # STDIO (default)\nuv run python server.py --sse    # SSE on port 8000\nuv run python server.py --http   # HTTP on port 8000\n```\n\n## Development\n\n### Development Setup\n\n```bash\n# Install development dependencies (Python 3.12+)\nuv sync --group dev\n\n# Run tests\nuv run pytest\n\n# Format and lint code\nuv run ruff check .          # Lint\nuv run ruff format .         # Format\nuv run black .               # Alternative formatter\nuv run isort .               # Import sorting\n\n# Type checking\nuv run mypy server.py\n```\n\n### Validation\n\n```bash\n# Validate installation\nuv run python scripts/validate.py\n```\n\n## Examples\n\nCheck out the example files for usage patterns:\n\n- `examples/examples.py` - Basic usage examples\n- `examples/quick-start.py` - Quick start guide\n- `examples/sse-example.py` - SSE transport usage example\n\n## Files Overview\n\n- `server.py` - Main FastMCP server\n- `pyproject.toml` - Modern Python project configuration\n- `scripts/install-cursor.py` - Cross-platform Cursor installation\n- `scripts/install-cursor-sse.py` - SSE-specific Cursor installation\n- `scripts/validate.py` - Installation validation\n- `examples/` - Usage examples and quick start guides\n- `tests/test_server.py` - Basic server tests\n- `config/cursor-config.json` - Example Cursor configuration "
+}

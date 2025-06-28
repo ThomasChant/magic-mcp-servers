@@ -1,0 +1,71 @@
+{
+  "mcp_name": "DifyWorkflow",
+  "mcp_description": "🏎️ ☁️ Tools to the query and execute of Dify workflows",
+  "mcp_id": "gotoolkits_mcp-difyworkflow-server",
+  "fetch_timestamp": "2025-06-23T02:38:33.363416Z",
+  "github_url": "https://github.com/gotoolkits/mcp-difyworkflow-server",
+  "repository": {
+    "name": "mcp-difyworkflow-server",
+    "full_name": "gotoolkits/mcp-difyworkflow-server",
+    "description": "mcp-difyworkflow-server is an mcp server Tools application that implements the query and invocation of Dify workflows, supporting the on-demand operation of multiple custom Dify workflows.",
+    "html_url": "https://github.com/gotoolkits/mcp-difyworkflow-server",
+    "created_at": "2024-12-26T07:57:27Z",
+    "updated_at": "2025-05-31T12:51:13Z",
+    "pushed_at": "2024-12-26T09:02:57Z",
+    "size": 13,
+    "stargazers_count": 53,
+    "watchers_count": 53,
+    "forks_count": 13,
+    "open_issues_count": 1,
+    "language": "Go",
+    "license": "Apache License 2.0",
+    "topics": [
+      "ai",
+      "mcp",
+      "mcp-server"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "gotoolkits",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30166507?v=4",
+      "html_url": "https://github.com/gotoolkits"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 13,
+    "subscribers_count": 1,
+    "languages": {
+      "Go": 10112,
+      "Makefile": 573
+    },
+    "language_percentages": {
+      "Go": 94.64,
+      "Makefile": 5.36
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 2,
+    "latest_release": {
+      "tag_name": "v0.0.1",
+      "name": "mcp-difyworkflow-server v0.0.1",
+      "published_at": "2024-12-26T08:41:54Z",
+      "body": " v0.0.1 Release.",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.0.1",
+        "commit_sha": "2ddc249fdeca0a3fb350ef9d2a8bc0a7e810ceea"
+      }
+    ],
+    "latest_version": "v0.0.1"
+  },
+  "readme": "## mcp-difyworkflow-server\n\nmcp-difyworkflow-server is an mcp server Tools application that implements the query and invocation of Dify workflows, supporting the on-demand operation of multiple custom Dify workflows.\n\n## INSTALL\n\n```shell\ngit clone https://github.com/gotoolkis/mcp-difyworkflow-server.git\n\n# build by go\ncd mcp-difyworkflow-server\ngo build .\n\n## or use make build\nmake build\n```\n\n## Configuration\n\n```json\n{\n  \"mcpServers\": {\n    \"mcp-difyworkflow-server\": {\n      \"command\": \"mcp-difyworkflow-server\",\n      \"args\": [\"-base-url\", \"http://localhost/v1\"],\n      \"env\": {\n        \"DIFY_WORKFLOW_NAME\": \"workflow-translator“,workflow-genImag\",\n        \"DIFY_API_KEYS\": \"appkey-xxxxxxxxxxxa,appkey-xxxxxxxxxxxb\"\n      }\n    }\n  }\n}\n```\n\n- **\"base-url\":\"http://localhost/v1\"**\n\n  The base URL of the Dify platform api server url.\n\n- **\"command\":\"mcp-difyworkflow-server\"**\n\n  You can specify the absolute path for the compiled binary, or create a symbolic link with:<br>\n  \"sudo ln -s \\<gitWorkPath\\>/mcp-difyworkflow-server /usr/local/bin/mcp-difyworkflow-server\"\n\n- **DIFY_WORKFLOW_NAME、DIFY_API_KEYS**\n\n  Need to correspond one by one in order.<br>\n  Workflow name can be self-defined by the user in the Prompt, and the Workflow API Key needs to be generated for the corresponding workflow created on the Dify platform (refer to the relevant Dify documentation for how to generate the API KEY).\n\n## Usage\n\n- **list_workflows**<br>\n  List authorized workflows\n- **execute_workflow**<br>\n  Execute a specified workflow,args: workflow_name, input\n  Note: The input variable name of the **dify workflow** should be defined by default as: **\"message\"**\n\n#### Samples\n\n> prompt: **查看 mcp-difyworkflow-server 可使用的工具列表**<br>\n> prompt: **给我执行 dify 名为 workflow-translator 的工作流，输入的消息为“这是一条测试消息”**\n\n> prompt: **View the list of tools available for mcp-difyworkflow-server.**<br>\n> prompt: **Execute the workflow named 'workflow-translator' for me, the input message is \"This is a test message\".**\n"
+}

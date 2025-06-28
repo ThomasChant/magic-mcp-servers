@@ -1,0 +1,90 @@
+{
+  "mcp_name": "mettamatt/code-reasoning",
+  "mcp_description": "Enhances Claude's problem-solving capabilities by breaking down complex programming tasks into manageable steps using structured, sequential thinking.",
+  "mcp_id": "mettamatt_code-reasoning",
+  "fetch_timestamp": "2025-06-23T06:43:17.649127Z",
+  "github_url": "https://github.com/mettamatt/code-reasoning",
+  "repository": {
+    "name": "code-reasoning",
+    "full_name": "mettamatt/code-reasoning",
+    "description": "A code reasoning MCP server, a fork of sequential-thinking",
+    "html_url": "https://github.com/mettamatt/code-reasoning",
+    "created_at": "2025-04-23T15:59:18Z",
+    "updated_at": "2025-06-22T21:24:45Z",
+    "pushed_at": "2025-06-18T13:03:17Z",
+    "size": 839,
+    "stargazers_count": 140,
+    "watchers_count": 140,
+    "forks_count": 16,
+    "open_issues_count": 3,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "mettamatt",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/321285?v=4",
+      "html_url": "https://github.com/mettamatt"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 16,
+    "subscribers_count": 2,
+    "languages": {
+      "TypeScript": 80964,
+      "JavaScript": 46926,
+      "Dockerfile": 507
+    },
+    "language_percentages": {
+      "TypeScript": 63.06,
+      "JavaScript": 36.55,
+      "Dockerfile": 0.39
+    },
+    "pull_requests_count": 19,
+    "contributors_count": 3,
+    "latest_release": {
+      "tag_name": "v0.7.0",
+      "name": "v0.7.0: New MCP Prompts System",
+      "published_at": "2025-05-10T05:42:27Z",
+      "body": "## What's New in 0.7.0\n\nThis release introduces a new MCP prompts system with predefined templates for common development tasks:\n\n- **Ready-to-use prompt templates** for:\n  - Architecture decision documentation\n  - Bug analysis and troubleshooting\n  - Code review processes\n  - Feature planning\n  - Refactoring plans\n\n- **Prompt value persistence** to save the last prompt values for reuse\n  - Note: Full integration with Claude Desktop and Claude Code is pending implementation of MCP CompleteRequestSchema\n\n- **Custom prompt templates support** via JSON files\n  - Create your own specialized prompts with the template system\n  - Automatically loaded from ~/.code-reasoning/prompts directory\n\n## How to Use\n\nClick the '+' icon in Claude Desktop or use '/help' in Claude Code to access the new prompts through \"Add from Code Reasoning\".\n\nFor more details, see the [Prompts Guide](https://github.com/mettamatt/code-reasoning/blob/main/docs/prompts.md).",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.7.0",
+        "commit_sha": "62cda8610c4deb610dc4d490ef87428186fd0807"
+      },
+      {
+        "name": "v0.6.2",
+        "commit_sha": "ad10bea6e8ac99f0bea2b89efb509db7cc12fcf7"
+      },
+      {
+        "name": "v0.6.1",
+        "commit_sha": "dd88e4471f0d071e46e31cfbe38554e8635e89a0"
+      },
+      {
+        "name": "v0.6.0",
+        "commit_sha": "597ac5f75532f6471dd922302540be50bf9c2a64"
+      },
+      {
+        "name": "v0.5.0",
+        "commit_sha": "d16da13a3ba120a2baa39813022a27e559e3bc8a"
+      },
+      {
+        "name": "v0.3.0",
+        "commit_sha": "e82a2e5c5faa8ca7d194f990e203a330b9fc6524"
+      }
+    ],
+    "latest_version": "v0.7.0",
+    "package_json_version": "0.7.0"
+  },
+  "readme": "# Code Reasoning MCP Server\n\nA Model Context Protocol (MCP) server that enhances Claude's ability to solve complex programming tasks through structured, step-by-step thinking.\n\n<a href=\"https://glama.ai/mcp/servers/@mettamatt/code-reasoning\">\n  <img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/@mettamatt/code-reasoning/badge\" alt=\"Code Reasoning Server MCP server\" />\n</a>\n\n[![npm version](https://img.shields.io/npm/v/@mettamatt/code-reasoning.svg)](https://www.npmjs.com/package/@mettamatt/code-reasoning)\n[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)\n[![CI](https://github.com/mettamatt/code-reasoning/actions/workflows/ci.yml/badge.svg)](https://github.com/mettamatt/code-reasoning/actions/workflows/ci.yml)\n\n## Quick Installation\n\n1. Configure Claude Desktop by editing:\n\n   - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`\n   - Windows: `%APPDATA%\\Claude\\claude_desktop_config.json`\n   - Linux: `~/.config/Claude/claude_desktop_config.json`\n\n   ```json\n   {\n     \"mcpServers\": {\n       \"code-reasoning\": {\n         \"command\": \"npx\",\n         \"args\": [\"-y\", \"@mettamatt/code-reasoning\"]\n       }\n     }\n   }\n   ```\n\n2. Configure VS Code:\n\n```json\n{\n  \"mcp\": {\n    \"servers\": {\n      \"code-reasoning\": {\n        \"command\": \"npx\",\n        \"args\": [\"-y\", \"@mettamatt/code-reasoning\"]\n      }\n    }\n  }\n}\n```\n\n## Usage\n\n1. To trigger this MCP, append this to your chat messages:\n\n   ```\n   Use sequential thinking to reason about this.\n   ```\n\n2. Use ready-to-go prompts that trigger Code-Reasoning:\n\n![Code Reasoning Prompts](./docs/prompts.png)\n\n- Click the \"+\" icon in the Claude Desktop chat window, or in Claude Code type `/help` to see the specific commands.\n- Select \"Add from Code Reasoning\" from the available tools\n- Choose a prompt template and fill in the required information\n- Submit the form to add the prompt to your chat message and hit return\n\nSee the [Prompts Guide](./docs/prompts.md) for details on using the prompt templates.\n\n## Command Line Options\n\n- `--debug`: Enable detailed logging\n- `--help` or `-h`: Show help information\n\n## Key Features\n\n- **Programming Focus**: Optimized for coding tasks and problem-solving\n- **Structured Thinking**: Break down complex problems into manageable steps\n- **Thought Branching**: Explore multiple solution paths in parallel\n- **Thought Revision**: Refine earlier reasoning as understanding improves\n- **Safety Limits**: Automatically stops after 20 thought steps to prevent loops\n- **Ready-to-Use Prompts**: Pre-defined templates for common development tasks\n\n## Documentation\n\nDetailed documentation available in the docs directory:\n\n- [Usage Examples](./docs/examples.md): Examples of sequential thinking with the MCP server\n- [Configuration Guide](./docs/configuration.md): All configuration options for the MCP server\n- [Prompts Guide](./docs/prompts.md): Using and customizing prompts with the MCP server\n- [Testing Framework](./docs/testing.md): Testing information\n\n## Project Structure\n\n```\n├── index.ts                  # Entry point\n├── src/                      # Implementation source files\n└── test/                     # Testing framework\n```\n\n## Prompt Evaluation\n\nThe Code Reasoning MCP Server includes a prompt evaluation system that assesses Claude's ability to follow the code reasoning prompts. This system allows:\n\n- Testing different prompt variations against scenario problems\n- Verifying parameter format adherence\n- Scoring solution quality\n\nTo use the prompt evaluation system, run:\n\n```bash\nnpm run eval\n```\n\n### Prompt Comparison and Development\n\nSignificant effort went into developing the optimal prompt for the Code Reasoning server. The current implementation uses the HYBRID_DESIGN prompt, which emerged as the winner from our evaluation process.\n\nWe compared four different prompt designs:\n\n| Prompt Design       | Description                                                          |\n| ------------------- | -------------------------------------------------------------------- |\n| SEQUENTIAL          | The original sequential thinking prompt design                       |\n| DEFAULT             | The baseline prompt previously used in the server                    |\n| CODE_REASONING_0_30 | An experimental variant focusing on code-specific reasoning          |\n| HYBRID_DESIGN       | A refined design incorporating the best elements of other approaches |\n\nOur evaluation across seven diverse programming scenarios showed that HYBRID_DESIGN outperformed other prompts:\n\n| Scenario                   | HYBRID_DESIGN | CODE_REASONING_0_30 | DEFAULT | SEQUENTIAL |\n| -------------------------- | ------------- | ------------------- | ------- | ---------- |\n| Algorithm Selection        | 89%           | 82%                 | 92%     | 88%        |\n| Bug Identification         | 92%           | 91%                 | 88%     | 94%        |\n| Multi-Stage Implementation | 87%           | 67%                 | 82%     | 87%        |\n| System Design Analysis     | 87%           | 87%                 | 83%     | 82%        |\n| Code Debugging Task        | 96%           | 87%                 | 91%     | 93%        |\n| Compiler Optimization      | 83%           | 78%                 | 72%     | 78%        |\n| Cache Strategy             | 87%           | 88%                 | 89%     | 87%        |\n| **Average**                | **89%**       | **83%**             | **85%** | **87%**    |\n\nThe HYBRID_DESIGN prompt demonstrates the highest average solution quality (89%) and the most consistent performance across all scenarios, with no scores below 80%. It also produces the most thoughts. The `src/server.ts` file has been updated to use this optimal prompt design.\n\nPersonally, I think the biggest improvement was adding this to the end of the prompt: \"✍️ End each thought by asking: \"What am I missing or need to reconsider?\"\n\nSee [Testing Framework](./docs/testing.md) for more details on the prompt evaluation system.\n\n## License\n\nThis project is licensed under the MIT License. See the LICENSE file for details.\n"
+}

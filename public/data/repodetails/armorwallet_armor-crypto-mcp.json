@@ -1,0 +1,110 @@
+{
+  "mcp_name": "Armor Crypto MCP",
+  "mcp_description": "🐍 ☁️ - MCP to interface with multiple blockchains, staking, DeFi, swap, bridging, wallet management, DCA, Limit Orders, Coin Lookup, Tracking and more.",
+  "mcp_id": "armorwallet_armor-crypto-mcp",
+  "fetch_timestamp": "2025-06-23T01:16:36.855435Z",
+  "github_url": "https://github.com/armorwallet/armor-crypto-mcp",
+  "repository": {
+    "name": "armor-crypto-mcp",
+    "full_name": "armorwallet/armor-crypto-mcp",
+    "description": "The MCP server for interacting with Blockchain, Swaps, Strategic Planning and more.",
+    "html_url": "https://github.com/armorwallet/armor-crypto-mcp",
+    "created_at": "2025-03-22T12:05:35Z",
+    "updated_at": "2025-06-21T22:33:14Z",
+    "pushed_at": "2025-06-03T10:32:45Z",
+    "size": 232,
+    "stargazers_count": 163,
+    "watchers_count": 163,
+    "forks_count": 29,
+    "open_issues_count": 1,
+    "language": "Python",
+    "license": "GNU General Public License v3.0",
+    "topics": [
+      "ai",
+      "ai-agents",
+      "cryptocurrency",
+      "mcp",
+      "tradingbot",
+      "wallet"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "armorwallet",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/168436604?v=4",
+      "html_url": "https://github.com/armorwallet"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 29,
+    "subscribers_count": 3,
+    "languages": {
+      "Python": 63490,
+      "Dockerfile": 545
+    },
+    "language_percentages": {
+      "Python": 99.15,
+      "Dockerfile": 0.85
+    },
+    "pull_requests_count": 23,
+    "contributors_count": 6,
+    "latest_release": {
+      "tag_name": "v0.2.1",
+      "name": "v0.2.1-alpha",
+      "published_at": "2025-05-14T14:02:00Z",
+      "body": "Alpha pre-release for Codex NFT holders. Go to https://codex.armorwallet.ai/ and follow the instructions. Various fixes were included due to testing with PydanticAI, n8n, Cline, Cursor and Claude Desktop agents.\r\n\r\n**New Features**\r\n\r\n- Trending tokens (allows for time ranges up to 24hr)\r\n- Statistical Calculator tool (includes safe execution for complex statistical equations)\r\n- Candlestick Data\r\n- Advanced Token Search (find trending tokens by market cap, liquidity, price etc.)\r\n- Industry Grade Limit Orders",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.2.1",
+        "commit_sha": "a07a2159c821936cb04b318fa5633d2bcfc09ed8"
+      },
+      {
+        "name": "v0.2.0",
+        "commit_sha": "8a4837571672b5f1477156715dbd5eaa1de854a7"
+      },
+      {
+        "name": "v0.1.24",
+        "commit_sha": "f2c439cd0cdb441dda9c99f30b117ea3339dc6bf"
+      },
+      {
+        "name": "v0.1.23",
+        "commit_sha": "ae7c200f4c371f2e59e5a2300ff6b67675c660f6"
+      },
+      {
+        "name": "v0.1.22",
+        "commit_sha": "00ecfb8b772ea828ba1d2023348f278ec1867eec"
+      },
+      {
+        "name": "v0.1.21",
+        "commit_sha": "7935c721e7468523d6fa2b44faef3f4db3ef20b4"
+      },
+      {
+        "name": "v0.1.20",
+        "commit_sha": "25f8ba8a730eae76dfb8771b7285363a14ab425a"
+      },
+      {
+        "name": "v0.1.19",
+        "commit_sha": "365c680d30d7cdf3086dd2ae49b8ade761601a30"
+      },
+      {
+        "name": "v0.1.18",
+        "commit_sha": "491f561b388cefc0a5a05d4b461e0d7590a6859c"
+      },
+      {
+        "name": "v0.1.17",
+        "commit_sha": "6e31a20219f7faa4d3b672a6321a3b45fb8a4523"
+      }
+    ],
+    "latest_version": "v0.2.1"
+  },
+  "readme": "# Armor Crypto MCP\n*Alpha Test version 0.1.24*\n\nA single source for integrating AI Agents with the Crypto ecosystem. This includes Wallet creation and management, swaps, transfers, event-based trades like DCA, stop loss and take profit, and much more. The Armor MCP supports Solana in Alpha and, when in beta, will support more than a dozen blockchains, including Ethereum. Base, Avalanche, Bitcoin, Sui, Berachain, megaETH, Optimism, Ton, BNB, and Arbitrum, among others. Using Armor's MCP you can bring all of crypto into your AI Agent with unified logic and a complete set of tools.\n       \n![Armor MCP](https://armor-assets-repository.s3.nl-ams.scw.cloud/MCP_sm.png)\n<br />\n<br />\n<br />\n<br />\n<br />\n<br />\n# Features\n\n🧠 AI Native\n\n📙 Wallet Management\n\n🔃 Swaps\n\n🌈 Specialized trades (DCA, Stop Loss etc.)\n\n⛓️ Multi-chain\n\n↔️ Cross-chain transations\n\n🥩 Staking\n\n🤖 Fast intergration to Agentic frameworks\n\n👫 Social Sentiment\n\n🔮 Prediction\n<br />\n<br />\n![Armor MCP Diagram](https://armor-assets-repository.s3.nl-ams.scw.cloud/amor_mcp_diagram.png)\n<br />\n<br />\n<br />\n<br />\n<br />\n<br />\n\n# Requirements\n\n### 1. Make sure you have python installed\n<br />\n\n### 2. Install `uv`\n*Linux / Windows*\n\n```sh\npip install uv\n```\n*Mac*\n\n```sh\nbrew install uv\n```\n<br />\n\n### 3. Claude Desktop or your AI Agent will run the MCP\nSee [Usage & Configuration](#usage--configuration) for details.\n<br />\n<br />\n<br />\n<br />\n<br />\n\n# Alpha Testing\n\nWe are currently in pre-alpha, and we are testing the capabilities of various agents and agentic frameworks like Claude Desktop, Cline, Cursor, n8n, etc. \n\n## Current Features & Tools\n- Wallet Management\n    - Grouping & Organization\n    - Archiving\n- Swap & Trades\n    - Normal swap\n    - DCA (place / list / cancel)\n    - Scheduled Orders\n    - Limit Orders (place / list / cancel)\n- Staking and Unstaking\n- Token Search and Trending Tokens\n- Statistical Calculator for accurate Analysis\n- Supports Solana blockchain\n\n## Coming Soon\n- More Blockchain Support\n- Minting\n- Armor Agents as a Tool (or A2A)\n\n## MCP Setup\nCurrently you need to have the Armor NFT to get an API Key.\nGet it [here](https://codex.armorwallet.ai/)\n\n## Usage & Configuration\nTo use the Armor MCP with your agent, you need the following configuration, replace `<PUT-YOUR-KEY-HERE>` with your API key:\n```json\n{\n  \"mcpServers\": {\n    \"armor-crypto-mcp\": {\n      \"command\": \"uvx\",\n      \"args\": [\"armor-crypto-mcp@latest\", \"--version\"],\n      \"env\": {\n        \"ARMOR_API_KEY\": \"<PUT-YOUR-KEY-HERE>\"\n      }\n    }\n  }\n}\n```\n<br />\n<br />\n<br />\n<br />\n<br />\n<br />\n\n# Use in Claude Desktop\n1. Must have Developer Mode enabled\n2. Open Claude Desktop's File Menu top left of the window.\n3. Go to File > Settings\n4. Under Developer, click Edit Configuration\n5. In the config file, insert the `armor-wallet-mcp` section from above\n6. Make sure to replace the placeholder with your API key\n7. Save the file and start a new Chat in Claude Desktop\n\n## Use in Cline\n1. Click on the `MCP Servers` button in the Cline tab in VSCode on the left panel\n2. Scroll to the bottom of the left panel and click on `Configure MCP Servers`\n3. In the config file, insert `armor-wallet-mcp` section from above\n4. Make sure to replace the placeholder with your API key\n5. Save the file, click `Done` under the `MCP Servers` tab and start chatting with Cline\n\n## Use in n8n\n1. Open the n8n app\n2. Bottom-left of screen click `...` next to your username and click `Settings`\n3. On the left panel, click `Community nodes` and then `Install a Community Node` button\n4. In the search field for `npm Package Name` type in *mcp*\n5. Install `MCP Nodes`\n6. Add any MCP node, for example: `List Tools`\n7. In the MCP Client `Parameters` tab, click `Select Credential` and click `Create new credential`\n8. Under `Command` enter `uvx`\n9. Under `Arguments` enter `armor-crypto-mcp`\n10. Under `Environments` enter `ARMOR_API_KEY=eyJhbGciOiJIUzI1NiIsIn...` paste the full API Key value after the `=`\n11. Back in the `Parameters` tab you can choose the MCP `Operation` for that Node\n<br />\n<br />\n<br />\n<br />\n<br />\n<br />\n\n# Using Armor MCP\n\nOnce you have setup the Armor MCP [here are some prompts you can use to get started](https://github.com/armorwallet/armor-crypto-mcp/blob/main/README_prompts.md)\n<br />\n<br />\n<br />\n"
+}

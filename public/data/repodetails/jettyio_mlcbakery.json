@@ -1,0 +1,81 @@
+{
+  "mcp_name": "Jetty.io",
+  "mcp_description": "",
+  "mcp_id": "jettyio_mlcbakery",
+  "fetch_timestamp": "2025-06-23T05:24:09.296046Z",
+  "github_url": "https://github.com/jettyio/mlcbakery/tree/main/mcp_server",
+  "repository": {
+    "name": "mlcbakery",
+    "full_name": "jettyio/mlcbakery",
+    "description": null,
+    "html_url": "https://github.com/jettyio/mlcbakery",
+    "created_at": "2025-03-25T03:44:37Z",
+    "updated_at": "2025-06-13T01:39:59Z",
+    "pushed_at": "2025-06-13T01:39:58Z",
+    "size": 937,
+    "stargazers_count": 4,
+    "watchers_count": 4,
+    "forks_count": 1,
+    "open_issues_count": 3,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "jettyio",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/205713262?v=4",
+      "html_url": "https://github.com/jettyio"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 2,
+    "languages": {
+      "Python": 383020,
+      "Jupyter Notebook": 38950,
+      "Mako": 1378,
+      "Shell": 1305,
+      "Dockerfile": 747
+    },
+    "language_percentages": {
+      "Python": 90.04,
+      "Jupyter Notebook": 9.16,
+      "Mako": 0.32,
+      "Shell": 0.31,
+      "Dockerfile": 0.18
+    },
+    "pull_requests_count": 21,
+    "contributors_count": 3,
+    "latest_release": {
+      "tag_name": "0.1.3",
+      "name": "0.1.3",
+      "published_at": "2025-05-29T21:19:38Z",
+      "body": "**Full Changelog**: https://github.com/jettyio/mlcbakery/compare/0.1.2...0.1.3",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "0.1.3",
+        "commit_sha": "2925c1c0a9d379bc4228312a9774023bc4f4aa5c"
+      },
+      {
+        "name": "0.1.2",
+        "commit_sha": "b9f1bc054b313cf7fce444f05eb39c323097685e"
+      },
+      {
+        "name": "0.1.1",
+        "commit_sha": "a3ba776d21cfc75fa76f43acb6d1917f9bbe717c"
+      }
+    ],
+    "latest_version": "0.1.3"
+  },
+  "readme": "# MLC Bakery\n\nA Python-based service for managing ML model provenance and lineage, built with FastAPI and SQLAlchemy. Support for Croissant metadata validation.\n\n## Features\n\n- Dataset management with collection support\n- Entity tracking\n- Activity logging\n- Provenance relationships tracking\n- RESTful API endpoints\n\n## Running with Docker\n\n1.  **Set up Environment Variables:**\n    Create a `.env` file in the project root by copying the example:\n    ```bash\n    cp env.example .env\n    ```\n\n2. **Start docker containers:**\n    The bakery relies on a postgres database and Typesense for search. The MCP server makes REST calls to the API server, which then calls the persistence layer.\n    ```\n    docker compose up -d\n    ```\n\n3.  **Run Database Migrations:**\n    Apply the latest database schema using Alembic. `uv run` executes commands within the project's managed environment.\n    ```bash\n    docker compose exec db psql -U postgres -c \"create DATABASE mlcbakery;\"\n    docker compose exec api alembic upgrade head\n    ```\n## Access the bakery\nBy default, the API will be available on localhost.\n-   Swagger UI: `http://bakery.localhost/docs`\n-   ReDoc: `http://bakery.localhost/redoc`\n-   Streamable MCP HTTP: `http://mcp.localhost/mcp` (you may need to add this to your `/etc/hosts` for local development)\n\n## Running the Server (Locally)\n\n### Prerequisites\n\n- Python 3.12+\n- [uv](https://github.com/astral-sh/uv) (Python package manager)\n\n### Development steps\n\n1.  **Clone the repository:**\n    ```bash\n    git clone git@github.com:jettyio/mlcbakery.git\n    cd mlcbakery\n    ```\n\n2.  **Install Dependencies:**\n    `uv` uses `pyproject.toml` to manage dependencies. It will automatically create a virtual environment if one doesn't exist.\n    ```bash\n    curl -LsSf https://astral.sh/uv/install.sh | sh\n    ```\n    ```\n    pip install poetry uvicorn\n    uv run poetry install --no-interaction --no-ansi --no-root --with mcp\n    ```\nStart the FastAPI application using uvicorn:\n```bash\n# Make sure your .env file is present for the DATABASE_URL\nuv run uvicorn mlcbakery.main:app --reload --host 0.0.0.0 --port 8000\n```\n\n### Running Tests\n\nThe tests are configured to run against a PostgreSQL database defined by the `DATABASE_URL` environment variable. You can use the same database as your development environment or configure a separate test database in your `.env` file if preferred (adjust connection string as needed).\n\n```bash\n# Ensure DATABASE_URL is set in your environment or .env file\nuv run pytest\n```\n"
+}

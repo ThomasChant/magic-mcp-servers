@@ -1,0 +1,59 @@
+{
+  "mcp_name": "HenryHaoson/Yuque-MCP-Server",
+  "mcp_description": "📇 ☁️ A Model-Context-Protocol (MCP) server for integrating with Yuque API, allowing AI models to manage documents, interact with knowledge bases, search content, and access analytics data from the Yuque platform.",
+  "mcp_id": "HenryHaoson_Yuque-MCP-Server",
+  "fetch_timestamp": "2025-06-23T04:44:53.537694Z",
+  "github_url": "https://github.com/HenryHaoson/Yuque-MCP-Server",
+  "repository": {
+    "name": "Yuque-MCP-Server",
+    "full_name": "HenryHaoson/Yuque-MCP-Server",
+    "description": "Yuque mcp server",
+    "html_url": "https://github.com/HenryHaoson/Yuque-MCP-Server",
+    "created_at": "2025-03-06T08:59:12Z",
+    "updated_at": "2025-06-14T01:57:44Z",
+    "pushed_at": "2025-04-22T03:48:29Z",
+    "size": 68,
+    "stargazers_count": 19,
+    "watchers_count": 19,
+    "forks_count": 8,
+    "open_issues_count": 2,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [
+      "mcp",
+      "yuque",
+      "yuque-mcp"
+    ],
+    "default_branch": "master",
+    "owner": {
+      "login": "HenryHaoson",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/22147654?v=4",
+      "html_url": "https://github.com/HenryHaoson"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 8,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 53008,
+      "Dockerfile": 657,
+      "JavaScript": 232
+    },
+    "language_percentages": {
+      "TypeScript": 98.35,
+      "Dockerfile": 1.22,
+      "JavaScript": 0.43
+    },
+    "pull_requests_count": 3,
+    "contributors_count": 2,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# 语雀 MCP 服务器\n\n[![smithery badge](https://smithery.ai/badge/@HenryHaoson/Yuque-MCP-Server)](https://smithery.ai/server/@HenryHaoson/Yuque-MCP-Server)\n\n[English Version](./README.en.md)\n\n一个用于与语雀 API 集成的 Model-Context-Protocol (MCP) 服务器。此实现受 [Figma-Context-MCP](https://github.com/GLips/Figma-Context-MCP) 的启发，并使用 [语雀开放 API](https://app.swaggerhub.com/apis-docs/Jeff-Tian/yuque-open_api/2.0.1)。\n\n## 概述\n\n该服务器提供了与语雀知识库平台交互的 MCP 工具，允许 AI 模型：\n\n- 获取用户和文档信息\n- 创建、读取、更新和删除文档\n- 搜索语雀中的内容\n- 获取知识库信息\n- 获取统计数据和分析信息\n\n## 安装\n\n### 安装 via Smithery\n\n要使用 [Smithery](https://smithery.ai) 将 Yuque MCP Server 自动安装到 Claude 桌面端：\n\n```bash\nnpx -y @smithery/cli install @HenryHaoson/Yuque-MCP-Server --client claude\n```\n\n### 前提条件\n\n- Node.js 18+ (推荐)\n- 拥有 API 令牌的语雀账号\n\n### 设置\n\n1. 克隆此仓库：\n   ```\n   git clone https://github.com/Henryhaoson/Yueque-MCP-Server.git\n   cd Yueque-MCP-Server\n   ```\n\n2. 安装依赖：\n   ```\n   npm install\n   ```\n\n3. 基于 `.env.example` 创建 `.env` 文件：\n   ```\n   cp .env.example .env\n   ```\n\n4. (可选) 在 `.env` 文件中添加你的语雀 API 令牌：\n   ```\n   YUQUE_API_TOKEN=your_yuque_api_token_here\n   ```\n   \n   你也可以选择在连接到服务器时通过查询参数提供令牌，而不是在 .env 文件中设置。\n\n## 使用方法\n\n### 运行服务器\n\n#### 开发模式\n\n```bash\n# HTTP 服务器模式\nnpm run dev\n\n# CLI stdio 模式\nnpm run dev:cli\n```\n\n#### 生产模式\n\n首先，构建项目：\n\n```bash\nnpm run build\n```\n\n然后在 HTTP 或 CLI 模式下运行：\n\n```bash\n# HTTP 服务器模式\nnpm run start\n\n# CLI stdio 模式\nnpm run start:cli\n```\n\n### 使用 Docker 部署\n\n本项目提供了 Docker 支持，使您可以轻松地容器化和部署服务器。\n\n#### 使用 Docker Compose（推荐）\n\n1. 构建并启动容器：\n   ```bash\n   docker-compose up -d\n   ```\n\n2. 查看日志：\n   ```bash\n   docker-compose logs -f\n   ```\n\n3. 停止服务：\n   ```bash\n   docker-compose down\n   ```\n\n您可以通过环境变量或在 `.env` 文件中设置配置项：\n```bash\n# .env 文件示例\nPORT=3000\nYUQUE_API_TOKEN=your_token_here\nYUQUE_API_BASE_URL=https://www.yuque.com/api/v2\n```\n\n#### 手动使用 Docker\n\n1. 构建 Docker 镜像：\n   ```bash\n   docker build -t yuque-mcp-server .\n   ```\n\n2. 运行容器：\n   ```bash\n   docker run -d -p 3000:3000 --name yuque-mcp-server yuque-mcp-server\n   ```\n\n3. 使用环境变量：\n   ```bash\n   docker run -d -p 3000:3000 \\\n     -e YUQUE_API_TOKEN=your_token_here \\\n     -e YUQUE_API_BASE_URL=https://www.yuque.com/api/v2 \\\n     --name yuque-mcp-server yuque-mcp-server\n   ```\n\n### MCP 工具\n\n语雀 MCP 服务器提供以下工具：\n\n#### 用户和文档管理\n- `get_current_user` - 获取当前认证用户的信息，包括用户ID、用户名、头像等语雀账号基本信息\n- `get_user_docs` - 获取当前用户的所有知识库文档列表，包括私人和协作文档\n- `get_user_repos` - 获取指定用户的知识库列表，知识库是语雀中组织文档的集合\n- `get_repo_docs` - 获取特定知识库中的所有文档列表，包括文档标题、更新时间等信息\n- `get_doc` - 获取语雀中特定文档的详细内容，包括正文、修改历史和权限信息\n- `create_doc` - 在指定知识库中创建新的语雀文档，支持多种格式内容（Markdown、HTML、Lake）\n- `update_doc` - 更新语雀中已存在的文档，可以修改标题、内容或权限设置\n- `delete_doc` - 从语雀知识库中删除指定文档，此操作不可撤销\n- `search` - 在语雀平台中搜索文档或知识库内容，支持范围和作者筛选\n\n#### 团队统计分析\n- `get_group_statistics` - 获取团队的汇总统计数据，包括成员人数、文档数量、阅读量和互动数据等\n- `get_group_member_statistics` - 获取团队成员的统计数据，包括各成员的编辑次数、阅读量、点赞量等\n- `get_group_book_statistics` - 获取团队知识库的统计数据，包括各知识库的文档数、字数、阅读量等\n- `get_group_doc_statistics` - 获取团队文档的统计数据，包括各文档的字数、阅读量、评论量等\n\n## 与 AI 模型的集成\n\n此 MCP 服务器可以与支持 Model-Context-Protocol 的 AI 模型一起使用，允许它们通过定义的工具与语雀交互。例如：\n\n1. 启动 MCP 服务器\n2. 从兼容的客户端连接到服务器\n3. AI 模型现在可以使用注册的工具与语雀数据交互\n\n### SSE 端点的查询参数\n\n当连接到 SSE 端点时，你可以通过查询参数（query parameters）覆盖环境配置，这些参数的优先级高于环境变量：\n\n- `accessToken`: 覆盖在 .env 文件中设置的语雀 API 令牌\n- `baseUrl`: 覆盖在 .env 文件中设置的语雀 API 基础 URL\n\n示例：\n```\nhttp://localhost:3000/sse?accessToken=your_token_here&baseUrl=https://custom.yuque.api/v2\n```\n\n这允许你在不修改 .env 文件的情况下动态配置服务，并且查询参数的优先级高于环境变量。这对于多用户环境或测试不同 API 端点特别有用。\n\n每个 SSE 连接都可以使用不同的配置，这使得同一个服务器实例可以同时为不同的用户或环境提供服务。\n\n## 开发\n\n### 项目结构\n\n```\nsrc/\n  ├── config.ts          # 服务器配置\n  ├── index.ts           # 主入口点\n  ├── cli.ts             # CLI 入口点 \n  ├── server.ts          # MCP 服务器实现\n  └── services/\n      └── yuque.ts       # 语雀 API 服务\n```\n\n### 添加新工具\n\n要添加新工具，请修改 `src/server.ts` 中的 `registerTools` 方法。\n\n## API 改进\n\n最近的更新增加了以下功能：\n\n1. **团队统计数据**：添加了获取团队、成员、知识库和文档统计数据的功能，便于分析和监控团队知识库的使用情况。\n\n2. **文档管理增强**：\n   - 支持多种文档格式（Markdown、HTML、Lake）\n   - 完善的文档公开性设置（私密、公开、企业内公开）\n   - 搜索功能支持更多参数和过滤条件\n\n3. **数据类型完善**：更新了接口定义，使其与语雀 OpenAPI 规范保持一致。\n\n## 许可证\n\nMIT License\n\nCopyright (c) 2025 Henryhaoson\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n## 致谢\n\n- [Figma-Context-MCP](https://github.com/GLips/Figma-Context-MCP) 提供 MCP 服务器实现参考\n- [语雀开放 API](https://app.swaggerhub.com/apis-docs/Jeff-Tian/yuque-open_api/2.0.1) 提供 API 文档\n- [Model Context Protocol](https://github.com/anthropics/model-context-protocol) 提供 MCP 规范\n"
+}

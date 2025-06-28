@@ -1,0 +1,50 @@
+{
+  "mcp_name": "OpenAI",
+  "mcp_description": "🐍 ☁️ - Query OpenAI models directly from Claude using MCP protocol",
+  "mcp_id": "pierrebrunelle_mcp-server-openai",
+  "fetch_timestamp": "2025-06-23T07:18:40.323275Z",
+  "github_url": "https://github.com/pierrebrunelle/mcp-server-openai",
+  "repository": {
+    "name": "mcp-server-openai",
+    "full_name": "pierrebrunelle/mcp-server-openai",
+    "description": "Query OpenAI models directly from Claude using MCP protocol.",
+    "html_url": "https://github.com/pierrebrunelle/mcp-server-openai",
+    "created_at": "2024-11-28T03:40:31Z",
+    "updated_at": "2025-06-19T16:43:11Z",
+    "pushed_at": "2024-11-28T03:48:15Z",
+    "size": 178,
+    "stargazers_count": 63,
+    "watchers_count": 63,
+    "forks_count": 15,
+    "open_issues_count": 4,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "pierrebrunelle",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/70675979?v=4",
+      "html_url": "https://github.com/pierrebrunelle"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 15,
+    "subscribers_count": 2,
+    "languages": {
+      "Python": 4650
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 3,
+    "contributors_count": 1
+  },
+  "readme": "# OpenAI MCP Server\r\n\r\nQuery OpenAI models directly from Claude using MCP protocol.\r\n\r\n![preview](preview.png)\r\n\r\n## Setup\r\n\r\nAdd to `claude_desktop_config.json`:\r\n\r\n```json\r\n{\r\n  \"mcpServers\": {\r\n    \"openai-server\": {\r\n      \"command\": \"python\",\r\n      \"args\": [\"-m\", \"src.mcp_server_openai.server\"],\r\n      \"env\": {\r\n        \"PYTHONPATH\": \"C:/path/to/your/mcp-server-openai\",\r\n        \"OPENAI_API_KEY\": \"your-key-here\"\r\n      }\r\n    }\r\n  }\r\n}\r\n```\r\n\r\n## Development\r\n```bash\r\ngit clone https://github.com/pierrebrunelle/mcp-server-openai\r\ncd mcp-server-openai\r\npip install -e .\r\n```\r\n\r\n## Testing\r\n```python\r\n# Run tests from project root\r\npytest -v test_openai.py -s\r\n\r\n# Sample test output:\r\nTesting OpenAI API call...\r\nOpenAI Response: Hello! I'm doing well, thank you for asking...\r\nPASSED\r\n```\r\n\r\n## License\r\nMIT License\r\n"
+}

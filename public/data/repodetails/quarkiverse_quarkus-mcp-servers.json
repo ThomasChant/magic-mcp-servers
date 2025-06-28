@@ -1,0 +1,100 @@
+{
+  "mcp_name": "quarkiverse/mcp-server-jfx",
+  "mcp_description": "☕ 🏠 - Draw on JavaFX canvas.",
+  "mcp_id": "quarkiverse_quarkus-mcp-servers",
+  "fetch_timestamp": "2025-06-23T07:44:12.226177Z",
+  "github_url": "https://github.com/quarkiverse/quarkus-mcp-servers/tree/main/jfx",
+  "repository": {
+    "name": "quarkus-mcp-servers",
+    "full_name": "quarkiverse/quarkus-mcp-servers",
+    "description": "Model Context Protocol Servers in Quarkus",
+    "html_url": "https://github.com/quarkiverse/quarkus-mcp-servers",
+    "created_at": "2025-01-22T15:10:05Z",
+    "updated_at": "2025-06-23T06:10:28Z",
+    "pushed_at": "2025-05-22T22:39:14Z",
+    "size": 3075,
+    "stargazers_count": 144,
+    "watchers_count": 144,
+    "forks_count": 38,
+    "open_issues_count": 18,
+    "language": "Java",
+    "license": "Apache License 2.0",
+    "topics": [
+      "mcp",
+      "quarkus-app"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "quarkiverse",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/69191779?v=4",
+      "html_url": "https://github.com/quarkiverse"
+    },
+    "has_issues": true,
+    "has_projects": false,
+    "has_downloads": false,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 38,
+    "subscribers_count": 5,
+    "languages": {
+      "Java": 134829
+    },
+    "language_percentages": {
+      "Java": 100
+    },
+    "pull_requests_count": 54,
+    "contributors_count": 8,
+    "latest_release": {
+      "tag_name": "1.0.0.CR4",
+      "name": "1.0.0.CR4",
+      "published_at": "2025-05-22T22:21:28Z",
+      "body": "## What's Changed\n* release 1.0.0.CR4 by @maxandersen in https://github.com/quarkiverse/quarkus-mcp-servers/pull/71\n\n\n**Full Changelog**: https://github.com/quarkiverse/quarkus-mcp-servers/compare/early-access...1.0.0.CR4",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "early-access",
+        "commit_sha": "bd561bc0ee5fbaddf1a4c3e5e89d95cf82968b88"
+      },
+      {
+        "name": "1.0.0.CR4",
+        "commit_sha": "112c90b99e8c2ed502108df061db1355c5e31f8c"
+      },
+      {
+        "name": "1.0.0.CR3",
+        "commit_sha": "995e6709aab55c88cb1f134d5b86c0a038b1bb02"
+      },
+      {
+        "name": "1.0.CR1",
+        "commit_sha": "38aa6b162dbfc77a8f76f4ba5624ef34d3746fc3"
+      },
+      {
+        "name": "0.0.6",
+        "commit_sha": "f13095e96d68146baa7bdf406aa6922106908fb1"
+      },
+      {
+        "name": "0.0.4",
+        "commit_sha": "1d9d6ed4439ab7faeb4cb51eb5da7fa99ac90b7d"
+      },
+      {
+        "name": "0.0.3",
+        "commit_sha": "3af3f2d11a5c670441a7f5d255c1d59e8cd8eab9"
+      },
+      {
+        "name": "0.0.2",
+        "commit_sha": "8b8d91b83a4a06027edc72df8141047f1a5dbdd2"
+      },
+      {
+        "name": "0.0.1",
+        "commit_sha": "211676145abf164b4cb70a05031d0d1dc1bf9198"
+      }
+    ],
+    "latest_version": "early-access"
+  },
+  "readme": "# Model Context Protocol Servers in Quarkus/Java\n\nThis project contains [Model Context Protocol](https://modelcontextprotocol.io/) servers,\nimplemented in Java using the [Quarkus MCP server framework](https://github.com/quarkiverse/quarkus-mcp-server).\n\nThese lets you extend the capabilities of your MCP enabled LLM (Large Language Model) AI applications.\n\nThese also work in MCP enabled LLM applications, like Claude Desktop. You can find other clients on\n[Awesome MCP Clients](https://github.com/punkpeye/awesome-mcp-clients) page.\n\n## Running the servers\n\nAll of these servers are available to run with [jbang everywhere](https://jbang.dev/everywhere): Java, JavaScript, Python and more. Where it says `jbang` it can be replaced with `npx @jbangdev/jbang` or `uvx jbang` or `pipx jbang` dependent on your preference.\n\n## Servers\n\n### [jdbc](jdbc)\n\n![](jdbc/images/jdbc-trends-demo.png)\n\nThe `jdbc` server can be used to store and retrieve data from a database given just a JDBC URL. You can use any JDBC database, like Postgres, MySQL, Oracle, Sqlite, etc.\n\n```shell\njbang jdbc@quarkiverse/quarkus-mcp-servers\n```\n\nSee more in the [jdbc readme](jdbc/README.md).\n\n### [jvminsight](jvminsight)\n\n![](jvminsight/images/jvminsight-demo.png)\n\nThe `jvminsight` server is a server that can be used to inspect a running JVM process.\n\n```shell\njbang jvminsight@quarkiverse/quarkus-mcp-servers\n```\n\nSee more in the [jvminsight readme](jvminsight/README.md).\n\n### [filesystem](filesystem)\n\nThe `filesystem` server is a file system server that can be used to serve files from a file system.\n\n```shell\njbang filesystem@quarkiverse/quarkus-mcp-servers [path1] [path2] ...\n```\n\nSee more in the [filesystem readme](filesystem/README.md).\n\n### [jfx](jfx)\n\n[![](jfx/images/jfx-demo.png)](https://www.youtube.com/watch?v=Wnh_-0dAaDI)\n\nThe `jfx` server exposes a canvas that can be used to make drawings using JavaFX.\n\n```shell\njbang jfx@quarkiverse/quarkus-mcp-servers\n```\n\nSee more in the [jfx readme](jfx/README.md).\n\n\n### [kubernetes](kubernetes)\n\nThe `kubernetes` server can be used to interact with a Kubernetes cluster.\n\n```shell\njbang kubernetes@quarkiverse/quarkus-mcp-servers\n```\n\n### [containers](containers)\n\nThe 'containers' server lets you work with Docker/Podman/OCI compatible container engines.\n\n```shell\njbang containers@quarkiverse/quarkus-mcp-servers\n```\n\n![](containers/images/containers-demo.png)\n\n### [wolfram](wolfram)\n\nThe `wolfram` server can be used to perform web search optimized for use by a large language model through the Wolfram Alpha LLM API.\n\n```shell\njbang wolfram@quarkiverse/quarkus-mcp-servers\n```\n\n## Other Quarkus MCP based servers\n\n### [WildFly](https://github.com/wildfly-extras/wildfly-mcp)\n\nA WildFly MCP server that allows you to interact with WildFly running servers.\n\nYou can check this [WildFly vlog](https://youtu.be/wg1hAdOoe2w) that demonstrates its capabilities.\n\nRead more in the [WildFly MCP Server readme](https://github.com/wildfly-extras/wildfly-mcp/blob/main/wildfly-mcp-server/README.md).\n\n## Ideas for other servers\n\nIf you have ideas for other servers, feel free to contribute them to this project.\n\nIf missing ideas, then look at the reference servers at https://github.com/modelcontextprotocol/servers and see if you can implement them in this project.\n\nOther ideas:\n\n- zulip\n- jfr/java hooked to jmx/jfr\n- quarkus dev mode\n- ... \n\n## Contributing\n\nIf you have ideas for other servers, feel free to contribute them to this project.\n\nTo get started, clone the repository and build it:\n\n```bash\ngit clone https://github.com/quarkiverse/quarkus-mcp-servers\ncd quarkus-mcp-servers\nmvn clean install\n```\n\nThen run the following command to generate a new server for i.e. jfr:\n\n```shell\nmkdir jfr\ncd jfr\njbang init -t mcp jfr\n```\n\nThis will create the `jfr` directory with a Hello World MCP server.\n\nYou can then build it:\n\n```shell\nmvn clean install\n```\n\nTo wire it into the full project you need to add `<module>jfr</module>` to the root `pom.xml` file.\n\nMake sure you have added some useful content to the `README.md` file + updated the demo image.\n\nThen open a PR :)\n\n\n\n\n\n\n\n"
+}

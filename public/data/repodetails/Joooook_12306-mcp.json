@@ -1,0 +1,99 @@
+{
+  "mcp_name": "Joooook/12306-mcp",
+  "mcp_description": "Facilitates 12306 ticket searches using a simple API interface based on the Model Context Protocol.",
+  "mcp_id": "Joooook_12306-mcp",
+  "fetch_timestamp": "2025-06-23T05:32:08.568411Z",
+  "github_url": "https://github.com/Joooook/12306-mcp",
+  "repository": {
+    "name": "12306-mcp",
+    "full_name": "Joooook/12306-mcp",
+    "description": "This is a 12306 ticket search server based on the Model Context Protocol (MCP).",
+    "html_url": "https://github.com/Joooook/12306-mcp",
+    "created_at": "2025-04-14T14:31:32Z",
+    "updated_at": "2025-06-23T03:56:36Z",
+    "pushed_at": "2025-06-19T12:20:58Z",
+    "size": 466,
+    "stargazers_count": 262,
+    "watchers_count": 262,
+    "forks_count": 46,
+    "open_issues_count": 4,
+    "language": "JavaScript",
+    "license": "MIT License",
+    "topics": [
+      "12306",
+      "mcp",
+      "mcp-server",
+      "train-tickets"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "Joooook",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/118427326?v=4",
+      "html_url": "https://github.com/Joooook"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 46,
+    "subscribers_count": 2,
+    "languages": {
+      "JavaScript": 89896
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 8,
+    "contributors_count": 8,
+    "latest_release": {
+      "tag_name": "v0.3.2",
+      "name": "v0.3.2",
+      "published_at": "2025-05-30T05:22:31Z",
+      "body": "- 新增车票排序功能，对车票的`出发时间`，`到达时间`，`历时`进行排序，并筛选部分车票。\r\n- 修复中转车票的接口路径问题。https://github.com/Joooook/12306-mcp/pull/19\r\n- 新增架构描述等文档。https://github.com/Joooook/12306-mcp/pull/19",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.3.2",
+        "commit_sha": "68f09e07ad0d75fd09b9b3f52c744e65b3df8c0e"
+      },
+      {
+        "name": "v0.3.1",
+        "commit_sha": "ee38d67dd37dadca31ea9fb7ee20ed534f2d6295"
+      },
+      {
+        "name": "v0.3.0",
+        "commit_sha": "af56e6354789f3e606d8ce9fd350346b1b9a3df7"
+      },
+      {
+        "name": "v0.2.5",
+        "commit_sha": "d9be898041a7e5411058fe233820a0e5a4587dbf"
+      },
+      {
+        "name": "v0.2.4",
+        "commit_sha": "f6f5e4525aee9bd688796bf9fee049e8ceb3d418"
+      },
+      {
+        "name": "v0.2.3",
+        "commit_sha": "65bb1a9103d78ecc61760933df16f4b4d4f40cd5"
+      },
+      {
+        "name": "v0.2.1",
+        "commit_sha": "1f89139f122e4829307e8d1d2e26277a2f661a7f"
+      },
+      {
+        "name": "v0.1",
+        "commit_sha": "ef33bfca3f1ed82f60b9fba28393ebc238858e20"
+      }
+    ],
+    "latest_version": "v0.3.2",
+    "package_json_version": "0.3.2"
+  },
+  "readme": "# <div align=\"center\">12306-mcp</div>\n\n<div align=\"center\">\n\n[![](https://img.shields.io/badge/Joooook-blue.svg?logo=github&lable=python&labelColor=497568&color=497568&style=flat-square)](https://github.com/Joooook)\n[![](https://img.shields.io/badge/Joooook-blue.svg?logo=bilibili&logoColor=white&lable=python&labelColor=af7a82&color=af7a82&style=flat-square)](https://space.bilibili.com/3546386788255839)\n![](https://img.shields.io/badge/typescript-blue.svg?logo=typescript&lable=typescript&logoColor=white&labelColor=192c3b&color=192c3b&style=flat-square)\n![](https://img.shields.io/github/stars/Joooook/12306-mcp?logo=reverbnation&lable=python&logoColor=white&labelColor=ffc773&color=ffc773&style=flat-square)\n![](https://img.shields.io/github/last-commit/Joooook/12306-mcp.svg?style=flat-square)\n![](https://img.shields.io/github/license/Joooook/12306-mcp.svg?style=flat-square&color=000000)\n</div>\n\nA 12306 ticket search server based on the Model Context Protocol (MCP). The server provides a simple API interface that allows users to search for 12306 tickets.\n\n基于 Model Context Protocol (MCP) 的12306购票搜索服务器。提供了简单的API接口，允许大模型利用接口搜索12306购票信息。\n\n## <div align=\"center\">🚩Features</div>\n<div align=\"center\"> \n\n| 功能描述                         | 状态     |\n|------------------------------|--------|\n| 查询12306购票信息              | ✅ 已完成  |\n| 过滤列车信息                   | ✅ 已完成  |\n| 过站查询                      | ✅ 已完成 |\n| 中转查询                      | ✅ 已完成 |\n| 其余接口，欢迎提feature         | 🚧 计划内 |\n\n</div>\n<div align=\"center\"> \n  <img src=\"https://s2.loli.net/2025/04/15/UjbrG5esaSEmJxN.jpg\" width=800px/>\n</div>\n<div align=\"center\"> \n  <img src=\"https://s2.loli.net/2025/04/15/rm1j8zX7sqiyafP.jpg\" width=800px/>\n</div>\n\n## <div align=\"center\">⚙️Installation</div>\n\n~~~bash\ngit clone https://github.com/Joooook/12306-mcp.git\nnpm i\n~~~\n\n\n## <div align=\"center\">▶️Quick Start</div>\n\n### CLI\n~~~bash\nnpx -y 12306-mcp\n~~~\n\n### MCP sever configuration\n\n~~~json\n{\n    \"mcpServers\": {\n        \"12306-mcp\": {\n            \"command\": \"npx\",\n            \"args\": [\n                \"-y\",\n                \"12306-mcp\"\n            ]\n        }\n    }\n}\n~~~\n\n\n\n\n## <div align=\"center\">📚Documentation</div>\n\n- [服务原理详解](./docs/principle.md)  12306-MCP服务的工作原理\n- [架构图](./docs/architecture.md)  12306-MCP服务的架构图\n   ![12306-MCP 服务架构图](./docs/architecture.png)\n\n## <div align=\"center\">👉️Reference</div>\n- [modelcontextprotocol/modelcontextprotocol](https://github.com/modelcontextprotocol/modelcontextprotocol)\n- [modelcontextprotocol/typescript-sdk](https://github.com/modelcontextprotocol/typescript-sdk)\n\n## <div align=\"center\">💭Murmurs</div>\n本项目仅用于学习，欢迎催更。\n\n## <div align=\"center\">🎫Badges</div>\n<div align=\"center\"> \n<a href=\"https://glama.ai/mcp/servers/@Joooook/12306-mcp\">\n  <img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/@Joooook/12306-mcp/badge\" alt=\"12306-mcp MCP server\" />\n</a>\n\n[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/joooook-12306-mcp-badge.png)](https://mseep.ai/app/joooook-12306-mcp)\n\n</div>\n\n## <div align=\"center\">☕️Donate</div>\n请我喝杯奶茶吧。\n<div align=\"center\"> \n<a href=\"https://afdian.com/item/2a0e0cdcadf911ef9f725254001e7c00\">\n  <img src=\"https://s2.loli.net/2024/11/29/1JBxzphs7V6WcK9.jpg\" width=\"500px\">\n</a>\n</div>\n"
+}

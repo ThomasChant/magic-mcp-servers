@@ -1,0 +1,51 @@
+{
+  "mcp_name": "93minki/weather-forecast-mcp-server",
+  "mcp_description": "A TypeScript-based MCP server that manages and summarizes text notes using URIs and metadata.",
+  "mcp_id": "93minki_weather-forecast-mcp-server",
+  "fetch_timestamp": "2025-06-23T00:09:39.066182Z",
+  "github_url": "https://github.com/93minki/weather-forecast-mcp-server",
+  "repository": {
+    "name": "weather-forecast-mcp-server",
+    "full_name": "93minki/weather-forecast-mcp-server",
+    "description": null,
+    "html_url": "https://github.com/93minki/weather-forecast-mcp-server",
+    "created_at": "2025-04-15T14:21:09Z",
+    "updated_at": "2025-04-21T00:39:46Z",
+    "pushed_at": "2025-04-21T00:39:43Z",
+    "size": 13,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "93minki",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32607413?v=4",
+      "html_url": "https://github.com/93minki"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 8410
+    },
+    "language_percentages": {
+      "TypeScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "0.1.0"
+  },
+  "readme": "# weather-server MCP Server\n\nWeather MCP Server\n\nThis is a TypeScript-based MCP server that implements a simple notes system. It demonstrates core MCP concepts by providing:\n\n### 사용 방법\n\n1. `.env` 파일 생성 후 OPENWEATHER_API_KEY=API_KEY\n2. `npm run build` 명령어 실행\n3. `claude_desktop_config.json` 파일 수정 (빌드 후 생성되는 index.js 파일의 경로)\n\n```json\n{\n  \"mcpServers\": {\n    \"weather-server\": {\n      \"command\": \"node\",\n      \"args\": [\"/Users/{UserName}/Desktop/{Project-path}/build/index.js\"]\n    }\n  }\n}\n```\n"
+}

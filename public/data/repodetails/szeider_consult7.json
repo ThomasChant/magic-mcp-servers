@@ -1,0 +1,50 @@
+{
+  "mcp_name": "consult7",
+  "mcp_description": "Analyze large codebases and document collections using high-context models via OpenRouter, OpenAI, or Google AI -- very useful, e.g., with Claude Code",
+  "mcp_id": "szeider_consult7",
+  "fetch_timestamp": "2025-06-23T02:15:56.453530Z",
+  "github_url": "https://github.com/szeider/consult7",
+  "repository": {
+    "name": "consult7",
+    "full_name": "szeider/consult7",
+    "description": "MCP server to consult a language model with large context size",
+    "html_url": "https://github.com/szeider/consult7",
+    "created_at": "2025-06-10T19:40:26Z",
+    "updated_at": "2025-06-23T00:08:06Z",
+    "pushed_at": "2025-06-21T16:45:28Z",
+    "size": 180,
+    "stargazers_count": 38,
+    "watchers_count": 38,
+    "forks_count": 5,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "szeider",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16817638?v=4",
+      "html_url": "https://github.com/szeider"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 5,
+    "subscribers_count": 0,
+    "languages": {
+      "Python": 62282
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# Consult7 MCP Server\n\n**Consult7** is a Model Context Protocol (MCP) server that enables AI agents to consult large context window models for analyzing extensive file collections - entire codebases, document repositories, or mixed content that exceed the current agent's context limits. Supports providers *Openrouter*, *OpenAI*, and *Google*.\n\n## Why Consult7?\n\nWhen working with AI agents that have limited context windows (like Claude with 200K tokens), **Consult7** allows them to leverage models with massive context windows to analyze large codebases or document collections that would otherwise be impossible to process in a single query.\n\n> \"For Claude Code users, Consult7 is a game changer.\"\n\n## How it works\n\n**Consult7** recursively collects all files from a given path that match your regex pattern (including all subdirectories), assembles them into a single context, and sends them to a large context window model along with your query. The result of this query is directly fed back to the agent you are working with.\n\n## Example Use Cases\n\n### Summarize an entire codebase\n* **Query:** \"Summarize the architecture and main components of this Python project\"\n* **Pattern:** `\".*\\.py$\"` (all Python files)\n* **Path:** `/Users/john/my-python-project`\n\n### Find specific method definitions\n\n* **Query:** \"Find the implementation of the authenticate_user method and explain how it handles password verification\"\n* **Pattern:** `\".*\\.(py|js|ts)$\"` (Python, JavaScript, TypeScript files)\n* **Path:** `/Users/john/backend`\n\n### Analyze test coverage\n* **Query:** \"List all the test files and identify which components lack test coverage\"\n* **Pattern:** `\".*test.*\\.py$|.*_test\\.py$\"` (test files)\n* **Path:** `/Users/john/project`\n\n### Complex analysis with thinking mode\n* **Query:** \"Analyze the authentication flow across this codebase. Think step by step about security vulnerabilities and suggest improvements\"\n* **Pattern:** `\".*\\.(py|js|ts)$\"`\n* **Model:** `\"gemini-2.5-flash|thinking\"`\n* **Path:** `/Users/john/webapp`\n\n## Installation\n\n### Claude Code\n\nSimply run:\n\n```bash\n# OpenRouter\nclaude mcp add -s user consult7 uvx -- consult7 openrouter your-api-key\n\n# Google AI\nclaude mcp add -s user consult7 uvx -- consult7 google your-api-key\n\n# OpenAI\nclaude mcp add -s user consult7 uvx -- consult7 openai your-api-key\n```\n\n### Claude Desktop\n\nAdd to your Claude Desktop configuration file:\n\n```json\n{\n  \"mcpServers\": {\n    \"consult7\": {\n      \"type\": \"stdio\",\n      \"command\": \"uvx\",\n      \"args\": [\"consult7\", \"openrouter\", \"your-api-key\"]\n    }\n  }\n}\n```\n\nReplace `openrouter` with your provider choice (`google` or `openai`) and `your-api-key` with your actual API key.\n\nNo installation required - `uvx` automatically downloads and runs consult7 in an isolated environment.\n\n\n## Command Line Options\n\n```bash\nuvx consult7 <provider> <api-key> [--test]\n```\n\n- `<provider>`: Required. Choose from `openrouter`, `google`, or `openai`\n- `<api-key>`: Required. Your API key for the chosen provider\n- `--test`: Optional. Test the API connection\n\nThe model is specified when calling the tool, not at startup. The server shows example models for your provider on startup.\n\n### Model Examples\n\n#### Google\nStandard models:\n- `\"gemini-2.5-flash\"` - Fast model\n- `\"gemini-2.5-pro\"` - Intelligent model\n- `\"gemini-2.0-flash-exp\"` - Experimental model\n\nWith thinking mode (add `|thinking` suffix):\n- `\"gemini-2.5-flash|thinking\"` - Fast with deep reasoning\n- `\"gemini-2.5-pro|thinking\"` - Intelligent with deep reasoning\n\n#### OpenRouter\nStandard models:\n- `\"google/gemini-2.5-pro\"` - Intelligent, 1M context\n- `\"google/gemini-2.5-flash\"` - Fast, 1M context\n- `\"anthropic/claude-sonnet-4\"` - Claude Sonnet, 200k context\n- `\"openai/gpt-4.1\"` - GPT-4.1, 1M+ context\n\nWith reasoning mode (add `|thinking` suffix):\n- `\"anthropic/claude-sonnet-4|thinking\"` - Claude with 31,999 reasoning tokens\n- `\"openai/gpt-4.1|thinking\"` - GPT-4.1 with reasoning effort=high\n\n#### OpenAI\nStandard models (include context length):\n- `\"gpt-4.1-2025-04-14|1047576\"` - 1M+ context, very fast\n- `\"gpt-4.1-nano-2025-04-14|1047576\"` - 1M+ context, ultra fast\n- `\"o3-2025-04-16|200k\"` - Advanced reasoning model\n- `\"o4-mini-2025-04-16|200k\"` - Fast reasoning model\n\nO-series models with |thinking marker:\n- `\"o1-mini|128k|thinking\"` - Mini reasoning with |thinking marker\n- `\"o3-2025-04-16|200k|thinking\"` - Advanced reasoning with |thinking marker\n\n**Note:** For OpenAI, |thinking is only supported on o-series models and serves as an informational marker. The models use reasoning tokens automatically.\n\n**Advanced:** You can specify custom thinking tokens with `|thinking=30000` but this is rarely needed. \n\n## Testing\n\n```bash\n# Test OpenRouter\nuvx consult7 openrouter sk-or-v1-... --test\n\n# Test Google AI\nuvx consult7 google AIza... --test\n\n# Test OpenAI\nuvx consult7 openai sk-proj-... --test\n```\n\n## Uninstalling\n\nTo remove consult7 from Claude Code (or before reinstalling):\n\n```bash\nclaude mcp remove consult7 -s user\n```\n\n"
+}

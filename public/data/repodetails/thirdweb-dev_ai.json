@@ -1,0 +1,97 @@
+{
+  "mcp_name": "Thirdweb",
+  "mcp_description": "Read/write to over 2k blockchains, enabling data querying, contract analysis/deployment, and transaction execution, powered by [Thirdweb](https://thirdweb.com/)",
+  "mcp_id": "thirdweb-dev_ai",
+  "fetch_timestamp": "2025-06-23T08:53:48.994721Z",
+  "github_url": "https://github.com/thirdweb-dev/ai/tree/main/python/thirdweb-mcp",
+  "repository": {
+    "name": "ai",
+    "full_name": "thirdweb-dev/ai",
+    "description": null,
+    "html_url": "https://github.com/thirdweb-dev/ai",
+    "created_at": "2025-03-13T05:23:03Z",
+    "updated_at": "2025-06-23T07:56:57Z",
+    "pushed_at": "2025-05-28T14:56:59Z",
+    "size": 1470,
+    "stargazers_count": 13,
+    "watchers_count": 13,
+    "forks_count": 5,
+    "open_issues_count": 3,
+    "language": "Python",
+    "license": "Apache License 2.0",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "thirdweb-dev",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/79496167?v=4",
+      "html_url": "https://github.com/thirdweb-dev"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 5,
+    "subscribers_count": 3,
+    "languages": {
+      "Python": 103185
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 40,
+    "contributors_count": 3,
+    "latest_release": {
+      "tag_name": "v0.1.24",
+      "name": "v0.1.24",
+      "published_at": "2025-05-28T14:57:14Z",
+      "body": "**Full Changelog**: https://github.com/thirdweb-dev/ai/compare/v0.1.23...v0.1.24",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.1.24",
+        "commit_sha": "c6c2bb1acb1908113cbd2a132b5292ade7459b66"
+      },
+      {
+        "name": "v0.1.23",
+        "commit_sha": "11ed7d9640fba90ac5c67deab1b23d00c648a51a"
+      },
+      {
+        "name": "v0.1.22",
+        "commit_sha": "7d09b324e1b97da5f16975dd8d5ed6bd1554b90c"
+      },
+      {
+        "name": "v0.1.21",
+        "commit_sha": "a58d05ab019bbe6cde920e2e25f29ac67b143476"
+      },
+      {
+        "name": "v0.1.20",
+        "commit_sha": "d6b2a452120172cd2ae7532af9255b41e6b535ff"
+      },
+      {
+        "name": "v0.1.19",
+        "commit_sha": "16cec6a3f6c9a21c4e8a4834d2458a8700b317ac"
+      },
+      {
+        "name": "v0.1.18",
+        "commit_sha": "a41112da52ce62261214b2c8053df839ac19e9c8"
+      },
+      {
+        "name": "v0.1.17",
+        "commit_sha": "9fe000ad5ee6cf231c8f6d83434b392d33fd9c5d"
+      },
+      {
+        "name": "v0.1.16",
+        "commit_sha": "bc5fea35a6f0b9b0c50990b4bee359f6c01ec73a"
+      }
+    ],
+    "latest_version": "v0.1.24"
+  },
+  "readme": "# thirdweb AI\n\n_AI Agents with Onchain Intelligence_\n\n## 📖 Overview\n\nthirdweb AI is thirdweb's comprehensive toolkit for blockchain data analysis, wallet management, and AI agent interaction with blockchains. It simplifies complex blockchain operations into five core components: Insight for data analysis, Engine for wallet and contract operations, EngineCloud for cloud-based engine operations, Storage for decentralized file management, and Nebula for natural language-powered blockchain interactions.\n\n## 🌐 Features\n\n### Insight\nComprehensive blockchain data intelligence:\n- **Chains**: Multi-chain support and network information\n- **Transactions**: Transaction analysis and monitoring\n- **Blocks**: Block data exploration and metrics\n- **Events**: Smart contract event tracking and filtering\n- **Prices**: Real-time token price feeds\n- **Tokens**: Detailed token information and analytics\n\n### Engine\nCore blockchain interaction capabilities:\n- **Wallet**: Secure wallet management and transaction signing\n- **Read**: Read operations for smart contracts and blockchain data\n- **Write**: Transaction creation and contract interaction\n\n### EngineCloud\nCloud-based engine operations with advanced capabilities:\n- **Server Wallets**: Create and manage server wallets with KMS integration\n- **Contract Interaction**: Read from and write to smart contracts\n- **Transaction Management**: Send transactions and query transaction history\n- **Balance Queries**: Check native token balances on various chains\n\n### Storage\nDecentralized storage capabilities:\n- **Upload**: Upload files, directories, and JSON data to IPFS\n- **Fetch**: Retrieve content from IPFS using thirdweb gateway\n\n### Nebula\nAI agent blockchain interaction:\n- **Natural Language Agent Action**: Completing blockchain tasks through natural language instructions\n\n## 🚀 Quickstart\n\n### MCP Server\n\n#### Installation\n\n```bash\n### Run using uvx\nTHIRDWEB_SECRET_KEY=... \\\n    uvx thirdweb-mcp\n\n### Install and run using pipx (and run thirdweb-mcp)\npipx install thirdweb-mcp\n\nTHIRDWEB_SECRET_KEY=... \\\n    thirdweb-mcp\n```\n\nMore [information](python/thirdweb-mcp)\n\n### Python SDK\n\n#### Installation\n\n```bash\n# Install core package with all framework adapters\npip install \"thirdweb-ai[all]\"\n\n# Or install with specific framework adapters\npip install \"thirdweb-ai[openai]\"    # For OpenAI Agents\npip install \"thirdweb-ai[langchain]\" # For LangChain\npip install \"thirdweb-ai[agentkit]\" # For Coinbase Agentkit\npip install \"thirdweb-ai[goat]\" # For GOAT SDK\n# ... many more framework supported\n```\n\nSee the list of [supported framework and installation guides](python/thirdweb-ai#install-with-framework-specific-adapters)\n\n#### Basic Usage\n\n```python\nfrom thirdweb_ai import Engine, EngineCloud, Insight, Nebula, Storage, Tool\n\n# Initialize services\ninsight = Insight(secret_key=...)\nnebula = Nebula(secret_key=...)\nengine = Engine(...)\nengine_cloud = EngineCloud(secret_key=..., vault_access_token=...)  # For cloud-based operations\nstorage = Storage(secret_key=...)\n\n# Example: Create tools for AI agents\n# Option 1: Use Nebula alone (recommended when you need a self-sufficient blockchain agent)\n# Nebula already uses most other services internally\ntools = [\n    *nebula.get_tools(),\n]\n\n# Option 2: Use individual services directly without Nebula\n# tools = [\n#     *insight.get_tools(),\n#     *engine.get_tools(),\n#     *engine_cloud.get_tools(),\n#     *storage.get_tools(),\n# ]\n\n# Example: Framework integration (LangChain)\nfrom thirdweb_ai.adapters.langchain import get_langchain_tools\nlangchain_tools = get_langchain_tools(tools)\nagent = create_tool_calling_agent(tools=langchain_tools, ...)\n\n# Example: Framework integration (OpenAI Agents)\nfrom thirdweb_ai.adapters.openai import get_openai_tools\nopenai_tools = get_openai_tools(tools)\nagent = Agent(name=\"thirdweb Assistant\", tools=tools)\n\n# see python/examples for other framework integration\n```\n\nMore [information](python/thirdweb-ai)\n\n### TypeScript SDK\n\nComing soon.\n\n## 📜 Documentation\n\nFor comprehensive documentation, please visit:\n\n- [thirdweb Documentation](https://portal.thirdweb.com/)\n\n## 🚨 Security and Bug Reports\n\nWe take security seriously. If you discover a security vulnerability within thirdweb AI, please email security@thirdweb.com rather than using the issue tracker.\n\nFor non-security-related bugs, please use the GitHub issue tracker.\n\n## ⚠️ Important Usage Notes\n\nWhen using Nebula, do not combine it with other tools (Insight, Engine, EngineCloud, Storage) in the same agent implementation as Nebula already calls these tools in the background. Using them together can lead to compatibility issues and unexpected behavior.\n\n## 📦 Publishing Workflow\n\nTo publish a new version of thirdweb AI packages:\n\n1. Create a git tag for the new version: `git tag -a v0.X.Y -m \"Release v0.X.Y\"`\n2. Push the tag to GitHub: `git push origin v0.X.Y`\n3. Go to GitHub and create a release using this tag\n4. The CI/CD pipeline will automatically build and publish both packages to PyPI with matching version numbers\n\n## 📧 Contact\n\n- **Website**: [thirdweb.com](https://thirdweb.com)\n- **X**: [@thirdweb](https://x.com/thirdweb)\n- **Telegram**: [Join our community](https://t.me/officialthirdweb)\n- **Discord**: [Join our community](https://discord.gg/thirdweb)\n- **Email**: support@thirdweb.com\n\n## 📝 License\n\nthirdweb AI is licensed under the Apache-2.0 License. See the [LICENSE](./LICENSE) file for details."
+}

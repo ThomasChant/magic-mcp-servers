@@ -1,0 +1,53 @@
+{
+  "mcp_name": "Nozomuts/date-mcp",
+  "mcp_description": "Provides current date and time in specified formats and timezones via a simple MCP server.",
+  "mcp_id": "Nozomuts_date-mcp",
+  "fetch_timestamp": "2025-06-23T07:10:49.482779Z",
+  "github_url": "https://github.com/Nozomuts/date-mcp",
+  "repository": {
+    "name": "date-mcp",
+    "full_name": "Nozomuts/date-mcp",
+    "description": null,
+    "html_url": "https://github.com/Nozomuts/date-mcp",
+    "created_at": "2025-04-28T09:29:59Z",
+    "updated_at": "2025-05-16T00:28:54Z",
+    "pushed_at": "2025-05-16T00:28:50Z",
+    "size": 168,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "Nozomuts",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/61049074?v=4",
+      "html_url": "https://github.com/Nozomuts"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 4903,
+      "Dockerfile": 568
+    },
+    "language_percentages": {
+      "TypeScript": 89.62,
+      "Dockerfile": 10.38
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# Date MCP Server\n\n[English](#date-mcp-server-english) | [日本語](README-ja.md)\n\n---\n\n## Date MCP Server (English)\n\nA simple MCP Server that provides the current date and time.\n\n### Features\n\n- **Get Current Date and Time**: Returns the current date and time in the specified format and timezone\n\n## Tools\n\n1. `get_now`\n   - Get the current date and time\n   - Inputs:\n     - `format` (optional string): Date format - 'ISO' or 'YYYY-MM-DD' (default: \"ISO\")\n     - `timezone` (optional string): Timezone - 'Asia/Tokyo' or 'UTC' (default: \"Asia/Tokyo\")\n   - Returns: Current date and time in the specified format and timezone\n\n## Setup\n\n1. Install dependencies:\n   ```bash\n   npm install\n   # or\n   pnpm install\n   ```\n2. Build the TypeScript project:\n   ```bash\n   npm run build\n   # or\n   pnpm run build\n   ```\n\n### Docker Setup\nYou can build using Docker with the following command:\n\n```bash\ndocker build -t date-mcp .\n```\n\n### Usage with Claude Desktop\nTo use this with Claude Desktop, add the following to your `claude_desktop_config.json`:\n\n```json\n{\n  \"mcpServers\": {\n    \"date\": {\n      \"command\": \"node\",\n      \"args\": [\n        \"/path/to/date-mcp/build/index.js\"\n      ]\n    }\n  }\n}\n```\n\nIf you're using Docker, you can configure it like this:\n\n```json\n{\n  \"mcpServers\": {\n    \"date\": {\n      \"command\": \"docker\",\n        \"args\": [\n          \"run\",\n          \"-i\",\n          \"--rm\",\n          \"date-mcp\"\n        ]\n    }\n  }\n}\n```\n\n### Usage with VS Code\n\nFor quick installation in VS Code, configure your settings:\n\n1. Open User Settings (JSON) in VS Code (`Ctrl+Shift+P` → `Preferences: Open User Settings (JSON)`)\n2. Add the following configuration:\n\n```json\n{\n  \"mcp\": {\n    \"servers\": {\n      \"date\": {\n        \"command\": \"node\",\n        \"args\": [\n          \"/path/to/date-mcp/build/index.js\"\n        ]\n      }\n    }\n  }\n}\n```\n\nIf you're using Docker, you can configure it like this:\n\n```json\n{\n  \"mcp\": {\n    \"servers\": {\n      \"date\": {\n        \"command\": \"docker\",\n          \"args\": [\n          \"run\",\n          \"-i\",\n          \"--rm\",\n          \"date-mcp\"\n        ]\n      }\n    }\n  }\n}\n```\n\nAlternatively, you can add this to a `.vscode/mcp.json` file in your workspace (without the `mcp` key):\n\n```json\n{\n  \"servers\": {\n    \"date\": {\n      \"command\": \"node\",\n      \"args\": [\n        \"/path/to/date-mcp/build/index.js\"\n      ]\n    }\n  }\n}\n```\n\nIf you're using Docker, you can configure it like this:\n\n```json\n{\n  \"servers\": {\n    \"date\": {\n      \"command\": \"docker\",\n        \"args\": [\n          \"run\",\n          \"-i\",\n          \"--rm\",\n          \"date-mcp\"\n        ]\n    }\n  }\n}\n```"
+}

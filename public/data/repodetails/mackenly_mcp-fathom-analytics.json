@@ -1,0 +1,59 @@
+{
+  "mcp_name": "Fathom Analytics",
+  "mcp_description": "Access Fathom Analytics data and reports about your sites",
+  "mcp_id": "mackenly_mcp-fathom-analytics",
+  "fetch_timestamp": "2025-06-23T03:14:50.496093Z",
+  "github_url": "https://github.com/mackenly/mcp-fathom-analytics",
+  "repository": {
+    "name": "mcp-fathom-analytics",
+    "full_name": "mackenly/mcp-fathom-analytics",
+    "description": "MCP server for Fathom Analytics",
+    "html_url": "https://github.com/mackenly/mcp-fathom-analytics",
+    "created_at": "2025-03-07T22:12:27Z",
+    "updated_at": "2025-06-17T13:18:41Z",
+    "pushed_at": "2025-06-17T13:18:37Z",
+    "size": 35,
+    "stargazers_count": 2,
+    "watchers_count": 2,
+    "forks_count": 3,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [
+      "fathom-analytics",
+      "mcp",
+      "mcp-server"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "mackenly",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/53151058?v=4",
+      "html_url": "https://github.com/mackenly"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 3,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 14273,
+      "Dockerfile": 692,
+      "JavaScript": 324
+    },
+    "language_percentages": {
+      "TypeScript": 93.35,
+      "Dockerfile": 4.53,
+      "JavaScript": 2.12
+    },
+    "pull_requests_count": 3,
+    "contributors_count": 4,
+    "package_json_version": "1.0.2"
+  },
+  "readme": "# MCP Fathom Analytics\n\nAn unofficial Model Context Protocol ([MCP](https://modelcontextprotocol.io/introduction)) server for accessing [Fathom Analytics](https://usefathom.com/) data through an AI assistant. This implementation uses the [@mackenly/fathom-api](https://github.com/mackenly/fathom-api) unofficial SDK to interact with the Fathom Analytics API. Not affiliated, endorsed, or supported by Fathom Analytics. Published to [npm as an npx script](https://www.npmjs.com/package/mcp-fathom-analytics).\n\n[![smithery badge](https://smithery.ai/badge/@mackenly/mcp-fathom-analytics)](https://smithery.ai/server/@mackenly/mcp-fathom-analytics)\n\n<p float=\"left\">\n<a href=\"https://glama.ai/mcp/servers/56cxbakbc4\" width=\"33%\">\n  <img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/56cxbakbc4/badge\" alt=\"Fathom Analytics MCP server\" />\n</a> \n<a href=\"https://mseep.ai/app/mackenly-mcp-fathom-analytics\" width=\"33%\">\n  <img width=\"200\" src=\"https://mseep.net/pr/mackenly-mcp-fathom-analytics-badge.png\" alt=\"MseeP.ai Security Assessment Badge\" />\n</a>\n</p>\n\n## Features\n\nThe MCP server provides the following Fathom Analytics tools:\n\n### Account Information\n- `get-account`: Retrieve details about your Fathom Analytics account\n\n### Sites Management\n- `list-sites`: List all your Fathom Analytics sites\n\n### Events\n- `list-events`: List events for a specific site\n\n### Analytics\n- `get-aggregation`: Generate aggregated analytics reports with flexible filtering and grouping options\n\n### Visitor Tracking\n- `get-current-visitors`: Get real-time data about current site visitors\n\n## Usage\nIf you're using Claude Desktop, you can add the MCP server using the json config ([more info](https://modelcontextprotocol.io/quickstart/user)). Here's an example:\n```json\n{\n    \"mcpServers\": {\n        \"fathom-analytics\": {\n            \"command\": \"npx\",\n            \"args\": [\n                \"-y\",\n                \"mcp-fathom-analytics\"\n            ],\n            \"env\": {\n                \"FATHOM_API_KEY\": \"your_api_key_here\"\n            }\n        }\n    }\n}\n```\n\nYou can find more information about other MCP Clients here: [Model Context Protocol Example Clients](https://modelcontextprotocol.io/clients)\n\n## API Structure\n\nThe MCP server uses the [@mackenly/fathom-api](https://github.com/mackenly/fathom-api) SDK to interface with the Fathom Analytics API endpoints:\n\n1. **Account API**: `https://api.usefathom.com/v1/account`\n2. **Sites API**: `https://api.usefathom.com/v1/sites`\n3. **Events API**: `https://api.usefathom.com/v1/sites/SITE_ID/events`\n4. **Aggregation API**: `https://api.usefathom.com/v1/aggregations`\n5. **Current Visitors API**: `https://api.usefathom.com/v1/current_visitors`\n\n## Aggregation Examples\n\nThe aggregation tool is highly flexible. Here are some example use cases:\n\n1. **Daily pageview statistics for the last 30 days**:\n```json\n{\n  \"entity\": \"pageview\",\n  \"entity_id\": \"SITE_ID\",\n  \"aggregates\": \"pageviews,uniques,visits\",\n  \"date_grouping\": \"day\",\n  \"date_from\": \"2023-08-01 00:00:00\"\n}\n```\n\n2. **Performance of individual pages**:\n```json\n{\n  \"entity\": \"pageview\",\n  \"entity_id\": \"SITE_ID\",\n  \"aggregates\": \"pageviews,uniques,avg_duration\",\n  \"field_grouping\": \"pathname\",\n  \"sort_by\": \"pageviews:desc\",\n  \"limit\": 10\n}\n```\n\n3. **Traffic from specific countries**:\n```json\n{\n  \"entity\": \"pageview\",\n  \"entity_id\": \"SITE_ID\",\n  \"aggregates\": \"visits\",\n  \"field_grouping\": \"country_code\",\n  \"sort_by\": \"visits:desc\"\n}\n```\n\n## Contributing\n\nContributions are welcome! Please feel free to submit a Pull Request.\n\n## License\n\nThis project is licensed under the MIT License - see the LICENSE file for details.\n"
+}

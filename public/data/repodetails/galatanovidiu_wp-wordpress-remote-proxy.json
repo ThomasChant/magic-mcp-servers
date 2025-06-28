@@ -1,0 +1,53 @@
+{
+  "mcp_name": "galatanovidiu/wp-wordpress-remote-proxy",
+  "mcp_description": "Facilitates seamless communication between local and remote WordPress MCP servers through a bidirectional proxy.",
+  "mcp_id": "galatanovidiu_wp-wordpress-remote-proxy",
+  "fetch_timestamp": "2025-06-23T03:41:02.316325Z",
+  "github_url": "https://github.com/galatanovidiu/wp-wordpress-remote-proxy",
+  "repository": {
+    "name": "wp-wordpress-remote-proxy",
+    "full_name": "galatanovidiu/wp-wordpress-remote-proxy",
+    "description": null,
+    "html_url": "https://github.com/galatanovidiu/wp-wordpress-remote-proxy",
+    "created_at": "2025-04-22T10:40:09Z",
+    "updated_at": "2025-04-30T20:39:06Z",
+    "pushed_at": "2025-04-30T20:38:44Z",
+    "size": 2263,
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "galatanovidiu",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2674748?v=4",
+      "html_url": "https://github.com/galatanovidiu"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": true,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 39626,
+      "JavaScript": 8957
+    },
+    "language_percentages": {
+      "TypeScript": 81.56,
+      "JavaScript": 18.44
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 2,
+    "package_json_version": "1.0.6"
+  },
+  "readme": "# MCP WordPress Remote\n\nThis repository has been moved to https://github.com/Automattic/mcp-wordpress-remote\n"
+}

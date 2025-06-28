@@ -1,0 +1,140 @@
+{
+  "mcp_name": "Zed",
+  "mcp_description": "",
+  "mcp_id": "zed-industries_zed",
+  "fetch_timestamp": "2025-06-23T09:45:29.448556Z",
+  "github_url": "https://github.com/zed-industries/zed",
+  "repository": {
+    "name": "zed",
+    "full_name": "zed-industries/zed",
+    "description": "Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter.",
+    "html_url": "https://github.com/zed-industries/zed",
+    "created_at": "2021-02-20T03:01:06Z",
+    "updated_at": "2025-06-23T09:30:21Z",
+    "pushed_at": "2025-06-23T09:34:14Z",
+    "size": 216207,
+    "stargazers_count": 61757,
+    "watchers_count": 61757,
+    "forks_count": 4542,
+    "open_issues_count": 2651,
+    "language": "Rust",
+    "license": "Other",
+    "topics": [
+      "gpui",
+      "rust-lang",
+      "text-editor",
+      "zed"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "zed-industries",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/79345384?v=4",
+      "html_url": "https://github.com/zed-industries"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 4542,
+    "subscribers_count": 258,
+    "languages": {
+      "Rust": 27937861,
+      "Tree-sitter Query": 96521,
+      "Shell": 92127,
+      "Metal": 46744,
+      "WGSL": 46076,
+      "HTML": 40610,
+      "JavaScript": 37540,
+      "Rich Text Format": 32668,
+      "Python": 30799,
+      "Handlebars": 17420,
+      "Nix": 13935,
+      "Scheme": 8225,
+      "PowerShell": 6519,
+      "TypeScript": 3339,
+      "Objective-C": 203,
+      "Procfile": 139,
+      "C": 60,
+      "RenderScript": 2
+    },
+    "language_percentages": {
+      "Rust": 98.34,
+      "Tree-sitter Query": 0.34,
+      "Shell": 0.32,
+      "Metal": 0.16,
+      "WGSL": 0.16,
+      "HTML": 0.14,
+      "JavaScript": 0.13,
+      "Rich Text Format": 0.11,
+      "Python": 0.11,
+      "Handlebars": 0.06,
+      "Nix": 0.05,
+      "Scheme": 0.03,
+      "PowerShell": 0.02,
+      "TypeScript": 0.01,
+      "Objective-C": 0,
+      "Procfile": 0,
+      "C": 0,
+      "RenderScript": 0
+    },
+    "pull_requests_count": 16645,
+    "contributors_count": 1013,
+    "latest_release": {
+      "tag_name": "v0.191.7",
+      "name": "v0.191.7",
+      "published_at": "2025-06-20T15:52:34Z",
+      "body": "- Fixed a bug where the `--diff` CLI flag did not work with `--wait`. ([#33094](https://github.com/zed-industries/zed/pull/33094))\r\n- Debugger: Moved the \"remove breakpoint\" button to the top of a breakpoint list. ([#33062](https://github.com/zed-industries/zed/pull/33062))\r\n- Debugger: Fixed wrong arguments being passed to the DAP when debugging scripts from package.json. ([#33044](https://github.com/zed-industries/zed/pull/33044))\r\n- Debugger: Fixed bug where setting a variable's value wouldn't update the variable list or inline values. ([#33078](https://github.com/zed-industries/zed/pull/33078))\r\n",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.192.3-pre",
+        "commit_sha": "8771862c2b2a1a67eb945bdf09d7f75003368b02"
+      },
+      {
+        "name": "v0.192.2-pre",
+        "commit_sha": "4319bc498fc5ded09b2ae3cb7c17519151a75150"
+      },
+      {
+        "name": "v0.192.1-pre",
+        "commit_sha": "bcb7c5208127570e271069a4b15629efe4366eda"
+      },
+      {
+        "name": "v0.192.0-pre",
+        "commit_sha": "b3f31286d41e389e3a55b98ef79b03d2b39bcbf0"
+      },
+      {
+        "name": "v0.191.7",
+        "commit_sha": "a3e535d72007d0c0e55c1e8a1b62a64e31927d2b"
+      },
+      {
+        "name": "v0.191.6",
+        "commit_sha": "4f878cceba04a3bbf4e36274707f81f31376da08"
+      },
+      {
+        "name": "v0.191.5",
+        "commit_sha": "f8a213b487ba36b68b1b3433d8d5ea7cf3575da3"
+      },
+      {
+        "name": "v0.191.4",
+        "commit_sha": "83d7dd005018f77c7aaef19eca409aa25e6de4ed"
+      },
+      {
+        "name": "v0.191.4-pre",
+        "commit_sha": "02c8322bb80271abebaf06a00ae7d70de1979a2a"
+      },
+      {
+        "name": "v0.191.3-pre",
+        "commit_sha": "80d56e2c31a07fc31d6f3b8d3c4a2c2b86bff9de"
+      }
+    ],
+    "latest_version": "v0.192.3-pre"
+  },
+  "readme": "# Zed\n\n[![CI](https://github.com/zed-industries/zed/actions/workflows/ci.yml/badge.svg)](https://github.com/zed-industries/zed/actions/workflows/ci.yml)\n\nWelcome to Zed, a high-performance, multiplayer code editor from the creators of [Atom](https://github.com/atom/atom) and [Tree-sitter](https://github.com/tree-sitter/tree-sitter).\n\n---\n\n### Installation\n\nOn macOS and Linux you can [download Zed directly](https://zed.dev/download) or [install Zed via your local package manager](https://zed.dev/docs/linux#installing-via-a-package-manager).\n\nOther platforms are not yet available:\n\n- Windows ([tracking issue](https://github.com/zed-industries/zed/issues/5394))\n- Web ([tracking issue](https://github.com/zed-industries/zed/issues/5396))\n\n### Developing Zed\n\n- [Building Zed for macOS](./docs/src/development/macos.md)\n- [Building Zed for Linux](./docs/src/development/linux.md)\n- [Building Zed for Windows](./docs/src/development/windows.md)\n- [Running Collaboration Locally](./docs/src/development/local-collaboration.md)\n\n### Contributing\n\nSee [CONTRIBUTING.md](./CONTRIBUTING.md) for ways you can contribute to Zed.\n\nAlso... we're hiring! Check out our [jobs](https://zed.dev/jobs) page for open roles.\n\n### Licensing\n\nLicense information for third party dependencies must be correctly provided for CI to pass.\n\nWe use [`cargo-about`](https://github.com/EmbarkStudios/cargo-about) to automatically comply with open source licenses. If CI is failing, check the following:\n\n- Is it showing a `no license specified` error for a crate you've created? If so, add `publish = false` under `[package]` in your crate's Cargo.toml.\n- Is the error `failed to satisfy license requirements` for a dependency? If so, first determine what license the project has and whether this system is sufficient to comply with this license's requirements. If you're unsure, ask a lawyer. Once you've verified that this system is acceptable add the license's SPDX identifier to the `accepted` array in `script/licenses/zed-licenses.toml`.\n- Is `cargo-about` unable to find the license for a dependency? If so, add a clarification field at the end of `script/licenses/zed-licenses.toml`, as specified in the [cargo-about book](https://embarkstudios.github.io/cargo-about/cli/generate/config.html#crate-configuration).\n"
+}

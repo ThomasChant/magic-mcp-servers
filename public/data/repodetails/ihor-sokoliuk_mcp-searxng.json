@@ -1,0 +1,115 @@
+{
+  "mcp_name": "SearXNG",
+  "mcp_description": "📇 🏠/☁️ - A Model Context Protocol Server for [SearXNG](https://docs.searxng.org)",
+  "mcp_id": "ihor-sokoliuk_mcp-searxng",
+  "fetch_timestamp": "2025-06-23T08:16:00.268551Z",
+  "github_url": "https://github.com/ihor-sokoliuk/mcp-searxng",
+  "repository": {
+    "name": "mcp-searxng",
+    "full_name": "ihor-sokoliuk/mcp-searxng",
+    "description": "MCP Server for SearXNG",
+    "html_url": "https://github.com/ihor-sokoliuk/mcp-searxng",
+    "created_at": "2024-12-23T02:00:51Z",
+    "updated_at": "2025-06-22T19:27:50Z",
+    "pushed_at": "2025-06-02T03:22:55Z",
+    "size": 34,
+    "stargazers_count": 120,
+    "watchers_count": 120,
+    "forks_count": 26,
+    "open_issues_count": 2,
+    "language": "JavaScript",
+    "license": "MIT License",
+    "topics": [
+      "ai",
+      "llm",
+      "llm-agent",
+      "mcp",
+      "mcp-server",
+      "mcp-servers",
+      "mcp-tools",
+      "search",
+      "search-engine",
+      "searxng"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "ihor-sokoliuk",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17313213?v=4",
+      "html_url": "https://github.com/ihor-sokoliuk"
+    },
+    "has_issues": true,
+    "has_projects": false,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 26,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 8595,
+      "Dockerfile": 414
+    },
+    "language_percentages": {
+      "JavaScript": 95.4,
+      "Dockerfile": 4.6
+    },
+    "pull_requests_count": 8,
+    "contributors_count": 8,
+    "latest_release": {
+      "tag_name": "v0.5.0",
+      "name": "v0.5.0",
+      "published_at": "2025-06-02T03:14:45Z",
+      "body": "## What's Changed\r\n* Make it work with Goose by @genkernel in https://github.com/ihor-sokoliuk/mcp-searxng/pull/9\r\n* Add support for HTTP Basic Auth by @hutchisr in https://github.com/ihor-sokoliuk/mcp-searxng/pull/12\r\n\r\n## New Contributors\r\n* @genkernel made their first contribution in https://github.com/ihor-sokoliuk/mcp-searxng/pull/9\r\n* @hutchisr made their first contribution in https://github.com/ihor-sokoliuk/mcp-searxng/pull/12\r\n\r\n**Full Changelog**: https://github.com/ihor-sokoliuk/mcp-searxng/compare/v0.4.4...v0.5.0",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.5.0",
+        "commit_sha": "e2291216e0fb52f8199f8d7c38348a6a1e7ec060"
+      },
+      {
+        "name": "v0.4.7",
+        "commit_sha": "41ad5e534404db89fc6dfea18be30674db0b2fa5"
+      },
+      {
+        "name": "v0.4.6",
+        "commit_sha": "cf5128a1409befc4a658cc170332357e0fb8e29e"
+      },
+      {
+        "name": "v0.4.5",
+        "commit_sha": "b7e720b842e0c017bf18a74bdaa8a05a0e6dbf64"
+      },
+      {
+        "name": "v0.4.4",
+        "commit_sha": "df39042139b11820580732f2c43f0cbbc6f768bd"
+      },
+      {
+        "name": "v0.4.3",
+        "commit_sha": "cfaac057e157da0c76cb5cb46b7fcc461ddb7868"
+      },
+      {
+        "name": "v0.4.2",
+        "commit_sha": "aa6c5c233194aa9566163b3a0dae8e68d0c2c640"
+      },
+      {
+        "name": "v0.4.1",
+        "commit_sha": "e32f704d56567ecd6a49a03638e85e5d016cd3a5"
+      },
+      {
+        "name": "v0.4.0",
+        "commit_sha": "ae12a306d615057c328d201cc497d5aad6571583"
+      },
+      {
+        "name": "v0.3.7",
+        "commit_sha": "8d9592923bfe89ba345a823599effc929dc88c2f"
+      }
+    ],
+    "latest_version": "v0.5.0",
+    "package_json_version": "0.5.0"
+  },
+  "readme": "# SearXNG MCP Server\n\nAn [MCP server](https://modelcontextprotocol.io/introduction) implementation that integrates the [SearXNG](https://docs.searxng.org) API, providing web search capabilities.\n\n<a href=\"https://glama.ai/mcp/servers/0j7jjyt7m9\"><img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/0j7jjyt7m9/badge\" alt=\"SearXNG Server MCP server\" /></a>\n\n[![smithery badge](https://smithery.ai/badge/@ihor-sokoliuk/server-searxng)](https://smithery.ai/server/@ihor-sokoliuk/server-searxng)\n\n## Features\n\n- **Web Search**: General queries, news, articles, with pagination.\n- **Pagination**: Control which page of results to retrieve.\n- **Time Filtering**: Filter results by time range (day, month, year).\n- **Language Selection**: Filter results by preferred language.\n- **Safe Search**: Control content filtering level for search results.\n\n## Tools\n\n- **searxng_web_search**\n  - Execute web searches with pagination\n  - Inputs:\n    - `query` (string): The search query. This string is passed to external search services.\n    - `pageno` (number, optional): Search page number, starts at 1 (default 1)\n    - `time_range` (string, optional): Filter results by time range - one of: \"day\", \"month\", \"year\" (default: none)\n    - `language` (string, optional): Language code for results (e.g., \"en\", \"fr\", \"de\") or \"all\" (default: \"all\")\n    - `safesearch` (number, optional): Safe search filter level (0: None, 1: Moderate, 2: Strict) (default: instance setting)\n\n- **web_url_read**\n  - Read and convert the content from a URL to markdown\n  - Inputs:\n    - `url` (string): The URL to fetch and process\n\n## Configuration\n\n### Setting the SEARXNG_URL\n\n1. Choose a SearxNG instance from the [list of public instances](https://searx.space/) or use your local environment.\n2. Set the `SEARXNG_URL` environment variable to the instance URL.\n3. The default `SEARXNG_URL` value is `http://localhost:8080`.\n\n### Using Authentication\n\nIf you are using a password protected SearxNG instance you can set a username and password for HTTP Basic Auth:\n\n- Set the `AUTH_USERNAME` environmental variable to your username\n- Set the `AUTH_PASSWORD` environmental variable to your password\n\n### Usage with Claude Desktop\n\n### Installing via Smithery\n\nTo install SearxNG Server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@ihor-sokoliuk/server-searxng):\n\n```bash\nnpx -y @smithery/cli install @ihor-sokoliuk/server-searxng --client claude\n```\n\n### [NPX](https://www.npmjs.com/package/mcp-searxng)\n\n```json\n{\n  \"mcpServers\": {\n    \"searxng\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"-y\",\n        \"mcp-searxng\"\n      ],\n      \"env\": {\n        \"SEARXNG_URL\": \"YOUR_SEARXNG_INSTANCE_URL\"\n      }\n    }\n  }\n}\n```\n\n### [NPM](https://www.npmjs.com/package/mcp-searxng)\n\n```bash\nnpm install -g mcp-searxng\n```\n\nAnd then in your MCP config file:\n\n```json\n{\n  \"mcpServers\": {\n    \"searxng\": {\n      \"command\": \"mcp-searxng\",\n      \"env\": {\n        \"SEARXNG_URL\": \"YOUR_SEARXNG_INSTANCE_URL\"\n      }\n    }\n  }\n}\n```\n\n### Docker\n\n#### Using [Pre-built Image from Docker Hub](https://hub.docker.com/r/isokoliuk/mcp-searxng)\n\n```bash\ndocker pull isokoliuk/mcp-searxng:latest\n```\n\nAdd this to your `claude_desktop_config.json`:\n\n```json\n{\n  \"mcpServers\": {\n    \"searxng\": {\n      \"command\": \"docker\",\n      \"args\": [\n        \"run\",\n        \"-i\",\n        \"--rm\",\n        \"-e\",\n        \"SEARXNG_URL\",\n        \"isokoliuk/mcp-searxng:latest\"\n      ],\n      \"env\": {\n        \"SEARXNG_URL\": \"YOUR_SEARXNG_INSTANCE_URL\"\n      }\n    }\n  }\n}\n```\n\n#### Build Locally\n\n```bash\ndocker build -t mcp-searxng:latest -f Dockerfile .\n```\n\n#### Use\n\nAdd this to your `claude_desktop_config.json`:\n\n```json\n{\n  \"mcpServers\": {\n    \"searxng\": {\n      \"command\": \"docker\",\n      \"args\": [\n        \"run\",\n        \"-i\",\n        \"--rm\",\n        \"-e\",\n        \"SEARXNG_URL\",\n        \"mcp-searxng:latest\"\n      ],\n      \"env\": {\n        \"SEARXNG_URL\": \"YOUR_SEARXNG_INSTANCE_URL\"\n      }\n    }\n  }\n}\n```\n\n\n## License\n\nThis MCP server is licensed under the MIT License. This means you are free to use, modify, and distribute the software, subject to the terms and conditions of the MIT License. For more details, please see the LICENSE file in the project repository.\n"
+}

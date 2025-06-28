@@ -1,0 +1,51 @@
+{
+  "mcp_name": "larryhudson/figma-mcp-server",
+  "mcp_description": "A template for building MCP servers with TypeScript, designed to facilitate integration with AI assistants and external tools.",
+  "mcp_id": "larryhudson_figma-mcp-server",
+  "fetch_timestamp": "2025-06-23T06:04:45.859008Z",
+  "github_url": "https://github.com/larryhudson/figma-mcp-server",
+  "repository": {
+    "name": "figma-mcp-server",
+    "full_name": "larryhudson/figma-mcp-server",
+    "description": null,
+    "html_url": "https://github.com/larryhudson/figma-mcp-server",
+    "created_at": "2025-04-28T16:23:53Z",
+    "updated_at": "2025-04-28T16:23:59Z",
+    "pushed_at": "2025-04-28T16:23:56Z",
+    "size": 2,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "JavaScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "larryhudson",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/10627494?v=4",
+      "html_url": "https://github.com/larryhudson"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 598
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "0.1.2"
+  },
+  "readme": "# [Template] MCP Server\n\n## How to use this template\n\n- Add tool definitions in src/index.ts\n- Update the README below\n- Update the placeholder info in package.json\n- Test building the MCP server with `npm run build`, and using the @modelcontextprotocol/inspector library\n- Publish to npm: `npm login`, `npm publish --access public`\n\n## Overview\n\n[Insert overview here]\n\n## Features\n\n[Insert features here]\n\n## Setup\n\n1. Create a API key etc.\n2. Set the token as an environment variable:\n\n```bash\nexport API_KEY_ENV_VAR=the_secret_api_key\n```\n\n## Usage\n\n### Using with VS Code\n\nAdd this to your settings JSON file:\n\n```json\n{\n  \"mcp\": {\n    \"inputs\": [\n      {\n        \"type\": \"promptString\",\n        \"id\": \"some_secret_api_key\",\n        \"description\": \"Secret API key\",\n        \"password\": true\n      }\n    ],\n    \"servers\": {\n      \"[library-name]\": {\n        \"command\": \"npx\",\n        \"args\": [\n          \"-y\",\n          \"@larryhudson/[the-library]\"\n        ],\n        \"env\": {\n          \"API_KEY_ENV_VAR\": \"${input:some_secret_api_key}\"\n        }\n      }\n    }\n  }\n}\n```\n\n### Using with Claude or other MCP-compatible applications\n\nAdd this to your MCP configuration JSON file:\n\n```json\n{\n  \"mcpServers\": {\n    \"[the-library]\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@larryhudson/[the-library]\"],\n      \"env\": {\n        \"API_KEY_ENV_VAR\": \"<THE_SECRET_API_KEY>\"\n      }\n    }\n  }\n}\n```\n\n## Available Tools\n\n[List the tools here]\n\n## How It Works\n\n[Some info about how it works]\n\n## Technical Details\n\nBuilt with:\n- **Model Context Protocol (MCP)**: Framework for allowing AI assistants to interact with external tools\n- **TypeScript**: For type safety and better developer experience\n\n## Development\n\nYou can use the Model Context Protocol inspector to try out the server:\n\n```bash\nnpx @modelcontextprotocol/inspector npx tsx src/index.ts\n```\n\n\n## Limitations and Future Improvements\n\n\n## License\n\nMIT"
+}

@@ -1,0 +1,51 @@
+{
+  "mcp_name": "kdr/mcp-draw",
+  "mcp_description": "Facilitates AI-driven image generation from text prompts via a standardized interface.",
+  "mcp_id": "kdr_mcp-draw",
+  "fetch_timestamp": "2025-06-23T05:42:28.457801Z",
+  "github_url": "https://github.com/kdr/mcp-draw",
+  "repository": {
+    "name": "mcp-draw",
+    "full_name": "kdr/mcp-draw",
+    "description": "Fun MCP server that draws / generates images and saves the output locally",
+    "html_url": "https://github.com/kdr/mcp-draw",
+    "created_at": "2025-04-25T14:28:37Z",
+    "updated_at": "2025-05-08T08:49:54Z",
+    "pushed_at": "2025-04-26T09:57:39Z",
+    "size": 53,
+    "stargazers_count": 2,
+    "watchers_count": 2,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "JavaScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "kdr",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1297134?v=4",
+      "html_url": "https://github.com/kdr"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 2460
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 3,
+    "contributors_count": 1,
+    "package_json_version": "0.0.3"
+  },
+  "readme": "# MCP Draw\n\nAn MCP (Model Context Protocol) server for generating images from text prompts. This server allows AI assistants to create images / draw through a standardized interface.\n\n<img width=\"1463\" alt=\"image\" src=\"https://github.com/user-attachments/assets/afbef817-91ab-4b31-a2bf-73cb0d0b6758\" />\n\n\n## 📖 Resources\n\n- [Model Context Protocol](https://modelcontextprotocol.io/introduction)\n- [OpenAI API Documentation](https://platform.openai.com/docs/api-reference)\n\n## Prerequisites\n\n- Node.js (v18 or higher)\n- An OpenAI API key\n\n## Setup\n\n### 1. API Key\n\nFirst, get an OpenAI API key from [OpenAI's platform](https://platform.openai.com/api-keys). This will be used to authenticate the MCP server with OpenAI's services.\n\n### 2. Configure MCP Client for Local Development\n\n```json\n{\n  \"mcpServers\": {\n    \"mcp-draw\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"-y\",\n        \"mcp-draw@latest\"\n        \"--api-key\",\n        \"<REPLACE-WITH-YOUR-OPENAI-API-KEY>\",\n        \"--output-dir\",\n        \"/ABSOLUTE/PATH/TO/SAVE/OUTPUT_FOLDER\"\n      ]\n    }\n  }\n}\n```\n\n## Local Development Setup\n\n### 1. API Key\n\nFirst, get an OpenAI API key from [OpenAI's platform](https://platform.openai.com/api-keys). This will be used to authenticate the MCP server with OpenAI's services.\n\n### 2. Clone the Repository\n\n```bash\ngit clone https://github.com/kdr/mcp-draw.git\ncd mcp-draw\n```\n\n### 3. Install Dependencies & Build the Server\n\n```bash\nnpm install\nnpm run build\n```\n\n### 4. Configure MCP Client for Local Development\n\n```json\n{\n  \"mcpServers\": {\n    \"mcp-draw\": {\n      \"command\": \"node\",\n      \"args\": [\n        \"/ABSOLUTE/PATH/TO/mcp-draw/build/index.js\",\n        \"--api-key\",\n        \"<REPLACE-WITH-YOUR-OPENAI-API-KEY>\",\n        \"--output-dir\",\n        \"/ABSOLUTE/PATH/TO/SAVE/OUTPUT_FOLDER\"\n      ]\n    }\n  }\n}\n```\n\n## Tools\n\nThe following tools are available to the LLM:\n\n- `generate_image_from_description`: Creates an image from a text prompt using OpenAI's gpt-image-1 model\n"
+}

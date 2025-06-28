@@ -1,0 +1,99 @@
+{
+  "id": "8d0d6f8b9d2a",
+  "owner": "zhongwencool",
+  "repoName": "dida-mcp-server",
+  "fullDescription": "Facilitates AI-driven task and project management through TickTick/Dida365 using the Model Context Protocol.",
+  "techStack": [],
+  "serviceTypes": [
+    {
+      "type": "ai",
+      "label": "Ai",
+      "icon": "🤖",
+      "description": "Leverages AI and machine learning"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "simple",
+    "maturity": "stable",
+    "deployment": [
+      "local"
+    ],
+    "featured": false,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 2.4,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "project management"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/zhongwencool/dida-mcp-server",
+    "owner": "zhongwencool",
+    "name": "dida-mcp-server",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.283Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "utilities-tools",
+    "mcp",
+    "dida",
+    "server"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Simple",
+      "color": "#22c55e",
+      "icon": "🟢"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    }
+  ],
+  "icon": "🤖",
+  "readme": null
+}

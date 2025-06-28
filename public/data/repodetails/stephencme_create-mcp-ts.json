@@ -1,0 +1,95 @@
+{
+  "mcp_name": "create-mcp-ts",
+  "mcp_description": "Create a new MCP server in TypeScript, batteries included - supports user-defined templates!",
+  "mcp_id": "stephencme_create-mcp-ts",
+  "fetch_timestamp": "2025-06-23T02:18:37.476198Z",
+  "github_url": "https://github.com/stephencme/create-mcp-ts",
+  "repository": {
+    "name": "create-mcp-ts",
+    "full_name": "stephencme/create-mcp-ts",
+    "description": "Create a new MCP server in TypeScript, batteries included.",
+    "html_url": "https://github.com/stephencme/create-mcp-ts",
+    "created_at": "2025-04-09T01:23:35Z",
+    "updated_at": "2025-06-20T21:33:19Z",
+    "pushed_at": "2025-04-23T10:48:01Z",
+    "size": 630,
+    "stargazers_count": 18,
+    "watchers_count": 18,
+    "forks_count": 4,
+    "open_issues_count": 3,
+    "language": "JavaScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "stephencme",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5668591?v=4",
+      "html_url": "https://github.com/stephencme"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 4,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 21371,
+      "TypeScript": 7824
+    },
+    "language_percentages": {
+      "JavaScript": 73.2,
+      "TypeScript": 26.8
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "latest_release": {
+      "tag_name": "0.3.4",
+      "name": "0.3.4",
+      "published_at": "2025-04-22T22:56:07Z",
+      "body": "**Full Changelog**: https://github.com/stephencme/create-mcp-ts/compare/0.3.3...0.3.4",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "0.3.4",
+        "commit_sha": "35d80a600ce1b8bd8ddfdc322d9861c5e0fbff0f"
+      },
+      {
+        "name": "0.3.3",
+        "commit_sha": "6d92242ceb36910f16a67ab7f7f6d33b065fda9b"
+      },
+      {
+        "name": "0.3.2",
+        "commit_sha": "733e8cb57041c1115970fc3601199159044eb5f8"
+      },
+      {
+        "name": "0.3.1",
+        "commit_sha": "b97aaaa604ee67d59ca3bc9de370cf7b6566a936"
+      },
+      {
+        "name": "0.3.0",
+        "commit_sha": "ab9472aeb047ff6680039b3639b6aa44ec5569d2"
+      },
+      {
+        "name": "0.1.3",
+        "commit_sha": "c2e1e747655fff1585e5887d25f2cfaf9f6b1748"
+      },
+      {
+        "name": "0.1.2",
+        "commit_sha": "f63f954d26661362249c2ac7a525e9091292f45a"
+      },
+      {
+        "name": "0.1.1",
+        "commit_sha": "3c3980839467c42ce7c044978fab2b4def1c2acd"
+      }
+    ],
+    "latest_version": "0.3.4"
+  },
+  "readme": "# create-mcp-ts ![NPM Version](https://img.shields.io/npm/v/create-mcp-ts)\n\nCreate a new MCP server in TypeScript, batteries included.\n\n## Getting started\n\n```shell\nnpm init mcp-ts your-server\ncd your-server\nnpm run dev\n```\n\n`create-mcp-ts` requires **zero build configuration** - it will automatically install everything you need to develop, build, and set up your MCP server.\n\n### Set up your MCP server in Cursor, Windsurf, and Claude Desktop\n\n`create-mcp-ts` can automatically configure your MCP server in Cursor, Windsurf, and Claude Desktop:\n\n```shell\nnpm run setup\n```\n\nThis script checks if `your-server` already exists in each client's respective MCP configuration file. If not, it adds an entry pointing to the server script (`dist/index.js`):\n\n```json\n{\n  \"mcpConfig\": {\n    \"your-server\": {\n      \"command\": \"node\",\n      \"args\": [\"/path/to/your-server/dist/index.js\"]\n    }\n  }\n}\n```\n\nFor more details on how to set up MCP servers in Cursor, Windsurf, and Claude Desktop, see:\n\n- [MCP docs for Cursor](https://docs.cursor.com/integrations/mcp)\n- [MCP docs for Windsurf](https://docs.windsurf.com/windsurf/mcp)\n- [MCP docs for Claude Desktop](https://modelcontextprotocol.io/quickstart/user)\n\n### Custom templates\n\nIf you'd like to use a custom template, you can do so by passing the template npm package name or file path to the `npx create-mcp-ts` command:\n\n```shell\nnpx create-mcp-ts your-server --template=mcp-ts-template-default\nnpx create-mcp-ts your-server --template=file:/path/to/mcp-ts-template\n```\n\n### Publishing your MCP server\n\nIf you plan to share your MCP server, you can publish it to npm:\n\n1.  Set `\"version\"` in `package.json` and ensure `\"private\"` is set to `false`.\n2.  Run `npm install`.\n3.  Run `npm run build`.\n4.  Run `npm login` (if needed).\n5.  Run `npm publish`.\n\n## Ejecting from `mcp-scripts`\n\nThe `mcp-scripts` package contains build tools for `create-mcp-ts` projects - everything you'll need to develop, build, and set up an MCP server **without any additional configuration**.\n\nUnder the hood `mcp-scripts` uses [tsup](https://github.com/egoist/tsup) and [esbuild](https://github.com/evanw/esbuild), lightweight, battle-tested utilities that are well-suited for production-grade TypeScript projects.\n\nIf you'd like to eject from `mcp-scripts`, run the following command:\n\n```shell\nnpm run eject\n```\n\nThis will remove the `mcp-scripts` dependency and replace any related commands from your project's `package.json` file.\n\n## Troubleshooting your MCP server\n\n### Confirm you have Node.js installed\n\nIf you experience issues running your MCP server, the first thing to check is that you have Node.js installed globally. You can check this by running:\n\n```shell\nnode --version\n```\n\nIf you don't have Node.js installed, you can install it by following the instructions [here](https://nodejs.org/en/download/).\n\n### Usage with Node.js version managers\n\nSome MCP client environments may not have access to the full system PATH, which can cause issues when using Node.js version managers like `nodenv` or `nvm`. In these cases, you'll need to specify the full path to the Node.js binary in your MCP config:\n\n```json\n{\n  \"mcpConfig\": {\n    \"your-server\": {\n      \"command\": \"/absolute/path/to/node\",\n      \"args\": [\"/path/to/your-mcp-server/dist/index.js\"]\n    }\n  }\n}\n```\n\nTo find the absolute path to your Node.js binary, you can run:\n\n```shell\nwhich node\n```\n\nMake sure to update your MCP config in each client (Cursor, Windsurf, or Claude Desktop) with the correct absolute path to the Node.js binary you want to use.\n\nFor any other issues, please [open an issue here](https://github.com/stephencme/create-mcp-ts/issues/new).\n\n## Philosophy\n\n`create-mcp-ts` is designed to be a batteries-included, \"it just works\" experience for MCP server developers.\n\n- **Batteries included**: there is only one build dependency, `mcp-scripts`. It uses tsup, esbuild, and other amazing open source projects, but provides a curated experience on top of them.\n- **Zero configuration**: you don't need to configure anything. A reasonably good configuration is handled for you so you can focus on writing code.\n- **No lock-in**: you can \"eject\" to a custom setup at any time. Run a single command, and all the configuration and build dependencies will be moved directly into your project, so you can pick up right where you left off.\n\nThis project is inspired by [create-react-app](https://github.com/facebook/create-react-app).\n\n## Related packages\n\n- **[packages/mcp-scripts](https://github.com/stephencme/create-mcp-ts/tree/main/packages/mcp-scripts)**: The build tools that power `create-mcp-ts` projects.\n- **[packages/mcp-ts-template-default](https://github.com/stephencme/create-mcp-ts/tree/main/packages/mcp-ts-template-default)**: Default project template for `create-mcp-ts`.\n"
+}

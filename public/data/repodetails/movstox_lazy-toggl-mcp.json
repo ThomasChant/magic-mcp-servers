@@ -1,0 +1,50 @@
+{
+  "mcp_name": "Lazy Toggl MCP",
+  "mcp_description": "Simple unofficial MCP server to track time via Toggl API",
+  "mcp_id": "movstox_lazy-toggl-mcp",
+  "fetch_timestamp": "2025-06-23T06:06:20.347320Z",
+  "github_url": "https://github.com/movstox/lazy-toggl-mcp",
+  "repository": {
+    "name": "lazy-toggl-mcp",
+    "full_name": "movstox/lazy-toggl-mcp",
+    "description": "A lazy Toggl MCP server for time tracking integration",
+    "html_url": "https://github.com/movstox/lazy-toggl-mcp",
+    "created_at": "2025-06-06T20:39:07Z",
+    "updated_at": "2025-06-11T17:17:50Z",
+    "pushed_at": "2025-06-11T17:17:47Z",
+    "size": 18,
+    "stargazers_count": 2,
+    "watchers_count": 2,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "movstox",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1857476?v=4",
+      "html_url": "https://github.com/movstox"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 0,
+    "languages": {
+      "Python": 20680
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 2
+  },
+  "readme": "# Lazy Toggl MCP Server\n\nA Model Context Protocol (MCP) server that provides tools for interacting with Toggl time tracking.\n\n## Features\n\n- Start/stop time tracking\n- Get current entry\n- List workspaces\n\n## API\n\n### Tools\n\n- **start_tracking**\n  - Start tracking time for a new task\n  - Inputs:\n    - `title` (string): Title/description of the task to track\n    - `workspace_id` (integer): Workspace ID (optional, uses default if not provided)\n    - `project_id` (integer): Project ID (optional)\n    - `tags` (string[]): List of tags (optional)\n\n- **stop_tracking**\n  - Stop the currently running time entry\n  - No input required\n  - Returns confirmation of stopped time entry\n\n- **list_workspaces**\n  - List all available workspaces\n  - No input required\n  - Returns list of workspaces with their IDs and names\n\n- **show_current_time_entry**\n  - Show the currently running time entry, if any\n  - No input required\n  - Returns:\n    - If tracking: Task description, entry ID, workspace, start time, running duration, tags, and project (if any)\n    - If not tracking: A message indicating no time entry is currently running\n\n### Integration with Toggl Track API\n\nThis server uses the Toggl Track API v9. The following endpoints are utilized:\n\n- `GET /me` - Get user information\n- `GET /workspaces` - List workspaces\n- `GET /me/time_entries/current` - Get current running time entry\n- `POST /workspaces/{workspace_id}/time_entries` - Start time tracking\n- `PATCH /workspaces/{workspace_id}/time_entries/{time_entry_id}/stop` - Stop time tracking\n\n## Installation\n\n1. Clone/create this project\n2. Install dependencies with `uv`:\n   ```bash\n   cd lazy-toggl-mcp\n   uv sync\n   ```\n\n## Configuration\n\n### Get Your Toggl API Token\n\n1. Go to [Toggl Track](https://track.toggl.com/)\n2. Sign in to your account\n3. Click on your profile picture/avatar in the top right corner\n4. Go to \"Profile\" or \"Settings\"\n5. Find your \"API Token\" - copy this long string of characters\n\n### Configure MCP Server\n\nAdd the following configuration to your MCP settings file:\n\n```json\n{\n  \"mcpServers\": {\n    \"lazy-toggl-mcp\": {\n      \"autoApprove\": [],\n      \"disabled\": false,\n      \"timeout\": 60,\n      \"type\": \"stdio\",\n      \"transportType\": \"stdio\",\n      \"command\": \"uv\",\n      \"args\": [\n        \"run\",\n        \"--directory\",\n        \"/path/to/lazy-toggl-mcp\",\n        \"python\",\n        \"server.py\"\n      ],\n      \"env\": {\n        \"TOGGL_API_TOKEN\": \"your-actual-api-token-here\"\n      }\n    }\n  }\n}\n```\n\n**Important**: Replace `/path/to/lazy-toggl-mcp` with the actual path to this project and `your-actual-api-token-here` with your real Toggl API token.\n\n## Project Structure\n\n```\nlazy-toggl-mcp/\n├── src/\n│   └── toggl_server/\n│       ├── __init__.py      # Package initialization\n│       ├── main.py          # MCP server implementation (new structure)\n│       ├── models.py        # Data models and type definitions\n│       ├── toggl_api.py     # Toggl API client\n│       └── utils.py         # Utility functions\n├── main.py                  # CLI interface for testing\n├── server.py                # Main MCP server entry point\n├── pyproject.toml           # Project configuration and dependencies\n├── README.md                # This file\n├── uv.lock                  # Dependency lock file\n├── .gitignore               # Git ignore patterns\n└── .python-version          # Python version specification\n```\n\n## License\n\nMIT License - feel free to modify and use as needed.\n"
+}

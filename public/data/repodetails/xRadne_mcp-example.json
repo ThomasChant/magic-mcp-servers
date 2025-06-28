@@ -1,0 +1,51 @@
+{
+  "mcp_name": "xRadne/mcp-example",
+  "mcp_description": "Demonstrates creating an MCP server using Express.js and the MCP SDK with real-time communication via Server-Sent Events.",
+  "mcp_id": "xRadne_mcp-example",
+  "fetch_timestamp": "2025-06-23T09:34:08.891982Z",
+  "github_url": "https://github.com/xRadne/mcp-example",
+  "repository": {
+    "name": "mcp-example",
+    "full_name": "xRadne/mcp-example",
+    "description": null,
+    "html_url": "https://github.com/xRadne/mcp-example",
+    "created_at": "2025-04-26T20:04:27Z",
+    "updated_at": "2025-04-26T20:15:37Z",
+    "pushed_at": "2025-04-26T20:15:34Z",
+    "size": 18,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "xRadne",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32938476?v=4",
+      "html_url": "https://github.com/xRadne"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 1198
+    },
+    "language_percentages": {
+      "TypeScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# MCP Example Server\n\nThis is a demonstration server implementing the Model Context Protocol (MCP). It provides a simple example of how to create an MCP server with custom tools.\n\n## Features\n\n- Built with Express.js and the MCP SDK\n- Implements Server-Sent Events (SSE) for real-time communication\n- Includes a demo greeting tool\n\n## Getting Started\n\n### Prerequisites\n\n- Node.js (latest LTS version recommended)\n- npm or yarn\n\n### Installation\n\n1. Clone the repository\n2. Install dependencies:\n```bash\nnpm install\n```\n\n### Running the Server\n\nStart the server with:\n```bash\nnpm start\n```\n\nThe server will run on port 8080 by default.\n\nAdd the following to the `mcp.json` file\n\n```json\n{\n  \"mcpServers\": {\n    \"greeter-server-example\": {\n      \"name\": \"MCP Greeter Server Example\",\n      \"url\": \"http://localhost:8080/sse\"\n    }\n  }\n}\n```\n\n## License\n\nMIT\n\n"
+}

@@ -1,0 +1,55 @@
+{
+  "mcp_name": "id100700/mcp-geo",
+  "mcp_description": "Facilitates AI model integration with geolocation data using EdgeOne Pages Functions.",
+  "mcp_id": "id100700_mcp-geo",
+  "fetch_timestamp": "2025-06-23T04:55:35.319542Z",
+  "github_url": "https://github.com/id100700/mcp-geo",
+  "repository": {
+    "name": "mcp-geo",
+    "full_name": "id100700/mcp-geo",
+    "description": "An MCP service for getting user geolocation information",
+    "html_url": "https://github.com/id100700/mcp-geo",
+    "created_at": "2025-04-11T10:28:28Z",
+    "updated_at": "2025-04-11T10:28:35Z",
+    "pushed_at": "2025-04-11T10:28:31Z",
+    "size": 63,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "id100700",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/193223456?v=4",
+      "html_url": "https://github.com/id100700"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 11307,
+      "CSS": 2008,
+      "JavaScript": 1812
+    },
+    "language_percentages": {
+      "TypeScript": 74.75,
+      "CSS": 13.27,
+      "JavaScript": 11.98
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "0.1.0"
+  },
+  "readme": "# MCP with Pages Functions ：Geo Location Demo \n\nThis project demonstrates how to use EdgeOne Pages Functions to retrieve user geolocation information and integrate it with large language models through MCP (Model Context Protocol).\n\n## Demo\n\n![](https://cloudcache.tencent-cloud.com/qcloud/ui/static/static_source_business/f180b5ae-0e9c-40a8-a76a-b8f2a5e6108f.gif)\n\n## Deploy\n\n[![Deploy with EdgeOne Pages](https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg)](https://edgeone.ai/pages/new?template=mcp-geo)\n\nMore Templates: [EdgeOne Pages](https://edgeone.ai/pages/templates)\n\n## Components\n\n### 1. EdgeOne Pages Functions: Geolocation\n\nThe project includes an EdgeOne Pages Function that retrieves user geolocation information:\n\n* Uses the EdgeOne request context to access geolocation data\n* Returns location information in a JSON format\n* Located in `functions/get_geo.ts`\n\n### 2. MCP Server Integration\n\nThe MCP server component provides an interface for large language models to access geolocation data:\n\n* Implements the Model Context Protocol (MCP)\n* Exposes a `get_geolocation` tool that can be used by AI models\n* Uses the EdgeOne Pages Function to fetch geolocation data\n* Located in `mcp-server/index.ts`\n\n## MCP Configuration\n\nTo use the MCP server with large language models, add the following configuration:\n\n```json\n{\n  \"mcpServers\": {\n    \"edgeone-geo-mcp-server\": {\n      \"command\": \"tsx\",\n      \"args\": [\"path/to/mcp-server/index.ts\"]\n    }\n  }\n}\n```\n\n## Learn More\n\n* [EdgeOne Pages](https://edgeone.ai/products/pages)\n* [EdgeOne Pages Functions documentation](https://edgeone.ai/document/162227908259442688)\n* [Model Context Protocol (MCP)](https://modelcontextprotocol.github.io) - Learn about integrating AI models with external tools and services\n"
+}

@@ -1,0 +1,53 @@
+{
+  "mcp_name": "Raygun",
+  "mcp_description": "Interact with your crash reporting and real using monitoring data on your Raygun account",
+  "mcp_id": "MindscapeHQ_mcp-server-raygun",
+  "fetch_timestamp": "2025-06-23T07:53:24.406970Z",
+  "github_url": "https://github.com/MindscapeHQ/mcp-server-raygun",
+  "repository": {
+    "name": "mcp-server-raygun",
+    "full_name": "MindscapeHQ/mcp-server-raygun",
+    "description": null,
+    "html_url": "https://github.com/MindscapeHQ/mcp-server-raygun",
+    "created_at": "2024-11-28T19:57:23Z",
+    "updated_at": "2025-06-18T12:40:56Z",
+    "pushed_at": "2024-11-28T20:07:09Z",
+    "size": 12,
+    "stargazers_count": 13,
+    "watchers_count": 13,
+    "forks_count": 9,
+    "open_issues_count": 8,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "MindscapeHQ",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1767684?v=4",
+      "html_url": "https://github.com/MindscapeHQ"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 9,
+    "subscribers_count": 4,
+    "languages": {
+      "TypeScript": 47799,
+      "JavaScript": 3089
+    },
+    "language_percentages": {
+      "TypeScript": 93.93,
+      "JavaScript": 6.07
+    },
+    "pull_requests_count": 4,
+    "contributors_count": 1,
+    "package_json_version": "0.1.0"
+  },
+  "readme": "# Raygun MCP Server\n\nMCP Server for Raygun's API V3 endpoints for interacting with your Crash Reporting and Real User Monitoring applications. This server provides comprehensive access to Raygun's API features through the Model Context Protocol.\n\n## Features\n\n### Tools\n\n#### Applications\n- `list_applications` - List all applications under your account\n- `get_application` - Get application details by identifier\n- `get_application_by_api_key` - Get application details by API key\n- `regenerate_application_api_key` - Generate a new API key for an application\n\n#### Error Management\n- `list_error_groups` - List error groups for an application\n- `get_error_group` - Get detailed information about an error group\n- `resolve_error_group` - Set error group status to resolved\n- `activate_error_group` - Set error group status to active\n- `ignore_error_group` - Set error group status to ignored\n- `permanently_ignore_error_group` - Set error group status to permanently ignored\n\n#### Deployment Management\n- `list_deployments` - List deployments for an application\n- `get_deployment` - Get deployment details by identifier\n- `delete_deployment` - Remove a deployment\n- `update_deployment` - Update deployment information\n- `reprocess_deployment_commits` - Reprocess deployment commit data\n\n#### User & Session Management\n- `list_customers` - List customers for an application\n- `list_sessions` - List user sessions for an application\n- `get_session` - Get detailed session information\n\n#### Performance Monitoring\n- `list_pages` - List monitored pages for an application\n- `get_page_metrics_time_series` - Get time-series performance metrics\n- `get_page_metrics_histogram` - Get histogram of performance metrics\n- `get_error_metrics_time_series` - Get time-series error metrics\n\n#### Source Maps\n- `list_source_maps` - List source maps for an application\n- `get_source_map` - Get source map details\n- `update_source_map` - Update source map information\n- `delete_source_map` - Remove a source map\n- `upload_source_map` - Upload a new source map\n- `delete_all_source_maps` - Remove all source maps\n\n#### Team Management\n- `list_invitations` - List pending team invitations\n- `send_invitation` - Send a new team invitation\n- `get_invitation` - Get invitation details\n- `revoke_invitation` - Revoke a pending invitation\n\n## Configuration\n\nThe server requires the following environment variables:\n\n- `RAYGUN_PAT_TOKEN` (required): Your [Raygun PAT token](https://raygun.com/documentation/product-guides/raygun-api/)\n- `SOURCEMAP_ALLOWED_DIRS` (optional): Comma-separated list of directories allowed for source map operations\n\n## Usage with Claude Desktop\n\nAdd to your `claude_desktop_config.json`:\n\n```json\n{\n  \"mcpServers\": {\n    \"raygun\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@raygun.io/mcp-server-raygun\"],\n      \"env\": {\n        \"RAYGUN_PAT_TOKEN\": \"your-pat-token-here\"\n      }\n    }\n  }\n}\n```\n\n## Development\n\nInstall dependencies:\n```bash\nnpm install\n```\n\nBuild the server:\n```bash\nnpm run build\n```\n\nFor development with auto-rebuild:\n```bash\nnpm run watch\n```\n\n## Installation\n\nTo use with Claude Desktop, add the server config:\n\nOn MacOS: `~/Library/Application Support/Claude/claude_desktop_config.json`\nOn Windows: `%APPDATA%/Claude/claude_desktop_config.json`\n\n```json\n{\n  \"mcpServers\": {\n    \"raygun\": {\n      \"command\": \"/path/to/server-raygun/build/index.js\",\n      \"env\": {\n        \"RAYGUN_PAT_TOKEN\": \"your-pat-token-ken\"\n      }\n    }\n  }\n}\n```\n\n### Debugging\n\nSince MCP servers communicate over stdio, debugging can be challenging. We recommend using the [MCP Inspector](https://github.com/modelcontextprotocol/inspector), which is available as a package script:\n\n```bash\nnpm run inspector\n```\n\nThe Inspector will provide a URL to access debugging tools in your browser.\n"
+}

@@ -1,0 +1,61 @@
+{
+  "mcp_name": "wowinter13/solscan-mcp",
+  "mcp_description": "🦀 🏠 - An MCP tool for querying Solana transactions using natural language with Solscan API.",
+  "mcp_id": "wowinter13_solscan-mcp",
+  "fetch_timestamp": "2025-06-23T09:29:21.612423Z",
+  "github_url": "https://github.com/wowinter13/solscan-mcp",
+  "repository": {
+    "name": "solscan-mcp",
+    "full_name": "wowinter13/solscan-mcp",
+    "description": "An MCP server for querying Solana transactions using natural language with Solscan API",
+    "html_url": "https://github.com/wowinter13/solscan-mcp",
+    "created_at": "2025-04-10T14:17:43Z",
+    "updated_at": "2025-06-15T16:08:04Z",
+    "pushed_at": "2025-04-13T17:15:46Z",
+    "size": 1516,
+    "stargazers_count": 20,
+    "watchers_count": 20,
+    "forks_count": 6,
+    "open_issues_count": 0,
+    "language": "Rust",
+    "license": null,
+    "topics": [
+      "crate",
+      "crates",
+      "mcp",
+      "mcp-client",
+      "mcp-server",
+      "modelcontextprotocol",
+      "rust",
+      "solana",
+      "solana-sdk",
+      "solscan"
+    ],
+    "default_branch": "master",
+    "owner": {
+      "login": "wowinter13",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12775766?v=4",
+      "html_url": "https://github.com/wowinter13"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 6,
+    "subscribers_count": 1,
+    "languages": {
+      "Rust": 62350
+    },
+    "language_percentages": {
+      "Rust": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# 🟣🔎 solscan-mcp: A Solscan API MCP Server in Rust\n\n## Overview\n\nA Model Context Protocol (MCP) server for interacting with the Solscan Pro API for Solana blockchain data. This server provides tools to query token information, account activities, and transaction details on the Solana blockchain via Large Language Models.\n\n\n## Examples\n\nSimple prompts: \n\n\nhttps://github.com/user-attachments/assets/2f2586b2-ed9d-4d4d-bda4-0154b9b98cde\n\n\n\n\n_You can also use it for much more complex queries, like analyzing criminal activity combining multiple MCPs and correct context._\n\n_For example, upload a csv list of suspected addresses, then using perplexity-mcp research tool LLM will add info to context window on how investigators define criminal wallets based on their activity (mev, dusting, poisoning, sandwiched, etc) -> solscan-mcp will use this context to investigate the wallets and provide a report._\n\n\n## Features\n\nFor detailed documentation of all available tools, see [TOOLS.md](TOOLS.md).\n\n## Installation\n\nPrerequisites:\n- Rust toolchain (install via [rustup](https://rustup.rs/)) – for regular usage\n- Docker – for Docker usage\n- Solscan Pro API key. You can obtain one from [Solscan APIs](https://solscan.io/apis).\n\n### Regular\n\n```bash\ncargo install solscan-mcp\n\nwhere solscan-mcp # -> /Users/$username/.cargo/bin/solscan-mcp\n```\n\nAdd the following to your `claude_desktop_config.json` or `claude_config.json`:\n\n```json\n{\n  \"mcpServers\": {\n    \"solscan-mcp\": {\n      \"command\": \"/Users/$username/.cargo/bin/solscan-mcp\",\n      \"args\": [],\n      \"env\": {\n        \"SOLSCAN_API_KEY\": \"your_solscan_api_key\"\n      }\n    }\n  }\n}\n```\n\n### Docker\n\nWIP, will be available soon.\n\n\n\n## Code quality Notes\n\nI treat MCPs like useful scripts, as the structure of the APIs they rely on can always change. So, api.rs could definitely be split into multiple APIs based on Solscan namespaces. My main goal was to make it work and be easy to maintain, while ensuring errors are ignored without breaking the flow (unlike many MCPs I've tested in Python/TS, which crash painfully when they don't gracefully handle simple errors).\n\n\n## License\n\nMIT\n"
+}

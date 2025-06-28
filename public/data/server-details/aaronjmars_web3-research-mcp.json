@@ -1,0 +1,110 @@
+{
+  "id": "e67d4ea95a70",
+  "owner": "aaronjmars",
+  "repoName": "web3-research-mcp",
+  "fullDescription": "📇 ☁️ - Deep Research for crypto - free & fully local",
+  "techStack": [],
+  "serviceTypes": [
+    {
+      "type": "ai",
+      "label": "Ai",
+      "icon": "🤖",
+      "description": "Leverages AI and machine learning"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "moderate",
+    "maturity": "stable",
+    "deployment": [
+      "local"
+    ],
+    "featured": true,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 5.85,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "crypto",
+      "blockchain",
+      "web3"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/aaronjmars/web3-research-mcp",
+    "owner": "aaronjmars",
+    "name": "web3-research-mcp",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.279Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "local",
+    "finance-crypto",
+    "crypto",
+    "analysis",
+    "blockchain",
+    "research",
+    "web3"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Moderate",
+      "color": "#eab308",
+      "icon": "🟡"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    },
+    {
+      "type": "featured",
+      "label": "Featured",
+      "color": "#3b82f6",
+      "icon": "⭐"
+    }
+  ],
+  "icon": "🤖",
+  "readme": null
+}

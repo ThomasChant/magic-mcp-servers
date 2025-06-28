@@ -1,0 +1,50 @@
+{
+  "mcp_name": "Mailgun",
+  "mcp_description": "Interact with Mailgun API.",
+  "mcp_id": "mailgun_mailgun-mcp-server",
+  "fetch_timestamp": "2025-06-23T06:22:03.281646Z",
+  "github_url": "https://github.com/mailgun/mailgun-mcp-server",
+  "repository": {
+    "name": "mailgun-mcp-server",
+    "full_name": "mailgun/mailgun-mcp-server",
+    "description": "Implementation of Model Context Protocol server for Mailgun APIs",
+    "html_url": "https://github.com/mailgun/mailgun-mcp-server",
+    "created_at": "2025-03-17T19:36:31Z",
+    "updated_at": "2025-06-18T08:04:55Z",
+    "pushed_at": "2025-03-20T14:48:57Z",
+    "size": 111,
+    "stargazers_count": 22,
+    "watchers_count": 22,
+    "forks_count": 8,
+    "open_issues_count": 3,
+    "language": "JavaScript",
+    "license": "Apache License 2.0",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "mailgun",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/447686?v=4",
+      "html_url": "https://github.com/mailgun"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 8,
+    "subscribers_count": 12,
+    "languages": {
+      "JavaScript": 27211
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 4,
+    "contributors_count": 2
+  },
+  "readme": "# Mailgun MCP Server\n[![MCP](https://img.shields.io/badge/MCP-Server-blue.svg)](https://github.com/modelcontextprotocol)\n\n## Overview\nA Model Context Protocol (MCP) server implementation for [Mailgun](https://mailgun.com), enabling MCP-compatible AI clients like Claude Desktop to interract with the service.\n\n## Prerequisites\n\n- Node.js (v18 or higher)\n- Git\n- Claude Desktop (for Claude integration)\n- Mailgun account and an API key\n\n## Quick Start\n\n### Manual Installation\n1. Clone the repository:\n   ```bash\n   git clone https://github.com/mailgun/mailgun-mcp-server.git\n   cd mailgun-mcp-server\n   ```\n\n2. Install dependencies and build:\n   ```bash\n   npm install\n   ```\n\n3. Configure Claude Desktop:\n\n   Create or modify the config file:\n   - MacOS: `~/Library/Application Support/Claude/claude_desktop_config.json`\n   - Windows: `%APPDATA%/Claude/claude_desktop_config.json`\n\n   Add the following configuration:\n   ```json\n   {\n       \"mcpServers\": {\n           \"mailgun\": {\n               \"command\": \"node\",\n               \"args\": [\"CHANGE/THIS/PATH/TO/mailgun-mcp-server/src/mailgun-mcp.js\"],\n               \"env\": {\n                   \"MAILGUN_API_KEY\": \"YOUR-mailgun-api-key\"\n               }\n           }\n       }\n   }\n   ```\n\n## Testing\n\nRun the local test suite with:\n\n```bash\nNODE_ENV=test npm test\n```\n\n### Sample Prompts with Claude\n\n#### Send an Email\n\n> Note: sending an email currently (2025-03-18) seems to require a paid account with Anthropic. You'll get a silent failure on the free account\n\n```\nCan you send an email to EMAIL_HERE with a funny email body that makes it sound like it's from the IT Desk from Office Space?\nPlease use the sending domain DOMAIN_HERE, and make the email from \"postmaster@DOMAIN_HERE\"!\n```\n\n#### Fetch and Visualize Sending Statistics\n\n```\nWould you be able to make a chart with email delivery statistics for the past week?\n```\n\n## Debugging\n\nThe MCP server communicates over stdio, please refer to [Debugging](https://modelcontextprotocol.io/docs/tools/debugging) section of the Model Context Protocol.\n\n## License\n\n[LICENSE](LICENSE) file for details\n\n## Contributing\n\nWe welcome contributions! Please feel free to submit a Pull Request.\n"
+}

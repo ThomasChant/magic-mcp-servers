@@ -1,0 +1,51 @@
+{
+  "mcp_name": "Chazzychouse/weather-mcp-server",
+  "mcp_description": "Provides weather forecasts and alerts using the MCP protocol with data from the National Weather Service.",
+  "mcp_id": "Chazzychouse_weather-mcp-server",
+  "fetch_timestamp": "2025-06-23T02:03:35.311673Z",
+  "github_url": "https://github.com/Chazzychouse/weather-mcp-server",
+  "repository": {
+    "name": "weather-mcp-server",
+    "full_name": "Chazzychouse/weather-mcp-server",
+    "description": "Implementation of MCP documentation's \"quickstart\" server",
+    "html_url": "https://github.com/Chazzychouse/weather-mcp-server",
+    "created_at": "2025-04-13T19:22:50Z",
+    "updated_at": "2025-04-13T19:29:04Z",
+    "pushed_at": "2025-04-13T19:29:01Z",
+    "size": 5,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "Chazzychouse",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/99293657?v=4",
+      "html_url": "https://github.com/Chazzychouse"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 7057
+    },
+    "language_percentages": {
+      "TypeScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# MCP Weather Server\n\n- A basic implementation of the quick start MCP server using typescript. The implementation includes two tools. Data is queried from `https://api.weather.gov`\n\n## Setup With Claude Desktop\n\n- Navigate to Claude desktop's AppData, and create a `claude_desktop_config.json` if it is not present.\n\n  Windows Path: `C:/users/<Username>/AppData/Roaming/Claude`\n\n  ```json\n  {\n    \"mcpServers\": {\n      \"weather\": {\n        \"command\": \"node\",\n        \"args\": [\"<Drive>:\\\\PATH\\\\TO\\\\PROJECT\\\\build\\\\index.js\"]\n      }\n    }\n  }\n  ```\n\n## Troubleshooting\n\n- See [MCP documentation](https://modelcontextprotocol.io/docs/tools/debugging) for tips on troubleshooting\n\n## Capabilities\n\n- ### Tools\n  - #### get-forecast\n    - gets a weekly weather forecast for a latitude and longitude. (obtained by the client using prompted area in the US)\n  - #### get-alerts\n    - gets any current alerts for a state code, tokenized by the client.\n"
+}

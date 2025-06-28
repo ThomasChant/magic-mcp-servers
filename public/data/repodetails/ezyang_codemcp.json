@@ -1,0 +1,95 @@
+{
+  "mcp_name": "ezyang/codemcp",
+  "mcp_description": "🐍🏠 - Coding agent with basic read, write and command line tools.",
+  "mcp_id": "ezyang_codemcp",
+  "fetch_timestamp": "2025-06-23T02:57:31.893476Z",
+  "github_url": "https://github.com/ezyang/codemcp",
+  "repository": {
+    "name": "codemcp",
+    "full_name": "ezyang/codemcp",
+    "description": "Coding assistant MCP for Claude Desktop",
+    "html_url": "https://github.com/ezyang/codemcp",
+    "created_at": "2025-03-09T03:58:34Z",
+    "updated_at": "2025-06-23T00:01:32Z",
+    "pushed_at": "2025-06-04T01:38:34Z",
+    "size": 1642,
+    "stargazers_count": 1444,
+    "watchers_count": 1444,
+    "forks_count": 116,
+    "open_issues_count": 76,
+    "language": "Python",
+    "license": "Apache License 2.0",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "ezyang",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/13564?v=4",
+      "html_url": "https://github.com/ezyang"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 116,
+    "subscribers_count": 10,
+    "languages": {
+      "Python": 522220,
+      "Shell": 1540
+    },
+    "language_percentages": {
+      "Python": 99.71,
+      "Shell": 0.29
+    },
+    "pull_requests_count": 246,
+    "contributors_count": 9,
+    "latest_release": {
+      "tag_name": "0.6.0",
+      "name": "0.6.0",
+      "published_at": "2025-04-20T07:50:01Z",
+      "body": "This is a pretty big release with many days of commits since the last one, so it is going to be somewhat risky. The dependency footprint of the project also expanded substantially; I need to do some package splitting to get it back down but for now it's a little more bloated.\r\n\r\nFixed issues:\r\n* https://github.com/ezyang/codemcp/issues/253\r\n* https://github.com/ezyang/codemcp/issues/162\r\n* https://github.com/ezyang/codemcp/issues/198\r\n* Avoid shadowing glob module by renaming the glob_pattern.py file, thanks Lance Kindle\r\n\r\nFeatures:\r\n* Chmod tool to mark files executable (Sonnet really wants this tool to exist so I added it)\r\n* codemcp init - creates a new codemcp project with a codemcp.toml file. Also --python flag is supported to generate an opinionated Python scaffold (this is not as well tested and I think there's more scaffold I want to add). Thanks Lance Kindle for fixing some bugs in this implementation.\r\n* codemcp serve - serves codemcp as an SSE server, which is convenient for integration if you like running codemcp separately\r\n* You can now pass ~ inside your init codemcp prompt directory and it will work.\r\n* Trailing whitespace is always stripped when you write/edit files.\r\n* Some minor bugs in the prompt were fixed; unfortunately I don't have good evals to determine how much improvement this is worth. Thanks Tobias Mansfield-Williams for this fix.\r\n* We now properly report the current commit hash after all tool execution\r\n* I've done some mild testing with Goose + codemcp, and can confirm that you can use codemcp with Gemini 2.5 Pro this way, although I personally find it doesn't work as well as Sonnet 3.7\r\n\r\nDeveloper notes:\r\n* All of the e2e tests now no longer spawn a new process so you can properly pdb to debug issues now\r\n* The project is now fully typed with pyright!",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "run-test-killer",
+        "commit_sha": "9b2ef892333a8279ae11b7ef420d203c0e10569a"
+      },
+      {
+        "name": "feat-disable-git",
+        "commit_sha": "c486633ba81d413735b2e741b88db257274e3179"
+      },
+      {
+        "name": "cpkt3",
+        "commit_sha": "6260d64a77610270e8e7124483d03a95e07df076"
+      },
+      {
+        "name": "0.7.0",
+        "commit_sha": "41dfe735e1541d6db93f326e43db66f1e7038425"
+      },
+      {
+        "name": "0.6.0",
+        "commit_sha": "b8ee25a25a6286cc9f9c9ca2f703b6dcdcef994b"
+      },
+      {
+        "name": "0.5.0",
+        "commit_sha": "25a724ddba7091a669cc39e2f0540a542eb21470"
+      },
+      {
+        "name": "0.4.0",
+        "commit_sha": "94c02eb59757f342dd679ae2e8be85e62607158d"
+      },
+      {
+        "name": "0.3.0",
+        "commit_sha": "683e6ec29b15b91ec12430afabf5a45ed57d2489"
+      }
+    ],
+    "latest_version": "run-test-killer"
+  },
+  "readme": "# codemcp\n\nMake Claude Desktop a pair programming assistant by installing codemcp.  With\nit, you can directly ask Claude to implement features, fix bugs and do\nrefactors on a codebase on your computer; Claude will directly edit files and\nrun tests.  Say goodbye to copying code in and out of Claude's chat window!\n\n![Screenshot of Claude Desktop with codemcp](static/screenshot.png?raw=true)\n\ncodemcp offers similar functionality to other AI coding software (Claude Code,\nCursor, Cline, Aider), but it occupies a unique point in the design space:\n\n1. It's intended to be used with **Claude Pro**, Anthropic's $20/mo\n   subscription offering.  I like paying for my usage with a subscription plan\n   because it means **zero marginal cost** for agent actions; no more feeling\n   bad that you wasted five bucks on a changeset that doesn't work.\n\n   Note that if you have Claude Max ($100/mo), Claude Code can also be used\n   with subscription based pricing.  The value proposition for codemcp is\n   murkier in this case (and it is definitely inferior to Claude Code in some\n   respects), but you can still use codemcp with Claude Max if you prefer some\n   of the other UI decisions it makes.  (Also, it's open source, so you can\n   change it if you don't like it, unlike Claude Code!)\n\n2. It's built around **auto-accept by default**.  I want my agent to get as\n   far as it can without my supervision, so I can review everything in one go at\n   the end.  There are two key things that codemcp does differently than most\n   coding agents: we **forbid unrestricted shell**, instead requiring you to\n   predeclare commands the agent can use in ``codemcp.toml``, and we **Git\n   version all LLM edits**, so you can roll back agent changes on a\n   fine-grained basis and don't have to worry about forgetting to commit\n   changes.\n\n3. It's **IDE agnostic**: you ask Claude to make changes, it makes them, and\n   then you can use your favorite IDE setup to review the changes and make\n   further edits.  I use vim as my daily driver editor, and coding environments\n   that require VSCode or a specific editor are a turn off for me.\n\n## IMPORTANT: For master users - Major changes for token efficiency\n\nTo improve codemcp's token efficiency, on master I am in the process of\nchanging codemcp back into a multi-tool tool (instead of a single tool whose\ninstructions are blatted into chat when you InitProject).  This means you have\nto manually approve tool use.  Because tool use approval is persistent across\nmultiple chats, I think this is a reasonable tradeoff to make, but if you\nreally don't like, file a bug at\n[refined-claude](https://github.com/ezyang/refined-claude/issues) browser\nextension for supporting auto-approve tool use.\n\n## Installation\n\nI recommend this specific way of installing and using codemcp:\n\n1. Install `uv` and install git, if they are not installed already.\n\n2. Install [claude-mcp](https://chromewebstore.google.com/detail/mcp-for-claudeai/jbdhaamjibfahpekpnjeikanebpdpfpb) on your browser.\n   This enables you to connect to SSE MCP servers directly from the website,\n   which means you don't need to use Claude Desktop and can easily have\n   multiple chat windows going in parallel.  We expect this extension should\n   be soon obsoleted by the rollout of\n   [Integrations](https://www.anthropic.com/news/integrations).  At time of\n   writing, however, Integrations have not yet arrived for Claude Pro subscribers.\n\n3. Run codemcp using ``uvx --from git+https://github.com/ezyang/codemcp@prod codemcp serve``.\n   You can add ``--port 1234`` if you need it to listen on a non-standard port.\n\n   Pro tip: if you like to live dangerously, you can change `prod` to `main`.  If\n   you want to pin to a specific release, replace it with `0.3.0` or similar.\n\n   Pro tip: you can run codemcp remotely!  If you use\n   [Tailscale](https://tailscale.com/) and trust all devices on your Tailnet,\n   you can do this securely by passing ``--host 100.101.102.103`` (replace the\n   IP with the Tailscale IP address of your node.  This IP typically lives in\n   the 100.64.0.0/10 range.)  **WARNING:** Anyone with access to this MCP can perform\n   arbitrary code execution on your computer, it is **EXTREMELY** unlikely you want to\n   bind to 0.0.0.0.\n\n4. Configure claude-mcp with URL: ``http://127.0.0.1:8000/sse`` (replace the port if needed.)\n\n5. Unfortunately, the web UI inconsistently displays the hammer icon.  However, you can verify\n   that the MCP server is working by looking for \"[MCP codemcp] SSE connection opened\" in the\n   Console, or by asking Claude what tools it has available (it should say\n   tools from codemcp are available.)\n\nIf you prefer to use Claude Desktop or have unusual needs, check out [INSTALL.md](INSTALL.md) for\ninstallation instructions for a variety of non-standard situations.\n\n## Usage\n\nFirst, you must create a `codemcp.toml` file in the Git repository checkout\nyou want to work on.  If you want the agent to be able to do things like run\nyour formatter or run tests, add the commands to execute them in the commands\nsection (note: these commands need to appropriately setup any virtual\nenvironment they need):\n\n```toml\nformat = [\"./run_format.sh\"]\ntest = [\"./run_test.sh\"]\n```\n\nThe ``format`` command is special; it is always run after every file edit.\n\nNext, in Claude Desktop, we recommend creating a Project and putting this in\nthe Project Instructions:\n\n```\nInitialize codemcp with $PROJECT_DIR\n```\n\nWhere `$PROJECT_DIR` is the path to the project you want to work on.\n\nThen chat with Claude about what changes you want to make to the project.\nEvery time codemcp makes a change to your code, it will generate a commit.\n\nTo see some sample transcripts using this tool, check out:\n\n- [Implement a new feature](https://claude.ai/share/a229d291-6800-4cb8-a0df-896a47602ca0)\n- [Fix failing tests](https://claude.ai/share/2b7161ef-5683-4261-ad45-fabc3708f950)\n- [Do a refactor](https://claude.ai/share/f005b43c-a657-43e5-ad9f-4714a5cd746f)\n\ncodemcp will generate a commit per chat and amend it as it is working on your feature.\n\n## Philosophy\n\n- When you get rate limited, take the time to do something else (review\n  Claude's code, review someone else's code, make plans, do some meetings)\n\n- This is *not* an autonomous agent.  At minimum, you have to intervene after\n  every chat to review the changes and request the next change.  While you\n  *can* ask for a long list of things to be done in a single chat, you will\n  likely hit Claude Desktop's output limit and have to manually \"continue\" the\n  agent anyway.  Embrace it, and use the interruptions to make sure Claude is\n  doing the right thing.\n\n- When Claude goes off the rails, it costs you time rather than dollars.\n  Behave accordingly: if time is the bottleneck, watch Claude's incremental\n  output carefully.\n\n## Configuration\n\nHere are all the config options supported by `codemcp.toml`:\n\n```toml\nproject_prompt = \"\"\"\nBefore beginning work on this feature, write a short haiku.  Do this only once.\n\"\"\"\n\n[commands]\nformat = [\"./run_format.sh\"]\ntest = [\"./run_test.sh\"]\n```\n\nThe `project_prompt` will be loaded when you initialize the project in chats.\n\nThe `commands` section allows you to configure commands for specific tools.  The\nnames are told to the LLM, who will decide when it wants to run them.  You can add\ninstructions how to use tools in the `project_prompt`; we also support a more verbose\nsyntax where you can give specific instructions on a tool-by-tool basis:\n\n```\n[commands.test]\ncommand = [\"./run_test.sh\"]\ndoc = \"Accepts a pytest-style test selector as an argument to run a specific test.\"\n```\n\n## Troubleshooting\n\nTo run the server with inspector, use:\n\n```\nPYTHONPATH=. mcp dev codemcp/__main__.py\n```\n\nLogs are written to `~/.codemcp/codemcp.log`. The log level can be set in a global configuration file at `~/.codemcprc`:\n\n```toml\n[logger]\nverbosity = \"INFO\"  # Can be DEBUG, INFO, WARNING, ERROR, or CRITICAL\n```\n\nLogging is not configurable on a per project basis, but this shouldn't matter\nmuch because it's difficult to use Claude Desktop in parallel on multiple\nprojects anyway.\n\n## Contributing\n\nSee [CONTRIBUTING.md](CONTRIBUTING.md).\n"
+}

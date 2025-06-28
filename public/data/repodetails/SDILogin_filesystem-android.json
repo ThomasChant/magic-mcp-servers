@@ -1,0 +1,56 @@
+{
+  "mcp_name": "SDILogin/filesystem-android",
+  "mcp_description": "A Claude MCP server facilitating secure access to Android project files for AI-assisted code navigation and analysis.",
+  "mcp_id": "SDILogin_filesystem-android",
+  "fetch_timestamp": "2025-06-23T08:15:13.569665Z",
+  "github_url": "https://github.com/SDILogin/filesystem-android",
+  "repository": {
+    "name": "filesystem-android",
+    "full_name": "SDILogin/filesystem-android",
+    "description": "A Claude MCP server providing secure access to Android project files for AI-assisted code   navigation and analysis.",
+    "html_url": "https://github.com/SDILogin/filesystem-android",
+    "created_at": "2025-03-24T08:09:45Z",
+    "updated_at": "2025-03-24T08:23:18Z",
+    "pushed_at": "2025-03-24T08:19:50Z",
+    "size": 18,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 1,
+    "open_issues_count": 2,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [
+      "android",
+      "claude",
+      "mcp",
+      "mcp-server",
+      "python"
+    ],
+    "default_branch": "master",
+    "owner": {
+      "login": "SDILogin",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5954000?v=4",
+      "html_url": "https://github.com/SDILogin"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 6867
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 1
+  },
+  "readme": "# MCP Server Configuration\n[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)\n[![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue)](https://python.org)\n\n## Overview\nThis project provides a Claude MCP server that enables secure access to Android project files. It allows AI assistants to browse and read source code from Android projects by checking for essential gradle configuration files that validate authentic Android projects.\n\nKey features:\n- **Project Validation**: Ensures directories are valid Android projects by checking for gradle files\n- **File Browsing**: Lists all Kotlin, KTS, TOML files and AndroidManifest.xml grouped by directory\n- **File Reading**: Provides secure access to read individual or multiple files with appropriate filtering\n- **Security**: Prevents access to sensitive directories like .gradle, .git and build folders\n\nThis tool is ideal for developers who want to leverage Claude to help them understand, analyze, and work with Android codebases.\n\n## Server Setup\nAdd this configuration to your Claude client's MCP settings:\n```json\n{\n  \"mcpServers\": {\n    \"Android source code\": {\n      \"command\": \"/path/to/uv\", \n      \"args\": [\n        \"run\",\n        \"--with\",\n        \"mcp[cli]\",\n        \"mcp\",\n        \"run\",\n        \"./filesystem_android/main.py\"\n      ]\n    }\n  }\n}\n```\nNote: Replace `/path/to/uv` with your actual UV installation path\n\n## Installation\n```bash\n# Install UV if missing\ncurl -LsSf https://astral.sh/uv/install.sh | sh\n\n# Initialize project\nuv venv\nuv pip install -r uv.lock\n```\n\n## License\nMIT License - See [LICENSE](LICENSE) for details"
+}

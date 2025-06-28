@@ -1,0 +1,51 @@
+{
+  "mcp_name": "Taskeract",
+  "mcp_description": "Official Taskeract MCP Server for integrating your [Taskeract](https://www.taskeract.com/) project tasks and load the context of your tasks into your MCP enabled app.",
+  "mcp_id": "Acqusys_taskeract-mcp",
+  "fetch_timestamp": "2025-06-23T08:48:33.445833Z",
+  "github_url": "https://github.com/Acqusys/taskeract-mcp",
+  "repository": {
+    "name": "taskeract-mcp",
+    "full_name": "Acqusys/taskeract-mcp",
+    "description": null,
+    "html_url": "https://github.com/Acqusys/taskeract-mcp",
+    "created_at": "2025-04-26T20:16:16Z",
+    "updated_at": "2025-05-03T21:41:19Z",
+    "pushed_at": "2025-05-03T21:41:15Z",
+    "size": 16,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 1,
+    "open_issues_count": 1,
+    "language": "JavaScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "Acqusys",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/167594233?v=4",
+      "html_url": "https://github.com/Acqusys"
+    },
+    "has_issues": true,
+    "has_projects": false,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 4219
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 1,
+    "package_json_version": "1.0.6"
+  },
+  "readme": "# Taskeract MCP Server\n\nThis MCP Server will allow your AI infused code editor to interact with the Taskeract platform and will allow your editor to pull in the complete context of tasks that you're actively working on.\n\n## Taskeract\n\nCheck out Taskeract at https://www.taskeract.com.  Taskeract is an AI-driven platform that converts stakeholder requirements into organized tasks and integrates directly with your IDE.\n\n## Instructions\n\nInstructions for integrating the MCP Server with your code editor is available here: https://www.taskeract.com/documentation\n"
+}

@@ -1,0 +1,151 @@
+{
+  "id": "ba097b79ad07",
+  "owner": "0010aor",
+  "repoName": "mcp-mtg-assistant",
+  "fullDescription": "Fetches Magic: The Gathering card details using the Scryfall API, aiding in rules queries and card information retrieval.",
+  "techStack": [],
+  "serviceTypes": [
+    {
+      "type": "integration",
+      "label": "Integration",
+      "icon": "🔗",
+      "description": "Connects to external APIs and services"
+    },
+    {
+      "type": "ai",
+      "label": "Ai",
+      "icon": "🤖",
+      "description": "Leverages AI and machine learning"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "moderate",
+    "maturity": "stable",
+    "deployment": [
+      "saas"
+    ],
+    "featured": false,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 3.25,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "api",
+      "fetch"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/0010aor/mcp-mtg-assistant",
+    "owner": "0010aor",
+    "name": "mcp-mtg-assistant",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.279Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "api",
+    "gaming",
+    "content-media",
+    "card game",
+    "rules",
+    "scryfall",
+    "magic"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Moderate",
+      "color": "#eab308",
+      "icon": "🟡"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    }
+  ],
+  "icon": "🔗",
+  "readme": {
+    "overview": {
+      "title": "Overview",
+      "content": "MCP Server MTG Assistant\n------------------------\nA Model Context Protocol server that provides Magic: The Gathering card information fetching capabilities using the Scryfall API.\n### Example Rules Question Workflow\nWhile primarily used for looking up specific card details, this server can also be a crucial first step in answering MTG rules questions.\n**User Query:** \"If I cast a Finale of Devastation with X=10 and search for an Avenger of Zendikar, do the tokens also get +10/+10 and haste, or not?\"\n[[Image 1: Example Video Walkthrough]](https://github.com/0010aor/mcp-mtg-assistant/blob/main/sample.gif)\n### Available Tools\n*   `get_mtg_card_info` - Retrieves details for a specific Magic: The Gathering card from Scryfall. \n    *   `query` (string, required): The search query string (e.g., card name, partial name, characteristics).\nInstallation and Running\n------------------------\nThis project uses [`uv`](https://docs.astral.sh/uv/) for dependency management and running scripts.\n### Using uv (recommended)\nEnsure `uv` is installed. You can run the server directly from the project directory:\n# Navigate to the project root directory first\ncd path/to/mcp-servers/mcp-mtg-assistant\n# Install dependencies (if needed) and run the server script\nuv run mcp-server-mtg-assistant\n### Using PIP (for distribution or alternative setup)\nIf the package were published, you could install it via pip:\npip install mcp-server-mtg-assistant\nAfter installation, you could run it as a script:\npython -m mcp_server_mtg_assistant\nFor development, you typically run it using `uv run` as shown above.\nConfiguration\n-------------\n### Configure for MCP Clients (e.g., Claude.app, Inspector)\nAdd an entry to your client's MCP server configuration. The exact key (`\"mtg-assistant\"` in the examples) can be chosen by you.\n**Important:** The configuration needs to point `uv` to the correct project directory using the `--directory` argument. The path style (`/` vs `\\`) depends on your operating system and how you run `uv`.\nDefault: Using uv Directly (Linux/macOS/WSL)\nThis is the standard approach if your MCP client and the server run in the same Linux, macOS, or WSL environment.\n// Example for mcp.json or Claude settings\n\"mcpServers\": {\n  \"mtg-assistant\": {\n    \"command\": \"uv\",\n    \"args\": [\n      \"--directory\",\n      \"/path/to/mcp-servers/mcp-mtg-assistant\", // Unix-style path\n      \"run\",\n      \"mcp-server-mtg-assistant\"\n    ]\n  }\n}\nWindows Client + WSL Server\nThis configuration is **recommended** if your MCP client runs on **Windows**, but you want the server to execute within **WSL** It uses `wsl.exe` to invoke `uv` inside WSL.\n**Requirements:**\n*   `uv` must be installed _inside_ your WSL distribution.\n*   Adjust the path to `uv` inside WSL (e.g., `/home/user/.cargo/bin/uv`) if it's not in the WSL `PATH`.\n*   Use the `/mnt/...` style path for the `--directory` argument accessible from within WSL.\n// Example for mcp.json or Claude settings on Windows\n\"mcpServers\": {\n  \"mtg-assistant\": {\n    \"command\": \"wsl.exe\",\n    \"args\": [\n      \"/home/your-user/.cargo/bin/uv\", // uv WSL PATH\n      \"--directory\",\n      \"/mnt/d/repos/mcp-servers/mcp-mtg-assistant\", // WSL-style path to project\n      \"run\",\n      \"mcp-server-mtg-assistant\"\n    ]\n  }\n}\nAlternative: Using uv Directly on Windows\nThis assumes `uv` is installed directly on Windows and your MCP client also runs directly on Windows.\n*   Use the Windows-style path (`D:\\...`) for the `--directory` argument.\n*   Be mindful of potential `.venv` conflicts if you also use WSL (see below).\n// Example for mcp.json or Claude settings on Windows\n\"mcpServers\": {\n  \"mtg-assistant\": {\n    \"command\": \"uv\",\n    \"args\": [\n      \"--directory\",\n      \"D:\\p ath\\t o\\m cp-servers\\m cp-mtg-assistant\", // Windows-style path\n      \"run\",\n      \"mcp-server-mtg-assistant\"\n    ]\n  }\n}\n### Handling `.venv` Conflicts (Different Environments)\n*   **Problem:**`uv run` creates a `.venv` directory specific to the operating system/environment (e.g., Linux vs. Windows). If you switch between running the server directly on Windows and running it via WSL (or native Linux), the existing `.venv` might be incompatible.\n*   **Solution:** Before switching environments, **delete the `.venv` directory** in the `mcp-mtg-assistant` project root. `uv run` will then create a fresh, compatible one for the environment you are using.\nDebugging\n---------\nYou can use the MCP inspector to debug the server by prefixing the command and arguments from your configuration with `npx @modelcontextprotocol/inspector`.\n# Example using the Default (Linux/macOS/WSL) configuration:\nnpx @modelcontextprotocol/inspector uv --directory /path/to/mcp-servers/mcp-mtg-assistant run mcp-server-mtg-assistant\n# Example using the Recommended (Windows Client + WSL Server) configuration:\nnpx @modelcontextprotocol/inspector wsl.exe /home/your-user/.cargo/bin/uv --directory /mnt/d/repos/mcp-servers/mcp-mtg-assistant run mcp-server-mtg-assistant\n# Example using the Alternative (Direct Windows) configuration:\nnpx @modelcontextprotocol/inspector uv --directory D:\\path\\to\\mcp-servers\\mcp-mtg-assistant run mcp-server-mtg-assistant\nContributing\n------------\nWe encourage contributions to help expand and improve this MTG Assistant MCP server. Whether you want to add new features, enhance existing functionality, or improve documentation, your input is valuable.\nFor examples of other MCP servers and implementation patterns, see: [https://github.com/modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers)\nPull requests are welcome! Feel free to contribute new ideas, bug fixes, or enhancements.\nLicense\n-------\nmcp-server-mtg-assistant is licensed under the MIT License. This means you are free to use, modify, and distribute the software, subject to the terms and conditions of the MIT License.",
+      "code_blocks": [],
+      "subsections": []
+    },
+    "installation": {
+      "title": "Example using the Alternative (Direct Windows) configuration:",
+      "content": "npx @modelcontextprotocol/inspector uv --directory D:\\path\\to\\mcp-servers\\mcp-mtg-assistant run mcp-server-mtg-assistant\nContributing\n------------\nWe encourage contributions to help expand and improve this MTG Assistant MCP server. Whether you want to add new features, enhance existing functionality, or improve documentation, your input is valuable.\nFor examples of other MCP servers and implementation patterns, see: [https://github.com/modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers)\nPull requests are welcome! Feel free to contribute new ideas, bug fixes, or enhancements.\nLicense\n-------\nmcp-server-mtg-assistant is licensed under the MIT License. This means you are free to use, modify, and distribute the software, subject to the terms and conditions of the MIT License.",
+      "code_blocks": [],
+      "subsections": []
+    },
+    "examples": {
+      "title": "",
+      "content": "",
+      "code_blocks": [],
+      "subsections": []
+    },
+    "api_reference": {
+      "title": "",
+      "content": "",
+      "code_blocks": [],
+      "subsections": []
+    },
+    "metadata": {
+      "hasContent": true,
+      "sections": [
+        "overview",
+        "installation"
+      ],
+      "codeBlocks": 0,
+      "filename": "mcp-mtg-assistant.md",
+      "project_name": "mcp-mtg-assistant",
+      "server_id": "ba097b79ad07",
+      "github_url": "https://github.com/0010aor/mcp-mtg-assistant",
+      "processed_at": "2025-06-27",
+      "originalFilename": "mcp-mtg-assistant.md",
+      "processedAt": "2025-06-27T01:56:19.336Z",
+      "processedWith": "Jina MCP + AI",
+      "version": "2.0"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "mcp_name": "Hologres",
+  "mcp_description": "Connect to a [Hologres](https://www.alibabacloud.com/en/product/hologres) instance, get table metadata, query and analyze data.",
+  "mcp_id": "aliyun_alibabacloud-hologres-mcp-server",
+  "fetch_timestamp": "2025-06-23T04:48:56.719703Z",
+  "github_url": "https://github.com/aliyun/alibabacloud-hologres-mcp-server",
+  "repository": {
+    "name": "alibabacloud-hologres-mcp-server",
+    "full_name": "aliyun/alibabacloud-hologres-mcp-server",
+    "description": null,
+    "html_url": "https://github.com/aliyun/alibabacloud-hologres-mcp-server",
+    "created_at": "2025-03-20T03:30:27Z",
+    "updated_at": "2025-06-17T01:08:22Z",
+    "pushed_at": "2025-05-09T08:29:56Z",
+    "size": 107,
+    "stargazers_count": 22,
+    "watchers_count": 22,
+    "forks_count": 7,
+    "open_issues_count": 2,
+    "language": "Python",
+    "license": "Apache License 2.0",
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "aliyun",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/941070?v=4",
+      "html_url": "https://github.com/aliyun"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 7,
+    "subscribers_count": 2,
+    "languages": {
+      "Python": 52649
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 10,
+    "contributors_count": 1,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "English | [中文](README_ZH.md)\n\n# Hologres MCP Server\n\nHologres MCP Server serves as a universal interface between AI Agents and Hologres databases. It enables seamless communication between AI Agents and Hologres, helping AI Agents retrieve Hologres database metadata and execute SQL operations.\n\n## Configuration\n\n### Mode 1: Using Local File\n\n#### Download\n\nDownload from Github\n\n```bash\ngit clone https://github.com/aliyun/alibabacloud-hologres-mcp-server.git\n```\n\n#### MCP Integration\n\nAdd the following configuration to the MCP client configuration file:\n\n```json\n{\n    \"mcpServers\": {\n        \"hologres-mcp-server\": {\n            \"command\": \"uv\",\n            \"args\": [\n                \"--directory\",\n                \"/path/to/alibabacloud-hologres-mcp-server\",\n                \"run\",\n                \"hologres-mcp-server\"\n            ],\n            \"env\": {\n                \"HOLOGRES_HOST\": \"host\",\n                \"HOLOGRES_PORT\": \"port\",\n                \"HOLOGRES_USER\": \"access_id\",\n                \"HOLOGRES_PASSWORD\": \"access_key\",\n                \"HOLOGRES_DATABASE\": \"database\"\n            }\n        }\n    }\n}\n```\n\n### Mode 2: Using PIP Mode\n\n#### Installation\n\nInstall MCP Server using the following package:\n\n```bash\npip install hologres-mcp-server\n```\n\n#### MCP Integration\n\nAdd the following configuration to the MCP client configuration file:\n\nUse uv mode\n\n```json\n{\n    \"mcpServers\": {\n        \"hologres-mcp-server\": {\n            \"command\": \"uv\",\n            \"args\": [\n                \"run\",\n                \"--with\",\n                \"hologres-mcp-server\",\n                \"hologres-mcp-server\"\n            ],\n            \"env\": {\n                \"HOLOGRES_HOST\": \"host\",\n                \"HOLOGRES_PORT\": \"port\",\n                \"HOLOGRES_USER\": \"access_id\",\n                \"HOLOGRES_PASSWORD\": \"access_key\",\n                \"HOLOGRES_DATABASE\": \"database\"\n            }\n        }\n    }\n}\n```\nUse uvx mode\n\n```json\n{\n    \"mcpServers\": {\n        \"hologres-mcp-server\": {\n            \"command\": \"uvx\",\n            \"args\": [\n                \"hologres-mcp-server\"\n            ],\n            \"env\": {\n                \"HOLOGRES_HOST\": \"host\",\n                \"HOLOGRES_PORT\": \"port\",\n                \"HOLOGRES_USER\": \"access_id\",\n                \"HOLOGRES_PASSWORD\": \"access_key\",\n                \"HOLOGRES_DATABASE\": \"database\"\n            }\n        }\n    }\n}\n```\n\n## Components\n\n### Tools\n\n* `execute_hg_select_sql`: Execute a SELECT SQL query in Hologres database\n* `execute_hg_select_sql_with_serverless`: Execute a SELECT SQL query in Hologres database with serverless computing\n* `execute_hg_dml_sql`: Execute a DML (INSERT, UPDATE, DELETE) SQL query in Hologres database\n* `execute_hg_ddl_sql`: Execute a DDL (CREATE, ALTER, DROP, COMMENT ON) SQL query in Hologres database\n* `gather_hg_table_statistics`: Collect table statistics in Hologres database\n* `get_hg_query_plan`: Get query plan in Hologres database\n* `get_hg_execution_plan`: Get execution plan in Hologres database\n* `call_hg_procedure`: Invoke a procedure in Hologres database\n* `create_hg_maxcompute_foreign_table`: Create MaxCompute foreign tables in Hologres database.\n\nSince some Agents do not support resources and resource templates, the following tools are provided to obtain the metadata of schemas, tables, views, and external tables.\n* `list_hg_schemas`: Lists all schemas in the current Hologres database, excluding system schemas.\n* `list_hg_tables_in_a_schema`: Lists all tables in a specific schema, including their types (table, view, external table, partitioned table).\n* `show_hg_table_ddl`: Show the DDL script of a table, view, or external table in the Hologres database.\n\n### Resources\n\n#### Built-in Resources\n\n* `hologres:///schemas`: Get all schemas in Hologres database\n\n#### Resource Templates\n\n* `hologres:///{schema}/tables`: List all tables in a schema in Hologres database\n* `hologres:///{schema}/{table}/partitions`: List all partitions of a partitioned table in Hologres database\n* `hologres:///{schema}/{table}/ddl`: Get table DDL in Hologres database\n* `hologres:///{schema}/{table}/statistic`: Show collected table statistics in Hologres database\n* `system:///{+system_path}`:\n  System paths include:\n\n  * `hg_instance_version` - Shows the hologres instance version.\n  * `guc_value/<guc_name>` - Shows the guc (Grand Unified Configuration) value.\n  * `missing_stats_tables` - Shows the tables that are missing statistics.\n  * `stat_activity` - Shows the information of current running queries.\n  * `query_log/latest/<row_limits>` - Get recent query log history with specified number of rows.\n  * `query_log/user/<user_name>/<row_limits>` - Get query log history for a specific user with row limits.\n  * `query_log/application/<application_name>/<row_limits>` - Get query log history for a specific application with row limits.\n  * `query_log/failed/<interval>/<row_limits>` - Get failed query log history with interval and specified number of rows.\n\n### Prompts\n\nNone at this time\n"
+}

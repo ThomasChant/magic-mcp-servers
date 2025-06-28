@@ -1,0 +1,50 @@
+{
+  "mcp_name": "dotku/mcpm",
+  "mcp_description": "Manage and configure multiple MCP servers with ease, supporting filesystem operations and SSE server integration.",
+  "mcp_id": "dotku_mcpm",
+  "fetch_timestamp": "2025-06-23T02:43:07.966415Z",
+  "github_url": "https://github.com/dotku/mcpm",
+  "repository": {
+    "name": "mcpm",
+    "full_name": "dotku/mcpm",
+    "description": null,
+    "html_url": "https://github.com/dotku/mcpm",
+    "created_at": "2025-04-27T03:42:36Z",
+    "updated_at": "2025-04-27T06:21:27Z",
+    "pushed_at": "2025-04-27T06:21:24Z",
+    "size": 8,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "dotku",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1519232?v=4",
+      "html_url": "https://github.com/dotku"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 13685
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# MCP Manager\n\n```sh\n# Add a new server\npython mcpm.py add \"filesystem npx -y @modelcontextprotocol/server-filesystem /path1 /path2\"\n\n# Update an existing server\npython mcpm.py set \"filesystem npx -y @modelcontextprotocol/server-filesystem /path3 /path4\"\n\n# List all servers\npython mcpm.py ls\n\n# Remove a server\npython mcpm.py rm filesystem\n```\n\noutput\n\n```json\n{\n  \"mcpServers\": {\n    \"server_name\": {\n      \"command\": \"command\",\n      \"args\": [\"arg1\", \"arg2\"]\n    }\n  }\n}\n```\n\nfile will be saved to `Saved to: /Users/username/.mcpm/config.json`\n\n## Todo\n\n- specifiy a output path eg `python mcpm.py add \"filesystem npx -y @modelcontextprotocol/server-filesystem /path1 /path2\" -o config.json`\n- support sse server"
+}

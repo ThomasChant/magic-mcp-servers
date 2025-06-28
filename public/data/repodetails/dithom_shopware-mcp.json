@@ -1,0 +1,82 @@
+{
+  "mcp_name": "dithom/shopware-mcp",
+  "mcp_description": "Automates bugfixing for Shopware plugins by leveraging LLMs to handle support tickets and plugin versions.",
+  "mcp_id": "dithom_shopware-mcp",
+  "fetch_timestamp": "2025-06-23T02:39:52.862749Z",
+  "github_url": "https://github.com/dithom/shopware-mcp",
+  "repository": {
+    "name": "shopware-mcp",
+    "full_name": "dithom/shopware-mcp",
+    "description": null,
+    "html_url": "https://github.com/dithom/shopware-mcp",
+    "created_at": "2025-04-28T10:04:53Z",
+    "updated_at": "2025-06-05T16:08:00Z",
+    "pushed_at": "2025-04-30T17:37:26Z",
+    "size": 98,
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 1,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "develop",
+    "owner": {
+      "login": "dithom",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12197549?v=4",
+      "html_url": "https://github.com/dithom"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 31856
+    },
+    "language_percentages": {
+      "TypeScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "tags": [
+      {
+        "name": "1.2.0",
+        "commit_sha": "0bf45093749e67a0a92dd1fe1948d49f28aa1068"
+      },
+      {
+        "name": "1.1.1",
+        "commit_sha": "f894d4f434cd7fcf26b6d107e170e71f9cc70a3c"
+      },
+      {
+        "name": "1.1.0",
+        "commit_sha": "45691891b058ecb7800b121794cb979a37ed4ad6"
+      },
+      {
+        "name": "1.0.3",
+        "commit_sha": "800f6370f1df52be339ed6b98e37f4a2b2d2d922"
+      },
+      {
+        "name": "1.0.2",
+        "commit_sha": "9a9f47c21812a51f9365bc34d52e17c28c2b8392"
+      },
+      {
+        "name": "1.0.1",
+        "commit_sha": "56fc8a1e377d2ebe61dcc9bb744c2d0a3d62fb2f"
+      },
+      {
+        "name": "1.0.0",
+        "commit_sha": "fdc50e05222d836dcd46a2954a9f5891480e97be"
+      }
+    ],
+    "latest_version": "1.2.0",
+    "package_json_version": "1.2.0"
+  },
+  "readme": "# Shopware MCP\n\nA local Model Context Protocol (MCP) server for Shopware plugin development. This project aims to automate bugfixing for Shopware plugins as much as possible by considering support tickets, affected Shopware versions, and affected plugin versions using LLMs in your IDE. \n\n## Tools\n\n- ✅ \"start-plugin-fix\": Detailed instructions on how to approach fixing a bug in a Shopware plugin\n- ✅ \"get-support-ticket\": Support ticket information retrieval (Sensitive data and customer information are stored in dedicated properties, which are **not passed to the LLM**. However, if a customer includes sensitive data directly in the ticket content, it will be.)\n- ✅ \"check-environment\" and \"setup-environment\": Environment setup based on support ticket information (cloning of Shopware and plugin repo in affected versions)\n- 👷‍♂️ Planned: Check code, run existing tests and interact with the browser via MCP to fix bugs\n\nNote: I'm new to MCP development. I'm open to any suggestions and tips!\n\n## Connect to server\n\nCurrently you will have to work with a project specific MCP configuration. Right now this is the only way to be able to provide path information about the project to the MCP server on a per project basis.\n\nCreate `.cursor/mcp.json` (in case you are using Cursor) in your desired project location with the following content:\n\n```\n{\n  \"mcpServers\": {\n    \"shopware-mcp\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@studiosolid/shopware-mcp\"],\n      \"env\": {\n        \"SHOPWARE_ACCOUNT_EMAIL\": \"YOUR_SHOPWARE_ACCOUNT_EMAIL\",\n        \"SHOPWARE_ACCOUNT_PASSWORD\": \"YOUR_SHOPWARE_ACCOUNT_PASSWORD\"\n        \"PROJECT_DIRECTORY\": \"/absolute/path/to/project\"\n      }\n    }\n  }\n}\n```\n\nCheck it's connecting successfully. Then you can prompt something like:\n\n```\nUse \"start-plugin-fix\" to stat fixing the plugin affected by support ticket ABCDE-123456.\n```\n\nor also simply\n\n```\nCan you show me info about ABCDE-123456?\n```"
+}

@@ -1,0 +1,51 @@
+{
+  "mcp_name": "raymondlowe/roo-code-custom-mode-editor-mcp-server",
+  "mcp_description": "Facilitates editing of Roo Code custom modes by providing tools to list, create, and modify mode fields without direct file manipulation.",
+  "mcp_id": "raymondlowe_roo-code-custom-mode-editor-mcp-server",
+  "fetch_timestamp": "2025-06-23T07:53:40.505431Z",
+  "github_url": "https://github.com/raymondlowe/roo-code-custom-mode-editor-mcp-server",
+  "repository": {
+    "name": "roo-code-custom-mode-editor-mcp-server",
+    "full_name": "raymondlowe/roo-code-custom-mode-editor-mcp-server",
+    "description": "An MCP server that knows how to edit the Roo Code custom modes file",
+    "html_url": "https://github.com/raymondlowe/roo-code-custom-mode-editor-mcp-server",
+    "created_at": "2025-04-28T03:50:28Z",
+    "updated_at": "2025-04-28T04:34:33Z",
+    "pushed_at": "2025-04-28T05:26:35Z",
+    "size": 30,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "JavaScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "raymondlowe",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/49975086?v=4",
+      "html_url": "https://github.com/raymondlowe"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 11290
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "0.1.0"
+  },
+  "readme": "# roo-code-custom-mode-editor-mcp-server\n\nAn MCP server that knows how to edit the Roo Code custom modes file\n\nAvoids having to overwrite the `.roomodes` file using file writes or edit the json with unreliable diffs.\n\nThe MCP server exposes tools to:\n\n* List all custom modes\n* Create a new custom mode\n* Get the fields of a custom mode ( \"slug\",\"name\",  \"roleDefinition\", \"customInstructions\", \"groups\")\n* Put and overwrite any one or more fields of a custom mode.\n\nFields are:\n\n- slug : short string\n- name : short string\n- roleDefinition : long string\n- customInstructions : long string\n- groups : array of short strings\n\n## Usage\n\nThis server is located at https://github.com/raymondlowe/roo-code-custom-mode-editor-mcp-server and can be run using the following command:\n\n```bash\nnpx https://github.com/raymondlowe/roo-code-custom-mode-editor-mcp-server\n```\n\n## MCP Configuration\n\nTo use with Roo Code, add the server config to the MCP settings file:\n\n```json\n{\n  \"mcpServers\": {\n    \"roo-code-custom-mode-editor\": {\n      \"command\": \"node\",\n      \"args\": [\n        \"/path/to/roo-code-custom-mode-editor-mcp-server/build/index.js\"\n      ],\n      \"disabled\": false,\n      \"alwaysAllow\": []\n    }\n  }\n}\n```\n\n## Development\n\nInstall dependencies:\n```bash\nnpm install\n```\n\nBuild the server:\n```bash\nnpm run build\n```\n\nFor development with auto-rebuild:\n```bash\nnpm run watch\n```\n\n### Debugging\n\nSince MCP servers communicate over stdio, debugging can be challenging. We recommend using the [MCP Inspector](https://github.com/modelcontextprotocol/inspector), which is available as a package script:\n\n```bash\nnpm run inspector\n```\n\nThe Inspector will provide a URL to access debugging tools in your browser.\n\n## Tools\n\n### list_custom_modes\nLists all custom modes in the `.roomodes` file.\n\n### create_custom_mode\nCreates a new custom mode with the specified fields.\n\nParameters:\n- slug: string\n- name: string\n- roleDefinition: string\n- customInstructions: string\n- groups: string[]\n\n### get_custom_mode_fields\nGets the fields of a custom mode.\n\nParameters:\n- slug: string\n\n### put_custom_mode_fields\nUpdates one or more fields of a custom mode.\n\nParameters:\n- slug: string\n- fields: object containing any of the following fields:\n  - name: string\n  - roleDefinition: string\n  - customInstructions: string\n  - groups: string[]\n"
+}

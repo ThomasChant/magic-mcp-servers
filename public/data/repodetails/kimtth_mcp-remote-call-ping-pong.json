@@ -1,0 +1,60 @@
+{
+  "mcp_name": "kimtth/mcp-remote-call-ping-pong",
+  "mcp_description": "🐍 🏠 - An experimental and educational app for Ping-pong server demonstrating remote MCP (Model Context Protocol) calls",
+  "mcp_id": "kimtth_mcp-remote-call-ping-pong",
+  "fetch_timestamp": "2025-06-23T05:48:45.696226Z",
+  "github_url": "https://github.com/kimtth/mcp-remote-call-ping-pong",
+  "repository": {
+    "name": "mcp-remote-call-ping-pong",
+    "full_name": "kimtth/mcp-remote-call-ping-pong",
+    "description": "🏓 An experimental and educational script for Ping-pong server demonstrating remote MCP (Model Context Protocol) calls",
+    "html_url": "https://github.com/kimtth/mcp-remote-call-ping-pong",
+    "created_at": "2025-04-07T11:53:08Z",
+    "updated_at": "2025-04-09T23:55:28Z",
+    "pushed_at": "2025-04-08T07:46:39Z",
+    "size": 207,
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 1,
+    "open_issues_count": 0,
+    "language": "HTML",
+    "license": null,
+    "topics": [
+      "fastapi",
+      "fastmcp",
+      "mcp",
+      "mcp-client",
+      "mcp-server",
+      "model-context-protocol",
+      "sse"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "kimtth",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/13846660?v=4",
+      "html_url": "https://github.com/kimtth"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 1,
+    "languages": {
+      "HTML": 14753,
+      "Python": 8635
+    },
+    "language_percentages": {
+      "HTML": 63.08,
+      "Python": 36.92
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# 🏓 MCP Ping-Pong Server by Remote Call\n\nAn experimental and educational Ping-Pong server demonstrating MCP (Model Context Protocol) calls via FastAPI.\n\n## Features\n\n- ✅ FastAPI/FastMCP backend for remote MCP calls through API endpoints or SSE\n- 🔄 MCP integration for command handling\n- 🔐 Thread-safe session management\n\n## Quick Start\n\n### Installation\n\nTo install the dependencies, run:\n\n```bash\npoetry install\n```\n\n### 1. Call MCP Tool through API\n\n#### Run the Server\n\nStart the FastAPI server with:\n\n```bash\npython mcp-api-server.py\n```\n\nThe server will start at `http://localhost:8080`.\n\n#### UI\n\nOpen `mcp-api-client.html` in a browser to interact with the UI.\n\n<img alt=\"ui\" src=\"doc/pingpong-ui.png\" width=\"400\"/>\n\n#### API Endpoints\n\n- `GET /ping-pong?prompt_name=<prompt_name>`: Retrieves the specified prompt.\n- `POST /ping-pong`: Invokes MCP tool commands (`ping`, `pong`, `count`).\n\n### 2. Call MCP Tool through SSE transport\n\nThe following example demonstrates using Server-Sent Events (SSE) for communication with the MCP server.\n\n#### Run the SSE Server\n\n```bash\npython mcp-sse-server.py\n```\n\n#### Run the SSE Client\n\n```bash\npython mcp-sse-client.py\n```\n\n#### Sample Output\n\n```bash\nType a command (e.g., 'ping', 'pong', 'count') or 'exit' to quit:\n>>> ping\nSending command: ping\nResult: pong\n>>> pong\nSending command: pong\nResult: ping\n>>> count\nSending command: count\nResult: 2\n```\n\n## References\n\n- [FastAPI SSE MCP](https://github.com/ragieai/fastapi-sse-mcp)\n- [MCP Weather SSE](https://github.com/justjoehere/mcp-weather-sse)\n- [MCP Chinese Getting Started Guide](https://github.com/liaokongVFX/MCP-Chinese-Getting-Started-Guide)\n\n## 📄 License\n\nMIT\n\n"
+}

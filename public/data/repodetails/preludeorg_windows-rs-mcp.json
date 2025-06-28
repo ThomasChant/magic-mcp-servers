@@ -1,0 +1,73 @@
+{
+  "mcp_name": "preludeorg/windows-rs-mcp",
+  "mcp_description": "Facilitates searching the Rust windows crate API documentation using Playwright for seamless interaction with the documentation website.",
+  "mcp_id": "preludeorg_windows-rs-mcp",
+  "fetch_timestamp": "2025-06-23T07:36:58.703119Z",
+  "github_url": "https://github.com/preludeorg/windows-rs-mcp",
+  "repository": {
+    "name": "windows-rs-mcp",
+    "full_name": "preludeorg/windows-rs-mcp",
+    "description": "MCP server that allows searching the Rust windows crate API documentation",
+    "html_url": "https://github.com/preludeorg/windows-rs-mcp",
+    "created_at": "2025-04-08T19:53:34Z",
+    "updated_at": "2025-04-20T01:44:52Z",
+    "pushed_at": "2025-04-10T16:03:08Z",
+    "size": 28,
+    "stargazers_count": 9,
+    "watchers_count": 9,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "preludeorg",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32579863?v=4",
+      "html_url": "https://github.com/preludeorg"
+    },
+    "has_issues": true,
+    "has_projects": false,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 3,
+    "languages": {
+      "Python": 17859
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 2,
+    "tags": [
+      {
+        "name": "v0.0.5",
+        "commit_sha": "5758734319a98f3f525e7ab8ee8e0c8144f5784d"
+      },
+      {
+        "name": "v0.0.4",
+        "commit_sha": "c8ff64b8d4d56e4f480afa2c892eabf41460d440"
+      },
+      {
+        "name": "v0.0.3",
+        "commit_sha": "6f4f68eda47f359bc1d7754b83330340b326f1ca"
+      },
+      {
+        "name": "v0.0.2",
+        "commit_sha": "6477104802b261721f179780d63519f810651b28"
+      },
+      {
+        "name": "v0.0.1",
+        "commit_sha": "90c5ec1b04b9423cd99804a9719933782589f9dd"
+      }
+    ],
+    "latest_version": "v0.0.5"
+  },
+  "readme": "# Windows Crate Docs Search MCP\n\nThis project provides a Claude Desktop MCP server that allows searching the Rust `windows` crate API documentation hosted at [microsoft.github.io/windows-docs-rs](https://microsoft.github.io/windows-docs-rs/).\n\nIt uses Playwright to interact with the documentation website's search functionality and the features table.\n\n## Features\n\n*   **Search Windows API:** Use the `search_windows_api` tool to find functions, structs, enums, etc., within the `windows` crate docs.\n*   **Get Documentation:** Retrieve detailed documentation for exact matches, including description, signature, and the required Cargo feature (best effort).\n*   **Find Related Items:** List related API items found during the search.\n\n## Usage\n\nThis package requires Playwright browsers to be installed. The server attempts to install the default browser (`chromium`) automatically on the first run. You can skip this by setting the `MCP_SKIP_PLAYWRIGHT_INSTALL` environment variable.\n\n### Running the MCP Server\n\n**Using `uvx`:**\n\nThe simplest way to run the server after installation is using `uvx`:\n\n```bash\nuvx windows-rs-mcp\n```\n\n**Running Locally with `uv`:**\n\nIf you have cloned the repository, you can run the server directly using `uv run` from the project directory:\n\n```bash\n# Navigate to the project root directory\n# cd /path/to/windows-rs-mcp  (Linux/macOS)\n# cd C:\\path\\to\\your\\project\\windows-rs-mcp (Windows)\n\n# Run the server\nuv run windows-rs-mcp\n```\n\n### Configuring Claude Desktop\n\nTo use this MCP with Claude Desktop, add the following configuration to your Claude Desktop settings:\n\n**Option 1: Using `uvx` (Recommended)**\n\n```json\n{\n  \"mcpServers\": {\n    \"windows-docs\": {\n      \"command\": \"uvx\",\n      \"args\": [\n        \"windows-rs-mcp\"\n      ]\n    }\n  }\n}\n```\n\n**Option 2: Using `uv run` (For local source)**\n\nMake sure to replace the placeholder path in `args` with the actual absolute path to your project directory.\n\n```json\n{\n  \"mcpServers\": {\n    \"windows-docs\": {\n      \"command\": \"uv\",\n      \"args\": [\n        \"--directory\",\n        \"C:\\\\path\\\\to\\\\your\\\\project\\\\windows-rs-mcp\", // <-- Replace with your path\n        \"run\",\n        \"windows-rs-mcp\"\n      ]\n    }\n  }\n}\n```\n\nAfter configuring, restart Claude Desktop. You should then be able to use the `search_windows_api` tool.\n\n### Configuring Cursor\n\nOpen `.cursor/mcp.json` and add the MCP server\n\n```json\n{\n  \"mcpServers\": {\n    \"windows-rs-mcp\": {\n      \"command\": \"uvx\",\n      \"args\": [\"windows-rs-mcp\"]\n    }\n  }\n}\n```\n\n## Environment Variables\n\n*   `MCP_SKIP_PLAYWRIGHT_INSTALL`: Set to `true`, `1`, or `yes` to skip the automatic Playwright browser installation check.\n*   `MCP_PLAYWRIGHT_BROWSER`: Specifies the browser Playwright should install (defaults to `chromium`). Other options include `firefox` and `webkit`.\n"
+}

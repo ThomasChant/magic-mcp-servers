@@ -1,0 +1,108 @@
+{
+  "mcp_name": "flowcore/mcp-flowcore-platform",
+  "mcp_description": "🎖️ 📇 ☁️ 🏠 - Interact with Flowcore to perform actions, ingest data, and analyse, cross reference and utilise any data in your data cores, or in public data cores; all with human language.",
+  "mcp_id": "flowcore-io_mcp-flowcore-platform",
+  "fetch_timestamp": "2025-06-23T03:20:30.189774Z",
+  "github_url": "https://github.com/flowcore-io/mcp-flowcore-platform",
+  "repository": {
+    "name": "mcp-flowcore-platform",
+    "full_name": "flowcore-io/mcp-flowcore-platform",
+    "description": "MCP server for managing and interacting with Flowcore Platform",
+    "html_url": "https://github.com/flowcore-io/mcp-flowcore-platform",
+    "created_at": "2025-03-12T12:01:11Z",
+    "updated_at": "2025-06-17T09:12:47Z",
+    "pushed_at": "2025-05-12T10:50:57Z",
+    "size": 120,
+    "stargazers_count": 4,
+    "watchers_count": 4,
+    "forks_count": 3,
+    "open_issues_count": 1,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [
+      "flowcore",
+      "mcp",
+      "mcp-server"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "flowcore-io",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/114778675?v=4",
+      "html_url": "https://github.com/flowcore-io"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 3,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 29043,
+      "JavaScript": 18463
+    },
+    "language_percentages": {
+      "TypeScript": 61.14,
+      "JavaScript": 38.86
+    },
+    "pull_requests_count": 20,
+    "contributors_count": 3,
+    "latest_release": {
+      "tag_name": "v1.7.1",
+      "name": "v1.7.1",
+      "published_at": "2025-05-12T10:50:57Z",
+      "body": "## [1.7.1](https://github.com/flowcore-io/mcp-flowcore-platform/compare/v1.7.0...v1.7.1) (2025-05-12)\n\n\n### Bug Fixes\n\n* **sensitive-data:** :security: Update sensitive data handling instructions in event type info and events retrieval ([fd4ce3f](https://github.com/flowcore-io/mcp-flowcore-platform/commit/fd4ce3f8bd371dd59a6edfd91202ab105c16cf2a))",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v1.7.1",
+        "commit_sha": "8e1c080d9ec86949e840be0cc99ba3c07b3b041b"
+      },
+      {
+        "name": "v1.7.0",
+        "commit_sha": "9c0eb8b916c31ac4970f864e8888e8c942e62a58"
+      },
+      {
+        "name": "v1.6.2",
+        "commit_sha": "8b6d38cc9d75929365e3c8ee8d4b78b253b3195e"
+      },
+      {
+        "name": "v1.6.1",
+        "commit_sha": "eb0453db5c82fa9bef4ff8cfbe3b0e4de6d03fae"
+      },
+      {
+        "name": "v1.6.0",
+        "commit_sha": "003e202dabbc06bfba7e15997c2984305a01d6be"
+      },
+      {
+        "name": "v1.5.3",
+        "commit_sha": "ea8d93b3e57b0d1c7b056691ce3fe7318964ec66"
+      },
+      {
+        "name": "v1.5.2",
+        "commit_sha": "2db3847b07f0139b7a30a4a167621759432414a3"
+      },
+      {
+        "name": "v1.5.1",
+        "commit_sha": "5a9e1df551962cfd63355786ea622690307c056d"
+      },
+      {
+        "name": "v1.5.0",
+        "commit_sha": "e0f1aa251da0704bcb129c624cd04688dc8d16d9"
+      },
+      {
+        "name": "v1.4.0",
+        "commit_sha": "0f5c59be191d84ad9e6ed9076f6d2ef6d4a269a7"
+      }
+    ],
+    "latest_version": "v1.7.1",
+    "package_json_version": "1.7.1"
+  },
+  "readme": "# Flowcore Platform MCP Server\n\nA Model Context Protocol (MCP) server for managing and interacting with the Flowcore Platform.\n\nIf you're curious about how it works, you can [check out our video](https://www.youtube.com/watch?v=Wh4h_n7IlTw), where we set it up and demonstrate what it can do.\n\n> If you like this solution, but would like to reduce the hallucinations, reduce token usage, increase the amount of data you can look through and also speed up querying exponentially - then we recommend you also [check out our local read model mcp server](https://github.com/flowcore-io/mcp-flowcore-local-readmodel),\n\n## Usage with npx\n\nYou can run this package directly using npx without installing it:\n\n```bash\nnpx @flowcore/platform-mcp-server --username <username> --pat <pat>\n```\n\nReplace `<username>` and `<pat>` with your Flowcore username and PAT (Personal Access Token).\n\n## Installation\n\nIf you prefer to install the package globally:\n\n```bash\nnpm install -g @flowcore/platform-mcp-server\n```\n\nThen run it:\n\n```bash\nplatform-mcp-server --username <username> --pat <pat>\n```\n\n## Development\n\nTo install dependencies:\n\n```bash\nbun install\n```\n\nRun the project directly with Bun:\n\n```bash\nbun run src/index.ts --username <username> --pat <pat>\n```\n\n## Building\n\nBuild the project:\n\n```bash\nbun run build\n```\n\nRun the built project:\n\n```bash\nnode dist/cli.js --username <username> --pat <pat>\n```\n\n## Environment Variables\n\n| Variable | Type | Description | Default | Required |\n|----------|------|-------------|---------|----------|\n| USERNAME | string | Flowcore username | - | ✓ |\n| PAT | string | Flowcore PAT (Personal Access Token) | - | ✓ |\n\n## About\n\nThis project uses the Model Context Protocol (MCP) to provide a standardized interface for interacting with the Flowcore Platform. It allows AI assistants to query and manage Flowcore resources through a structured API.\n\nOriginally created using `bun init` in bun v1.2.3. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.\n\n## Questions\nif you have any questions or cool ideas, then feel free to [join our Discord community](https://discord.gg/4fmSaR4wFR). Otherwise you can find us on all major social platforms"
+}

@@ -1,0 +1,50 @@
+{
+  "mcp_name": "cygkichi/estat-mcp-server",
+  "mcp_description": "Facilitates access to Japan's e-Stat API, enabling language models to search and retrieve government statistical data.",
+  "mcp_id": "cygkichi_estat-mcp-server",
+  "fetch_timestamp": "2025-06-23T02:24:33.700437Z",
+  "github_url": "https://github.com/cygkichi/estat-mcp-server",
+  "repository": {
+    "name": "estat-mcp-server",
+    "full_name": "cygkichi/estat-mcp-server",
+    "description": null,
+    "html_url": "https://github.com/cygkichi/estat-mcp-server",
+    "created_at": "2025-04-17T14:20:11Z",
+    "updated_at": "2025-06-17T10:51:21Z",
+    "pushed_at": "2025-04-19T15:45:35Z",
+    "size": 17,
+    "stargazers_count": 4,
+    "watchers_count": 4,
+    "forks_count": 1,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "cygkichi",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9675041?v=4",
+      "html_url": "https://github.com/cygkichi"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 9301
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# e-Stat MCP server\n\n[Model Context Protocol](https://modelcontextprotocol.io/introduction) (MCP) サーバーで、日本の政府統計ポータルサイト「e-Stat」のAPIにアクセスするための機能を提供します。言語モデルが統計データを検索・取得できるようになります。\n\n\n## ツール\n\nこのサーバーは以下のツールを提供しています：\n\n- `search_e_stat_tables` : キーワードと調査年で統計表を検索します\n- `get_e_stat_meta_info` : 統計表IDに対応するメタ情報を取得します\n- `get_specific_e_stat_data` : 統計表IDまたはデータセットIDに対応する統計データを取得します\n-  `get_e_stat_ref_dataset` : データセットの絞り込み条件等を参照します\n- `get_e_stat_data_catalog` : 統計表ファイルおよび統計データベースの情報を取得します\n\n## 使い方\nこのサーバーを使用するには、e-Stat APIのアプリケーションIDが必要です。以下の手順で取得できます：\n1. [e-Stat API機能](https://www.e-stat.go.jp/api/)にアクセス\n2. ユーザ登録を行う\n3. 利用規約に同意してアプリケーションIDを取得\n\n\n#### Claude Desktop\n\n- On MacOS: `~/Library/Application\\ Support/Claude/claude_desktop_config.json`\n- On Windows: `%APPDATA%/Claude/claude_desktop_config.json`\n\n```json\n{\n    \"mcpServers\": {\n        \"e-stat\": {\n            \"command\": \"uv\",\n            \"args\": [\n                \"--directory\",\n                \"/path/to/estat-mcp-server\",\n                \"run\",\n                \"server.py\"\n            ],\n            \"env\": {\n                \"E_STAT_APP_ID\": \"YOUR_E_STAT_APP_ID\"\n            }\n        }\n    }\n}\n```\n\n```json\n{\n    \"mcpServers\": {\n        \"e-stat\": {\n            \"command\": \"uvx\",\n            \"args\": [\n                \"estat-mcp-server\"\n            ],\n            \"env\": {\n                \"E_STAT_APP_ID\": \"YOUR_E_STAT_APP_ID\"\n            }\n        }\n    }\n}\n```\n\n\n\n## 使用例\n\n接続後、Claudeに以下のような質問ができます：\n\n- \"2023年の東京都の人口統計を検索して\"\n- \"アイスクリームの需要に関する統計を取得して\"\n- \"都道府県別の高齢化率を比較して\"\n\n\n## ライセンス\n\nこのプロジェクトはMITライセンスの下で提供されています\n - 詳細はLICENSEファイルを参照してください。"
+}

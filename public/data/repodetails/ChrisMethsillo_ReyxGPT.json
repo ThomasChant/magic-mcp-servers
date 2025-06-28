@@ -1,0 +1,59 @@
+{
+  "mcp_name": "ChrisMethsillo/ReyxGPT",
+  "mcp_description": "ReyxGPT enables seamless management of Minecraft servers through the Model Context Protocol, facilitating command execution and status monitoring via RCON.",
+  "mcp_id": "ChrisMethsillo_ReyxGPT",
+  "fetch_timestamp": "2025-06-23T02:05:42.173938Z",
+  "github_url": "https://github.com/ChrisMethsillo/ReyxGPT",
+  "repository": {
+    "name": "ReyxGPT",
+    "full_name": "ChrisMethsillo/ReyxGPT",
+    "description": "Minecraft server manager using the Model Context Protocol.",
+    "html_url": "https://github.com/ChrisMethsillo/ReyxGPT",
+    "created_at": "2025-04-18T02:02:16Z",
+    "updated_at": "2025-04-18T03:01:41Z",
+    "pushed_at": "2025-04-18T03:01:38Z",
+    "size": 15,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [
+      "administration",
+      "claude",
+      "llm",
+      "mcp-server",
+      "minecraft",
+      "minecraft-server",
+      "rcon",
+      "server-management"
+    ],
+    "default_branch": "master",
+    "owner": {
+      "login": "ChrisMethsillo",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/75255574?v=4",
+      "html_url": "https://github.com/ChrisMethsillo"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 12043
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# ReyxGPT: Minecraft Server Management Agent\n\nReyxGPT is an agent built on the Model Context Protocol (MCP) for managing Minecraft servers via RCON. It allows a language model to:\n\n- Execute server commands\n- Monitor server and player status\n\n## Setup\n\nTo integrate ReyxGPT with clients like Claude Desktop, add the following to your MCP configuration:\n\n```json\n\"mcpServers\": {\n  \"reyxgpt\": {\n    \"command\": \"uv\",\n    \"args\": [\n      \"--directory\",\n      \"C:\\\\ABSOLUTE_PATH\\\\\",\n      \"run\",\n      \"main.py\"\n    ],\n    \"env\": {\n      \"RCON_HOST\": \"localhost\",\n      \"RCON_PORT\": \"25575\",\n      \"RCON_PASSWORD\": \"verysecurepassword\"\n    }\n  }\n}\n```\n\nEnsure your Minecraft server has RCON enabled with the specified credentials.\n\n## Project Structure\n\n```\nReyxGPT/\n├── .env                 # RCON configuration\n├── main.py              # Application entry point\n├── mcp_server/          # MCP server implementation\n├── rcon/                # RCON client implementation\n├── pyproject.toml       # Dependencies and metadata\n└── uv.lock              # Dependency lock file\n```\n\n## Requirements\n\n- Python 3.13\n- [uv](https://github.com/astral-sh/uv) for running the project\n\n## Running the Agent\n\n```bash\nuv run main.py\n```\n\nThis will start the MCP server, allowing the agent to interact with your Minecraft server.\n"
+}

@@ -1,0 +1,133 @@
+{
+  "mcp_name": "utensils/mcp-nixos",
+  "mcp_description": "🐍 🏠 - MCP server providing accurate information about NixOS packages, system options, Home Manager configurations, and nix-darwin macOS settings to prevent AI hallucinations.",
+  "mcp_id": "utensils_mcp-nixos",
+  "fetch_timestamp": "2025-06-23T09:13:56.372636Z",
+  "github_url": "https://github.com/utensils/mcp-nixos",
+  "repository": {
+    "name": "mcp-nixos",
+    "full_name": "utensils/mcp-nixos",
+    "description": "MCP-NixOS - Model Context Protocol Server for NixOS resources",
+    "html_url": "https://github.com/utensils/mcp-nixos",
+    "created_at": "2025-03-20T05:05:00Z",
+    "updated_at": "2025-06-22T20:00:43Z",
+    "pushed_at": "2025-06-22T06:17:10Z",
+    "size": 2138,
+    "stargazers_count": 145,
+    "watchers_count": 145,
+    "forks_count": 11,
+    "open_issues_count": 1,
+    "language": "HTML",
+    "license": "MIT License",
+    "topics": [
+      "ai-assistant",
+      "ai-integration",
+      "ai-tools",
+      "anthropic",
+      "claude",
+      "developer-tools",
+      "devops-tools",
+      "fastmcp",
+      "llm-tools",
+      "mcp",
+      "model-context-protocol",
+      "nix",
+      "nix-options",
+      "nix-packages",
+      "nix-search",
+      "nixos",
+      "package-search",
+      "python",
+      "sre-tools"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "utensils",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7536831?v=4",
+      "html_url": "https://github.com/utensils"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 11,
+    "subscribers_count": 4,
+    "languages": {
+      "HTML": 1510955,
+      "Python": 441456,
+      "TypeScript": 203135,
+      "Nix": 37852,
+      "CSS": 1495,
+      "JavaScript": 1213,
+      "Dockerfile": 251
+    },
+    "language_percentages": {
+      "HTML": 68.79,
+      "Python": 20.1,
+      "TypeScript": 9.25,
+      "Nix": 1.72,
+      "CSS": 0.07,
+      "JavaScript": 0.06,
+      "Dockerfile": 0.01
+    },
+    "pull_requests_count": 25,
+    "contributors_count": 4,
+    "latest_release": {
+      "tag_name": "v1.0.0",
+      "name": "Release v1.0.0",
+      "published_at": "2025-05-26T22:43:15Z",
+      "body": "\n## Overview\n\nMCP-NixOS v1.0.0 is a complete rewrite that proves less is more. We've drastically simplified the codebase while maintaining 100% functionality and adding new features. This isn't just a refactor—it's a masterclass in minimalism.\n\n## Changes in v1.0.0\n\n### 🎯 The Nuclear Option\n\n- **Complete Rewrite**: Drastically simplified the entire codebase\n- **Stateless Operation**: No more cache directories filling up your disk\n- **Direct API Calls**: Removed all abstraction layers—now it's just functions doing their job\n- **Simplified Dependencies**: Reduced from 5 to 3 core dependencies (40% reduction)\n- **Two-File Implementation**: Everything you need in just `server.py` and `__main__.py`\n- **Resolves #22**: Completely eliminated pickle usage and the entire cache layer\n\n### 🚀 Major Improvements\n\n- **Plain Text Output**: All responses now return human-readable plain text (no XML!)\n- **NixHub Integration**: Added package version history tools\n  - `nixhub_package_versions`: Get version history with nixpkgs commits\n  - `nixhub_find_version`: Smart search for specific versions\n- **Dynamic Channel Resolution**: Auto-discovers current stable channel\n- **Enhanced Error Messages**: Suggestions when exact matches fail\n- **Flake Search**: Added deduplicated flake package search\n- **Better Stats**: Accurate statistics for all tools\n- **Zero Configuration**: Removed all the config options you weren't using anyway\n- **Faster Startup**: No cache initialization, no state management, just pure functionality\n- **100% Test Coverage**: Comprehensive test suite ensures everything works as advertised\n\n### 💥 Breaking Changes\n\n- **No More Caching**: All operations are now stateless (your internet better be working)\n- **Environment Variables Removed**: Only `ELASTICSEARCH_URL` remains\n- **No Pre-Cache Option**: The `--pre-cache` flag is gone (along with the cache itself)\n- **No Interactive Shell**: The deprecated CLI has been completely removed\n\n### 🧹 What We Removed\n\n- `cache/` directory - Complex caching that nobody understood\n- `clients/` directory - Abstract interfaces that abstracted nothing\n- `contexts/` directory - Context managers for contexts that didn't exist\n- `resources/` directory - MCP resource definitions (now inline)\n- `tools/` directory - Tool implementations (now in server.py)\n- `utils/` directory - \"Utility\" functions that weren't\n- 45 files of over-engineered complexity\n\n### 📊 The Numbers\n\n- **Before**: Many files with layers of abstraction\n- **After**: Just 2 core files that matter\n- **Result**: Dramatically less code, zero reduction in functionality, more features added\n\n## Installation\n\n```bash\n# Install with pip\npip install mcp-nixos==1.0.0\n\n# Install with uv\nuv pip install mcp-nixos==1.0.0\n\n# Install with uvx\nuvx mcp-nixos==1.0.0\n```\n\n## Migration Guide\n\nIf you're upgrading from v0.x:\n\n1. **Remove cache-related environment variables** - They don't do anything anymore\n2. **Remove `--pre-cache` from any scripts** - It's gone\n3. **That's it** - Everything else just works\n\n## Why This Matters\n\nThis release demonstrates that most \"enterprise\" code is just complexity for complexity's sake. By removing abstractions, caching layers, and \"design patterns,\" we've created something that:\n\n- Is easier to understand\n- Has fewer bugs (less code = less bugs)\n- Starts faster\n- Uses less memory\n- Is more reliable\n\nSometimes the best code is the code you delete.\n\n## Contributors\n\n- James Brink (@utensils) - Chief Code Deleter\n\n---\n\n",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v1.0.0",
+        "commit_sha": "651e7e2d088af252a8aff338882e80001cf0d366"
+      },
+      {
+        "name": "v0.5.1",
+        "commit_sha": "6e72359b585b4c1cabc624ccb504c4df4601d05e"
+      },
+      {
+        "name": "v0.5.0",
+        "commit_sha": "24ccb93930f7139b1579b19a70e7cf04465751a1"
+      },
+      {
+        "name": "v0.4.0",
+        "commit_sha": "c6bb5c061e278cd08d033b5504715f5f084bb828"
+      },
+      {
+        "name": "v0.3.1",
+        "commit_sha": "1facbfaecb0e327c56ca19fe35b9ae390ac3f8af"
+      },
+      {
+        "name": "v0.3.0",
+        "commit_sha": "1f529c7bf4810b560b7bb068e597d0d70c98e52b"
+      },
+      {
+        "name": "v0.2.3",
+        "commit_sha": "74b94f06cc9d5dcd2899d8f3fbe2bbb5863ac3bb"
+      },
+      {
+        "name": "v0.2.2",
+        "commit_sha": "de3f610f15dc983194d6cb3d6a22f8a9578a0084"
+      },
+      {
+        "name": "v0.2.1",
+        "commit_sha": "5b8d434c7494cb6827206029c03308cf8457fb34"
+      },
+      {
+        "name": "v0.1.4",
+        "commit_sha": "c19db481807b9d82fb43e94de7f714db924ae8a7"
+      }
+    ],
+    "latest_version": "v1.0.0"
+  },
+  "readme": "# MCP-NixOS - Because Your AI Assistant Shouldn't Hallucinate About Packages\n\n[![CI](https://github.com/utensils/mcp-nixos/actions/workflows/ci.yml/badge.svg)](https://github.com/utensils/mcp-nixos/actions/workflows/ci.yml)\n[![codecov](https://codecov.io/gh/utensils/mcp-nixos/graph/badge.svg?token=kdcbgvq4Bh)](https://codecov.io/gh/utensils/mcp-nixos)\n[![PyPI](https://img.shields.io/pypi/v/mcp-nixos.svg)](https://pypi.org/project/mcp-nixos/)\n[![Python Versions](https://img.shields.io/pypi/pyversions/mcp-nixos.svg)](https://pypi.org/project/mcp-nixos/)\n[![smithery badge](https://smithery.ai/badge/@utensils/mcp-nixos)](https://smithery.ai/server/@utensils/mcp-nixos)\n[![Verified on MseeP](https://mseep.ai/badge.svg)](https://mseep.ai/app/99cc55fb-a5c5-4473-b315-45a6961b2e8c)\n\n> **🎉 REFACTORED**: Version 1.0.0 represents a complete rewrite that drastically simplified everything. We removed all the complex caching, abstractions, and \"enterprise\" patterns. Because sometimes less is more, and more is just showing off.\n\n## Quick Start (Because You Want to Use It NOW)\n\n**🚨 No Nix/NixOS Required!** This tool works on any system - Windows, macOS, Linux. You're just querying web APIs.\n\n### Option 1: Using uvx (Recommended for most users)\n[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=nixos&config=eyJjb21tYW5kIjoidXZ4IG1jcC1uaXhvcyJ9)\n```json\n{\n  \"mcpServers\": {\n    \"nixos\": {\n      \"command\": \"uvx\",\n      \"args\": [\"mcp-nixos\"]\n    }\n  }\n}\n```\n\n### Option 2: Using Nix (For Nix users)\n[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=nixos&config=eyJjb21tYW5kIjoibml4IHJ1biBnaXRodWI6dXRlbnNpbHMvbWNwLW5peG9zIC0tIn0%3D)\n```json\n{\n  \"mcpServers\": {\n    \"nixos\": {\n      \"command\": \"nix\",\n      \"args\": [\"run\", \"github:utensils/mcp-nixos\", \"--\"]\n    }\n  }\n}\n```\n\nThat's it. Your AI assistant now has access to real NixOS data instead of making things up. You're welcome.\n\n## What Is This Thing?\n\nMCP-NixOS is a Model Context Protocol server that gives your AI assistant accurate, real-time information about:\n- **NixOS packages** (130K+ packages that actually exist)\n- **Configuration options** (22K+ ways to break your system)\n- **Home Manager settings** (4K+ options for the power users)\n- **nix-darwin configurations** (1K+ macOS settings Apple doesn't want you to touch)\n- **Package version history** via [NixHub.io](https://www.nixhub.io) (Find that ancient Ruby 2.6 with commit hashes)\n\n## The Tools You Actually Care About\n\n### 🔍 NixOS Tools\n- `nixos_search(query, type, channel)` - Search packages, options, or programs\n- `nixos_info(name, type, channel)` - Get detailed info about packages/options\n- `nixos_stats(channel)` - Package and option counts\n- `nixos_channels()` - List all available channels\n- `nixos_flakes_search(query)` - Search community flakes\n- `nixos_flakes_stats()` - Flake ecosystem statistics\n\n### 📦 Version History Tools (NEW!)\n- `nixhub_package_versions(package, limit)` - Get version history with commit hashes\n- `nixhub_find_version(package, version)` - Smart search for specific versions\n\n### 🏠 Home Manager Tools\n- `home_manager_search(query)` - Search user config options\n- `home_manager_info(name)` - Get option details (with suggestions!)\n- `home_manager_stats()` - See what's available\n- `home_manager_list_options()` - Browse all 131 categories\n- `home_manager_options_by_prefix(prefix)` - Explore options by prefix\n\n### 🍎 Darwin Tools\n- `darwin_search(query)` - Search macOS options\n- `darwin_info(name)` - Get option details\n- `darwin_stats()` - macOS configuration statistics\n- `darwin_list_options()` - Browse all 21 categories\n- `darwin_options_by_prefix(prefix)` - Explore macOS options\n\n## Installation Options\n\n**Remember: You DON'T need Nix/NixOS installed!** This tool runs anywhere Python runs.\n\n### For Regular Humans (Windows/Mac/Linux)\n```bash\n# Run directly with uvx (no installation needed)\nuvx mcp-nixos\n\n# Or install globally\npip install mcp-nixos\nuv pip install mcp-nixos\n```\n\n### For Nix Users (You Know Who You Are)\n```bash\n# Run without installing\nnix run github:utensils/mcp-nixos\n\n# Install to profile\nnix profile install github:utensils/mcp-nixos\n```\n\n## Features Worth Mentioning\n\n### 🚀 Version 1.0.0: The Great Simplification\n- **Drastically less code** - Removed thousands of lines of complexity\n- **100% functionality** - Everything still works\n- **0% cache corruption** - Because we removed the cache entirely\n- **Stateless operation** - No files to clean up\n- **Direct API access** - No abstraction nonsense\n\n### 📊 What You Get\n- **Real-time data** - Always current, never stale\n- **Plain text output** - Human and AI readable\n- **Smart suggestions** - Helps when you typo option names\n- **Cross-platform** - Works on Linux, macOS, and yes, even Windows\n- **No configuration** - It just works™\n\n### 🎯 Key Improvements\n- **Dynamic channel resolution** - `stable` always points to current stable\n- **Enhanced error messages** - Actually helpful when things go wrong\n- **Deduped flake results** - No more duplicate spam\n- **Version-aware searches** - Find that old Ruby version you need\n- **Category browsing** - Explore options systematically\n\n## For Developers (The Brave Ones)\n\n### With Nix (The Blessed Path)\n```bash\nnix develop\nmenu  # Shows all available commands\n\n# Common tasks\nrun        # Start the server\nrun-tests  # Run all tests\nlint       # Format and check code\ntypecheck  # Check types\n```\n\n### Without Nix (The Path of Pain)\n```bash\npip install -e \".[dev]\"\npytest tests/\nblack mcp_nixos/\nflake8 mcp_nixos/\n```\n\n### Testing Philosophy\n- **367 tests** that actually test things\n- **Real API calls** because mocks are for cowards\n- **Plain text validation** ensuring no XML leaks through\n- **Cross-platform tests** because Windows users deserve pain too\n\n## Environment Variables\n\nJust one. We're minimalists now:\n\n| Variable | Description | Default |\n|----------|-------------|---------|\n| `ELASTICSEARCH_URL` | NixOS API endpoint | https://search.nixos.org/backend |\n\n\n## Acknowledgments\n\nThis project queries data from several amazing services:\n- **[NixHub.io](https://www.nixhub.io)** - Provides package version history and commit tracking\n- **[search.nixos.org](https://search.nixos.org)** - Official NixOS package and option search\n- **[Jetify](https://www.jetify.com)** - Creators of [Devbox](https://www.jetify.com/devbox) and NixHub\n\n*Note: These services have not endorsed this tool. We're just grateful API consumers.*\n\n## License\n\nMIT - Because sharing is caring, even if the code hurts.\n\n---\n\n_Created by James Brink and maintained by masochists who enjoy Nix._\n\n_Special thanks to the NixOS project for creating an OS that's simultaneously the best and worst thing ever._"
+}

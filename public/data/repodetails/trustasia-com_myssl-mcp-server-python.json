@@ -1,0 +1,50 @@
+{
+  "mcp_name": "trustasia-com/myssl-mcp-server-python",
+  "mcp_description": "MySSL MCP Server performs site security certificate inspections, integrating with LLM models for enhanced analysis.",
+  "mcp_id": "trustasia-com_myssl-mcp-server-python",
+  "fetch_timestamp": "2025-06-23T09:05:50.112185Z",
+  "github_url": "https://github.com/trustasia-com/myssl-mcp-server-python",
+  "repository": {
+    "name": "myssl-mcp-server-python",
+    "full_name": "trustasia-com/myssl-mcp-server-python",
+    "description": "The MySSL MCP Server",
+    "html_url": "https://github.com/trustasia-com/myssl-mcp-server-python",
+    "created_at": "2025-04-15T11:09:06Z",
+    "updated_at": "2025-05-04T12:01:01Z",
+    "pushed_at": "2025-04-16T02:34:37Z",
+    "size": 622,
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "trustasia-com",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/86408538?v=4",
+      "html_url": "https://github.com/trustasia-com"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 3,
+    "languages": {
+      "Python": 6307
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# MySSL MCP Server\n\n## What is MySSL MCP Server?\n\nMySSL is a site inspection tool developed by TrustAsia (official website: [MySSL](https://myssl.com)), which supports a series of inspections for site security certificates. With MySSL MCP, it is possible to integrate with LLM models. The MySSL MCP inspection tool can inspect sites and provide inspection results for further analysis and processing by LLM models.\n\nBelow is a demonstration of configuring MySSL MCP and performing site inspection using Cline.\n\n## Demonstration with Cline\n\n1. **Install Cline**  \n    Follow the official documentation to install Cline on your VSCode.\n\n2. **Configure MySSL MCP**  \n    Use the provided JSON configuration file and replace the placeholders (`{{PATH_TO_UV}}` and `{{PATH_TO_SRC}}`) with the appropriate paths on your system.\n\n    ![Configuration](images/20250415185421.jpg)\n\n3. **Run the Inspection and View Results**  \n    Ask Cline to inspect a site (it may request configuration information).\n    \n    ![step1](images/20250415185053.jpg)\n\n    ![step2](images/20250415185142.jpg)\n\n    ![step3](images/20250415185200.jpg)\n\n    ![step4](images/20250415185235.jpg)\n\n## Supportted features\n\n* fast scan\n\n# Installation\n\n## Prerequisites\n\n* Python 3.12+\n* Anthropic Claude Desktop app (or Cursor, or Cline)\n* UV (Python package manager), install with curl -LsSf https://astral.sh/uv/install.sh | sh\n\n## Steps\n\n1. Clone repository\n\n```\ngit clone https://github.com/trustasia-com/myssl-mcp-server-python.git\n```\n\n2. Configure MCP server and run\n\nCopy the below json with the appropriate {{PATH}} values:\n\n```\n{\n  \"mcpServers\": {\n    \"myssl-mcp-server\": {\n      \"command\": \"{{PATH_TO_UV}}\", // Run `which uv` and place the output here\n      \"args\": [\n        \"--directory\",\n        \"{{PATH_TO_SRC}}/myssl-mcp-server-python/myssl-mcp-server\",\n        \"run\",\n        \"server.py\"\n      ]\n    }\n  }\n}\n```"
+}

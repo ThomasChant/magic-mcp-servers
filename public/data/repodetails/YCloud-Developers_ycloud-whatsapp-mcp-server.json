@@ -1,0 +1,53 @@
+{
+  "mcp_name": "YCloud-Developers/ycloud-whatsapp-mcp-server",
+  "mcp_description": "📇 🏠 - MCP server for WhatsApp Business Platform by YCloud.",
+  "mcp_id": "YCloud-Developers_ycloud-whatsapp-mcp-server",
+  "fetch_timestamp": "2025-06-23T09:37:49.613712Z",
+  "github_url": "https://github.com/YCloud-Developers/ycloud-whatsapp-mcp-server",
+  "repository": {
+    "name": "ycloud-whatsapp-mcp-server",
+    "full_name": "YCloud-Developers/ycloud-whatsapp-mcp-server",
+    "description": null,
+    "html_url": "https://github.com/YCloud-Developers/ycloud-whatsapp-mcp-server",
+    "created_at": "2025-04-07T07:24:12Z",
+    "updated_at": "2025-05-12T12:16:25Z",
+    "pushed_at": "2025-04-07T07:30:00Z",
+    "size": 7058,
+    "stargazers_count": 4,
+    "watchers_count": 4,
+    "forks_count": 3,
+    "open_issues_count": 1,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "YCloud-Developers",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/107683113?v=4",
+      "html_url": "https://github.com/YCloud-Developers"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 3,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 11778,
+      "JavaScript": 784
+    },
+    "language_percentages": {
+      "TypeScript": 93.76,
+      "JavaScript": 6.24
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 1,
+    "package_json_version": "0.1.0"
+  },
+  "readme": "# YCloud WhatsApp API MCP 服务器\n\n[English](README-en.md) | 中文\n\n这是一个基于[Model Context Protocol (MCP)](https://modelcontextprotocol.io/)构建的YCloud WhatsApp API服务器。它能够自动从YCloud WhatsApp OpenAPI规范中生成工具，让AI模型（如Claude）可以直接与YCloud WhatsApp API交互。\n\n## 前提条件\n\n在使用此服务器之前，您需要：\n\n1. 在 [YCloud官网](https://www.ycloud.com) 注册一个账户\n2. 获取您的API密钥（请参阅下面的说明）\n3. 安装必要的软件依赖（请参阅下面的说明）\n\n## 系统要求\n\n- Node.js v16.0.0 或更高版本\n- npm v7.0.0 或更高版本\n- Claude 桌面应用（如果要与 Claude 集成）\n\n## 功能\n\n- 自动从OpenAPI规范生成MCP工具\n- 支持所有YCloud API端点\n- 支持API认证\n- 自动处理参数类型和验证\n- 支持HTTP请求和响应处理\n\n## 安装\n\n```bash\n# 克隆仓库\ngit clone https://github.com/YCloud-Developers/ycloud-whatsapp-mcp-server.git\ncd ycloud-whatsapp-mcp-server\n\n# 安装依赖\nnpm install\n\n# 构建项目\nnpm run build\n```\n\n## 使用方法\n\n### 获取API密钥\n\n要使用YCloud API，您需要一个API密钥进行身份验证：\n\n1. 登录到 [YCloud控制台](https://www.ycloud.com/console/)\n2. 导航到开发者页面\n3. 在此页面上，您可以找到您的API密钥\n\nAPI密钥应作为请求头 `X-API-Key` 包含在所有API请求中。\n\n### 环境变量配置\n\n您可以通过以下环境变量配置服务器：\n\n- `API_BASE_URL`: YCloud API的基础URL（默认：https://api.ycloud.com/v2）\n- `OPENAPI_SPEC_PATH`: OpenAPI规范的路径或URL（默认：https://docs.ycloud.com/openapi.json）\n- `API_HEADERS`: API请求头（格式：key1:value1,key2:value2）\n\n### Claude桌面端集成\n\n要在Claude桌面应用中使用此服务器，请编辑Claude配置文件：\n\n1. 找到或创建Claude桌面配置文件：\n   - 在macOS上：`~/Library/Application Support/Claude/claude_desktop_config.json`\n   - 在Windows上：`%APPDATA%\\Claude\\claude_desktop_config.json`\n\n2. 添加以下配置：\n\n```json\n{\n  \"mcpServers\": {\n    \"ycloud-whatsapp\": {\n      \"command\": \"node\",\n      \"args\": [\"path/to/ycloud-whatsapp-mcp-server/build/index.js\"],\n      \"env\": {\n        \"API_BASE_URL\": \"https://api.ycloud.com/v2\",\n        \"API_HEADERS\": \"X-API-Key:your-api-key-here\"\n      }\n    }\n  }\n}\n```\n\n3. 替换`your-api-key-here`为您的YCloud API密钥\n\n### 直接运行\n\n```bash\n# 设置环境变量并运行\nAPI_BASE_URL=https://api.ycloud.com/v2 \\\nAPI_HEADERS=\"X-API-Key:your-api-key-here\" \\\nnpm start\n```\n\n## 示例\n\n在Claude中，您可以使用以下提示来与YCloud API交互：\n\n```\n请帮我查询我的YCloud账户余额。\n```\n\nClaude将能够调用适当的API端点并返回结果。\n\n## 调试\n\n在开发过程中，您可以使用以下方法调试MCP服务器：\n\n1. 查看服务器日志：服务器运行时会输出调试信息\n2. 使用MCP Inspector：您可以使用[MCP Inspector](https://modelcontextprotocol.io/inspector)工具来检查服务器的运行状态\n3. Claude桌面端调试：在Claude桌面应用中可以查看服务器状态和日志\n\n## 贡献\n\n欢迎提交Pull Request或创建Issue来改进此项目。\n\n## 许可证\n\nMIT "
+}

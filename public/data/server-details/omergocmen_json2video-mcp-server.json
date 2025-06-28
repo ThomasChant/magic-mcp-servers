@@ -1,0 +1,123 @@
+{
+  "id": "5a05b47edbbf",
+  "owner": "omergocmen",
+  "repoName": "json2video-mcp-server",
+  "fullDescription": "Facilitates video creation and status monitoring through the json2video API, enabling seamless integration with LLMs and automation agents.",
+  "techStack": [
+    {
+      "name": "go",
+      "icon": "🔷",
+      "color": "#00add8"
+    },
+    {
+      "name": "typescript",
+      "icon": "📘",
+      "color": "#3178c6"
+    },
+    {
+      "name": "javascript",
+      "icon": "📄",
+      "color": "#f7df1e"
+    }
+  ],
+  "serviceTypes": [
+    {
+      "type": "integration",
+      "label": "Integration",
+      "icon": "🔗",
+      "description": "Connects to external APIs and services"
+    },
+    {
+      "type": "ai",
+      "label": "Ai",
+      "icon": "🤖",
+      "description": "Leverages AI and machine learning"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "moderate",
+    "maturity": "stable",
+    "deployment": [
+      "saas"
+    ],
+    "featured": false,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 3.9,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "video",
+      "media"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/omergocmen/json2video-mcp-server",
+    "owner": "omergocmen",
+    "name": "json2video-mcp-server",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.281Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "video creation",
+    "automation",
+    "api",
+    "content-media",
+    "json2video"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Moderate",
+      "color": "#eab308",
+      "icon": "🟡"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    }
+  ],
+  "icon": "🔗",
+  "readme": null
+}

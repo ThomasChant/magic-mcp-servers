@@ -1,0 +1,68 @@
+{
+  "mcp_name": "QueryArtisan",
+  "mcp_description": "A server application that helps AI agents interact with GraphQL APIs through structured tools",
+  "mcp_id": "flinstonedev_queryartisan",
+  "fetch_timestamp": "2025-06-23T07:44:43.642038Z",
+  "github_url": "https://github.com/flinstonedev/queryartisan",
+  "repository": {
+    "name": "queryartisan",
+    "full_name": "flinstonedev/queryartisan",
+    "description": null,
+    "html_url": "https://github.com/flinstonedev/queryartisan",
+    "created_at": "2025-05-29T22:37:36Z",
+    "updated_at": "2025-06-21T17:26:40Z",
+    "pushed_at": "2025-06-21T17:26:37Z",
+    "size": 160,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": "Other",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "flinstonedev",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/146753980?v=4",
+      "html_url": "https://github.com/flinstonedev"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 0,
+    "languages": {
+      "TypeScript": 658582,
+      "HTML": 15982
+    },
+    "language_percentages": {
+      "TypeScript": 97.63,
+      "HTML": 2.37
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "latest_release": {
+      "tag_name": "v.0.1.0",
+      "name": "v.0.1.0",
+      "published_at": "2025-06-21T14:14:15Z",
+      "body": "Initial release\r\n\r\n**Full Changelog**: https://github.com/flinstonedev/queryartisan/commits/v.0.1.0",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v.0.1.0",
+        "commit_sha": "c17598425edac80ffa70138e232d0709a4a5d5e7"
+      }
+    ],
+    "latest_version": "v.0.1.0",
+    "package_json_version": "0.1.0"
+  },
+  "readme": "# ⚒️ QueryArtisan\n\n## 🚀 **GraphQL for AI Agents**\n\nA server application that helps AI agents interact with GraphQL APIs through structured tools instead of raw query generation.\n\nQueryArtisan provides **26 tools** via the Model Context Protocol (MCP) that allow agents to build, validate, and execute GraphQL queries step-by-step rather than generating complete query strings.\n\n### **How It Works**\n\n**Traditional approaches:**\n- Hardcoded queries lack flexibility and are hard to maintain\n- Raw GraphQL generation has high error rates and complex syntax requirements\n- Agents struggle with complex schema relationships\n- No validation leads to runtime failures\n- Monolithic queries require all-or-nothing construction\n\n**QueryArtisan approach:**\n- Guided construction with step-by-step query building and validation\n- Schema-aware with real-time introspection and type safety\n- Error prevention catches issues during construction rather than execution\n- Incremental building works well with conversational AI workflows\n- MCP standard compatibility with Claude, Cursor, and other MCP clients\n\nWorks best with Claude Sonnet models - results may vary with other LLMs.\n\n## 🎯 **Problem and Solution**\n\n### **Before: Complex GraphQL Generation**\n```graphql\n# Agent tries to generate this complex query in one go:\nquery GetUserWithPostsAndComments($userId: ID!, $postLimit: Int = 10) {\n  user(id: $userId) {\n    id\n    name\n    email\n    posts(first: $postLimit) {\n      edges {\n        node {\n          id\n          title\n          content\n          comments(first: 5) {\n            edges {\n              node {\n                id\n                content\n                author {\n                  name\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n```\n**Result:** Syntax errors, wrong types, missing fields, frustrated developers\n\n### **After: QueryArtisan Approach**\n```typescript\n// Agent builds this incrementally with guided tools:\n1. startQuerySession() \n2. introspectSchema()\n3. selectField(\"user\") \n4. setTypedArgument(\"id\", userId)\n5. selectField(\"user.name\")\n6. selectField(\"user.posts\")\n7. setTypedArgument(\"user.posts\", \"first\", 10)\n// ... continue building step by step\n8. validateQuery() ✅\n9. executeQuery() 🎉\n```\n**Result:** Well-formed queries, reduced syntax errors, built-in validation\n\n## 🌟 **Features**\n\n### **🧠 Schema Introspection**\n- Live schema discovery and API understanding\n- Type relationship mapping for complex schemas\n- Field-level insights showing available fields and requirements\n\n### **🔧 Guided Query Construction**\n- 26 tools organized into 7 categories\n- Step-by-step building suitable for AI reasoning workflows\n- Real-time validation to catch errors before execution\n- Fragment support for reusable query components\n\n### **⚡ Architecture**\n- Redis-backed sessions for persistent state across interactions\n- Rate limiting for API protection\n- Vercel deployment ready\n- Comprehensive test coverage\n\n### **🤝 Compatibility**\n- MCP Standard - works with Claude Desktop, Cursor, and other MCP clients\n- RESTful fallback for use without MCP clients\n- TypeScript native with full type safety\n\n## 📋 **Requirements**\n\nQueryArtisan requires Redis for session management and query state persistence.\n\n**Redis Options:**\n- **[Upstash](https://upstash.com/)** - Serverless Redis (recommended for production)\n- **Local Redis** - For development (`redis-server`)\n- **Docker Redis** - `docker run -d -p 6379:6379 redis:alpine`\n- **Any Redis provider** - AWS ElastiCache, Google Cloud Memorystore, etc.\n\n## 🎪 **Demo and Setup**\n\n### **🌍 Public Demo**\n**MCP Endpoint:** `https://agent-query-builder-toolbox.vercel.app/mcp`\n\nThe demo is pre-configured to use the [Pokemon API](https://graphql-pokeapi.vercel.app/) for testing QueryArtisan features.\n\n### **🎮 Demo: Pokemon API Examples**\n*Our demo uses the Pokemon API - here's what you can ask:*\n\n**Discover Pokemon:**\n- *\"Show me the first 10 Pokemon with their types and sprites\"*\n- *\"Find all Pokemon that are both Fire and Flying type\"*\n- *\"What are the stats for Charizard?\"*\n\n**Explore Abilities & Moves:**\n- *\"List all Pokemon abilities and their effects\"*\n- *\"What moves can Pikachu learn?\"*\n- *\"Show me all Electric-type moves with their power and accuracy\"*\n\n**Regional & Species Data:**\n- *\"List all Pokemon from the Kanto region\"*\n- *\"Show me Pokemon species with their evolution chains\"*\n- *\"What berries are available and what do they do?\"*\n\n**Complex Queries:**\n- *\"Find Pokemon with abilities that boost attack in a pinch\"*\n- *\"Show me all legendary Pokemon with their types and base stats\"*\n- *\"List Pokemon that can learn both Water and Ice moves\"*\n\nAdd to your Cursor `mcp.json`:\n```json\n{\n  \"mcpServers\": {\n    \"graphql-query-builder-demo\": {\n      \"url\": \"https://agent-query-builder-toolbox.vercel.app/mcp\"\n    }\n  }\n}\n```\n\n### **🏃‍♂️ Local Setup**\n```bash\n# Clone and setup\ngit clone https://github.com/flinstonedev/queryartisan.git\ncd queryartisan\npnpm install\n\n# Configure (copy example.env to .env and customize)\ncp example.env .env\n\n# Launch\nvercel dev\n# 🚀 Your MCP server is live at http://localhost:3000/mcp\n```\n\n## 🎯 **Use Cases**\n\n### **🔍 Data Discovery**\n*\"Agent, find all users who posted in the last week and show their top comments.\"*\n\nThe agent uses QueryArtisan to:\n1. Introspect any GraphQL API\n2. Build queries targeting users, posts, and comments\n3. Execute with proper syntax and structure\n\n### **💬 Natural Language to GraphQL**\nTransform chatbots into GraphQL-capable agents:\n- **User:** \"Show me recent fiction books under $20\"\n- **Agent:** Uses QueryArtisan tools to query bookstore APIs\n- **Result:** Structured data retrieval without manual query writing\n\n### **📊 Automated Reports**\nCreate agents that generate business insights:\n- Sales dashboards from e-commerce APIs\n- User engagement from social media APIs  \n- Performance metrics from any GraphQL source\n\n### **🛠️ Developer Tools**\n- **IDE integration** - AI assistants that help write queries\n- **API exploration** - Discover and understand any GraphQL API\n- **Query optimization** - AI-suggested performance improvements\n\n### **🏗️ Available Tools**\n\n**26 Tools Across 7 Categories:**\n\n#### **🔍 Schema Intelligence (5 tools)**\n- `introspect-schema` - API schema understanding\n- `get-root-operation-types` - Entry point discovery\n- `get-type-info` - Type analysis\n- `get-field-info` - Field-level information\n- `get-input-object-help` - Input object guidance\n\n#### **🎯 Session Management (4 tools)**\n- `start-query-session` - Session initialization\n- `end-query-session` - Resource cleanup\n- `get-current-query` - Query visualization\n- `get-selections` - Field suggestions\n\n#### **⚡ Field Selection (3 tools)**\n- `select-field` - Field targeting\n- `select-multiple-fields` - Batch operations\n- `select-field-simple` - Simple selections\n\n#### **🧬 Variable Management (3 tools)**\n- `set-query-variable` - Variable definition\n- `set-variable-value` - Value assignment\n- `remove-query-variable` - Variable removal\n\n#### **🎪 Argument Handling (4 tools)**\n- `set-string-argument` - String and enum handling\n- `set-typed-argument` - Numbers, booleans, complex types\n- `set-input-object-argument` - Nested object construction\n- `set-variable-argument` - Variable references\n\n#### **🎭 Fragment Support (3 tools)**\n- `define-named-fragment` - Reusable query components\n- `apply-named-fragment` - Fragment application\n- `apply-inline-fragment` - Type-conditional selections\n\n#### **🔮 Directive Support (2 tools)**\n- `set-field-directive` - Field-level directives (@include, @skip)\n- `set-operation-directive` - Operation-level directives\n\n#### **✅ Validation & Execution (2 tools)**\n- `validate-query` - Schema compliance verification\n- `execute-query` - Query execution\n\n## 🌍 **Configuration**\n\n### **🤝 Claude Desktop Setup**\n\nQueryArtisan works with Claude Desktop through [mcp-remote](https://github.com/geelen/mcp-remote), which acts as a bridge between Claude Desktop and remote MCP servers.\n\nEdit your configuration file:\n- **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`\n- **Windows**: `%APPDATA%\\Claude\\claude_desktop_config.json`\n\n**For Remote Demo:**\n```json\n{\n  \"mcpServers\": {\n    \"queryartisan\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"mcp-remote\",\n        \"https://agent-query-builder-toolbox.vercel.app/mcp\"\n      ]\n    }\n  }\n}\n```\n\n**For Local Development:**\n```json\n{\n  \"mcpServers\": {\n    \"queryartisan-local\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"mcp-remote\",\n        \"http://localhost:3000/mcp\",\n        \"--allow-http\"\n      ]\n    }\n  }\n}\n```\n\n### **🔍 Troubleshooting**\n\nIf you encounter issues:\n\n1. **Clear mcp-remote cache:**\n   ```bash\n   rm -rf ~/.mcp-auth\n   ```\n\n2. **Check logs:**\n   - **macOS/Linux**: `tail -n 20 -F ~/Library/Logs/Claude/mcp*.log`\n   - **Windows**: `Get-Content \"C:\\Users\\YourUsername\\AppData\\Local\\Claude\\Logs\\mcp.log\" -Wait -Tail 20`\n\n3. **Restart Claude Desktop** completely after config changes\n\n## 🚀 **Deploy Anywhere**\n\n### **⚡ Vercel (Recommended)**\n\n**One-Click Deploy:**\n\n[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/flinstonedev/queryartisan)\n\nAfter deployment, configure these environment variables in your Vercel dashboard:\n- `REDIS_URL` - your Redis connection string\n- `DEFAULT_GRAPHQL_ENDPOINT` - your GraphQL API endpoint\n- `DEFAULT_GRAPHQL_HEADERS` - JSON string with default headers for the GraphQL API (optional)\n\n**Manual Deploy:**\n```bash\n# Clone and deploy\ngit clone https://github.com/flinstonedev/queryartisan.git\ncd queryartisan\nvercel --prod\n```\n\nConfigure these environment variables in your Vercel dashboard:\n- `REDIS_URL` - your Redis connection string  \n- `DEFAULT_GRAPHQL_ENDPOINT` - your GraphQL API endpoint\n- `DEFAULT_GRAPHQL_HEADERS` - JSON string with default headers for the GraphQL API (optional)\n\n## 📈 **Roadmap**\n\n- [ ] **Add proper logging** - Web UI for query construction\n- [ ] **Query Optimization AI** - Automatic performance improvements  \n- [ ] **Visual Query Builder** - Web UI for query construction\n\n### **🌟 Community Contributions Welcome**\n- **Documentation improvements** - Help others understand the project\n- **Tool enhancements** - Add new capabilities\n- **Client integrations** - Support more MCP clients\n- **Performance optimizations** - Improve performance\n"
+}

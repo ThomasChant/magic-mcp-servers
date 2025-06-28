@@ -1,0 +1,52 @@
+{
+  "mcp_name": "kappaexpress/docker-mcp",
+  "mcp_description": "Facilitates MCP server integration with Claude Desktop using a Docker image built with Playwright.",
+  "mcp_id": "kappaexpress_docker-mcp",
+  "fetch_timestamp": "2025-06-23T05:40:36.627895Z",
+  "github_url": "https://github.com/kappaexpress/docker-mcp",
+  "repository": {
+    "name": "docker-mcp",
+    "full_name": "kappaexpress/docker-mcp",
+    "description": null,
+    "html_url": "https://github.com/kappaexpress/docker-mcp",
+    "created_at": "2025-04-07T16:26:27Z",
+    "updated_at": "2025-04-07T18:51:12Z",
+    "pushed_at": "2025-04-07T18:51:09Z",
+    "size": 3,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "kappaexpress",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/46478065?v=4",
+      "html_url": "https://github.com/kappaexpress"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 1846,
+      "Dockerfile": 310
+    },
+    "language_percentages": {
+      "Python": 85.62,
+      "Dockerfile": 14.38
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# docker imageビルドコマンド\n```\ncd playwright\ndocker build -t playwright-mcp .\n```\n\n```\ncd google-search\ndocker build -t google-search-mcp .\n```\n\n# WindowsでのClaude Desktopでのmcpの設定\n1. `C:\\Users\\{ユーザー名}\\AppData\\Roaming\\Claude\\claude_desktop_config.json`を開く\n2. `claude_desktop_config.json`に以下を追記\n```json\n{\n  \"mcpServers\": {\n    \"playwright\": {\n      \"command\": \"docker\",\n      \"args\": [\"run\", \"-i\", \"--rm\", \"playwright-mcp\"]\n    },\n    \"googlesearch\": {\n      \"command\": \"docker\",\n      \"args\": [\n        \"run\",\n        \"-i\",\n        \"--rm\",\n        \"-e\",\n        \"GOOGLE_SEARCH_ENGINE_ID\",\n        \"-e\",\n        \"GOOGLE_API_KEY\",\n        \"google-search-mcp\"\n      ],\n      \"env\": {\n        \"GOOGLE_SEARCH_ENGINE_ID\": \"XXXXXXXXXXXXXXXX\",\n        \"GOOGLE_API_KEY\": \"XXXXXXXXXXXXXX\"\n      }\n    }\n  }\n}\n```\n3. `claude_desktop_config.json`を保存\n4. Claude Desktopを再起動"
+}

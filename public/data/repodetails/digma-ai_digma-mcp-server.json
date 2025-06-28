@@ -1,0 +1,97 @@
+{
+  "mcp_name": "Digma",
+  "mcp_description": "A code observability MCP enabling dynamic code analysis based on OTEL/APM data to assist in code reviews, issues identification and fix, highlighting risky code etc.",
+  "mcp_id": "digma-ai_digma-mcp-server",
+  "fetch_timestamp": "2025-06-23T02:39:21.268780Z",
+  "github_url": "https://github.com/digma-ai/digma-mcp-server",
+  "repository": {
+    "name": "digma-mcp-server",
+    "full_name": "digma-ai/digma-mcp-server",
+    "description": null,
+    "html_url": "https://github.com/digma-ai/digma-mcp-server",
+    "created_at": "2025-04-21T08:38:45Z",
+    "updated_at": "2025-06-19T21:42:00Z",
+    "pushed_at": "2025-05-06T20:24:08Z",
+    "size": 70,
+    "stargazers_count": 2,
+    "watchers_count": 2,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "C#",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "digma-ai",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/96283867?v=4",
+      "html_url": "https://github.com/digma-ai"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 3,
+    "languages": {
+      "C#": 26497,
+      "Dockerfile": 1355,
+      "Shell": 186
+    },
+    "language_percentages": {
+      "C#": 94.5,
+      "Dockerfile": 4.83,
+      "Shell": 0.66
+    },
+    "pull_requests_count": 4,
+    "contributors_count": 3,
+    "latest_release": {
+      "tag_name": "v1.0.0",
+      "name": "v1.0.0",
+      "published_at": "2025-04-23T11:11:08Z",
+      "body": "## What's Changed\r\n* Added docker file and github workflows by @ohrebeniuk in https://github.com/digma-ai/digma-mcp-server/pull/2\r\n\r\n\r\n**Full Changelog**: https://github.com/digma-ai/digma-mcp-server/compare/v1.0.0-alpha.4...v1.0.0",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v1.0.1-alpha.3",
+        "commit_sha": "42b74e8ae0c954923d9d08a14a733e9662e13b84"
+      },
+      {
+        "name": "v1.0.1-alpha.2",
+        "commit_sha": "7b9adffaba2d6a9a0a921e46e338c25748af640a"
+      },
+      {
+        "name": "v1.0.1-alpha.1",
+        "commit_sha": "2e5dba26b8932c7b9c27ef5d92838fd72b8695fe"
+      },
+      {
+        "name": "v1.0.0",
+        "commit_sha": "3aef796f027b2ae5c7863e2f135d62507ca78191"
+      },
+      {
+        "name": "v1.0.0-alpha.4",
+        "commit_sha": "4484d3a9f44269db2816acbc1ac55ca5854cc609"
+      },
+      {
+        "name": "v1.0.0-alpha.3",
+        "commit_sha": "ac345a85114f8170f66f2951deb69963a39da265"
+      },
+      {
+        "name": "v1.0.0-alpha.2",
+        "commit_sha": "a75e4b80e01301e8ca61502cc1c6df9b1eef96fe"
+      },
+      {
+        "name": "v1.0.0-alpha.1",
+        "commit_sha": "a75e4b80e01301e8ca61502cc1c6df9b1eef96fe"
+      }
+    ],
+    "latest_version": "v1.0.1-alpha.3"
+  },
+  "readme": "# Digma Code Observability MCP Server\n\nA Model Context Protocol (MCP) server implementation for enabling agents to access observability insights using [Digma](https://digma.ai) for code observability and dynamic code analysis\n\n## Key Features 🚀\n\n*   **🗣️ Observability-assisted code reviews:** Check the PR branch for any issues discovered by pre-prod observability.\n*   **🔎 Find code inefficiencies with dynamic code analysis:** Identify issues in the code/queries that are slowing the app down\n*   **🔭 Utilize code runtime usage data from distributed tracing:** Check for breaking changes or generated relevant tests\n\n## Example prompts 💬 \n\n* `help me review the code changes in this branch by looking at related runtime issues`\n* `I want to improve the performance of this app. What are the three most severe issues I can fix?`\n* `I'm making changes to this function, based on runtime data. What other services and code would be affected?`\n* `Are there any new issues in this code based on the Staging environment?`\n* `Which database queries have the most impact on the application performance?`\n\n## See it in action 📺 \n\n[![Code review with Digma MCP](https://img.youtube.com/vi/bFv-ptGvLo8/0.jpg)](https://www.youtube.com/watch?v=bFv-ptGvLo8)\n\n\n---\n\n## Get early access 👀\n\nDigma pre-processes your observability data to identify issues, track code performance and runtime data - for dynamic code analysis.\nVisit our [MCP page](https://digma.ai/mcp/) to sign up for early access to our MCP server.\n---\n\n## Installation ⚙️\n\nConfigure your MCP Client (Claude, Cursor, etc.) to include the Digma MCP.\nThe Digma deployment includes the MCP SSE server. You can configure it using its URL in your client, or use an MCP tool such as [SuperGateway](https://github.com/supercorp-ai/supergateway) to run it as a command tool. \nThe MCP URL path is composed of the Digma API Key as follows:\n`https://<DIGMA_API_URL>/mcp/<DIGMA_API_TOKEN>>/sse`\n\n### Example MCP XML \n\nIf your client supports SSE servers, you can use the following syntax:\n\n  ```json\n  {\n    \"mcpServers\": {\n      \"digma\": {\n      \"url\": \"https://<DIGMA_API_URL>/mcp/DIGMA_API_TOKEN>/sse\",\n     \n        }\n      // ... other servers might be here ...\n    }\n  }\n```\n\nTo use the MCP server as a command tool, use the [SuperGateway](https://github.com/supercorp-ai/supergateway) tool to bridge to the URL as seen below:\n\n  ```json\n  {\n    \"digma\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"-y\",\n        \"supergateway\",\n        \"--sse\",\n        \"https://<DIGMA_API_URL>/mcp/DIGMA_API_TOKEN>/sse\"\n      ]\n    }\n  }\n```\n\n---\n\n## Using rules 👨‍💼\n\nThe agent is autonomous and selects when to use the data provided by Digma as needed, however, some clients allow setting rules and policies to set a more structured process.\nHere is an example rules file which you can add to your cursor `.cursor/rules` directory\n```markdown\n# Digma Memory File - Code Review Instructions\n\n## Runtime Analysis Settings\n- Environment: TEST\n\n## Code Review Protocol\n1. For any code or branch review request:\n   - Get the list of changed files and methods in the current branch using `git diff`\n   - Check for ALL runtime issues in TEST environment (not just for the method in context)\n   - Check if any runtime issue may be related to the changed code\n   - Check the runtime usage of the changed methods (based on the `git diff`)\n   - Check if any of the changed methods (based on the `git diff`) have a high risk based on their performance impact \n   - Synthesize the data with standard code review analysis\n\n\n## Note\nThis file is used by the AI assistant to maintain consistent review protocols across sessions. \n```\n\n\n\n## License 📜\n\nMIT License. See [LICENSE](https://www.google.com/url?sa=E&q=https%3A%2F%2Fgithub.com%2Fjustinpbarnett%2Funity-mcp%2Fblob%2Fmaster%2FLICENSE) file.\n\n"
+}

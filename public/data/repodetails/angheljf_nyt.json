@@ -1,0 +1,55 @@
+{
+  "mcp_name": "NYTimes",
+  "mcp_description": "📇 ☁️ - Search articles using the NYTimes API",
+  "mcp_id": "angheljf_nyt",
+  "fetch_timestamp": "2025-06-23T07:13:37.267969Z",
+  "github_url": "https://github.com/angheljf/nyt",
+  "repository": {
+    "name": "nyt",
+    "full_name": "angheljf/nyt",
+    "description": null,
+    "html_url": "https://github.com/angheljf/nyt",
+    "created_at": "2024-11-30T02:36:04Z",
+    "updated_at": "2025-06-16T00:07:41Z",
+    "pushed_at": "2025-01-27T21:12:42Z",
+    "size": 328,
+    "stargazers_count": 11,
+    "watchers_count": 11,
+    "forks_count": 6,
+    "open_issues_count": 1,
+    "language": "JavaScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "angheljf",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60663303?v=4",
+      "html_url": "https://github.com/angheljf"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 6,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 4834,
+      "TypeScript": 1759,
+      "Dockerfile": 939
+    },
+    "language_percentages": {
+      "JavaScript": 64.18,
+      "TypeScript": 23.35,
+      "Dockerfile": 12.47
+    },
+    "pull_requests_count": 2,
+    "contributors_count": 3,
+    "package_json_version": "0.1.0"
+  },
+  "readme": "# NYTimes Article Search MCP Server\n\n[![smithery badge](https://smithery.ai/badge/nyt)](https://smithery.ai/server/nyt)\n\nThis is a TypeScript-based MCP server that allows searching for New York Times articles from the last 30 days based on a keyword. It demonstrates core MCP concepts by providing:\n\n- Tools for searching articles\n- Integration with the New York Times API\n\n![NYTimes Article Search](img/example.png)\n\n<a href=\"https://glama.ai/mcp/servers/ylg4ai4vin\"><img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/ylg4ai4vin/badge\" alt=\"NYTimes Article Search Server MCP server\" /></a>\n\n## Features\n\n### Tools\n- `search_articles` - Search NYTimes articles from the last 30 days based on a keyword\n  - Takes `keyword` as a required parameter\n  - Returns a list of articles with title, abstract, URL, published date, and author\n\n## Development\n\nInstall dependencies:\n```bash\nnpm install\n```\n\nBuild the server:\n```bash\nnpm run build\n```\n\nFor development with auto-rebuild:\n```bash\nnpm run watch\n```\n\n### Debugging\n\nSince MCP servers communicate over stdio, debugging can be challenging. We recommend using the [MCP Inspector](https://github.com/modelcontextprotocol/inspector), which is available as a package script:\n\n```bash\nnpm run inspector\n```\n\nThe Inspector will provide a URL to access debugging tools in your browser.\n\n## Installation\n\n### Installing via Smithery\n\nTo install NYTimes Article Search for Claude Desktop automatically via [Smithery](https://smithery.ai/server/nyt):\n\n```bash\nnpx -y @smithery/cli install nyt --client claude\n```\n\n### Manual Installation\nTo use with Claude Desktop, add the server config:\n\nOn MacOS: `~/Library/Application Support/Claude/claude_desktop_config.json`\nOn Windows: `%APPDATA%/Claude/claude_desktop_config.json`\n\n```json\n{\n  \"mcpServers\": {\n    \"nyt\": {\n      \"command\": \"node\",\n      \"args\": [\"path/to/your/build/index.js\"],\n      \"env\": {\n        \"NYTIMES_API_KEY\": \"your_api_key_here\"\n      }\n    }\n  }\n}\n```\n\n## Environment Variables\n\nCreate a `.env` file in the root of your project and add your New York Times API key:\n\n```\nNYTIMES_API_KEY=your_api_key_here\n```\n\n## Running the Server\n\nAfter building the project, you can run the server with:\n\n```bash\nnode build/index.js\n```\n\nThe server will start and listen for MCP requests over stdio.\n\n## License\n\nThis project is licensed under the MIT License.\n"
+}

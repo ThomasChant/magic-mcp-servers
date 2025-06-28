@@ -1,0 +1,71 @@
+{
+  "mcp_name": "Terragrunt-Docs",
+  "mcp_description": "Terragrunt documentation always up to date.",
+  "mcp_id": "Excoriate_mcp-terragrunt-docs",
+  "fetch_timestamp": "2025-06-23T08:50:41.479908Z",
+  "github_url": "https://github.com/Excoriate/mcp-terragrunt-docs",
+  "repository": {
+    "name": "mcp-terragrunt-docs",
+    "full_name": "Excoriate/mcp-terragrunt-docs",
+    "description": "Deno/TypeScript MCP Server providing context related to Terragrunt documentation.",
+    "html_url": "https://github.com/Excoriate/mcp-terragrunt-docs",
+    "created_at": "2025-04-22T08:11:46Z",
+    "updated_at": "2025-06-08T19:18:05Z",
+    "pushed_at": "2025-04-22T11:08:16Z",
+    "size": 253,
+    "stargazers_count": 13,
+    "watchers_count": 13,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "Excoriate",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4020679?v=4",
+      "html_url": "https://github.com/Excoriate"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 66026,
+      "Shell": 4377,
+      "Just": 2373,
+      "Dockerfile": 235
+    },
+    "language_percentages": {
+      "TypeScript": 90.43,
+      "Shell": 5.99,
+      "Just": 3.25,
+      "Dockerfile": 0.32
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 1,
+    "latest_release": {
+      "tag_name": "v0.1.1",
+      "name": "v0.1.1",
+      "published_at": "2025-04-22T09:16:07Z",
+      "body": "**Full Changelog**: https://github.com/Excoriate/mcp-terragrunt-docs/commits/v0.1.1",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.1.1",
+        "commit_sha": "15a71bf0fda1bd3d2f624b66bb4b1e5df46e0d21"
+      }
+    ],
+    "latest_version": "v0.1.1"
+  },
+  "readme": "# MCP Server: Terragrunt Docs Provider\n\n[![Language](https://img.shields.io/badge/language-Deno/TypeScript-blue.svg)](https://deno.land/)\n[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE) <!-- Assuming MIT, add LICENSE file if needed -->\n\nA [Model Context Protocol (MCP)](modelcontextprotocol.io) server built with Deno and TypeScript, designed to provide contextual information related to [Terragrunt](https://terragrunt.gruntwork.io/).\n\n## Overview\n\nThis server acts as an MCP provider, exposing tools and resources that allow AI agents or other MCP clients to query information about Terragrunt documentation and development information, such as GitHub issues.\n\n- Watch a realistic demo 📺 on Claude Desktop [here](https://screen.studio/share/UKJNhBNq)\n\n---\n\n## Why?\n\nWhen writing IaC configurations, mostly in terragrunt, the IDE support isn't that good, in VSCode the terraform plugin is good, but not for terragrunt; it does not recognize the terragrunt blocks and does not provide any autocompletion. When interacting with AI autocompletion, it's common to get incorrect results, or false-positive linting errors. With this MCP server, you can provide to your LLM/AI assistant the latest documentation and issues from the Terragrunt GitHub repository, so it can use that to provide you with the most accurate information.\n\n## Tools\n\n> **Note:** All tools require a valid GitHub token set as an environment variable: `GITHUB_TOKEN`, `GH_TOKEN`, or `GITHUB_PERSONAL_ACCESS_TOKEN`.\n\n| Tool Name                   | Purpose                                                                 | Inputs                                   | Outputs                                                                 | Use Case                                                                                          |\n|-----------------------------|-------------------------------------------------------------------------|------------------------------------------|-------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|\n| `list-doc-categories`       | Retrieve all documentation categories from Terragrunt docs.             | None                                     | Array of objects with `name` (string) and `link` (string) properties    | Use when you need to explore the available documentation structure or when building a documentation navigation system. This is typically the first tool to call when starting to work with Terragrunt docs. |\n| `list-all-docs-by-category` | List all docs in a specific category.                                   | category (string)                        | Array of objects with `name` (string), `link` (string), and `content` (string) | Use when you need to see all available documentation within a specific category, such as when building a category-specific documentation viewer or when you need to scan through all docs in a particular area. |\n| `read-document-from-category` | Read a specific doc from a category.                                    | category (string), document (string)     | Object containing `content` (string) with the full markdown content     | Use when you need to access the complete content of a specific document, such as when implementing documentation search or when you need to reference specific documentation in your application. |\n| `read-all-docs-from-category` | Retrieve and merge all docs in a category into one response.            | category (string)                        | Object containing `content` (string) with all docs merged into one      | Use when you need a comprehensive view of all documentation within a category, such as when building a documentation search feature or when you need to analyze the complete documentation set for a specific topic. |\n| `get-all-open-issues`         | Retrieve all open issues from Terragrunt GitHub repo.                   | all (boolean, optional)                  | Array of objects with `title` (string), `number` (number), `state` (string), `created_at` (string), `updated_at` (string), `body` (string), and `labels` (string[]) | Use when you need to track or analyze current issues in the Terragrunt project, such as when building an issue dashboard, performing issue triage, or when you need to stay updated with the latest project challenges and discussions. |\n\n## Setup\n\n1. **Install Deno:**\n   - [Deno Installation Guide](https://deno.land/manual/getting_started/installation)\n2. **Clone the repository:**\n\n   ```sh\n   git clone https://github.com/Excoriate/mcp-terragrunt-docs.git\n   cd mcp-terragrunt-docs\n   ```\n\n3. **Set your GitHub token as an environment variable:**\n   - On Unix/macOS:\n\n     ```sh\n     export GITHUB_TOKEN=ghp_xxx... # or GH_TOKEN or GITHUB_PERSONAL_ACCESS_TOKEN\n     ```\n   - On Windows (cmd):\n\n     ```cmd\n     set GITHUB_TOKEN=ghp_xxx...\n     ```\n>Note: You can also set the token in the `.env` file.\n\n4. **Run the MCP server:**\n\n   ```sh\n   # directly using deno\n   deno run -A main.ts\n\n   # Using the justfile\n   just run\n\n   # You can also debug it, and inspect it locally\n   just inspect\n   ```\nThe most straightforward method is to use it directly from [JSR](https://jsr.io/) (Javascript Registry ❤️)\n```sh\n# export your github token\nexport GITHUB_TOKEN=ghp_xxx...\n\n# run it\ndeno run -A jsr:@excoriate/mcp-terragrunt-docs@0.1.0\n```\n\n### Usage with Claude Desktop\nTo use this Deno-based MCP server with Claude Desktop, add the following to your `claude_desktop_config.json`:\n\n#### Using Deno\n\n```json\n{\n  \"mcpServers\": {\n    \"terragrunt_docs\": {\n      \"command\": \"deno\",\n      \"args\": [\n        \"run\",\n        \"-A\",\n        \"main.ts\"\n      ],\n      \"env\": {\n        \"GITHUB_TOKEN\": \"<YOUR_TOKEN>\"\n      },\n    }\n  }\n}\n```\n\n#### Using Docker\n\n```json\n{\n  \"mcpServers\": {\n    \"terragrunt_docs\": {\n      \"command\": \"docker\",\n      \"args\": [\n        \"run\",\n        \"-e\", \"GITHUB_TOKEN=<YOUR_TOKEN>\", \"mcp-terragrunt-docs\"\n      ],\n      \"env\": {\n        \"GITHUB_TOKEN\": \"<YOUR_TOKEN>\"\n      }\n    }\n  }\n}\n```\n\n#### Using JSR\n\n```json\n{\n  \"mcpServers\": {\n    \"terragrunt_docs\": {\n      \"command\": \"deno\",\n      \"args\": [\n        \"run\",\n        \"-A\",\n        \"jsr:@excoriate/mcp-terragrunt-docs@0.1.0\"\n      ],\n      \"env\": {\n        \"GITHUB_TOKEN\": \"<YOUR_TOKEN>\"\n      }\n    }\n  }\n}\n```\n\n### Build the Docker image\n\n```sh\ndocker build -t mcp-terragrunt-docs .\n```\n\n### Run the MCP server in Docker\n\n```sh\ndocker run -it --rm \\\n  -e GITHUB_TOKEN=ghp_xxx... \\\n  mcp-terragrunt-docs\n```\n\n- Replace `ghp_xxx...` with your [GitHub Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) with appropriate permissions.\n- You can also use `GH_TOKEN` or `GITHUB_PERSONAL_ACCESS_TOKEN` as the environment variable name.\n- If you want to use a local `.env` file, you can pass it with `--env-file .env`.\n\n## Contributing\n\nSee [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) for detailed contribution guidelines, including setup, code style, PR process, and codebase structure reference.\n\n## Security\n\nSee [SECURITY.md](SECURITY.md) for the project's security policy, including how to report vulnerabilities and responsible disclosure guidelines.\n\n## License\n\nThis project is licensed under the [MIT License](LICENSE).\n"
+}

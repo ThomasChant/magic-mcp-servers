@@ -1,0 +1,50 @@
+{
+  "mcp_name": "Ramp",
+  "mcp_description": "Interact with [Ramp](https://ramp.com)'s Developer API to run analysis on your spend and gain insights leveraging LLMs",
+  "mcp_id": "ramp-public_ramp_mcp",
+  "fetch_timestamp": "2025-06-23T07:51:45.590682Z",
+  "github_url": "https://github.com/ramp-public/ramp-mcp",
+  "repository": {
+    "name": "ramp_mcp",
+    "full_name": "ramp-public/ramp_mcp",
+    "description": "ramp_mcp",
+    "html_url": "https://github.com/ramp-public/ramp_mcp",
+    "created_at": "2025-03-20T14:26:04Z",
+    "updated_at": "2025-06-17T21:30:54Z",
+    "pushed_at": "2025-03-20T15:30:58Z",
+    "size": 25,
+    "stargazers_count": 23,
+    "watchers_count": 23,
+    "forks_count": 8,
+    "open_issues_count": 2,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "ramp-public",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/149106637?v=4",
+      "html_url": "https://github.com/ramp-public"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 8,
+    "subscribers_count": 0,
+    "languages": {
+      "Python": 25816
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# ramp-mcp: A Ramp MCP server\n\n## Overview\n\nA Model Context Protocol server for retrieving and analyzing data or running tasks for [Ramp](https://ramp.com) using [Developer API](https://docs.ramp.com/developer-api/v1/overview/introduction). In order to get around token and input size limitations, this server implements a simple ETL pipeline + ephemeral sqlite database in memory for analysis by an LLM. All requests are made to demo by default, but can be changed by setting `RAMP_ENV=prd`. Large datasets may not be processable due to API and/or your MCP client limitations.\n\n### Tools\n\n#### Database tools\n\nTools that can be used to setup, process, query, and delete an ephemeral database in memory.\n\n1. `process_data`\n2. `execute_query`\n3. `clear_table`\n\n#### Fetch tools\n\nTools that can be used to fetch data directly\n\n1. `get_ramp_categories`\n2. `get_currencies`\n\n#### Load tools\n\nLoads data to server which the client can fetch. Based on the tools you wish to use, ensure to enable those scopes on your\nRamp client and include the scopes when starting the server as a CLI argument.\n\n| Tool                      | Scope               |\n| ------------------------- | ------------------- |\n| load_transactions         | transactions:read   |\n| load_reimbursements       | reimbursements:read |\n| load_bills                | bills:read          |\n| load_locations            | locations:read      |\n| load_departments          | departments:read    |\n| load_bank_accounts        | bank_accounts:read  |\n| load_vendors              | vendors:read        |\n| load_vendor_bank_accounts | vendors:read        |\n| load_entities             | entities:read       |\n| load_spend_limits         | limits:read         |\n| load_spend_programs       | spend_programs:read |\n| load_users                | users:read          |\n\nFor large datasets, it is recommended to explicitly prompt Claude not to use REPL and to keep responses concise to avoid timeout or excessive token usage.\n\n## Setup\n\n### Ramp Setup\n\n1. Create a new client from the Ramp developer page (Profile on top right > Developer > Create app)\n2. Grant the scopes you wish (based on tools) to the client and enable client credentials (Click on App > Grant Types / Scopes)\n3. Include the client ID and secret in the config file as well as the scopes you wish to use\n\n### Local Setup\n\n1. Clone this Github repo via `git clone git@github.com:ramp/ramp-mcp.git` or equivalent\n2. Install [`uv`](https://docs.astral.sh/uv/)\n\n## Usage\n\nRun the MCP server from your CLI with:\n\n```bash\nRAMP_CLIENT_ID=... RAMP_CLIENT_SECRET=... RAMP_ENV=<demo|prd> uv run ramp-mcp -s <COMMA-SEPARATED-SCOPES>\n```\n\n## Configuration\n\n### Usage with Claude Desktop\n\nAdd this to your `claude_desktop_config.json`:\n\n```json\n{\n  \"mcpServers\": {\n    \"ramp-mcp\": {\n      \"command\": \"uv\",\n      \"args\": [\n        \"--directory\",\n        \"/<ABSOLUTE-PATH-TO>/ramp-mcp\", // make sure to update this path\n        \"run\",\n        \"ramp-mcp\",\n        \"-s\",\n        \"transactions:read,reimbursements:read\"\n      ],\n      \"env\": {\n        \"RAMP_CLIENT_ID\": \"<CLIENT_ID>\",\n        \"RAMP_CLIENT_SECRET\": \"<CLIENT_SECRET>\",\n        \"RAMP_ENV\": \"<demo|qa|prd>\"\n      }\n    }\n  }\n}\n```\n\nIf this file doesn't exist yet, create one in `/<ABSOLUTE-PATH-TO>/Library/Application Support/Claude/`\n\n## License\n\nCopyright (c) 2025, Ramp Business Corporation\nAll rights reserved.\nThis source code is licensed under the MIT License found in the LICENSE file in the root directory of this source tree.\n"
+}

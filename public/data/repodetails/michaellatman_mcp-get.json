@@ -1,0 +1,96 @@
+{
+  "mcp_name": "mcp-get",
+  "mcp_description": "CLI tool for installing and managing MCP servers. Simplifies server installation and configuration for Claude Desktop.",
+  "mcp_id": "michaellatman_mcp-get",
+  "fetch_timestamp": "2025-06-23T06:35:09.119513Z",
+  "github_url": "https://github.com/michaellatman/mcp-get",
+  "repository": {
+    "name": "mcp-get",
+    "full_name": "michaellatman/mcp-get",
+    "description": null,
+    "html_url": "https://github.com/michaellatman/mcp-get",
+    "created_at": "2024-11-27T01:45:08Z",
+    "updated_at": "2025-06-22T09:24:26Z",
+    "pushed_at": "2025-06-02T12:32:02Z",
+    "size": 817,
+    "stargazers_count": 434,
+    "watchers_count": 434,
+    "forks_count": 90,
+    "open_issues_count": 5,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "michaellatman",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/236019?v=4",
+      "html_url": "https://github.com/michaellatman"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 90,
+    "subscribers_count": 8,
+    "languages": {
+      "TypeScript": 122106,
+      "JavaScript": 44551
+    },
+    "language_percentages": {
+      "TypeScript": 73.27,
+      "JavaScript": 26.73
+    },
+    "pull_requests_count": 135,
+    "contributors_count": 47,
+    "tags": [
+      {
+        "name": "v1.0.115",
+        "commit_sha": "1244c3bdabbe299c0493d974a008ea9953bff7c9"
+      },
+      {
+        "name": "v1.0.114",
+        "commit_sha": "6328b5ff68b4778f6f493aaf2bd625f5c6f247a2"
+      },
+      {
+        "name": "v1.0.113",
+        "commit_sha": "73ed236aa75123e1f6f909e05c94d5192ff59482"
+      },
+      {
+        "name": "v1.0.112",
+        "commit_sha": "d4372c6a0a77da2971362c1745cc14a77bfe64f3"
+      },
+      {
+        "name": "v1.0.111",
+        "commit_sha": "2fc3450022c18d9639d8e466ac2ced258047d6ec"
+      },
+      {
+        "name": "v1.0.110",
+        "commit_sha": "d35285a609b1504b7c217e1ce6fb9e76169a34c5"
+      },
+      {
+        "name": "v1.0.109",
+        "commit_sha": "a9f9672108bc0b3604accd8516ba0d884866bbb2"
+      },
+      {
+        "name": "v1.0.108",
+        "commit_sha": "25d1f3cbaa3499e5c440feaf8198f161cc959c22"
+      },
+      {
+        "name": "v1.0.107",
+        "commit_sha": "d0138e0f5464460ccfc15ca40341a287b5e83957"
+      },
+      {
+        "name": "v1.0.106",
+        "commit_sha": "1794e9792744f2ca217a0c7a8c949da274fc1a10"
+      }
+    ],
+    "latest_version": "v1.0.115",
+    "package_json_version": "1.0.115"
+  },
+  "readme": "# mcp-get\n\nA powerful command-line tool for discovering, installing, and managing Model Context Protocol (MCP) servers. This tool simplifies the process of connecting Large Language Models (LLMs) to external data sources, tools, and services.\n\nWith mcp-get, you can:\n- Discover available MCP servers from our curated registry\n- Install servers with a single command\n- Manage environment variables and configurations\n- Update and uninstall servers as needed\n\n## Quick Start\n\nTry mcp-get immediately:\n\n```bash\nnpx @michaellatman/mcp-get@latest list\nnpx @michaellatman/mcp-get@latest install @modelcontextprotocol/server-brave-search\n```\n\nAll packages added to the registry are automatically displayed on [mcp-get.com](https://mcp-get.com), making them discoverable to other users.\n\n## About Model Context Protocol\n\nThe Model Context Protocol (MCP) is an open protocol that enables seamless integration between LLM applications and external data sources and tools. Whether you're building an AI-powered IDE, enhancing a chat interface, or creating custom AI workflows, MCP provides a standardized way to connect LLMs with the context they need.\n\nLearn more about MCP at [modelcontextprotocol.io](https://modelcontextprotocol.io/introduction)\n\n## What Packages Can You Install?\n\nThis tool helps you install and manage MCP servers that connect Claude to various data sources and tools, including:\n\n- **Development Tools**: GitHub, GitLab\n- **Communication Tools**: Slack\n- **Search & Data**: Brave Search, Google Maps\n- **Database Systems**: PostgreSQL, SQLite\n- **Web Automation**: Puppeteer\n- **Cloud Storage**: Google Drive\n\n## Prerequisites\n\n- Node.js (version 14 or higher) for Node.js-based MCP servers\n- Python (version 3.10 or higher) for Python-based MCP servers\n- Go (version 1.16 or higher) for Go-based MCP servers\n- Claude Desktop app (for local MCP server usage)\n\n## Usage Examples\n\n### Install a Package\n\n```\nnpx @michaellatman/mcp-get@latest install @modelcontextprotocol/server-brave-search\n```\n\nSample output:\n```\nInstalling @modelcontextprotocol/server-brave-search...\nInstallation complete.\n```\n\n#### Install a Specific Version\n\nYou can also install a specific version of a package:\n\n```\nnpx @michaellatman/mcp-get@latest install @modelcontextprotocol/server-brave-search 1.0.0\n```\n\nSample output:\n```\nInstalling @modelcontextprotocol/server-brave-search version 1.0.0...\nInstallation complete.\n```\n\nThe version syntax follows standard package manager conventions:\n- For Node.js packages: `package@version` (e.g., `@modelcontextprotocol/server-brave-search@1.0.0`)\n- For Python packages: `package==version` (e.g., `mcp-server-aidd==0.1.19`)\n- For Go packages: `package@version` (e.g., `example.com/go-server@v1.0.0`)\n\n### List Packages\n\n```\nnpx @michaellatman/mcp-get@latest list\n```\n\nSample output:\n```\n📦 Available Packages\nFound 11 packages\n\n@modelcontextprotocol/server-brave-search │ MCP server for Brave Search API integration │ Anthropic, PBC (https://anthropic.com) │ MIT\n@modelcontextprotocol/server-everything   │ MCP server that exercises all the features of the MCP protocol │ Anthropic, PBC (https://anthropic.com) │ MIT\n...\n```\n\n### Uninstall a Package\n\n```\nnpx @michaellatman/mcp-get@latest uninstall @modelcontextprotocol/server-brave-search\n```\n\nSample output:\n```\nUninstalling @modelcontextprotocol/server-brave-search...\nUninstallation complete.\n```\n\n### Update the Tool\n\nThe tool automatically checks for updates when running commands. You can also manually update:\n\n```\nnpx @michaellatman/mcp-get@latest update\n```\n\nSample output:\n```\nUpdating mcp-get...\nUpdate complete.\n```\n\n## Contributing\n\nWe welcome contributions to the project! If you would like to contribute, please follow these guidelines:\n\n1. Fork the repository and create a new branch for your feature or bugfix.\n2. Write tests for your changes and ensure all existing tests pass.\n3. Submit a pull request with a clear description of your changes.\n\n## License\n\nThis project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.\n\n## Contact Information\n\nIf you have any questions or need help, feel free to reach out:\n\n- GitHub Issues: [michaellatman/mcp-get](https://github.com/michaellatman/mcp-get/issues)\n\n## Adding Your Own MCP Server to the Registry\n\nThere are two ways to add your MCP server to the registry:\n\n### Option 1: Manual Package Addition\n\nIf you want to maintain your own package:\n\n1. **Create Your MCP Server**: \n   - Develop your MCP server according to the [MCP protocol specifications](https://modelcontextprotocol.io)\n   - Publish it as either an NPM package (installable via npm) or a Python package (installable via uvx)\n\n2. **Add Your Package to the Package Folder**: Add your server as a JSON file in the `packages/` directory:\n\n   - For regular packages, use `packages/your-package-name.json`\n   - For scoped packages, use `packages/scope--package-name.json` (double hyphens between scope and name)\n\n   ```json\n   {\n     \"name\": \"your-package-name\",\n     \"description\": \"A brief description of your MCP server\",\n     \"vendor\": \"Your Name or Organization\",\n     \"sourceUrl\": \"URL to the source code repository\",\n     \"homepage\": \"URL to the homepage or documentation\",\n     \"license\": \"License type (e.g., MIT)\",\n     \"runtime\": \"node | python | go\",\n     \"environmentVariables\": {\n       \"SOME_API_KEY\": {\n         \"description\": \"Description of what this key is for\",\n         \"required\": true\n       }\n     }\n   }\n   ```\n\n   Important notes:\n   - The `name` field must be the exact resolvable package name in npm or pip\n   - The `runtime` field specifies how your package should be installed:\n     - Use `\"runtime\": \"node\"` for packages that should be installed via npm\n     - Use `\"runtime\": \"python\"` for packages that should be installed via uvx\n   - Always include an `environmentVariables` object (can be empty `{}` if none required)\n\n3. **Validate Your Package**: Run the PR check to validate your package:\n   ```\n   npm run pr-check\n   ```\n\n4. **Submit a Pull Request**: Fork this repository, add your package file, and submit a PR.\n\n### Option 2: Community Servers Repository\n\nIf you don't want to manage package deployment and distribution:\n\n1. **Fork Community Repository**: \n   - Fork [mcp-get/community-servers](https://github.com/mcp-get/community-servers)\n   - This repository follows the same structure as the official MCP servers\n\n2. **Add Your Server**:\n   - Add your implementation to the `src` directory\n   - Follow the existing patterns and structure\n   - Include necessary documentation and tests\n\n3. **Submit a Pull Request**:\n   - Submit your PR to the community servers repository\n   - Once merged, your server will be automatically added to the registry\n\nBoth options require following the [MCP protocol specifications](https://modelcontextprotocol.io). Choose the option that best fits your needs:\n- Option 1 if you want full control over your package distribution\n- Option 2 if you want to avoid managing package deployment and distribution\n"
+}

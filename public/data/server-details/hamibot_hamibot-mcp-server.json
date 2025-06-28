@@ -1,0 +1,119 @@
+{
+  "id": "0a2b24e31d95",
+  "owner": "hamibot",
+  "repoName": "hamibot-mcp-server",
+  "fullDescription": "Facilitates interaction with the Hamibot API, offering tools for device and script management, including custom JavaScript execution on specified devices.",
+  "techStack": [
+    {
+      "name": "javascript",
+      "icon": "📄",
+      "color": "#f7df1e"
+    },
+    {
+      "name": "java",
+      "icon": "☕",
+      "color": "#ed8b00"
+    }
+  ],
+  "serviceTypes": [
+    {
+      "type": "automation",
+      "label": "Automation",
+      "icon": "⚡",
+      "description": "Automates tasks and workflows"
+    },
+    {
+      "type": "integration",
+      "label": "Integration",
+      "icon": "🔗",
+      "description": "Connects to external APIs and services"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "moderate",
+    "maturity": "stable",
+    "deployment": [
+      "saas"
+    ],
+    "featured": false,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 3.25,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "automation",
+      "action"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/hamibot/hamibot-mcp-server",
+    "owner": "hamibot",
+    "name": "hamibot-mcp-server",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.280Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "automation",
+    "javascript",
+    "web-network",
+    "android",
+    "scripts",
+    "hamibot"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Moderate",
+      "color": "#eab308",
+      "icon": "🟡"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    }
+  ],
+  "icon": "⚡",
+  "readme": null
+}

@@ -1,0 +1,55 @@
+{
+  "mcp_name": "shadcn-ui-mcp-server",
+  "mcp_description": "A powerful and flexible MCP server designed to enhance the development experience with Shadcn UI components, providing tools for component management, documentation, and installation.",
+  "mcp_id": "heilgar_shadcn-ui-mcp-server",
+  "fetch_timestamp": "2025-06-23T08:20:41.530054Z",
+  "github_url": "https://github.com/heilgar/shadcn-ui-mcp-server",
+  "repository": {
+    "name": "shadcn-ui-mcp-server",
+    "full_name": "heilgar/shadcn-ui-mcp-server",
+    "description": null,
+    "html_url": "https://github.com/heilgar/shadcn-ui-mcp-server",
+    "created_at": "2025-05-15T20:23:42Z",
+    "updated_at": "2025-06-22T14:02:22Z",
+    "pushed_at": "2025-05-21T16:34:27Z",
+    "size": 52,
+    "stargazers_count": 4,
+    "watchers_count": 4,
+    "forks_count": 1,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "heilgar",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2695198?v=4",
+      "html_url": "https://github.com/heilgar"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 15201,
+      "JavaScript": 3456,
+      "Dockerfile": 356
+    },
+    "language_percentages": {
+      "TypeScript": 79.95,
+      "JavaScript": 18.18,
+      "Dockerfile": 1.87
+    },
+    "pull_requests_count": 2,
+    "contributors_count": 4,
+    "package_json_version": "1.0.6"
+  },
+  "readme": "# Shadcn UI MCP Server\n\nA powerful and flexible MCP (Model Control Protocol) server designed to enhance the development experience with Shadcn UI components. This server provides a robust foundation for building and managing UI components with advanced tooling and functionality.\n\n<a href=\"https://glama.ai/mcp/servers/@heilgar/shadcn-ui-mcp-server\">\n  <img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/@heilgar/shadcn-ui-mcp-server/badge\" alt=\"Shadcn UI Server MCP server\" />\n</a>\n\n## Features\n\n### Tools \nThe MCP server provides a set of tools that can be used through the Model Control Protocol:\n\n- `list-components`: Get the list of available shadcn/ui components\n- `get-component-docs`: Get documentation for a specific component\n- `install-component`: Install a shadcn/ui component\n- `list-blocks`: Get the list of available shadcn/ui blocks\n- `get-block-docs`: Get documentation for a specific block\n- `install-blocks`: Install a shadcn/ui block\n\n### Functionality\n- **Component Management**\n  - List available shadcn/ui components\n  - Get detailed documentation for specific components\n  - Install components with support for multiple package managers (npm, pnpm, yarn, bun)\n\n- **Block Management**\n  - List available shadcn/ui blocks\n  - Get documentation and code for specific blocks\n  - Install blocks with support for multiple package managers\n\n- **Package Manager Support**\n  - Flexible runtime support for npm, pnpm, yarn, and bun\n  - Automatic detection of user's preferred package manager\n\n## Installation\n\n### Prerequisites\n- Node.js (v18 or higher)\n- npm or yarn package manager\n\n### Claude Desktop Configuration\nTo use with Claude Desktop, add the server config:\n\nOn MacOS: `~/Library/Application Support/Claude/claude_desktop_config.json`\nOn Windows: `%APPDATA%/Claude/claude_desktop_config.json`\n\n```json\n{\n  \"mcpServers\": {\n    \"shadcn-ui-server\": {\n      \"command\": \"npx\",\n      \"args\": [\"@heilgar/shadcn-ui-mcp-server\"]\n    }\n  }\n}\n```\n\n### Windsurf Configuration\nAdd this to your `./codeium/windsurf/model_config.json`:\n\n```json\n{\n  \"mcpServers\": {\n    \"shadcn-ui-server\": {\n      \"command\": \"npx\",\n      \"args\": [\"@heilgar/shadcn-ui-mcp-server\"]\n    }\n  }\n}\n```\n\n### Cursor Configuration\nAdd this to your `.cursor/mcp.json`:\n\n```json\n{\n  \"mcpServers\": {\n    \"shadcn-ui-server\": {\n      \"command\": \"npx\",\n      \"args\": [\"@heilgar/shadcn-ui-mcp-server\"]\n    }\n  }\n}\n```\n\n## Development and Debugging\n\n### Local Development\n1. Install dependencies:\n```bash\nnpm install\n```\n\n2. Build the server:\n```bash\nnpm run build\n```\n\n### Debugging\nSince MCP servers communicate over stdio, debugging can be challenging. We recommend using the [MCP Inspector](https://github.com/modelcontextprotocol/inspector) for debugging:\n\n```bash\nnpm run inspector\n```\n\nThe Inspector will provide a URL to access debugging tools in your browser, allowing you to:\n- Monitor MCP communication\n- Inspect tool calls and responses\n- Debug server behavior\n- View real-time logs\n\n## Related Projects and Dependencies\n\nThis project is built using the following tools and libraries:\n\n- [Model Context Protocol TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk) - The official TypeScript SDK for MCP servers and clients\n- [MCP Inspector](https://github.com/modelcontextprotocol/inspector) - A debugging tool for MCP servers\n- [Cheerio](https://github.com/cheeriojs/cheerio) - Fast, flexible, and lean implementation of core jQuery designed specifically for the server\n\n## License\n\nMIT License - feel free to use this project for your own purposes.\n\n## Contributing\n\nContributions are welcome! Please feel free to submit a Pull Request. "
+}

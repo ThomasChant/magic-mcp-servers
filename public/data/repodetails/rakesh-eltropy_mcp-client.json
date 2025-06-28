@@ -1,0 +1,50 @@
+{
+  "mcp_name": "mcp-client",
+  "mcp_description": "",
+  "mcp_id": "rakesh-eltropy_mcp-client",
+  "fetch_timestamp": "2025-06-23T06:33:34.727107Z",
+  "github_url": "https://github.com/rakesh-eltropy/mcp-client",
+  "repository": {
+    "name": "mcp-client",
+    "full_name": "rakesh-eltropy/mcp-client",
+    "description": null,
+    "html_url": "https://github.com/rakesh-eltropy/mcp-client",
+    "created_at": "2024-12-04T15:32:29Z",
+    "updated_at": "2025-05-16T19:42:25Z",
+    "pushed_at": "2025-03-11T11:18:15Z",
+    "size": 32,
+    "stargazers_count": 46,
+    "watchers_count": 46,
+    "forks_count": 18,
+    "open_issues_count": 1,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "rakesh-eltropy",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11676761?v=4",
+      "html_url": "https://github.com/rakesh-eltropy"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 18,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 20394
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# MCP REST API and CLI Client\n\nA **simple REST API** and **CLI client** to interact with [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers.\n\n## Key Features\n\n### 1. MCP-Compatible Servers\n- Supports any [MCP-compatible servers](https://github.com/punkpeye/awesome-mcp-servers) servers.\n- Pre-configured default servers:\n  - **SQLite** (test.db has been provided with sample products data) \n  - **Brave Search**\n- Additional MCP servers can be added in the [mcp-server-config.json](mcp-server-config.json) file\n\n### 2. Integrated with LangChain\n- Leverages LangChain to execute LLM prompts.\n- Enables multiple MCP servers to collaborate and respond to a specific query simultaneously.\n\n### 3. LLM Provider Support\n- Compatible with any LLM provider that supports APIs with function capabilities.\n- Examples:\n  - **OpenAI**\n  - **Claude**\n  - **Gemini**\n  - **AWS Nova**\n  - **Groq**\n  - **Ollama**\n  - Essentially all LLM providers are supported as long as they provide a function-based API. Please refer [langchain documentation](https://python.langchain.com/docs/integrations/chat/) for more details.\n\n\n## Setup\n\n1. Clone the repository:\n   ```bash\n   git clone https://github.com/rakesh-eltropy/mcp-client.git\n   ```\n\n2. **Navigate to the Project Directory**\n   After cloning the repository, move to the project directory:\n   ```bash\n   cd mcp-client\n   ```\n   \n3. Set the OPENAI_API_KEY environment variable:\n   ```bash\n   export OPENAI_API_KEY=your-openai-api-key\n   ```\n   You can also set the `OPENAI_API_KEY` in the [mcp-server-config.json](mcp-server-config.json) file.\n\n   You can also set the `provider` and `model` in the [mcp-server-config.json](mcp-server-config.json) file.\n   e.g. `provider` can be `ollama` and `model` can be `llama3.2:3b`.\n\n\n4.Set the BRAVE_API_KEY environment variable:\n   ```bash\n   export BRAVE_API_KEY=your-brave-api-key\n   ```\n   You can also set the `BRAVE_API_KEY` in the [mcp-server-config.json](mcp-server-config.json) file.\n   You can get the free `BRAVE_API_KEY` from [Brave Search API](https://brave.com/search/api/).\n\n5. Running from the CLI:\n   ```bash\n   uv run cli.py\n   ```\n   To explore the available commands, use the `help` option. You can chat with LLM using `chat` command.\n   Sample prompts:\n   ```bash\n     What is the capital city of India?\n    ```\n   ```bash\n     Search the most expensive product from database and find more details about it from amazon?\n    ```\n\n6. Running from the REST API:\n   ```bash\n   uvicorn app:app --reload\n   ```\n   You can use the following curl command to chat with llm:\n   ```bash\n   curl -X POST -H \"Content-Type: application/json\" -d '{\"message\": \"list all the products from my local database?\"}' http://localhost:8000/chat\n   ```\n   You can use the following curl command to chat with llm with streaming:\n   ```bash\n   curl -X POST -H \"Content-Type: application/json\" -d '{\"message\": \"list all the products from my local database?\", \"streaming\": true}' http://localhost:8000/chat\n   ```\n\n\n## Contributing\n\nFeel free to submit issues and pull requests for improvements or bug fixes.\n"
+}

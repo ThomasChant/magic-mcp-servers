@@ -1,0 +1,55 @@
+{
+  "mcp_name": "yuki9541134/mcp-redash",
+  "mcp_description": "Facilitates SQL query execution and data source management through Redash API integration.",
+  "mcp_id": "yuki9541134_mcp-redash",
+  "fetch_timestamp": "2025-06-23T09:43:34.593097Z",
+  "github_url": "https://github.com/yuki9541134/mcp-redash",
+  "repository": {
+    "name": "mcp-redash",
+    "full_name": "yuki9541134/mcp-redash",
+    "description": null,
+    "html_url": "https://github.com/yuki9541134/mcp-redash",
+    "created_at": "2025-04-05T02:16:50Z",
+    "updated_at": "2025-06-17T11:25:58Z",
+    "pushed_at": "2025-06-17T11:25:55Z",
+    "size": 81,
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "yuki9541134",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/34640556?v=4",
+      "html_url": "https://github.com/yuki9541134"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 12150,
+      "JavaScript": 6741,
+      "Dockerfile": 834
+    },
+    "language_percentages": {
+      "TypeScript": 61.6,
+      "JavaScript": 34.17,
+      "Dockerfile": 4.23
+    },
+    "pull_requests_count": 4,
+    "contributors_count": 1,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# Redash MCPサーバー\n\nRedash APIのMCPサーバーで、クエリの実行、結果の取得などの機能を提供します。\n\n## ツール\n\n1. `execute_query_and_wait`\n   * クエリを実行し、結果が利用可能になるまで待機します\n   * 入力パラメータ:\n     * `data_source_id` (数値): クエリを実行するデータソースのID\n     * `query` (文字列): 実行するSQLクエリ\n   * 戻り値: 利用可能になったクエリ結果\n\n2. `list_data_sources`\n   * 利用可能なすべてのデータソースを一覧表示します\n   * 入力パラメータ: なし\n   * 戻り値: データソースの配列\n\n3. `get_data_source`\n   * 特定のデータソースに関する詳細を取得します\n   * 入力パラメータ:\n     * `data_source_id` (数値): データソースのID\n   * 戻り値: データソースの詳細情報\n\n## セットアップ\n\n### APIキー\n\nRedash APIキーを取得してください。\n\n1. Redashにログイン\n2. 「Edit Profile」をクリック\n3. APIキーをコピーする\n\n### 環境変数\n\n以下の環境変数が必要です:\n\n* `REDASH_API_KEY`: RedashのAPIキー\n* `REDASH_BASE_URL`: RedashのURL（例: https://redash.example.com）\n\n### git clone\n\nこのリポジトリをローカルにcloneしてください\n\n### npxで利用する場合\n\nビルドとnpxコマンドの登録を行ってください\n\n```sh\nnpm install\nnpm run build\nnpm link\n```\n\nClaude DesktopまたはCursorのMCP設定に以下を追加してください\n\n```json\n{\n  \"mcpServers\": {\n    \"redash\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"mcp-redash\"\n      ],\n      \"env\": {\n        \"REDASH_API_KEY\": \"<YOUR_API_KEY>\",\n        \"REDASH_BASE_URL\": \"https://redash.example.com\"\n      }\n    }\n  }\n}\n```\n\n### Dockerで利用する場合\n\nビルドを行ってください\n\n```sh\ndocker build -t yuki9541134/mcp-redash .\n```\n\nClaude DesktopまたはCursorのMCP設定に以下を追加してください\n\n```json\n{\n  \"mcpServers\": {\n    \"redash\": {\n      \"command\": \"docker\",\n      \"args\": [\n        \"run\",\n        \"-i\",\n        \"--rm\",\n        \"-e\", \"REDASH_API_KEY\",\n        \"-e\", \"REDASH_BASE_URL\",\n        \"yuki9541134/mcp-redash\"\n      ],\n      \"env\": {\n        \"REDASH_API_KEY\": \"<YOUR_API_KEY>\",\n        \"REDASH_BASE_URL\": \"https://redash.example.com\"\n      }\n    }\n  }\n}\n```\n\n### SSEモードで利用する場合\n\nHTTPサーバーとして起動し、Server-Sent Events (SSE) を使用した通信を行うことも可能です。\n\n#### 開発時\n```bash\nnpm run dev -- --sse\n```\n\n#### ビルド後\n```bash\nnode dist/index.js --sse\n```\n\nSSEモードではHTTPサーバーがポート3000で起動します。エンドポイント：\n- `GET /sse` - SSE接続の確立\n- `POST /messages` - メッセージの送信\n"
+}

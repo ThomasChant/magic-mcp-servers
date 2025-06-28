@@ -1,0 +1,50 @@
+{
+  "mcp_name": "dealwallet1/meiliseachmcp",
+  "mcp_description": "Facilitates seamless interaction with Meilisearch through LLM interfaces, offering dynamic connection management, search capabilities, and comprehensive index and task management.",
+  "mcp_id": "dealwallet1_meiliseachmcp",
+  "fetch_timestamp": "2025-06-23T02:32:52.041099Z",
+  "github_url": "https://github.com/dealwallet1/meiliseachmcp",
+  "repository": {
+    "name": "meiliseachmcp",
+    "full_name": "dealwallet1/meiliseachmcp",
+    "description": null,
+    "html_url": "https://github.com/dealwallet1/meiliseachmcp",
+    "created_at": "2025-04-25T09:43:04Z",
+    "updated_at": "2025-04-25T09:45:23Z",
+    "pushed_at": "2025-04-25T09:45:19Z",
+    "size": 32,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "dealwallet1",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/117338735?v=4",
+      "html_url": "https://github.com/dealwallet1"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 0,
+    "languages": {
+      "Python": 45224
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# Meilisearch MCP Server\n\nA Model Context Protocol (MCP) server for interacting with Meilisearch through LLM interfaces like Claude.\n\n<a href=\"https://glama.ai/mcp/servers/tbc3n51jja\"><img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/tbc3n51jja/badge\" alt=\"Meilisearch Server MCP server\" /></a>\n\n## Features\n\n- Index and document management \n- Settings configuration and management\n- Task monitoring and API key management\n- Built-in logging and monitoring tools\n- Dynamic connection configuration to switch between Meilisearch instances\n- Smart search across single or multiple indices\n- This is a Python implementation, [there is Typescript integration if you need to work with a Meilisearch MCP server within the browser](https://github.com/devlimelabs/meilisearch-ts-mcp)\n\n## Installation\n\n```bash\n# Clone repository\ngit clone <repository_url>\ncd meilisearch-mcp\n\n# Create virtual environment and install\nuv venv\nsource .venv/bin/activate  # On Windows: .venv\\Scripts\\activate\nuv pip install -e .\n```\n\n## Requirements\n\n- Python ≥ 3.9\n- Running Meilisearch instance\n- Node.js (for testing with MCP Inspector)\n\n## Usage\n\n### Environment Variables\n\n```bash\nMEILI_HTTP_ADDR=http://localhost:7700  # Default Meilisearch URL\nMEILI_MASTER_KEY=your_master_key       # Optional: Default Meilisearch API key\n```\n\n### Dynamic Connection Configuration\n\nThe server provides tools to view and update connection settings at runtime:\n\n- `get-connection-settings`: View current connection URL and API key status\n- `update-connection-settings`: Update URL and/or API key to connect to a different Meilisearch instance\n\nExample usage through MCP:\n```json\n// Get current settings\n{\n  \"name\": \"get-connection-settings\"\n}\n\n// Update connection settings\n{\n  \"name\": \"update-connection-settings\",\n  \"arguments\": {\n    \"url\": \"http://new-host:7700\",\n    \"api_key\": \"new-api-key\"\n  }\n}\n```\n\n### Search Functionality\n\nThe server provides a flexible search tool that can search across one or all indices:\n\n- `search`: Search through Meilisearch indices with optional parameters\n\nExample usage through MCP:\n```json\n// Search in a specific index\n{\n  \"name\": \"search\",\n  \"arguments\": {\n    \"query\": \"search term\",\n    \"indexUid\": \"movies\",\n    \"limit\": 10\n  }\n}\n\n// Search across all indices\n{\n  \"name\": \"search\",\n  \"arguments\": {\n    \"query\": \"search term\",\n    \"limit\": 5,\n    \"sort\": [\"releaseDate:desc\"]\n  }\n}\n```\n\nAvailable search parameters:\n- `query`: The search query (required)\n- `indexUid`: Specific index to search in (optional)\n- `limit`: Maximum number of results per index (optional, default: 20)\n- `offset`: Number of results to skip (optional, default: 0)\n- `filter`: Filter expression (optional)\n- `sort`: Sorting rules (optional)\n\n### Running the Server\n\n```bash\npython -m src.meilisearch_mcp\n```\n\n### Usage with Claude Desktop\nTo use this with Claude Desktop, add the following to your `claude_desktop_config.json`:\n```json\n{\n  \"mcpServers\": {\n    \"meilisearch\": {\n      \"command\": \"uvx\",\n      \"args\": [\"-n\", \"meilisearch-mcp\"]\n    }\n  }\n}\n```\n\n### Testing with MCP Inspector\n\n```bash\nnpx @modelcontextprotocol/inspector python -m src.meilisearch_mcp\n```\n\n## Available Tools\n\n### Connection Management\n- `get-connection-settings`: View current Meilisearch connection URL and API key status\n- `update-connection-settings`: Update URL and/or API key to connect to a different instance\n\n### Index Management\n- `create-index`: Create a new index with optional primary key\n- `list-indexes`: List all available indexes\n- `get-index-metrics`: Get detailed metrics for a specific index\n\n### Document Operations\n- `get-documents`: Retrieve documents from an index with pagination\n- `add-documents`: Add or update documents in an index\n\n### Search\n- `search`: Flexible search across single or multiple indices with filtering and sorting options\n\n### Settings Management\n- `get-settings`: View current settings for an index\n- `update-settings`: Update index settings (ranking, faceting, etc.)\n\n### API Key Management\n- `get-keys`: List all API keys\n- `create-key`: Create new API key with specific permissions\n- `delete-key`: Delete an existing API key\n\n### Task Management\n- `get-task`: Get information about a specific task\n- `get-tasks`: List tasks with optional filters:\n  - `limit`: Maximum number of tasks to return\n  - `from`: Number of tasks to skip\n  - `reverse`: Sort order of tasks\n  - `batchUids`: Filter by batch UIDs\n  - `uids`: Filter by task UIDs\n  - `canceledBy`: Filter by cancellation source\n  - `types`: Filter by task types\n  - `statuses`: Filter by task statuses\n  - `indexUids`: Filter by index UIDs\n  - `afterEnqueuedAt`/`beforeEnqueuedAt`: Filter by enqueue time\n  - `afterStartedAt`/`beforeStartedAt`: Filter by start time\n  - `afterFinishedAt`/`beforeFinishedAt`: Filter by finish time\n- `cancel-tasks`: Cancel pending or enqueued tasks\n- `delete-tasks`: Delete completed tasks\n\n### System Monitoring\n- `health-check`: Basic health check\n- `get-health-status`: Comprehensive health status\n- `get-version`: Get Meilisearch version information\n- `get-stats`: Get database statistics\n- `get-system-info`: Get system-level information\n\n## Contributing\n\n1. Fork repository\n2. Create feature branch\n3. Commit changes\n4. Create pull request\n\n## License\n\nMIT\n"
+}

@@ -1,0 +1,151 @@
+{
+  "id": "d4a0d1209082",
+  "owner": "1Levick3",
+  "repoName": "postgresql-mcp-server",
+  "fullDescription": "Facilitates direct SQL query execution on PostgreSQL databases with parameterized queries and configurable timeouts.",
+  "techStack": [
+    {
+      "name": "typescript",
+      "icon": "📘",
+      "color": "#3178c6"
+    }
+  ],
+  "serviceTypes": [
+    {
+      "type": "data",
+      "label": "Data",
+      "icon": "📊",
+      "description": "Manages, processes, or analyzes data"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "moderate",
+    "maturity": "stable",
+    "deployment": [
+      "local"
+    ],
+    "featured": false,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 7.25,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "postgresql",
+      "postgres",
+      "sql query"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/1Levick3/postgresql-mcp-server",
+    "owner": "1Levick3",
+    "name": "postgresql-mcp-server",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.279Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "parameters",
+    "database",
+    "queries",
+    "postgresql",
+    "sql",
+    "timeout",
+    "data-storage"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Moderate",
+      "color": "#eab308",
+      "icon": "🟡"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    }
+  ],
+  "icon": "📊",
+  "readme": {
+    "overview": {
+      "title": "Overview",
+      "content": "postgresql-mcp-server/README.md at main · 1Levick3/postgresql-mcp-server · GitHub\n===============\n[Skip to content](https://github.com/1Levick3/postgresql-mcp-server/blob/main/README.md#start-of-content)\nNavigation Menu\n---------------\nToggle navigation\n[Sign in](https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2F1Levick3%2Fpostgresql-mcp-server%2Fblob%2Fmain%2FREADME.md)\nAppearance settings\n*    Product \n    *   [GitHub Copilot Write better code with AI](https://github.com/features/copilot)\n    *   [GitHub Models New Manage and compare prompts](https://github.com/features/models)\n    *   [GitHub Advanced Security Find and fix vulnerabilities](https://github.com/security/advanced-security)\n    *   [Actions Automate any workflow](https://github.com/features/actions)\n    *   [Codespaces Instant dev environments](https://github.com/features/codespaces)\n    *   [Issues Plan and track work](https://github.com/features/issues)\n    *   [Code Review Manage code changes](https://github.com/features/code-review)\n    *   [Discussions Collaborate outside of code](https://github.com/features/discussions)\n    *   [Code Search Find more, search less](https://github.com/features/code-search)\nExplore\n    *   [Why GitHub](https://github.com/why-github)\n    *   [All features](https://github.com/features)\n    *   [Documentation](https://docs.github.com/)\n    *   [GitHub Skills](https://skills.github.com/)\n    *   [Blog](https://github.blog/)\n*    Solutions \nBy company size\n    *   [Enterprises](https://github.com/enterprise)\n    *   [Small and medium teams](https://github.com/team)\n    *   [Startups](https://github.com/enterprise/startups)\n    *   [Nonprofits](https://github.com/solutions/industry/nonprofits)\nBy use case\n    *   [DevSecOps](https://github.com/solutions/use-case/devsecops)\n    *   [DevOps](https://github.com/solutions/use-case/devops)\n    *   [CI/CD](https://github.com/solutions/use-case/ci-cd)\n    *   [View all use cases](https://github.com/solutions/use-case)\nBy industry\n    *   [Healthcare](https://github.com/solutions/industry/healthcare)\n    *   [Financial services](https://github.com/solutions/industry/financial-services)\n    *   [Manufacturing](https://github.com/solutions/industry/manufacturing)\n    *   [Government](https://github.com/solutions/industry/government)\n    *   [View all industries](https://github.com/solutions/industry)\n[View all solutions](https://github.com/solutions)\n*    Resources \nTopics\n    *   [AI](https://github.com/resources/articles/ai)\n    *   [DevOps](https://github.com/resources/articles/devops)\n    *   [Security](https://github.com/resources/articles/security)\n    *   [Software Development](https://github.com/resources/articles/software-development)\n    *   [View all](https://github.com/resources/articles)\nExplore\n    *   [Learning Pathways](https://resources.github.com/learn/pathways)\n    *   [Events & Webinars](https://resources.github.com/)\n    *   [Ebooks & Whitepapers](https://github.com/resources/whitepapers)\n    *   [Customer Stories](https://github.com/customer-stories)\n    *   [Partners](https://partner.github.com/)\n    *   [Executive Insights](https://github.com/solutions/executive-insights)\n*    Open Source \n    *   [GitHub Sponsors Fund open source developers](https://github.com/sponsors)\n    *   [The ReadME Project GitHub community articles](https://github.com/readme)\nRepositories\n    *   [Topics](https://github.com/topics)\n    *   [Trending](https://github.com/trending)\n    *   [Collections](https://github.com/collections)\n*    Enterprise \n    *   [Enterprise platform AI-powered developer platform](https://github.com/enterprise)\nAvailable add-ons\n    *   [GitHub Advanced Security Enterprise-grade security features](https://github.com/security/advanced-security)\n    *   [Copilot for business Enterprise-grade AI features](https://github.com/features/copilot/copilot-business)\n    *   [Premium Support Enterprise-grade 24/7 support](https://github.com/premium-support)\n*   [Pricing](https://github.com/pricing)\nSearch or jump to...\nSearch code, repositories, users, issues, pull requests...\n==========================================================\n Search  \nClear\n[Search syntax tips](https://docs.github.com/search-github/github-code-search/understanding-github-code-search-syntax)\nProvide feedback\n================\nWe read every piece of feedback, and take your input very seriously.\n- [x] Include my email address so I can be contacted \n Cancel  Submit feedback \nSaved searches\n==============\nUse saved searches to filter your results more quickly\n------------------------------------------------------\nName \nQuery \nTo see all available qualifiers, see our [documentation](https://docs.github.com/search-github/github-code-search/understanding-github-code-search-syntax).\n Cancel  Create saved search \n[Sign in](https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2F1Levick3%2Fpostgresql-mcp-server%2Fblob%2Fmain%2FREADME.md)\n[Sign up](https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E%2Fblob%2Fshow&source=header-repo&source_repo=1Levick3%2Fpostgresql-mcp-server)\nAppearance settings\nResetting focus\nYou signed in with another tab or window. Reload to refresh your session.You signed out in another tab or window. Reload to refresh your session.You switched accounts on another tab or window. Reload to refresh your session.Dismiss alert\n{{ message }}\n[1Levick3](https://github.com/1Levick3)/**[postgresql-mcp-server](https://github.com/1Levick3/postgresql-mcp-server)**Public\n*   [Notifications](https://github.com/login?return_to=%2F1Levick3%2Fpostgresql-mcp-server)You must be signed in to change notification settings\n*   [Fork 0](https://github.com/login?return_to=%2F1Levick3%2Fpostgresql-mcp-server)\n*   [Star 0](https://github.com/login?return_to=%2F1Levick3%2Fpostgresql-mcp-server) \n*   [Code](https://github.com/1Levick3/postgresql-mcp-server)\n*   [Issues 0](https://github.com/1Levick3/postgresql-mcp-server/issues)\n*   [Pull requests 0](https://github.com/1Levick3/postgresql-mcp-server/pulls)\n*   [Actions](https://github.com/1Levick3/postgresql-mcp-server/actions)\n*   [Projects 0](https://github.com/1Levick3/postgresql-mcp-server/projects)\n*   [Security](https://github.com/1Levick3/postgresql-mcp-server/security)[### Uh oh!](https://github.com/1Levick3/postgresql-mcp-server/security)\n[There was an error while loading.](https://github.com/1Levick3/postgresql-mcp-server/security)Please reload this page.    \n*   [Insights](https://github.com/1Levick3/postgresql-mcp-server/pulse)\nAdditional navigation options\n*   [Code](https://github.com/1Levick3/postgresql-mcp-server)\n*   [Issues](https://github.com/1Levick3/postgresql-mcp-server/issues)\n*   [Pull requests](https://github.com/1Levick3/postgresql-mcp-server/pulls)\n*   [Actions](https://github.com/1Levick3/postgresql-mcp-server/actions)\n*   [Projects](https://github.com/1Levick3/postgresql-mcp-server/projects)\n*   [Security](https://github.com/1Levick3/postgresql-mcp-server/security)\n*   [Insights](https://github.com/1Levick3/postgresql-mcp-server/pulse)\nCollapse file tree\n------------------\nFiles\n-----\nmain\nSearch this repository\n*         src  \n*       .gitignore  \n*       CODE_OF_CONDUCT.md  \n*       CONTRIBUTING.md  \n*       Dockerfile  \n*       LICENSE  \n*       README.md  \n*       SECURITY.md  \n*       package-lock.json  \n*       package.json  \n*       smithery.yaml  \n*       test-client.js  \n*       tsconfig.json  \nBreadcrumbs\n-----------\n1.   [postgresql-mcp-server](https://github.com/1Levick3/postgresql-mcp-server/tree/main)\n/\nREADME.md\n=========\nCopy path\nBlame More file actions\nBlame More file actions\nLatest commit\n-------------\n[[Image 2: 1Levick3]](https://github.com/1Levick3)[1Levick3](https://github.com/1Levick3/postgresql-mcp-server/commits?author=1Levick3)\n[Merge branch 'main' into smithery/config-mxwu](https://github.com/1Levick3/postgresql-mcp-server/commit/5f572f26a3a773d787898b42269aed13c4d3583a)\nApr 29, 2025\n[5f572f2](https://github.com/1Levick3/postgresql-mcp-server/commit/5f572f26a3a773d787898b42269aed13c4d3583a)·Apr 29, 2025\nHistory\n-------\n[History](https://github.com/1Levick3/postgresql-mcp-server/commits/main/README.md)\nOpen commit details\n72 lines (56 loc) · 1.94 KB\nBreadcrumbs\n-----------\n1.   [postgresql-mcp-server](https://github.com/1Levick3/postgresql-mcp-server/tree/main)\n/\nREADME.md\n=========\nTop\nFile metadata and controls\n--------------------------\n*   Preview \n*   Code \n*   Blame \n72 lines (56 loc) · 1.94 KB\n[Raw](https://github.com/1Levick3/postgresql-mcp-server/raw/refs/heads/main/README.md)\nCopy raw file\nDownload raw file\nYou must be signed in to make or propose changes\nMore edit options\nOutline\nEdit and raw actions\nPostgreSQL MCP Server\n=====================\n[[Image 3: smithery badge]](https://smithery.ai/server/@1Levick3/postgresql-mcp-server)\nA Model Context Protocol (MCP) server that provides direct PostgreSQL database query execution capabilities. This server enables custom SQL query execution against PostgreSQL databases with support for parameterized queries and configurable timeouts. This project is designed specifically for use with the Cursor IDE.\nPrerequisites\n-------------\n*   Node.js >= 18.0.0\n*   PostgreSQL server (for target database operations)\n*   Network access to target PostgreSQL instances\nInstallation\n------------\n### Installing via Smithery\nTo install PostgreSQL Database Query Server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@1Levick3/postgresql-mcp-server):\nundefinedshell\nnpx -y @smithery/cli install @1Levick3/postgresql-mcp-server --client claude\nundefined\n### Manual Installation\n1.   Clone the repository\n2.   Install dependencies: \nundefinedshell\nnpm install\nundefined\n3.   Build the server: \nundefinedshell\nnpm run build\nundefined\n4.   Add to MCP settings file: \nundefinedjson\n {\n   \"mcpServers\": {\n     \"postgresql-mcp\": {\n       \"command\": \"node\",\n       \"args\": [\"/Users/1Levick3/Desktop/postgresql-mcp-server/build/index.js\"],\n       \"disabled\": false,\n       \"alwaysAllow\": [],\n       \"env\": {\n         \"POSTGRES_CONNECTION_STRING\": \"postgresUrl\",\n         \"POSTGRES_SSL_CERT_PATH\": \"/Users/1levick3/Desktop/root.crt\"\n       }\n     }\n   }\n }\nundefined\nDevelopment\n-----------\n*   `npm run dev` - Start development server with hot reload\n*   `npm run lint` - Run ESLint\n*   `npm test` - Run tests\nSecurity Considerations\n-----------------------\n1.   Connection Security \n    *   Uses connection pooling\n    *   Implements connection timeouts\n    *   Validates connection strings\n    *   Supports SSL/TLS connections\nContributing\n------------\n1.   Fork the repository\n2.   Create a feature branch\n3.   Commit your changes\n4.   Push to the branch\n5.   Create a Pull Request\nFooter\n------\n © 2025 GitHub,Inc. \n### Footer navigation\n*   [Terms](https://docs.github.com/site-policy/github-terms/github-terms-of-service)\n*   [Privacy](https://docs.github.com/site-policy/privacy-policies/github-privacy-statement)\n*   [Security](https://github.com/security)\n*   [Status](https://www.githubstatus.com/)\n*   [Docs](https://docs.github.com/)\n*   [Contact](https://support.github.com/?tags=dotcom-footer)\n*    Manage cookies \n*    Do not share my personal information \n You can’t perform that action at this time.",
+      "code_blocks": [],
+      "subsections": []
+    },
+    "installation": {
+      "title": "",
+      "content": "",
+      "code_blocks": [],
+      "subsections": []
+    },
+    "examples": {
+      "title": "",
+      "content": "",
+      "code_blocks": [],
+      "subsections": []
+    },
+    "api_reference": {
+      "title": "",
+      "content": "",
+      "code_blocks": [],
+      "subsections": []
+    },
+    "metadata": {
+      "hasContent": true,
+      "sections": [
+        "overview"
+      ],
+      "codeBlocks": 0,
+      "filename": "postgresql-mcp-server.md",
+      "project_name": "postgresql-mcp-server",
+      "server_id": "d4a0d1209082",
+      "github_url": "https://github.com/1Levick3/postgresql-mcp-server",
+      "processed_at": "2025-06-27",
+      "originalFilename": "postgresql-mcp-server.md",
+      "processedAt": "2025-06-27T01:56:19.339Z",
+      "processedWith": "Jina MCP + AI",
+      "version": "2.0"
+    }
+  }
+}

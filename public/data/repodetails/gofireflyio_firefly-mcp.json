@@ -1,0 +1,65 @@
+{
+  "mcp_name": "gofireflyio/firefly-mcp",
+  "mcp_description": "🎖️ 📇 ☁️ - Integrates, discovers, manages, and codifies cloud resources with [Firefly](https://firefly.ai).",
+  "mcp_id": "gofireflyio_firefly-mcp",
+  "fetch_timestamp": "2025-06-23T03:52:17.536538Z",
+  "github_url": "https://github.com/gofireflyio/firefly-mcp",
+  "repository": {
+    "name": "firefly-mcp",
+    "full_name": "gofireflyio/firefly-mcp",
+    "description": "Firefly MCP",
+    "html_url": "https://github.com/gofireflyio/firefly-mcp",
+    "created_at": "2025-03-25T13:30:45Z",
+    "updated_at": "2025-06-16T08:04:07Z",
+    "pushed_at": "2025-05-18T13:10:24Z",
+    "size": 158,
+    "stargazers_count": 8,
+    "watchers_count": 8,
+    "forks_count": 1,
+    "open_issues_count": 3,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "gofireflyio",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/100200663?v=4",
+      "html_url": "https://github.com/gofireflyio"
+    },
+    "has_issues": true,
+    "has_projects": false,
+    "has_downloads": false,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 3,
+    "languages": {
+      "TypeScript": 12363,
+      "JavaScript": 9713,
+      "Dockerfile": 372,
+      "Makefile": 334
+    },
+    "language_percentages": {
+      "TypeScript": 54.27,
+      "JavaScript": 42.63,
+      "Dockerfile": 1.63,
+      "Makefile": 1.47
+    },
+    "pull_requests_count": 4,
+    "contributors_count": 6,
+    "latest_release": {
+      "tag_name": "v1.1.5",
+      "name": "Release v1.1.5",
+      "published_at": "2025-05-18T13:10:25Z",
+      "body": "## What's Changed\n* INFL-13817: Improve MCP server by @YuvalFireFly in https://github.com/gofireflyio/firefly-mcp/pull/5\n\n\n**Full Changelog**: https://github.com/gofireflyio/firefly-mcp/compare/v1.1.4...v1.1.5",
+      "prerelease": false,
+      "draft": false
+    },
+    "package_json_version": "1.0.0"
+  },
+  "readme": "[![Firefly](https://infralight-templates-public.s3.amazonaws.com/company-logos/firefly_logo_white.png)](https://firefly.ai)\n\n# Firefly MCP Server\n\nThe Firefly MCP (Model Context Protocol) server is a TypeScript-based server that enables seamless integration with the Firefly platform. It allows you to discover, manage, and codify resources across your Cloud and SaaS accounts connected to Firefly.\n\n## Features\n\n- 🔍 Resource Discovery: Find any resource in your Cloud and SaaS accounts\n- 📝 Resource Codification: Convert discovered resources into Infrastructure as Code\n- 🔐 Secure Authentication: Uses FIREFLY_ACCESS_KEY and FIREFLY_SECRET_KEY for secure communication\n- 🚀 Easy Integration: Works seamlessly with Claude and Cursor\n\n## Prerequisites\n\n- Node.js (v14 or higher)\n- npm or yarn\n- Firefly account with generated access keys\n\n## Installation\n\nYou can run the Firefly MCP server directly using NPX:\n\n```bash\nnpx @fireflyai/firefly-mcp\n```\n\n### Environment Variables\n\nYou can provide your Firefly credentials in two ways:\n\n1. Using environment variables:\n```bash\nFIREFLY_ACCESS_KEY=your_access_key FIREFLY_SECRET_KEY=your_secret_key npx @fireflyai/firefly-mcp\n```\n\n2. Using arguments:\n```bash\nnpx @fireflyai/firefly-mcp --access-key your_access_key --secret-key your_secret_key\n```\n\n## Usage\n\n### Stdio\n\nUpdate the `mcp.json` file with the following:  \n```bash\n{\n  \"mcpServers\": {\n    \"firefly\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@fireflyai/firefly-mcp\"],\n      \"env\": {\n        \"FIREFLY_ACCESS_KEY\": \"your_access_key\",\n        \"FIREFLY_SECRET_KEY\": \"your_secret_key\"\n      }\n    }\n  }\n}\n```\n\nRun the MCP server using one of the methods above with the following command:\n```bash\nnpx @fireflyai/firefly-mcp --sse --port 6001\n```\n\nUpdate the `mcp.json` file with the following:\n```bash\n{\n  \"mcpServers\": {\n    \"firefly\": {\n      \"url\": \"http://localhost:6001/sse\"\n    }\n  }\n}\n```\n\n### Using with Cursor\n\n1. Start the MCP server using one of the methods above\n2. Use the Cursor extension to connect to the MCP server - see [Cursor Model Context Protocol documentation](https://docs.cursor.com/context/model-context-protocol)\n3. Use natural language to query your resources\n\n#### Example:\n\n##### Prompt \n```\nFind all \"ubuntu-prod\" EC2 instance in 123456789012 AWS account and codify it into Terraform\n```\n\n##### Response\n```\nresource \"aws_instance\" \"ubuntu-prod\" {\n  ami           = \"ami-0c55b159cbfafe1f0\"\n  instance_type = \"t3.micro\"\n}\n```\n\n## Demo\n\nhttps://github.com/user-attachments/assets/0986dff5-d433-4d82-9564-876b8215b61e\n\n## Contributing\n\n1. Fork the repository\n2. Create your feature branch (`git checkout -b feature/amazing-feature`)\n3. Commit your changes (`git commit -m 'feat: Add amazing feature'`)\n4. Push to the branch (`git push origin feature/amazing-feature`)\n5. Open a Pull Request\n\n## License\n\nThis project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.\n\n## Support\n\nFor support, please visit [Firefly's documentation](https://docs.firefly.ai/firefly-docs) or create an issue in this repository.\n"
+}

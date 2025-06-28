@@ -1,0 +1,55 @@
+{
+  "mcp_name": "ZephyrDeng/mcp-server-gitlab",
+  "mcp_description": "Integrates GitLab RESTful API tools with platforms like Claude and Smithery, enabling seamless project management and collaboration.",
+  "mcp_id": "ZephyrDeng_mcp-server-gitlab",
+  "fetch_timestamp": "2025-06-23T09:46:31.501389Z",
+  "github_url": "https://github.com/ZephyrDeng/mcp-server-gitlab",
+  "repository": {
+    "name": "mcp-server-gitlab",
+    "full_name": "ZephyrDeng/mcp-server-gitlab",
+    "description": null,
+    "html_url": "https://github.com/ZephyrDeng/mcp-server-gitlab",
+    "created_at": "2025-04-09T08:58:12Z",
+    "updated_at": "2025-04-26T10:14:31Z",
+    "pushed_at": "2025-04-26T10:14:28Z",
+    "size": 218,
+    "stargazers_count": 2,
+    "watchers_count": 2,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "ZephyrDeng",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56784262?v=4",
+      "html_url": "https://github.com/ZephyrDeng"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 83101,
+      "JavaScript": 2307,
+      "Dockerfile": 541
+    },
+    "language_percentages": {
+      "TypeScript": 96.69,
+      "JavaScript": 2.68,
+      "Dockerfile": 0.63
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 2,
+    "package_json_version": "0.2.0"
+  },
+  "readme": "[中文版](./README.md)\n\n![](https://badge.mcpx.dev?type=server&features=tools 'MCP server with tools') [![Build Status](https://github.com/ZephyrDeng/mcp-server-gitlab/actions/workflows/ci.yml/badge.svg)](https://github.com/ZephyrDeng/mcp-server-gitlab/actions) [![Node Version](https://img.shields.io/node/v/@zephyr-mcp/gitlab)](https://nodejs.org) [![License](https://img.shields.io/badge/license-MIT-blue)](./LICENSE)\n\n[![Downloads](https://img.shields.io/npm/dm/@zephyr-mcp/gitlab)](https://npmjs.com/package/@zephyr-mcp/gitlab) [![npm version](https://img.shields.io/npm/v/@zephyr-mcp/gitlab)](https://npmjs.com/package/@zephyr-mcp/gitlab) [![smithery badge](https://smithery.ai/badge/@ZephyrDeng/mcp-server-gitlab)](https://smithery.ai/server/@ZephyrDeng/mcp-server-gitlab)\n\n\n\n<a href=\"https://glama.ai/mcp/servers/@ZephyrDeng/mcp-server-gitlab\">\n  <img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/@ZephyrDeng/mcp-server-gitlab/badge\" />\n</a>\n\n# mcp-gitlab MCP Server (English)\n\nA GitLab integration server built on the fastmcp framework, providing various GitLab RESTful API tools. Supports integration with Claude, Smithery, and other platforms.\n\n## Features\n\n- **GitlabSearchUserProjectsTool**: Search users and their active projects by username\n- **GitlabGetUserTasksTool**: Get current user's pending tasks\n- **GitlabSearchProjectDetailsTool**: Search projects and details\n- **GitlabCreateMRCommentTool**: Add comments to merge requests\n- **GitlabAcceptMRTool**: Accept and merge merge requests\n- **GitlabUpdateMRTool**: Update merge request assignee, reviewers, title, description, and labels\n- **GitlabCreateMRTool**: Create a new merge request with assignee and reviewers\n- **GitlabRawApiTool**: Call any GitLab API with custom parameters\n\n## Quick Start\n\n```bash\n# Install dependencies\nbun install\n\n# Build the project\nbun run build\n\n# Start the server\nbun run start\n```\n\n## Environment Variables\n\n```env\nGITLAB_API_URL=https://your-gitlab-instance.com\nGITLAB_TOKEN=your_access_token\n\n# Optional: Provide a mapping from usernames to user IDs (JSON string)\n# This can reduce API calls, especially when referencing the same users frequently\n# Example: '{\"username1\": 123, \"username2\": 456}'\nGITLAB_USER_MAPPING={\"username1\": 123, \"username2\": 456}\n\n# Optional: Provide a mapping from project names to project IDs (JSON string)\n# Project IDs can be numbers or strings (e.g., 'group/project')\n# This can reduce API calls and ensure the correct project is used\n# Example: '{\"project-name-a\": 1001, \"group/project-b\": \"group/project-b\"}'\nGITLAB_PROJECT_MAPPING={\"project-name-a\": 1001, \"group/project-b\": \"group/project-b\"}\n```\n\n## Usage Examples\n\nSee [USAGE.md](./USAGE.md) for detailed examples of each tool's parameters.\n\n## Project Structure\n\n```\nsrc/\n├── server/\n│   └── GitlabMCPServer.ts          # MCP server entry point\n├── tools/\n│   ├── GitlabAcceptMRTool.ts\n│   ├── GitlabCreateMRCommentTool.ts\n│   ├── GitlabGetUserTasksTool.ts\n│   ├── GitlabRawApiTool.ts\n│   ├── GitlabSearchProjectDetailsTool.ts\n│   ├── GitlabSearchUserProjectsTool.ts\n│   └── gitlab/\n│       ├── FieldFilterUtils.ts\n│       ├── GitlabApiClient.ts\n│       └── GitlabApiTypes.ts\n├── utils/\n│   ├── is.ts\n│   └── sensitive.ts\nsmithery.json                      # Smithery config\nUSAGE.md                          # Usage examples\npackage.json\ntsconfig.json\n```\n\n## Integration\n\n### Claude Desktop Client\n\nAdd to your config:\n\n```json\n{\n  \"mcpServers\": {\n    \"@zephyr-mcp/gitlab\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@zephyr-mcp/gitlab\"]\n    }\n  }\n}\n```\n\n### Smithery\n\nUse directly on Smithery platform:\n\n```bash\nsmithery add @zephyr-mcp/gitlab\n```\n\nOr search \"@zephyr-mcp/gitlab\" in Smithery UI and add to your workspace.\n\nEnvironment variables:\n\n- `GITLAB_API_URL`: Base URL of your GitLab API\n- `GITLAB_TOKEN`: Access token for GitLab API authentication\n\n## Related Links\n\n- [fastmcp](https://github.com/punkpeye/fastmcp)\n- [Smithery](https://smithery.ai/docs)\n- [GitLab API](https://docs.gitlab.com/ee/api/rest/)"
+}

@@ -1,0 +1,50 @@
+{
+  "mcp_name": "funwarioisii/perplexity-mcp-rb",
+  "mcp_description": "Facilitates web search operations through a Perplexity-based MCP server.",
+  "mcp_id": "funwarioisii_perplexity-mcp-rb",
+  "fetch_timestamp": "2025-06-23T03:37:43.370547Z",
+  "github_url": "https://github.com/funwarioisii/perplexity-mcp-rb",
+  "repository": {
+    "name": "perplexity-mcp-rb",
+    "full_name": "funwarioisii/perplexity-mcp-rb",
+    "description": null,
+    "html_url": "https://github.com/funwarioisii/perplexity-mcp-rb",
+    "created_at": "2025-04-22T10:43:56Z",
+    "updated_at": "2025-04-22T10:44:02Z",
+    "pushed_at": "2025-04-22T10:43:58Z",
+    "size": 2,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Ruby",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "funwarioisii",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/20943066?v=4",
+      "html_url": "https://github.com/funwarioisii"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Ruby": 3342
+    },
+    "language_percentages": {
+      "Ruby": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "MCP Server for web search using Perplexity.\n\ninspired by https://github.com/jsonallen/perplexity-mcp\n\n## Usage\n\n```json\n{\n  \"mcpServers\": {\n    \"perplexity\": {\n      \"command\": \"/path/to/perplexity-mcp-rb/perplexity_mcp.rb\",\n      \"env\": {\n        \"PERPLEXITY_API_KEY\": \"pplx-xxxx\"\n      },\n    }\n  }\n}\n```\n"
+}

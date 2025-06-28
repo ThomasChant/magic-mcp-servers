@@ -1,0 +1,50 @@
+{
+  "mcp_name": "tsainte/wordpress-automation-mcp",
+  "mcp_description": "Automate WordPress post management with a Python-based MCP server, offering CRUD operations and post status handling.",
+  "mcp_id": "tsainte_wordpress-automation-mcp",
+  "fetch_timestamp": "2025-06-23T09:06:21.855660Z",
+  "github_url": "https://github.com/tsainte/wordpress-automation-mcp",
+  "repository": {
+    "name": "wordpress-automation-mcp",
+    "full_name": "tsainte/wordpress-automation-mcp",
+    "description": "A quick mcp for Wordpress post automation",
+    "html_url": "https://github.com/tsainte/wordpress-automation-mcp",
+    "created_at": "2025-04-03T10:35:58Z",
+    "updated_at": "2025-05-23T00:37:28Z",
+    "pushed_at": "2025-04-03T10:36:40Z",
+    "size": 80,
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "tsainte",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1645414?v=4",
+      "html_url": "https://github.com/tsainte"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 6220
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# Wordpress Automation MCP\n\nThis is a [MCP tool](https://modelcontextprotocol.io/introduction) to interact with Wordpress posts. \n\n## Tech Stack\n- Python 3.13\n- UV\n\n## Features\n- Connect to WordPress sites using environment variables or direct credentials\n- Create, read, update, and delete posts\n- Support for post status (draft, publish, etc.)\n- Pagination support for listing posts\n\n## Usage\n\nYou must specify the environment variables in your MCP configuration:\n\n```json \n{\n    \"mcpServers\": {\n        \"wordpress\": {\n            \"command\": \"uv\",\n            \"args\": [\n                \"--directory\", \n                \"/path/to/wordpress-automation-mcp\",\n                \"run\",\n                \"main.py\"\n            ],\n            \"env\": {\n                \"WP_SITE_URL\": \"https://your-wordpress-site.com\",\n                \"WP_USERNAME\": \"your-username\",\n                \"WP_APP_PASSWORD\": \"your-app-password\"\n            }\n        }\n    }\n  }\n```"
+}

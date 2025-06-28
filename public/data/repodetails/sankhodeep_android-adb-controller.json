@@ -1,0 +1,51 @@
+{
+  "mcp_name": "sankhodeep/android-adb-controller",
+  "mcp_description": "Facilitates AI-driven control of Android devices through ADB commands, enabling functionalities like device listing and screen tapping.",
+  "mcp_id": "sankhodeep_android-adb-controller",
+  "fetch_timestamp": "2025-06-23T08:09:40.958021Z",
+  "github_url": "https://github.com/sankhodeep/android-adb-controller",
+  "repository": {
+    "name": "android-adb-controller",
+    "full_name": "sankhodeep/android-adb-controller",
+    "description": null,
+    "html_url": "https://github.com/sankhodeep/android-adb-controller",
+    "created_at": "2025-03-29T22:01:32Z",
+    "updated_at": "2025-03-29T22:02:22Z",
+    "pushed_at": "2025-03-29T22:02:19Z",
+    "size": 7,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "JavaScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "sankhodeep",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/199106707?v=4",
+      "html_url": "https://github.com/sankhodeep"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 3546
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "0.1.0"
+  },
+  "readme": "# Android ADB Controller MCP Server\n\n## Overview\nThis MCP server enables AI agents to control Android devices via ADB commands. It provides tools for:\n- Listing connected devices\n- Executing screen taps\n- (Extensible for more ADB commands)\n\n## Setup Guide\n\n### Prerequisites\n1. Android device with USB debugging enabled\n2. ADB installed and working (`adb devices` should show your device)\n3. Node.js v16+\n\n### Installation Steps\n\n1. **Create MCP Server**:\n```bash\nnpx @modelcontextprotocol/create-server android-adb-controller\ncd android-adb-controller\n```\n\n2. **Install Dependencies**:\n```bash\nnpm install adbkit @types/adbkit\n```\n\n3. **Configure MCP Settings**:\nAdd to `mcp_settings.json`:\n```json\n{\n  \"mcpServers\": {\n    \"android-adb\": {\n      \"command\": \"node\",\n      \"args\": [\"android-adb-controller/build/index.js\"]\n    }\n  }\n}\n```\n\n## Implementation Details\n\n### Key Components\n1. **ADB Client Initialization**:\n```typescript\nthis.adbClient = adb.createClient();\n```\n\n2. **Command Execution**:\n```typescript\nprivate async executeADBCommand(deviceId: string, command: string) {\n  const device = this.adbClient.getDevice(deviceId);\n  return await device.shell(command);\n}\n```\n\n3. **Tool Definitions**:\n- `list_devices`: Lists connected Android devices\n- `tap_screen`: Executes screen taps at specified coordinates\n\n## Troubleshooting Guide\n\n### Common Issues & Solutions\n\n1. **ADB Command Not Found**:\n- Ensure ADB is installed and in system PATH\n- Verify platform-tools are extracted correctly\n\n2. **Device Not Detected**:\n- Check USB debugging is enabled\n- Verify USB cable connection\n- Run `adb devices` to confirm detection\n\n3. **TypeScript Errors**:\nSolution: Added proper type definitions in `adbkit.d.ts`:\n```typescript\ndeclare module 'adbkit' {\n  interface Device {\n    id: string;\n    type: string;\n  }\n  // ... other type definitions\n}\n```\n\n4. **MCP Server Connection Issues**:\n- Verify server is running (`node build/index.js`)\n- Check MCP settings configuration\n\n## Extending Functionality\n\nTo add new commands:\n\n1. Define new tool in `ListToolsRequestSchema`\n2. Implement handler in `CallToolRequestSchema`\n3. Add corresponding ADB command execution\n\nExample for text input:\n```typescript\n{\n  name: \"input_text\",\n  description: \"Input text on device\",\n  inputSchema: {\n    type: \"object\",\n    properties: {\n      deviceId: { type: \"string\" },\n      text: { type: \"string\" }\n    }\n  }\n}\n```\n\n## Development Workflow\n\n1. Make code changes\n2. Rebuild:\n```bash\nnpm run build\n```\n3. Restart server:\n```bash\nnode build/index.js\n```\n\n## Architecture\n```\nMCP Server (Node.js) ↔ ADB Interface ↔ Android Device\n                ↑\n                |\n          AI Control System\n```\n\n## Future Improvements\n- Add swipe gestures\n- Implement screenshot capability\n- Add device monitoring\n- Support multiple simultaneous devices\n"
+}

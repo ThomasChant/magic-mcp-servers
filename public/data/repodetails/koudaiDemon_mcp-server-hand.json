@@ -1,0 +1,50 @@
+{
+  "mcp_name": "koudaiDemon/mcp-server-hand",
+  "mcp_description": "Enhances user shopping experiences by analyzing conversations to provide personalized product recommendations through intelligent tag matching.",
+  "mcp_id": "koudaiDemon_mcp-server-hand",
+  "fetch_timestamp": "2025-06-23T05:52:59.862882Z",
+  "github_url": "https://github.com/koudaiDemon/mcp-server-hand",
+  "repository": {
+    "name": "mcp-server-hand",
+    "full_name": "koudaiDemon/mcp-server-hand",
+    "description": null,
+    "html_url": "https://github.com/koudaiDemon/mcp-server-hand",
+    "created_at": "2025-04-14T07:23:09Z",
+    "updated_at": "2025-04-15T08:39:01Z",
+    "pushed_at": "2025-04-15T08:38:57Z",
+    "size": 7,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Java",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "koudaiDemon",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26588038?v=4",
+      "html_url": "https://github.com/koudaiDemon"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Java": 4715
+    },
+    "language_percentages": {
+      "Java": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# Hand Marketing MCP Server\n\nThis MCP Server analyzes user conversations to accurately extract multi-dimensional tags, intelligently matches them with product tags from an industry database, and thereby provides users with highly tailored product recommendations that align with their needs—enhancing both shopping experience and conversion rates.\n\n## Features\n\n- Conversation Analysis & Tag Extraction: Function: Analyzes user dialogues to extract multi-dimensional tags (e.g., preferences, scenarios, budgets) via NLP.\n- Intelligent Tag Matching: Dynamically aligns user tags with product tags from an industry database using rule-based or ML-driven algorithms.\n- Scalability & Real-Time Processing: Supports cross-industry databases (e-commerce, travel, etc.).\n- Personalized Recommendation Engine: Generates highly tailored product recommendations based on matched tags, optimizing relevance and ranking.\n- Performance Optimization: Reduces decision fatigue by filtering irrelevant options.\n\n## Prerequisites\n\n- Get Hand Marketing MCP Server Auth Key\n\n## Getting started\n\n- Configure\n\nPlease set the value for auth key\n\n```json\n{\n  \"mcpServers\": {\n    \"hand-marketing-mcp-sse\": {\n      \"url\": \"https://mcp.linkcrm.cn/sse?key=xxxxx\"\n    }\n  }\n}\n```\n\n- Run\nUse Hand Marketing MCP Server in a MCP client, like 火山方舟/Cursor/Claude macOS app/Cherry Studio.\n"
+}

@@ -1,0 +1,53 @@
+{
+  "mcp_name": "Drand",
+  "mcp_description": "An MCP server for fetching verifiable random numbers from the [drand network](https://drand.love).",
+  "mcp_id": "randa-mu_drand-mcp-server",
+  "fetch_timestamp": "2025-06-23T02:43:22.839708Z",
+  "github_url": "https://github.com/randa-mu/drand-mcp-server",
+  "repository": {
+    "name": "drand-mcp-server",
+    "full_name": "randa-mu/drand-mcp-server",
+    "description": "A model context protocol server for drand",
+    "html_url": "https://github.com/randa-mu/drand-mcp-server",
+    "created_at": "2025-05-19T13:19:28Z",
+    "updated_at": "2025-05-20T12:47:15Z",
+    "pushed_at": "2025-05-20T12:47:12Z",
+    "size": 65,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "randa-mu",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/143084315?v=4",
+      "html_url": "https://github.com/randa-mu"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 2742,
+      "JavaScript": 454
+    },
+    "language_percentages": {
+      "TypeScript": 85.79,
+      "JavaScript": 14.21
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "0.0.1-rc1"
+  },
+  "readme": "# drand-mcp-server 🎲\n\n![build](https://github.com/randa-mu/drand-mcp-server/actions/workflows/build.yml/badge.svg)\n\nUse verifiable randomness in your AI application. This [Model Context Protocol (MCP)](https://modelcontextprotocol.io)\nserver enables you to get a random value from the [drand](https://drand.love) network, verify its validity and use it as\nan input seed to your model-driven flows!\n\n## Use Cases\n\n* repeatable, random sampling of input data\n* interaction with other MCP servers in a verifiable manner (e.g. paying out rewards based on a prompt)\n* verifying the output of another random process using historical drand beacons\n\n## Prerequisites\n\n* a relatively recent version of node (v21+ - `fetch` is required)\n\n## Installation\n\nYou can run the MCP server either using npx or after building locally.\n\n### Usage with VS Code\n\nCreate a file called `.vscode/mcp.json` in your workspace (or in your home directory) and add the following code:\n\n```json\n{\n  \"servers\": {\n    \"drand\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"drand-mcp-server\"\n      ]\n    }\n  }\n}\n```\n\nFor additional info, see the VS Code [docs on MCP](https://code.visualstudio.com/docs/copilot/chat/mcp-servers)\n\n### Usage with Claude\n\nYou can run the drand-mcp-server alongside claude desktop by adding the following to your config:\n\n```json\n{\n  \"mcpServers\": {\n    \"drand\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"drand-mcp-server\"\n      ]\n    }\n  }\n}\n```\n\n## Tools\n\nThe following tools are available from the MCP server\n| Name| Params | Description |\n|----------|-----|-----------|\n| get-randomness-latest | none | fetches the latest available beacon from drand quicknet|\n| get-randomness-by-time| time in milliseconds | fetches the randomness beacon emitted at or just before the time\nprovided |\n| get-randomness-by-round| round | fetches the randomness beacon emitted with a given round number |\n\n## Building from source\n\n- install dependencies with `npm install`\n- build the application with `npm run build`\n- run the application with either `npm start` or `node ./dist/index.mjs`\n\nYou can also configure VS Code and Claude as above, replacing the command/args with the following:\n\n```\n  \"command\": \"node\",\n  \"args\": [\"/path/to/my/project/drand-mcp-server/dist/index.mjs\"]\n```\n\n## Roadmap\n\n- [x] fetch latest randomness\n- [x] fetch randomness by round\n- [x] fetch randomness by time\n- [ ] select items from a list"
+}

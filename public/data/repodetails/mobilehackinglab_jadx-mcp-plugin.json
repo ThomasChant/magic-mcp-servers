@@ -1,0 +1,75 @@
+{
+  "mcp_name": "mobilehackinglab/jadx-mcp-plugin",
+  "mcp_description": "Facilitates decompiler access for Claude by bridging Jadx API over HTTP using MCP, enabling live interaction with decompiled code.",
+  "mcp_id": "mobilehackinglab_jadx-mcp-plugin",
+  "fetch_timestamp": "2025-06-23T06:51:07.138095Z",
+  "github_url": "https://github.com/mobilehackinglab/jadx-mcp-plugin",
+  "repository": {
+    "name": "jadx-mcp-plugin",
+    "full_name": "mobilehackinglab/jadx-mcp-plugin",
+    "description": null,
+    "html_url": "https://github.com/mobilehackinglab/jadx-mcp-plugin",
+    "created_at": "2025-04-05T20:44:38Z",
+    "updated_at": "2025-06-19T12:35:57Z",
+    "pushed_at": "2025-04-15T08:48:09Z",
+    "size": 58,
+    "stargazers_count": 67,
+    "watchers_count": 67,
+    "forks_count": 8,
+    "open_issues_count": 0,
+    "language": "Java",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "mobilehackinglab",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/125667452?v=4",
+      "html_url": "https://github.com/mobilehackinglab"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 8,
+    "subscribers_count": 0,
+    "languages": {
+      "Java": 21735,
+      "Python": 3380
+    },
+    "language_percentages": {
+      "Java": 86.54,
+      "Python": 13.46
+    },
+    "pull_requests_count": 4,
+    "contributors_count": 2,
+    "latest_release": {
+      "tag_name": "v1.2",
+      "name": "V1.2",
+      "published_at": "2025-04-15T08:48:09Z",
+      "body": "## What's Changed\r\n* Added configurable parameter for HTTP interface by @JH-MHL in https://github.com/mobilehackinglab/jadx-mcp-plugin/pull/5\r\n\r\n\r\n**Full Changelog**: https://github.com/mobilehackinglab/jadx-mcp-plugin/compare/v1.1...v1.2",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v1.2",
+        "commit_sha": "9bc4168a80c0848609d7c9d89369be5b275340d4"
+      },
+      {
+        "name": "v1.1",
+        "commit_sha": "a0183698c38e76e544d4324daf6a910eb5b61fc0"
+      },
+      {
+        "name": "v1.0",
+        "commit_sha": "90304d73b66f968c714098cf4e532ad2b6b8aaf2"
+      }
+    ],
+    "latest_version": "v1.2"
+  },
+  "readme": "## ⚙️ Jadx MCP Plugin — Decompiler Access for Claude via MCP\n\nThis project provides a [Jadx](https://github.com/skylot/jadx) plugin written in **Java**, which exposes the **Jadx API over HTTP** — enabling live interaction through MCP clients like [Claude](https://www.anthropic.com/index/introducing-claude) via the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/). A lightweight [FastMCP](https://github.com/modelcontextprotocol/python-sdk?tab=readme-ov-file#resources) adapter in Python acts as a bridge between Claude and the plugin. This enables intelligent navigation and automation of reverse engineering workflows, ideal for AI-assisted security analysis of Android apps.\n\n---\n\n### 🧰 Setup Instructions\n\n```bash\n# Clone this repository\ngit clone https://github.com/mobilehackinglab/jadx-mcp-plugin.git\ncd jadx-mcp-plugin\n\n# Create and activate a virtual environment\npython3 -m venv venv\n\n# Activate:\nsource venv/bin/activate      # Linux/Mac\n.\\venv\\Scripts\\activate       # Windows\n```\n\n### Install Python dependencies\n```bash\npip install -r requirements.txt \n```\n\n### 🧠 Setup Claude MCP CLient Integration\nTo use this adapter in Claude Desktop, go to `File` -> `Settings` -> `Developer` -> `Edit Config` -> `claude_desktop_config.json` and add an MCP server pointing to the Python executable in the venv (to prevent depedency issues) and the full adapter path following below examples:\n\nWindows:\n\n```json\n{\n  \"mcpServers\": {\n    \"Jadx MCP Server\": {\n      \"command\": \"C:\\\\Workset\\\\jadx-mcp-plugin\\\\venv\\\\Scripts\\\\python.exe\",\n      \"args\": [\"C:\\\\Workset\\\\jadx-mcp-plugin\\\\fastmcp_adapter.py\"]\n    }\n  }\n}\n```\n\nMacOS / Linux:\n```json\n{\n  \"mcpServers\": {\n    \"Jadx MCP Server\": {\n      \"command\": \"/Users/yourname/jadx-mcp-plugin/venv/bin/python\",\n      \"args\": [\"/Users/yourname/jadx-mcp-plugin/fastmcp_adapter.py\"]\n    }\n  }\n}\n```\n\nMake sure to restart (Quit) Claude after editing the config.\nAfter restart it should look like this:\n![](img/jadx-mcp-running.png)\n\n### ✅ Usage Flow\n\n1. Open **Jadx** with the latest plugin JAR from [the releases](https://github.com/mobilehackinglab/jadx-mcp-plugin/releases) placed in its `plugins/` folder or load it via `Plugins` -> `install plugin`.\n2. Load an APK or DEX file\n3. (Optional) You can specify the HTTP interface address by launching Jadx with:\n\n    ```bash\n    jadx-gui -Pjadx-mcp.http-interface=http://localhost:8085\n    ```\n\n   This is useful if you want to change the default host/port (`http://localhost:8085`).\n\n   > **Note:** If you change the interface address here, make sure to also update the corresponding URL in `fastmcp_adapter.py` to match.\n\n4. Claude will detect and activate the Jadx MCP Server tools.\n5. You can now list classes, fetch source, inspect methods/fields, and extract code live.\n\n---\n\n## 🧪 Tools Provided\n\n| Tool                  | Description                           |\n|-----------------------|---------------------------------------|\n| `list_all_classes`    | Get all decompiled class names        |\n| `search_class_by_name` | Find classes matching a string       |\n| `get_class_source`    | Get full source of a given class      |\n| `search_method_by_name` | Find methods matching a string      |\n| `get_methods_of_class` | List all method names in a class     |\n| `get_fields_of_class`  | List all field names in a class      |\n| `get_method_code`     | Extract decompiled code for a method  |\n\n---\n\n## 🛠 Development\n\n### ☕ Java Plugin\n\nThe Java plugin is located at:\n\n```\nplugin/src/main/java/com/mobilehackinglab/jadxplugin/McpPlugin.java\n```\n\nIt uses the `JadxPlugin` API (`jadx.api.*`) to:\n- Load decompiled classes and methods\n- Serve structured data via an embedded HTTP server\n- Respond to `/invoke` and `/tools` endpoints\n\n#### 🚀 Automated Installation with Gradle Tasks\n\nYou can use the following Gradle task to build and install the plugin in one step:\n\n```bash\n./gradlew installPlugin\n```\n\n> This uses the `jadx plugins` CLI. Make sure Jadx is installed and available in your `PATH`.\n\nFor other plugin-related tasks (uninstall, enable/disable), see the task definitions in [`plugin/build.gradle`](./plugin/build.gradle).\n\n#### 🔧 Manual Installation\n\nTo build the plugin:\n\n```bash\n./gradlew build\n# Output: plugin/build/libs/jadx-mcp-plugin-<version>.jar\n```\n\nInstall the plugin JAR using the `jadx plugins` CLI:\n\n```bash\njadx plugins --install-jar path/to/jadx-mcp-plugin-<version>.jar\n```\n\nAlternatively, place the built `.jar` file into your Jadx `plugins/` folder, typically located at: `~/.jadx/plugins/`\n\nIf you place the JAR manually, you’ll also need to enable the plugin through the Jadx GUI or by running:\n\n```bash\njadx plugins --enable jadx-mcp\n```\n\n---\n\n### Python FastMCP Adapter\n\nThe adapter file is:\n\n```\nfastmcp_adapter.py\n```\n\nIt translates Claude’s MCP tool calls into HTTP POSTs to the running Jadx plugin server. Make sure Jadx is open **before** starting Claude.\n\n---\n\n## 🤝 Contributing\n\nPRs, feature requests, and tool extensions are welcome!  \nThis project is maintained by [Mobile Hacking Lab](https://github.com/mobilehackinglab).\n\n---\n\n## 🧩 Credits\n\n- [Jadx](https://github.com/skylot/jadx)\n- [FastMCP](https://github.com/modelcontextprotocol/python-sdk)\n- [Claude by Anthropic](https://www.anthropic.com)\n"
+}

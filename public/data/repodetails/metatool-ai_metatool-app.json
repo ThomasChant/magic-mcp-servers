@@ -1,0 +1,112 @@
+{
+  "mcp_name": "metatool-ai/metatool-app",
+  "mcp_description": "📇 ☁️ 🏠 🍎 🪟 🐧 - MetaMCP is the one unified middleware MCP server that manages your MCP connections with GUI.",
+  "mcp_id": "metatool-ai_metatool-app",
+  "fetch_timestamp": "2025-06-23T06:42:30.972563Z",
+  "github_url": "https://github.com/metatool-ai/metatool-app",
+  "repository": {
+    "name": "metatool-app",
+    "full_name": "metatool-ai/metatool-app",
+    "description": "Unified middleware MCP to manage all your MCPs",
+    "html_url": "https://github.com/metatool-ai/metatool-app",
+    "created_at": "2025-01-22T11:58:52Z",
+    "updated_at": "2025-06-22T18:08:01Z",
+    "pushed_at": "2025-06-22T15:39:00Z",
+    "size": 8922,
+    "stargazers_count": 515,
+    "watchers_count": 515,
+    "forks_count": 80,
+    "open_issues_count": 7,
+    "language": "TypeScript",
+    "license": "GNU Affero General Public License v3.0",
+    "topics": [
+      "mcp",
+      "mcp-server",
+      "mcp-servers"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "metatool-ai",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/196043485?v=4",
+      "html_url": "https://github.com/metatool-ai"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 80,
+    "subscribers_count": 5,
+    "languages": {
+      "TypeScript": 449732,
+      "JavaScript": 4482,
+      "Dockerfile": 2552,
+      "CSS": 2447
+    },
+    "language_percentages": {
+      "TypeScript": 97.94,
+      "JavaScript": 0.98,
+      "Dockerfile": 0.56,
+      "CSS": 0.53
+    },
+    "pull_requests_count": 30,
+    "contributors_count": 3,
+    "latest_release": {
+      "tag_name": "v0.6.0",
+      "name": "Support Streamable HTTP MCP Servers",
+      "published_at": "2025-05-21T13:21:37Z",
+      "body": "As title\r\n\r\n<img width=\"417\" alt=\"Screenshot 2025-05-21 at 9 22 00 PM\" src=\"https://github.com/user-attachments/assets/598c18c5-2f85-4c89-b253-b086bd2d8d0f\" />\r\n",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.6.0",
+        "commit_sha": "736aad6e7e536166db37dd87998b1ad13dc3e735"
+      },
+      {
+        "name": "v0.5.3",
+        "commit_sha": "87df7115b85c216fe2ac13f6761314baf8a0cc80"
+      },
+      {
+        "name": "v0.5.2",
+        "commit_sha": "70b9f1b15b3a779a1a3834d2a4f408454fd30f41"
+      },
+      {
+        "name": "v0.5.1",
+        "commit_sha": "039e58c6d4df6f8822175a480b3e14e06715ae17"
+      },
+      {
+        "name": "v0.5.0",
+        "commit_sha": "74d5be3655cbe2ce30f97687a71e02c4276e0c77"
+      },
+      {
+        "name": "v0.4.5",
+        "commit_sha": "36d1baa6d260e269f531e661427609a860871d97"
+      },
+      {
+        "name": "v0.4.3",
+        "commit_sha": "7556ed9352cb68d1d65dde8d86a80a9522ff83fc"
+      },
+      {
+        "name": "v0.4.2",
+        "commit_sha": "4f23adcbe1b1b06b548a737ef58f96dee6d4e1fe"
+      },
+      {
+        "name": "v0.4.0",
+        "commit_sha": "85618538fbadc41ff7c2076e3e163fef341f2783"
+      },
+      {
+        "name": "v0.3.2",
+        "commit_sha": "b90757505c58bdf7893275d96eb7654f7f2f2d13"
+      }
+    ],
+    "latest_version": "v0.6.0",
+    "package_json_version": "0.1.0"
+  },
+  "readme": "# MetaMCP (Unified middleware MCP to manage all your MCPs)\n\n[![](https://dcbadge.limes.pink/api/server/mNsyat7mFX)](https://discord.gg/mNsyat7mFX)\n\nMetaMCP is the unified middleware MCP to manage all your MCPs. It uses a GUI fullstack app (this repo) and a local MCP proxy to achieve this. (see our latest npm repo [mcp-server-metamcp](https://github.com/metatool-ai/mcp-server-metamcp))\n\nA few feature highlights:\n\n- GUI app to manage multiple MCP server integrations all together.\n- Support ANY MCP clients (e.g., Claude Desktop, Cursor, etc.) because MetaMCP is a MCP server.\n- Support prompts, resources, tools under MCP.\n- Support multi-workspace: e.g., activate a workspace of DB1 or switch to DB2 in another workspace, preventing polluting context of DB1 to your MCP Client.\n- Tool level toggle on/off\n\nThe app is also self hostable, free and open source. There is also a cloud version. You can try how this app works using cloud version but I actually encourage you to self host if you are familiar with docker: it will provide unlimited access with lower latency, full private operations on your end.\n\nCheck out demo videos at https://metamcp.com/. Here is an overview screenshot.\n\n![MetaMCP Overview Screenshot](screenshot.png)\n![MetaMCP Tool Management Screenshot](tool_management.png)\n\n## Verified Platform\n\n- [x] Windows (after MCP official typescript SDK 1.8.0, which we updated accordingly, it works) https://github.com/metatool-ai/metatool-app/issues/15\n- [x] Mac\n- [x] Linux\n\n## Installation\n\nTo get started with this self hostable version of MetaMCP App, the eastiest way is to clone the repository and use Docker Compose to run it.\n\n```bash\ngit clone https://github.com/metatool-ai/metatool-app.git\ncd metatool-app\ncp example.env .env\ndocker compose up --build -d\n```\n\nThen open http://localhost:12005 in your browser to open MetaMCP App.\n\nIt is recommended to have npx (node.js based mcp) and uvx (python based mcp) installed globally.\nTo install uv check: https://docs.astral.sh/uv/getting-started/installation/\n\n### Default Remote Mode SSE endpoint for MetaMCP\n\nThe recommended way to connect to MetaMCP is via the SSE endpoint:\n\n```\nhttp://localhost:12007/sse with Authorization: Bearer <your-api-key>\n```\n\nAlternatively, if you cannot set headers, you can use this URL-based endpoint:\n\n```\nhttp://localhost:12007/api-key/<your-api-key>/sse\n```\n\nYou can get the API key from the MetaMCP App's API Keys page.\n\n### For Local Access\n\nYou can still use these methods even if your workspace is in Default Remote Mode.\n\n#### Claude Desktop Configuration\n\nFor Claude Desktop, the config json should look like this:\n\n```json\n{\n  \"mcpServers\": {\n    \"MetaMCP\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@metamcp/mcp-server-metamcp@latest\"],\n      \"env\": {\n        \"METAMCP_API_KEY\": \"<your api key>\",\n        \"METAMCP_API_BASE_URL\": \"http://localhost:12005\"\n      }\n    }\n  }\n}\n```\n\n#### Cursor Configuration\n\nFor Cursor, env vars aren't easy to get typed in so you may use args instead:\n\n```bash\nnpx -y @metamcp/mcp-server-metamcp@latest --metamcp-api-key <your-api-key> --metamcp-api-base-url http://localhost:12005\n```\n\n#### Windows Configuration\n\nFor Windows, you can use the following command for Cursor:\n\n```bash\ncmd /c npx -y @metamcp/mcp-server-metamcp@latest --metamcp-api-key <your-api-key> --metamcp-api-base-url http://localhost:12005\n```\n\nOr configure it using json:\n\n```json\n{\n  \"mcpServers\": {\n    \"MetaMCP\": {\n      \"command\": \"cmd\",\n      \"args\": [\n        \"/c\",\n        \"npx\",\n        \"-y\",\n        \"@metamcp/mcp-server-metamcp@latest\"\n      ],\n      \"env\": {\n        \"METAMCP_API_KEY\": \"<your api key>\",\n        \"METAMCP_API_BASE_URL\": \"http://localhost:12005\"\n      }\n    }\n  }\n}\n```\n\n#### Standalone SSE Server\n\nYou can also use the following command to start a standalone SSE server:\n\n```bash\nmcp-server-metamcp --metamcp-api-key <your-api-key> --transport sse --port 12006\n```\n\nThen use following json configuration:\n\n```json\n{\n  \"mcpServers\": {\n    \"MetaMCP\": {\n      \"url\": \"http://localhost:12006\"\n    }\n  }\n}\n```\n\n#### Smithery Windows Configuration\n\nYou can also use Smithery to run MCPs in docker on cloud for max compatibility:\n\n```bash\nsmithery run @metatool-ai/mcp-server-metamcp --config '{\"metamcpApiKey\":\"<your api key>\"}'\n```\n\nOr configure it in your Claude Desktop configuration file:\n\n```json\n{\n  \"mcpServers\": {\n    \"MetaMCP\": {\n      \"command\": \"smithery\",\n      \"args\": [\n        \"run\",\n        \"@metatool-ai/mcp-server-metamcp\",\n        \"--config\",\n        \"{\\\"metamcpApiKey\\\":\\\"<your api key>\\\"}\"\n      ]\n    }\n  }\n}\n```\n\nYou can get the API key from the MetaMCP App's API Keys page.\n\n## Architecture Overview\n\nNote that prompts and resources are also covered similar to tools.\n\n```mermaid\nsequenceDiagram\n    participant MCPClient as MCP Client (e.g., Claude Desktop)\n    participant MetaMCPMCP as MetaMCP MCP Server\n    participant MetaMCPApp as MetaMCP App\n    participant MCPServers as Installed MCP Servers in MetaMCP App\n\n    MCPClient ->> MetaMCPMCP: Request list tools\n    MetaMCPMCP ->> MetaMCPApp: Get tools configuration & status\n    MetaMCPApp ->> MetaMCPMCP: Return tools configuration & status\n\n    loop For each listed MCP Server\n        MetaMCPMCP ->> MCPServers: Request list_tools\n        MCPServers ->> MetaMCPMCP: Return list of tools\n    end\n\n    MetaMCPMCP ->> MetaMCPMCP: Aggregate tool lists\n    MetaMCPMCP ->> MCPClient: Return aggregated list of tools\n\n    MCPClient ->> MetaMCPMCP: Call tool\n    MetaMCPMCP ->> MCPServers: call_tool to target MCP Server\n    MCPServers ->> MetaMCPMCP: Return tool response\n    MetaMCPMCP ->> MCPClient: Return tool response\n```\n\n## Basic HTTP Authentication (Optional)\n\nMetaMCP App includes optional basic HTTP authentication to protect your self-hosted instance. To enable it:\n\n1. Set the following environment variables in your `.env` file:\n   ```bash\n   BASIC_AUTH_USERNAME=your-username\n   BASIC_AUTH_PASSWORD=your-secure-password\n   ```\n\n2. Restart your application:\n   ```bash\n   docker compose down\n   docker compose up --build -d\n   ```\n\nWhen enabled, all routes will require basic HTTP authentication except for:\n- Static assets (`/_next/static`, `/_next/image`, `/favicon.ico`)\n- API routes (`/api/*`) - these use their own API key authentication\n- Other public paths (you can customize this in `middleware.ts`)\n\nIf you don't set these environment variables, the authentication will be disabled and the app will work as before.\n\n**Security Note**: Make sure to use a strong password and consider using HTTPS in production environments.\n\n\n## License\n\nGNU AGPL v3\n\n## Credits\n- Used some oauth codes in https://github.com/modelcontextprotocol/inspector\n- (Deprecated) Demo video uses MCP Client [5ire](https://5ire.app/)\n"
+}

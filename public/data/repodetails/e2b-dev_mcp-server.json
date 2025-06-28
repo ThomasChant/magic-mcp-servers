@@ -1,0 +1,67 @@
+{
+  "mcp_name": "E2B",
+  "mcp_description": "Run code in secure sandboxes hosted by [E2B](https://e2b.dev)",
+  "mcp_id": "e2b-dev_mcp-server",
+  "fetch_timestamp": "2025-06-23T02:45:27.460409Z",
+  "github_url": "https://github.com/e2b-dev/mcp-server",
+  "repository": {
+    "name": "mcp-server",
+    "full_name": "e2b-dev/mcp-server",
+    "description": "Giving Claude ability to run code with E2B via MCP (Model Context Protocol)",
+    "html_url": "https://github.com/e2b-dev/mcp-server",
+    "created_at": "2024-12-01T17:26:15Z",
+    "updated_at": "2025-06-23T02:32:39Z",
+    "pushed_at": "2025-06-18T12:26:53Z",
+    "size": 270,
+    "stargazers_count": 272,
+    "watchers_count": 272,
+    "forks_count": 38,
+    "open_issues_count": 3,
+    "language": "JavaScript",
+    "license": "Apache License 2.0",
+    "topics": [
+      "anthropic",
+      "claude",
+      "claude-3-5-sonnet",
+      "claude-ai",
+      "model-context-protocol"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "e2b-dev",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/129434473?v=4",
+      "html_url": "https://github.com/e2b-dev"
+    },
+    "has_issues": true,
+    "has_projects": false,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 38,
+    "subscribers_count": 4,
+    "languages": {
+      "JavaScript": 2752,
+      "Python": 2162,
+      "Dockerfile": 296
+    },
+    "language_percentages": {
+      "JavaScript": 52.82,
+      "Python": 41.5,
+      "Dockerfile": 5.68
+    },
+    "pull_requests_count": 16,
+    "contributors_count": 8,
+    "tags": [
+      {
+        "name": "@e2b/python-mcp-server@0.1.0",
+        "commit_sha": "05bf0289d1055b95966c1e8ccca6f81f85e4751d"
+      }
+    ],
+    "latest_version": "@e2b/python-mcp-server@0.1.0"
+  },
+  "readme": "![E2B MCP Server Preview Light](/readme-assets/mcp-server-light.png#gh-light-mode-only)\n![E2B MCP Server Preview Dark](/readme-assets/mcp-server-dark.png#gh-dark-mode-only)\n\n# E2B MCP Server\n\n[![smithery badge](https://smithery.ai/badge/e2b)](https://smithery.ai/server/e2b)\n\nThis repository contains the source code for the [E2B](https://e2b.dev) MCP server.\n\nThe E2B MCP server allows you to add [code interpreting capabilities](https://github.com/e2b-dev/code-interpreter) to your Claude Desktop app via the E2B Sandbox. See demo [here](https://x.com/mishushakov/status/1863286108433317958).\n\n\nAvailable in two editions:\n\n- [JavaScript](packages/js/README.md)\n\n- [Python](packages/python/README.md)\n\n\n### Installing via Smithery\n\nYou can also install E2B for Claude Desktop automatically via [Smithery](https://smithery.ai/server/e2b):\n\n```bash\nnpx @smithery/cli install e2b --client claude\n```\n"
+}

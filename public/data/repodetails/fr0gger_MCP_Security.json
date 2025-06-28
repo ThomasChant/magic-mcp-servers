@@ -1,0 +1,50 @@
+{
+  "mcp_name": "fr0gger/MCP_Security",
+  "mcp_description": "📇 ☁️ - MCP server for querying the ORKL API. This server provides tools for fetching threat reports, analyzing threat actors, and retrieving intelligence sources.",
+  "mcp_id": "fr0gger_MCP_Security",
+  "fetch_timestamp": "2025-06-23T03:34:53.767739Z",
+  "github_url": "https://github.com/fr0gger/MCP_Security",
+  "repository": {
+    "name": "MCP_Security",
+    "full_name": "fr0gger/MCP_Security",
+    "description": "This is a repository to experiment with MCP for security",
+    "html_url": "https://github.com/fr0gger/MCP_Security",
+    "created_at": "2024-11-27T09:18:13Z",
+    "updated_at": "2025-06-09T10:08:17Z",
+    "pushed_at": "2025-01-22T23:09:11Z",
+    "size": 10,
+    "stargazers_count": 39,
+    "watchers_count": 39,
+    "forks_count": 6,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "fr0gger",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6546250?v=4",
+      "html_url": "https://github.com/fr0gger"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 6,
+    "subscribers_count": 2,
+    "languages": {
+      "Python": 9810
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# ORKL MCP Server\n\n![MIT License](https://img.shields.io/badge/license-MIT-green)\n\nA full write-up can be found here: https://blog.securitybreak.io/building-a-threat-intelligence-genai-reporter-with-orkl-and-claude-a0ae2e969693\n\nA Model Context Protocol (MCP) server for querying the ORKL API. This server provides tools for fetching and analyzing threat reports, threat actors, and sources. It integrates smoothly with MCP-compatible applications.\n\n---\n# Quick Install\nEdit or create the file /Users/user/Library/Application Support/Claude/claude_desktop_config.json\n```\n{\n  \"mcpServers\": {\n    \"orkl\": {\n      \"command\": \"uv\",\n      \"args\": [\n      \"--directory\",\n      \"/MyMCP/mcptest/orkl\",\n      \"run\",\n      \"orkl\"\n      ]\n    }\n  }\n}\n```\n---\n\n# Tools\n\n## Report Tools\n\n### Fetch Latest Threat Reports\n- **Name**: `fetch_latest_threat_reports`\n- **Description**: Fetch recent threat reports with their titles and IDs.\n- **Parameters**: None\n\n### Fetch Threat Report Details\n- **Name**: `fetch_threat_report_details`\n- **Description**: Retrieve detailed information for a specific threat report by ID.\n- **Parameters**:\n  - `report_id` (required): The ID of the threat report.\n\n## Threat Actor Tools\n\n### Fetch Threat Actors\n- **Name**: `fetch_threat_actors`\n- **Description**: Fetch a list of known threat actors with their IDs and names.\n- **Parameters**: None\n\n### Fetch Threat Actor Details\n- **Name**: `fetch_threat_actor_details`\n- **Description**: Retrieve detailed information for a specific threat actor by ID.\n- **Parameters**:\n  - `actor_id` (required): The ID of the threat actor.\n\n## Source Tools\n\n### Fetch Sources\n- **Name**: `fetch_sources`\n- **Description**: Fetch a list of sources used in threat intelligence.\n- **Parameters**: None\n\n### Fetch Source Details\n- **Name**: `fetch_source_details`\n- **Description**: Retrieve detailed metadata for a specific source by ID.\n- **Parameters**:\n  - `source_id` (required): The ID of the source.\n\n\n"
+}

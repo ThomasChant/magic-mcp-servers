@@ -1,0 +1,74 @@
+{
+  "mcp_name": "codemirror-mcp",
+  "mcp_description": "",
+  "mcp_id": "marimo-team_codemirror-mcp",
+  "fetch_timestamp": "2025-06-23T02:12:00.754107Z",
+  "github_url": "https://github.com/marimo-team/codemirror-mcp",
+  "repository": {
+    "name": "codemirror-mcp",
+    "full_name": "marimo-team/codemirror-mcp",
+    "description": "CodeMirror extension to hook up a Model Context Provider (MCP)",
+    "html_url": "https://github.com/marimo-team/codemirror-mcp",
+    "created_at": "2025-01-09T03:24:07Z",
+    "updated_at": "2025-06-19T22:06:50Z",
+    "pushed_at": "2025-01-09T19:21:10Z",
+    "size": 101,
+    "stargazers_count": 72,
+    "watchers_count": 72,
+    "forks_count": 3,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": "Apache License 2.0",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "marimo-team",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/98563464?v=4",
+      "html_url": "https://github.com/marimo-team"
+    },
+    "has_issues": true,
+    "has_projects": false,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": true,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 3,
+    "subscribers_count": 2,
+    "languages": {
+      "TypeScript": 40367
+    },
+    "language_percentages": {
+      "TypeScript": 100
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 1,
+    "latest_release": {
+      "tag_name": "v0.1.2",
+      "name": "v0.1.2",
+      "published_at": "2025-01-09T16:43:18Z",
+      "body": "First release \r\n\r\n## Usage\r\n\r\n```ts\r\nimport { mcpExtension, extractResources } from '@marimo-team/codemirror-mcp';\r\nimport { EditorView } from '@codemirror/view';\r\n\r\nconst view = new EditorView({\r\n  extensions: [\r\n    // ... other extensions\r\n\r\n    mcpExtension({\r\n      // Required options\r\n      transport: yourMCPTransport,\r\n\r\n      // Optional options\r\n      logger: console,\r\n      clientOptions: {\r\n        name: 'your-client',\r\n        version: '1.0.0'\r\n      },\r\n      onResourceClick: (resource) => {\r\n        // Open resource\r\n        // e.g. open in a tab, etc.\r\n      },\r\n    }),\r\n\r\n    // Handle submit\r\n    keymap.of([\r\n      {\r\n        key: 'Enter',\r\n        run: () => {\r\n          const resources = extractResources(view);\r\n          const formattedResources = resources\r\n            .map(\r\n              ({ resource }) =>\r\n                `${resource.uri} (${resource.type}): ${resource.description || resource.name}`\r\n            )\r\n            .join('\\n');\r\n          const prompt = `${view.state.doc.toString()}\\n\\nResources:\\n${formattedResources}`;\r\n          // ... submit prompt to AI server\r\n          // const response = await generateText(prompt);\r\n        },\r\n      },\r\n    ]),\r\n  ],\r\n  parent: document.querySelector('#editor'),\r\n});\r\n```\r\n\r\n\r\n##### &nbsp;&nbsp;&nbsp;&nbsp;[View changes on GitHub](https://github.com/marimo-team/codemirror-mcp/compare/dd6824a87260f3d1456bea20a4b320648b22432b...v0.1.2)",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.1.2",
+        "commit_sha": "e16eec5b1f7d685dcbdea8254b309280592feda8"
+      },
+      {
+        "name": "v0.1.1",
+        "commit_sha": "51979129a921287451c1208d68e851f27b033e50"
+      },
+      {
+        "name": "v0.1.0",
+        "commit_sha": "2453edac4fa851ddcd630e4512706bb66051081f"
+      }
+    ],
+    "latest_version": "v0.1.2",
+    "package_json_version": "0.1.2"
+  },
+  "readme": "# codemirror-mcp\n\nA CodeMirror extension that implements the [Model Context Protocol](https://modelcontextprotocol.io) (MCP) for resource mentions and prompt commands.\n\n## Features\n\n- Resource Completion: Autocomplete for `@resource` mentions\n- Resource Decorations: Visual styling for `@resource` mentions with click handling\n- Prompt Completion: Autocomplete for `/prompt` commands\n- Theme Support: Customizable styling\n\n## Installation\n\n```bash\nnpm install @marimo-team/codemirror-mcp @modelcontextprotocol/sdk\n# or\npnpm add @marimo-team/codemirror-mcp @modelcontextprotocol/sdk\n```\n\n### Peer Dependencies\n\nThis module requires the following peer dependencies:\n\n- `@codemirror/view`\n- `@codemirror/state`\n- `@modelcontextprotocol/sdk`\n\n## Usage\n\n```ts\nimport { WebSocketClientTransport } from \"@modelcontextprotocol/sdk/client/websocket.js\";\nimport { mcpExtension, extractResources } from '@marimo-team/codemirror-mcp';\nimport { EditorView } from '@codemirror/view';\n\nconst transport = new WebSocketClientTransport(new URL('ws://localhost:8080'));\n\nconst view = new EditorView({\n  extensions: [\n    // ... other extensions\n\n    mcpExtension({\n      // Required options\n      transport: transport,\n\n      // Optional options\n      logger: console,\n      clientOptions: {\n        name: 'your-client',\n        version: '1.0.0'\n      },\n      onResourceClick: (resource) => {\n        // Open resource\n        // e.g. open in a tab, etc.\n      },\n    }),\n\n    // Handle submit\n    keymap.of([\n      {\n        key: 'Enter',\n        run: () => {\n          const resources = extractResources(view);\n          const formattedResources = resources\n            .map(\n              ({ resource }) =>\n                `${resource.uri} (${resource.type}): ${resource.description || resource.name}`\n            )\n            .join('\\n');\n          const prompt = `${view.state.doc.toString()}\\n\\nResources:\\n${formattedResources}`;\n          // ... submit prompt to AI server\n          // const response = await generateText(prompt);\n        },\n      },\n    ]),\n  ],\n  parent: document.querySelector('#editor'),\n});\n```\n\n## Resources\n\n- Use `@resource-uri` syntax to reference resources\n- Resources are visually decorated and clickable\n- Click handling for resource interactions\n- Hover tooltips show resource details\n- Customizable theme\n\n## Prompts\n\n- Use `/command` syntax for prompt commands\n- Autocomplete for available prompts\n\n## Development\n\n```bash\n# Install dependencies\npnpm install\n\n# Run tests\npnpm test\n\n# Run demo\npnpm dev\n```\n\n## License\n\nMIT\n"
+}

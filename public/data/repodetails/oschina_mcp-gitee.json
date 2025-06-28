@@ -1,0 +1,111 @@
+{
+  "mcp_name": "Gitee",
+  "mcp_description": "Gitee API integration, repository, issue, and pull request management, and more.",
+  "mcp_id": "oschina_mcp-gitee",
+  "fetch_timestamp": "2025-06-23T03:48:02.987886Z",
+  "github_url": "https://github.com/oschina/mcp-gitee",
+  "repository": {
+    "name": "mcp-gitee",
+    "full_name": "oschina/mcp-gitee",
+    "description": "mcp-gitee is a Model Context Protocol (MCP) server implementation for Gitee. It provides a set of tools that interact with Gitee's API, allowing AI assistants to manage repository, issues, pull requests, etc.",
+    "html_url": "https://github.com/oschina/mcp-gitee",
+    "created_at": "2025-03-12T09:46:56Z",
+    "updated_at": "2025-06-20T09:07:59Z",
+    "pushed_at": "2025-06-18T06:55:58Z",
+    "size": 3541,
+    "stargazers_count": 29,
+    "watchers_count": 29,
+    "forks_count": 6,
+    "open_issues_count": 2,
+    "language": "Go",
+    "license": "MIT License",
+    "topics": [
+      "gitee",
+      "mcp",
+      "mcp-server"
+    ],
+    "default_branch": "master",
+    "owner": {
+      "login": "oschina",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1540855?v=4",
+      "html_url": "https://github.com/oschina"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 6,
+    "subscribers_count": 3,
+    "languages": {
+      "Go": 75778,
+      "Makefile": 4297,
+      "JavaScript": 1017,
+      "Dockerfile": 776
+    },
+    "language_percentages": {
+      "Go": 92.56,
+      "Makefile": 5.25,
+      "JavaScript": 1.24,
+      "Dockerfile": 0.95
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 3,
+    "latest_release": {
+      "tag_name": "v0.1.11",
+      "name": "Release v0.1.11",
+      "published_at": "2025-06-16T10:55:06Z",
+      "body": "## Updates\r\n\r\n* feat: Support streamable http @JJ-H \r\n\r\n**Full Changelog**: https://github.com/oschina/mcp-gitee/compare/v0.1.10...v0.1.11",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.1.11",
+        "commit_sha": "a06409a867047db2c8331c217d7fc7f4d8f691c7"
+      },
+      {
+        "name": "v0.1.10",
+        "commit_sha": "3227471f3a81b4eb7581a4ea674b40ee9bc9f1df"
+      },
+      {
+        "name": "v0.1.9",
+        "commit_sha": "8465a159642a2720939c6d9e2978952dc5b18bc9"
+      },
+      {
+        "name": "v0.1.8",
+        "commit_sha": "71db89b03bcb790461668826efbdcb20c12773cf"
+      },
+      {
+        "name": "v0.1.7",
+        "commit_sha": "164e7c8bc7e1a6ed97de8142f206e93160698049"
+      },
+      {
+        "name": "v0.1.6",
+        "commit_sha": "43b5a40c2c572b946c55e64c2bb9a61e35741c15"
+      },
+      {
+        "name": "v0.1.5",
+        "commit_sha": "872418b1bef5fae5985e5abdba7f6d80b45b83a5"
+      },
+      {
+        "name": "v0.1.4",
+        "commit_sha": "7a3b15601f0866dc23104e8647ae1f4bb6821913"
+      },
+      {
+        "name": "v0.1.3",
+        "commit_sha": "298af0297fe7cc33a6b22c43f682de51be6c15cb"
+      },
+      {
+        "name": "v0.1.2",
+        "commit_sha": "0765059083f0a655d48bd5d8d7bf2bd85e1e11f9"
+      }
+    ],
+    "latest_version": "v0.1.11"
+  },
+  "readme": "# Gitee MCP Server\n\nGitee MCP Server is a Model Context Protocol (MCP) server implementation for Gitee. It provides a set of tools for interacting with Gitee's API, allowing AI assistants to manage repositories, issues, pull requests, and more.\n\n[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=gitee&config=eyJjb21tYW5kIjoibnB4IC15IEBnaXRlZS9tY3AtZ2l0ZWVAbGF0ZXN0IiwiZW52Ijp7IkdJVEVFX0FDQ0VTU19UT0tFTiI6Ijx5b3VyIHBlcnNvbmFsIGFjY2VzcyB0b2tlbj4ifX0%3D)\n\n## Features\n\n- Interact with Gitee repositories, issues, pull requests, and notifications\n- Configurable API base URL to support different Gitee instances\n- Command-line flags for easy configuration\n- Supports both personal, organization, and enterprise operations\n- Dynamic toolset enable/disable\n\n<details>\n<summary><b>Practical scenario: Obtain Issue from the repository, implement and create a Pull Request</b></summary>\n\n1. Get repository Issues\n![get_repo_issues](./docs/images/get_repo_issues.jpg)\n2. Implement coding & create Pull Request based on Issue details\n![implement_issue](./docs/images/implement_issue.jpg)\n3. Comment & Close Issue\n![comment_and_close_issue](./docs/images/comment_and_close_issue.jpg)\n</details>\n\n## Installation(This step can be skipped directly when starting npx)\n\n### Prerequisites\n\n- Go 1.23.0 or higher\n- Gitee account with an access token, [Go to get](https://gitee.com/profile/personal_access_tokens)\n\n### Building from Source\n\n1. Clone the repository:\n   ```bash\n   git clone https://gitee.com/oschina/mcp-gitee.git\n   cd mcp-gitee\n   ```\n\n2. Build the project:\n   ```bash\n   make build\n   ```\n   Move ./bin/mcp-gitee PATH env\n\n### Use go install\n   ```bash\n   go install gitee.com/oschina/mcp-gitee@latest\n   ```\n\n## Usage\n\nCheck mcp-gitee version:\n\n```bash\nmcp-gitee --version\n```\n\n## MCP Hosts Configuration\n<div align=\"center\">\n  <a href=\"docs/install/claude.md\" title=\"Claude\"><img src=\"docs/install/logos/Claude.png\" width=80 height=80></a>\n  <a href=\"docs/install/cursor.md\" title=\"Cursor\"><img src=\"docs/install/logos/Cursor.png\" width=80 height=80></a>\n  <a href=\"docs/install/trae.md\" title=\"Trae\"><img src=\"docs/install/logos/Trae.png\" width=80 height=80></a>\n  <a href=\"docs/install/cline.md\" title=\"Cline\"><img src=\"docs/install/logos/Cline.png\" width=80 height=80></a>\n  <a href=\"docs/install/windsurf.md\" title=\"Windsurf\"><img src=\"docs/install/logos/Windsurf.png\" width=80 height=80></a>\n</div>\n\nconfig example: [Click to view more application configuration](./docs/install/)\n- Connect to the official remote mcp-gitee server (no installation required)\n```json\n{\n  \"mcpServers\": {\n    \"gitee\": {\n      \"url\": \"https://api.gitee.com/mcp\",\n      \"headers\": {\n        \"Authorization\": \"Bearer <your personal access token>\"\n      }\n    }\n  }\n}\n```\n\n- npx\n```json\n{\n  \"mcpServers\": {\n    \"gitee\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"-y\",\n        \"@gitee/mcp-gitee@latest\"\n      ],\n      \"env\": {\n        \"GITEE_API_BASE\": \"https://gitee.com/api/v5\",\n        \"GITEE_ACCESS_TOKEN\": \"<your personal access token>\"\n      }\n    }\n  }\n}\n```\n- executable\n```json\n{\n  \"mcpServers\": {\n    \"gitee\": {\n      \"command\": \"mcp-gitee\",\n      \"env\": {\n        \"GITEE_API_BASE\": \"https://gitee.com/api/v5\",\n        \"GITEE_ACCESS_TOKEN\": \"<your personal access token>\"\n      }\n    }\n  }\n}\n```\n\n### Command-line Options\n\n- `--token`: Gitee access token\n- `--api-base`: Gitee API base URL (default: https://gitee.com/api/v5)\n- `--version`: Show version information\n- `--transport`: Transport type (stdio、sse or http, default: stdio)\n- `--address`: The host and port to start the server on (default: localhost:8000)\n- `--enabled-toolsets`: Comma-separated list of tools to enable (if specified, only these tools will be enabled)\n- `--disabled-toolsets`: Comma-separated list of tools to disable\n\n### Environment Variables\n\nYou can also configure the server using environment variables:\n\n- `GITEE_ACCESS_TOKEN`: Gitee access token\n- `GITEE_API_BASE`: Gitee API base URL\n- `ENABLED_TOOLSETS`: Comma-separated list of tools to enable\n- `DISABLED_TOOLSETS`: Comma-separated list of tools to disable\n\n### Toolset Management\n\nToolset management supports two modes:\n\n1. Enable specified tools (whitelist mode):\n   - Use `--enabled-toolsets` parameter or `ENABLED_TOOLSETS` environment variable\n   - Specify after, only listed tools will be enabled, others will be disabled\n   - Example: `--enabled-toolsets=\"list_user_repos,get_file_content\"`\n\n2. Disable specified tools (blacklist mode):\n   - Use `--disabled-toolsets` parameter or `DISABLED_TOOLSETS` environment variable\n   - Specify after, listed tools will be disabled, others will be enabled\n   - Example: `--disabled-toolsets=\"list_user_repos,get_file_content\"`\n\nNote:\n- If both `enabled-toolsets` and `disabled-toolsets` are specified, `enabled-toolsets` takes precedence\n- Tool names are case-sensitive\n\n## License\n\nThis project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.\n\n## Available Tools\n\nThe server provides various tools for interacting with Gitee:\n\n| Tool                                | Category | Description |\n|-------------------------------------|----------|-------------|\n| **list_user_repos**                 | Repository | List user authorized repositories |\n| **get_file_content**                | Repository | Get the content of a file in a repository |\n| **create_user_repo**                | Repository | Create a user repository |\n| **create_org_repo**                 | Repository | Create an organization repository |\n| **create_enter_repo**               | Repository | Create an enterprise repository |\n| **fork_repository**                 | Repository | Fork a repository |\n| **create_release**                  | Repository | Create a release for a repository |\n| **list_releases**                   | Repository | List repository releases |\n| **search_open_source_repositories** | Repository | Search open source repositories on Gitee |\n| **list_repo_pulls**                 | Pull Request | List pull requests in a repository |\n| **merge_pull**                      | Pull Request | Merge a pull request |\n| **create_pull**                     | Pull Request | Create a pull request |\n| **update_pull**                     | Pull Request | Update a pull request |\n| **get_pull_detail**                 | Pull Request | Get details of a pull request |\n| **comment_pull**                    | Pull Request | Comment on a pull request |\n| **list_pull_comments**              | Pull Request | List all comments for a pull request |\n| **create_issue**                    | Issue | Create an issue |\n| **update_issue**                    | Issue | Update an issue |\n| **get_repo_issue_detail**           | Issue | Get details of a repository issue |\n| **list_repo_issues**                | Issue | List repository issues |\n| **comment_issue**                   | Issue | Comment on an issue |\n| **list_issue_comments**             | Issue | List comments on an issue |\n| **get_user_info**                   | User | Get current authenticated user information |\n| **search_users**                    | User | Search for users |\n| **list_user_notifications**         | Notification | List user notifications |\n\n## Contribution\n\nWe welcome contributions from the open-source community! If you'd like to contribute to this project, please follow these guidelines:\n\n1. Fork the repository.\n2. Create a new branch for your feature or bug fix.\n3. Make your changes and ensure the code is well-documented.\n4. Submit a pull request with a clear description of your changes.\n\nFor more information, please refer to the [CONTRIBUTING](CONTRIBUTING.md) file.\n"
+}

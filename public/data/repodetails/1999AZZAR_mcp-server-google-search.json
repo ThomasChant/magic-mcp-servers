@@ -1,0 +1,56 @@
+{
+  "mcp_name": "1999AZZAR/mcp-server-google-search",
+  "mcp_description": "Facilitates Google Programmable Search Engine queries through a structured MCP server interface, enhancing integration with Claude Desktop.",
+  "mcp_id": "1999AZZAR_mcp-server-google-search",
+  "fetch_timestamp": "2025-06-23T00:06:37.751214Z",
+  "github_url": "https://github.com/1999AZZAR/mcp-server-google-search",
+  "repository": {
+    "name": "mcp-server-google-search",
+    "full_name": "1999AZZAR/mcp-server-google-search",
+    "description": "MCP server proxy for Google Programmable Search Engine",
+    "html_url": "https://github.com/1999AZZAR/mcp-server-google-search",
+    "created_at": "2025-04-28T12:24:15Z",
+    "updated_at": "2025-04-29T12:25:15Z",
+    "pushed_at": "2025-04-29T11:52:32Z",
+    "size": 157,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [
+      "mcp-server",
+      "microservice"
+    ],
+    "default_branch": "master",
+    "owner": {
+      "login": "1999AZZAR",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/48999412?v=4",
+      "html_url": "https://github.com/1999AZZAR"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 23787,
+      "JavaScript": 758
+    },
+    "language_percentages": {
+      "TypeScript": 96.91,
+      "JavaScript": 3.09
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "A microservice for Google Custom Search with caching, rate-limiting, metrics, and robust error handling.\n\n### GET /health\n\nLiveness probe. Returns `200 OK`.\n\n### GET /ready\n\nReadiness probe. Checks Redis & Google API reachability. Returns `200 OK` or `503 Service Unavailable` with JSON `{ checks: {...} }`.\n\n### GET /\n\nRoot endpoint. Returns JSON `{ status: 'ok' }`.\n\n### GET /search\n\nPerform a Google Custom Search.\n\n**Query Parameters**:\n- `q` (string, required): search query\n- Optional filters: `searchType`, `fileType`, `siteSearch`, `dateRestrict`, `safe`, `exactTerms`, `excludeTerms`, `sort`, `gl`, `hl`, `num`, `start`\n\n**Response**: JSON from Google API.\n\n### GET /search-file-type\n\nSearch only specific file types.\n\n**Query Parameters**:\n- `q` (string, required): search query\n- `fileType` (string, required): file type\n\n**Response**: JSON from Google API.\n\n### GET /extract\n\nExtract main content and sentiment from a URL.\n\n**Query Parameters**:\n- `url` (string, required): URL to extract\n\n**Response**: JSON with extracted content and sentiment.\n\n### GET /filters\n\nList supported filters.\n\n### GET /tools\n\nList available tool descriptions.\n\n\n### GET /metrics\n\nPrometheus metrics in plain text.\n\n### GET /graphql\n\nGraphQL interactive UI (Apollo Server Sandbox).\n\n### POST /graphql\n\nGraphQL endpoint. Accepts JSON `{ \"query\": \"<GraphQL Query>\" }` and returns JSON response."
+}

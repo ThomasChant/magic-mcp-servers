@@ -1,0 +1,65 @@
+{
+  "mcp_name": "Stripe",
+  "mcp_description": "Interact with Stripe API",
+  "mcp_id": "stripe_agent-toolkit",
+  "fetch_timestamp": "2025-06-23T08:41:34.454213Z",
+  "github_url": "https://github.com/stripe/agent-toolkit",
+  "repository": {
+    "name": "agent-toolkit",
+    "full_name": "stripe/agent-toolkit",
+    "description": "Python and TypeScript library for integrating the Stripe API into agentic workflows",
+    "html_url": "https://github.com/stripe/agent-toolkit",
+    "created_at": "2024-11-11T17:13:41Z",
+    "updated_at": "2025-06-23T07:48:25Z",
+    "pushed_at": "2025-06-05T02:13:41Z",
+    "size": 765,
+    "stargazers_count": 851,
+    "watchers_count": 851,
+    "forks_count": 119,
+    "open_issues_count": 14,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [
+      "llm",
+      "llm-agents",
+      "mcp",
+      "python",
+      "typescript",
+      "workflows"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "stripe",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/856813?v=4",
+      "html_url": "https://github.com/stripe"
+    },
+    "has_issues": true,
+    "has_projects": false,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 119,
+    "subscribers_count": 12,
+    "languages": {
+      "TypeScript": 175017,
+      "Python": 90063,
+      "JavaScript": 24659,
+      "Makefile": 451,
+      "Dockerfile": 405
+    },
+    "language_percentages": {
+      "TypeScript": 60.23,
+      "Python": 30.99,
+      "JavaScript": 8.49,
+      "Makefile": 0.16,
+      "Dockerfile": 0.14
+    },
+    "pull_requests_count": 96,
+    "contributors_count": 14
+  },
+  "readme": "# Stripe Agent Toolkit\n\nThe Stripe Agent Toolkit enables popular agent frameworks including OpenAI's Agent SDK, LangChain, CrewAI, Vercel's AI SDK, and Model Context Protocol (MCP) to integrate with Stripe APIs through function calling. The\nlibrary is not exhaustive of the entire Stripe API. It includes support for both Python and TypeScript and is built directly on top of the Stripe [Python][python-sdk] and [Node][node-sdk] SDKs.\n\nIncluded below are basic instructions, but refer to the [Python](/python) and [TypeScript](/typescript) packages for more information.\n\n## Python\n\n### Installation\n\nYou don't need this source code unless you want to modify the package. If you just\nwant to use the package run:\n\n```sh\npip install stripe-agent-toolkit\n```\n\n#### Requirements\n\n- Python 3.11+\n\n### Usage\n\nThe library needs to be configured with your account's secret key which is\navailable in your [Stripe Dashboard][api-keys].\n\n```python\nfrom stripe_agent_toolkit.openai.toolkit import StripeAgentToolkit\n\nstripe_agent_toolkit = StripeAgentToolkit(\n    secret_key=\"sk_test_...\",\n    configuration={\n        \"actions\": {\n            \"payment_links\": {\n                \"create\": True,\n            },\n        }\n    },\n)\n```\n\nThe toolkit works with OpenAI's Agent SDK, LangChain, and CrewAI and can be passed as a list of tools. For example:\n\n```python\nfrom agents import Agent\n\nstripe_agent = Agent(\n    name=\"Stripe Agent\",\n    instructions=\"You are an expert at integrating with Stripe\",\n    tools=stripe_agent_toolkit.get_tools()\n)\n```\n\nExamples for OpenAI's Agent SDK,LangChain, and CrewAI are included in [/examples](/python/examples).\n\n#### Context\n\nIn some cases you will want to provide values that serve as defaults when making requests. Currently, the `account` context value enables you to make API calls for your [connected accounts](https://docs.stripe.com/connect/authentication).\n\n```python\nstripe_agent_toolkit = StripeAgentToolkit(\n    secret_key=\"sk_test_...\",\n    configuration={\n        \"context\": {\n            \"account\": \"acct_123\"\n        }\n    }\n)\n```\n\n## TypeScript\n\n### Installation\n\nYou don't need this source code unless you want to modify the package. If you just\nwant to use the package run:\n\n```\nnpm install @stripe/agent-toolkit\n```\n\n#### Requirements\n\n- Node 18+\n\n### Usage\n\nThe library needs to be configured with your account's secret key which is available in your [Stripe Dashboard][api-keys]. Additionally, `configuration` enables you to specify the types of actions that can be taken using the toolkit.\n\n```typescript\nimport { StripeAgentToolkit } from \"@stripe/agent-toolkit/langchain\";\n\nconst stripeAgentToolkit = new StripeAgentToolkit({\n  secretKey: process.env.STRIPE_SECRET_KEY!,\n  configuration: {\n    actions: {\n      paymentLinks: {\n        create: true,\n      },\n    },\n  },\n});\n```\n\n#### Tools\n\nThe toolkit works with LangChain and Vercel's AI SDK and can be passed as a list of tools. For example:\n\n```typescript\nimport { AgentExecutor, createStructuredChatAgent } from \"langchain/agents\";\n\nconst tools = stripeAgentToolkit.getTools();\n\nconst agent = await createStructuredChatAgent({\n  llm,\n  tools,\n  prompt,\n});\n\nconst agentExecutor = new AgentExecutor({\n  agent,\n  tools,\n});\n```\n\n#### Context\n\nIn some cases you will want to provide values that serve as defaults when making requests. Currently, the `account` context value enables you to make API calls for your [connected accounts](https://docs.stripe.com/connect/authentication).\n\n```typescript\nconst stripeAgentToolkit = new StripeAgentToolkit({\n  secretKey: process.env.STRIPE_SECRET_KEY!,\n  configuration: {\n    context: {\n      account: \"acct_123\",\n    },\n  },\n});\n```\n\n#### Metered billing\n\nFor Vercel's AI SDK, you can use middleware to submit billing events for usage. All that is required is the customer ID and the input/output meters to bill.\n\n```typescript\nimport { StripeAgentToolkit } from \"@stripe/agent-toolkit/ai-sdk\";\nimport { openai } from \"@ai-sdk/openai\";\nimport {\n  generateText,\n  experimental_wrapLanguageModel as wrapLanguageModel,\n} from \"ai\";\n\nconst stripeAgentToolkit = new StripeAgentToolkit({\n  secretKey: process.env.STRIPE_SECRET_KEY!,\n  configuration: {\n    actions: {\n      paymentLinks: {\n        create: true,\n      },\n    },\n  },\n});\n\nconst model = wrapLanguageModel({\n  model: openai(\"gpt-4o\"),\n  middleware: stripeAgentToolkit.middleware({\n    billing: {\n      customer: \"cus_123\",\n      meters: {\n        input: \"input_tokens\",\n        output: \"output_tokens\",\n      },\n    },\n  }),\n});\n```\n\n## Model Context Protocol\n\nThe Stripe Agent Toolkit also supports the [Model Context Protocol (MCP)](https://modelcontextprotocol.com/).\n\nTo run the Stripe MCP server using npx, use the following command:\n\n```bash\nnpx -y @stripe/mcp --tools=all --api-key=YOUR_STRIPE_SECRET_KEY\n```\n\nReplace `YOUR_STRIPE_SECRET_KEY` with your actual Stripe secret key. Or, you could set the STRIPE_SECRET_KEY in your environment variables.\n\nAlternatively, you can set up your own MCP server. For example:\n\n```typescript\nimport { StripeAgentToolkit } from \"@stripe/agent-toolkit/modelcontextprotocol\";\nimport { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\";\n\nconst server = new StripeAgentToolkit({\n  secretKey: process.env.STRIPE_SECRET_KEY!,\n  configuration: {\n    actions: {\n      paymentLinks: {\n        create: true,\n      },\n      products: {\n        create: true,\n      },\n      prices: {\n        create: true,\n      },\n    },\n  },\n});\n\nasync function main() {\n  const transport = new StdioServerTransport();\n  await server.connect(transport);\n  console.error(\"Stripe MCP Server running on stdio\");\n}\n\nmain().catch((error) => {\n  console.error(\"Fatal error in main():\", error);\n  process.exit(1);\n});\n```\n\n## Supported API methods\n\n- [Create a customer](https://docs.stripe.com/api/customers/create)\n- [List all customers](https://docs.stripe.com/api/customers/list)\n- [Create a coupon](https://docs.stripe.com/api/coupons/create)\n- [List all coupons](https://docs.stripe.com/api/coupons/list)\n- [Create a product](https://docs.stripe.com/api/products/create)\n- [List all products](https://docs.stripe.com/api/products/list)\n- [Create a price](https://docs.stripe.com/api/prices/create)\n- [List all prices](https://docs.stripe.com/api/prices/list)\n- [Create a payment link](https://docs.stripe.com/api/payment-link/create)\n- [Create an invoice](https://docs.stripe.com/api/invoices/create)\n- [Create an invoice item](https://docs.stripe.com/api/invoiceitems/create)\n- [Finalize an invoice](https://docs.stripe.com/api/invoices/finalize)\n- [Retrieve balance](https://docs.stripe.com/api/balance/balance_retrieve)\n- [List all subscriptions](https://docs.stripe.com/api/subscriptions/list)\n- [Update a subscription](https://docs.stripe.com/api/subscriptions/update)\n- [Cancel a subscription](https://docs.stripe.com/api/subscriptions/cancel)\n- [Create a refund](https://docs.stripe.com/api/refunds/create)\n- [List all disputes](https://docs.stripe.com/api/disputes/list)\n- [Update a dispute](https://docs.stripe.com/api/disputes/update)\n\n[python-sdk]: https://github.com/stripe/stripe-python\n[node-sdk]: https://github.com/stripe/stripe-node\n[api-keys]: https://dashboard.stripe.com/account/apikeys\n"
+}

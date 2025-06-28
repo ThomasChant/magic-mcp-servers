@@ -1,0 +1,50 @@
+{
+  "mcp_name": "tradercjz/dolphindb-mcp-server",
+  "mcp_description": "🐍 ☁️ - TDolphinDB database integration with schema inspection and query capabilities",
+  "mcp_id": "tradercjz_dolphindb-mcp-server",
+  "fetch_timestamp": "2025-06-23T09:03:11.499668Z",
+  "github_url": "https://github.com/tradercjz/dolphindb-mcp-server",
+  "repository": {
+    "name": "dolphindb-mcp-server",
+    "full_name": "tradercjz/dolphindb-mcp-server",
+    "description": "dolphindb-mcp-server",
+    "html_url": "https://github.com/tradercjz/dolphindb-mcp-server",
+    "created_at": "2025-03-24T08:32:00Z",
+    "updated_at": "2025-06-05T12:53:11Z",
+    "pushed_at": "2025-05-06T07:32:13Z",
+    "size": 130,
+    "stargazers_count": 3,
+    "watchers_count": 3,
+    "forks_count": 1,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "tradercjz",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/79293981?v=4",
+      "html_url": "https://github.com/tradercjz"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 2970
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# dolphindb-mcp-server\n\n## Quickstart\n\n### 1.Install pkgs\n\nWe strongly recommend installing FastMCP with [uv](https://docs.astral.sh/uv/), as it is required for deploying servers:\n\n```bash\nuv pip install fastmcp dolphindb dotenv\n```\n\n### 2.Configure DolphinDB Server\n\n```bash\ncp .env.example .env\n```\n\nUpdate the relevant configuration parameters in the .env file to include the DolphinDB server connection details.\n\n\n### 3.Install to Claude Desktop\n\n\n```bash\nfastmcp install demo.py\n```\n\n### 4.Test using Claude Desktop \n\n\n![Claude Desktop](./claude.png)\n\n\n### 5. Add more tool\n\n\n\n"
+}

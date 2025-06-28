@@ -1,0 +1,55 @@
+{
+  "mcp_name": "hamibot/hamibot-mcp-server",
+  "mcp_description": "Facilitates interaction with the Hamibot API, offering tools for device and script management, including custom JavaScript execution on specified devices.",
+  "mcp_id": "hamibot_hamibot-mcp-server",
+  "fetch_timestamp": "2025-06-23T04:19:06.167701Z",
+  "github_url": "https://github.com/hamibot/hamibot-mcp-server",
+  "repository": {
+    "name": "hamibot-mcp-server",
+    "full_name": "hamibot/hamibot-mcp-server",
+    "description": "用于与 Hamibot API 进行交互。它提供了一系列工具来管理和控制 Hamibot 设备及脚本",
+    "html_url": "https://github.com/hamibot/hamibot-mcp-server",
+    "created_at": "2025-04-25T14:36:24Z",
+    "updated_at": "2025-06-19T03:38:18Z",
+    "pushed_at": "2025-04-27T08:24:54Z",
+    "size": 183,
+    "stargazers_count": 3,
+    "watchers_count": 3,
+    "forks_count": 0,
+    "open_issues_count": 1,
+    "language": "JavaScript",
+    "license": null,
+    "topics": [
+      "hamibot",
+      "mcp",
+      "mcp-server"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "hamibot",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/52420549?v=4",
+      "html_url": "https://github.com/hamibot"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 6557
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "1.0.2"
+  },
+  "readme": "# 🤖 Hamibot MCP Server\n\nHamibot MCP Server 是一个基于 Model Context Protocol (MCP) 的服务器实现，用于与 Hamibot API 进行交互。它提供了一系列工具来管理和控制 Hamibot 设备及脚本。\n\n## ✨ 功能特性\n\n- 设备管理：列出所有连接的设备\n- 脚本管理：查看和运行自动化脚本\n- 代码执行：在指定设备上执行自定义 JavaScript 代码\n- 支持变量传递：可以向脚本传递自定义参数\n\n## ⚙️ 配置\n\n### 获取访问令牌\n\n1. 访问 <https://hamibot.com/account/tokens>\n2. 点击生成\n\n### 在 Trae 中使用\n\n详细步骤参考 Trae 文档：<https://docs.trae.ai/ide/model-context-protocol?_lang=zh>\n\n1. 按键 `F1`\n2. 输入 `open mcp config json`，点击进去\n3. 在 `mcp.json` 中添加：\n\n```json\n{\n  \"mcpServers\": {\n    \"hamibot\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@hmbt/hamibot-mcp-server\"],\n      \"env\": {\n        \"HAMIBOT_PERSONAL_ACCESS_TOKEN\": \"你的访问令牌\"\n      }\n    }\n  }\n}\n```\n\n> 其他客户端请参考相应的文档\n\n## 🛠️ 可用工具\n\n### list-devices\n\n列出所有已连接的设备。\n\n### list-scripts\n\n列出所有可用的自动化脚本。\n\n### run-script\n\n在指定设备上运行脚本。\n\n参数：\n\n- scriptId: 24 位十六进制字符串，表示要运行的脚本 ID\n- devices: 设备列表，包含设备 ID 和可选的设备名称\n- vars: (可选) 传递给脚本的变量\n\n### execute\n\n在指定设备上执行自定义 JavaScript 代码。\n\n参数：\n\n- code: JavaScript Hamibot 代码\n- devices: 设备列表，包含设备 ID 和可选的设备名称\n- vars: (可选) 传递给代码的变量\n\n## 📝 示例\n\n- `获取设备列表`\n- `获取脚本列表`\n- `在 \"设备名\" 上运行脚本 \"脚本名\"`，设备名和脚本名加引号，会更明确，例如 `在 \"初号机\" 上运行脚本 \"演示脚本\"`\n\n![运行脚本](assets/img1.png)\n![运行脚本](assets/img2.png)\n\n- `在所有 tag1 标签的设备上运行 \"演示脚本\"`\n- `在初号机上运行这个脚本文件`\n\n![运行脚本文件](assets/img3.png)\n\n## 💻 开发\n\n```bash\n# 构建项目\nnpm run build\n\n# 启动服务器\nnpm start\n\n# 开发模式（监视文件变化）\nnpm run watch\n```\n"
+}

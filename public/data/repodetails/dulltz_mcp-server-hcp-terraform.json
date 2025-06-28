@@ -1,0 +1,50 @@
+{
+  "mcp_name": "mcp-server-hcp-terraform",
+  "mcp_description": "MCP server for working with HashiCorp Cloud Platform (HCP) Terraform",
+  "mcp_id": "dulltz_mcp-server-hcp-terraform",
+  "fetch_timestamp": "2025-06-23T06:36:12.310574Z",
+  "github_url": "https://github.com/dulltz/mcp-server-hcp-terraform",
+  "repository": {
+    "name": "mcp-server-hcp-terraform",
+    "full_name": "dulltz/mcp-server-hcp-terraform",
+    "description": "MCP server for working with HCP Terraform",
+    "html_url": "https://github.com/dulltz/mcp-server-hcp-terraform",
+    "created_at": "2025-04-06T04:17:32Z",
+    "updated_at": "2025-05-05T00:07:03Z",
+    "pushed_at": "2025-04-06T11:59:29Z",
+    "size": 16,
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 1,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "dulltz",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1369554?v=4",
+      "html_url": "https://github.com/dulltz"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 4509
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 2,
+    "contributors_count": 1
+  },
+  "readme": "# mcp-server-hcp-terraform\n\nMCP server for working with HashiCorp Terraform Cloud/Enterprise API\n\n## Overview\n\nThis project provides a MCP server that integrates with the HCP Terraform Cloud/Enterprise API. Through MCP, you can access features such as searching for Terraform modules and retrieving module information.\n\n## Prerequisites\n\n- Python 3.13+\n- HCP Terraform Cloud/Enterprise account\n- Access token\n\n## Environment Variables\n\nSet the following environment variables before use:\n\n- `HCP_TERRAFORM_TOKEN`: HCP Terraform access token (required)\n- `HCP_TERRAFORM_ORG`: HCP Terraform organization name (required)\n- `HCP_TERRAFORM_BASE_URL`: HCP Terraform base URL (optional, default: `https://app.terraform.io`)\n\n## Features\n\nThis MCP server provides the following features:\n\n### Search Private Modules\n\nUse the `hcp_terraform_search_private_modules` tool to search for modules in the HCP Terraform Private Registry.\n\n**Parameters**:\n\n- `query`: Search query\n- `provider` (optional): Provider filter (e.g., aws, gcp, azure)\n- `limit` (optional): Maximum number of results (default: 10)\n\n### Get Module Details\n\nUse the `hcp_terraform_get_module` tool to retrieve detailed information about a specific module from the HCP Terraform Registry.\n\n**Parameters**:\n\n- `module_name`: Name of the module\n- `provider`: Provider (e.g., aws, gcp, azure)\n- `registry_name` (optional): Registry name (private or public, default: private)\n- `namespace` (optional): Module namespace (uses organization name if not specified)\n\n## Usage\n\n```json\n{\n  \"globalShortcut\": \"\",\n  \"mcpServers\": {\n    \"HCP Terraform\": {\n      \"command\": \"uv\",\n      \"args\": [\n        \"run\",\n        \"--with\",\n        \"mcp[cli]\",\n        \"mcp\",\n        \"run\",\n        \"path/to/mcp-server-hcp-terraform/server.py\"\n      ],\n      \"env\": {\n        \"HCP_TERRAFORM_TOKEN\": \"paste_here\",\n        \"HCP_TERRAFORM_ORG\": \"my_org\"\n      }\n    }\n  }\n}\n```\n\n\n## License\n\nMIT License\n"
+}

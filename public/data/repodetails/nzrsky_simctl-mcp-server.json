@@ -1,0 +1,50 @@
+{
+  "mcp_name": "xcsimctl",
+  "mcp_description": "🍎 Manage Xcode simulators.",
+  "mcp_id": "nzrsky_simctl-mcp-server",
+  "fetch_timestamp": "2025-06-23T09:30:26.738716Z",
+  "github_url": "https://github.com/nzrsky/simctl-mcp-server",
+  "repository": {
+    "name": "simctl-mcp-server",
+    "full_name": "nzrsky/simctl-mcp-server",
+    "description": "iOS simctl MCP server",
+    "html_url": "https://github.com/nzrsky/simctl-mcp-server",
+    "created_at": "2025-05-27T10:39:19Z",
+    "updated_at": "2025-05-27T12:24:44Z",
+    "pushed_at": "2025-05-27T12:24:41Z",
+    "size": 15,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 1,
+    "open_issues_count": 1,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "nzrsky",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1218163?v=4",
+      "html_url": "https://github.com/nzrsky"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 0,
+    "languages": {
+      "Python": 13791
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 1
+  },
+  "readme": "# SimCtl MCP Server\n\nA Model Context Protocol (MCP) server that provides structured access to iOS Simulator management via `xcrun simctl` commands.\n\n## Installation\n\n### Method 1: Using uvx\n\n1. **Prerequisites**:\n   - Python 3.13+\n   - Xcode with Command Line Tools installed\n   - [uvx](https://github.com/astral-sh/uv): `curl -LsSf https://astral.sh/uv/install.sh | sh`\n\n2. **Run directly with uvx**:\n   ```bash\n   uvx simctl-mcp-server\n   ```\n\n### Method 2: Local Development Installation\n\n1. **Prerequisites**:\n   - Python 3.13+\n   - Xcode with Command Line Tools installed\n\n2. **Clone and install**:\n   ```bash\n   git clone https://github.com/nzrsky/simctl-mcp-server\n   cd simctl-mcp-server\n   pip install .\n   ```\n\n3. **Run the server**:\n   ```bash\n   simctl-mcp-server\n   ```\n\n### Method 3: Build from Source\n\n1. **Build the wheel**:\n   ```bash\n   python -m build --wheel\n   pip install dist/simctl_mcp_server-0.1.0-py3-none-any.whl\n   ```\n\n## Configuration\n\n### For Claude Desktop\n\nAdd to your `~/Library/Application Support/Claude/claude_desktop_config.json`:\n\n```json\n{\n  \"mcpServers\": {\n    \"simctl\": {\n      \"command\": \"simctl-mcp-server\",\n      \"args\": [],\n      \"env\": {}\n    }\n  }\n}\n```\n\nOr if using uvx:\n\n```json\n{\n  \"mcpServers\": {\n    \"simctl\": {\n      \"command\": \"uvx\",\n      \"args\": [\"simctl-mcp-server\"],\n      \"env\": {}\n    }\n  }\n}\n```\n\n### For VS Code with MCP Extension\n\n1. **Install the MCP Extension** from the VS Code marketplace\n2. **Add server configuration** to your VS Code settings (`settings.json`):\n\n```json\n{\n  \"mcp.servers\": {\n    \"simctl\": {\n      \"command\": \"simctl-mcp-server\",\n      \"args\": [],\n      \"env\": {}\n    }\n  }\n}\n```\n\nOr if using uvx:\n\n```json\n{\n  \"mcp.servers\": {\n    \"simctl\": {\n      \"command\": \"uvx\",\n      \"args\": [\"simctl-mcp-server\"],\n      \"env\": {}\n    }\n  }\n}\n```\n\n3. **Restart VS Code** to load the MCP server\n4. **Use the Command Palette** (`Cmd+Shift+P`) and search for \"MCP\" commands to interact with the simulator tools\n\n### For Other MCP Clients\n\nThe server runs on stdio, so you can invoke it directly:\n\n**With installed package:**\n```bash\nsimctl-mcp-server\n```\n\n**With uvx:**\n```bash\nuvx simctl-mcp-server\n```\n\n## Available Tools\n\n### Device Management\n- **`simctl_list_devices`** - List all simulators and their states\n- **`simctl_boot_device`** - Boot a simulator\n- **`simctl_shutdown_device`** - Shutdown a simulator\n- **`simctl_create_device`** - Create a new simulator\n- **`simctl_delete_device`** - Delete simulators\n\n### App Management\n- **`simctl_install_app`** - Install an app (.app bundle or .ipa)\n- **`simctl_launch_app`** - Launch an app with options\n- **`simctl_terminate_app`** - Terminate a running app\n\n### Media & Screenshots\n- **`simctl_screenshot`** - Take screenshots\n- **`simctl_record_video`** - Record video (start recording)\n\n### Testing & Development\n- **`simctl_push_notification`** - Send push notifications\n- **`simctl_privacy_control`** - Manage app permissions\n- **`simctl_set_location`** - Set device location/GPS\n- **`simctl_status_bar_override`** - Override status bar appearance\n- **`simctl_ui_appearance`** - Control light/dark mode\n\n## Usage Examples\n\n### Basic Device Operations\n\n```\n# List all devices\n\"List all available iOS simulators\"\n\n# Boot a specific device\n\"Boot the iPhone 15 Pro simulator\"\n\n# Create a new simulator\n\"Create a new iPhone 14 simulator named 'Test Device' with iOS 17.0\"\n```\n\n### App Testing\n\n```\n# Install and launch an app\n\"Install MyApp.app on the booted simulator and launch it\"\n\n# Take a screenshot\n\"Take a screenshot of the current simulator and save it to ~/Desktop/screenshot.png\"\n\n# Send a push notification\n\"Send a push notification with title 'Hello' and body 'Test message' to com.example.myapp\"\n```\n\n### UI Testing Setup\n\n```\n# Set up a controlled testing environment\n\"Set the simulator to dark mode, override the status bar to show full battery and strong WiFi, and set the time to 9:41 AM\"\n\n# Grant permissions for testing\n\"Grant photo library access to com.example.myapp on the booted simulator\"\n```\n\n### Location Testing\n\n```\n# Set specific location\n\"Set the simulator location to Apple Park (37.334606, -122.009102)\"\n\n# Clear location\n\"Clear the simulated location on the booted device\"\n```\n\n## Error Handling\n\nThe server includes comprehensive error handling:\n\n- **Command failures**: Returns detailed error messages from simctl\n- **Missing Xcode**: Detects when xcrun simctl is not available\n- **Invalid parameters**: Validates input parameters before execution\n- **File operations**: Handles temporary files for push notifications safely\n\n## Security Considerations\n\n- The server only exposes read and simulator management operations\n- No access to host file system beyond specified app paths\n- Push notification payloads are validated for structure\n- Privacy permission changes are explicit and logged\n\n## Development Notes\n\n- Built specifically for iOS development workflows\n- Optimized for common simulator management tasks\n- Structured output parsing for JSON responses\n- Support for both individual and batch operations\n- Compatible with Xcode 15+ simulator features\n"
+}

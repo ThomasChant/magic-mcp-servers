@@ -1,0 +1,51 @@
+{
+  "mcp_name": "Ryuhei-So/mermaid-cli-server",
+  "mcp_description": "Generates PNG images from Mermaid markdown using the official mermaid-cli.",
+  "mcp_id": "Ryuhei-So_mermaid-cli-server",
+  "fetch_timestamp": "2025-06-23T08:06:42.831049Z",
+  "github_url": "https://github.com/Ryuhei-So/mermaid-cli-server",
+  "repository": {
+    "name": "mermaid-cli-server",
+    "full_name": "Ryuhei-So/mermaid-cli-server",
+    "description": null,
+    "html_url": "https://github.com/Ryuhei-So/mermaid-cli-server",
+    "created_at": "2025-04-08T09:12:49Z",
+    "updated_at": "2025-04-08T09:20:24Z",
+    "pushed_at": "2025-04-08T09:20:20Z",
+    "size": 20,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "JavaScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "Ryuhei-So",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/62884595?v=4",
+      "html_url": "https://github.com/Ryuhei-So"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 6823
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "0.1.0"
+  },
+  "readme": "# Mermaid CLI MCP Server\n\nA Model Context Protocol (MCP) server that generates PNG images from Mermaid markdown code using the official `@mermaid-js/mermaid-cli`.\n\n## Features\n\nThis server provides one tool:\n\n### Tools\n\n-   **`generate_image`**: Generates a PNG image from Mermaid markdown.\n    -   **Input Parameters:**\n        -   `code` (string, required): The Mermaid markdown code to render.\n        -   `name` (string, required): The base name for the output PNG file (without the `.png` extension).\n        -   `folder` (string, optional): The absolute path to the directory where the image should be saved. If not provided, the image will be saved in the same directory where the server script (`index.js`) is located.\n    -   **Output:** A text message indicating the path where the image was successfully generated, or an error message if generation failed.\n\n## Demo\n\nHere's an example of generating a simple flowchart:\n\n**Mermaid Code:**\n\n```\ngraph TD\n    A[Start] --> B{Is it Friday?};\n    B -- Yes --> C[Good!];\n    B -- No --> D[Wait...];\n    C --> E[End];\n    D --> E;\n```\n\n**Generated Image (`docs/demo.png`):**\n\n![Demo Flowchart](docs/demo.png)\n\n## Prerequisites\n\n-   **Node.js and npm:** Required to install dependencies and run the server.\n-   **Puppeteer-compatible Browser:** `@mermaid-js/mermaid-cli` uses Puppeteer internally, which requires a compatible browser installation (like Chrome, Chromium, or Chrome for Testing). The server needs the path to the browser executable.\n\n## Installation\n\n1.  **Clone the repository (if you haven't already):**\n    ```bash\n    git clone https://github.com/Ryuhei-So/mermaid-cli-server.git\n    cd mermaid-cli-server\n    ```\n\n2.  **Install dependencies:**\n    ```bash\n    npm install\n    ```\n\n3.  **Build the server:**\n    ```bash\n    npm run build\n    ```\n    This compiles the TypeScript code into JavaScript in the `build` directory.\n\n## Configuration\n\nThis server requires the path to a Puppeteer-compatible browser executable. You need to set the `PUPPETEER_EXECUTABLE_PATH` environment variable when configuring this server in your MCP client (e.g., Cursor, Claude Desktop).\n\n**Example MCP Client Configuration (`coolcline_mcp_settings.json` or similar):**\n\n```json\n{\n  \"mcpServers\": {\n    \"mermaid-cli\": { // Choose a name for the server instance\n      \"command\": \"node\", // Or the direct path to node if needed\n      \"args\": [\"/path/to/mermaid-cli-server/build/index.js\"], // Absolute path to the built server script\n      \"env\": {\n        \"PUPPETEER_EXECUTABLE_PATH\": \"/path/to/your/chrome/executable\" // IMPORTANT: Set the correct absolute path to your Chrome/Chromium executable\n      },\n      \"disabled\": false,\n      \"alwaysAllow\": []\n    }\n    // ... other server configurations\n  }\n}\n```\n\n**Finding the Browser Path:**\n\n-   **macOS (Chrome for Testing example):** `/Users/your_user/.cache/puppeteer/chrome/mac-XXX.X.XXXX.XX/chrome-mac-x64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing` (Replace `your_user` and version number)\n-   **macOS (Standard Chrome):** `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`\n-   **Windows:** Might be something like `C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe`\n-   **Linux:** Might be `/usr/bin/google-chrome` or similar.\n\nYou might need to install Chrome for Testing specifically if Puppeteer requires it: `npx @puppeteer/browsers install chrome@stable`\n\n## Development\n\n-   **Build:** `npm run build` (Compiles TypeScript)\n-   **Watch Mode:** `npm run watch` (Automatically recompiles on changes)\n-   **MCP Inspector:** `npm run inspector` (Runs the server with a debugging interface)\n"
+}

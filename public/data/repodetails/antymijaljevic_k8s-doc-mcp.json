@@ -1,0 +1,50 @@
+{
+  "mcp_name": "antymijaljevic/k8s-doc-mcp",
+  "mcp_description": "A Python-based MCP server for managing and summarizing sticky notes using the Model Context Protocol SDK.",
+  "mcp_id": "antymijaljevic_k8s-doc-mcp",
+  "fetch_timestamp": "2025-06-23T01:10:38.474150Z",
+  "github_url": "https://github.com/antymijaljevic/k8s-doc-mcp",
+  "repository": {
+    "name": "k8s-doc-mcp",
+    "full_name": "antymijaljevic/k8s-doc-mcp",
+    "description": "A Kubernetes documentation assistant built with the MCP (Model Context Protocol) Python SDK.",
+    "html_url": "https://github.com/antymijaljevic/k8s-doc-mcp",
+    "created_at": "2025-04-15T07:40:12Z",
+    "updated_at": "2025-04-21T11:44:06Z",
+    "pushed_at": "2025-04-21T11:44:03Z",
+    "size": 119,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "antymijaljevic",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/52050991?v=4",
+      "html_url": "https://github.com/antymijaljevic"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 12539
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 1
+  },
+  "readme": "# Kubernetes Documentation MCP Server\n\nA Kubernetes documentation assistant built with the MCP (Model Context Protocol) Python SDK.\n\n## Features\n\n- Fetch and convert Kubernetes documentation to Markdown format\n- Get related/recommended documentation pages\n\n## Installation\n\n1. Install the `uv` package manager:\n   ```bash\n   curl -LsSf https://astral.sh/uv/install.sh | sh\n   ```\n\n2. Initialize the project and install dependencies:\n   ```bash\n   uv init .\n   uv add \"mcp[cli]\" requests beautifulsoup4 markdown\n   ```\n\n3. Install the MCP server:\n   ```bash\n   uv run mcp install main.py\n   ```\n\n## Usage\n\nStart the MCP server:\n```bash\nuv run python main.py\n```\n\nThis will add json definition to Claude Desktop (to MPC Host/Client) like this and run server in background.\n```json\n{\n  \"mcpServers\": {\n    \"k8s-doc\": {\n      \"command\": \"uv\",\n      \"args\": [\n        \"run\",\n        \"--with\",\n        \"mcp[cli]\",\n        \"mcp\",\n        \"run\",\n        \"/<path-to>/k8s-doc-mcp/main.py\"\n      ]\n    }\n  }\n}\n```\n\n### Available Tools\n\n- `read_documentation(url)`: Fetch and convert a Kubernetes documentation page to Markdown format\n- `recommend(url)`: Get recommended Kubernetes documentation pages related to a specified URL\n\n### Examples\n\n1. read_documentation\nAccess and understand the content of specific Kubernetes documentation pages.\n\nHow to https://kubernetes.io/docs/tasks/tls/certificate-issue-client-csr/?\nHow to https://kubernetes.io/docs/tasks/administer-cluster/cluster-upgrade/?\n\n\n2. recommend\nFind other pages related to a topic, typically starting from a page you've just read or are interested in.\n\n\"Can you recommend other pages related to this URL: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/?\"\n\"What other documentation pages are related to the one about Deployments (https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)?\"\n\"Based on the information about Services, what other pages might be relevant? (Page: https://kubernetes.io/docs/concepts/services-networking/service/)\"\n\"Explore related topics starting from the documentation on Pods (https://kubernetes.io/docs/concepts/workloads/pods/).\"\n\n## Resources\n\n- [MCP Python SDK Documentation](https://github.com/modelcontextprotocol/python-sdk)\n- [uv Package Manager](https://docs.astral.sh/uv/getting-started/installation/)\n- [Kubernetes Documentation](https://kubernetes.io/docs/)\n"
+}

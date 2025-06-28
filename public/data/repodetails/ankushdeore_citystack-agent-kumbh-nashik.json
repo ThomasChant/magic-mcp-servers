@@ -1,0 +1,50 @@
+{
+  "mcp_name": "ankushdeore/citystack-agent-kumbh-nashik",
+  "mcp_description": "CityStack Agent provides real-time civic service location data for large events, starting with the Kumbh Mela 2027 in Nashik, using the Model Context Protocol.",
+  "mcp_id": "ankushdeore_citystack-agent-kumbh-nashik",
+  "fetch_timestamp": "2025-06-23T01:09:37.029096Z",
+  "github_url": "https://github.com/ankushdeore/citystack-agent-kumbh-nashik",
+  "repository": {
+    "name": "citystack-agent-kumbh-nashik",
+    "full_name": "ankushdeore/citystack-agent-kumbh-nashik",
+    "description": null,
+    "html_url": "https://github.com/ankushdeore/citystack-agent-kumbh-nashik",
+    "created_at": "2025-04-14T18:42:52Z",
+    "updated_at": "2025-04-14T22:28:29Z",
+    "pushed_at": "2025-04-14T22:28:26Z",
+    "size": 236,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": "Other",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "ankushdeore",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/83556259?v=4",
+      "html_url": "https://github.com/ankushdeore"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 5671
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 2
+  },
+  "readme": "# 🏙️ CityStack Agent – Kumbh Nashik 2027\n<img src=\"http://nanda-registry.com/api/v1/verification/badge/6c8bef94-6de4-44d4-855a-237ed103c513/\" alt=\"Verified MCP Server\" />\n\n**CityStack Agent** is a small Python-based tool that helps people find civic services like hospitals during large events — starting with the **Kumbh Mela 2027 in Nashik**.\n\nIt uses real-time data and can run on local devices, with Internet.\n\n---\n\nThis project uses the **Model Context Protocol (MCP)** — a simple way to define and run local AI tools, like \"find hospitals in Nashik\", from chat interfaces or other apps. MCP makes it easy to connect real data and actions to AI agents.\n\n---\n\n## ✨ What It Can Do\n\n- 🔍 Find nearby hospitals in Nashik using real data\n- 🛠️ Works with Claude Desktop (or CLI) as a tool\n- ⚙️ Built using Python and the MCP tool server\n- 🔗 Connects to live civic data (ArcGIS)\n\n---\n\n## ℹ️ About MCP\n\nMCP (Model Context Protocol) is a lightweight way to define tools that AI models (like Claude or GPT) can call to fetch live data or take actions. This project includes a working MCP tool that looks up hospitals using real-time data.\n\n---\n\n## 🚀 How to Run It\n\n### 1. Clone the Project\n\n```bash\ngit clone https://github.com/ankushdeore/citystack-agent-kumbh-nashik.git\ncd citystack-agent-kumbh-nashik\n```\n\n### 2. Set Up the Environment (with [uv](https://astral.sh/uv))\n\n```bash\nuv venv\nsource .venv/bin/activate\nuv pip install\n```\n\n### 3. Start the Server\n\n```bash\nuv run server.py\n```\n\n### 4. (Optional) Run Tool Simulator\n\n```bash\nuv run simulate_citystack.py\n```\n\n---\n\n## 🧪 Example Tool: `find_civic_resource`\n\nLooks up hospitals in Nashik.\n\n**Input:**\n\n```json\n{ \"resource_type\": \"hospital\" }\n```\n\n**Example Output:**\n\n```\nHospital A – Address 1 📍 (20.000000, 73.750000)\nHospital B – Address 2 📍 (20.005000, 73.760000)\n```\n\n---\n\n## 📁 Folder Structure\n\n```\ncitystack-agent-kumbh-nashik/\n├── server.py              # Starts the tool server\n├── tools/\n│   └── find_civic_resource.py\n├── simulate_citystack.py  # For testing locally\n├── pyproject.toml\n├── .gitignore\n└── README.md\n```\n\n---\n\n## 💻 Claude Desktop Setup\n\nTo use this with Claude Desktop, create a `claude_config.json` file:\n\n```json\n{\n  \"mcpServers\": {\n    \"citystack-kumbh\": {\n      \"command\": \"uv\",\n      \"args\": [\n        \"--directory\",\n        \"/Users/yourname/path/to/citystack-agent-kumbh-nashik\",\n        \"run\",\n        \"server.py\"\n      ]\n    }\n  }\n}\n```\n\nReplace the path with your actual project location.\n\n---\n\n## 🌐 Deployment Notes\n\nFor cloud platforms like Render or Replit:\n\n- Make sure `server.py` listens on `0.0.0.0` and gets the port from environment:\n\n```python\nimport os\nport = int(os.environ.get(\"PORT\", 8000))\n```\n\n- Start command:\n\n```bash\nuv run server.py\n```\n\n### 🔧 MCP Modifications\n\n- ✅ Caching: repeated queries return from memory\n- ✅ Privacy: added small random noise to hospital coordinates\n\n---\n\n## 🛣️ What's Next\n\nFuture Scope:\n\n- 🚽 Toilet finder\n- 🚰 Drinking Water finder\n- 👮 Nearby police stations\n- 📢 Emergency alert system\n- 🛐 Cultural site guide\n\n---\n\n## 🙏 Credits\n\n- **Data**: ArcGIS Open Data (https://www.arcgis.com)\n- **Inspiration**: MIT Kumbhathon, CityStack idea, and Decentralized AI research\n"
+}

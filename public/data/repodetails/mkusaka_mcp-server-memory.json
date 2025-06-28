@@ -1,0 +1,80 @@
+{
+  "mcp_name": "mkusaka/mcp-server-memory",
+  "mcp_description": "A persistent memory server utilizing a local knowledge graph to enable Claude to retain user information across interactions.",
+  "mcp_id": "mkusaka_mcp-server-memory",
+  "fetch_timestamp": "2025-06-23T06:50:05.522187Z",
+  "github_url": "https://github.com/mkusaka/mcp-server-memory",
+  "repository": {
+    "name": "mcp-server-memory",
+    "full_name": "mkusaka/mcp-server-memory",
+    "description": null,
+    "html_url": "https://github.com/mkusaka/mcp-server-memory",
+    "created_at": "2025-04-27T15:47:12Z",
+    "updated_at": "2025-05-22T06:09:43Z",
+    "pushed_at": "2025-05-22T06:09:41Z",
+    "size": 116,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "mkusaka",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/24956031?v=4",
+      "html_url": "https://github.com/mkusaka"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 28332,
+      "JavaScript": 10753
+    },
+    "language_percentages": {
+      "TypeScript": 72.49,
+      "JavaScript": 27.51
+    },
+    "pull_requests_count": 12,
+    "contributors_count": 2,
+    "latest_release": {
+      "tag_name": "v0.0.4",
+      "name": "v0.0.4",
+      "published_at": "2025-04-29T11:39:40Z",
+      "body": "## What's Changed\n* Add fix script and format code by @devin-ai-integration in https://github.com/mkusaka/mcp-server-memory/pull/6\n* Fix npm package configuration by @devin-ai-integration in https://github.com/mkusaka/mcp-server-memory/pull/7\n* docs: translate Japanese comments to English by @devin-ai-integration in https://github.com/mkusaka/mcp-server-memory/pull/10\n\n\n**Full Changelog**: https://github.com/mkusaka/mcp-server-memory/compare/v0.0.3...v0.0.4",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.0.4",
+        "commit_sha": "a7cde7c3e4302127ead9e6f014f9603f2f104ebd"
+      },
+      {
+        "name": "v0.0.3",
+        "commit_sha": "4391b715b172671be2c5adc436e4543b9187ee6a"
+      },
+      {
+        "name": "v0.0.2",
+        "commit_sha": "9a3daa6ff05fa0a3a4bdc4c9260a8632cbdb1b02"
+      },
+      {
+        "name": "v0.0.1",
+        "commit_sha": "2aa23c20ec120b7ae3194d3f187e6f0d9660981e"
+      }
+    ],
+    "latest_version": "v0.0.4",
+    "package_json_version": "0.0.4"
+  },
+  "readme": "# Category-based Memory Server\n\nA basic implementation of persistent memory using a category-based memory system. This lets Claude remember information across chats by storing it in categorized memory entries.\n\n## Core Concepts\n\n### Categories\nCategories are the primary organizational units in the memory system. Each category contains a collection of memories (pieces of information).\n\nExample:\n```json\n\"development\": [\n  \"Uses pnpm for package management\",\n  \"Prefers 2-space indentation\"\n]\n```\n\n### Tags\nTags provide additional context and grouping for memories within a category. They can be used to filter and find related memories.\n\nExample:\n```\n# formatting style\nUses 2-space indentation\nPrefers camelCase for variables\n```\n\n### Global vs Local Memories\nThe memory system supports two storage locations:\n\n- **Global Memories**: Stored in the user's home directory (`~/.config/mcp-memory`) and persist across all projects.\n- **Local Memories**: Stored in the current project directory (`.mcp-memory`) and are specific to the current project.\n\n### Memory Storage\nMemories are stored as text entries, with the following characteristics:\n\n- Organized by categories (stored in separate files)\n- Can be tagged for easier retrieval\n- Stored in plain text files\n- Can be added or removed independently\n- Should be atomic (one piece of information per memory)\n\nExample Memory File (`development.txt`):\n```\n# formatting style\nUses 2-space indentation\nPrefers camelCase for variables\n\n# tools\nUses eslint for linting\nUses prettier for formatting\n```\n\n## API\n\n### Tools\n- **remember_memory**\n  - Stores a memory with optional tags in a specified category\n  - Input:\n    - `category` (string): The category to store the memory in\n    - `data` (string): The data to store in memory\n    - `tags` (string[], optional): Optional tags for categorizing the memory\n    - `is_global` (boolean): Whether to store in global or local memory\n  - Stores the memory entry in the specified category with optional tags\n\n- **retrieve_memories**\n  - Retrieves all memories from a specified category\n  - Input:\n    - `category` (string): The category to retrieve memories from, use '*' for all categories\n    - `is_global` (boolean): Whether to retrieve from global or local memory\n  - Returns memories from the specified category, grouped by tags\n  - Returns empty object if category doesn't exist\n\n- **remove_memory_category**\n  - Removes all memories within a specified category\n  - Input:\n    - `category` (string): The category to remove, use '*' for all categories\n    - `is_global` (boolean): Whether to remove from global or local memory\n  - Removes the entire category file\n  - Silent operation if category doesn't exist\n\n- **remove_specific_memory**\n  - Removes a specific memory within a specified category\n  - Input:\n    - `category` (string): The category containing the memory to remove\n    - `memory_content` (string): Content of the memory to remove (partial match)\n    - `is_global` (boolean): Whether to remove from global or local memory\n  - Removes memories containing the specified content\n  - Silent operation if memory doesn't exist\n\n# Usage with Claude Desktop\n\n### Setup\n\nAdd this to your claude_desktop_config.json:\n\n#### npx\n```json\n{\n  \"mcpServers\": {\n    \"memory\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"-y\",\n        \"@mkusaka/mcp-server-memory\"\n      ]\n    }\n  }\n}\n```\n\n#### npx with custom setting\n\nThe server can be configured using the following environment variables:\n\n```json\n{\n  \"mcpServers\": {\n    \"memory\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"-y\",\n        \"@mkusaka/mcp-server-memory\"\n      ],\n      \"env\": {\n        \"MEMORY_FILE_PATH\": \"/path/to/custom/memory.json\"\n      }\n    }\n  }\n}\n```\n\n- `MEMORY_FILE_PATH`: Path to the memory storage JSON file (default: `memory.json` in the server directory)\n\n# VS Code Installation Instructions\n\nFor quick installation, use one of the one-click installation buttons below:\n\nFor manual installation, add the following JSON block to your User Settings (JSON) file in VS Code. You can do this by pressing `Ctrl + Shift + P` and typing `Preferences: Open Settings (JSON)`.\n\nOptionally, you can add it to a file called `.vscode/mcp.json` in your workspace. This will allow you to share the configuration with others. \n\n> Note that the `mcp` key is not needed in the `.vscode/mcp.json` file.\n\n#### npx\n\n```json\n{\n  \"mcp\": {\n    \"servers\": {\n      \"memory\": {\n        \"command\": \"npx\",\n        \"args\": [\n          \"-y\",\n          \"@mkusaka/mcp-server-memory\"\n        ]\n      }\n    }\n  }\n}\n```\n\n## License\n\nThis MCP server is licensed under the MIT License. This means you are free to use, modify, and distribute the software, subject to the terms and conditions of the MIT License. For more details, please see the LICENSE file in the project repository.\n"
+}

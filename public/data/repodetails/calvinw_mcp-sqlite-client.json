@@ -1,0 +1,52 @@
+{
+  "mcp_name": "calvinw/mcp-sqlite-client",
+  "mcp_description": "Facilitates natural language interaction with SQLite databases via a command-line client using OpenRouter's LLM API.",
+  "mcp_id": "calvinw_mcp-sqlite-client",
+  "fetch_timestamp": "2025-06-23T01:54:36.410804Z",
+  "github_url": "https://github.com/calvinw/mcp-sqlite-client",
+  "repository": {
+    "name": "mcp-sqlite-client",
+    "full_name": "calvinw/mcp-sqlite-client",
+    "description": "A simple command line mcp client interacting with sqlite database",
+    "html_url": "https://github.com/calvinw/mcp-sqlite-client",
+    "created_at": "2025-04-13T18:09:36Z",
+    "updated_at": "2025-05-03T09:56:42Z",
+    "pushed_at": "2025-04-14T01:58:27Z",
+    "size": 473,
+    "stargazers_count": 2,
+    "watchers_count": 2,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "calvinw",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2001105?v=4",
+      "html_url": "https://github.com/calvinw"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 52449,
+      "Nix": 607
+    },
+    "language_percentages": {
+      "Python": 98.86,
+      "Nix": 1.14
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# MCP SQLite Client\n\nA simple command-line client for interacting with an MCP SQLite server. This client enables natural language interaction with SQLite databases through OpenRouter's LLM API.\n\n## Installation\n\n### Prerequisites\n\n- Python 3.8 or higher\n- pip (Python package installer)\n\n### Setup Steps\n\n1. **Create a project directory**:\n   ```bash\n   git clone https://github.com/calvinw/mcp-sqlite-client.git\n   cd mcp-sqlite-client\n   ```\n\n2. **Create and activate a virtual environment**:\n   ```bash\n   python -m venv venv\n   source venv/bin/activate\n   ```\n\n3. **Install the required dependencies**:\n\n   Then install from the requirements file:\n   ```bash\n   pip install -r requirements.txt\n   ```\n\n4. **Install the MCP SQLite server**:\n   ```bash\n   pip install mcp-server-sqlite\n   ```\n\n5. **Download a sample SQLite database**:\n\n   ```bash\n   # For Chinook database\n   curl -L https://github.com/lerocha/chinook-database/raw/master/ChinookDatabase/DataSources/Chinook_Sqlite.sqlite -o chinook.db\n   \n   # For Northwind database\n   git clone https://github.com/jpwhite3/northwind-SQLite3.git\n   cp northwind-SQLite3/northwind.db .\n   \n   # For Superheroes database (optional)\n   git clone https://github.com/codecrafters-io/sample-sqlite-databases.git\n   cp sample-sqlite-databases/superheroes.db .\n   ```\n\n6. **Create a configuration file**:\n   Create a file named `servers_config.json` with the following content:\n   ```json\n   {\n     \"mcpServers\": {\n       \"sqlite\": {\n         \"command\": \"mcp-server-sqlite\",\n         \"args\": [\n           \"--db-path\",\n           \"./chinook.db\"\n         ]\n       }\n     }\n   }\n   ```\n\n7. **Set up your API key**:\n   Create a `.env` file in the project directory:\n   ```\n   OPENROUTER_API_KEY=your_openrouter_api_key_here\n   ```\n\n## Usage\n\nRun the client using Python:\n\n```bash\npython mcp_client.py\n```\n\nThis will start an interactive chat session where you can ask questions about the database in natural language.\n\nFor the chinook.db you can use these examples:\n\nExample queries:\n- \"What tables are in this database?\"\n- \"How many albums are there in total?\"\n- \"Show me the artists with the most albums\"\n- \"List all employees and their hire dates\"\n\nType 'exit' or 'quit' to end the session.\n\n## Customizing the Database\n\nTo use a different SQLite database, modify the `--db-path` in the `servers_config.json` file to point to your desired database file.\n\n## Troubleshooting\n\nIf you encounter issues:\n\n1. **MCP-Server-SQLite not found**: Ensure that the package is correctly installed and the command is available in your PATH.\n   ```bash\n   which mcp-server-sqlite\n   ```\n\n2. **API Key issues**: Verify that your `.env` file contains the correct API key and is in the same directory as the script.\n\n3. **Connection issues**: Check that the database file exists and is readable at the path specified in `servers_config.json`.\n\n## License\n\n[MIT](LICENSE)\n"
+}

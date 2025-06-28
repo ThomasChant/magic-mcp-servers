@@ -1,0 +1,50 @@
+{
+  "mcp_name": "MCP-Chatbot",
+  "mcp_description": "",
+  "mcp_id": "3choff_mcp-chatbot",
+  "fetch_timestamp": "2025-06-23T06:32:42.529663Z",
+  "github_url": "https://github.com/3choff/mcp-chatbot",
+  "repository": {
+    "name": "mcp-chatbot",
+    "full_name": "3choff/mcp-chatbot",
+    "description": "A simple CLI chatbot that demonstrates the integration of the Model Context Protocol (MCP).",
+    "html_url": "https://github.com/3choff/mcp-chatbot",
+    "created_at": "2024-12-05T19:07:56Z",
+    "updated_at": "2025-06-22T23:17:56Z",
+    "pushed_at": "2024-12-05T20:15:04Z",
+    "size": 12,
+    "stargazers_count": 200,
+    "watchers_count": 200,
+    "forks_count": 22,
+    "open_issues_count": 5,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "3choff",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/151955752?v=4",
+      "html_url": "https://github.com/3choff"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 22,
+    "subscribers_count": 2,
+    "languages": {
+      "Python": 16107
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# MCP Chatbot\n\nThis chatbot example demonstrates how to integrate the Model Context Protocol (MCP) into a simple CLI chatbot. The implementation showcases MCP's flexibility by supporting multiple tools through MCP servers and is compatible with any LLM provider that follows OpenAI API standards.\n\nIf you find this project helpful, don’t forget to ⭐ star the [repository](https://github.com/3choff/mcp-chatbot) or buy me a ☕ [coffee](https://ko-fi.com/3choff).\n\n## Key Features\n\n- **LLM Provider Flexibility**: Works with any LLM that follows OpenAI API standards (tested with Llama 3.2 90b on Groq and GPT-4o mini on GitHub Marketplace).\n- **Dynamic Tool Integration**: Tools are declared in the system prompt, ensuring maximum compatibility across different LLMs.\n- **Server Configuration**: Supports multiple MCP servers through a simple JSON configuration file like the Claude Desktop App.\n\n## Requirements\n\n- Python 3.10\n- `python-dotenv`\n- `requests`\n- `mcp`\n- `uvicorn`\n\n## Installation\n\n1. **Clone the repository:**\n\n   ```bash\n   git clone https://github.com/3choff/mcp-chatbot.git\n   cd mcp-chatbot\n   ```\n\n2. **Install the dependencies:**\n\n   ```bash\n   pip install -r requirements.txt\n   ```\n\n3. **Set up environment variables:**\n\n   Create a `.env` file in the root directory and add your API key:\n\n   ```plaintext\n   LLM_API_KEY=your_api_key_here\n   ```\n\n4. **Configure servers:**\n\n   The `servers_config.json` follows the same structure as Claude Desktop, allowing for easy integration of multiple servers. \n   Here's an example:\n\n   ```json\n   {\n     \"mcpServers\": {\n       \"sqlite\": {\n         \"command\": \"uvx\",\n         \"args\": [\"mcp-server-sqlite\", \"--db-path\", \"./test.db\"]\n       },\n       \"puppeteer\": {\n         \"command\": \"npx\",\n         \"args\": [\"-y\", \"@modelcontextprotocol/server-puppeteer\"]\n       }\n     }\n   }\n   ```\n   Environment variables are supported as well. Pass them as you would with the Claude Desktop App.\n\n   Example:\n   ```json\n   {\n     \"mcpServers\": {\n       \"server_name\": {\n         \"command\": \"uvx\",\n         \"args\": [\"mcp-server-name\", \"--additional-args\"],\n         \"env\": {\n           \"API_KEY\": \"your_api_key_here\"\n         }\n       }\n     }\n   }\n   ```\n\n## Usage\n\n1. **Run the client:**\n\n   ```bash\n   python main.py\n   ```\n\n2. **Interact with the assistant:**\n   \n   The assistant will automatically detect available tools and can respond to queries based on the tools provided by the configured servers.\n\n3. **Exit the session:**\n\n   Type `quit` or `exit` to end the session.\n\n## Architecture\n\n- **Tool Discovery**: Tools are automatically discovered from configured servers.\n- **System Prompt**: Tools are dynamically included in the system prompt, allowing the LLM to understand available capabilities.\n- **Server Integration**: Supports any MCP-compatible server, tested with various server implementations including Uvicorn and Node.js.\n\n### Class Structure\n- **Configuration**: Manages environment variables and server configurations\n- **Server**: Handles MCP server initialization, tool discovery, and execution\n- **Tool**: Represents individual tools with their properties and formatting\n- **LLMClient**: Manages communication with the LLM provider\n- **ChatSession**: Orchestrates the interaction between user, LLM, and tools\n\n### Logic Flow\n\n```mermaid\nflowchart TD\n    A[Start] --> B[Load Configuration]\n    B --> C[Initialize Servers]\n    C --> D[Discover Tools]\n    D --> E[Format Tools for LLM]\n    E --> F[Wait for User Input]\n    \n    F --> G{User Input}\n    G --> H[Send Input to LLM]\n    H --> I{LLM Decision}\n    I -->|Tool Call| J[Execute Tool]\n    I -->|Direct Response| K[Return Response to User]\n    \n    J --> L[Return Tool Result]\n    L --> M[Send Result to LLM]\n    M --> N[LLM Interprets Result]\n    N --> O[Present Final Response to User]\n    \n    K --> O\n    O --> F\n```\n\n1. **Initialization**:\n   - Configuration loads environment variables and server settings\n   - Servers are initialized with their respective tools\n   - Tools are discovered and formatted for LLM understanding\n\n2. **Runtime Flow**:\n   - User input is received\n   - Input is sent to LLM with context of available tools\n   - LLM response is parsed:\n     - If it's a tool call → execute tool and return result\n     - If it's a direct response → return to user\n   - Tool results are sent back to LLM for interpretation\n   - Final response is presented to user\n\n3. **Tool Integration**:\n   - Tools are dynamically discovered from MCP servers\n   - Tool descriptions are automatically included in system prompt\n   - Tool execution is handled through standardized MCP protocol\n\n## Contributing\n\nFeedback and contributions are welcome. If you encounter any issues or have suggestions for improvements, please create a new [issue](https://github.com/3choff/mcp-chatbot/issues) on the GitHub repository.\n\nIf you'd like to contribute to the development of the project, feel free to submit a pull request with your changes.\n\n## License\n\nThis project is licensed under the [MIT License](https://github.com/3choff/mcp-chatbot/blob/main/LICENSE).\n"
+}

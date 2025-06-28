@@ -1,0 +1,78 @@
+{
+  "mcp_name": "ariadng/metatrader-mcp-server",
+  "mcp_description": "🐍 🏠 🪟 - Enable AI LLMs to execute trades using MetaTrader 5 platform",
+  "mcp_id": "ariadng_metatrader-mcp-server",
+  "fetch_timestamp": "2025-06-23T01:15:18.394338Z",
+  "github_url": "https://github.com/ariadng/metatrader-mcp-server",
+  "repository": {
+    "name": "metatrader-mcp-server",
+    "full_name": "ariadng/metatrader-mcp-server",
+    "description": "Model Context Protocol (MCP) to enable AI LLMs to trade using MetaTrader platform",
+    "html_url": "https://github.com/ariadng/metatrader-mcp-server",
+    "created_at": "2025-04-10T09:15:15Z",
+    "updated_at": "2025-06-22T17:02:40Z",
+    "pushed_at": "2025-05-23T09:52:03Z",
+    "size": 1679,
+    "stargazers_count": 58,
+    "watchers_count": 58,
+    "forks_count": 12,
+    "open_issues_count": 2,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [
+      "ai",
+      "finance",
+      "investment",
+      "llm",
+      "mcp",
+      "metatrader",
+      "quantitative-finance",
+      "trading"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "ariadng",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/57926750?v=4",
+      "html_url": "https://github.com/ariadng"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 12,
+    "subscribers_count": 6,
+    "languages": {
+      "Python": 259621
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 3,
+    "contributors_count": 2,
+    "latest_release": {
+      "tag_name": "v0.2.3",
+      "name": "Trade using other LLMs",
+      "published_at": "2025-04-23T18:25:00Z",
+      "body": "![Open WebUI - Chat](https://yvkbpmmzjmfqjxusmyop.supabase.co/storage/v1/object/public/github//openwebui-chat.png)\r\n\r\nNow you can trade using other LLMs, beside Claude Desktop app, by running the new OpenAPI HTTP server.",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.2.3",
+        "commit_sha": "cb95af71261d95e408676d70548eb0ec54d43204"
+      },
+      {
+        "name": "v0.2.1",
+        "commit_sha": "39108e4112a9b216dda4892670a3a187d1b8d62b"
+      }
+    ],
+    "latest_version": "v0.2.3"
+  },
+  "readme": "# MetaTrader MCP Server\n\n[![PyPI version](https://img.shields.io/pypi/v/metatrader-mcp-server.svg?style=flat&color=blue)](https://pypi.org/project/metatrader-mcp-server/)\n\nThis is a Model Context Protocol (MCP) server built with Python to enable AI LLMs to trade using MetaTrader platform.\n\n![MetaTrader MCP Server](https://yvkbpmmzjmfqjxusmyop.supabase.co/storage/v1/object/public/github//metatrader-mcp-server-1.png)\n\n## Disclaimer\n\n**Financial trading involves significant risk, and the developers of this package disclaim any liability for any losses or profits; this package is provided solely to facilitate MetaTrader 5 trade executions via AI LLMs using the Model Context Protocol (MCP). By using this package, you assume all risks and agree not to hold the developers liable or to initiate any legal action for any damages, losses, or profits.**\n\n## Updates\n\n- May 5, 2025: Use broker-based filling modes (0.2.5)\n- April 23, 2025: Published to PyPi (0.2.0) \n- April 16, 2025: We have our first minor version release (0.1.0) \n\n## Installation Guide\n\nMake sure you have Python version 3.10+ and MetaTrader 5 terminal installed in your workspace. Then install the package:\n\n```bash\npip install metatrader-mcp-server\n```\n\nThen you need to enable algorithmic trading on MetaTrader 5 terminal. Open `Tools > Options` and check `Allow algorithmic trading`.\n\n## Claude Desktop Integration\n\nTo use this package to enable trading operations via Claude Desktop app, please add this into your Claude Desktop configuration:\n\n```json\n{\n  \"mcpServers\": {\n    \"metatrader\": {\n      \"command\": \"metatrader-mcp-server\",\n      \"args\": [\n        \"--login\",    \"<YOUR_MT5_LOGIN>\",\n        \"--password\", \"<YOUR_MT5_PASSWORD>\",\n        \"--server\",   \"<YOUR_MT5_SERVER>\"\n      ]\n    }\n  }\n}\n```\n\n## Other LLMs using Open WebUI\n\nYou can use this MCP server with other LLMs such as OpenAI's GPT by using its HTTP server and Open WebUI.\n\nTo start, make sure you have installed the package. Then, run the server:\n\n```\nmetatrader-http-server --login <YOUR_MT5_LOGIN> --password <YOUR_MT5_PASSWORD> --server <YOUR_MT5_SERVER> --host 0.0.0.0 --port 8000\n```\n\nIt will launch HTTP server locally on port 8000 and automatically launch MetaTrader 5 terminal.\n\nOn Open WebUI settings page, navigate to **Tools** menu. Then click plus button on \"Manage Tool Servers\". Add `http://localhost:8000` (or whatever you set your port is).\n\n![Open WebUI - Add Connection](https://yvkbpmmzjmfqjxusmyop.supabase.co/storage/v1/object/public/github//openwebui-add-tools.png)\n\nIf all is well, you can now access the tools via chat using available models, such as `gpt-4o` or `o4-mini`.\n\n![Open WebUI - Chat](https://yvkbpmmzjmfqjxusmyop.supabase.co/storage/v1/object/public/github//openwebui-macos.png)\n\n## Project Roadmap\n\nFor full version checklist, see [version-checklist.md](docs/roadmap/version-checklist.md).\n\n| Task | Status | Done | Tested |\n|------|--------|------|--------|\n| Connect to MetaTrader 5 terminal | Finished | ✅ | ✅ |\n| Develop MetaTrader client module | Finished | ✅ | ✅ |\n| Develop MCP Server module | Finished | ✅ | ✅ |\n| Implement MCP tools | Finished | ✅ | ✅ |\n| Publish to PyPi | Finished | ✅ | ✅ |\n| Claude Desktop integration | Finished | ✅ | ✅ |\n| OpenAPI server | Finished | ✅ | ✅ |\n| Open WebUI integration | Finished | ✅ | ✅ |\n| Google ADK integration | On progress | - | - |\n\n## Developer Documentation\n\nFor developers, see [Developer's Documentation](docs/README.md).\n"
+}

@@ -1,0 +1,51 @@
+{
+  "mcp_name": "awwaiid/mcp-server-taskwarrior",
+  "mcp_description": "🏠 📇 - An MCP server for basic local taskwarrior usage (add, update, remove tasks)",
+  "mcp_id": "awwaiid_mcp-server-taskwarrior",
+  "fetch_timestamp": "2025-06-23T01:28:31.800378Z",
+  "github_url": "https://github.com/awwaiid/mcp-server-taskwarrior",
+  "repository": {
+    "name": "mcp-server-taskwarrior",
+    "full_name": "awwaiid/mcp-server-taskwarrior",
+    "description": "MCP Server for TaskWarrior!",
+    "html_url": "https://github.com/awwaiid/mcp-server-taskwarrior",
+    "created_at": "2025-02-22T15:58:08Z",
+    "updated_at": "2025-06-18T16:19:08Z",
+    "pushed_at": "2025-03-16T01:15:04Z",
+    "size": 55,
+    "stargazers_count": 17,
+    "watchers_count": 17,
+    "forks_count": 6,
+    "open_issues_count": 1,
+    "language": "JavaScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "awwaiid",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8642?v=4",
+      "html_url": "https://github.com/awwaiid"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 6,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 6014
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 3,
+    "contributors_count": 2,
+    "package_json_version": "1.0.1"
+  },
+  "readme": "# TaskWarrior MCP Server\n\nNode.js server implementing Model Context Protocol (MCP) for [TaskWarrior](https://taskwarrior.org/) operations.\n\n<a href=\"https://glama.ai/mcp/servers/e8w3e1su1x\">\n  <img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/e8w3e1su1x/badge\" alt=\"TaskWarrior Server MCP server\" />\n</a>\n\n## Features\n\n- View pending tasks\n- Filter tasks by project and tags\n- Add new tasks with descriptions, due dates, priorities, projects and tags\n- Mark tasks as complete\n\n**Note**: This runs your local `task` binary, so TaskWarrior needs to be installed and configured!\n\n> [!WARNING]\n> This currently uses task `id` which is an unstable identifier; taskwarrior\n> sometimes renumbers tasks when new ones are added or removed. In the future\n> this should be more careful, using task UUID instead.\n\n## API\n\n### Tools\n\n- **get_next_tasks**\n  - Get a list of all pending tasks\n  - Optional filters:\n    - `project`: Filter by project name\n    - `tags`: Filter by one or more tags\n\n- **add_task**\n  - Add a new task to TaskWarrior\n  - Required:\n    - `description`: Task description text\n  - Optional:\n    - `due`: Due date (ISO timestamp)\n    - `priority`: Priority level (\"H\", \"M\", or \"L\")\n    - `project`: Project name (lowercase with dots)\n    - `tags`: Array of tags (lowercase)\n\n- **mark_task_done**\n  - Mark a task as completed\n  - Required:\n    - `identifier`: Task ID or UUID\n\n## Usage with Claude Desktop\n\nAdd this to your `claude_desktop_config.json`:\n\n```json\n{\n  \"mcpServers\": {\n    \"taskwarrior\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"-y\",\n        \"mcp-server-taskwarrior\"\n      ]\n    }\n  }\n}\n```\n\n## Installation\n\n```bash\nnpm install -g mcp-server-taskwarrior\n```\n\nMake sure you have TaskWarrior (`task`) installed and configured on your system.\n\n## Example usage ideas:\n\n* What are my current work tasks?\n  * Executes: `task project:work next`\n* TODO: Call my sister (high priority)\n  * Executes: `task add priority:H Call my sister`\n* OK, I've called my sister\n  * Executes: `task done 1`\n\n## License\n\nThis MCP server is licensed under the MIT License. See the LICENSE file for details."
+}

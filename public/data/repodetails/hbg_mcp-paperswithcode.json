@@ -1,0 +1,52 @@
+{
+  "mcp_name": "PapersWithCode",
+  "mcp_description": "Search research papers, conferences, and codebases through PapersWithCode API",
+  "mcp_id": "hbg_mcp-paperswithcode",
+  "fetch_timestamp": "2025-06-23T07:27:10.444149Z",
+  "github_url": "https://github.com/hbg/mcp-paperswithcode",
+  "repository": {
+    "name": "mcp-paperswithcode",
+    "full_name": "hbg/mcp-paperswithcode",
+    "description": "An unofficial MCP interface to interact with the PapersWithCode API",
+    "html_url": "https://github.com/hbg/mcp-paperswithcode",
+    "created_at": "2025-03-16T20:38:06Z",
+    "updated_at": "2025-06-07T02:53:43Z",
+    "pushed_at": "2025-06-07T02:53:39Z",
+    "size": 54,
+    "stargazers_count": 9,
+    "watchers_count": 9,
+    "forks_count": 2,
+    "open_issues_count": 1,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "hbg",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/14966358?v=4",
+      "html_url": "https://github.com/hbg"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 2,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 7275,
+      "Dockerfile": 466
+    },
+    "language_percentages": {
+      "Python": 93.98,
+      "Dockerfile": 6.02
+    },
+    "pull_requests_count": 5,
+    "contributors_count": 2
+  },
+  "readme": "# mcp-paperswithcode\n\n[![smithery badge](https://smithery.ai/badge/@hbg/mcp-paperswithcode)](https://smithery.ai/server/@hbg/mcp-paperswithcode)\n\n# 🦾 Features\n\n> Allows AI assistants to find and read papers, as well as view related code repositories for further context.\n\nThis MCP server provides a Model Context Protocol (MCP) client that interfaces with the PapersWithCode API.\n\nIt includes tools for searching, retrieving, and parsing information on research papers, authors, datasets, conferences, and more.\n\n# 🚀 Getting Started\n\n### Installing via Smithery\n\nTo install mcp-paperswithcode for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@hbg/mcp-paperswithcode):\n\n```bash\nnpx -y @smithery/cli install @hbg/mcp-paperswithcode --client claude\n```\n\n# 🛠️ Tools\n\n## 📚 Paper Tools\n\n### `search_papers`\nSearch for papers using optional filters.\n\n- `abstract` (str, optional): Filter by abstract text.\n- `title` (str, optional): Filter by title text.\n- `arxiv_id` (str, optional): Filter by ArXiv ID.\n\n### `get_paper`\nGet a paper's metadata by its ID.\n\n- `paper_id` (str): The paper ID.\n\n### `read_paper_from_url`\nExtract readable text from a paper given its URL.\n\n- `paper_url` (str): The direct PDF or HTML URL to a paper.\n\n### `list_paper_results`\nList benchmark results associated with a paper.\n\n- `paper_id` (str): The paper ID.\n\n### `list_paper_tasks`\nList tasks associated with a paper.\n\n- `paper_id` (str): The paper ID.\n\n### `list_paper_methods`\nList methods discussed in a paper.\n\n- `paper_id` (str): The paper ID.\n\n### `list_paper_repositories`\nList code repositories linked to a paper.\n\n- `paper_id` (str): The paper ID.\n\n### `list_paper_datasets`\nList datasets mentioned or used in a paper.\n\n- `paper_id` (str): The paper ID.\n\n## 🧠 Research Area Tools\n\n### `search_research_areas`\nSearch research areas by name.\n\n- `name` (str): Partial or full name of the research area.\n\n### `get_research_area`\nGet metadata for a specific research area.\n\n- `area_id` (str): The area ID.\n\n### `list_research_area_tasks`\nList tasks associated with a research area.\n\n- `area_id` (str): The area ID.\n\n## 👨‍🔬 Author Tools\n\n### `search_authors`\nSearch authors by full name.\n\n- `full_name` (str): Full name of the author.\n\n### `get_paper_author`\nGet metadata for an author by ID.\n\n- `author_id` (str): The author ID.\n\n### `list_papers_by_author_id`\nList all papers written by an author via ID.\n\n- `author_id` (str): The author ID.\n\n### `list_papers_by_author_name`\nSearch by name and return papers for the first matching author.\n\n- `author_name` (str): Full name of the author.\n\n## 🎓 Conference Tools\n\n### `list_conferences`\nList conferences, optionally filter by name.\n\n- `conference_name` (str, optional): Full or partial name.\n\n### `get_conference`\nGet metadata for a specific conference.\n\n- `conference_id` (str): The conference ID.\n\n### `list_conference_proceedings`\nList all proceedings under a conference.\n\n- `conference_id` (str): The conference ID.\n\n### `get_conference_proceeding`\nGet details for a specific conference proceeding.\n\n- `conference_id` (str): The conference ID.\n- `proceeding_id` (str): The proceeding ID.\n\n### `list_conference_papers`\nList all papers for a specific conference proceeding.\n\n- `conference_id` (str): The conference ID.\n- `proceeding_id` (str): The proceeding ID.\n"
+}

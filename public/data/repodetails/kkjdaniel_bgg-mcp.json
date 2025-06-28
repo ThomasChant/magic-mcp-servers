@@ -1,0 +1,62 @@
+{
+  "mcp_name": "BGG MCP",
+  "mcp_description": "BGG MCP enables AI tools to interact with the BoardGameGeek API.",
+  "mcp_id": "kkjdaniel_bgg-mcp",
+  "fetch_timestamp": "2025-06-23T01:37:34.411155Z",
+  "github_url": "https://github.com/kkjdaniel/bgg-mcp",
+  "repository": {
+    "name": "bgg-mcp",
+    "full_name": "kkjdaniel/bgg-mcp",
+    "description": "BGG MCP provides access to the BoardGameGeek API through the Model Context Protocol, enabling retrieval and filtering of board game data, user collections, and profiles.",
+    "html_url": "https://github.com/kkjdaniel/bgg-mcp",
+    "created_at": "2025-05-20T15:50:40Z",
+    "updated_at": "2025-06-21T01:03:37Z",
+    "pushed_at": "2025-05-23T12:45:23Z",
+    "size": 739,
+    "stargazers_count": 4,
+    "watchers_count": 4,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Go",
+    "license": "MIT License",
+    "topics": [
+      "bgg",
+      "bgg-api",
+      "board-game",
+      "boardgamegeek",
+      "boardgames",
+      "mcp",
+      "mcp-server"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "kkjdaniel",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7441747?v=4",
+      "html_url": "https://github.com/kkjdaniel"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Go": 9243,
+      "Dockerfile": 618,
+      "Makefile": 115
+    },
+    "language_percentages": {
+      "Go": 92.65,
+      "Dockerfile": 6.19,
+      "Makefile": 1.15
+    },
+    "pull_requests_count": 2,
+    "contributors_count": 2
+  },
+  "readme": "<p align=\"center\">\n  <img src=\"bgg-mcp-logo.png\" width=\"250\" alt=\"BGG MCP Logo\">\n</p>\n\n# BGG MCP: BoardGameGeek MCP API Server\n\n[![smithery badge](https://smithery.ai/badge/@kkjdaniel/bgg-mcp)](https://smithery.ai/server/@kkjdaniel/bgg-mcp)\n\n> [!WARNING]  \n> This project is under active developmennt, therefore expect tooling to change.\n\nBGG MCP provides access to the BoardGameGeek API through the [Model Context Protocol](https://www.anthropic.com/news/model-context-protocol), enabling retrieval and filtering of board game data, user collections, and profiles. The server is implemented in Go, using the [GoGeek](https://github.com/kkjdaniel/gogeek) library, which helps ensure robust API interactions.\n\n<a href=\"https://boardgamegeek.com/\">\n  <img src=\"powered-bgg.webp\" width=\"160\" alt=\"Powered by BGG\">\n</a>\n\n## Example\n\n![Example of BGG MCP in action](example.png)\n\n## Tools\n\n- Game Details _(find game by name, currently returns best match)_\n- Collection _(find and filter about a users collection)_\n- Hottness _(get the current BGG hotness)_\n- User _(find details of a user by username)_\n\n## Roadmap\n\n- [x] Specific Game Details _(by name)_\n- [x] Collection (+ filters)\n- [x] Hot Games\n- [x] User Details\n- [ ] Broad Search\n- [ ] Recommended Games\n\n## Setup\n\nYou have two options for setting up, the easiest is to use the integration of Smithery.\n\n### A) Installing via Smithery\n\nTo install bgg-mcp for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@kkjdaniel/bgg-mcp):\n\n```bash\nnpx -y @smithery/cli install @kkjdaniel/bgg-mcp --client claude\n```\n\n### B) Manual Setup\n\n#### 1. Install Go\n\nYou will need to have Go installed on your system to build binary. This can be easily [downloaded and setup here](https://go.dev/doc/install), or you can use the package manager that you prefer such as Brew.\n\n#### 2. Build\n\nThe project includes a Makefile to simplify building and managing the binary.\n\n```bash\n# Build the application (output goes to build/bgg-mcp)\nmake build\n\n# Clean build artifacts\nmake clean\n\n# Both clean and build\nmake all\n```\n\nOr you can simply build it directly with Go...\n\n```bash\ngo build -o build/bgg-mcp\n```\n\n#### 3. Add MCP Config\n\nIn the `settings.json` (VS Code / Cursor) or `claude_desktop_config.json` add the following to your list of servers, pointing it to the binary you created earlier, once you load up your AI tool you should see the tools provided by the server connected:\n\n```json\n\"bgg\": {\n    \"command\": \"path/to/build/bgg-mcp\",\n    \"args\": []\n}\n```\n\nMore details for configuring Claude can be [found here](https://modelcontextprotocol.io/quickstart/user).\n\n## Using Makefile\n\nThe project includes a Makefile to simplify building and managing the binary.\n\n```bash\n# Build the application (output goes to build/bgg-mcp)\nmake build\n\n# Clean build artifacts\nmake clean\n\n# Both clean and build\nmake all\n```\n"
+}

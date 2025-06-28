@@ -1,0 +1,57 @@
+{
+  "mcp_name": "Tmux",
+  "mcp_description": "Interact with your Tmux sessions, windows and pane, execute commands in tmux panes and retrieve result.",
+  "mcp_id": "nickgnd_tmux-mcp",
+  "fetch_timestamp": "2025-06-23T08:58:48.962034Z",
+  "github_url": "https://github.com/nickgnd/tmux-mcp",
+  "repository": {
+    "name": "tmux-mcp",
+    "full_name": "nickgnd/tmux-mcp",
+    "description": "A MCP server for our beloved terminal multiplexer tmux.",
+    "html_url": "https://github.com/nickgnd/tmux-mcp",
+    "created_at": "2025-03-13T22:28:43Z",
+    "updated_at": "2025-06-22T15:59:51Z",
+    "pushed_at": "2025-06-07T11:03:58Z",
+    "size": 30,
+    "stargazers_count": 39,
+    "watchers_count": 39,
+    "forks_count": 12,
+    "open_issues_count": 3,
+    "language": "JavaScript",
+    "license": "MIT License",
+    "topics": [
+      "mcp",
+      "mcp-server",
+      "tmux"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "nickgnd",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3228071?v=4",
+      "html_url": "https://github.com/nickgnd"
+    },
+    "has_issues": true,
+    "has_projects": false,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 12,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 12352,
+      "TypeScript": 7340
+    },
+    "language_percentages": {
+      "JavaScript": 62.73,
+      "TypeScript": 37.27
+    },
+    "pull_requests_count": 2,
+    "contributors_count": 2,
+    "package_json_version": "0.1.2"
+  },
+  "readme": "# Tmux MCP Server\n\nModel Context Protocol server that enables Claude Desktop to interact with and view tmux session content. This integration allows AI assistants to read from, control, and observe your terminal sessions.\n\n## Features\n\n- List and search tmux sessions\n- View and navigate tmux windows and panes\n- Capture and expose terminal content from any pane\n- Execute commands in tmux panes and retrieve results (use it at your own risk ⚠️)\n- Create new tmux sessions and windows\n\nCheck out this short video to get excited!\n\n</br>\n\n[![youtube video](http://i.ytimg.com/vi/3W0pqRF1RS0/hqdefault.jpg)](https://www.youtube.com/watch?v=3W0pqRF1RS0)\n\n## Prerequisites\n\n- Node.js\n- tmux installed and running\n\n## Usage\n\n### Configure Claude Desktop\n\nAdd this MCP server to your Claude Desktop configuration:\n\n```json\n\"mcpServers\": {\n  \"tmux\": {\n    \"command\": \"npx\",\n    \"args\": [\"-y\", \"tmux-mcp\"]\n  }\n}\n```\n\n### MCP server options\n\nYou can optionally specify the command line shell you are using, if unspecified it defaults to `bash`\n\n```json\n\"mcpServers\": {\n  \"tmux\": {\n    \"command\": \"npx\",\n    \"args\": [\"-y\", \"tmux-mcp\", \"--shell-type=fish\"]\n  }\n}\n```\n\nThe MCP server needs to know the shell only when executing commands, to properly read its exit status.\n\n## Available Resources\n\n- `tmux://sessions` - List all tmux sessions\n- `tmux://pane/{paneId}` - View content of a specific tmux pane\n- `tmux://command/{commandId}/result` - Results from executed commands\n\n## Available Tools\n\n- `list-sessions` - List all active tmux sessions\n- `find-session` - Find a tmux session by name\n- `list-windows` - List windows in a tmux session\n- `list-panes` - List panes in a tmux window\n- `capture-pane` - Capture content from a tmux pane\n- `create-session` - Create a new tmux session\n- `create-window` - Create a new window in a tmux session\n- `execute-command` - Execute a command in a tmux pane\n- `get-command-result` - Get the result of an executed command\n\n"
+}

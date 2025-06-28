@@ -1,0 +1,52 @@
+{
+  "mcp_name": "entropic-digital/bioinformatics-mcp-example",
+  "mcp_description": "Facilitates bioinformatics tasks by integrating with Claude Desktop through a Docker-based MCP server.",
+  "mcp_id": "entropic-digital_bioinformatics-mcp-example",
+  "fetch_timestamp": "2025-06-23T02:53:28.678956Z",
+  "github_url": "https://github.com/entropic-digital/bioinformatics-mcp-example",
+  "repository": {
+    "name": "bioinformatics-mcp-example",
+    "full_name": "entropic-digital/bioinformatics-mcp-example",
+    "description": "Example of how to build a bioinformatics repository for bioinformatics.",
+    "html_url": "https://github.com/entropic-digital/bioinformatics-mcp-example",
+    "created_at": "2025-04-09T11:35:51Z",
+    "updated_at": "2025-04-16T23:12:12Z",
+    "pushed_at": "2025-04-16T23:12:09Z",
+    "size": 9421,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "entropic-digital",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/172978602?v=4",
+      "html_url": "https://github.com/entropic-digital"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 0,
+    "languages": {
+      "Python": 7638,
+      "Dockerfile": 339
+    },
+    "language_percentages": {
+      "Python": 95.75,
+      "Dockerfile": 4.25
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 2
+  },
+  "readme": "1. Build docker stuff\n```bash\ndocker build -t biotools-mcp .\n```\n2. Add it to claude_desktop_config.json\nclaude_desktop_config.json\n```\n{\n  \"mcpServers\": {\n    \"biotools-mcp\": {\n      \"command\": \"docker\",\n      \"args\": [\n        \"run\",\n        \"--rm\",\n        \"-i\",\n        \"-v\",\n        \"path/to/this/github/repo:/app\",\n        \"biotools-mcp\"\n      ]\n    }\n  }\n}\n```\n3. You can also run it with something like Cursor.\n"
+}

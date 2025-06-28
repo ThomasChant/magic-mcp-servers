@@ -1,0 +1,57 @@
+{
+  "mcp_name": "Svtter/git-mcp",
+  "mcp_description": "Facilitates git command processing through an MCP service, leveraging FastMCP for efficient repository management.",
+  "mcp_id": "Svtter_git-mcp",
+  "fetch_timestamp": "2025-06-23T08:44:31.731139Z",
+  "github_url": "https://github.com/Svtter/git-mcp",
+  "repository": {
+    "name": "git-mcp",
+    "full_name": "Svtter/git-mcp",
+    "description": "A MCP service could handle git command, to process given repo name.",
+    "html_url": "https://github.com/Svtter/git-mcp",
+    "created_at": "2025-04-24T10:28:00Z",
+    "updated_at": "2025-04-24T11:02:59Z",
+    "pushed_at": "2025-04-24T11:02:55Z",
+    "size": 24,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [
+      "git",
+      "llms",
+      "mcp",
+      "openai"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "Svtter",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5856931?v=4",
+      "html_url": "https://github.com/Svtter"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 5670,
+      "Dockerfile": 268
+    },
+    "language_percentages": {
+      "Python": 95.49,
+      "Dockerfile": 4.51
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# Git MCP\n\nA MCP tool to using git, built with [FastMCP](https://gofastmcp.com/getting-started/welcome).\n\n## Usage\n\nYou set up your repos folder on your own disk.\n\n### Run from source code\n\n```bash\nREPO_DIR=<your repo dir>\n```\n\nStart server.py\n\n```bash\nuv run server.py\n```\n\nThis will start a MCP server on your machine.\n\n### Run from Docker\n\nIn your repos folder, run:\n\n`docker run --rm -t -v $(pwd):/repos -p 8000:8000 -e REPO_DIR=/repos svtter/git-mcp`\n\n## Config\n\nConfig your MCP application\n\n```json\n{\n  \"mcpServers\": {\n    \"git\": {\n      \"url\": \"http://<your_host>:8000/sse\"\n    }\n  }\n}\n```\n\nFor example,\n\n```json\n{\n  \"mcpServers\": {\n    \"git\": {\n      \"url\": \"http://localhost:8000/sse\"\n    }\n  }\n}\n```"
+}

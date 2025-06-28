@@ -1,0 +1,53 @@
+{
+  "mcp_name": "lincw/dwd-mcp-server",
+  "mcp_description": "Connects Claude Desktop to the Deutsche Wetterdienst API for real-time German weather data and warnings.",
+  "mcp_id": "lincw_dwd-mcp-server",
+  "fetch_timestamp": "2025-06-23T06:10:40.165407Z",
+  "github_url": "https://github.com/lincw/dwd-mcp-server",
+  "repository": {
+    "name": "dwd-mcp-server",
+    "full_name": "lincw/dwd-mcp-server",
+    "description": "A simple mcp-server via the Deutscher Wetterdienst API",
+    "html_url": "https://github.com/lincw/dwd-mcp-server",
+    "created_at": "2025-04-04T21:07:09Z",
+    "updated_at": "2025-04-04T21:10:52Z",
+    "pushed_at": "2025-04-04T21:10:48Z",
+    "size": 4,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 1,
+    "language": "JavaScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "lincw",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5780303?v=4",
+      "html_url": "https://github.com/lincw"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 3958,
+      "Shell": 2443
+    },
+    "language_percentages": {
+      "JavaScript": 61.83,
+      "Shell": 38.17
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "0.1.0"
+  },
+  "readme": "# DWD MCP Server\n\nA simple Model Context Protocol (MCP) server that connects Claude Desktop to the Deutsche Wetterdienst (DWD) API for German weather data.\n\n## Features\n\n- Simple, lightweight Node.js implementation\n- No dependencies beyond the MCP SDK\n- Easy to set up and use\n- Access to DWD weather station data and warnings\n\n## Quick Start\n\n1. Make the setup script executable:\n   ```bash\n   chmod +x setup.sh\n   ```\n\n2. Run the setup script:\n   ```bash\n   ./setup.sh\n   ```\n\n3. Restart Claude Desktop\n\n4. Start using the DWD data in your conversations with Claude!\n\n## Available Tools\n\n### `get_station_data`\nGet current weather data for specific DWD weather stations.\n\nExample usage in Claude:\n```\nCan you check the current weather for station 10865 (Berlin-Tegel)?\n```\n\n### `get_nowcast_warnings`\nGet current nowcast weather warnings in Germany.\n\nExample usage in Claude:\n```\nAre there any current weather warnings in Germany? Can you check using the DWD API?\n```\n\n## Finding Station IDs\n\nThe DWD API requires specific station IDs. You can find these at:\n- [Official DWD station list](https://www.dwd.de/DE/leistungen/klimadatendeutschland/stationsliste.html)\n\nCommon station IDs:\n- 10381: Berlin-Brandenburg\n- 10865: Berlin-Tegel\n- 10147: Hamburg\n- 10637: Köln-Bonn\n- 10870: Munich\n\n## Manual Setup\n\nIf the setup script doesn't work for you, you can manually configure Claude Desktop:\n\n1. Install dependencies:\n   ```bash\n   npm install\n   ```\n\n2. Create or edit `~/.config/claude/claude_desktop_config.json`:\n   ```json\n   {\n     \"mcpServers\": {\n       \"dwd\": {\n         \"command\": \"node\",\n         \"args\": [\n           \"/full/path/to/dwd-server.js\"\n         ]\n       }\n     }\n   }\n   ```\n\n3. Restart Claude Desktop\n\n## Troubleshooting\n\n- Make sure Node.js 18+ is installed\n- Check if the MCP server is running properly: `node dwd-server.js`\n- Verify the path in claude_desktop_config.json is correct\n- Restart Claude Desktop after configuration changes"
+}

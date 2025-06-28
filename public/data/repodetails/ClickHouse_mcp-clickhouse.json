@@ -1,0 +1,52 @@
+{
+  "mcp_name": "ClickHouse",
+  "mcp_description": "🐍 ☁️ - ClickHouse database integration with schema inspection and query capabilities",
+  "mcp_id": "ClickHouse_mcp-clickhouse",
+  "fetch_timestamp": "2025-06-23T02:08:36.784165Z",
+  "github_url": "https://github.com/ClickHouse/mcp-clickhouse",
+  "repository": {
+    "name": "mcp-clickhouse",
+    "full_name": "ClickHouse/mcp-clickhouse",
+    "description": null,
+    "html_url": "https://github.com/ClickHouse/mcp-clickhouse",
+    "created_at": "2024-12-25T14:15:46Z",
+    "updated_at": "2025-06-22T15:42:15Z",
+    "pushed_at": "2025-06-16T17:14:27Z",
+    "size": 91,
+    "stargazers_count": 401,
+    "watchers_count": 401,
+    "forks_count": 73,
+    "open_issues_count": 17,
+    "language": "Python",
+    "license": "Apache License 2.0",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "ClickHouse",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/54801242?v=4",
+      "html_url": "https://github.com/ClickHouse"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 73,
+    "subscribers_count": 5,
+    "languages": {
+      "Python": 17400,
+      "Dockerfile": 1430
+    },
+    "language_percentages": {
+      "Python": 92.41,
+      "Dockerfile": 7.59
+    },
+    "pull_requests_count": 43,
+    "contributors_count": 14
+  },
+  "readme": "# ClickHouse MCP Server\n\n[![PyPI - Version](https://img.shields.io/pypi/v/mcp-clickhouse)](https://pypi.org/project/mcp-clickhouse)\n\nAn MCP server for ClickHouse.\n\n<a href=\"https://glama.ai/mcp/servers/yvjy4csvo1\"><img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/yvjy4csvo1/badge\" alt=\"mcp-clickhouse MCP server\" /></a>\n\n## Features\n\n### Tools\n\n* `run_select_query`\n  * Execute SQL queries on your ClickHouse cluster.\n  * Input: `sql` (string): The SQL query to execute.\n  * All ClickHouse queries are run with `readonly = 1` to ensure they are safe.\n\n* `list_databases`\n  * List all databases on your ClickHouse cluster.\n\n* `list_tables`\n  * List all tables in a database.\n  * Input: `database` (string): The name of the database.\n\n## Configuration\n\n1. Open the Claude Desktop configuration file located at:\n   * On macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`\n   * On Windows: `%APPDATA%/Claude/claude_desktop_config.json`\n\n2. Add the following:\n\n```json\n{\n  \"mcpServers\": {\n    \"mcp-clickhouse\": {\n      \"command\": \"uv\",\n      \"args\": [\n        \"run\",\n        \"--with\",\n        \"mcp-clickhouse\",\n        \"--python\",\n        \"3.13\",\n        \"mcp-clickhouse\"\n      ],\n      \"env\": {\n        \"CLICKHOUSE_HOST\": \"<clickhouse-host>\",\n        \"CLICKHOUSE_PORT\": \"<clickhouse-port>\",\n        \"CLICKHOUSE_USER\": \"<clickhouse-user>\",\n        \"CLICKHOUSE_PASSWORD\": \"<clickhouse-password>\",\n        \"CLICKHOUSE_SECURE\": \"true\",\n        \"CLICKHOUSE_VERIFY\": \"true\",\n        \"CLICKHOUSE_CONNECT_TIMEOUT\": \"30\",\n        \"CLICKHOUSE_SEND_RECEIVE_TIMEOUT\": \"30\"\n      }\n    }\n  }\n}\n```\n\nUpdate the environment variables to point to your own ClickHouse service.\n\nOr, if you'd like to try it out with the [ClickHouse SQL Playground](https://sql.clickhouse.com/), you can use the following config:\n\n```json\n{\n  \"mcpServers\": {\n    \"mcp-clickhouse\": {\n      \"command\": \"uv\",\n      \"args\": [\n        \"run\",\n        \"--with\",\n        \"mcp-clickhouse\",\n        \"--python\",\n        \"3.13\",\n        \"mcp-clickhouse\"\n      ],\n      \"env\": {\n        \"CLICKHOUSE_HOST\": \"sql-clickhouse.clickhouse.com\",\n        \"CLICKHOUSE_PORT\": \"8443\",\n        \"CLICKHOUSE_USER\": \"demo\",\n        \"CLICKHOUSE_PASSWORD\": \"\",\n        \"CLICKHOUSE_SECURE\": \"true\",\n        \"CLICKHOUSE_VERIFY\": \"true\",\n        \"CLICKHOUSE_CONNECT_TIMEOUT\": \"30\",\n        \"CLICKHOUSE_SEND_RECEIVE_TIMEOUT\": \"30\"\n      }\n    }\n  }\n}\n```\n\n3. Locate the command entry for `uv` and replace it with the absolute path to the `uv` executable. This ensures that the correct version of `uv` is used when starting the server. On a mac, you can find this path using `which uv`.\n\n4. Restart Claude Desktop to apply the changes.\n\n## Development\n\n1. In `test-services` directory run `docker compose up -d` to start the ClickHouse cluster.\n\n2. Add the following variables to a `.env` file in the root of the repository.\n\n*Note: The use of the `default` user in this context is intended solely for local development purposes.*\n\n```bash\nCLICKHOUSE_HOST=localhost\nCLICKHOUSE_PORT=8123\nCLICKHOUSE_USER=default\nCLICKHOUSE_PASSWORD=clickhouse\n```\n\n3. Run `uv sync` to install the dependencies. To install `uv` follow the instructions [here](https://docs.astral.sh/uv/). Then do `source .venv/bin/activate`.\n\n4. For easy testing, you can run `mcp dev mcp_clickhouse/mcp_server.py` to start the MCP server.\n\n### Environment Variables\n\nThe following environment variables are used to configure the ClickHouse connection:\n\n#### Required Variables\n\n* `CLICKHOUSE_HOST`: The hostname of your ClickHouse server\n* `CLICKHOUSE_USER`: The username for authentication\n* `CLICKHOUSE_PASSWORD`: The password for authentication\n\n> [!CAUTION]\n> It is important to treat your MCP database user as you would any external client connecting to your database, granting only the minimum necessary privileges required for its operation. The use of default or administrative users should be strictly avoided at all times.\n\n#### Optional Variables\n\n* `CLICKHOUSE_PORT`: The port number of your ClickHouse server\n  * Default: `8443` if HTTPS is enabled, `8123` if disabled\n  * Usually doesn't need to be set unless using a non-standard port\n* `CLICKHOUSE_SECURE`: Enable/disable HTTPS connection\n  * Default: `\"true\"`\n  * Set to `\"false\"` for non-secure connections\n* `CLICKHOUSE_VERIFY`: Enable/disable SSL certificate verification\n  * Default: `\"true\"`\n  * Set to `\"false\"` to disable certificate verification (not recommended for production)\n* `CLICKHOUSE_CONNECT_TIMEOUT`: Connection timeout in seconds\n  * Default: `\"30\"`\n  * Increase this value if you experience connection timeouts\n* `CLICKHOUSE_SEND_RECEIVE_TIMEOUT`: Send/receive timeout in seconds\n  * Default: `\"300\"`\n  * Increase this value for long-running queries\n* `CLICKHOUSE_DATABASE`: Default database to use\n  * Default: None (uses server default)\n  * Set this to automatically connect to a specific database\n\n#### Example Configurations\n\nFor local development with Docker:\n\n```env\n# Required variables\nCLICKHOUSE_HOST=localhost\nCLICKHOUSE_USER=default\nCLICKHOUSE_PASSWORD=clickhouse\n\n# Optional: Override defaults for local development\nCLICKHOUSE_SECURE=false  # Uses port 8123 automatically\nCLICKHOUSE_VERIFY=false\n```\n\nFor ClickHouse Cloud:\n\n```env\n# Required variables\nCLICKHOUSE_HOST=your-instance.clickhouse.cloud\nCLICKHOUSE_USER=default\nCLICKHOUSE_PASSWORD=your-password\n\n# Optional: These use secure defaults\n# CLICKHOUSE_SECURE=true  # Uses port 8443 automatically\n# CLICKHOUSE_DATABASE=your_database\n```\n\nFor ClickHouse SQL Playground:\n\n```env\nCLICKHOUSE_HOST=sql-clickhouse.clickhouse.com\nCLICKHOUSE_USER=demo\nCLICKHOUSE_PASSWORD=\n# Uses secure defaults (HTTPS on port 8443)\n```\n\nYou can set these variables in your environment, in a `.env` file, or in the Claude Desktop configuration:\n\n```json\n{\n  \"mcpServers\": {\n    \"mcp-clickhouse\": {\n      \"command\": \"uv\",\n      \"args\": [\n        \"run\",\n        \"--with\",\n        \"mcp-clickhouse\",\n        \"--python\",\n        \"3.13\",\n        \"mcp-clickhouse\"\n      ],\n      \"env\": {\n        \"CLICKHOUSE_HOST\": \"<clickhouse-host>\",\n        \"CLICKHOUSE_USER\": \"<clickhouse-user>\",\n        \"CLICKHOUSE_PASSWORD\": \"<clickhouse-password>\",\n        \"CLICKHOUSE_DATABASE\": \"<optional-database>\"\n      }\n    }\n  }\n}\n```\n\n### Running tests\n\n```bash\nuv sync --all-extras --dev # install dev dependencies\nuv run ruff check . # run linting\n\ndocker compose up -d test_services # start ClickHouse\nuv run pytest tests\n```\n\n## YouTube Overview\n\n[![YouTube](http://i.ytimg.com/vi/y9biAm_Fkqw/hqdefault.jpg)](https://www.youtube.com/watch?v=y9biAm_Fkqw)\n"
+}

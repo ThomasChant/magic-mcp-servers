@@ -1,0 +1,55 @@
+{
+  "mcp_name": "hugeicons/mcp-server",
+  "mcp_description": "Facilitates seamless integration of Hugeicons across various platforms by providing tools, resources, and platform-specific guides for AI assistants.",
+  "mcp_id": "hugeicons_mcp-server",
+  "fetch_timestamp": "2025-06-23T04:51:29.086411Z",
+  "github_url": "https://github.com/hugeicons/mcp-server",
+  "repository": {
+    "name": "mcp-server",
+    "full_name": "hugeicons/mcp-server",
+    "description": "MCP server that provides tools and resources for integrating Hugeicons into various platforms. It implements a Model Context Protocol (MCP) server that helps AI assistants provide accurate guidance for using Hugeicons.",
+    "html_url": "https://github.com/hugeicons/mcp-server",
+    "created_at": "2025-04-10T22:19:05Z",
+    "updated_at": "2025-06-09T12:49:27Z",
+    "pushed_at": "2025-04-21T15:31:14Z",
+    "size": 28,
+    "stargazers_count": 4,
+    "watchers_count": 4,
+    "forks_count": 0,
+    "open_issues_count": 1,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "hugeicons",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/130147052?v=4",
+      "html_url": "https://github.com/hugeicons"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 18343,
+      "JavaScript": 10285,
+      "Dockerfile": 727
+    },
+    "language_percentages": {
+      "TypeScript": 62.49,
+      "JavaScript": 35.04,
+      "Dockerfile": 2.48
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 2,
+    "package_json_version": "0.1.2"
+  },
+  "readme": "# Hugeicons MCP Server\n\nMCP server for Hugeicons integration and documentation\n\n[![smithery badge](https://smithery.ai/badge/@hugeicons/mcp-server)](https://smithery.ai/server/@hugeicons/mcp-server)\n\nThis is a TypeScript-based MCP server that provides tools and resources for integrating Hugeicons into various platforms. It implements a Model Context Protocol (MCP) server that helps AI assistants provide accurate guidance for using Hugeicons.\n\n## Features\n\n### Tools\n\n- `list_icons` - Get a list of all available Hugeicons icons\n- `search_icons` - Search for icons by name or tags\n- `get_platform_usage` - Get platform-specific usage instructions for Hugeicons\n\n### Resources\n\nPlatform Documentation (in Markdown format):\n- `hugeicons://docs/platforms/react` - React integration guide\n- `hugeicons://docs/platforms/vue` - Vue integration guide\n- `hugeicons://docs/platforms/angular` - Angular integration guide\n- `hugeicons://docs/platforms/svelte` - Svelte integration guide\n- `hugeicons://docs/platforms/react-native` - React Native integration guide\n- `hugeicons://docs/platforms/flutter` - Flutter integration guide\n\nIcons Data:\n- `hugeicons://icons/index` - Complete index of all Hugeicons (JSON format)\n\n### Functionality\n\nThis server provides comprehensive Hugeicons integration support including:\n- Icon discovery and search\n- Platform-specific installation guides\n- Usage examples with code snippets\n- Component props documentation\n- Package installation instructions\n\n## Development\n\nInstall dependencies:\n```bash\nnpm install\n```\n\nBuild the server:\n```bash\nnpm run build\n```\n\nFor development with auto-rebuild:\n```bash\nnpm run watch\n```\n\n## Installation\n\n### Installing via Smithery\n\nTo install Hugeicons MCP Server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@hugeicons/mcp-server):\n\n```bash\nnpx -y @smithery/cli install @hugeicons/mcp-server --client claude\n```\n\nTo use with Claude Desktop, add the server config:\n\nOn MacOS: `~/Library/Application Support/Claude/claude_desktop_config.json`\nOn Windows: `%APPDATA%/Claude/claude_desktop_config.json`\n\n```json\n{\n  \"mcpServers\": {\n    \"hugeicons\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"-y\",\n        \"@hugeicons/mcp-server\"\n      ]\n    }\n  }\n}\n```\n\nThe args array specifies:\n1. `-y`: Automatically answer \"yes\" to npx prompts\n2. Package name: `@hugeicons/mcp-server`\n\n### Quick Start\n\nYou can also run the server directly using npx:\n\n```bash\nnpx @hugeicons/mcp-server\n```\n\n### Debugging\n\nSince MCP servers communicate over stdio, debugging can be challenging. We recommend using the [MCP Inspector](https://github.com/modelcontextprotocol/inspector), which is available as a package script:\n\n```bash\nnpm run inspector\n```\n\nThe Inspector will provide a URL to access debugging tools in your browser.\n"
+}

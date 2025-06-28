@@ -1,0 +1,70 @@
+{
+  "mcp_name": "allenporter/mcp-server-home-assistant",
+  "mcp_description": "🐍 🏠 - Expose all Home Assistant voice intents through a Model Context Protocol Server allowing home control.",
+  "mcp_id": "allenporter_mcp-server-home-assistant",
+  "fetch_timestamp": "2025-06-23T01:02:35.287020Z",
+  "github_url": "https://github.com/allenporter/mcp-server-home-assistant",
+  "repository": {
+    "name": "mcp-server-home-assistant",
+    "full_name": "allenporter/mcp-server-home-assistant",
+    "description": "A Model Context Protocol Server for Home Assistant",
+    "html_url": "https://github.com/allenporter/mcp-server-home-assistant",
+    "created_at": "2024-11-27T03:00:15Z",
+    "updated_at": "2025-06-10T11:22:28Z",
+    "pushed_at": "2025-03-02T18:08:50Z",
+    "size": 138,
+    "stargazers_count": 54,
+    "watchers_count": 54,
+    "forks_count": 7,
+    "open_issues_count": 5,
+    "language": "Python",
+    "license": "Apache License 2.0",
+    "topics": [
+      "home-assistant",
+      "model-context-protocol"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "allenporter",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6026418?v=4",
+      "html_url": "https://github.com/allenporter"
+    },
+    "has_issues": true,
+    "has_projects": false,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": true,
+    "archived": true,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 7,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 6058,
+      "Shell": 264
+    },
+    "language_percentages": {
+      "Python": 95.82,
+      "Shell": 4.18
+    },
+    "pull_requests_count": 15,
+    "contributors_count": 2,
+    "latest_release": {
+      "tag_name": "0.1.0",
+      "name": "0.1.0",
+      "published_at": "2024-11-29T18:32:09Z",
+      "body": "**Full Changelog**: https://github.com/allenporter/mcp-server-home-assistant/commits/0.1.0",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "0.1.0",
+        "commit_sha": "d4d7ddf637df7c79619eac536977211623416aa9"
+      }
+    ],
+    "latest_version": "0.1.0"
+  },
+  "readme": "# mcp-server-home-assistant\n\nA Model Context Protocol Server for Home Assistant. See [Model Context Protocol](https://modelcontextprotocol.io/)\nfor context.\n\nThe custom component required by this integration is moving to Home Assistant Core in https://github.com/home-assistant/core/pull/134122\n\n## Usage in Claude Desktop\n\n1. Install the [home-assistant-model-context-protocol](https://github.com/allenporter/home-assistant-model-context-protocol) custom component in your Home Assistant instance\n1. Create a [Long Lived Access Token](https://www.home-assistant.io/docs/authentication/#your-account-profile)\n1. Clone this git repo to a path like `/Users/allen/Development/mcp-server-home-assistant`\n1. Edit your `claude_desktop_config.json` with something like this and include your home assistant url and api token:\n\n    ```json\n    {\n        \"mcpServers\": {\n            \"Home-assistant\": {\n                \"command\": \"uv\",\n                \"args\": [\n                    \"--directory\",\n                    \"/Users/allen/Development/mcp-server-home-assistant\",\n                    \"run\",\n                    \"mcp-server-home-assistant\",\n                    \"-v\",\n                    \"-v\"\n                ],\n                \"env\": {\n                    \"HOME_ASSISTANT_WEB_SOCKET_URL\": \"http://localhost:8123/api/websocket\",\n                    \"HOME_ASSISTANT_API_TOKEN\": \"byJhbVci0iJIUzI1ii1sInR5cCI6IkpXVCJ9.....\n                }\n            }\n        }\n    }\n    ```\n1. You can view the logs e.g. `~Library/Logs/Claude/mcp-server-Home-assistant.log` to understand what is happening\n"
+}

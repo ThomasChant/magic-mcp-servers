@@ -1,0 +1,51 @@
+{
+  "mcp_name": "jasiekkk/jan-stripe",
+  "mcp_description": "Deploy a remote MCP server on Cloudflare Workers without authentication, enabling seamless integration with Cloudflare AI Playground and local MCP clients.",
+  "mcp_id": "jasiekkk_jan-stripe",
+  "fetch_timestamp": "2025-06-23T05:08:29.836443Z",
+  "github_url": "https://github.com/jasiekkk/jan-stripe",
+  "repository": {
+    "name": "jan-stripe",
+    "full_name": "jasiekkk/jan-stripe",
+    "description": null,
+    "html_url": "https://github.com/jasiekkk/jan-stripe",
+    "created_at": "2025-04-28T13:51:51Z",
+    "updated_at": "2025-04-30T09:28:29Z",
+    "pushed_at": "2025-04-30T09:28:26Z",
+    "size": 83,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "jasiekkk",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17417124?v=4",
+      "html_url": "https://github.com/jasiekkk"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 6543
+    },
+    "language_percentages": {
+      "TypeScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "0.0.0"
+  },
+  "readme": "# Building a Remote MCP Server on Cloudflare (Without Auth)\n\nThis example allows you to deploy a remote MCP server that doesn't require authentication on Cloudflare Workers. \n\n## Get started: \n\n[![Deploy to Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/ai/tree/main/demos/remote-mcp-authless)\n\nThis will deploy your MCP server to a URL like: `remote-mcp-server-authless.<your-account>.workers.dev/sse`\n\nAlternatively, you can use the command line below to get the remote MCP Server created on your local machine:\n```bash\nnpm create cloudflare@latest -- my-mcp-server --template=cloudflare/ai/demos/remote-mcp-authless\n```\n\n## Customizing your MCP Server\n\nTo add your own [tools](https://developers.cloudflare.com/agents/model-context-protocol/tools/) to the MCP server, define each tool inside the `init()` method of `src/index.ts` using `this.server.tool(...)`. \n\n## Connect to Cloudflare AI Playground\n\nYou can connect to your MCP server from the Cloudflare AI Playground, which is a remote MCP client:\n\n1. Go to https://playground.ai.cloudflare.com/\n2. Enter your deployed MCP server URL (`remote-mcp-server-authless.<your-account>.workers.dev/sse`)\n3. You can now use your MCP tools directly from the playground!\n\n## Connect Claude Desktop to your MCP server\n\nYou can also connect to your remote MCP server from local MCP clients, by using the [mcp-remote proxy](https://www.npmjs.com/package/mcp-remote). \n\nTo connect to your MCP server from Claude Desktop, follow [Anthropic's Quickstart](https://modelcontextprotocol.io/quickstart/user) and within Claude Desktop go to Settings > Developer > Edit Config.\n\nUpdate with this configuration:\n\n```json\n{\n  \"mcpServers\": {\n    \"calculator\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"mcp-remote\",\n        \"http://localhost:8787/sse\"  // or remote-mcp-server-authless.your-account.workers.dev/sse\n      ]\n    }\n  }\n}\n```\n\nRestart Claude and you should see the tools become available. \n"
+}

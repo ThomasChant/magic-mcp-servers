@@ -1,0 +1,89 @@
+{
+  "mcp_name": "hamflx/imagen3-mcp",
+  "mcp_description": "📇 🏠 🪟 🍎 🐧 - A powerful image generation tool using Google's Imagen 3.0 API through MCP. Generate high-quality images from text prompts with advanced photography, artistic, and photorealistic controls.",
+  "mcp_id": "hamflx_imagen3-mcp",
+  "fetch_timestamp": "2025-06-23T04:18:50.250338Z",
+  "github_url": "https://github.com/hamflx/imagen3-mcp",
+  "repository": {
+    "name": "imagen3-mcp",
+    "full_name": "hamflx/imagen3-mcp",
+    "description": null,
+    "html_url": "https://github.com/hamflx/imagen3-mcp",
+    "created_at": "2025-04-26T06:41:39Z",
+    "updated_at": "2025-06-19T13:30:58Z",
+    "pushed_at": "2025-05-03T15:02:35Z",
+    "size": 932,
+    "stargazers_count": 28,
+    "watchers_count": 28,
+    "forks_count": 3,
+    "open_issues_count": 2,
+    "language": "Rust",
+    "license": null,
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "hamflx",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/13356747?v=4",
+      "html_url": "https://github.com/hamflx"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 3,
+    "subscribers_count": 1,
+    "languages": {
+      "Rust": 28417
+    },
+    "language_percentages": {
+      "Rust": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "latest_release": {
+      "tag_name": "v0.1.6",
+      "name": "Release v0.1.6",
+      "published_at": "2025-05-03T15:08:10Z",
+      "body": "",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.1.6",
+        "commit_sha": "1b293dca12153bb0440de5091825b3c746b6cf9d"
+      },
+      {
+        "name": "v0.1.5",
+        "commit_sha": "bfafd2e00c889560014229019dac11428a980dd9"
+      },
+      {
+        "name": "v0.1.4",
+        "commit_sha": "7ffbf2a06e2d090d2645bf7ae5e1a1a35a7dcbf3"
+      },
+      {
+        "name": "v0.1.3",
+        "commit_sha": "7aa36894382ad9c4d6bfecf537a75f037dbed1b5"
+      },
+      {
+        "name": "v0.1.2",
+        "commit_sha": "fe5e6e4ff87d29681cd6f540567b22ff1ecf3305"
+      },
+      {
+        "name": "v0.1.1",
+        "commit_sha": "41efcdb35dc0015605f93008bfed7878d5c84c5d"
+      },
+      {
+        "name": "v0.1.0",
+        "commit_sha": "9f4eaccc2be304c4e1ef76a15787833c336044b6"
+      }
+    ],
+    "latest_version": "v0.1.6"
+  },
+  "readme": "# Imagen3-MCP\n\n[English Version](#imagen3-mcp-english)\n\n基于 Google 的 Imagen 3.0 的图像生成工具，通过 MCP（Model Control Protocol）提供服务。\n\n## 效果\n\n画一只奔跑的杰克罗素犬，长焦镜头，阳光透过狗狗的毛发，照片级画质\n\n![奔跑的杰克罗素犬](./docs/Snipaste_2025-04-26_15-18-15.png)\n\n画一个科技感十足的苹果\n\n![科技感十足的苹果](./docs/Snipaste_2025-04-26_15-18-02.png)\n\n## 安装要求\n\n- 有效的 [Google Gemini API 密钥](https://aistudio.google.com/apikey)\n\n## 安装步骤——Cherry Studio\n\n1. 从 [GitHub Releases](https://github.com/hamflx/imagen3-mcp/releases) 下载最新版本的可执行文件\n2. 将下载的可执行文件放置在系统中的任意位置，例如 `C:\\bin\\imagen3-mcp.exe`\n3. 在 Cherry Studio 中配置：\n   - Command 字段填写可执行文件路径，例如 `C:\\bin\\imagen3-mcp.exe`\n   - 环境变量 `GEMINI_API_KEY` 中填写你的 Gemini API 密钥\n   - [可选] 环境变量 `BASE_URL` 中填写代理地址，例如 `https://lingxi-proxy.hamflx.dev/api/provider/google`（这个地址可以解决 GFW 的问题，但是解决不了 Google 对 IP 的限制问题，因此还是得挂梯子）。\n   - [可选] 环境变量 `SERVER_LISTEN_ADDR`：设置服务器监听的 IP 地址（默认为 `127.0.0.1`）。\n   - [可选] 环境变量 `SERVER_PORT`：设置服务器监听的端口和图片 URL 使用的端口（默认为 `9981`）。\n   - [可选] 环境变量 `IMAGE_RESOURCE_SERVER_ADDR`：设置图片 URL 中使用的服务器地址（默认为 `127.0.0.1`）。这在服务器运行在容器或远程机器上时很有用。\n\n![配置](./docs/config.png)\n\n## 安装步骤——Cursor\n\n```json\n{\n  \"mcpServers\": {\n    \"imagen3\": {\n      \"command\": \"C:\\\\bin\\\\imagen3-mcp.exe\",\n      \"env\": {\n        \"GEMINI_API_KEY\": \"<GEMINI_API_KEY>\"\n        // Optional environment variables:\n        // \"BASE_URL\": \"<PROXY_URL>\",\n        // \"SERVER_LISTEN_ADDR\": \"0.0.0.0\", // Example: Listen on all interfaces\n        // \"SERVER_PORT\": \"9981\",\n        // \"IMAGE_RESOURCE_SERVER_ADDR\": \"your.domain.com\" // Example: Use a domain name for image URLs\n      }\n    }\n  }\n}\n```\n\n## 许可证\n\nMIT\n\n---\n\n# Imagen3-MCP (English)\n\nAn image generation tool based on Google's Imagen 3.0, providing services through MCP (Model Control Protocol).\n\n## Examples\n\nA running Jack Russell Terrier, telephoto lens, sunlight filtering through the dog's fur, photorealistic quality\n\n![Running Jack Russell Terrier](./docs/Snipaste_2025-04-26_15-18-15.png)\n\nA high-tech apple\n\n![High-tech apple](./docs/Snipaste_2025-04-26_15-18-02.png)\n\n## Requirements\n\n- Valid [Google Gemini API key](https://aistudio.google.com/apikey)\n\n## Installation Steps—Cherry Studio\n\n1. Download the latest executable from [GitHub Releases](https://github.com/hamflx/imagen3-mcp/releases)\n2. Place the downloaded executable anywhere in your system, e.g., `C:\\bin\\imagen3-mcp.exe`\n3. Configure in Cherry Studio:\n   - Fill in the Command field with the executable path, e.g., `C:\\bin\\imagen3-mcp.exe`\n   - Enter your Gemini API key in the `GEMINI_API_KEY` environment variable\n   - [Optional] Enter a proxy URL in the `BASE_URL` environment variable, e.g., `https://your-proxy.com`.\n   - [Optional] Set the `SERVER_LISTEN_ADDR` environment variable: The IP address the server listens on (defaults to `127.0.0.1`).\n   - [Optional] Set the `SERVER_PORT` environment variable: The port the server listens on and uses for image URLs (defaults to `9981`).\n   - [Optional] Set the `IMAGE_RESOURCE_SERVER_ADDR` environment variable: The server address used in the image URLs (defaults to `127.0.0.1`). Useful if the server runs in a container or remote machine.\n\n![Configuration](./docs/config.png)\n\n## Installation Steps—Cursor\n\n```json\n{\n  \"mcpServers\": {\n    \"imagen3\": {\n      \"command\": \"C:\\\\bin\\\\imagen3-mcp.exe\",\n      \"env\": {\n        \"GEMINI_API_KEY\": \"<GEMINI_API_KEY>\"\n        // Optional environment variables:\n        // \"BASE_URL\": \"<PROXY_URL>\",\n        // \"SERVER_LISTEN_ADDR\": \"0.0.0.0\", // Example: Listen on all interfaces\n        // \"SERVER_PORT\": \"9981\",\n        // \"IMAGE_RESOURCE_SERVER_ADDR\": \"your.domain.com\" // Example: Use a domain name for image URLs\n      }\n    }\n  }\n}\n```\n\n## License\n\nMIT\n"
+}

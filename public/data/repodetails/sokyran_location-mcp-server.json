@@ -1,0 +1,53 @@
+{
+  "mcp_name": "sokyran/location-mcp-server",
+  "mcp_description": "Facilitates location data retrieval from a macOS app for integration with Claude Desktop.",
+  "mcp_id": "sokyran_location-mcp-server",
+  "fetch_timestamp": "2025-06-23T08:32:40.186872Z",
+  "github_url": "https://github.com/sokyran/location-mcp-server",
+  "repository": {
+    "name": "location-mcp-server",
+    "full_name": "sokyran/location-mcp-server",
+    "description": "An MCP (Model Context Protocol) server that provides location data from a local macOS app.",
+    "html_url": "https://github.com/sokyran/location-mcp-server",
+    "created_at": "2025-04-10T22:10:15Z",
+    "updated_at": "2025-04-14T09:02:19Z",
+    "pushed_at": "2025-04-14T09:02:16Z",
+    "size": 163,
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Swift",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "sokyran",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/28529576?v=4",
+      "html_url": "https://github.com/sokyran"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Swift": 9146,
+      "JavaScript": 5758
+    },
+    "language_percentages": {
+      "Swift": 61.37,
+      "JavaScript": 38.63
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "1.1.5"
+  },
+  "readme": "# Location MCP Server\n\nAn MCP (Model Context Protocol) server that provides location data from a local macOS app.\n\n## Prerequisites\n\n- macOS (this package launches a macOS app)\n- Node.js 16 or higher\n\n## Installation\n\n```bash\nnpm install -g @sokyran/location-mcp-server\n```\n\nOr run it directly with npx:\n\n```bash\nnpx @sokyran/location-mcp-server\n```\n\n## Usage with Claude Desktop\n\n1. Download the location-getter-agent.app and place it in the same directory where you run the command.\n\n2. Edit your Claude Desktop configuration file:\n\n```json\n{\n  \"mcpServers\": {\n    \"location\": {\n      \"command\": \"npx\",\n      \"args\": [\"@sokyran/location-mcp-server\"]\n    }\n  }\n}\n```\n\n3. Restart Claude Desktop.\n\n4. You can now use the `getCurrentLocation` tool in your conversations with Claude.\n\n## How It Works\n\nThe server:\n\n1. Launches the location-getter-agent.app (which must be in the current directory)\n2. Waits for the app to start its HTTP server on port 8080\n3. Exposes a `getCurrentLocation` tool to Claude\n4. When invoked, it fetches location data from the local app and returns it\n\n## Troubleshooting\n\n- Make sure the location-getter-agent.app is in the same directory where you're running the command\n- If you get permission errors, you may need to allow the app in System Preferences > Security & Privacy\n- Check that port 8080 is not being used by another application\n\n## Instructions\n\n1. Use Xcode, build location-getter\n2. Inside Xcode, go to Product -> Show build folder in Finder\n3. Here, find Products/Debug/location-getter-agent.app and paste in inside this folder, right near index.ts.\n4. npm i, npm run build, npm run start\n"
+}

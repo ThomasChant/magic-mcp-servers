@@ -1,0 +1,50 @@
+{
+  "mcp_name": "HZreal/mcp-weather-server",
+  "mcp_description": "Provides weather data integration for Claude using the MCP protocol.",
+  "mcp_id": "HZreal_mcp-weather-server",
+  "fetch_timestamp": "2025-06-23T04:54:03.283554Z",
+  "github_url": "https://github.com/HZreal/mcp-weather-server",
+  "repository": {
+    "name": "mcp-weather-server",
+    "full_name": "HZreal/mcp-weather-server",
+    "description": null,
+    "html_url": "https://github.com/HZreal/mcp-weather-server",
+    "created_at": "2025-04-07T16:05:40Z",
+    "updated_at": "2025-04-07T16:06:28Z",
+    "pushed_at": "2025-04-07T16:06:24Z",
+    "size": 13,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "HZreal",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/37980413?v=4",
+      "html_url": "https://github.com/HZreal"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 3068
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# 天气 MCP Server\n\ndocs: https://modelcontextprotocol.io/quickstart/server\n\n## 服务运行测试\n\n```shell\n    uv run weather.py \n```\n\n## 使用 Claude for Desktop 作为客户端测试\n\n### 配置\n\n打开并编辑文件： ~/Library/Application\\ Support/Claude/claude_desktop_config.json，内容如下：\n\n```json\n    {\n    \"mcpServers\": {\n        \"weather\": {\n            \"command\": \"/ABSOLUTE/PATH/TO/uv\",\n            \"args\": [\n                \"--directory\",\n                \"/ABSOLUTE/PATH/TO/mcp-weather-server\",\n                \"run\",\n                \"weather.py\"\n            ]\n        }\n    }\n}\n```\n\n### 重启 Claude for Desktop\n\n重启不报错，且有`锤子`图标显示两个 Available MCP Tools，即为成功；否则，查看日志排查\n\n## Claude for Desktop 日志\n\n日志文件夹：~/Library/Logs/Claude\n\n来自具体 MCP Server 的日志：mcp-server-weather.log\n\nMCP 连接通用日志：mcp.log\n\n## 工作原理\n\n1. 客户将您的问题发送给 Claude\n2. Claude 分析可用的工具并决定使用哪一个\n3. 客户端通过 MCP 服务器执行所选工具\n4. 结果被发回给 Claude\n5. Claude 制定了自然语言响应\n6. 答案已经展示给你了！"
+}

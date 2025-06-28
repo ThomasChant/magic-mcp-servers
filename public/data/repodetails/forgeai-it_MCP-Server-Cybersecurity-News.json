@@ -1,0 +1,58 @@
+{
+  "mcp_name": "enggpt-it/MCP-Server-Cybersecurity-News",
+  "mcp_description": "Access the latest cybersecurity news from various websites with seamless Claude Desktop integration.",
+  "mcp_id": "forgeai-it_MCP-Server-Cybersecurity-News",
+  "fetch_timestamp": "2025-06-23T02:52:23.840238Z",
+  "github_url": "https://github.com/enggpt-it/MCP-Server-Cybersecurity-News",
+  "repository": {
+    "name": "MCP-Server-Cybersecurity-News",
+    "full_name": "forgeai-it/MCP-Server-Cybersecurity-News",
+    "description": "Implementazione di un server MCP integrabile con Claude Desktop che consente di accedere alle ultime notizie sulla cybersecurity da vari siti web.",
+    "html_url": "https://github.com/forgeai-it/MCP-Server-Cybersecurity-News",
+    "created_at": "2025-04-24T14:24:09Z",
+    "updated_at": "2025-05-12T21:23:22Z",
+    "pushed_at": "2025-05-05T10:58:06Z",
+    "size": 23,
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [
+      "claude",
+      "claude-desktop",
+      "generative-ai",
+      "llm",
+      "mcp",
+      "mcp-server",
+      "python"
+    ],
+    "default_branch": "master",
+    "owner": {
+      "login": "forgeai-it",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/207327705?v=4",
+      "html_url": "https://github.com/forgeai-it"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 2479
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# MCP Server Cybersecurity News\n\nImplementazione di un server MCP integrabile con Claude Desktop che consente di accedere alle ultime notizie sulla cybersecurity da vari siti web. Il server espone uno strumento (`get_news`) che può essere utilizzato per recuperare contenuti da fonti di notizie specificate. Puoi consultare l'articolo relativo al seguente [link](https://www.forgeai.it/server-mcp-python-tutorial/).\n\n## Caratteristiche\n\n- Recupero delle ultime notizie da siti web supportati\n- Integrazione semplice con Claude Desktop tramite MCP\n- Architettura estendibile per aggiungere nuove fonti di notizie\n\n## Requisiti\n\n- Python 3.9+\n- [uv](https://github.com/astral-sh/uv) package manager (consigliato)\n- Claude Desktop (per testare l'integrazione)\n\n## Installazione\n\n### 1. Installare uv\n\nPer MacOS e Linux:\n```bash\ncurl -LsSf https://astral.sh/uv/install.sh | sh\n```\n\nPer Windows:\n```bash\npowershell -ExecutionPolicy ByPass -c \"irm https://astral.sh/uv/install.ps1 | iex\"\n```\n\n### 2. Clonare il repository\n\n```bash\ngit clone https://github.com/forgeai-it/MCP-Server-Cybersecurity-News.git\ncd MCP-Server-Cybersecurity-News\n```\n\n### 3. Creare un ambiente virtuale e installare le dipendenze\n\n```bash\n# Creazione ambiente virtuale\nuv venv\n\n# Attivazione per macOS/Linux\nsource .venv/bin/activate\n\n# Attivazione per Windows\n.venv\\Scripts\\activate\n\n# Installazione librerie\nuv add \"mcp[cli]\" httpx bs4\n```\n\n### Integrazione con Claude Desktop\n\n1. Apri Claude Desktop\n2. Vai su File > Settings e seleziona le impostazioni sviluppatore.\n3. Clicca su \"Edit Config\"\n4. Modifica il file `claude_desktop_config.json` aggiungendo:\n\n```json\n{\n    \"mcpServers\": {\n        \"mcp-server-cybersecurity-news\": {\n            \"command\": \"/percorso/al/tuo/uv\",\n            \"args\": [\n                \"--directory\",\n                \"/percorso/completo/al/tuo/progetto/MCP-Server-Cybersecurity-News\",\n                \"run\",\n                \"main.py\"\n            ]\n        }\n    }\n}\n```\n\nSostituisci `/percorso/al/tuo/uv` con il percorso al tuo eseguibile uv (puoi trovarlo con `which uv` su macOS/Linux o `powershell Get-Command uv` su Windows) e `/percorso/completo/al/tuo/progetto/mcp-server-news` con il percorso completo della directory del progetto.\n\n## Come Funziona\n\nIl server MCP espone uno strumento (`get_news`) che, quando invocato, esegue le seguenti operazioni:\n\n1. Verifica che la fonte richiesta sia supportata\n2. Recupera il contenuto HTML dalla fonte specificata\n3. Estrae il titolo, il link e la descrizione delle ultime 5 notizie utilizzando Beautiful Soup\n4. Restituisce il testo estratto al modello AI\n\n## Contribuire\n\nContributi sono benvenuti! Senti libero di aprire issues o pull requests per migliorare questo progetto.\n\nAlcune idee per contribuire:\n- Aggiungere supporto per altre fonti di notizie\n- Migliorare la qualità del contenuto estratto\n- Implementare funzionalità di caching per ridurre le richieste ripetute\n- Aggiungere filtri per categorie di notizie\n\n## Licenza\n\nQuesto progetto è rilasciato sotto licenza MIT. Consulta il file [LICENSE](LICENSE) per maggiori dettagli."
+}

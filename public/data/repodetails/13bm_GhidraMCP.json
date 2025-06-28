@@ -1,0 +1,71 @@
+{
+  "mcp_name": "13bm/GhidraMCP",
+  "mcp_description": "🐍 ☕ 🏠 - MCP server for integrating Ghidra with AI assistants. This plugin enables binary analysis, providing tools for function inspection, decompilation, memory exploration, and import/export analysis via the Model Context Protocol.",
+  "mcp_id": "13bm_GhidraMCP",
+  "fetch_timestamp": "2025-06-23T00:06:22.902990Z",
+  "github_url": "https://github.com/13bm/GhidraMCP",
+  "repository": {
+    "name": "GhidraMCP",
+    "full_name": "13bm/GhidraMCP",
+    "description": "Socket based MCP Server for Ghidra",
+    "html_url": "https://github.com/13bm/GhidraMCP",
+    "created_at": "2025-03-24T12:54:19Z",
+    "updated_at": "2025-06-19T20:39:23Z",
+    "pushed_at": "2025-03-26T19:42:25Z",
+    "size": 43,
+    "stargazers_count": 53,
+    "watchers_count": 53,
+    "forks_count": 8,
+    "open_issues_count": 0,
+    "language": "Java",
+    "license": null,
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "13bm",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1351877?v=4",
+      "html_url": "https://github.com/13bm"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 8,
+    "subscribers_count": 2,
+    "languages": {
+      "Java": 80488,
+      "Python": 22090
+    },
+    "language_percentages": {
+      "Java": 78.47,
+      "Python": 21.53
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "latest_release": {
+      "tag_name": "v0.1.1",
+      "name": "GhidraMCP v0.1.1",
+      "published_at": "2025-03-26T18:29:16Z",
+      "body": "Added\r\n\r\n- Function and data renaming capabilities\r\n\r\n  - rename_function(current_name, new_name)\r\n  - rename_data(address, new_name)\r\n\r\n- Security analysis tools\r\n\r\n  - extract_api_call_sequences(address)\r\n  - identify_user_input_sources()\r\n  - generate_call_graph(address, max_depth)\r\n  - identify_crypto_patterns()\r\n  - find_obfuscated_strings()\r\n\r\n\r\n- [Installation](https://github.com/13bm/GhidraMCP?tab=readme-ov-file#installation)\r\n- SHA256: `D2BE458842B5078DCE6A47EEE4C2B0240E3BEFB0B00FD881A335811756D764A3`\r\n",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.1.1",
+        "commit_sha": "96dfd972e4a16e969aeab285b18b1ebf29b92e2e"
+      },
+      {
+        "name": "v0.1.0",
+        "commit_sha": "721e43b9aedd2fc27db6a6ad37621f915d620d4f"
+      }
+    ],
+    "latest_version": "v0.1.1"
+  },
+  "readme": "A Ghidra plugin that implements the Model Context Protocol (MCP) for AI-assisted binary analysis.\n\n### Prerequisites\n\n- Ghidra 11.2.1+\n- Java 17 or newer\n- Python 3.8+ (for the bridge script)\n\n### Steps\n\n1. Download the latest release ZIP file from the [Releases](https://github.com/yourusername/GhidraMCP/releases) page\n2. Open Ghidra\n3. Navigate to `File > Install Extensions`\n4. Click the \"+\" button and select the downloaded ZIP file\n5. Restart Ghidra to complete the installation\n6. Enable the extension by going to `File > Configure > Miscellaneous` and checking the box next to \"MCPServerPlugin\"\n\n### Security Analysis Capabilities\n\nGhidraMCP provides specialized tools for security-focused analysis:\n\n#### API Call Sequence Analysis\nExtract and categorize external API calls from a function for security analysis. This helps identify potentially dangerous functions and understand their interactions.\n\n#### User Input Sources\nIdentify entry points where external data enters the program, crucial for vulnerability assessment and understanding attack surfaces.\n\n#### Call Graph Generation\nCreate structured call graphs to understand execution flow, track data propagation, and identify potential attack paths.\n\n#### Cryptographic Pattern Detection\nIdentify cryptographic implementations including standard algorithms (AES, RSA, etc.) and custom implementations based on code patterns.\n\n#### Obfuscated String Detection\nFind strings that may be obfuscated through techniques like XOR encoding or character-by-character construction.\n\n### Custom Configurations\n\nYou can modify the server port by editing the `MCPServerPlugin.java` file:\n\n\n\n### Integration with Analysis Workflows\n\nGhidraMCP can be integrated into your existing analysis workflows:\n\n1. Use Ghidra's standard analysis features to identify areas of interest\n2. Leverage AI assistance through GhidraMCP for deeper understanding\n3. Combine the AI insights with your manual analysis\n4. Rename functions and data based on AI insights for better readability"
+}

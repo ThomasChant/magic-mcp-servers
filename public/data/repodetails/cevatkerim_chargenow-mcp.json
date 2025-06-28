@@ -1,0 +1,53 @@
+{
+  "mcp_name": "cevatkerim/chargenow-mcp",
+  "mcp_description": "Facilitates AI assistants in locating and providing real-time status of EV charging stations using the ChargeNow API.",
+  "mcp_id": "cevatkerim_chargenow-mcp",
+  "fetch_timestamp": "2025-06-23T02:00:08.595938Z",
+  "github_url": "https://github.com/cevatkerim/chargenow-mcp",
+  "repository": {
+    "name": "chargenow-mcp",
+    "full_name": "cevatkerim/chargenow-mcp",
+    "description": "MCP server for finding ChargeNow EV charging points.",
+    "html_url": "https://github.com/cevatkerim/chargenow-mcp",
+    "created_at": "2025-04-12T18:08:54Z",
+    "updated_at": "2025-04-12T19:13:26Z",
+    "pushed_at": "2025-04-12T19:13:22Z",
+    "size": 25,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "JavaScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "cevatkerim",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1452094?v=4",
+      "html_url": "https://github.com/cevatkerim"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 36011,
+      "Shell": 130
+    },
+    "language_percentages": {
+      "JavaScript": 99.64,
+      "Shell": 0.36
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "1.0.2"
+  },
+  "readme": "# ChargeNow MCP Server\n\nA Model Context Protocol (MCP) server that provides EV charging station information using the ChargeNow API. This server allows AI assistants supporting the MCP protocol (such as Claude) to search for charging stations near a specified address.\n\n## Features\n\n- Find available EV charging stations near a specified address\n- Get real-time availability status of charging points\n- View detailed information about charging stations including:\n  - Distance from the search location\n  - Address and operator information\n  - Available connector types and power levels\n  - Payment methods supported\n  - Opening hours information\n\n## Installation\n\n1. Clone the repository\n2. Install dependencies:\n\n```bash\nnpm install\n```\n\n3. Build the project:\n\n```bash\nnpm run build\n```\n\n## Configuration\n\nThe server requires an API key for geocoding services. You can configure it in one of the following ways:\n\n### 1. Environment Variable\n\nSet the `GEOCODE_API_KEY` environment variable:\n\n```bash\nexport GEOCODE_API_KEY=\"your_api_key_here\"\n```\n\n### 2. MCP Server Configuration\n\nWhen using with an MCP client (like Claude), configure it in your MCP config:\n\n```json\n{\n  \"mcpServers\": {\n    \"chargenow\": {\n      \"command\": \"node\",\n      \"args\": [\n        \"/path/to/chargenow-mcp/build/index.js\"\n      ],\n      \"config\": {\n        \"geocodeApiKey\": \"your_api_key_here\"\n      }\n    }\n  }\n}\n```\n\nReplace `/path/to/chargenow-mcp/build/index.js` with the absolute path to the built `index.js` file.\n\n## Claude Desktop Configuration\n\nTo use this server with Claude Desktop, add the following to your `claude_desktop_config.json`:\n\n```json\n{\n  \"mcpServers\": {\n    \"chargenow\": {\n      \"command\": \"node\",\n      \"args\": [\n        \"/path/to/chargenow-mcp/build/index.js\"\n      ],\n      \"config\": {\n        \"geocodeApiKey\": \"your_api_key_here\"\n      }\n    }\n  }\n}\n```\n\nThe file should be located at:\n- macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`\n- Windows: `%APPDATA%\\Claude\\claude_desktop_config.json`\n\n## Usage\n\nOnce configured, you can use the charging station search functionality in Claude by asking questions like:\n\n- \"Find EV charging stations near Brandenburg Gate, Berlin\"\n- \"Are there any available charging points in Munich city center?\"\n- \"Show me charging stations near Bautzener Str Berlin\"\n\n## Available Tools\n\nThis MCP server provides the following tool:\n\n### find_available_chargepoints\n\nFinds available electric vehicle charge points near a given address.\n\nParameters:\n- `address`: The street address and city (e.g., \"Bautzener Str Berlin\")\n\nExample response:\n```\nCharging Stations near Bautzener Str Berlin:\n\nSummary:\n• 5 charge points AVAILABLE\n• 2 charge points in use (CHARGING)\n• 1 charge points OFFLINE\n\nDetailed Locations:\n\n📍 Charging Station Berlin Mitte (0.89 km)\n   Address: Brückenstraße 5, 10179 Berlin\n   Operator: Allego\n   Payment: Credit Card, RFID\n   Hours: 24/7\n   Connectors: CCS (150kW), CHAdeMO (50kW), Type 2 (22kW)\n   Status:\n   • 2 available points\n   • 1 points in use\n   Last updated: 14:32:45\n\n[...additional charging stations...]\n```\n\n## API Key Information\n\nThis server uses [geocode.maps.co](https://geocode.maps.co) for geocoding services. You need to obtain an API key from their website to use this server.\n\n## License\n\nISC "
+}

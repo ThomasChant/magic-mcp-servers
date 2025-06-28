@@ -1,0 +1,123 @@
+{
+  "mcp_name": "Gru Sandbox",
+  "mcp_description": "Gru-sandbox(gbox) is an open source project that provides a self-hostable sandbox for MCP integration or other AI agent usecases.",
+  "mcp_id": "babelcloud_gbox",
+  "fetch_timestamp": "2025-06-23T04:15:23.405754Z",
+  "github_url": "https://github.com/babelcloud/gru-sandbox",
+  "repository": {
+    "name": "gbox",
+    "full_name": "babelcloud/gbox",
+    "description": "A self-hostable sandbox for Agents to execute commands, surf web and use desktop/mobile.",
+    "html_url": "https://github.com/babelcloud/gbox",
+    "created_at": "2025-03-19T04:07:56Z",
+    "updated_at": "2025-06-22T16:31:41Z",
+    "pushed_at": "2025-06-23T01:21:57Z",
+    "size": 12581,
+    "stargazers_count": 57,
+    "watchers_count": 57,
+    "forks_count": 6,
+    "open_issues_count": 11,
+    "language": "Go",
+    "license": "Apache License 2.0",
+    "topics": [
+      "agent",
+      "android",
+      "browser",
+      "ios",
+      "linux",
+      "macos",
+      "mcp",
+      "sandbox",
+      "windows"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "babelcloud",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/104478511?v=4",
+      "html_url": "https://github.com/babelcloud"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 6,
+    "subscribers_count": 7,
+    "languages": {
+      "Go": 471989,
+      "Shell": 93919,
+      "TypeScript": 66797,
+      "Makefile": 18806,
+      "Python": 15002,
+      "Dockerfile": 9768,
+      "JavaScript": 971
+    },
+    "language_percentages": {
+      "Go": 69.69,
+      "Shell": 13.87,
+      "TypeScript": 9.86,
+      "Makefile": 2.78,
+      "Python": 2.22,
+      "Dockerfile": 1.44,
+      "JavaScript": 0.14
+    },
+    "pull_requests_count": 127,
+    "contributors_count": 11,
+    "latest_release": {
+      "tag_name": "v0.0.11",
+      "name": "v0.0.11",
+      "published_at": "2025-06-03T17:05:17Z",
+      "body": "**Full Changelog**: https://github.com/babelcloud/gbox/compare/v0.0.10...v0.0.11",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.0.11",
+        "commit_sha": "82cf3cdf93628eee31c12ec0c675f14f1a310c0a"
+      },
+      {
+        "name": "v0.0.10",
+        "commit_sha": "6c7603724e383044ac90914762d0124c43280b82"
+      },
+      {
+        "name": "v0.0.9",
+        "commit_sha": "9089c03eb5a05e96db63783770f778a845bd7cde"
+      },
+      {
+        "name": "v0.0.8",
+        "commit_sha": "2337134ce8deabc82b4b6d474bd40d0b2a995865"
+      },
+      {
+        "name": "v0.0.7",
+        "commit_sha": "c2bbeab114493d5c3261a575e710ebf6509f88f2"
+      },
+      {
+        "name": "v0.0.6",
+        "commit_sha": "ab6cc8c433e3ab887a83ee2e7b712a1af4e5f4e3"
+      },
+      {
+        "name": "v0.0.5",
+        "commit_sha": "0bb55018effc46d4a1279630f6ae2826c5ea782f"
+      },
+      {
+        "name": "v0.0.4",
+        "commit_sha": "c422289fb2bd7d102fa3fa646f6714f95f16b521"
+      },
+      {
+        "name": "v0.0.3",
+        "commit_sha": "d0ec270d0cb2f20a4647828b1c522508d912a899"
+      },
+      {
+        "name": "0.0.2",
+        "commit_sha": "e2a1f2b3bd9dec3dc34abbcaf076c34d9f5eeb82"
+      }
+    ],
+    "latest_version": "v0.0.11"
+  },
+  "readme": "# gbox\n\n**gbox** is a self-hostable sandbox for AI Agents to execute commands, surf web and use desktop/mobile. See \"Features\" section for details.\n\nThis project is based on the technology behind [gru.ai](https://gru.ai). It has been tested over 100000 Agent jobs.\n\nAs MCP is getting more and more popular, we also implemented a MCP server to make it easy to be directly integrated into MCP client such as Claude Desktop/Cursor.\n\n## Features\n1. Terminal\n   - Execute any linux command\n   - Execute python scripts directly\n   - Share session across invokes <em>[under-development]</em>\n2. File\n   - Read/Write/List files in sandbox\n   - Edit files <em>[under-development]</em>\n   - Search files <em>[under-development]</em>\n3. Browser\n   - Provide cdp url for browser control <em>[under-development]</em>\n   - Download from any url <em>[under-development]</em>\n   - Human take over <em>[under-development]</em>\n4. Computer-Using Agent for Android\n   - Natural language task execution via ADB client\n   - Physical Android devices supported only\n5. HTTP Server\n   - Start http service on any folder on demand <em>[under-development]</em>\n6. SDKs\n   - Typescript SDK Installing using `npm install gbox-sdk`, see [Gbox SDK Reference](https://docs.gbox.cloud/api-reference) for details.\n7. MCP\n   - Standard MCP support\n   - Integrate Claude Desktop & Cursor\n\n## Use gbox as a CLI\n\n## Installation\n\n### System Requirements\n\n- macOS 10.15 or later\n- [Docker Desktop for Mac](https://docs.docker.com/desktop/setup/install/mac-install/)\n- [Homebrew](https://brew.sh)\n\n> Note: Support for other platforms (Linux, Windows) is coming soon.\n\n### Installation Steps\n\n```bash\n# Install via Homebrew\nbrew tap babelcloud/gru && brew install gbox\n\n# Initialize environment\ngbox setup\n\n# Export MCP config and merge into Claude Desktop\ngbox mcp export --merge-to claude\n# or gbox mcp export --merge-to cursor\n\n# Restart Claude Desktop\n```\n\n### Update Steps\n\n```bash\n# Update gbox to the latest version\nbrew update && brew upgrade gbox\n\n# Update the environment\ngbox setup\n\n# Export and merge latest MCP config into Claude Desktop\ngbox mcp export --merge-to claude\n# or gbox mcp export --merge-to cursor\n\n# Restart Claude Desktop\n```\n\n### Command Line Usage (Under Development)\n\nThe project provides a command-line tool `gbox` for managing sandbox containers:\n\n```bash\n# login and profile management for gbox.cloud\ngbox login # login to gbox.cloud\ngbox logout # logout from gbox.cloud\n\ngbox profile create <profile-name> # create a new profile\ngbox profile delete <profile-name> # delete a profile\n\n# Setup local environment\ngbox local setup    # Setup local environment\ngbox local cleanup  # Cleanup local environment\n\n# Container management for both local and gbox.cloud\ngbox box newlinux --env \"DEBUG=true\"                                               # Create container\ngbox box list                                                                      # List containers\ngbox box start <box-id>                                                            # Start container\ngbox box stop <box-id>                                                             # Stop container\ngbox box delete <box-id>                                                           # Delete container\ngbox box exec <box-id> -- python -c \"print('Hello')\"                               # Execute command\ngbox box inspect <box-id>  \ngbox box cp <box-id> <local-path> <container-path>                                 # copy file from container to local\n\n# only for gbox.cloud\ngbox <box-id>  # open a box in browser                                             # switch to the target environment\ngbox switch                                                                        # switch to gbox cloud dashboard\n\n# To use the Computer-Using Agent for Android, an OPENAI_API_KEY is required.\ngbox cua android \"Open Uber and order a ride to The Chinese University of Hong Kong.\"\n\n# MCP configuration\ngbox mcp export                          # Export MCP configuration\ngbox mcp export --merge-to claude        # Export and merge into Claude Desktop config\ngbox mcp export --dry-run                # Preview merge result without applying changes\n```\n\n## Computer-Using Agent on Android\n\n### 📋 Prerequisites\n\n1. An Android device connected via USB or ADB over TCP/IP\n2. ADB (Android Debug Bridge) installed and configured\n3. API key for OpenAI with access to the computer-use-preview model\n\n### 🔧 Setting up ADB\n\nADB (Android Debug Bridge) is required for gbox to communicate with your Android device:\n\n1. **Install ADB**:\n   - **Windows**: Download [Android SDK Platform Tools](https://developer.android.com/studio/releases/platform-tools) and extract the ZIP file\n   - **macOS**: `brew install android-platform-tools`\n   - **Linux**: `sudo apt install adb` (Ubuntu/Debian) or `sudo pacman -S android-tools` (Arch)\n\n2. **Add ADB to your PATH**:\n   - **Windows**: Add the path to the extracted platform-tools folder to your system's PATH environment variable\n   - **macOS/Linux**: Add the following to your ~/.bashrc or ~/.zshrc:\n     ```bash\n     export PATH=$PATH:/path/to/platform-tools\n     ```\n\n3. **Verify ADB installation**:\n   ```bash\n   adb version\n   ```\n\n4. **Enable USB debugging on your Android device**:\n   - Go to **Settings → About phone**\n   - Tap **Build number** 7 times to enable Developer options\n   - Go to **Settings → System → Developer options** (location may vary by device)\n   - Enable **USB debugging**\n\n5. **Connect Android device via USB and confirm ADB connected**\n   ```bash\n   adb devices -l\n   List of devices attached\n   897X0691U       Pixel_3 device\n   ```\n6. **Set the OPENAI_API_KEY environment variable and enjoy gbox Android CUA**\n   ```bash\n   export OPENAI_API_KEY=YOUR_KEY\n   gbox cua android \"Open Uber and book a ride to The Chinese University of Hong Kong now.\"\n   ```\n   \n   The video demonstration for this task can be found in the first use case below under \"Use Cases\" section.\n\n\n### Use Cases\n#### 1. Call an Uber\n\n**Prompt**: Open Uber and book a ride to The Chinese University of Hong Kong now.\n\n<video src=\"https://github.com/user-attachments/assets/804c3bf4-8269-4d3b-88b0-52ad3b74aec2\" width=\"720\" height=\"1448\"></video>\n\n#### 2. Use DoorDash/Foodpanda to order food delivery.\n<img src=\"https://i.imghippo.com/files/hYdz1413YaE.jpg\" width=\"40%\" height=\"40%\">\n\n## MCP Use Cases\n\nYour AI client such as Claude Desktop can use gbox MCP to deliver better results, such as\n\n### 1. Generating Diagrams\n\nGenerate diagrams of Tesla stock prices:\n![Image](https://i.imghippo.com/files/njBB6977VQQ.png)\nhttps://claude.ai/share/34de8ca3-4e04-441b-9e79-5875fa9fc97a\n\n### 2. Generating PDFs\n\nGenerate PDF of latest AI news:\n![Image](https://i.imghippo.com/files/oMF9723LA.png)\nhttps://claude.ai/share/84600933-dcf2-44be-a2fd-7f49540db57a\n\n### 3. Analyzing and Calculation\n\nAnalyze and compare Nvidia/Tesla market cap:\n![Image](https://i.imghippo.com/files/FE2710WR.png)\nhttps://claude.ai/share/70c335b7-9fff-4ee7-8459-e6b7462d8994\n\n### 5. Execute Arbitrary Tasks\n\nDownload youtube video:\n![Image](https://i.imghippo.com/files/TI9396Rjg.png)\nhttps://claude.ai/share/c2ab6bcb-7032-489f-87d5-cc38f72c2ca9\n\n## Develop gbox\n\n### Prerequisites\n\n- Go 1.21 or later\n- Docker Desktop\n- Make\n- pnpm (via corepack)\n- Node.js 16.13 or later\n\n### Build\n\n```bash\n# Build all components\nmake build\n\n# Create distribution package\nmake dist\n```\n\n### Running Services\n\n```bash\n# API Server\nmake -C packages/api-server dev\n\n# MCP Server\ncd packages/mcp-server && pnpm dev\n\n# MCP Inspector\ncd packages/mcp-server && pnpm inspect\n```\n\n### Contributing\n\nWe welcome contributions! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.\n\n1. Fork the repository\n2. Create your feature branch (`git checkout -b username/feature-name`)\n3. Commit your changes (`git commit -m 'Add some feature'`)\n4. Push to the branch (`git push origin username/feature-name`)\n5. Open a Pull Request\n\n### Things to Know about Dev and Debug Locally\n\n#### How to run gbox in dev env instead of the system installed one\n\n1. Stop the installed gbox by `gbox cleanup`. It will stop the api server so that you can run the api server in dev env.\n2. Execute `make api-dev` in project root.\n3. Execute `./gbox box list`, this is the command run from your dev env.\n\n#### How to connect MCP client such as Claude Desktop to the MCP server in dev env\n\n1. Execute `make mcp-dev` in project root.\n2. Execute `./gbox mcp export --merge-to claude`\n\n#### How to open MCP inspect\n\n1. Execute `make mcp-inspect` in project root.\n2. Click the link returned in terminal.\n\n#### How to build and use image in dev env\n\n1. Execute `make build-image-python` in project root to build Python image, or `make build-images` to build all images.\n2. Change the image name as needed (e.g., `make build-image-typescript` for TypeScript image).\n3. You may need to delete current sandboxes to make the new image effective `./gbox box delete --all`\n\n#### Why MCP client still get the old MCP content?\n\n1. After you change MCP configuration such as tool definitions, you need to run `make build` to update the `dist/index.js` file.\n2. You may also need to execute `./gbox mcp export --merge-to claude`\n\n## License\n\nThis project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.\n"
+}

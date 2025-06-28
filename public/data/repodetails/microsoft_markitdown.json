@@ -1,0 +1,111 @@
+{
+  "mcp_name": "microsoft/markitdown",
+  "mcp_description": "🎖️ 🐍 🏠 - MCP tool access to MarkItDown -- a library that converts many file formats (local or remote) to Markdown for LLM consumption.",
+  "mcp_id": "microsoft_markitdown",
+  "fetch_timestamp": "2025-06-23T06:45:38.756547Z",
+  "github_url": "https://github.com/microsoft/markitdown/tree/main/packages/markitdown-mcp",
+  "repository": {
+    "name": "markitdown",
+    "full_name": "microsoft/markitdown",
+    "description": "Python tool for converting files and office documents to Markdown.",
+    "html_url": "https://github.com/microsoft/markitdown",
+    "created_at": "2024-11-13T19:56:40Z",
+    "updated_at": "2025-06-23T06:40:23Z",
+    "pushed_at": "2025-06-04T04:09:25Z",
+    "size": 3240,
+    "stargazers_count": 59393,
+    "watchers_count": 59393,
+    "forks_count": 3092,
+    "open_issues_count": 278,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [
+      "autogen",
+      "autogen-extension",
+      "langchain",
+      "markdown",
+      "microsoft-office",
+      "openai",
+      "pdf"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "microsoft",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6154722?v=4",
+      "html_url": "https://github.com/microsoft"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 3092,
+    "subscribers_count": 214,
+    "languages": {
+      "Python": 210322,
+      "Dockerfile": 1254
+    },
+    "language_percentages": {
+      "Python": 99.41,
+      "Dockerfile": 0.59
+    },
+    "pull_requests_count": 260,
+    "contributors_count": 65,
+    "latest_release": {
+      "tag_name": "v0.1.2",
+      "name": "v0.1.2",
+      "published_at": "2025-05-28T17:11:27Z",
+      "body": "## What's Changed\r\n- feat: render math equations in .docx documents by @sathinduga in https://github.com/microsoft/markitdown/pull/1160\r\n- Make it easier to use AzureKeyCredentials with Azure Doc Intelligence by @afourney in https://github.com/microsoft/markitdown/pull/1151\r\n- Add CSV to Markdown table conversion - fixes https://github.com/microsoft/markitdown/issues/1144 by @erinshek in https://github.com/microsoft/markitdown/pull/1176\r\n- Fix typo in README.md by @lentil32 in https://github.com/microsoft/markitdown/pull/1175\r\n- Update README.md by @createcentury in https://github.com/microsoft/markitdown/pull/1187\r\n- Switched from the stdlib minidom parser to defusedxml. by @afourney in https://github.com/microsoft/markitdown/pull/1259\r\n- Updated omml.py to use defusedxml [python.lang.security.use-defused-xml-parse.use-defused-xml-parse] by @kira-offgrid in https://github.com/microsoft/markitdown/pull/1251\r\n- Chore: Make linter happy by @t3tra-dev in https://github.com/microsoft/markitdown/pull/1256\r\n- FIX YouTube transcript errors by @JoshClark-git in https://github.com/microsoft/markitdown/pull/1241\r\n- feat: support API version selection for Document Intelligence by @kirisame-wang in https://github.com/microsoft/markitdown/pull/1253\r\n- Update Python version requirement and add .cursorrules to .gitignore by @Wuhall in https://github.com/microsoft/markitdown/pull/1249\r\n- support streamable http mcp by @Betula-L in https://github.com/microsoft/markitdown/pull/1245\r\n- docs: fix typos by @rtpacks in https://github.com/microsoft/markitdown/pull/1201itdown/pull/1260\r\n\r\n## New Contributors\r\n@sathinduga made their first contribution in https://github.com/microsoft/markitdown/pull/1160\r\n@erinshek made their first contribution in https://github.com/microsoft/markitdown/pull/1176\r\n@lentil32 made their first contribution in https://github.com/microsoft/markitdown/pull/1175\r\n@createcentury made their first contribution in https://github.com/microsoft/markitdown/pull/1187\r\n@kira-offgrid made their first contribution in https://github.com/microsoft/markitdown/pull/1251\r\n@t3tra-dev made their first contribution in https://github.com/microsoft/markitdown/pull/1256\r\n@JoshClark-git made their first contribution in https://github.com/microsoft/markitdown/pull/1241\r\n@kirisame-wang made their first contribution in https://github.com/microsoft/markitdown/pull/1253\r\n@Wuhall made their first contribution in https://github.com/microsoft/markitdown/pull/1249\r\n@Betula-L made their first contribution in https://github.com/microsoft/markitdown/pull/1245\r\n@rtpacks made their first contribution in https://github.com/microsoft/markitdown/pull/1201\r\n\r\n**Full Changelog**: https://github.com/microsoft/markitdown/compare/v0.1.1...v0.1.2",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.1.2",
+        "commit_sha": "1dd3c8333941690e2ce414c869dc92a8e8a8dc6a"
+      },
+      {
+        "name": "v0.1.2a1",
+        "commit_sha": "effde4767bbede61a805c859b9393fe840273d9b"
+      },
+      {
+        "name": "v0.1.1",
+        "commit_sha": "c1f9a323ee43782ab014032ce8731f5de6eb87ed"
+      },
+      {
+        "name": "v0.1.0",
+        "commit_sha": "2ffe6ea59140cf09afd1e7d41e1f29611bdba3e8"
+      },
+      {
+        "name": "v0.1.0a6",
+        "commit_sha": "efc55b260d65edf68016efb708d52ee0b2175d13"
+      },
+      {
+        "name": "v0.1.0a5",
+        "commit_sha": "cd6aa41361d47e3a1eaefc3a176e5d3ca7ab9994"
+      },
+      {
+        "name": "v0.1.0a4",
+        "commit_sha": "a93e0567e6f114fea6642e7603d9274fac9920d9"
+      },
+      {
+        "name": "v0.1.0a3",
+        "commit_sha": "a62d8edb13c3c68338af0d9f351042e127e79e90"
+      },
+      {
+        "name": "v0.1.0a2",
+        "commit_sha": "de2c56ffbc07f27fa0bb8667b2266df599dc4b18"
+      },
+      {
+        "name": "v0.1.0a1",
+        "commit_sha": "6bedf6d950719a7432ba6b7c34c946ba70ddfb76"
+      }
+    ],
+    "latest_version": "v0.1.2"
+  },
+  "readme": "# MarkItDown\n\n[![PyPI](https://img.shields.io/pypi/v/markitdown.svg)](https://pypi.org/project/markitdown/)\n![PyPI - Downloads](https://img.shields.io/pypi/dd/markitdown)\n[![Built by AutoGen Team](https://img.shields.io/badge/Built%20by-AutoGen%20Team-blue)](https://github.com/microsoft/autogen)\n\n> [!TIP]\n> MarkItDown now offers an MCP (Model Context Protocol) server for integration with LLM applications like Claude Desktop. See [markitdown-mcp](https://github.com/microsoft/markitdown/tree/main/packages/markitdown-mcp) for more information.\n\n> [!IMPORTANT]\n> Breaking changes between 0.0.1 to 0.1.0:\n> * Dependencies are now organized into optional feature-groups (further details below). Use `pip install 'markitdown[all]'` to have backward-compatible behavior. \n> * convert\\_stream() now requires a binary file-like object (e.g., a file opened in binary mode, or an io.BytesIO object). This is a breaking change from the previous version, where it previously also accepted text file-like objects, like io.StringIO.\n> * The DocumentConverter class interface has changed to read from file-like streams rather than file paths. *No temporary files are created anymore*. If you are the maintainer of a plugin, or custom DocumentConverter, you likely need to update your code. Otherwise, if only using the MarkItDown class or CLI (as in these examples), you should not need to change anything.\n\nMarkItDown is a lightweight Python utility for converting various files to Markdown for use with LLMs and related text analysis pipelines. To this end, it is most comparable to [textract](https://github.com/deanmalmgren/textract), but with a focus on preserving important document structure and content as Markdown (including: headings, lists, tables, links, etc.) While the output is often reasonably presentable and human-friendly, it is meant to be consumed by text analysis tools -- and may not be the best option for high-fidelity document conversions for human consumption.\n\nMarkItDown currently supports the conversion from:\n\n- PDF\n- PowerPoint\n- Word\n- Excel\n- Images (EXIF metadata and OCR)\n- Audio (EXIF metadata and speech transcription)\n- HTML\n- Text-based formats (CSV, JSON, XML)\n- ZIP files (iterates over contents)\n- Youtube URLs\n- EPubs\n- ... and more!\n\n## Why Markdown?\n\nMarkdown is extremely close to plain text, with minimal markup or formatting, but still\nprovides a way to represent important document structure. Mainstream LLMs, such as\nOpenAI's GPT-4o, natively \"_speak_\" Markdown, and often incorporate Markdown into their\nresponses unprompted. This suggests that they have been trained on vast amounts of\nMarkdown-formatted text, and understand it well. As a side benefit, Markdown conventions\nare also highly token-efficient.\n\n## Prerequisites\nMarkItDown requires Python 3.10 or higher. It is recommended to use a virtual environment to avoid dependency conflicts.\n\nWith the standard Python installation, you can create and activate a virtual environment using the following commands:\n\n```bash\npython -m venv .venv\nsource .venv/bin/activate\n```\n\nIf using `uv`, you can create a virtual environment with:\n\n```bash\nuv venv --python=3.12 .venv\nsource .venv/bin/activate\n# NOTE: Be sure to use 'uv pip install' rather than just 'pip install' to install packages in this virtual environment\n```\n\nIf you are using Anaconda, you can create a virtual environment with:\n\n```bash\nconda create -n markitdown python=3.12\nconda activate markitdown\n```\n\n## Installation\n\nTo install MarkItDown, use pip: `pip install 'markitdown[all]'`. Alternatively, you can install it from the source:\n\n```bash\ngit clone git@github.com:microsoft/markitdown.git\ncd markitdown\npip install -e 'packages/markitdown[all]'\n```\n\n## Usage\n\n### Command-Line\n\n```bash\nmarkitdown path-to-file.pdf > document.md\n```\n\nOr use `-o` to specify the output file:\n\n```bash\nmarkitdown path-to-file.pdf -o document.md\n```\n\nYou can also pipe content:\n\n```bash\ncat path-to-file.pdf | markitdown\n```\n\n### Optional Dependencies\nMarkItDown has optional dependencies for activating various file formats. Earlier in this document, we installed all optional dependencies with the `[all]` option. However, you can also install them individually for more control. For example:\n\n```bash\npip install 'markitdown[pdf, docx, pptx]'\n```\n\nwill install only the dependencies for PDF, DOCX, and PPTX files.\n\nAt the moment, the following optional dependencies are available:\n\n* `[all]` Installs all optional dependencies\n* `[pptx]` Installs dependencies for PowerPoint files\n* `[docx]` Installs dependencies for Word files\n* `[xlsx]` Installs dependencies for Excel files\n* `[xls]` Installs dependencies for older Excel files\n* `[pdf]` Installs dependencies for PDF files\n* `[outlook]` Installs dependencies for Outlook messages\n* `[az-doc-intel]` Installs dependencies for Azure Document Intelligence\n* `[audio-transcription]` Installs dependencies for audio transcription of wav and mp3 files\n* `[youtube-transcription]` Installs dependencies for fetching YouTube video transcription\n\n### Plugins\n\nMarkItDown also supports 3rd-party plugins. Plugins are disabled by default. To list installed plugins:\n\n```bash\nmarkitdown --list-plugins\n```\n\nTo enable plugins use:\n\n```bash\nmarkitdown --use-plugins path-to-file.pdf\n```\n\nTo find available plugins, search GitHub for the hashtag `#markitdown-plugin`. To develop a plugin, see `packages/markitdown-sample-plugin`.\n\n### Azure Document Intelligence\n\nTo use Microsoft Document Intelligence for conversion:\n\n```bash\nmarkitdown path-to-file.pdf -o document.md -d -e \"<document_intelligence_endpoint>\"\n```\n\nMore information about how to set up an Azure Document Intelligence Resource can be found [here](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/how-to-guides/create-document-intelligence-resource?view=doc-intel-4.0.0)\n\n### Python API\n\nBasic usage in Python:\n\n```python\nfrom markitdown import MarkItDown\n\nmd = MarkItDown(enable_plugins=False) # Set to True to enable plugins\nresult = md.convert(\"test.xlsx\")\nprint(result.text_content)\n```\n\nDocument Intelligence conversion in Python:\n\n```python\nfrom markitdown import MarkItDown\n\nmd = MarkItDown(docintel_endpoint=\"<document_intelligence_endpoint>\")\nresult = md.convert(\"test.pdf\")\nprint(result.text_content)\n```\n\nTo use Large Language Models for image descriptions, provide `llm_client` and `llm_model`:\n\n```python\nfrom markitdown import MarkItDown\nfrom openai import OpenAI\n\nclient = OpenAI()\nmd = MarkItDown(llm_client=client, llm_model=\"gpt-4o\")\nresult = md.convert(\"example.jpg\")\nprint(result.text_content)\n```\n\n### Docker\n\n```sh\ndocker build -t markitdown:latest .\ndocker run --rm -i markitdown:latest < ~/your-file.pdf > output.md\n```\n\n## Contributing\n\nThis project welcomes contributions and suggestions. Most contributions require you to agree to a\nContributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us\nthe rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.\n\nWhen you submit a pull request, a CLA bot will automatically determine whether you need to provide\na CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions\nprovided by the bot. You will only need to do this once across all repos using our CLA.\n\nThis project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).\nFor more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or\ncontact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.\n\n### How to Contribute\n\nYou can help by looking at issues or helping review PRs. Any issue or PR is welcome, but we have also marked some as 'open for contribution' and 'open for reviewing' to help facilitate community contributions. These are ofcourse just suggestions and you are welcome to contribute in any way you like.\n\n<div align=\"center\">\n\n|            | All                                                          | Especially Needs Help from Community                                                                                                      |\n| ---------- | ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |\n| **Issues** | [All Issues](https://github.com/microsoft/markitdown/issues) | [Issues open for contribution](https://github.com/microsoft/markitdown/issues?q=is%3Aissue+is%3Aopen+label%3A%22open+for+contribution%22) |\n| **PRs**    | [All PRs](https://github.com/microsoft/markitdown/pulls)     | [PRs open for reviewing](https://github.com/microsoft/markitdown/pulls?q=is%3Apr+is%3Aopen+label%3A%22open+for+reviewing%22)              |\n\n</div>\n\n### Running Tests and Checks\n\n- Navigate to the MarkItDown package:\n\n  ```sh\n  cd packages/markitdown\n  ```\n\n- Install `hatch` in your environment and run tests:\n\n  ```sh\n  pip install hatch  # Other ways of installing hatch: https://hatch.pypa.io/dev/install/\n  hatch shell\n  hatch test\n  ```\n\n  (Alternative) Use the Devcontainer which has all the dependencies installed:\n\n  ```sh\n  # Reopen the project in Devcontainer and run:\n  hatch test\n  ```\n\n- Run pre-commit checks before submitting a PR: `pre-commit run --all-files`\n\n### Contributing 3rd-party Plugins\n\nYou can also contribute by creating and sharing 3rd party plugins. See `packages/markitdown-sample-plugin` for more details.\n\n## Trademarks\n\nThis project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft\ntrademarks or logos is subject to and must follow\n[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).\nUse of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.\nAny use of third-party trademarks or logos are subject to those third-party's policies.\n"
+}

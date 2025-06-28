@@ -1,0 +1,58 @@
+{
+  "mcp_name": "birariro/agoda-review-mcp",
+  "mcp_description": "Facilitates LLMs in retrieving and aggregating Agoda hotel reviews for enhanced decision-making.",
+  "mcp_id": "birariro_agoda-review-mcp",
+  "fetch_timestamp": "2025-06-23T01:41:12.448866Z",
+  "github_url": "https://github.com/birariro/agoda-review-mcp",
+  "repository": {
+    "name": "agoda-review-mcp",
+    "full_name": "birariro/agoda-review-mcp",
+    "description": "MCP server for find agoda hotel reviews",
+    "html_url": "https://github.com/birariro/agoda-review-mcp",
+    "created_at": "2025-04-03T02:42:04Z",
+    "updated_at": "2025-06-06T07:40:05Z",
+    "pushed_at": "2025-04-04T07:10:10Z",
+    "size": 48,
+    "stargazers_count": 2,
+    "watchers_count": 2,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Java",
+    "license": null,
+    "topics": [
+      "agoda",
+      "mcp",
+      "mcp-server",
+      "model-context-protocol",
+      "spring-ai",
+      "spring-ai-mcp",
+      "tools"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "birariro",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/52993842?v=4",
+      "html_url": "https://github.com/birariro"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 2,
+    "languages": {
+      "Java": 7076
+    },
+    "language_percentages": {
+      "Java": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# agoda-review-mcp\n\nThis Model Context Protocol(MCP) server enables Large Language Models (LLMs) to <br>\nfind 'agoda' hotel reviews <br>\n\nIt helps with your choose because you bring positive and negative reviews together\n\n## Usage\n\n### Prerequisites\n- Java 17 or newer\n\n### Steps\n1 clone repository\n```shell\ngit clone https://github.com/birariro/agoda-review-mcp.git && cd agoda-review-mcp\n```\n2 build project\n```shell\n./gradlew build -x test\n```\n3 Add the following configuration to your Claude MCP setup\n```shell\n{\n  \"mcpServers\": {\n    \"agoda-review-mcp-server\": {\n      \"command\": \"java\",\n      \"args\": [\n        \"-jar\",\n        \"{path}/build/libs/agoda-review-mcp-0.0.1.jar\"\n      ]\n  }\n```\n\n"
+}

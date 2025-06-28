@@ -1,0 +1,52 @@
+{
+  "mcp_name": "qianlima365/zhipu-web-search-mcp",
+  "mcp_description": "Facilitates web network searches using Zhipu AI through an MCP tool.",
+  "mcp_id": "qianlima365_zhipu-web-search-mcp",
+  "fetch_timestamp": "2025-06-23T07:42:34.446235Z",
+  "github_url": "https://github.com/qianlima365/zhipu-web-search-mcp",
+  "repository": {
+    "name": "zhipu-web-search-mcp",
+    "full_name": "qianlima365/zhipu-web-search-mcp",
+    "description": "基于智普AI的web网络搜索MCP工具",
+    "html_url": "https://github.com/qianlima365/zhipu-web-search-mcp",
+    "created_at": "2025-04-09T10:02:29Z",
+    "updated_at": "2025-04-13T04:40:33Z",
+    "pushed_at": "2025-04-09T10:09:43Z",
+    "size": 36,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": "Apache License 2.0",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "qianlima365",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12694908?v=4",
+      "html_url": "https://github.com/qianlima365"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 9701,
+      "Dockerfile": 393
+    },
+    "language_percentages": {
+      "Python": 96.11,
+      "Dockerfile": 3.89
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "## 运行服务\n\n1. 通过stdio协议启动服务端\n    ```shell\n    mcp dev web_search.py\n    ```\n- 配置客户端\n    ```shell\n    {\n        \"mcpServers\": {\n            \"mcp-server\": {\n            \"command\": \"uv\",\n                \"args\": [\n                    \"--directory\",\n                    \"<你的项目路径>\",\n                    \"run\",\n                    \"main.py\"\n                ]\n            }\n        }\n    }\n    ```\n\n\n2. 通过SSE协议启动服务端\n\n- \n   ```shell\n    uv run main.py --host 0.0.0.0 --port 8020\n   ```\n\n- 运行客户端\n\n   ```shell\n    uv run client.py http://127.0.0.1:8020/sse\n   ```"
+}

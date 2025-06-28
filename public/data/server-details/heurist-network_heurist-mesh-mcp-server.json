@@ -1,0 +1,116 @@
+{
+  "id": "cab73b2d0ab7",
+  "owner": "heurist-network",
+  "repoName": "heurist-mesh-mcp-server",
+  "fullDescription": "🎖️ ⛅️ 🏠 🐍 - Access specialized web3 AI agents for blockchain analysis, smart contract security auditing, token metrics evaluation, and on-chain interactions through the Heurist Mesh network. Provides comprehensive tools for DeFi analysis, NFT valuation, and transaction monitoring across multiple blockchains",
+  "techStack": [
+    {
+      "name": "typescript",
+      "icon": "📘",
+      "color": "#3178c6"
+    }
+  ],
+  "serviceTypes": [
+    {
+      "type": "monitoring",
+      "label": "Monitoring",
+      "icon": "📈",
+      "description": "Monitors systems and applications"
+    },
+    {
+      "type": "security",
+      "label": "Security",
+      "icon": "🔐",
+      "description": "Provides security and authentication features"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "advanced",
+    "maturity": "stable",
+    "deployment": [
+      "local"
+    ],
+    "featured": false,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 14.1,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "crypto",
+      "blockchain",
+      "defi"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/heurist-network/heurist-mesh-mcp-server",
+    "owner": "heurist-network",
+    "name": "heurist-mesh-mcp-server",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.280Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "smart-contracts",
+    "monitoring",
+    "finance-crypto",
+    "crypto",
+    "blockchain",
+    "web3",
+    "defi"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Advanced",
+      "color": "#ef4444",
+      "icon": "🔴"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    }
+  ],
+  "icon": "📈",
+  "readme": null
+}

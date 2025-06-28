@@ -1,0 +1,103 @@
+{
+  "mcp_name": "narumiruna/yfinance-mcp",
+  "mcp_description": "🐍 ☁️ - An MCP server that uses yfinance to obtain information from Yahoo Finance.",
+  "mcp_id": "narumiruna_yfinance-mcp",
+  "fetch_timestamp": "2025-06-23T07:00:08.979530Z",
+  "github_url": "https://github.com/narumiruna/yfinance-mcp",
+  "repository": {
+    "name": "yfinance-mcp",
+    "full_name": "narumiruna/yfinance-mcp",
+    "description": null,
+    "html_url": "https://github.com/narumiruna/yfinance-mcp",
+    "created_at": "2025-03-30T11:35:19Z",
+    "updated_at": "2025-06-22T15:08:36Z",
+    "pushed_at": "2025-06-16T06:13:28Z",
+    "size": 357,
+    "stargazers_count": 27,
+    "watchers_count": 27,
+    "forks_count": 9,
+    "open_issues_count": 1,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [
+      "finance",
+      "mcp",
+      "mcp-server",
+      "python",
+      "yahoo-finance"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "narumiruna",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4680567?v=4",
+      "html_url": "https://github.com/narumiruna"
+    },
+    "has_issues": true,
+    "has_projects": false,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 9,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 10140,
+      "Dockerfile": 670,
+      "Makefile": 237
+    },
+    "language_percentages": {
+      "Python": 91.79,
+      "Dockerfile": 6.06,
+      "Makefile": 2.15
+    },
+    "pull_requests_count": 18,
+    "contributors_count": 2,
+    "tags": [
+      {
+        "name": "v0.4.2",
+        "commit_sha": "c6db34129b4d21fc1c0af67d5dce7648c10d6da3"
+      },
+      {
+        "name": "v0.4.1",
+        "commit_sha": "48eff70f574de4647241fd7f445bef9a9418be77"
+      },
+      {
+        "name": "v0.4.0",
+        "commit_sha": "3f27c968ec4b24e6ff7517b944644bccc7bff06c"
+      },
+      {
+        "name": "v0.3.1",
+        "commit_sha": "3482467d9e372d698153f065b5e25ed381386b3e"
+      },
+      {
+        "name": "v0.3.0",
+        "commit_sha": "8df3fabef8fea1af8207ad15c1cc5fb92c878480"
+      },
+      {
+        "name": "v0.2.0",
+        "commit_sha": "bc83a8ea5a802e5e7df874a8b52952ccfd5f5663"
+      },
+      {
+        "name": "v0.1.11",
+        "commit_sha": "2c1c72f6ef0fc4ce7511dfdd49861d93672c0966"
+      },
+      {
+        "name": "v0.1.10",
+        "commit_sha": "4cb85cb4c50adb586135e9fdeb822607d2ab243a"
+      },
+      {
+        "name": "v0.1.9",
+        "commit_sha": "247e3440d248475760cd4357652ae5bed3169b20"
+      },
+      {
+        "name": "v0.1.8",
+        "commit_sha": "4c411bd11277b18fa21fa8b6f33ec4936ee03086"
+      }
+    ],
+    "latest_version": "v0.4.2"
+  },
+  "readme": "# Yahoo Finance MCP Server\n\nA simple MCP server for Yahoo Finance using [yfinance](https://github.com/ranaroussi/yfinance). This server provides a set of tools to fetch stock data, news, and other financial information.\n\n<a href=\"https://glama.ai/mcp/servers/@narumiruna/yfinance-mcp\">\n  <img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/@narumiruna/yfinance-mcp/badge\" />\n</a>\n\n## Tools\n\n- **get_ticker_info**\n\n  - Retrieve stock data including company info, financials, trading metrics and governance data.\n  - Inputs:\n    - `symbol` (string): The stock symbol.\n\n- **get_ticker_news**\n\n  - Fetches recent news articles related to a specific stock symbol with title, content, and source details.\n  - Inputs:\n    - `symbol` (string): The stock symbol.\n\n- **search**\n\n  - Fetches and organizes search results from Yahoo Finance, including stock quotes and news articles.\n  - Inputs:\n    - `query` (string): The search query (ticker symbol or company name).\n    - `search_type` (string): Type of search results to retrieve (options: \"all\", \"quotes\", \"news\").\n\n- **get_top**\n\n  - Get top entities (ETFs, mutual funds, companies, growth companies, or performing companies) in a sector.\n  - Inputs:\n    - `sector` (string): The sector to get.\n    - `top_type` (string): Type of top companies to retrieve (options: \"top_etfs\", \"top_mutual_funds\", \"top_companies\", \"top_growth_companies\", \"top_performing_companies\").\n    - `top_n` (number, optional): Number of top entities to retrieve (default 10).\n\n- **get_price_history**\n\n  - Fetch historical price data for a given stock symbol over a specified period and interval.\n  - Inputs:\n    - `symbol` (string): The stock symbol.\n    - `period` (string, optional): Time period to retrieve data for (e.g. '1d', '1mo', '1y'). Default is '1mo'.\n    - `interval` (string, optional): Data interval frequency (e.g. '1d', '1h', '1m'). Default is '1d'.\n\n## Usage\n\nYou can use this MCP server either via uv (Python package installer) or Docker.\n\n### Via uv\n\n1. [Install uv](https://docs.astral.sh/uv/getting-started/installation/)\n2. Add the following configuration to your MCP server configuration file:\n\n```json\n{\n  \"mcpServers\": {\n    \"yfmcp\": {\n      \"command\": \"uvx\",\n      \"args\": [\"yfmcp@latest\"]\n    }\n  }\n}\n```\n\n### Via Docker\n\nAdd the following configuration to your MCP server configuration file:\n\n```json\n{\n  \"mcpServers\": {\n    \"yfmcp\": {\n      \"command\": \"docker\",\n      \"args\": [\"run\", \"-i\", \"--rm\", \"narumi/yfinance-mcp\"]\n    }\n  }\n}\n"
+}

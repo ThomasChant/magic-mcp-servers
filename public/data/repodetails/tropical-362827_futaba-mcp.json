@@ -1,0 +1,52 @@
+{
+  "mcp_name": "tropical-362827/futaba-mcp",
+  "mcp_description": "A Python library enabling AI assistants to interact with ふたば☆ちゃんねる by retrieving and sorting thread data.",
+  "mcp_id": "tropical-362827_futaba-mcp",
+  "fetch_timestamp": "2025-06-23T09:05:34.851947Z",
+  "github_url": "https://github.com/tropical-362827/futaba-mcp",
+  "repository": {
+    "name": "futaba-mcp",
+    "full_name": "tropical-362827/futaba-mcp",
+    "description": "ふたば☆ちゃんねると対話するためのModel Context Protocol（MCP）ツールを提供するPythonライブラリです。",
+    "html_url": "https://github.com/tropical-362827/futaba-mcp",
+    "created_at": "2025-04-08T20:15:06Z",
+    "updated_at": "2025-04-08T20:22:05Z",
+    "pushed_at": "2025-04-08T20:22:01Z",
+    "size": 90,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Jupyter Notebook",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "tropical-362827",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/79416175?v=4",
+      "html_url": "https://github.com/tropical-362827"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Jupyter Notebook": 321772,
+      "Python": 6322
+    },
+    "language_percentages": {
+      "Jupyter Notebook": 98.07,
+      "Python": 1.93
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# Futaba MCP\n\nFutaba MCPは、ふたば☆ちゃんねると対話するためのModel Context Protocol（MCP）ツールを提供するPythonライブラリです。AIアシスタントがふたば☆ちゃんねるからスレッドデータを取得しできるようになります。\n\n## 機能\n\n- **スレッド一覧**: ふたば掲示板からスレッドのリストを取得し、勢いでソート\n- **スレッド内容**: スレッドの内容(本文、そうだね数)を取得\n\nhttps://github.com/user-attachments/assets/54de7dfc-d060-4f04-9536-96577aae409a\n\n## 使用方法\n\n### MCPサーバーの実行\n\n\n```bash\n# uvなどで依存関係のインストール\nuv pip install --resolve uv\npython main.py\n```\n\nClaudeから呼び出す場合は、 `claude_desktop_config.json` から `main.py` が読み込めるように設定する必要があります。\n\n(WSL環境からpythonを読み込みたい場合の例)\n```json\n{\n  \"mcpServers\": {\n    \"futaba_mcp\": {\n      \"command\": \"wsl\",\n      \"args\": [\n        \"-d\",\n        \"Ubuntu-22.04\",\n        \"--\",\n        \"bash\",\n        \"-c\",\n        \"/path/to/repository/futaba-mcp/.venv/bin/python /path/to/repository/futaba-mcp/main.py\"\n      ]\n    }\n  }\n}\n```\n\n\n### 利用可能なツール\n\n#### get_futaba()\n\nふたば掲示板からスレッドのリストを勢いでソートして取得します。\n\n```python\nresult = await get_futaba()\nprint(result)\n```\n\n結果にはスレッドID、タイトル、レス数、勢いの値が含まれます。\n\n#### get_thread(thread_id, filter_top_sod=True)\n\n特定のスレッドの内容を取得します。\n\n```python\n# フィルタリング付きでスレッドを取得（そうだねカウント上位25%の投稿のみ）\nresult = await get_thread(1309537527)\nprint(result)\n\n# フィルタリングなしですべての投稿を取得\nresult = await get_thread(1309537527, filter_top_sod=False)\nprint(result)\n```\n\nデフォルトでは、この関数は以下の投稿のみをフィルタリングして含めます：\n- 元の投稿（OP）\n- 「そうだね」カウントが上位25%の返信投稿\n"
+}

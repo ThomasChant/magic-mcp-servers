@@ -1,0 +1,52 @@
+{
+  "mcp_name": "harshini-ns/mcp-search-engine",
+  "mcp_description": "A TypeScript-based MCP server offering a comprehensive suite of mathematical functions for seamless integration with language models.",
+  "mcp_id": "harshini-ns_mcp-search-engine",
+  "fetch_timestamp": "2025-06-23T04:36:31.465084Z",
+  "github_url": "https://github.com/harshini-ns/mcp-search-engine",
+  "repository": {
+    "name": "mcp-search-engine",
+    "full_name": "harshini-ns/mcp-search-engine",
+    "description": null,
+    "html_url": "https://github.com/harshini-ns/mcp-search-engine",
+    "created_at": "2025-04-24T05:20:49Z",
+    "updated_at": "2025-05-30T10:05:17Z",
+    "pushed_at": "2025-05-30T10:05:14Z",
+    "size": 55,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "harshini-ns",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/166401325?v=4",
+      "html_url": "https://github.com/harshini-ns"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 17132,
+      "JavaScript": 9402
+    },
+    "language_percentages": {
+      "TypeScript": 64.57,
+      "JavaScript": 35.43
+    },
+    "pull_requests_count": 0,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# Calculator and Search Engine MCP Server\n\nA comprehensive calculator and search engine implemented as a Model Context Protocol (MCP) server using TypeScript.\n\nThis server exposes a wide range of mathematical functions as MCP tools and aslo a search engine tool, allowing language models connected via MCP clients (like Claude for Desktop, Cursor, etc.) to perform calculations.\n\n## Features\n\nProvides MCP tools for:\n\n*   **Basic Arithmetic:** Addition, Subtraction, Multiplication, Division\n*   **Exponents & Roots:** Power (`^`), Square Root\n*   **Trigonometry:** Sine, Cosine, Tangent (input in radians)\n*   **Inverse Trigonometry:** Arcsine, Arccosine, Arctangent, Arctan2 (output in radians)\n*   **Degree/Radian Conversion:** Convert between degrees and radians\n*   **Logarithms:** Natural Log (ln), Base-10 Log (log10), Log with arbitrary base\n*   **Constants:** Pi (π), Euler's number (e)\n*   **Factorial:** `n!`\n*   **Percentage:** Calculate percentage of a number\n*   **Modulo:** Remainder operation\n*   **Absolute Value:** `abs()`\n*   **Rounding:** Floor, Ceiling, Round to nearest integer\n*   **search_engine:** searches query using searXNG (an external API) \n\n## Prerequisites\n\n*   [Node.js](https://nodejs.org/) (v16 or higher recommended)\n*   [npm](https://www.npmjs.com/) (usually included with Node.js)\n\n## Installation\n\n1.  Clone the repository:\n    ```bash\n    git clone https://github.com/harshini-ns/mcp-search-engine\n    ```\n\n2.  Navigate into the project directory:\n    ```bash\n    cd calculator-mcp-server\n    ```\n\n3.  Install dependencies:\n    ```bash\n    npm install\n    ```\n\n## Running the Server\n\n1.  Run the server:\n    ```bash\n    npm run start\n    # OR directly using node:\n    # node index.js\n    ```\n\nThe server will start and listen for MCP connections via standard input/output (stdio). You should see a message like `Calculator MCP Server connected via stdio and ready.` printed to your terminal's *standard error*. Keep this terminal window open while using the server with Claude Desktop.\n\n## Connecting to Clients (Claude Desktop Example)\n\nThis server communicates using the MCP stdio transport. To connect it to Claude for Desktop:\n\n1.  **Find Claude Desktop's MCP Configuration File:**\n    *   **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`\n    *   **Windows:** `%APPDATA%\\Claude\\claude_desktop_config.json` (You can paste this path into the File Explorer address bar).\n    *   **Linux:** `~/.config/Claude/claude_desktop_config.json`\n    *   If the file or the `Claude` directory doesn't exist, you might need to create it, or open Claude Desktop's Settings (`Claude Menu > Settings... > Developer > Edit Config`) which should create the file for you.\n\n2.  **Edit the Configuration File:** Open the `claude_desktop_config.json` file in a text editor.\n\n3.  **Add the Server Configuration:** Modify the file to include the `mcpServers` object with your calculator server entry. If the file was empty or didn't exist, its entire content should look like this:\n\n    ```json\n    {\n      \"mcpServers\": {\n        \"calculator\": {\n          \"command\": \"node\",\n          \"args\": [\n            \"/home/marco/code/calculator-mcp-server/index.js\"\n            // IMPORTANT: Replace this path with the ACTUAL ABSOLUTE PATH\n          ]\n        }\n        // You can add other servers here under different keys, like:\n        // \"another_server\": { ... }\n      }\n    }\n    ```\n\n    **Notes:**\n    *   On Windows, use double backslashes (`\\\\`) for the path separators, e.g., `\"C:\\\\Users\\\\YourUser\\\\path\\\\to\\\\calculator-mcp-server\\\\index.js\"`.\n    *   The key `\"calculator\"` is just a name you give this server connection within Claude's config; it can be anything descriptive.\n    *   If the `mcpServers` object already exists, just add the `\"calculator\": { ... }` entry inside it, separated by a comma if other servers are present.\n\n4.  **Restart Claude for Desktop:** Ensure Claude for Desktop is fully closed and reopened for the new configuration to take effect.\n\nClaude for Desktop should now show the MCP tools icon (a hammer icon then, now its a settings slider/tune icon) and be able to use the calculator tools when you ask it to perform calculations or to use search engine.\n\n## Read the Blog for this Repo:\nhttps://medium.com/@harshininaveen9801/building-on-an-mcp-server-adding-a-custom-search-tool-to-a-github-project-52acb0ee0aff\n\n## Watch the Recorded Demo Video:\nhttps://youtu.be/h0jKkmJLHlE\n\n\n"
+}

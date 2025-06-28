@@ -1,0 +1,50 @@
+{
+  "mcp_name": "luebken/playlist-mcp",
+  "mcp_description": "Provides access to YouTube playlist transcripts via an experimental MCP server, with initial support for KubeCon London 2025 content.",
+  "mcp_id": "luebken_playlist-mcp",
+  "fetch_timestamp": "2025-06-23T06:17:35.142375Z",
+  "github_url": "https://github.com/luebken/playlist-mcp",
+  "repository": {
+    "name": "playlist-mcp",
+    "full_name": "luebken/playlist-mcp",
+    "description": null,
+    "html_url": "https://github.com/luebken/playlist-mcp",
+    "created_at": "2025-04-15T21:30:05Z",
+    "updated_at": "2025-04-16T10:31:43Z",
+    "pushed_at": "2025-04-15T21:33:58Z",
+    "size": 28624,
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 1,
+    "open_issues_count": 1,
+    "language": "Python",
+    "license": "Apache License 2.0",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "luebken",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/53055?v=4",
+      "html_url": "https://github.com/luebken"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 5474
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 1
+  },
+  "readme": "# Playlist-MCP\n\nThis is an experimental MCP server, which makes the transcripts of a Youtube Playlist available.\n\nIt currently is preloaded with the KubeCon London 2025 transcripts. But you can change this by changing the URL.\n\n![MCP running in Claude](claude.png)\n\n## Install\n\n```sh\n# Clone this repo\ngit clone git@github.com:luebken/playlist-mcp.git; cd playlist-mcp\n\n# Install python dependencies\nuv venv\nsource .venv/bin/activate\nuv pip install -e .\n\n# Fill the transcript cache and vector db.\nuv run server.py https://www.youtube.com/playlist?list=PLj6h78yzYM2MP0QhYFK8HOb8UqgbIkLMc\n```\n\n## Setup for Claude Desktop\n\n```sh\n# Configure for Claude > Settings > Developer > Edit Config\n# /Users/YOUR_USERNAME/Library/Application Support/Claude/claude_desktop_config.json\n{\n  \"mcpServers\": {\n      \"playlist-mcp\": {\n          \"command\": \"uv\",\n          \"args\": [\n              \"--directory\",\n              \"/PATH/TO/PARENT/playlist-mcp/\",\n              \"run\",\n              \"server.py\",\n              \"https://www.youtube.com/playlist?list=PLj6h78yzYM2MP0QhYFK8HOb8UqgbIkLMc\"\n          ]\n      }\n  }\n}\n```"
+}

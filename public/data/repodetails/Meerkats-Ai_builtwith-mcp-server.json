@@ -1,0 +1,53 @@
+{
+  "mcp_name": "Meerkats-Ai/builtwith-mcp-server",
+  "mcp_description": "Integrates with the BuiltWith API to analyze and provide technology stack information for websites.",
+  "mcp_id": "Meerkats-Ai_builtwith-mcp-server",
+  "fetch_timestamp": "2025-06-23T06:38:35.643402Z",
+  "github_url": "https://github.com/Meerkats-Ai/builtwith-mcp-server",
+  "repository": {
+    "name": "builtwith-mcp-server",
+    "full_name": "Meerkats-Ai/builtwith-mcp-server",
+    "description": null,
+    "html_url": "https://github.com/Meerkats-Ai/builtwith-mcp-server",
+    "created_at": "2025-04-23T10:44:11Z",
+    "updated_at": "2025-04-23T11:04:55Z",
+    "pushed_at": "2025-04-23T11:04:51Z",
+    "size": 16,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "JavaScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "Meerkats-Ai",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/208632199?v=4",
+      "html_url": "https://github.com/Meerkats-Ai"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 0,
+    "languages": {
+      "JavaScript": 5892,
+      "Dockerfile": 344
+    },
+    "language_percentages": {
+      "JavaScript": 94.48,
+      "Dockerfile": 5.52
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# BuiltWith MCP Server\n\nThis is a Model Context Protocol (MCP) server that integrates with the BuiltWith API to provide technology stack analysis of websites.\n\n## Features\n\n- Find technology stack information for any domain\n- Analyze what technologies are used on websites\n\n## Setup\n\n### Local Setup\n\n1. Clone this repository\n2. Install dependencies:\n   ```\n   npm install\n   ```\n3. Create a `.env` file based on `.env.example` and add your BuiltWith API key:\n   ```\n   BUILTWITH_API_KEY=your_api_key_here\n   ```\n4. Build the server:\n   ```\n   npm run build\n   ```\n5. Start the server:\n   ```\n   npm start\n   ```\n\n### Docker Setup\n\n1. Clone this repository\n2. Create a `.env` file with your BuiltWith API key\n3. Build and run using Docker Compose:\n   ```\n   docker-compose up -d\n   ```\n\n## MCP Configuration\n\nTo use this server with an MCP client, add the following configuration to your MCP settings file:\n\n```json\n{\n  \"mcpServers\": {\n    \"builtwith\": {\n      \"command\": \"node\",\n      \"args\": [\"path/to/builtwith/dist/index.js\"],\n      \"env\": {\n        \"BUILTWITH_API_KEY\": \"your_api_key_here\"\n      },\n      \"disabled\": false,\n      \"autoApprove\": []\n    }\n  }\n}\n```\n\n## Available Tools\n\n- `builtwith_find_tech_stack`: Find the technology stack used by a website\n\n## License\n\nISC\n"
+}

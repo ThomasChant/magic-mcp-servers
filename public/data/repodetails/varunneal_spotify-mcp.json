@@ -1,0 +1,50 @@
+{
+  "mcp_name": "Spotify",
+  "mcp_description": "Connects with Spotify for playback control and track/album/artist/playlist management.",
+  "mcp_id": "varunneal_spotify-mcp",
+  "fetch_timestamp": "2025-06-23T08:34:44.666788Z",
+  "github_url": "https://github.com/varunneal/spotify-mcp",
+  "repository": {
+    "name": "spotify-mcp",
+    "full_name": "varunneal/spotify-mcp",
+    "description": "MCP to connect your LLM with Spotify.",
+    "html_url": "https://github.com/varunneal/spotify-mcp",
+    "created_at": "2024-12-01T02:06:14Z",
+    "updated_at": "2025-06-22T16:41:18Z",
+    "pushed_at": "2025-06-06T14:05:37Z",
+    "size": 4806,
+    "stargazers_count": 363,
+    "watchers_count": 363,
+    "forks_count": 69,
+    "open_issues_count": 11,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "varunneal",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32204417?v=4",
+      "html_url": "https://github.com/varunneal"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 69,
+    "subscribers_count": 4,
+    "languages": {
+      "Python": 37584
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 17,
+    "contributors_count": 7
+  },
+  "readme": "# spotify-mcp MCP server\n\nMCP project to connect Claude with Spotify. Built on top of [spotipy-dev's API](https://github.com/spotipy-dev/spotipy/tree/2.24.0).\n\n## Features\n\n- Start, pause, and skip playback\n- Search for tracks/albums/artists/playlists\n- Get info about a track/album/artist/playlist\n- Manage the Spotify queue\n- Manage, create, and update playlists\n\n## Demo\n\nMake sure to turn on audio\n\n<details>\n  <summary>\n    Video\n  </summary>\n  https://github.com/user-attachments/assets/20ee1f92-f3e3-4dfa-b945-ca57bc1e0894\n</details>\n\n## Configuration\n\n### Getting Spotify API Keys\n\nCreate an account on [developer.spotify.com](https://developer.spotify.com/). Navigate to [the dashboard](https://developer.spotify.com/dashboard). \nCreate an app with redirect_uri as http://127.0.0.1:8080/callback. \nYou can choose any port you want but you must use http and an explicit loopback address (IPv4 or IPv6).\n\nSee [here](https://developer.spotify.com/documentation/web-api/concepts/redirect_uri) for more info/troubleshooting. \nYou may have to restart your MCP environment (e.g. Claude Desktop) once or twice before it works.\n\n### Run this project locally\n\nThis project is not yet set up for ephemeral environments (e.g. `uvx` usage).\nRun this project locally by cloning this repo\n\n```bash\ngit clone https://github.com/varunneal/spotify-mcp.git\n```\n\nAdd this tool as a mcp server. \n\nClaude Desktop on MacOS: `~/Library/Application\\ Support/Claude/claude_desktop_config.json`\n\nClaude Desktop on Windows: `%APPDATA%/Claude/claude_desktop_config.json`\n\n  ```json\n  \"spotify\": {\n      \"command\": \"uv\",\n      \"args\": [\n        \"--directory\",\n        \"/path/to/spotify_mcp\",\n        \"run\",\n        \"spotify-mcp\"\n      ],\n      \"env\": {\n        \"SPOTIFY_CLIENT_ID\": YOUR_CLIENT_ID,\n        \"SPOTIFY_CLIENT_SECRET\": YOUR_CLIENT_SECRET,\n        \"SPOTIFY_REDIRECT_URI\": \"http://127.0.0.1:8080/callback\"\n      }\n    }\n  ```\n\n### Troubleshooting\n\nPlease open an issue if you can't get this MCP working. Here are some tips:\n\n1. Make sure `uv` is updated. I recommend version `>=0.54`.\n2. Make sure claude has execution permisisons for the project: `chmod -R 755`.\n3. Ensure you have Spotify premium (needed for running developer API). \n\nThis MCP will emit logs to std err (as specified in the MCP) spec. On Mac the Claude Desktop app should emit these logs\nto `~/Library/Logs/Claude`. \nOn other platforms [you can find logs here](https://modelcontextprotocol.io/quickstart/user#getting-logs-from-claude-for-desktop).\n\n\nYou can launch the MCP Inspector via [`npm`](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) with this command:\n\n```bash\nnpx @modelcontextprotocol/inspector uv --directory /path/to/spotify_mcp run spotify-mcp\n```\n\nUpon launching, the Inspector will display a URL that you can access in your browser to begin debugging.\n\n## TODO\n\nUnfortunately, a bunch of cool features have [now been deprecated](https://techcrunch.com/2024/11/27/spotify-cuts-developer-access-to-several-of-its-recommendation-features/)\nfrom the Spotify API. Most new features will be relatively minor or for the health of the project:\n\n- tests.\n- adding API support for managing playlists.\n- adding API support for paginated search results/playlists/albums.\n\nPRs appreciated! Thanks to @jamiew, @davidpadbury, @manncodes, @hyuma7, @aanurraj, and others for contributions.  \n\n## Deployment\n\n(todo)\n\n### Building and Publishing\n\nTo prepare the package for distribution:\n\n1. Sync dependencies and update lockfile:\n\n```bash\nuv sync\n```\n\n2. Build package distributions:\n\n```bash\nuv build\n```\n\nThis will create source and wheel distributions in the `dist/` directory.\n\n3. Publish to PyPI:\n\n```bash\nuv publish\n```\n\nNote: You'll need to set PyPI credentials via environment variables or command flags:\n\n- Token: `--token` or `UV_PUBLISH_TOKEN`\n- Or username/password: `--username`/`UV_PUBLISH_USERNAME` and `--password`/`UV_PUBLISH_PASSWORD`\n"
+}

@@ -1,0 +1,50 @@
+{
+  "mcp_name": "marioalexandreantunes/mcp-search-mojeek",
+  "mcp_description": "Integrates the Mojeek search engine into an MCP server for privacy-focused and unbiased search results.",
+  "mcp_id": "marioalexandreantunes_mcp-search-mojeek",
+  "fetch_timestamp": "2025-06-23T06:25:42.376316Z",
+  "github_url": "https://github.com/marioalexandreantunes/mcp-search-mojeek",
+  "repository": {
+    "name": "mcp-search-mojeek",
+    "full_name": "marioalexandreantunes/mcp-search-mojeek",
+    "description": "MCP Search mojeek",
+    "html_url": "https://github.com/marioalexandreantunes/mcp-search-mojeek",
+    "created_at": "2025-04-23T14:19:15Z",
+    "updated_at": "2025-04-23T20:28:20Z",
+    "pushed_at": "2025-04-23T20:28:17Z",
+    "size": 64,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": "GNU General Public License v3.0",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "marioalexandreantunes",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/132404820?v=4",
+      "html_url": "https://github.com/marioalexandreantunes"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 22688
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# MCP Search Mojeek\n\nUm servidor MCP (Model Context Protocol) que integra o motor de busca Mojeek, oferecendo uma alternativa de pesquisa focada em privacidade e resultados imparciais.\n\n## Descrição\n\nEste projeto implementa um servidor MCP que utiliza o Mojeek como motor de busca. O Mojeek é conhecido por:\n- Fornecer resultados de pesquisa imparciais\n- Respeitar a privacidade do utilizador (sem rastreamento)\n- Oferecer resultados rápidos e relevantes\n\n## Requisitos\n\n- Python 3.11 ou superior\n- Gestor de pacotes UV (recomendado)\n\n## Instalação\n\n1. Clone o repositório:\n```bash\ngit clone [url-do-repositório]\ncd mcp-search-mojeek\n```\n\n2. Instale as dependências utilizando UV:\n```bash\nuv venv\nuv pip install -r requirements.txt\n```\n\n## Configuração\n\n### VSCode\nAdicione a seguinte configuração ao seu ficheiro de configuração do VSCode:\n\n```json\n{\n  \"mcpServers\": {\n    \"mojeek-mcp\": {\n      \"command\": \"[caminho-para-seu-ambiente-virtual]/.venv/bin/python3\",\n      \"args\": [\n        \"[caminho-para-seu-projeto]/mojeek.py\"\n      ]\n    }\n  }\n}\n```\n\n### Trae\nA configuração para o Trae é similar à do VSCode. Consulte o ficheiro [MCP.md](MCP.md) para mais detalhes sobre o protocolo MCP e sua implementação.\n\n## Utilização\n\nO servidor MCP disponibiliza a ferramenta `get_search` que aceita um termo de pesquisa e retorna os resultados do Mojeek. Os resultados são armazenados em cache para melhorar o desempenho em pesquisas repetidas.\n\n## Funcionalidades\n\n- Pesquisa web através do Mojeek\n- Cache de resultados para pesquisas frequentes\n- Integração com editores via protocolo MCP\n- Tratamento de erros robusto\n\n## Contribuição\n\nContribuições são bem-vindas! Por favor, sinta-se à vontade para submeter pull requests.\n\n## Licença\n\n[Adicionar informação sobre a licença]\n"
+}

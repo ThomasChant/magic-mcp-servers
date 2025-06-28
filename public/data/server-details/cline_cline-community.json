@@ -1,0 +1,110 @@
+{
+  "id": "cb96cea11f18",
+  "owner": "cline",
+  "repoName": "cline-community",
+  "fullDescription": "Facilitates seamless issue reporting from Cline to GitHub by automating metadata extraction and providing a preview feature.",
+  "techStack": [],
+  "serviceTypes": [
+    {
+      "type": "automation",
+      "label": "Automation",
+      "icon": "⚡",
+      "description": "Automates tasks and workflows"
+    },
+    {
+      "type": "data",
+      "label": "Data",
+      "icon": "📊",
+      "description": "Manages, processes, or analyzes data"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "moderate",
+    "maturity": "beta",
+    "deployment": [
+      "local"
+    ],
+    "featured": false,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 4.55,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "git",
+      "github",
+      "pr"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/cline/cline-community",
+    "owner": "cline",
+    "name": "cline-community",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.279Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "automation",
+    "issues",
+    "development-tools",
+    "cline",
+    "github",
+    "metadata",
+    "reporting"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Moderate",
+      "color": "#eab308",
+      "icon": "🟡"
+    },
+    {
+      "type": "maturity",
+      "label": "Beta",
+      "color": "#f59e0b",
+      "icon": "🚧"
+    }
+  ],
+  "icon": "⚡",
+  "readme": null
+}

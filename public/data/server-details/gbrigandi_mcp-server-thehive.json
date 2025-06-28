@@ -1,0 +1,113 @@
+{
+  "id": "ab514d6a74a7",
+  "owner": "gbrigandi",
+  "repoName": "mcp-server-thehive",
+  "fullDescription": "🦀 🏠 🚨 🍎 🪟 🐧 - A Rust-based MCP server to integrate TheHive, facilitating collaborative security incident response and case management via AI.",
+  "techStack": [
+    {
+      "name": "rust",
+      "icon": "🦀",
+      "color": "#000000"
+    }
+  ],
+  "serviceTypes": [
+    {
+      "type": "communication",
+      "label": "Communication",
+      "icon": "💬",
+      "description": "Facilitates communication and collaboration"
+    },
+    {
+      "type": "security",
+      "label": "Security",
+      "icon": "🔐",
+      "description": "Provides security and authentication features"
+    }
+  ],
+  "quality": {
+    "score": 70,
+    "factors": {
+      "documentation": 60,
+      "maintenance": 50,
+      "community": 40,
+      "performance": 85
+    }
+  },
+  "metadata": {
+    "complexity": "moderate",
+    "maturity": "stable",
+    "deployment": [
+      "local"
+    ],
+    "featured": false,
+    "verified": false
+  },
+  "categorization": {
+    "confidence": 1.3,
+    "reason": "Keyword match analysis",
+    "matched_keywords": [
+      "ide"
+    ]
+  },
+  "usage": {
+    "downloads": 0,
+    "dependents": 0,
+    "weeklyDownloads": 0
+  },
+  "installation": {
+    "npm": null,
+    "pip": null,
+    "docker": null,
+    "manual": null,
+    "uv": null,
+    "instructions": []
+  },
+  "repository": {
+    "url": "https://github.com/gbrigandi/mcp-server-thehive",
+    "owner": "gbrigandi",
+    "name": "mcp-server-thehive",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdated": "2025-06-23T23:16:56.280Z",
+    "watchers": 0,
+    "openIssues": 0
+  },
+  "compatibility": {
+    "platforms": [
+      "web",
+      "desktop"
+    ],
+    "requirements": []
+  },
+  "documentation": {
+    "hasReadme": false,
+    "hasExamples": false,
+    "hasApiReference": false,
+    "hasInstallation": false,
+    "api": null
+  },
+  "allTags": [
+    "collaboration",
+    "rust",
+    "incident",
+    "cloud-infrastructure",
+    "thehive",
+    "security"
+  ],
+  "badges": [
+    {
+      "type": "complexity",
+      "label": "Moderate",
+      "color": "#eab308",
+      "icon": "🟡"
+    },
+    {
+      "type": "maturity",
+      "label": "Stable",
+      "color": "#10b981",
+      "icon": "✅"
+    }
+  ],
+  "icon": "💬",
+  "readme": null
+}

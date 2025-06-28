@@ -1,0 +1,50 @@
+{
+  "mcp_name": "charlesverge/mcp_open_interest",
+  "mcp_description": "Analyzes options open interest data to calculate market sentiment using put/call ratios for specified stock symbols.",
+  "mcp_id": "charlesverge_mcp_open_interest",
+  "fetch_timestamp": "2025-06-23T02:02:20.957764Z",
+  "github_url": "https://github.com/charlesverge/mcp_open_interest",
+  "repository": {
+    "name": "mcp_open_interest",
+    "full_name": "charlesverge/mcp_open_interest",
+    "description": "MCP Calculate open interest for a given symbol",
+    "html_url": "https://github.com/charlesverge/mcp_open_interest",
+    "created_at": "2025-04-23T16:14:36Z",
+    "updated_at": "2025-04-23T18:32:01Z",
+    "pushed_at": "2025-04-23T18:31:57Z",
+    "size": 188,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "charlesverge",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1906614?v=4",
+      "html_url": "https://github.com/charlesverge"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 14851
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# Open Interest Analysis MCP Server\n\nThis is an MCP (Message Control Protocol) server that retrieves options open interest data from Alpha Vantage and calculates the put/call ratio to determine market sentiment for a given stock symbol.\n\nYou can use the prompts.\n`Calculate the max pain for symbol NVDA`\n\n`Calculate put call ratio for symbol NVDA`\n\n## Screenshots\n\n![Max Pain Example](max-pain.png)\n\n![Put Call Ratio Example](market-sentiment.png)\n\n## Claude Desktop Setup\n\n1. Install the required dependencies:\n\n```bash\npip install -r requirements.txt\n```\n\n2. Set up your Alpha Vantage API key:\n\n   - Get an API key from [Alpha Vantage](https://www.alphavantage.co/support/#api-key)\n   - Create a `.env` file in the root directory\n\n3. Add to your Claude Desktop config file (`claude_desktop_config.json`):\n   Add the following configuration to your `claude_desktop_config.json` file under the root JSON object:\n\n```{\n  \"mcpServers\": {\n    \"openinterest_stdio\": {\n      \"command\": \"/dir/to/python\",\n      \"args\": [\"/dir/mcp_open_interest/main.py\"],\n      \"env\": {\n        \"ALPHAVANTAGE_KEY\": \"your_api_key_here\"\n      }\n    },\n  }\n}\n```\n\n## Sentiment Interpretation\n\n- **Bullish**: Put/Call ratio < 1.0\n- **Bearish**: Put/Call ratio > 1.0\n"
+}

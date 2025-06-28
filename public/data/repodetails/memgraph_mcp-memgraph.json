@@ -1,0 +1,50 @@
+{
+  "mcp_name": "memgraph/mcp-memgraph",
+  "mcp_description": "🐍 🏠 - Memgraph MCP Server - includes a tool to run a query against Memgraph and a schema resource.",
+  "mcp_id": "memgraph_mcp-memgraph",
+  "fetch_timestamp": "2025-06-23T06:40:58.124781Z",
+  "github_url": "https://github.com/memgraph/mcp-memgraph",
+  "repository": {
+    "name": "mcp-memgraph",
+    "full_name": "memgraph/mcp-memgraph",
+    "description": "Memgraph MCP Server",
+    "html_url": "https://github.com/memgraph/mcp-memgraph",
+    "created_at": "2025-03-10T15:34:08Z",
+    "updated_at": "2025-06-16T21:46:10Z",
+    "pushed_at": "2025-05-16T09:21:08Z",
+    "size": 90,
+    "stargazers_count": 18,
+    "watchers_count": 18,
+    "forks_count": 8,
+    "open_issues_count": 2,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "memgraph",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17707542?v=4",
+      "html_url": "https://github.com/memgraph"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": true,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 8,
+    "subscribers_count": 5,
+    "languages": {
+      "Python": 1867
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 4,
+    "contributors_count": 2
+  },
+  "readme": "> [!IMPORTANT]  \n> **This repository has been merged into the [Memgraph AI Toolkit](https://github.com/memgraph/ai-toolkit) monorepo to avoid duplicating tools.  \n> It will be deleted in one month—please follow the [MCP integration](https://github.com/memgraph/ai-toolkit/tree/main/integrations/mcp-memgraph) there for all future development, and feel free to open issues or PRs in that repo.**\n\n# 🚀 Memgraph MCP Server\n\nMemgraph MCP Server is a lightweight server implementation of the Model Context Protocol (MCP) designed to connect Memgraph with LLMs.\n\n![mcp-server](./mcp-server.png)\n\n## ⚡ Quick start\n\n> 📹 [Memgraph MCP Server Quick Start video](https://www.youtube.com/watch?v=0Tjw5QWj_qY)\n\n### 1. Run Memgraph MCP Server\n\n1. Install [`uv`](https://docs.astral.sh/uv/getting-started/installation/) and create `venv` with `uv venv`. Activate virtual environment with `.venv\\Scripts\\activate`. \n2. Install dependencies: `uv add \"mcp[cli]\" httpx`\n3. Run Memgraph MCP server: `uv run server.py`.\n\n\n### 2. Run MCP Client\n1. Install [Claude for Desktop](https://claude.ai/download).\n2. Add the Memgraph server to Claude config: \n\n**MacOS/Linux**\n```\ncode ~/Library/Application\\ Support/Claude/claude_desktop_config.json\n```\n\n**Windows**\n\n```\ncode $env:AppData\\Claude\\claude_desktop_config.json\n```\n\nExample config:\n```\n{\n    \"mcpServers\": {\n      \"mpc-memgraph\": {\n        \"command\": \"/Users/katelatte/.local/bin/uv\",\n        \"args\": [\n            \"--directory\",\n            \"/Users/katelatte/projects/mcp-memgraph\",\n            \"run\",\n            \"server.py\"\n        ]\n     }\n   }\n}\n```\n> [!NOTE]  \n> You may need to put the full path to the uv executable in the command field. You can get this by running `which uv` on MacOS/Linux or `where uv` on Windows. Make sure you pass in the absolute path to your server.\n\n### 3. Chat with the database\n1. Run Memgraph MAGE:\n   ```\n   docker run -p 7687:7687 memgraph/memgraph-mage --schema-info-enabled=True\n   ```\n   The `--schema-info-enabled` configuration setting is set to `True` to allow LLM to run `SHOW SCHEMA INFO` query.\n2. Open Claude Desktop and see the Memgraph tools and resources listed. Try it out! (You can load dummy data from [Memgraph Lab](https://memgraph.com/docs/data-visualization) Datasets)\n\n## 🔧Tools\n\n### run_query()\nRun a Cypher query against Memgraph.\n\n## 🗃️ Resources\n\n### get_schema()\nGet Memgraph schema information (prerequisite: `--schema-info-enabled=True`).\n\n## 🗺️ Roadmap\n\nThe Memgraph MCP Server is just at its beginnings. We're actively working on expanding its capabilities and making it even easier to integrate Memgraph into modern AI workflows. In the near future, we'll be releasing a TypeScript version of the server to better support JavaScript-based environments. Additionally, we plan to migrate this project into our central [AI Toolkit](https://github.com/memgraph/ai-toolkit) repository, where it will live alongside other tools and integrations for LangChain, LlamaIndex, and MCP. Our goal is to provide a unified, open-source toolkit that makes it seamless to build graph-powered applications and intelligent agents with Memgraph at the core.\n"
+}

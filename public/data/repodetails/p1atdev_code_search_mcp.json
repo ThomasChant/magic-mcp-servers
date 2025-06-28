@@ -1,0 +1,50 @@
+{
+  "mcp_name": "p1atdev/code_search_mcp",
+  "mcp_description": "Facilitates code search functionality through an MCP server setup, enabling efficient code retrieval and analysis.",
+  "mcp_id": "p1atdev_code_search_mcp",
+  "fetch_timestamp": "2025-06-23T07:25:05.477996Z",
+  "github_url": "https://github.com/p1atdev/code_search_mcp",
+  "repository": {
+    "name": "code_search_mcp",
+    "full_name": "p1atdev/code_search_mcp",
+    "description": null,
+    "html_url": "https://github.com/p1atdev/code_search_mcp",
+    "created_at": "2025-04-13T03:02:15Z",
+    "updated_at": "2025-04-13T03:04:12Z",
+    "pushed_at": "2025-04-13T03:04:08Z",
+    "size": 17,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": "Apache License 2.0",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "p1atdev",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60182057?v=4",
+      "html_url": "https://github.com/p1atdev"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 7479
+    },
+    "language_percentages": {
+      "TypeScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# code_search_mcp\n\nTo install dependencies:\n\n```bash\nbun install\n```\n\nTo run:\n\n```bash\nbun run build\n```\n\nThen `dist/server` will be created. \n\n## Configuration\n\n`claude_desktop_config.json`:\n\n```\n{\n    \"mcpServers\": {\n        \"code_search\": {\n            \"command\": \"ABSOLUTE/PATH/TO/code_search_mcp/dist/server\"\n        }\n    }\n}\n```\n\nFor development, you can run without building:\n\n`.vscode/mcp.json`:\n\n```json\n{\n    \"servers\": {\n        \"code_search\": {\n            \"type\": \"stdio\",\n            \"command\": \"bun\",\n            \"args\": [\n                \"run\",\n                \"/ABSOLUTE/PATH/TO/code_search_mcp/server.ts\"\n            ]\n        }\n    }\n}\n```"
+}

@@ -1,0 +1,144 @@
+{
+  "mcp_name": "julien040/anyquery",
+  "mcp_description": "🏎️ 🏠 ☁️ - Query more than 40 apps with one binary using SQL. It can also connect to your PostgreSQL, MySQL, or SQLite compatible database. Local-first and private by design.",
+  "mcp_id": "julien040_anyquery",
+  "fetch_timestamp": "2025-06-23T05:37:47.039118Z",
+  "github_url": "https://github.com/julien040/anyquery",
+  "repository": {
+    "name": "anyquery",
+    "full_name": "julien040/anyquery",
+    "description": "Query anything (GitHub, Notion, +40 more) with SQL and let LLMs (ChatGPT, Claude) connect to using MCP",
+    "html_url": "https://github.com/julien040/anyquery",
+    "created_at": "2024-04-06T17:17:25Z",
+    "updated_at": "2025-06-22T23:25:31Z",
+    "pushed_at": "2025-06-14T13:17:17Z",
+    "size": 86356,
+    "stargazers_count": 945,
+    "watchers_count": 945,
+    "forks_count": 49,
+    "open_issues_count": 7,
+    "language": "Go",
+    "license": "Other",
+    "topics": [
+      "ai",
+      "analytics",
+      "api",
+      "business-intelligence",
+      "chatgpt",
+      "claude",
+      "csv",
+      "data-visualization",
+      "database",
+      "github",
+      "go",
+      "json",
+      "llm",
+      "mcp",
+      "mysql",
+      "notion",
+      "parquet",
+      "salesforce",
+      "sql",
+      "sqlite"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "julien040",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/48369040?v=4",
+      "html_url": "https://github.com/julien040"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 49,
+    "subscribers_count": 8,
+    "languages": {
+      "Go": 2325639,
+      "Yacc": 190306,
+      "Astro": 148822,
+      "MDX": 24159,
+      "Shell": 18324,
+      "JavaScript": 13859,
+      "TypeScript": 9982,
+      "Makefile": 9946,
+      "AppleScript": 8500,
+      "CSS": 7493,
+      "Python": 6330,
+      "HTML": 3449
+    },
+    "language_percentages": {
+      "Go": 84.05,
+      "Yacc": 6.88,
+      "Astro": 5.38,
+      "MDX": 0.87,
+      "Shell": 0.66,
+      "JavaScript": 0.5,
+      "TypeScript": 0.36,
+      "Makefile": 0.36,
+      "AppleScript": 0.31,
+      "CSS": 0.27,
+      "Python": 0.23,
+      "HTML": 0.12
+    },
+    "pull_requests_count": 8,
+    "contributors_count": 5,
+    "latest_release": {
+      "tag_name": "0.4.2",
+      "name": "0.4.2",
+      "published_at": "2025-06-10T11:48:32Z",
+      "body": "<img src=\"https://anyquery.dev/favicon.png\" width=\"64\" height=\"64\" />\n\n## What is Anyquery?\n\nAnyquery is a query engine that allows you to query anything over SQL. \nWhether it's a local CSV, a Google Sheet, your Apple notes, or your GitHub stars, you can query it with Anyquery.\n\nIt's built on top of SQLite, and you can use alternative languages like PRQL and PQL to query your data.\n\nGet started at [anyquery.dev](https://anyquery.dev)\n\n![Anyquery](https://anyquery.dev/images/release-header.png)\n## Changelog\n* 1747051480e951ef42150f7378af5ad9373b7ac4 Merge pull request #49 (0.4.2 release)\n* d4deaecf0aef65678106c911fabf666cc00fd2c5 Update navBar.astro: fix link (#39)\n* d492cdba00e456e85c65517a7235d38d61b49d6a ✨ Add Clickhouse querying support\n* 6bcc22c93d975b40801bf0e801374dc4d089940c ✨ Add support for querying files in MCP #47\n* 5635b45145b3b739f8766a43ec7b65dfe4541581 ⬆️ Update dependencies to the latest patch\n* 6a33ea1be62f4b33f90413ce4a00e9790b663827 ⬆️ Upgrade Astro and Tailwind\n* 4e33c0d755101b984ea32b4093314870ca06fb94 🐛 Fix issue #40 (stream ID 1; INTERNAL_ERROR)\n* e6f88e6d494500df373315ac31a23e92ce0558a0 🐛 Fix issue #44 (Create table from csv/parquet file)\n* abb689b313967180b3fff76d9e37f9bc61383b30 🐛 Fix parameters handling of read_* tables\n* 56af84046c357b2abbdd0b5009dc113c606eea07 🐛 Potential fix for #48: Airtable marshalling error\n* 8ef2e68562858551307a284d64e85a77e199d84b 📝 Add deprecation notice for the ChatGPT integration\n* b21c9ee1b687c4784e2b55f6cd275ff56546fe8b 📝 Change to brew install anyquery (#38)\n* 09fe519b0edb6ad51a5d05bc44adb6897355df47 📝 Remove tunnel docs from mcp\n* 251f13a48d144b7147490f5ae9582ca3c8017064 📝 Update README.md for LLMs\n* c81f42fafed4dfc2a73808aab90cab853291902a 📝 Update documentation for ClickHouse database\n* 3129f1373a1dee1a7a5f63594635d48f0cf85d91 🙈 Update gitignore for integration server\n\n",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.1.6",
+        "commit_sha": "14deb8f7344429693cb290acd3bd1c05a2ddea20"
+      },
+      {
+        "name": "v0.1.5",
+        "commit_sha": "0c6a3f0c6edcca0d1e3d9696598a7088c9933c05"
+      },
+      {
+        "name": "v0.1.4",
+        "commit_sha": "a796efaa3ba873e810dc6625b6c3adfb16ffc5e2"
+      },
+      {
+        "name": "v0.1.3",
+        "commit_sha": "951a57887ed345d61246b707f9cac96be8c0ce1a"
+      },
+      {
+        "name": "v0.1.2",
+        "commit_sha": "d659ecedbe71afebcf769b5904f1073118584ad4"
+      },
+      {
+        "name": "v0.1.1",
+        "commit_sha": "34fae96cf41ac8259d0bdc54f2c3ae6eba50735a"
+      },
+      {
+        "name": "0.4.2",
+        "commit_sha": "1747051480e951ef42150f7378af5ad9373b7ac4"
+      },
+      {
+        "name": "0.4.1",
+        "commit_sha": "219ec41646c7be53d206c7e3be00828834a0ad32"
+      },
+      {
+        "name": "0.4.0",
+        "commit_sha": "bcae8f1340fd664e08b4096dd46ffd1b6c2156a8"
+      },
+      {
+        "name": "0.3.1",
+        "commit_sha": "f7a1d9d047460a37e4d114422c4b8e7c4e86c9b8"
+      }
+    ],
+    "latest_version": "v0.1.6"
+  },
+  "readme": "# Anyquery\n\n<img src=\"https://anyquery.dev/images/logo-shadow.png\" alt=\"Anyquery logo\" width=\"96\"></img>\n\n![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/julien040/anyquery/total)\n![GitHub commit activity](https://img.shields.io/github/commit-activity/m/julien040/anyquery)\n[![Documentation](https://img.shields.io/badge/documentation-blue)](https://anyquery.dev)\n[![GitHub issues](https://img.shields.io/github/issues/julien040/anyquery)](https://github.com/julien040/anyquery/issues)\n[![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fregistry.anyquery.dev%2Fv0%2Fregistry%2F&query=%24.plugins_count&label=Integrations%20count&cacheSeconds=3600)](https://anyquery.dev/integrations/)\n[![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fregistry.anyquery.dev%2Fv0%2Fquery%2F&query=%24.queries_count&style=flat&label=Queries%20from%20the%20hub&cacheSeconds=3600&link=https%3A%2F%2Fanyquery.dev%2Fqueries)](https://anyquery.dev/queries)\n[![Go Reference](https://pkg.go.dev/badge/github.com/julien040/anyquery@v0.1.3/namespace.svg)](https://pkg.go.dev/github.com/julien040/anyquery/namespace)\n\nAnyquery is a SQL query engine that allows you to run SQL queries on pretty much anything. It supports querying [files](https://anyquery.dev/docs/usage/querying-files/), [databases](https://anyquery.dev/docs/database), and [apps](https://anyquery.dev/integrations) (e.g. Apple Notes, Notion, Chrome, Todoist, etc.). It's built on top of [SQLite](https://www.sqlite.org) and uses [plugins](https://anyquery.dev/integrations) to extend its functionality.\n\nIt can also connect to [LLMs](https://anyquery.dev/llm) (e.g. ChatGPT, Claude, Cursor, TypingMind, etc.) to allow them to access your data.\n\nFinally, it can act as a [MySQL server](https://anyquery.dev/docs/usage/mysql-server/), allowing you to run SQL queries from your favorite MySQL-compatible client (e.g. [TablePlus](https://anyquery.dev/connection-guide/tableplus/), [Metabase](https://anyquery.dev/connection-guide/metabase/), etc.).\n\n![Anyquery header](https://anyquery.dev/images/release-header.png)\n\n## Usage\n\n### Connecting LLM\n\nLLMs can connect to Anyquery using the [Model Context Protocol (MCP)](https://anyquery.dev/docs/reference/commands/anyquery_mcp). This protocol provides context for LLMs that support it. You can start the MCP server with the following command:\n\n```bash\n# To be started by the LLM client\nanyquery mcp --stdio\n# To connect using an HTTP and SSE tunnel\nanyquery mcp --host 127.0.0.1 --port 8070\n```\n\nYou can also connect to clients that supports function calling (e.g. ChatGPT, TypingMind). Refer to each [connection guide](https://anyquery.dev/integrations#llm) in the documentation for more information.\n\n```bash\n# Copy the ID returned by the command, and paste it in the LLM client (e.g. ChatGPT, TypingMind)\nanyquery gpt\n```\n\n![5ire example](https://anyquery.dev/images/docs/llm/5ire-final.png)\n\n### Running SQL queries\n\nThe [documentation](https://anyquery.dev/docs/usage/running-queries) provides detailed instructions on how to run queries with Anyquery.\nBut let's see a quick example. Type `anyquery` in your terminal to open the shell mode. Then, run the following query:\n\n![Anyquery SQL examples](https://anyquery.dev/images/anyquery_examples.sql.png)\n\nYou can also launch the MySQL server with `anyquery server` and connect to it with your favorite MySQL-compatible client.\n\n```bash\nanyquery server &\nmysql -u root -h 127.0.0.1 -P 8070\n```\n\n## Installation\n\nThe [documentation](https://anyquery.dev/docs/#installation) provides detailed instructions on how to install Anyquery on your system. You can install anyquery from Homebrew, APT, YUM/DNF, Scoop, Winget and Chocolatey. You can also download the binary from the [releases page](https://github.com/julien040/anyquery/releases).\n\n### Homebrew\n\n```zsh\nbrew install anyquery\n```\n<!-- \n### Snap\n\n```bash\nsudo snap install anyquery\n``` -->\n\n### APT\n\n```bash\necho \"deb [trusted=yes] https://apt.julienc.me/ /\" | sudo tee /etc/apt/sources.list.d/anyquery.list\nsudo apt update\nsudo apt install anyquery\n```\n\n### YUM/DNF\n\n```bash\necho \"[anyquery]\nname=Anyquery\nbaseurl=https://yum.julienc.me/\nenabled=1\ngpgcheck=0\" | sudo tee /etc/yum.repos.d/anyquery.repo\nsudo dnf install anyquery\n```\n\n### Scoop\n\n```powershell\nscoop bucket add anyquery https://github.com/julien040/anyquery-scoop\nscoop install anyquery\n```\n\n### Winget\n\n```powershell\nwinget install JulienCagniart.anyquery\n```\n\n### Chocolatey\n\n```powershell\nchoco install anyquery\n```\n\n## Plugins\n\nAnyquery is plugin-based, and you can install plugins to extend its functionality. You can install plugins from the [official registry](https://anyquery.dev/integrations) or create your own. Anyquery can also [load any SQLite extension](https://anyquery.dev/docs/usage/plugins#using-sqlite-extensions).\n\n![Integrations](https://anyquery.dev/images/integrations_logo.png)\n\n## License\n\nAnyquery is licensed under the AGPLv3 license for the core engine. The RPC library is licensed under the MIT license so that anyone can reuse plugins in different projects.\n\nThe plugins are not subject to the AGPL license. Each plugins has its own license and the copyright is owned by the plugin author.\nSee the [LICENSE](https://github.com/julien040/anquery/blob/main/LICENSE.md) file for more information.\n\n## Contributing\n\nIf you want to contribute to Anyquery, please read the [contributing guidelines](https://anyquery.dev/docs/developers/project/contributing). I currently only accept minor contributions, but I'm open to any suggestions or feedback.\n\nYou can have a brief overview of the project in the [architecture](https://anyquery.dev/docs/developers/project/architecture/) documentation.\n"
+}

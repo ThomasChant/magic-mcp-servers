@@ -1,0 +1,53 @@
+{
+  "mcp_name": "operation-hp/WA-MCP",
+  "mcp_description": "Facilitates interaction with MCP servers through WhatsApp using chat messages, leveraging whatsapp-web.js.",
+  "mcp_id": "operation-hp_WA-MCP",
+  "fetch_timestamp": "2025-06-23T07:21:56.439797Z",
+  "github_url": "https://github.com/operation-hp/WA-MCP",
+  "repository": {
+    "name": "WA-MCP",
+    "full_name": "operation-hp/WA-MCP",
+    "description": "MCP client for Whatsapp ",
+    "html_url": "https://github.com/operation-hp/WA-MCP",
+    "created_at": "2025-04-26T13:55:29Z",
+    "updated_at": "2025-05-06T19:08:14Z",
+    "pushed_at": "2025-04-28T07:24:50Z",
+    "size": 76,
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": "Apache License 2.0",
+    "topics": [
+      "mcp-client"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "operation-hp",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51909803?v=4",
+      "html_url": "https://github.com/operation-hp"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 22272
+    },
+    "language_percentages": {
+      "TypeScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "0.1.0"
+  },
+  "readme": "# MCP-WhatsApp Client\r\n\r\nThis project lets you start an MCP server from WhatsApp and interact via chat messages. It builds on [whatsapp-web.js](https://github.com/pedroslopez/whatsapp-web.js) — follow its installation guide first.\r\n\r\n## Prerequisites\r\n\r\n- Node.js v18 or higher (`node -v`)\r\n- Follow whatsapp-web.js to get a whatsapp web client ready to use \r\n- npm (with Node.js; verify with `npm -v`)\r\n- OpenAI or Anthropic API key exported as environment variable:\r\n  ```bash\r\n  export ANTHROPIC_API_KEY=sk-...\r\n  ```\r\n- Git (for cloning the repo)\r\n\r\n\r\n## Installation\r\n\r\n1. **Clone the repository**  \r\n   ```bash\r\n   git clone [https://github.com/<you>/mcp-whatsapp.git](https://github.com/operation-hp/WA-MCP.git) \r\n   cd WA-MCP\r\n   ```\r\n   \r\n2. **Edit the whatsapp-client.ts and add your phone number**\r\n    \r\n   ```\r\n   const pairingCode = await this.whatsapp.requestPairingCode('+1234567890'); // enter the target phone number\r\n   ```\r\n\r\n3. **Install dependencies**  \r\n   ```bash\r\n   nvm use 20 \r\n   npm install\r\n   ```\r\n\r\n3. **Build the project**  \r\n   ```bash\r\n   npm run build\r\n   ```\r\n\r\nEverything, including the compatible Chromium bundle for Puppeteer, will be downloaded automatically.\r\n\r\n## Configure MCP servers\r\n\r\nEdit `mcp-server.conf` in the project /build directory. This config file is same as Claude Desktop:\r\n\r\n```json\r\n{\r\n  \"mcpServers\": {\r\n    \"python-bot\": {\r\n      \"command\": \"python\",\r\n      \"args\": [\"my_mcp_script.py\"],\r\n      \"env\": { \"TOKEN\": \"123\" },\r\n      \"cwd\": \"./bots\"\r\n    },\r\n    \"node-demo\": {\r\n      \"command\": \"node\",\r\n      \"args\": [\"--max-old-space-size=256\", \"demo.js\"]\r\n    }\r\n  }\r\n}\r\n```\r\none example can be found at https://github.com/operation-hp/spotify-mcp-wa ( which supports Oauth and let you login to Spotify) \r\n\r\n## Running the bridge\r\n\r\nStart the client:\r\n\r\n```bash\r\nnpm start\r\n```\r\n\r\n\r\n## Troubleshooting\r\n\r\n- **TimeoutError**:  \r\n  If Puppeteer fails to launch Chromium, ensure you haven’t modified `src/lib/whatsapp-client.ts` launch options.\r\n\r\n- **ENOENT mcp-server.conf**:  \r\n  Keep the file next to `build/index.js` or update the `configPath` constant.\r\n\r\n- **QR not shown**:  \r\n  Delete the session cache directory and restart:  \r\n  ```bash\r\n  rm -rf .wwebjs_auth\r\n  ```\r\n\r\n## Updating\r\n\r\n```bash\r\ngit pull\r\nnpm install\r\nnpm run build\r\n```\r\n\r\n\r\nEnjoy chatting with your MCP servers directly from WhatsApp!\r\n\r\n"
+}

@@ -1,0 +1,49 @@
+{
+  "mcp_name": "NexusX-MCP/integrate-mcp-server",
+  "mcp_description": "An extensible server providing standardized access to social and onchain data, supporting platforms like Farcaster with plans for Twitter integration.",
+  "mcp_id": "NexusX-MCP_integrate-mcp-server",
+  "fetch_timestamp": "2025-06-23T07:04:20.572936Z",
+  "github_url": "https://github.com/NexusX-MCP/integrate-mcp-server",
+  "repository": {
+    "name": "integrate-mcp-server",
+    "full_name": "NexusX-MCP/integrate-mcp-server",
+    "description": null,
+    "html_url": "https://github.com/NexusX-MCP/integrate-mcp-server",
+    "created_at": "2025-04-29T07:34:16Z",
+    "updated_at": "2025-04-29T07:48:47Z",
+    "pushed_at": "2025-04-29T07:48:44Z",
+    "size": 3,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "NexusX-MCP",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/207407433?v=4",
+      "html_url": "https://github.com/NexusX-MCP"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 0,
+    "languages": {
+      "TypeScript": 1293
+    },
+    "language_percentages": {
+      "TypeScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  }
+}

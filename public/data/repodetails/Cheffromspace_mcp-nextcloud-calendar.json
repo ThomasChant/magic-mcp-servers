@@ -1,0 +1,55 @@
+{
+  "mcp_name": "Nextcloud Calendar",
+  "mcp_description": "CalDAV Nectcloud calendar integration. Manage calendars, events, attendees, etc.",
+  "mcp_id": "Cheffromspace_mcp-nextcloud-calendar",
+  "fetch_timestamp": "2025-06-23T07:03:49.856765Z",
+  "github_url": "https://github.com/Cheffromspace/mcp-nextcloud-calendar",
+  "repository": {
+    "name": "mcp-nextcloud-calendar",
+    "full_name": "Cheffromspace/mcp-nextcloud-calendar",
+    "description": null,
+    "html_url": "https://github.com/Cheffromspace/mcp-nextcloud-calendar",
+    "created_at": "2025-04-15T22:17:45Z",
+    "updated_at": "2025-05-11T19:59:20Z",
+    "pushed_at": "2025-05-11T19:59:16Z",
+    "size": 461,
+    "stargazers_count": 2,
+    "watchers_count": 2,
+    "forks_count": 1,
+    "open_issues_count": 24,
+    "language": "TypeScript",
+    "license": "ISC License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "Cheffromspace",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/21370528?v=4",
+      "html_url": "https://github.com/Cheffromspace"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 416455,
+      "JavaScript": 17693,
+      "Shell": 85
+    },
+    "language_percentages": {
+      "TypeScript": 95.91,
+      "JavaScript": 4.07,
+      "Shell": 0.02
+    },
+    "pull_requests_count": 28,
+    "contributors_count": 1,
+    "package_json_version": "0.1.0"
+  },
+  "readme": "# MCP Nextcloud Calendar\n\n[![npm version](https://img.shields.io/npm/v/mcp-nextcloud-calendar.svg)](https://www.npmjs.com/package/mcp-nextcloud-calendar)\n[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)\n\nA Model Context Protocol (MCP) server for Nextcloud Calendar integration.\n\n## Features\n\n- Fetch calendars from Nextcloud\n- ADHD-friendly organization features\n- MCP protocol support (Streamable HTTP and Legacy HTTP+SSE)\n\n## Usage\n\n### Using with npx\n\nThe easiest way to use this package is with npx:\n\n```bash\nnpx mcp-nextcloud-calendar\n```\n\n### Installation\n\nFor development or local installation:\n\n```bash\n# Install globally\nnpm install -g mcp-nextcloud-calendar\n\n# Or install locally\nnpm install mcp-nextcloud-calendar\n```\n\n### MCP Client Configuration\n\nTo use with an MCP client (like Claude), add this configuration to your MCP client settings:\n\n```json\n{\n  \"mcpServers\": {\n    \"nextcloud-calendar\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"mcp-nextcloud-calendar\"],\n      \"env\": {\n        \"NEXTCLOUD_BASE_URL\": \"https://your-nextcloud-server.com\",\n        \"NEXTCLOUD_USERNAME\": \"your-username\",\n        \"NEXTCLOUD_APP_TOKEN\": \"your-app-token\"\n      }\n    }\n  }\n}\n```\n\n#### Specifying a Version\n\nYou can pin to a specific version of the package:\n\n```json\n{\n  \"mcpServers\": {\n    \"nextcloud-calendar\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"mcp-nextcloud-calendar@0.1.0\"],\n      \"env\": {\n        \"NEXTCLOUD_BASE_URL\": \"https://your-nextcloud-server.com\",\n        \"NEXTCLOUD_USERNAME\": \"your-username\",\n        \"NEXTCLOUD_APP_TOKEN\": \"your-app-token\"\n      }\n    }\n  }\n}\n```\n\n## Configuration\n\n### Environment Variables\n\nThe server uses these environment variables, with defaults where possible:\n\n| Variable | Description | Default | Required |\n|----------|-------------|---------|----------|\n| PORT | Server port | 3001 | No |\n| SERVER_NAME | MCP server identifier | nextcloud-calendar-server | No |\n| NODE_ENV | Environment (development/production) | development | No |\n| NEXTCLOUD_BASE_URL | Your Nextcloud server URL | - | Yes |\n| NEXTCLOUD_USERNAME | Your Nextcloud username | - | Yes |\n| NEXTCLOUD_APP_TOKEN | Your Nextcloud app token | - | Yes |\n| KEEP_ALIVE_INTERVAL | Keep-alive interval (ms) | 30000 | No |\n\n### Development Setup\n\nFor local development:\n\n1. Clone the repository\n2. Install dependencies:\n\n```bash\nnpm install\n```\n\n3. Create a `.env` file in the project root:\n\n```bash\ncp .env.example .env\n```\n\n4. Edit the `.env` file with your Nextcloud credentials.\n\n### Getting a Nextcloud App Token\n\n1. Log in to your Nextcloud instance\n2. Go to Settings → Security → App Passwords\n3. Create a new app password with a name like \"MCP Calendar\"\n4. Copy the generated token to your `.env` file\n\n## Development\n\n```bash\n# Build the project\nnpm run build\n\n# Run in development mode\nnpm run dev\n\n# Run tests\nnpm run test\n\n# Run linting\nnpm run lint\n\n# Format code\nnpm run format\n```\n\n## API Endpoints\n\n- `/mcp` - Primary MCP endpoint (Streamable HTTP transport)\n- `/sse` and `/messages` - Legacy MCP endpoints (HTTP+SSE transport)\n- `GET /health` - Health check endpoint\n- `GET /api/calendars` - List all calendars\n\n## MCP Tools\n\nThe following MCP tools are registered and available to clients:\n\n### Calendar Management\n\n| Tool | Description | Parameters |\n|------|-------------|------------|\n| `listCalendars` | Retrieves all accessible calendars | None |\n| `createCalendar` | Creates a new calendar | `displayName` (required), `color` (optional), `category` (optional), `focusPriority` (optional) |\n| `updateCalendar` | Updates an existing calendar | `id` (required), `displayName` (optional), `color` (optional), `category` (optional), `focusPriority` (optional) |\n| `deleteCalendar` | Deletes a calendar | `id` (required) |\n\n> **⚠️ Permission Warning**: The `updateCalendar` and `deleteCalendar` tools may require special permissions in your Nextcloud instance. Calendar operations are subject to Nextcloud's permission system.\n\n### Event Management\n\n| Tool | Description | Parameters |\n|------|-------------|------------|\n| `listEvents` | Retrieves events for a calendar | `calendarId` (required), `start` (optional), `end` (optional) |\n| `getEvent` | Gets a specific event | `calendarId` (required), `eventId` (required) |\n| `createEvent` | Creates a new event | `calendarId` (required), `summary` (required), `start` (required), `end` (required), `description` (optional), `location` (optional) |\n| `updateEvent` | Updates an existing event | `calendarId` (required), `eventId` (required), [plus any event properties to update] |\n| `deleteEvent` | Deletes an event | `calendarId` (required), `eventId` (required) |\n\n## Known Issues and Limitations\n\n> **Note**: This package is currently in early development (0.1.x). APIs and tools may change without notice in future releases.\n\n- The update and delete calendar operations may require specific permissions in your Nextcloud instance\n- Error handling for specific Nextcloud error codes is still being improved\n- Large calendars with many events may experience performance issues\n\nPlease report any issues on the GitHub repository.\n\n## License\n\nISC\n\n[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/cheffromspace)\n"
+}

@@ -1,0 +1,119 @@
+{
+  "mcp_name": "Lingo.dev",
+  "mcp_description": "Make your AI agent speak every language on the planet, using [Lingo.dev](https://lingo.dev) Localization Engine.",
+  "mcp_id": "lingodotdev_lingo.dev",
+  "fetch_timestamp": "2025-06-23T06:11:28.962373Z",
+  "github_url": "https://github.com/lingodotdev/lingo.dev/blob/main/mcp.md",
+  "repository": {
+    "name": "lingo.dev",
+    "full_name": "lingodotdev/lingo.dev",
+    "description": "⚡ Lingo.dev - open-source, AI-powered i18n toolkit for instant localization with LLMs. Bring your own LLM or use Lingo.dev engine. Join discord: https://lingo.dev/go/discord",
+    "html_url": "https://github.com/lingodotdev/lingo.dev",
+    "created_at": "2024-03-13T11:27:31Z",
+    "updated_at": "2025-06-23T05:39:52Z",
+    "pushed_at": "2025-06-23T05:02:20Z",
+    "size": 18082,
+    "stargazers_count": 2591,
+    "watchers_count": 2591,
+    "forks_count": 129,
+    "open_issues_count": 24,
+    "language": "TypeScript",
+    "license": "Apache License 2.0",
+    "topics": [
+      "i18n",
+      "javascript",
+      "react",
+      "react-native",
+      "typescript"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "lingodotdev",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/155387533?v=4",
+      "html_url": "https://github.com/lingodotdev"
+    },
+    "has_issues": true,
+    "has_projects": false,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 129,
+    "subscribers_count": 6,
+    "languages": {
+      "TypeScript": 859872,
+      "HTML": 8108,
+      "PHP": 5099,
+      "Vue": 2890,
+      "MDX": 1547,
+      "JavaScript": 1528,
+      "Dockerfile": 600
+    },
+    "language_percentages": {
+      "TypeScript": 97.75,
+      "HTML": 0.92,
+      "PHP": 0.58,
+      "Vue": 0.33,
+      "MDX": 0.18,
+      "JavaScript": 0.17,
+      "Dockerfile": 0.07
+    },
+    "pull_requests_count": 833,
+    "contributors_count": 41,
+    "latest_release": {
+      "tag_name": "lingo.dev@0.99.7",
+      "name": "lingo.dev@0.99.7",
+      "published_at": "2025-06-20T07:13:01Z",
+      "body": "### Patch Changes\n\n-   [#947](https://github.com/lingodotdev/lingo.dev/pull/947) [`d80285a`](https://github.com/lingodotdev/lingo.dev/commit/d80285a9b12bd85425564cb00e558812fd0aee40) Thanks [@mathio](https://github.com/mathio)! - remove local variable cache\n\n-   Updated dependencies \\[[`d80285a`](https://github.com/lingodotdev/lingo.dev/commit/d80285a9b12bd85425564cb00e558812fd0aee40)]:\n    -   @lingo.dev/\\_compiler@0.3.5\n",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "replexica@0.71.0",
+        "commit_sha": "c7d4d849e3ec7d5b8fa7c72276719c8ea696acc5"
+      },
+      {
+        "name": "replexica@0.70.1",
+        "commit_sha": "d72ed90df0d170306ef36db32a74e30713bcd365"
+      },
+      {
+        "name": "replexica@0.70.0",
+        "commit_sha": "3ccfaa0bb717b8d10e9a8412f7d70a02a0303fb2"
+      },
+      {
+        "name": "replexica@0.69.0",
+        "commit_sha": "ceb429ce4c3a11e6d279e0d0921f490b2f3c73c7"
+      },
+      {
+        "name": "replexica@0.68.0",
+        "commit_sha": "61c3fb3fd5e2975a7bf3acff0628595c72f1b475"
+      },
+      {
+        "name": "replexica@0.67.0",
+        "commit_sha": "1bdd72d8d2e02a2ecbf91a5c42ba091f7700d436"
+      },
+      {
+        "name": "replexica@0.66.2",
+        "commit_sha": "299f1f63be097074dfa2422dfb0f25c91644d25b"
+      },
+      {
+        "name": "replexica@0.66.1",
+        "commit_sha": "07f6f514e96d325bbbdd3bc4c153177437340ab3"
+      },
+      {
+        "name": "replexica@0.66.0",
+        "commit_sha": "a0c2d42d1953fe4b75bbb62ab9173c8008e557aa"
+      },
+      {
+        "name": "replexica@0.65.1",
+        "commit_sha": "d29bf27eb82fcb066282c38dd922650fc0dedab8"
+      }
+    ],
+    "latest_version": "replexica@0.71.0"
+  },
+  "readme": "<p align=\"center\">\n  <a href=\"https://lingo.dev\">\n    <img src=\"https://raw.githubusercontent.com/lingodotdev/lingo.dev/main/content/banner.compiler.png\" width=\"100%\" alt=\"Lingo.dev\" />\n  </a>\n</p>\n\n<p align=\"center\">\n  <strong>⚡ Lingo.dev - open-source, AI-powered i18n toolkit for instant localization with LLMs.</strong>\n</p>\n\n<br />\n\n<p align=\"center\">\n  <a href=\"https://lingo.dev/compiler\">Lingo.dev Compiler</a> •\n  <a href=\"https://lingo.dev/cli\">Lingo.dev CLI</a> •\n  <a href=\"https://lingo.dev/ci\">Lingo.dev CI/CD</a> •\n  <a href=\"https://lingo.dev/sdk\">Lingo.dev SDK</a>\n</p>\n\n<p align=\"center\">\n  <a href=\"https://github.com/lingodotdev/lingo.dev/actions/workflows/release.yml\">\n    <img src=\"https://github.com/lingodotdev/lingo.dev/actions/workflows/release.yml/badge.svg\" alt=\"Release\" />\n  </a>\n  <a href=\"https://github.com/lingodotdev/lingo.dev/blob/main/LICENSE.md\">\n    <img src=\"https://img.shields.io/github/license/lingodotdev/lingo.dev\" alt=\"License\" />\n  </a>\n  <a href=\"https://github.com/lingodotdev/lingo.dev/commits/main\">\n    <img src=\"https://img.shields.io/github/last-commit/lingodotdev/lingo.dev\" alt=\"Last Commit\" />\n  </a>\n</p>\n\n---\n\n## Meet the Compiler 🆕\n\n**Lingo.dev Compiler** is a free, open-source compiler middleware, designed to make any React app multilingual at build time without requiring any changes to the existing React components.\n\nInstall once:\n\n```bash\nnpm install lingo.dev\n```\n\nEnable in your build config:\n\n```js\nimport lingoCompiler from \"lingo.dev/compiler\";\n\nconst existingNextConfig = {};\n\nexport default lingoCompiler.next({\n  sourceLocale: \"en\",\n  targetLocales: [\"es\", \"fr\"],\n})(existingNextConfig);\n```\n\nRun `next build` and watch Spanish and French bundles pop out ✨\n\n[Read the docs →](https://lingo.dev/compiler) for the full guide, and [Join our Discord](https://lingo.dev/go/discord) to get help with your setup.\n\n---\n\n### What's inside this repo?\n\n| Tool         | TL;DR                                                                          | Docs                                    |\n| ------------ | ------------------------------------------------------------------------------ | --------------------------------------- |\n| **Compiler** | Build-time React localization                                                  | [/compiler](https://lingo.dev/compiler) |\n| **CLI**      | One-command localization for web and mobile apps, JSON, YAML, markdown, + more | [/cli](https://lingo.dev/cli)           |\n| **CI/CD**    | Auto-commit translations on every push + create pull requests if needed        | [/ci](https://lingo.dev/ci)             |\n| **SDK**      | Realtime translation for user-generated content                                | [/sdk](https://lingo.dev/sdk)           |\n\nBelow are the quick hits for each 👇\n\n---\n\n### ⚡️ Lingo.dev CLI\n\nTranslate code & content straight from your terminal.\n\n```bash\nnpx lingo.dev@latest run\n```\n\nIt fingerprints every string, caches results, and only re-translates what changed.\n\n[Follow the docs →](https://lingo.dev/cli) to learn how to set it up.\n\n---\n\n### 🔄 Lingo.dev CI/CD\n\nShip perfect translations automatically.\n\n```yaml\n# .github/workflows/i18n.yml\nname: Lingo.dev i18n\non: [push]\n\njobs:\n  i18n:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: lingodotdev/lingo.dev@main\n        with:\n          api-key: ${{ secrets.LINGODOTDEV_API_KEY }}\n```\n\nKeeps your repo green and your product multilingual without the manual steps.\n\n[Read the docs →](https://lingo.dev/ci)\n\n---\n\n### 🧩 Lingo.dev SDK\n\nInstant per-request translation for dynamic content.\n\n```ts\nimport { LingoDotDevEngine } from \"lingo.dev/sdk\";\n\nconst lingoDotDev = new LingoDotDevEngine({\n  apiKey: \"your-api-key-here\",\n});\n\nconst content = {\n  greeting: \"Hello\",\n  farewell: \"Goodbye\",\n  message: \"Welcome to our platform\",\n};\n\nconst translated = await lingoDotDev.localizeObject(content, {\n  sourceLocale: \"en\",\n  targetLocale: \"es\",\n});\n// Returns: { greeting: \"Hola\", farewell: \"Adiós\", message: \"Bienvenido a nuestra plataforma\" }\n\n```\n\nPerfect for chat, user comments, and other real-time flows.\n\n[Read the docs →](https://lingo.dev/sdk)\n\n---\n\n## 🤝 Community\n\nWe're community-driven and love contributions!\n\n- Got an idea? [Open an issue](https://github.com/lingodotdev/lingo.dev/issues)\n- Want to fix something? [Send a PR](https://github.com/lingodotdev/lingo.dev/pulls)\n- Need help? [Join our Discord](https://lingo.dev/go/discord)\n\n## ⭐ Star History\n\nIf you like what we're doing, give us a ⭐ and help us reach 3,000 stars! 🌟\n\n[![Star History Chart](https://api.star-history.com/svg?repos=lingodotdev/lingo.dev&type=Date)](https://www.star-history.com/#lingodotdev/lingo.dev&Date)\n\n## 🌐 Readme in other languages\n\n[English](https://github.com/lingodotdev/lingo.dev) • [中文](/readme/zh-Hans.md) • [日本語](/readme/ja.md) • [한국어](/readme/ko.md) • [Español](/readme/es.md) • [Français](/readme/fr.md) • [Русский](/readme/ru.md) • [Deutsch](/readme/de.md) • [Italiano](/readme/it.md) • [العربية](/readme/ar.md) • [हिन्दी](/readme/hi.md) • [বাংলা](/readme/bn.md) • [فارسی](/readme/fa.md)\n\nDon't see your language? Add it to [`i18n.json`](./i18n.json) and open a PR!\n"
+}

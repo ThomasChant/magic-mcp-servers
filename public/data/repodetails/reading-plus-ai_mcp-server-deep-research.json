@@ -1,0 +1,52 @@
+{
+  "mcp_name": "reading-plus-ai/mcp-server-deep-research",
+  "mcp_description": "📇 ☁️ - MCP server providing OpenAI/Perplexity-like autonomous deep research, structured query elaboration, and concise reporting.",
+  "mcp_id": "reading-plus-ai_mcp-server-deep-research",
+  "fetch_timestamp": "2025-06-23T07:53:55.853559Z",
+  "github_url": "https://github.com/reading-plus-ai/mcp-server-deep-research",
+  "repository": {
+    "name": "mcp-server-deep-research",
+    "full_name": "reading-plus-ai/mcp-server-deep-research",
+    "description": null,
+    "html_url": "https://github.com/reading-plus-ai/mcp-server-deep-research",
+    "created_at": "2025-03-23T01:35:18Z",
+    "updated_at": "2025-06-23T04:39:07Z",
+    "pushed_at": "2025-03-25T15:50:11Z",
+    "size": 24,
+    "stargazers_count": 126,
+    "watchers_count": 126,
+    "forks_count": 13,
+    "open_issues_count": 2,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "reading-plus-ai",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/190877960?v=4",
+      "html_url": "https://github.com/reading-plus-ai"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 13,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 13969,
+      "Shell": 1835
+    },
+    "language_percentages": {
+      "Python": 88.39,
+      "Shell": 11.61
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 2
+  },
+  "readme": "# MCP Server for Deep Research\n\nMCP Server for Deep Research is a tool designed for conducting comprehensive research on complex topics. It helps you explore questions in depth, find relevant sources, and generate structured research reports.\n\nYour personal Research Assistant, turning research questions into comprehensive, well-cited reports.\n\n## 🚀 Try it Out\n\n[![Watch the demo](https://img.youtube.com/vi/_a7sfo5yxoI/maxresdefault.jpg)]([VIDEO_URL](https://youtu.be/_a7sfo5yxoI))\nYoutube: https://youtu.be/_a7sfo5yxoI\n\n1. **Download Claude Desktop**\n   - Get it [here](https://claude.ai/download)\n\n2. **Install and Set Up**\n   - On macOS, run the following command in your terminal:\n   ```bash\n   python setup.py\n   ```\n\n3. **Start Researching**\n   - Select the deep-research prompt template from MCP\n   - Begin your research by providing a research question\n\n## Features\n\nThe Deep Research MCP Server offers a complete research workflow:\n\n1. **Question Elaboration**\n   - Expands and clarifies your research question\n   - Identifies key terms and concepts\n   - Defines scope and parameters\n\n2. **Subquestion Generation**\n   - Creates focused subquestions that address different aspects\n   - Ensures comprehensive coverage of the main topic\n   - Provides structure for systematic research\n\n3. **Web Search Integration**\n   - Uses Claude's built-in web search capabilities\n   - Performs targeted searches for each subquestion\n   - Identifies relevant and authoritative sources\n   - Collects diverse perspectives on the topic\n\n4. **Content Analysis**\n   - Evaluates information quality and relevance\n   - Synthesizes findings from multiple sources\n   - Provides proper citations for all sources\n\n5. **Report Generation**\n   - Creates well-structured, comprehensive reports as artifacts\n   - Properly cites all sources used\n   - Presents a balanced view with evidence-based conclusions\n   - Uses appropriate formatting for clarity and readability\n\n## 📦 Components\n\n### Prompts\n- **deep-research**: Tailored for comprehensive research tasks with a structured approach\n\n## ⚙️ Modifying the Server\n\n### Claude Desktop Configurations\n- macOS: `~/Library/Application\\ Support/Claude/claude_desktop_config.json`\n- Windows: `%APPDATA%/Claude/claude_desktop_config.json`\n\n### Development (Unpublished Servers)\n```json\n\"mcpServers\": {\n  \"mcp-server-deep-research\": {\n    \"command\": \"uv\",\n    \"args\": [\n      \"--directory\",\n      \"/Users/username/repos/mcp-server-application/mcp-server-deep-research\",\n      \"run\",\n      \"mcp-server-deep-research\"\n    ]\n  }\n}\n```\n\n### Published Servers\n```json\n\"mcpServers\": {\n  \"mcp-server-deep-research\": {\n    \"command\": \"uvx\",\n    \"args\": [\n      \"mcp-server-deep-research\"\n    ]\n  }\n}\n```\n\n## 🛠️ Development\n\n### Building and Publishing\n1. **Sync Dependencies**\n   ```bash\n   uv sync\n   ```\n\n2. **Build Distributions**\n   ```bash\n   uv build\n   ```\n   Generates source and wheel distributions in the dist/ directory.\n\n3. **Publish to PyPI**\n   ```bash\n   uv publish\n   ```\n\n## 🤝 Contributing\n\nContributions are welcome! Whether you're fixing bugs, adding features, or improving documentation, your help makes this project better.\n\n## 📜 License\n\nThis project is licensed under the MIT License.\nSee the LICENSE file for details.\n"
+}

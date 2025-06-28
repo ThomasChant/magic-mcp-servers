@@ -1,0 +1,62 @@
+{
+  "mcp_name": "hmk/attio-mcp-server",
+  "mcp_description": "📇 ☁️ Allows AI clients to manage records and notes in Attio CRM",
+  "mcp_id": "hmk_attio-mcp-server",
+  "fetch_timestamp": "2025-06-23T04:48:26.364423Z",
+  "github_url": "https://github.com/hmk/attio-mcp-server",
+  "repository": {
+    "name": "attio-mcp-server",
+    "full_name": "hmk/attio-mcp-server",
+    "description": null,
+    "html_url": "https://github.com/hmk/attio-mcp-server",
+    "created_at": "2025-02-01T16:55:46Z",
+    "updated_at": "2025-05-09T12:21:02Z",
+    "pushed_at": "2025-03-07T02:45:04Z",
+    "size": 99,
+    "stargazers_count": 10,
+    "watchers_count": 10,
+    "forks_count": 18,
+    "open_issues_count": 5,
+    "language": "JavaScript",
+    "license": "BSD 3-Clause \"New\" or \"Revised\" License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "hmk",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/756029?v=4",
+      "html_url": "https://github.com/hmk"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 18,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 10319
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 11,
+    "contributors_count": 2,
+    "tags": [
+      {
+        "name": "v0.0.2",
+        "commit_sha": "a77f27a390163986047744f054f3c02f5e0dd932"
+      },
+      {
+        "name": "v0.0.1",
+        "commit_sha": "27b50cae613b3d1dcb221bc653352eb4480d5afb"
+      }
+    ],
+    "latest_version": "v0.0.2",
+    "package_json_version": "0.0.2"
+  },
+  "readme": "# attio-mcp-server\n\nThis is an MCP server for [Attio](https://attio.com/), the AI-native CRM. It allows mcp clients (like Claude) to connect to the Attio API.\n\n#### Current Capabilities\n\n- [x] reading company records\n- [x] reading company notes\n- [x] writing company notes\n- [ ] other activities\n\n## Usage\n\nYou will need:\n\n- `ATTIO_API_KEY` \n\nThis is expected to be a *bearer token* which means you can get one through the [API Explorer](https://developers.attio.com/reference/get_v2-objects) on the right hand side or configure OAuth and retrieve one throught the Attio API.\n\n\n### Claude Desktop Configuration\n\n```json\n{\n  \"mcpServers\": {\n    \"attio\": {\n      \"command\": \"npx\",\n      \"args\": [\"attio-mcp-server\"],\n      \"env\": {\n        \"ATTIO_API_KEY\": \"YOUR_ATTIO_API_KEY\"\n      }\n    }\n  }\n}\n```\n## Development\n\n### Prerequisites\n\nBefore you begin, ensure you have the following installed:\n\n- Node.js (recommended v22 or higher)\n- npm\n- git\n- dotenv\n\n### Setting up Development Environment\n\nTo set up the development environment, follow these steps:\n\n1. Fork the repository\n\n   - Click the \"Fork\" button in the top-right corner of this repository\n   - This creates your own copy of the repository under your Github acocunt\n\n1. Clone Your Fork:\n\n   ```sh\n   git clone https://github.com/YOUR_USERNAME/attio-mcp-server.git\n   cd attio-mcp-server\n   ```\n\n1. Add Upstream Remote\n   ```sh\n   git remote add upstream https://github.com/hmk/attio-mcp-server.git\n   ```\n\n1. Copy the dotenv file\n    ```sh\n    cp .env.template .env\n    ```\n\n1. Install dependencies:\n\n   ```sh\n   npm install\n   ```\n\n1. Run watch to keep index.js updated:\n\n   ```sh\n   npm run build:watch\n   ```\n\n1. Start the model context protocol development server:\n\n   ```sh\n   dotenv npx @modelcontextprotocol/inspector node PATH_TO_YOUR_CLONED_REPO/dist/index.js\n   ```\n\n1. If the development server did not load the environment variable correctly, set the `ATTIO_API_KEY` on the left-hand side of the mcp inspector."
+}

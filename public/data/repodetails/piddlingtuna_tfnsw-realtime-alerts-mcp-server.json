@@ -1,0 +1,51 @@
+{
+  "mcp_name": "piddlingtuna/tfnsw-realtime-alerts-mcp-server",
+  "mcp_description": "Facilitates AI-driven access to real-time transport alerts from Transport for NSW, enhancing LLM capabilities with up-to-date disruption information.",
+  "mcp_id": "piddlingtuna_tfnsw-realtime-alerts-mcp-server",
+  "fetch_timestamp": "2025-06-23T07:30:34.248918Z",
+  "github_url": "https://github.com/piddlingtuna/tfnsw-realtime-alerts-mcp-server",
+  "repository": {
+    "name": "tfnsw-realtime-alerts-mcp-server",
+    "full_name": "piddlingtuna/tfnsw-realtime-alerts-mcp-server",
+    "description": "A Model Context Protocol (MCP) server for TfNSW's realtime alerts API",
+    "html_url": "https://github.com/piddlingtuna/tfnsw-realtime-alerts-mcp-server",
+    "created_at": "2025-03-02T11:49:01Z",
+    "updated_at": "2025-04-18T18:49:26Z",
+    "pushed_at": "2025-03-09T03:02:59Z",
+    "size": 27,
+    "stargazers_count": 7,
+    "watchers_count": 7,
+    "forks_count": 2,
+    "open_issues_count": 1,
+    "language": "JavaScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "piddlingtuna",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/46484970?v=4",
+      "html_url": "https://github.com/piddlingtuna"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 2,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 13961
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# TfNSW Realtime Alerts MCP Server\n\nA Model Context Protocol server for Transport for NSW's (TfNSW) Realtime Alerts API. This server provides tools to access and interact with real-time transport alerts and information via Large Language Models.\n\n## Overview\n\nThis TypeScript-based MCP server implements integration with Transport for NSW's Realtime Alerts system. It enables AI assistants to access up-to-date information about transport disruptions, planned works, and other important alerts across the NSW transport network.\n\n## Features\n\n### Resources\n- List and access transport alerts via `nsw-transport://` URIs\n- Filter alerts by transport mode (buses, trains, ferries, etc.)\n- Plain text format for easy consumption by AI assistants\n\n### Tools\n- `get-transport-alerts` - Retrieve current transport alerts\n  - Filter by transport mode\n  - Returns formatted alert information including affected routes, time periods, and impact details\n\n### Prompts\n- `transport-disruption-summary` - Generate a summary of current transport alerts\n  - Includes relevant alert details as embedded resources\n  - Returns structured prompt for LLM summarisation of major disruptions\n\n## Transport Modes\n\nThe following transport modes are supported:\n\n- `all` - All transport modes\n- `buses` - Sydney Metro and Outer Metro Bus services\n- `ferries` - Sydney Ferries and Newcastle Transport ferries\n- `lightrail` - Light Rail services\n- `metro` - Sydney Metro\n- `nswtrains` - NSW Trains regional trains and coaches\n- `regionbuses` - Regional Bus services\n- `sydneytrains` - Sydney Trains suburban and intercity network\n\n## Authentication\n\nThis server requires authentication with the TfNSW Open Data API. You will need to register for an API key at the [TfNSW Open Data Hub](https://opendata.transport.nsw.gov.au/).\n\n## Installation\n\nTo use with Claude Desktop, add the server config:\n\nOn MacOS: `~/Library/Application Support/Claude/claude_desktop_config.json`\n\nOn Windows: `%APPDATA%/Claude/claude_desktop_config.json`\n\n```json\n{\n  \"mcpServers\": {\n    \"tfnsw-realtime-alerts\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"-y\",\n        \"tfnsw-realtime-alerts-mcp-server\"\n      ],\n      \"env\": {\n        \"NSW_TRANSPORT_API_KEY\": \"your_api_key_here\"\n      }\n    }\n  }\n}\n```\n\nReplace `\"your_api_key_here\"` with your TfNSW API key from the [TfNSW Open Data Hub](https://opendata.transport.nsw.gov.au/).\n\n## Development\n\nConfigure your API key as an environment variable in your `.env` file:\n\n```\nNSW_TRANSPORT_API_KEY=\"your_api_key_here\"\n```\n\nInstall dependencies:\n```bash\nnpm install\n```\n\nBuild the server:\n```bash\nnpm run build\n```\n\nFor development with auto-rebuild:\n```bash\nnpm run watch\n```\n\n### Debugging\n\nYou can use the [MCP Inspector](https://github.com/modelcontextprotocol/inspector) for debugging, which is available as a package script:\n\n```bash\nnpm run inspector\n```\n\nThe Inspector will provide a URL to access debugging tools in your browser.\n\n## License\n\nThis project is licensed under the MIT License - see the LICENSE file for details.\n"
+}

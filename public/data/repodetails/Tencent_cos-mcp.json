@@ -1,0 +1,53 @@
+{
+  "mcp_name": "Tencent Cloud COS MCP",
+  "mcp_description": "Facilitates seamless integration of large models with Tencent Cloud Storage (COS) and Data Processing (CI) capabilities without coding.",
+  "mcp_id": "Tencent_cos-mcp",
+  "fetch_timestamp": "2025-06-23T08:50:10.032114Z",
+  "github_url": "https://github.com/Tencent/cos-mcp",
+  "repository": {
+    "name": "cos-mcp",
+    "full_name": "Tencent/cos-mcp",
+    "description": "基于 MCP 协议的腾讯云 COS MCP Server，无需编码即可让大模型快速接入腾讯云存储 (COS) 和数据万象 (CI) 能力。",
+    "html_url": "https://github.com/Tencent/cos-mcp",
+    "created_at": "2025-04-21T06:25:18Z",
+    "updated_at": "2025-05-21T12:02:32Z",
+    "pushed_at": "2025-04-21T09:36:50Z",
+    "size": 1329,
+    "stargazers_count": 11,
+    "watchers_count": 11,
+    "forks_count": 5,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": "Other",
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "Tencent",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/18461506?v=4",
+      "html_url": "https://github.com/Tencent"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 5,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 41197,
+      "JavaScript": 4881
+    },
+    "language_percentages": {
+      "TypeScript": 89.41,
+      "JavaScript": 10.59
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "1.0.8"
+  },
+  "readme": "中文 | [English](README.en.md)\n\n# 腾讯云 COS MCP Server 🚀🚀🚀\n\n<p align=\"center\">\n  <img alt=\"logo\" src=\"https://raw.githubusercontent.com/Tencent/cos-mcp/master/src/img/logo.png\"/>\n</p>\n\n基于 MCP 协议的腾讯云 COS MCP Server，无需编码即可让大模型快速接入腾讯云存储 (COS) 和数据万象 (CI) 能力。\n\n---\n\n## ✨ 核心功能\n\n### 云端存储能力\n- ⬆️ 文件上传到云端\n- ⬇️ 文件从云端下载\n- 📋 获取云端文件列表\n\n### 云端处理能力\n- 🖼️ 获取图片信息\n- 🔍 图片超分辨率\n- ✂️ 图片裁剪\n- 📲 二维码识别\n- 🏆 图片质量评估\n- 🅰️ 文字水印\n- 🎬 元数据/自然语言检索 (MateInsight)\n- 📄 文档转 PDF\n- 🎥 视频封面\n\n---\n\n## 💡 典型应用场景\n\n- 使用其他 MCP 能力获取的文本/图片/视频/音频等数据，可直接上传到 COS 云端存储。\n- 本地数据快速通过大模型转存到 COS 云端存储/备份。\n- 通过大模型实现自动化：将网页里的视频/图片/音频/文本等数据批量转存到 COS 云端存储。\n- 自动化将视频/图片/音频/文本等数据在云端处理，并转存到 COS 云端存储。\n\n---\n\n## 🌟 功能示例\n\n1. 上传文件到 COS  \n   ![eg1](https://raw.githubusercontent.com/Tencent/cos-mcp/master/src/img/eg1.png)\n2. 图片质量评估  \n   ![eg3](https://raw.githubusercontent.com/Tencent/cos-mcp/master/src/img/eg3.png)\n3. 自然语言检索图片  \n   ![eg2](https://raw.githubusercontent.com/Tencent/cos-mcp/master/src/img/eg2.png)\n4. 视频截帧  \n   ![eg15](https://raw.githubusercontent.com/Tencent/cos-mcp/master/src/img/eg15.png)\n\n---\n\n# 🔧 安装使用\n\n## 参数说明\n\n为了保护您的数据私密性，请准备以下参数：\n\n### 1. **SecretId / SecretKey**\n- **说明**: 腾讯云 COS 的密钥，用于身份认证，请妥善保管，切勿泄露。\n- **获取方式**: \n  1. 访问 [腾讯云密钥管理](https://console.cloud.tencent.com/cam/capi)。\n  2. 新建密钥并复制生成的 **SecretId** 和 **SecretKey**。\n\n### 2. **Bucket**\n- **示例**: `mybucket-123456`\n- **说明**: 存储桶名称，用于存放数据，相当于您的个人存储空间。\n- **获取方式**: \n  1. 访问 [存储桶列表](https://console.cloud.tencent.com/cos/bucket)。\n  2. 复制存储桶名称。如果没有存储桶，可点击“创建存储桶”，一般选择默认配置即可快速完成创建。\n\n### 3. **Region**\n- **示例**: `ap-beijing`\n- **说明**: 存储桶所在的地域。\n- **获取方式**: \n  1. 在 [存储桶列表](https://console.cloud.tencent.com/cos/bucket) 中找到存储桶。\n  2. 在存储桶名称一行查看所属地域并复制，例如：`ap-beijing`。\n\n### 4. **DatasetName**\n- **说明**: 非必填参数，数据智能检索操作需要此参数。\n- **获取方式**: \n  1. 访问 [数据集管理](https://console.cloud.tencent.com/cos/metaInsight/dataManage)。\n  2. 创建数据集并等待索引建立完成后，复制数据集名称。\n\n### 5. **connectType**\n- **说明**: 非必填参数，指定连接方式，可选值为 `stdio`（本地）或 `sse`（远程）。\n- **默认值**: `stdio`\n\n### 6. **port**\n- **说明**: 非必填参数，当连接方式为 `sse` 时，可自由设置端口。\n- **默认值**: `3001`\n\n---\n\n## 从 npx 启动\n\n在大模型内使用时（例如: cursor），需要在 `mcp.json` 中配置：\n\n```json\n{\n  \"mcpServers\": {\n    \"cos-mcp\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"cos-mcp\",\n        \"--Region=yourRegion\",\n        \"--Bucket=yourBucket\",\n        \"--SecretId=yourSecretId\",\n        \"--SecretKey=yourSecretKey\",\n        \"--DatasetName=yourDatasetname\"\n      ]\n    }\n  }\n}\n```\n\n也可以通过 JSON 配置：\n\n```json\n{\n  \"mcpServers\": {\n    \"cos-mcp\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"cos-mcp\",\n        \"--cos-config='{\\\"Region\\\":\\\"yourRegion\\\",\\\"Bucket\\\":\\\"yourBucket\\\",\\\"SecretId\\\":\\\"yourSecretId\\\",\\\"SecretKey\\\":\\\"yourSecretKey\\\",\\\"DatasetName\\\":\\\"yourDatasetname\\\"}'\"\n      ]\n    }\n  }\n}\n```\n\n---\n\n## 使用 npm 安装\n\n```bash\n# 安装\nnpm install -g cos-mcp@latest\n\n# 运行开启 SSE 模式\ncos-mcp --Region=yourRegion --Bucket=yourBucket --SecretId=yourSecretId --SecretKey=yourSecretKey --DatasetName=yourDatasetname --port=3001 --connectType=sse\n\n# 或通过 JSON 配置\ncos-mcp --cos-config='{\"Region\":\"yourRegion\",\"Bucket\":\"BucketName-APPID\",\"SecretId\":\"yourSecretId\",\"SecretKey\":\"yourSecretKey\",\"DatasetName\":\"datasetName\"}' --port=3001 --connectType=sse\n```\n\n在大模型内使用 SSE 模式时（例如: cursor），需要在 `mcp.json` 中配置：\n\n```json\n{\n  \"mcpServers\": {\n    \"cos-mcp\": {\n      \"url\": \"http://localhost:3001/sse\"\n    }\n  }\n}\n```\n\n---\n\n## 使用源码安装\n\n### 步骤 1: 克隆项目代码\n\n```bash\ngit clone https://github.com/Tencent/cos-mcp.git\ncd cos-mcp\n```\n\n### 步骤 2: 安装依赖\n\n```bash\nnpm install\n```\n\n### 步骤 3: 启动服务\n\n#### 3.1 配置本地环境变量\n\n创建 `.env` 文件，并配置以下环境变量：\n\n```env\nRegion='yourRegion'\nBucket='yourBucket'\nSecretId='yourSecretId'\nSecretKey='yourSecretKey'\nDatasetName=\"yourDatasetName\"\n```\n\n#### 3.2 本地 SSE 模式启动（方式一）\n\n```bash\nnpm run start:sse\n```\n\n#### 3.3 本地构建后使用 STDIO 模式（方式二）\n\n```bash\nnpm run build\n```\n\n构建产物位于 `dist/index.js`。\n\n---\n\n### 步骤 4: 在大模型内使用\n\n#### SSE 模式配置\n\n```json\n{\n  \"mcpServers\": {\n    \"cos-mcp\": {\n      \"url\": \"http://localhost:3001/sse\"\n    }\n  }\n}\n```\n\n#### STDIO 模式配置\n\n```json\n{\n  \"mcpServers\": {\n    \"cos-mcp\": {\n      \"command\": \"node\",\n      \"args\": [\n        \"${your work space}/dist/index.js\"\n      ]\n    }\n  }\n}\n```\n\n完成以上步骤后，即可通过源码运行 COS MCP Server。\n\n---\n\n## ⚠️ 注意事项\n\n1. 如果安装了旧版本的包，可以将上述内容内 `cos-mcp` 改为 `cos-mcp@latest` 安装最新版包。\n2. 如果全局安装后直接使用 `cos-mcp` 不行，可能是全局变量有问题，可以使用拆分变量或 `npx` 的方式启动：\n   ```bash\n   npm install -g cos-mcp@latest\n   cos-mcp --cos-config=xxx --port=3001 --connectType=sse\n   ```\n   上述命令效果等同于：\n   ```bash\n   npx cos-mcp@latest --cos-config=xxx --port=3001 --connectType=sse\n   ```\n3. 如果出现解析问题，可能是终端对双引号敏感，可以将配置参数改为以下格式再尝试：\n   ```bash\n   --cos-config='{\\\"Region\\\":\\\"yourRegion\\\",\\\"Bucket\\\":\\\"BucketName-APPID\\\",\\\"SecretId\\\":\\\"yourSecretId\\\",\\\"SecretKey\\\":\\\"yourSecretKey\\\",\\\"DatasetName\\\":\\\"datasetName\\\"}' --port=3001 --connectType=sse\n   ```\n\n---\n\n## 📄 许可证\n\n[![license](http://img.shields.io/badge/license-BSD3-brightgreen.svg?style=flat)](License.txt)"
+}

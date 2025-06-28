@@ -1,0 +1,102 @@
+{
+  "mcp_name": "VideoDB",
+  "mcp_description": "Server for advanced AI-driven video editing, semantic search, multilingual transcription, generative media, voice cloning, and content moderation.",
+  "mcp_id": "video-db_agent-toolkit",
+  "fetch_timestamp": "2025-06-23T09:18:22.375428Z",
+  "github_url": "https://github.com/video-db/agent-toolkit/tree/main/modelcontextprotocol",
+  "repository": {
+    "name": "agent-toolkit",
+    "full_name": "video-db/agent-toolkit",
+    "description": "An open-source agent toolkit that auto-syncs SDK versions, docs, and examples—built for seamless integration with LLMs, and AI agents ( MCP compatible).",
+    "html_url": "https://github.com/video-db/agent-toolkit",
+    "created_at": "2025-03-19T08:30:36Z",
+    "updated_at": "2025-06-20T02:25:03Z",
+    "pushed_at": "2025-06-12T12:27:09Z",
+    "size": 2437,
+    "stargazers_count": 29,
+    "watchers_count": 29,
+    "forks_count": 3,
+    "open_issues_count": 4,
+    "language": "Python",
+    "license": null,
+    "topics": [
+      "agent",
+      "llm",
+      "llms-txt",
+      "mcp",
+      "mcpserver",
+      "videodb"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "video-db",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/153916972?v=4",
+      "html_url": "https://github.com/video-db"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": true,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 3,
+    "subscribers_count": 0,
+    "languages": {
+      "Python": 44066,
+      "Dockerfile": 451
+    },
+    "language_percentages": {
+      "Python": 98.99,
+      "Dockerfile": 1.01
+    },
+    "pull_requests_count": 41,
+    "contributors_count": 7,
+    "tags": [
+      {
+        "name": "v0.41",
+        "commit_sha": "891cbc65ce1ee4822646c9e87a9d612dad45f467"
+      },
+      {
+        "name": "v0.40",
+        "commit_sha": "afa735ef3067a04cfc4d4690c59b60e432af0365"
+      },
+      {
+        "name": "v0.39",
+        "commit_sha": "c5da872af3cb4310a142167de3b9d374cf8acf8a"
+      },
+      {
+        "name": "v0.38",
+        "commit_sha": "f42daa1f8ddc5a0181cf8b5640dbf67fc88f68c5"
+      },
+      {
+        "name": "v0.37",
+        "commit_sha": "096919e34ab7e2573ab6e9c80ab002469dbade68"
+      },
+      {
+        "name": "v0.36",
+        "commit_sha": "1304772ed39517a4e3b60c60087b87f3ca1e42de"
+      },
+      {
+        "name": "v0.35",
+        "commit_sha": "926a9655a50ca54f20b4183f5c2368c7a8d178a1"
+      },
+      {
+        "name": "v0.34",
+        "commit_sha": "fa4390cb63d537d34f8b3f97c72cda81105f4661"
+      },
+      {
+        "name": "v0.33",
+        "commit_sha": "55ca018aa31afa9878be3ffdb40b9f3fa5f52d12"
+      },
+      {
+        "name": "v0.32",
+        "commit_sha": "e60ae57614773e654f64aa763b846034be49bd18"
+      }
+    ],
+    "latest_version": "v0.41"
+  },
+  "readme": "[![Latest Number][token-length-shield]][token-length-url]\n[![GitHub tag (latest SemVer)][tag-shield]][ tag-url]\n[![Stars][stars-shield]][stars-url]\n[![Issues][issues-shield]][issues-url]\n\n<!-- PROJECT LOGO -->\n<br />\n<p align=\"center\">\n  <a href=\"https://videodb.io/\">\n    <img src=\"https://codaio.imgix.net/docs/_s5lUnUCIU/blobs/bl-RgjcFrrJjj/d3cbc44f8584ecd42f2a97d981a144dce6a66d83ddd5864f723b7808c7d1dfbc25034f2f25e1b2188e78f78f37bcb79d3c34ca937cbb08ca8b3da1526c29da9a897ab38eb39d084fd715028b7cc60eb595c68ecfa6fa0bb125ec2b09da65664a4f172c2f\" alt=\"Logo\" width=\"300\" height=\"\">\n  </a>\n\n  <h3 align=\"center\">VideoDB Agent Toolkit</h3>\n\n  <p align=\"center\">\n    AI Agent toolkit for VideoDB\n    <br />\n    <a href=\"https://videodb.io/llms.txt\"><strong>llms.txt >></strong></a> \n    <a href=\"https://videodb.io/llms-full.txt\"><strong>llms-full.txt</strong></a>  <br />\n    <a href=\"https://videodb.io/mcp\"><strong>MCP</strong></a>\n    <br />\n  </p>\n</p>\n\n# VideoDB Agent Toolkit\n\nThe VideoDB Agent Toolkit exposes VideoDB context to LLMs and agents. It enables integration to AI-driven IDEs like Cursor, chat agents like Claude Code etc. This toolkit automates context generation, maintenance, and discoverability. It auto-syncs SDK versions, docs, and examples and is distributed through MCP and `llms.txt` \n\n\n## 🚀 Quick Overview\n\nThe toolkit offers context files designed for use with LLMs, structured around key components:\n\n`llms-full.txt` — Comprehensive context for deep integration.\n\n`llms.txt` — Lightweight metadata for quick discovery.\n\n`MCP (Model Context Protocol)` — A standardized protocol.\n\nThese components leverage automated workflows to ensure your AI applications always operate with accurate, up-to-date context.\n\n## 📦 Toolkit Components\n\n### 1. llms-full.txt ([View »](https://videodb.io/llms-full.txt))\n\n---\n\n`llms-full.txt` consolidates everything your LLM agent needs, including:\n\n- Comprehensive VideoDB overview.\n\n- Complete SDK usage instructions and documentation.\n\n- Detailed integration examples and best practices.\n\n**Real-world Examples:**\n\n- [VideoDB's Director](https://chat.videodb.io) `code-assistant` agent ([View Implementation ](https://github.com/video-db/Director/blob/main/backend/director/agents/code_assitant.py))\n- [VideoDB's Discord Bot](https://discord.com/invite/py9P639jGz) to power customer support and community help ([View Implementation ]())\n- Integrate `llms-full.txt` directly into your LLM-powered workflows, agent systems, or AI coding environments.\n\n### 2. llms.txt ([View »](https://videodb.io/llms.txt))\n\n---\n\nA streamlined file following the [Answer.AI llms.txt proposal](https://github.com/answerdotai/llms-txt). Ideal for quick metadata exposure and LLM discovery.\n\n> **ℹ️ Recommendation**: Use `llms.txt` for lightweight discovery and metadata integration.  Use `llms-full.txt` for complete functionality.\n\n### 3. MCP (Model Context Protocol)\n\nThe VideoDB MCP Server connects with the Director backend framework, providing a single tool for many workflows. For development, it can be installed and used via uvx for isolated environments. For more details on MCPs, please visit [here](https://docs.videodb.io/add-videodb-mcp-server-in-clients-108)\n\n**Install `uv`**\n\nWe need to install uv first.\n\nFor macOS/Linux:\n```\ncurl -LsSf https://astral.sh/uv/install.sh | sh\n```\nFor Windows:\n\n```\npowershell -ExecutionPolicy ByPass -c \"irm https://astral.sh/uv/install.ps1 | iex\"\n```\n\nYou can also visit the installation steps of `uv` for more details [here](https://docs.astral.sh/uv/getting-started/installation)\n\n**Run the MCP Server**\n\nYou can run the MCP server using `uvx` using the following command\n\n```\nuvx videodb-director-mcp --api-key=VIDEODB_API_KEY\n```\n\n**Update VideoDB Director MCP package**\n\nTo ensure you're using the latest version of the MCP server with `uvx`, start by clearing the cache:\n\n```\nuv cache clean\n```\n\nThis command removes any outdated cached packages of `videodb-director-mcp`, allowing `uvx` to fetch the most recent version.\n\nIf you always want to use the latest version of the MCP server, update your command as follows:\n```\nuvx videodb-director-mcp@latest --api-key=<VIDEODB_API_KEY>\n```\n\n<br/>\n       \n## 🧠 Anatomy of LLM Context Files\n\nLLM context files in VideoDB are modular, automatically generated, and continuously updated from multiple sources:\n\n### 🧩 Modular Structure:\n\n- **Instructions** — Best practices and prompt guidelines [View »](https://github.com/video-db/agent-toolkit/blob/main/context/instructions/prompt.md)\n\n- **SDK Context** — SDK structure, classes, and interface definitions [View »](https://github.com/video-db/agent-toolkit/blob/main/context/sdk/context/index.md)\n\n- **Docs Context** — Summarized product documentation [View »](https://github.com/video-db/agent-toolkit/blob/main/context/docs/docs_context.md)\n\n- **Examples Context** — Real-world notebook examples [View »](https://github.com/video-db/agent-toolkit/blob/main/context/examples/examples_context.md)\n<img src=\"./token_breakdown.png\" alt=\"Token Breakdown\" width=\"400\"/>\n\n\n\n### Automated Maintenance:\n- Managed through GitHub Actions for automated updates.\n- Triggered by changes to SDK repositories, documentation, or examples.\n- Maintained centrally via a [`config.yaml`](https://github.com/video-db/agent-toolkit/blob/readme-refactor/config.yaml) file.\n\n---\n\n## 🛠️ Automation with GitHub Actions\n\nAutomatic context generation ensures your applications always have the latest information:\n\n### 🔹 SDK Context Workflow ([View](https://github.com/video-db/agent-toolkit/blob/main/.github/workflows/update_sdk_context.yml))\n- **Automatically generates documentation** from SDK repo updates.\n- Uses [Sphinx](https://www.sphinx-doc.org/en/master/) for Python SDKs.\n\n### 🔹 Docs Context Workflow ([View](https://github.com/video-db/agent-toolkit/blob/main/.github/workflows/update_docs_context.yml))\n- **Scrapes and summarizes documentation** using [FireCrawl](https://www.firecrawl.dev/) and LLM-powered summarization.\n\n### 🔹 Examples Context Workflow ([View](https://github.com/video-db/agent-toolkit/blob/main/.github/workflows/update_examples_context.yml))\n- Converts and summarizes notebooks into practical context examples.\n\n### 🔹 Master Context Workflow ([View](https://github.com/video-db/agent-toolkit/blob/main/.github/workflows/update_master_context.yml))\n- Combines all sub-components into unified `llms-full.txt`.\n- Generates standards-compliant `llms.txt`.\n- Updates documentation with token statistics for transparency.\n\n---\n\n\n## 🛠️ Customization via `config.yaml`\n\nThe [`config.yaml`](https://github.com/video-db/agent-toolkit/blob/readme-refactor/config.yaml) file centralizes all configurations, allowing easy customization:\n\n- **Inclusion & Exclusion Patterns** for documentation and notebook processing\n- **Custom LLM Prompts** for precise summarization tailored to each document type\n- **Layout Configuration** for combining context components seamlessly\n\n`config.yaml` > `llms_full_txt_file` defines how `llms-full.txt` is assembled:\n\n```yaml\nllms_full_txt_file:\n  input_files:\n    - name: Instructions\n      file_path: \"context/instructions/prompt.md\"\n    - name: SDK Context\n      file_path: \"context/sdk/context/index.md\"\n    - name: Docs Context\n      file_path: \"context/docs/docs_context.md\"\n    - name: Examples Context\n      file_path: \"context/examples/examples_context.md\"\n  output_files:\n    - name: llms_full_txt\n      file_path: \"context/llms-full.txt\"\n    - name: llms_full_md\n      file_path: \"context/llms-full.md\"\n  layout: |\n    {{FILE1}}\n\n    {{FILE2}}\n\n    {{FILE3}}\n\n    {{FILE4}}\n\n  ```\n\n## 💡 Best Practices for Context-Driven Development\n\n- **Automate Context Updates:** Leverage GitHub Actions to maintain accuracy.\n- **Tailored Summaries:** Use custom LLM prompts to ensure context relevance.\n- **Seamless Integration:** Continuously integrate with existing LLM agents or IDEs.\n\nBy following these practices, you ensure your AI applications have reliable, relevant, and up-to-date context—critical for effective agent performance and developer productivity.\n\n---\n\n## 🚀 Get Started\n\nClone the toolkit repository and follow the setup instructions in [`config.yaml`](https://github.com/video-db/agent-toolkit/blob/readme-refactor/config.yaml) to start integrating VideoDB contexts into your LLM-powered applications today.\n\n**Explore further:**\n- [VideoDB SDK](https://github.com/video-db/videodb-python)\n- [Documentation](https://docs.videodb.io)\n- [Cookbook Examples](https://github.com/video-db/videodb-cookbook)\n\n---\n<!-- MARKDOWN LINKS & IMAGES -->\n<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->\n\n[token-length-shield]: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/video-db/agent-toolkit/refs/heads/main/readme_shields.json&style=for-the-badge\n[token-length-url]: https://github.com/video-db/agent-toolkit/blob/main/token_breakdown.png\n[tag-shield]: https://img.shields.io/github/v/tag/video-db/agent-toolkit?style=for-the-badge\n[tag-url]: https://github.com/video-db/agent-toolkit/tags\n[stars-shield]: https://img.shields.io/github/stars/video-db/agent-toolkit.svg?style=for-the-badge\n[stars-url]: https://github.com/video-db/agent-toolkit/stargazers\n[issues-shield]: https://img.shields.io/github/issues/video-db/agent-toolkit.svg?style=for-the-badge\n[issues-url]: https://github.com/video-db/agent-toolkit/issues\n"
+}

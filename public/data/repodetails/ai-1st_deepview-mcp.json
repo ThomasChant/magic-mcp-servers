@@ -1,0 +1,71 @@
+{
+  "mcp_name": "DeepView MCP",
+  "mcp_description": "Enables IDEs like Cursor and Windsurf to analyze large codebases using Gemini's 1M context window.",
+  "mcp_id": "ai-1st_deepview-mcp",
+  "fetch_timestamp": "2025-06-23T02:34:18.363931Z",
+  "github_url": "https://github.com/ai-1st/deepview-mcp",
+  "repository": {
+    "name": "deepview-mcp",
+    "full_name": "ai-1st/deepview-mcp",
+    "description": "DeepView MCP is a Model Context Protocol server that enables IDEs like Cursor and Windsurf to analyze large codebases using Gemini 2.5 Pro's extensive context window.",
+    "html_url": "https://github.com/ai-1st/deepview-mcp",
+    "created_at": "2025-03-26T09:19:05Z",
+    "updated_at": "2025-06-20T02:00:57Z",
+    "pushed_at": "2025-04-25T12:27:13Z",
+    "size": 58,
+    "stargazers_count": 31,
+    "watchers_count": 31,
+    "forks_count": 7,
+    "open_issues_count": 2,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "ai-1st",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/38861495?v=4",
+      "html_url": "https://github.com/ai-1st"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 7,
+    "subscribers_count": 2,
+    "languages": {
+      "Python": 14247,
+      "Dockerfile": 704
+    },
+    "language_percentages": {
+      "Python": 95.29,
+      "Dockerfile": 4.71
+    },
+    "pull_requests_count": 2,
+    "contributors_count": 2,
+    "tags": [
+      {
+        "name": "v0.2.3",
+        "commit_sha": "fd4db9dde64c7db2c71b429999266bdb7b16bd23"
+      },
+      {
+        "name": "v0.2.2",
+        "commit_sha": "1e51bb016caeae782bd75816f37b029faeb0bcd2"
+      },
+      {
+        "name": "v0.2.1",
+        "commit_sha": "29e92688709d8f42bff35662f0efc7b0000ccc90"
+      },
+      {
+        "name": "v0.2.0",
+        "commit_sha": "b99da0b928c4860eb11da26cd0daad76ea1cef7a"
+      }
+    ],
+    "latest_version": "v0.2.3"
+  },
+  "readme": "# DeepView MCP\n\nDeepView MCP is a Model Context Protocol server that enables IDEs like Cursor and Windsurf to analyze large codebases using Gemini's extensive context window.\n\n[![PyPI version](https://badge.fury.io/py/deepview-mcp.svg)](https://badge.fury.io/py/deepview-mcp)\n[![smithery badge](https://smithery.ai/badge/@ai-1st/deepview-mcp)](https://smithery.ai/server/@ai-1st/deepview-mcp)\n\n## Features\n\n- Load an entire codebase from a single text file (e.g., created with tools like repomix)\n- Query the codebase using Gemini's large context window\n- Connect to IDEs that support the MCP protocol, like Cursor and Windsurf\n- Configurable Gemini model selection via command-line arguments\n\n## Prerequisites\n\n- Python 3.13+\n- Gemini API key from [Google AI Studio](https://aistudio.google.com/)\n\n## Installation\n\n### Installing via Smithery\n\nTo install DeepView for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@ai-1st/deepview-mcp):\n\n```bash\nnpx -y @smithery/cli install @ai-1st/deepview-mcp --client claude\n```\n\n### Using pip\n\n```bash\npip install deepview-mcp\n```\n\n## Usage\n\n### Starting the Server\n\nNote: you don't need to start the server manually. These parameters are configured in your MCP setup in your IDE (see below).\n\n```bash\n# Basic usage with default settings\ndeepview-mcp [path/to/codebase.txt]\n\n# Specify a different Gemini model\ndeepview-mcp [path/to/codebase.txt] --model gemini-2.0-pro\n\n# Change log level\ndeepview-mcp [path/to/codebase.txt] --log-level DEBUG\n```\n\nThe codebase file parameter is optional. If not provided, you'll need to specify it when making queries.\n\n### Command-line Options\n\n- `--model MODEL`: Specify the Gemini model to use (default: gemini-2.0-flash-lite)\n- `--log-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}`: Set the logging level (default: INFO)\n\n### Using with an IDE (Cursor/Windsurf/...)\n\n1. Open IDE settings\n2. Navigate to the MCP configuration\n3. Add a new MCP server with the following configuration:\n   ```json\n   {\n     \"mcpServers\": {\n       \"deepview\": {\n         \"command\": \"/path/to/deepview-mcp\",\n         \"args\": [],\n         \"env\": {\n           \"GEMINI_API_KEY\": \"your_gemini_api_key\"\n         }\n       }\n     }\n   }\n\nSetting a codebase file is optional. If you are working with the same codebase, you can set the default codebase file using the following configuration:\n  ```json\n  {\n     \"mcpServers\": {\n       \"deepview\": {\n         \"command\": \"/path/to/deepview-mcp\",\n         \"args\": [\"/path/to/codebase.txt\"],\n         \"env\": {\n           \"GEMINI_API_KEY\": \"your_gemini_api_key\"\n         }\n       }\n     }\n   }\n  ```\n\nHere's how to specify the Gemini version to use:\n\n```json\n{\n   \"mcpServers\": {\n     \"deepview\": {\n       \"command\": \"/path/to/deepview-mcp\",\n       \"args\": [\"--model\", \"gemini-2.5-pro-exp-03-25\"],\n       \"env\": {\n         \"GEMINI_API_KEY\": \"your_gemini_api_key\"\n       }\n     }\n   }\n}\n```\n\n4. Reload MCP servers configuration\n\n\n### Available Tools\n\nThe server provides one tool:\n\n1. `deepview`: Ask a question about the codebase\n   - Required parameter: `question` - The question to ask about the codebase\n   - Optional parameter: `codebase_file` - Path to a codebase file to load before querying\n\n## Preparing Your Codebase\n\nDeepView MCP requires a single file containing your entire codebase. You can use [repomix](https://github.com/yamadashy/repomix) to prepare your codebase in an AI-friendly format.\n\n### Using repomix\n\n1. **Basic Usage**: Run repomix in your project directory to create a default output file:\n\n```bash\n# Make sure you're using Node.js 18.17.0 or higher\nnpx repomix\n```\n\nThis will generate a `repomix-output.xml` file containing your codebase.\n\n2. **Custom Configuration**: Create a configuration file to customize which files get packaged and the output format:\n\n```bash\nnpx repomix --init\n```\n\nThis creates a `repomix.config.json` file that you can edit to:\n- Include/exclude specific files or directories\n- Change the output format (XML, JSON, TXT)\n- Set the output filename\n- Configure other packaging options\n\n### Example repomix Configuration\n\nHere's an example `repomix.config.json` file:\n\n```json\n{\n  \"include\": [\n    \"**/*.py\",\n    \"**/*.js\",\n    \"**/*.ts\",\n    \"**/*.jsx\",\n    \"**/*.tsx\"\n  ],\n  \"exclude\": [\n    \"node_modules/**\",\n    \"venv/**\",\n    \"**/__pycache__/**\",\n    \"**/test/**\"\n  ],\n  \"output\": {\n    \"format\": \"xml\",\n    \"filename\": \"my-codebase.xml\"\n  }\n}\n```\n\nFor more information on repomix, visit the [repomix GitHub repository](https://github.com/yamadashy/repomix).\n\n## License\n\nMIT\n\n## Author\n\nDmitry Degtyarev (ddegtyarev@gmail.com)\n"
+}

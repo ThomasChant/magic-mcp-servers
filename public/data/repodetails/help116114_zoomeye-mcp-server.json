@@ -1,0 +1,72 @@
+{
+  "mcp_name": "help116114/zoomeye-mcp-server",
+  "mcp_description": "Facilitates AI assistants in querying internet-wide host and web data via the ZoomEye v2 API.",
+  "mcp_id": "help116114_zoomeye-mcp-server",
+  "fetch_timestamp": "2025-06-23T04:44:37.255657Z",
+  "github_url": "https://github.com/help116114/zoomeye-mcp-server",
+  "repository": {
+    "name": "zoomeye-mcp-server",
+    "full_name": "help116114/zoomeye-mcp-server",
+    "description": "ZoomEye MCP Server - 网络资产搜索与用户信息查询",
+    "html_url": "https://github.com/help116114/zoomeye-mcp-server",
+    "created_at": "2025-04-22T01:37:13Z",
+    "updated_at": "2025-04-22T02:14:34Z",
+    "pushed_at": "2025-04-22T02:06:52Z",
+    "size": 5,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [
+      "mcp-server",
+      "red-team",
+      "security-tools"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "help116114",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/141413935?v=4",
+      "html_url": "https://github.com/help116114"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 5579,
+      "JavaScript": 1620
+    },
+    "language_percentages": {
+      "TypeScript": 77.5,
+      "JavaScript": 22.5
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "latest_release": {
+      "tag_name": "security-tools",
+      "name": "",
+      "published_at": "2025-04-22T02:06:52Z",
+      "body": "",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "security-tools",
+        "commit_sha": "ca266b7ea64f78b4550a70d0cd1d68b5ab559099"
+      }
+    ],
+    "latest_version": "security-tools",
+    "package_json_version": "0.1.0"
+  },
+  "readme": "# Zoomeye MCP Server\n\nAn MCP (Model Context Protocol) server providing access to the ZoomEye v2 API, enabling AI assistants to query internet‑wide host and web data, view account quotas, and (for paid plans) fetch IP history.\n\n## Features\n\n- **Host Search**: Query devices by IP, port, service, etc.  \n- **Web Search**: Index web‑facing applications and components.  \n- **Account Info**: View your ZoomEye plan and remaining query quota.  \n- **Result Sampling**: Limit response sizes and select only desired fields.  \n- **Summarization**: Auto‑generate top countries, ports, and organizations summaries.  \n- **(Paid) IP History**: Retrieve historical scan data for a given IP.\n\n### Requirements\n\n- Node.js ≥ 16  \n- ZoomEye API Key (found at https://www.zoomeye.org/profile)   \n- Internet access to https://api.zoomeye.org  \n## Installation\n\n1. Clone the repository:\n\n   ```bash\n   git clone https://github.com/help116114/zoomeye-mcp-server.git\n   cd zoomeye-mcp-server\n   ```\n\n2. Install dependencies:\n\n   ```bash\n   npm install\n   ```\n\n3. Build the server:\n\n   ```bash\n   npm run build\n   ```\n\n4. Set up your Zoomeye API key:\n\n   ```bash\n   export Zoomeye_API_KEY=\"your-api-key-here\"\n   ```\n\n5. Start the server:\n   ```bash\n   npm start\n   ```\n\n## MCP Integration\n\nThis server can be integrated with MCP-compatible AI LLMs. To add it to Cline, Curser or Claude:\n\n1. Add the server to your MCP settings:\n\n   ```json\n   {\n     \"mcpServers\": {\n       \"zoomeye\": {\n         \"command\": \"node\",\n         \"args\": [\"./build/index.js\"],\n         \"env\": {\n           \"ZOOMEYE_API_KEY\": \"your-api-key-here\"\n         }\n       }\n     }\n   }\n   ```\n\n2. Reload the new MCP server.\n\n## Available Tools\n\n### `get_account_info`\n\nGet detailed information about a specific IP address.\n\n**Parameters:**\n\n- `ip` (required): IP address to look up\n- `max_items` (optional): Maximum number of items to include in arrays (default: 5)\n- `fields` (optional): List of fields to include in the results (e.g., ['ip_str', 'ports', 'location.country_name'])\n\n### `search_host`\n\nHost‐side search for devices and services.\n\n**Parameters:**\n\n- `query` (required): Shodan search query (e.g., 'apache country:US')\n- `page` (optional): Page number for results pagination (default: 1)\n- `facets` (optional): List of facets to include in the search results (e.g., ['country', 'org'])\n- `max_items` (optional): Maximum number of items to include in arrays (default: 5)\n- `fields` (optional): List of fields to include in the results (e.g., ['ip_str', 'ports', 'location.country_name'])\n- `summarize` (optional): Whether to return a summary of the results instead of the full data (default: false)\n\n### `search_web`\n\nSearch web resources in ZoomEye database\n\n**Parameters:**\n\n- `query` (required): Shodan search query (e.g., 'apache country:US')\n- `page` (optional): Page number for results pagination (default: 1)\n- `facets` (optional): List of facets to include in the search results (e.g., ['country', 'org'])\n\n### `get_history_ip`\n\n(Paid) Fetch historical scan data for an IP.\n\n**Parameters:**\n\n- `ip` (required): IP address to fetch historical scan data (e.g., ip=\"8.8.8.8\")\n\n### summarize\n\nGenerate top countries, ports, and orgs summary.\n\n**Parameters:**\n\n- `device_type` (required): Type of IoT device to search for (e.g., 'webcam', 'router', 'smart tv')\n- `country` (optional): Optional country code to limit search (e.g., 'US', 'DE')\n- `max_items` (optional): Maximum number of items to include in results (default: 5)\n\n## Available Resources\n\n- `zoomeye://host/{ip}`: Information about a specific IP address\n\n## API Limitations\n\nSome Zoomeye API endpoints require a paid membership. The following features are only available with a paid Zoomeye API key:\n\n- more for paid\n- \n- Search functionality\n- Network scanning\n- SSL certificate lookup\n- IoT device search\n\nBy following the above structure, your **zoomeye‑mcp‑server** will seamlessly plug into any MCP‑compatible client, offering AI assistants real‑time access to ZoomEye’s powerful cyberspace search capabilities.\n\n## License\n\nZGCLAB\n\n## Developed by\n\n[NASP](https://github.com/help116114/)\n"
+}

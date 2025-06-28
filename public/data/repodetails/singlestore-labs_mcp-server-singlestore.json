@@ -1,0 +1,54 @@
+{
+  "mcp_name": "SingleStore",
+  "mcp_description": "Interact with the SingleStore database platform",
+  "mcp_id": "singlestore-labs_mcp-server-singlestore",
+  "fetch_timestamp": "2025-06-23T08:27:17.170735Z",
+  "github_url": "https://github.com/singlestore-labs/mcp-server-singlestore",
+  "repository": {
+    "name": "mcp-server-singlestore",
+    "full_name": "singlestore-labs/mcp-server-singlestore",
+    "description": "MCP server for interacting with SingleStore Management API and services",
+    "html_url": "https://github.com/singlestore-labs/mcp-server-singlestore",
+    "created_at": "2025-03-03T11:25:06Z",
+    "updated_at": "2025-06-19T00:27:28Z",
+    "pushed_at": "2025-06-19T00:27:25Z",
+    "size": 365,
+    "stargazers_count": 21,
+    "watchers_count": 21,
+    "forks_count": 6,
+    "open_issues_count": 8,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "singlestore-labs",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/79943160?v=4",
+      "html_url": "https://github.com/singlestore-labs"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 6,
+    "subscribers_count": 3,
+    "languages": {
+      "Python": 113959,
+      "Jupyter Notebook": 384,
+      "Dockerfile": 366
+    },
+    "language_percentages": {
+      "Python": 99.35,
+      "Jupyter Notebook": 0.33,
+      "Dockerfile": 0.32
+    },
+    "pull_requests_count": 39,
+    "contributors_count": 9
+  },
+  "readme": "# SingleStore MCP Server\n\n[![MIT Licence](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/singlestore-labs/mcp-server-singlestore/blob/main/LICENSE) [![PyPI](https://img.shields.io/pypi/v/singlestore-mcp-server)](https://pypi.org/project/singlestore-mcp-server/) [![Downloads](https://static.pepy.tech/badge/singlestore-mcp-server)](https://pepy.tech/project/singlestore-mcp-server) [![Smithery](https://smithery.ai/badge/@singlestore-labs/mcp-server-singlestore)](https://smithery.ai/server/@singlestore-labs/mcp-server-singlestore)\n\n[Model Context Protocol]((https://modelcontextprotocol.io/introduction)) (MCP) is a standardized protocol designed to manage context between large language models (LLMs) and external systems. This repository provides an installer and an MCP Server for Singlestore, enabling seamless integration.\n\nWith MCP, you can use Claude Desktop, Cursor, or any compatible MCP client to interact with SingleStore using natural language, making it easier to perform complex operations effortlessly.\n\n## Requirements\n\n- Python >= v3.11.0\n- [uvx](https://docs.astral.sh/uv/guides/tools/) installed on your python environment\n- Claude Desktop, Cursor, or another supported LLM client\n\n## Client Setup\n\n### 1. Init Command\n\nThe simplest way to set up the MCP server is to use the initialization command:\n\n```bash\nuvx singlestore-mcp-server init --api-key <SINGLESTORE_API_KEY>\n```\n\nThis command will:\n\n1. Authenticate the user\n2. Automatically locate the configuration file for your platform\n3. Create or update the configuration to include the SingleStore MCP server\n4. Provide instructions for starting the server\n\nTo specify a client (e.g., `claude` or `cursor`), use the `--client` flag:\n\n```bash\nuvx singlestore-mcp-server init --api-key <SINGLESTORE_API_KEY> --client=<client>\n```\n\n### 2. Installing via Smithery\n\nTo install `mcp-server-singlestore` automatically via [Smithery](https://smithery.ai/server/@singlestore-labs/mcp-server-singlestore):\n\n```bash\nnpx -y @smithery/cli install @singlestore-labs/mcp-server-singlestore --client=<client>\n```\n\nReplace `<client>` with `claude` or `cursor` as needed.\n\n### 3. Manual Configuration\n\n#### Claude Desktop and Cursor\n\n1. Add the following configuration to your client configuration file. Check the client's configuration file here:\n\n- [Claude Desktop](https://modelcontextprotocol.io/quickstart/user)\n- [Cursor](https://docs.cursor.com/context/model-context-protocol#configuration-locations)\n\n  ```json\n  {\n    \"mcpServers\": {\n     \"singlestore-mcp-server\": {\n      \"command\": \"uvx\",\n      \"args\": [\n        \"singlestore-mcp-server\",\n        \"start\",\n        \"--api-key\",\n        \"<SINGLESTORE_API_KEY>\"\n      ]\n     }\n    }\n  }\n  ```\n\n2. Restart your client after making changes to the configuration.\n\n## Components\n\n### Tools\n\nThe server implements the following tools:\n\n- **workspace_groups_info**: Retrieve details about the workspace groups accessible to the user\n  - No arguments required\n  - Returns details of the workspace groups\n- **workspaces_info**: Retrieve details about the workspaces in a specific workspace group\n  - Arguments: `workspaceGroupID` (string)\n  - Returns details of the workspaces\n- **organization_info**: Retrieve details about the user's current organization\n  - No arguments required\n  - Returns details of the organization\n- **list_of_regions**: Retrieve a list of all regions that support workspaces for the user\n  - No arguments required\n  - Returns a list of regions\n- **execute_sql**: Execute SQL operations on a connected workspace\n  - Arguments: `workspace_group_identifier`, `workspace_identifier`, `username`, `password`, `database`, `sql_query`\n  - Returns the results of the SQL query in a structured format\n- **list_virtual_workspaces**: List all starter workspaces accessible to the user\n  - No arguments required\n  - Returns details of available starter workspaces\n- **create_virtual_workspace**: Create a new starter workspace with a user\n  - Arguments:\n    - `name`: Name of the starter workspace\n    - `database_name`: Name of the database to create\n    - `username`: Username for accessing the workspace\n    - `password`: Password for the user\n    - `workspace_group`: Object containing `name` (optional) and `cellID` (mandatory)\n  - Returns details of the created workspace and user\n- **execute_sql_on_virtual_workspace**: Execute SQL operations on a virtual workspace\n  - Arguments: `virtual_workspace_id`, `username`, `password`, `sql_query`\n  - Returns the results of the SQL query in a structured format including data, row count, columns, and status\n- **list_notebook_samples**: List all notebook samples available in SingleStore Spaces\n  - No arguments required\n  - Returns details of available notebook samples\n- **create_notebook**: Create a new notebook in the user's personal space\n  - Arguments: `notebook_name`, `content` (optional)\n  - Returns details of the created notebook\n- **list_personal_files**: List all files in the user's personal space\n  - No arguments required\n  - Returns details of all files in the user's personal space\n- **create_scheduled_job**: Create a new scheduled job to run a notebook\n  - Arguments:\n    - `name`: Name for the job\n    - `notebook_path`: Path to the notebook to execute\n    - `schedule_mode`: Once or Recurring\n    - `execution_interval_minutes`: Minutes between executions (optional)\n    - `start_at`: When to start the job (optional)\n    - `description`: Description of the job (optional)\n    - `create_snapshot`: Whether to create notebook snapshots (optional)\n    - `runtime_name`: Name of the runtime environment\n    - `parameters`: Parameters for the job (optional)\n    - `target_config`: Target configuration for the job (optional)\n  - Returns details of the created job\n- **get_job_details**: Get details about a specific job\n  - Arguments: `job_id`\n  - Returns detailed information about the specified job\n- **list_job_executions**: List execution history for a specific job\n  - Arguments: `job_id`, `start` (optional), `end` (optional)\n  - Returns execution history for the specified job\n\n## Dockerization\n\n### Building the Docker Image\n\nTo build the Docker image for the MCP server, run the following command in the project root:\n\n```bash\ndocker build -t mcp-server-singlestore .\n```\n\n### Running the Docker Container\n\nTo run the Docker container, use the following command:\n\n```bash\ndocker run -d \\\n  -p 8000:8000 \\\n  --name mcp-server \\\n  mcp-server-singlestore\n```\n"
+}

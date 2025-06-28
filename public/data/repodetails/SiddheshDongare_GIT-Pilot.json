@@ -1,0 +1,52 @@
+{
+  "mcp_name": "SiddheshDongare/GIT-Pilot",
+  "mcp_description": "GIT-Pilot streamlines GitHub management with a FastMCP-based server, offering secure and efficient automation for repository, pull request, and issue operations.",
+  "mcp_id": "SiddheshDongare_GIT-Pilot",
+  "fetch_timestamp": "2025-06-23T08:25:43.984778Z",
+  "github_url": "https://github.com/SiddheshDongare/GIT-Pilot",
+  "repository": {
+    "name": "GIT-Pilot",
+    "full_name": "SiddheshDongare/GIT-Pilot",
+    "description": "A GitHub MCP Server",
+    "html_url": "https://github.com/SiddheshDongare/GIT-Pilot",
+    "created_at": "2025-04-22T04:40:38Z",
+    "updated_at": "2025-06-17T08:20:30Z",
+    "pushed_at": "2025-06-17T08:20:25Z",
+    "size": 169,
+    "stargazers_count": 4,
+    "watchers_count": 4,
+    "forks_count": 1,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": "GNU General Public License v3.0",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "SiddheshDongare",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/70208548?v=4",
+      "html_url": "https://github.com/SiddheshDongare"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 87000,
+      "Dockerfile": 1317
+    },
+    "language_percentages": {
+      "Python": 98.51,
+      "Dockerfile": 1.49
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 2
+  },
+  "readme": "[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/siddheshdongare-git-pilot-badge.png)](https://mseep.ai/app/siddheshdongare-git-pilot)\n\n# GIT-Pilot\n\n<div align=\"center\">\n  <img src=\"images/logo.jpg\" alt=\"GIT-Pilot Logo\" width=\"200\"/>\n</div>\n\n[![Python Version](https://img.shields.io/badge/python-3.12%2B-blue)](https://www.python.org/downloads/)\n[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)\n[![GitHub](https://img.shields.io/badge/GitHub-GIT--Pilot-blue)](https://github.com/yourusername/GIT-Pilot)\n\n<div align=\"center\">\n  <h3>⭐️ If you find this project helpful, please give it a star! ⭐️</h3>\n</div>\n\nGIT-Pilot is a powerful GitHub automation and management tool that provides a comprehensive API wrapper for GitHub operations. It simplifies GitHub interactions through a FastMCP-based server, making it easy to manage repositories, pull requests, issues, and more.\n\n## 🌟 Features\n\n### 🔐 Authentication & Security\n- Secure token management with encryption using Fernet\n- Token expiration and automatic cleanup\n- Rate limit handling and automatic retries\n- Configurable authentication timeouts\n\n### 📦 Repository Management\n- Create and manage repositories\n- Handle branches and commits\n- File operations (create, update, delete)\n- Repository search and filtering\n- Commit comparison and history\n\n### 🔄 Pull Request Operations\n- Create and manage pull requests\n- Merge strategies (merge, squash, rebase)\n- Status check validation\n- Conflict detection and handling\n- Draft PR support\n\n### 📝 Issue Management\n- Create and update issues\n- Label management\n- Assignee handling\n- Comment management\n- Issue search and filtering\n\n### 🛠 Technical Features\n- Thread-safe operations\n- Resource management\n- Comprehensive error handling\n- Detailed logging\n- Type safety\n- Configuration management\n- FastMCP server integration\n\n## 🚀 Getting Started\n\n### Prerequisites\n- Python 3.12 or higher\n- GitHub account\n- GitHub Personal Access Token\n- FastMCP CLI (optional)\n\n### Installation\n\n1. Clone the repository:\n```bash\ngit clone https://github.com/yourusername/GIT-Pilot.git\ncd GIT-Pilot\n```\n\n2. Install uv (if not already installed):\n```bash\ncurl -LsSf https://astral.sh/uv/install.sh | sh\n```\n\n3. Create and activate a virtual environment:\n```bash\nuv venv\nsource .venv/bin/activate  # On Windows: .venv\\Scripts\\activate\n```\n\n4. Install the package using uv:\n```bash\nuv pip install -e .\n```\n\n5. Set up environment variables:\nCreate a `.env` file in the project root:\n```env\nGITHUB_TOKEN=your_github_token_here\n```\n\n### Basic Usage\n\n#### Setting Up Claude Desktop Integration\n\n1. Start the GIT-Pilot server:\n```bash\nuv run main.py\n```\n\n2. Download and install [Claude Desktop](https://claude.ai/download)\n\n3. Configure Claude Desktop:\n   - Open Claude Desktop\n   - Go to `File > Settings > Developer > Edit Config`\n   - Add the following configuration:\n```json\n{\n    \"mcpServers\": {\n        \"GIT-Pilot\": {\n            \"command\": \"uv\",\n            \"args\": [\n                \"--directory\",\n                \"path\\\\to\\\\repo\",\n                \"run\",\n                \"main.py\"\n            ]\n        }\n    }\n}\n```\n4. Restart Claude Desktop\n5. Look for the hammer icon in the chat window - this indicates the MCP server is ready to use\n\n### API Examples\n\n```python\n# Create a repository\nawait call_tool(\"create_repository\",\n    name=\"my-repo\",\n    description=\"My awesome repository\",\n    private=True,\n    has_issues=True,\n    has_wiki=True,\n    has_projects=True,\n    auto_init=True\n)\n\n# Create a pull request\nawait call_tool(\"create_pull_request\",\n    repo_path=\"owner/repo\",\n    title=\"New feature\",\n    head=\"feature-branch\",\n    base=\"main\",\n    body=\"Description of changes\",\n    draft=False\n)\n\n# List commits with filtering\nawait call_tool(\"list_commits\",\n    repo_path=\"owner/repo\",\n    branch=\"main\",\n    author=\"username\",\n    since=\"2024-01-01\",\n    until=\"2024-04-21\",\n    max_results=30\n)\n```\n\n## 🔧 Configuration\n\nThe service can be configured through the `Config` class:\n\n```python\n@dataclass\nclass Config:\n    TOKEN_TTL_HOURS: int = 24\n    MAX_STORED_TOKENS: int = 1000\n    CLEANUP_INTERVAL_SECONDS: int = 3600\n    MAX_RETRIES: int = 3\n    RETRY_DELAY_SECONDS: int = 5\n    MAX_RESULTS_PER_PAGE: int = 100\n    ENCRYPTION_KEY: bytes = Fernet.generate_key()\n```\n\n## 🛡 Security\n\n- Tokens are encrypted at rest using Fernet\n- Automatic token expiration and cleanup\n- Rate limit protection with retries\n- Input validation\n- Comprehensive error handling\n- Secure token cleanup\n\n## 🔄 Rate Limiting\n\nThe service includes built-in rate limit handling:\n- Automatic retry on rate limit\n- Configurable retry attempts\n- Delay between retries\n- Rate limit status logging\n- Exponential backoff\n\n## 🧪 Error Handling\n\nComprehensive error handling for:\n- Authentication failures\n- API errors\n- Rate limits\n- Invalid inputs\n- Resource conflicts\n- Network issues\n- Token validation\n- File operations\n\n## 📈 Logging\n\nDetailed logging with:\n- Timestamp\n- Log level\n- Function name\n- Line number\n- Error details\n- Stack traces\n- Rate limit information\n- Token operations\n\n## 🤝 Contributing\n\nWe welcome contributions! Please follow these steps:\n\n1. Fork the repository\n2. Create a feature branch\n3. Commit your changes\n4. Push to the branch\n5. Create a Pull Request\n\n## 📝 License\n\nThis project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.\n\n## 🙏 Acknowledgments\n\n- [PyGithub](https://github.com/PyGithub/PyGithub) for the GitHub API wrapper\n- [FastMCP](https://gofastmcp.com) for the server framework\n- [Fernet](https://cryptography.io/en/latest/fernet/) for secure token encryption\n---\n\nMade with ❤️ by the GIT-Pilot team\n"
+}

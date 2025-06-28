@@ -1,0 +1,76 @@
+{
+  "mcp_name": "Mapbox",
+  "mcp_description": "Unlock geospatial intelligence through Mapbox APIs like geocoding, POI search, directions, isochrones and more.",
+  "mcp_id": "mapbox_mcp-server",
+  "fetch_timestamp": "2025-06-23T06:24:10.242402Z",
+  "github_url": "https://github.com/mapbox/mcp-server",
+  "repository": {
+    "name": "mcp-server",
+    "full_name": "mapbox/mcp-server",
+    "description": "Mapbox Model Context Protocol (MCP) server",
+    "html_url": "https://github.com/mapbox/mcp-server",
+    "created_at": "2025-06-06T22:27:22Z",
+    "updated_at": "2025-06-21T17:25:37Z",
+    "pushed_at": "2025-06-13T07:36:11Z",
+    "size": 5150,
+    "stargazers_count": 195,
+    "watchers_count": 195,
+    "forks_count": 8,
+    "open_issues_count": 2,
+    "language": "TypeScript",
+    "license": "Other",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "mapbox",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/600935?v=4",
+      "html_url": "https://github.com/mapbox"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 8,
+    "subscribers_count": 0,
+    "languages": {
+      "TypeScript": 222674,
+      "JavaScript": 6915,
+      "Handlebars": 1725,
+      "Dockerfile": 633
+    },
+    "language_percentages": {
+      "TypeScript": 96,
+      "JavaScript": 2.98,
+      "Handlebars": 0.74,
+      "Dockerfile": 0.27
+    },
+    "pull_requests_count": 8,
+    "contributors_count": 3,
+    "latest_release": {
+      "tag_name": "v0.1.0",
+      "name": "v0.1.0",
+      "published_at": "2025-06-12T11:47:55Z",
+      "body": "## What's Changed\r\n* Verbose errors by @Valiunia in https://github.com/mapbox/mcp-server/pull/7\r\n* Introduce NPM Package by @zmofei in https://github.com/mapbox/mcp-server/pull/8\r\n\r\n## New Contributors\r\n* @zmofei made their first contribution in https://github.com/mapbox/mcp-server/pull/8\r\n\r\n**Full Changelog**: https://github.com/mapbox/mcp-server/compare/v0.0.1...v0.1.0",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.1.0",
+        "commit_sha": "bbabec1bcad469a98857aee8d031d1740ee2367c"
+      },
+      {
+        "name": "v0.0.1",
+        "commit_sha": "1df83ca6e6df05e437b46537380c3b3df91a7f85"
+      }
+    ],
+    "latest_version": "v0.1.0",
+    "package_json_version": "0.1.0"
+  },
+  "readme": "# Mapbox MCP Server\n\nNode.js server implementing Model Context Protocol (MCP) for Mapbox APIs.\n\n## Unlock Geospatial Intelligence for Your AI Applications\n\nThe Mapbox MCP Server transforms any AI agent or application into a geospatially-aware system by providing seamless access to Mapbox's comprehensive location intelligence platform. With this server, your AI can understand and reason about places, navigate the physical world, and access rich geospatial data including:\n\n- **Global geocoding** to convert addresses and place names to coordinates and vice versa\n- **Points of interest (POI) search** across millions of businesses, landmarks, and places worldwide\n- **Multi-modal routing** for driving, walking, and cycling with real-time traffic\n- **Travel time matrices** to analyze accessibility and optimize logistics\n- **Isochrone generation** to visualize areas reachable within specific time or distance constraints\n- **Static map images** to create visual representations of locations, routes, and geographic data\n\nWhether you're building an AI travel assistant, logistics optimizer, location-based recommender, or any application that needs to understand \"where\", the Mapbox MCP Server provides the spatial intelligence to make it possible. You can also enable it on popular clients like Claude Desktop and VS Code. See below for details\n\n![Mapbox MCP Server Demo](./assets/mapbox_mcp_server.gif)\n\n# Usage\n\n**A Mapbox access token is required to use this MCP server.**\n\nTo get a Mapbox access token:\n\n1. Sign up for a free Mapbox account at [mapbox.com/signup](https://www.mapbox.com/signup/)\n2. Navigate to your [Account page](https://account.mapbox.com/)\n3. Create a new token or use the default public token\n\nFor more information about Mapbox access tokens, see the [Mapbox documentation on access tokens](https://docs.mapbox.com/help/dive-deeper/access-tokens/).\n\n## Integration Guides\n\nFor detailed setup instructions for different integrations, refer to the following guides:\n\n- [Claude Desktop Setup](./docs/claude-desktop-setup.md) - Instructions for configuring Claude Desktop to work with this MCP server\n- [VS Code Setup](./docs/vscode-setup.md) - Setting up a development environment in Visual Studio Code\n- [Smolagents Integration](./docs/using-mcp-with-smolagents/README.md) - Example showing how to connect Smolagents AI agents to Mapbox's tools\n\n## Tools\n\n### Mapbox API tools\n\n#### Matrix tool\n\nCalculates travel times and distances between multiple points using [Mapbox Matrix API](https://www.mapbox.com/matrix-api). Features include:\n\n- Efficient one-to-many, many-to-one or many-to-many routing calculations\n- Support for different travel profiles (driving-traffic, driving, walking, cycling)\n- Departure time specification for traffic-aware calculations\n- Route summarization with distance and duration metrics\n- Control approach (curb/unrestricted) and range of allowed departure bearings\n\n#### Static image tool\n\nGenerates static map images using the [Mapbox static image API](https://docs.mapbox.com/api/maps/static-images/). Features include:\n\n- Custom map styles (streets, outdoors, satellite, etc.)\n- Adjustable image dimensions and zoom levels\n- Support for multiple markers with custom colors and labels\n- Overlay options including polylines and polygons\n- Auto-fitting to specified coordinates\n\n#### POI search tool\n\nFinds specific points of interest or brand locations by name using the [Mapbox Search Box forward search API](https://docs.mapbox.com/api/search/search-box/#search-request). Features include:\n\n- Search for specific points of interest by proper name or unique brand (e.g., \"Amalie Arena\", \"Starbucks\")\n- Find all nearby branches of a brand (e.g., \"Macy's stores near me\")\n- Geographic proximity biasing for more relevant results\n- Support for multiple languages and countries\n\n#### Category search tool\n\nPerforms a category search using the [Mapbox Search Box category search API](https://docs.mapbox.com/api/search/search-box/#category-search). Features include:\n\n- Search for points of interest by category (restaurants, hotels, gas stations, etc.)\n- Filtering by geographic proximity\n- Customizable result limits\n- Rich metadata for each result\n- Support for multiple languages\n\n#### Forward geocoding tool\n\nPerforms forward geocoding using the [Mapbox geocoding V6 API](https://docs.mapbox.com/api/search/geocoding/#forward-geocoding-with-search-text-input). Features include:\n\n- Convert addresses or place names to geographic coordinates\n- Fuzzy matching for partial or misspelled inputs\n- Results filtering by country, region, or bounding box\n- Customizable result limits\n- Multiple language support\n\n#### Reverse geocoding tool\n\nPerforms reverse geocoding using the [Mapbox geocoding V6 API](https://docs.mapbox.com/api/search/geocoding/#reverse-geocoding). Features include:\n\n- Convert geographic coordinates to human-readable addresses\n- Customizable levels of detail (street, neighborhood, city, etc.)\n- Results filtering by type (address, poi, neighborhood, etc.)\n- Support for multiple languages\n- Rich location context information\n\n#### Directions tool\n\nFetches routing directions using the [Mapbox Directions API](https://docs.mapbox.com/api/navigation/directions/). Features include:\n\n- Support for different routing profiles: driving (with live traffic or typical), walking, and cycling\n- Route from multiple waypoints (2-25 coordinate pairs)\n- Alternative routes option\n- Route annotations (distance, duration, speed, congestion)\n- Scheduling options:\n  - Future departure time (`depart_at`) for driving and driving-traffic profiles\n  - Desired arrival time (`arrive_by`) for driving profile only\n- Profile-specific optimizations:\n  - Walking: customizable walking speed and bias for/against walkways\n  - Driving: vehicle dimension constraints (height, width, weight)\n- Exclusion options for routing:\n  - Common exclusions: ferry routes, cash-only tolls\n  - Driving-specific exclusions: tolls, motorways, unpaved roads, tunnels, country borders, state borders\n  - Custom point exclusions (up to 50 geographic points to avoid)\n- Multiple geometry output formats (GeoJSON, polyline)\n\n#### Isochrone tool\n\nComputes areas that are reachable within a specified amount of times from a location using [Mapbox Isochrone API](https://docs.mapbox.com/api/navigation/isochrone/). Features include:\n\n- Support for different travel profiles (driving, walking, cycling)\n- Customizable travel times or distances\n- Multiple contour generation (e.g., 15, 30, 45 minute ranges)\n- Optional departure or arrival time specification\n- Color customization for visualization\n\n# Development\n\n## Inspecting server\n\n### Using Node.js\n\n```sh\n# Build\nnpm run build\n\n# Inspect\nnpx @modelcontextprotocol/inspector node dist/index.js\n```\n\n### Using Docker\n\n```sh\n# Build the Docker image\ndocker build -t mapbox-mcp-server .\n\n# Run and inspect the server\nnpx @modelcontextprotocol/inspector docker run -i --rm --env MAPBOX_ACCESS_TOKEN=\"YOUR_TOKEN\" mapbox-mcp-server\n```\n\n## Create new tool\n\n```sh\nnpx plop create-tool\n# provide tool name without suffix (e.g. Search)\n```\n\n## Environment Variables\n\n### VERBOSE_ERRORS\n\nSet `VERBOSE_ERRORS=true` to get detailed error messages from the MCP server. This is useful for debugging issues when integrating with MCP clients.\n\nBy default, the server returns generic error messages. With verbose errors enabled, you'll receive the actual error details, which can help diagnose API connection issues, invalid parameters, or other problems.\n\n---\n\n[License](LICENSE.md)\n"
+}

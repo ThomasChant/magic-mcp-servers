@@ -1,0 +1,53 @@
+{
+  "mcp_name": "Drew-Goddyn/buildkite-mcp",
+  "mcp_description": "Facilitates seamless integration with Buildkite by providing a microservice for retrieving and managing build information via MCP.",
+  "mcp_id": "Drew-Goddyn_buildkite-mcp",
+  "fetch_timestamp": "2025-06-23T02:43:39.929120Z",
+  "github_url": "https://github.com/Drew-Goddyn/buildkite-mcp",
+  "repository": {
+    "name": "buildkite-mcp",
+    "full_name": "Drew-Goddyn/buildkite-mcp",
+    "description": "A Model Context Protocol (MCP) server for Buildkite integration",
+    "html_url": "https://github.com/Drew-Goddyn/buildkite-mcp",
+    "created_at": "2025-04-04T21:57:05Z",
+    "updated_at": "2025-04-19T08:25:44Z",
+    "pushed_at": "2025-04-04T23:25:03Z",
+    "size": 19,
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 1,
+    "open_issues_count": 1,
+    "language": "JavaScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "Drew-Goddyn",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17152058?v=4",
+      "html_url": "https://github.com/Drew-Goddyn"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 20955,
+      "Dockerfile": 344
+    },
+    "language_percentages": {
+      "JavaScript": 98.38,
+      "Dockerfile": 1.62
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 1,
+    "package_json_version": "1.0.5"
+  },
+  "readme": "# Buildkite MCP Server\n\nA microservice for retrieving information from Buildkite via Model Context Protocol (MCP).\n\n## Setup\n\n1. Clone this repository\n2. Run `npm install`\n3. Set the `BUILDKITE_ACCESS_TOKEN` environment variable\n4. Start the server with `node index.js`\n\n## Using with Cursor (MCP Integration)\n\nTo add this server to Cursor, you need to configure it in your `~/.cursor/config/mcp.json` file:\n\n```json\n{\n  \"mcpServers\": {\n    \"buildkite\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"-y\",\n        \"@drew-goddyn/buildkite-mcp\"\n      ],\n      \"env\": {\n        \"BUILDKITE_ACCESS_TOKEN\": \"your-buildkite-access-token\"\n      }\n    }\n  }\n}\n```\n\nWith this configuration:\n- You don't need to install or run the server manually\n- Cursor will automatically start and stop the server as needed\n- Replace `your-buildkite-access-token` with your actual Buildkite API token\n\nAfter updating the configuration, restart Cursor to apply the changes.\n\n## MCP Endpoints\n\n### List Organizations\n\n```\nPOST /mcp_buildkite_list_organizations\n```\n\n**Request Body:**\n```json\n{\n  \"access_token\": \"optional-if-set-in-env\"\n}\n```\n\n**Response:**\n```json\n[\n  {\n    \"id\": \"org-id\",\n    \"name\": \"Organization Name\",\n    \"slug\": \"organization-slug\"\n  }\n]\n```\n\n### List Pipelines\n\n```\nPOST /mcp_buildkite_list_pipelines\n```\n\n**Request Body:**\n```json\n{\n  \"organization\": \"my-org\",\n  \"access_token\": \"optional-if-set-in-env\"\n}\n```\n\n**Response:**\n```json\n[\n  {\n    \"id\": \"pipeline-id\",\n    \"name\": \"Pipeline Name\",\n    \"slug\": \"pipeline-slug\"\n  }\n]\n```\n\n### List Builds\n\n```\nPOST /mcp_buildkite_list_builds\n```\n\n**Request Body:**\n```json\n{\n  \"organization\": \"my-org\",\n  \"pipeline\": \"my-pipeline\",\n  \"access_token\": \"optional-if-set-in-env\",\n  \"branch\": \"main\",\n  \"state\": \"failed\",\n  \"per_page\": 10,\n  \"page\": 1\n}\n```\n\n**Response:**\n```json\n[\n  {\n    \"id\": \"build-id\",\n    \"number\": 123,\n    \"state\": \"failed\"\n  }\n]\n```\n\n### Get Build Details\n\n```\nPOST /mcp_buildkite_get_build\n```\n\n**Request Body:**\n```json\n{\n  \"organization\": \"my-org\",\n  \"pipeline\": \"my-pipeline\",\n  \"build_number\": 123,\n  \"access_token\": \"optional-if-set-in-env\"\n}\n```\n\n**Response:**\n```json\n{\n  \"id\": \"build-id\",\n  \"number\": 123,\n  \"jobs\": [\n    {\n      \"id\": \"job-id\",\n      \"name\": \"Job Name\",\n      \"state\": \"failed\"\n    }\n  ]\n}\n```\n\n### List All Jobs\n\n```\nPOST /mcp_buildkite_list_jobs\n```\n\n**Request Body:**\n```json\n{\n  \"organization\": \"my-org\",\n  \"pipeline\": \"my-pipeline\",\n  \"build_number\": 123,\n  \"access_token\": \"optional-if-set-in-env\"\n}\n```\n\n**Response:**\n```json\n[\n  {\n    \"id\": \"job-id\",\n    \"name\": \"Job Name\",\n    \"state\": \"failed\"\n  }\n]\n```\n\n### List Failed Jobs\n\n```\nPOST /mcp_buildkite_list_failed_jobs\n```\n\n**Request Body:**\n```json\n{\n  \"organization\": \"my-org\",\n  \"pipeline\": \"my-pipeline\",\n  \"build_number\": 123,\n  \"access_token\": \"optional-if-set-in-env\"\n}\n```\n\n**Response:**\n```json\n[\n  {\n    \"id\": \"01234567-89ab-cdef-0123-456789abcdef\",\n    \"name\": \"Test Job\",\n    \"state\": \"failed\",\n    \"web_url\": \"https://buildkite.com/my-org/my-pipeline/builds/123#01234567-89ab-cdef-0123-456789abcdef\"\n  }\n]\n```\n\n### List Job Spec Failures\n\n```\nPOST /mcp_buildkite_list_job_spec_failures\n```\n\n**Request Body:**\n```json\n{\n  \"organization\": \"my-org\",\n  \"pipeline\": \"my-pipeline\",\n  \"build_number\": 123,\n  \"job_id\": \"01234567-89ab-cdef-0123-456789abcdef\",\n  \"access_token\": \"optional-if-set-in-env\"\n}\n```\n\n**Response:**\n```json\n[\n  {\n    \"type\": \"RSpec\",\n    \"spec\": \"./spec/path/to/file_spec.rb:123\",\n    \"message\": \"Expected result to be X but got Y\"\n  }\n]\n```\n\n### Get Job Log\n\n```\nPOST /mcp_buildkite_get_job_log\n```\n\n**Request Body:**\n```json\n{\n  \"organization\": \"my-org\",\n  \"pipeline\": \"my-pipeline\",\n  \"build_number\": 123,\n  \"job_id\": \"01234567-89ab-cdef-0123-456789abcdef\",\n  \"access_token\": \"optional-if-set-in-env\",\n  \"limit\": 100  // optional, defaults to all content\n}\n```\n\n**Response:**\n```json\n{\n  \"content\": \"...log content...\",\n  \"size\": 12345,\n  \"format\": \"raw\"\n}\n```\n\n### List Failed Specs from Build URL\n\n```\nPOST /mcp_buildkite_list_failed_specs\n```\n\n**Request Body:**\n```json\n{\n  \"build_url\": \"https://buildkite.com/my-org/my-pipeline/builds/123\",\n  \"access_token\": \"optional-if-set-in-env\"\n}\n```\n\n**Response:**\n```json\n{\n  \"build_url\": \"https://buildkite.com/my-org/my-pipeline/builds/123\",\n  \"failed_job_count\": 2,\n  \"jobs\": [\n    {\n      \"id\": \"01234567-89ab-cdef-0123-456789abcdef\",\n      \"name\": \"Test Job 1\",\n      \"web_url\": \"https://buildkite.com/my-org/my-pipeline/builds/123#01234567-89ab-cdef-0123-456789abcdef\",\n      \"failures\": [\n        {\n          \"spec\": \"./spec/path/to/file_spec.rb:123\",\n          \"message\": \"Expected result to be X but got Y\"\n        }\n      ]\n    },\n    {\n      \"id\": \"fedcba98-7654-3210-fedc-ba9876543210\",\n      \"name\": \"Test Job 2\",\n      \"web_url\": \"https://buildkite.com/my-org/my-pipeline/builds/123#fedcba98-7654-3210-fedc-ba9876543210\",\n      \"failures\": []\n    }\n  ],\n  \"failures\": [\n    {\n      \"job_id\": \"01234567-89ab-cdef-0123-456789abcdef\",\n      \"job_name\": \"Test Job 1\",\n      \"job_url\": \"https://buildkite.com/my-org/my-pipeline/builds/123#01234567-89ab-cdef-0123-456789abcdef\",\n      \"spec\": \"./spec/path/to/file_spec.rb:123\",\n      \"message\": \"Expected result to be X but got Y\"\n    }\n  ]\n}\n```\n\n### Retry Job\n\n```\nPOST /mcp_buildkite_retry_job\n```\n\n**Request Body:**\n```json\n{\n  \"organization\": \"my-org\",\n  \"pipeline\": \"my-pipeline\",\n  \"build_number\": 123,\n  \"job_id\": \"01234567-89ab-cdef-0123-456789abcdef\",\n  \"access_token\": \"optional-if-set-in-env\"\n}\n```\n\n**Response:**\n```json\n{\n  \"id\": \"job-id\",\n  \"state\": \"scheduled\"\n}\n```\n\n### List Pipeline Build Failures\n\n```\nPOST /mcp_buildkite_list_pipeline_build_failures\n```\n\n**Request Body:**\n```json\n{\n  \"organization\": \"my-org\",\n  \"pipeline\": \"my-pipeline\",\n  \"state\": \"finished\",\n  \"per_page\": 10,\n  \"page\": 1,\n  \"access_token\": \"optional-if-set-in-env\"\n}\n```\n\n**Response:**\n```json\n[\n  {\n    \"build_number\": 123,\n    \"build_url\": \"https://buildkite.com/my-org/my-pipeline/builds/123\",\n    \"failed_jobs\": [\n      {\n        \"name\": \"Test Job\",\n        \"url\": \"https://buildkite.com/my-org/my-pipeline/builds/123#01234567-89ab-cdef-0123-456789abcdef\"\n      }\n    ]\n  }\n]\n```\n\n## Environment Variables\n\n- `BUILDKITE_ACCESS_TOKEN`: Your Buildkite API token with read access\n- `PORT`: (Optional) Port to run the server on (default: 63330)\n\n## Error Handling\n\nThe server returns appropriate HTTP status codes and error messages when something goes wrong:\n\n- `400`: Bad Request - Missing or invalid parameters\n- `401`: Unauthorized - Invalid or missing access token\n- `404`: Not Found - Resource not found\n- `500`: Internal Server Error - Server-side error "
+}

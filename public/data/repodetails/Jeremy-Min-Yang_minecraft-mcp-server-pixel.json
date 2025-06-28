@@ -1,0 +1,51 @@
+{
+  "mcp_name": "Jeremy-Min-Yang/minecraft-mcp-server-pixel",
+  "mcp_description": "Enables AI-driven control of a Minecraft bot using the Mineflayer API for automated building and exploration.",
+  "mcp_id": "Jeremy-Min-Yang_minecraft-mcp-server-pixel",
+  "fetch_timestamp": "2025-06-23T05:22:47.462677Z",
+  "github_url": "https://github.com/Jeremy-Min-Yang/minecraft-mcp-server-pixel",
+  "repository": {
+    "name": "minecraft-mcp-server-pixel",
+    "full_name": "Jeremy-Min-Yang/minecraft-mcp-server-pixel",
+    "description": null,
+    "html_url": "https://github.com/Jeremy-Min-Yang/minecraft-mcp-server-pixel",
+    "created_at": "2025-04-17T06:44:38Z",
+    "updated_at": "2025-05-18T07:59:57Z",
+    "pushed_at": "2025-04-25T11:52:35Z",
+    "size": 15603,
+    "stargazers_count": 2,
+    "watchers_count": 2,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "JavaScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "Jeremy-Min-Yang",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/107783560?v=4",
+      "html_url": "https://github.com/Jeremy-Min-Yang"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 23957
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 2,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# MinecraftBuildMCP\n\n![Minecraft MCP Server](https://img.shields.io/badge/Minecraft-MCP%20Server-brightgreen)\n![Node.js](https://img.shields.io/badge/Node.js-v16+-blue)\n![License](https://img.shields.io/badge/License-MIT-yellow)\n\nMinecraftBuildMCP is a Model Context Protocol (MCP) server that enables Claude (or other compatible LLMs) to control a Minecraft bot using the Mineflayer API. This project bridges the gap between AI language models and Minecraft, allowing you to automate building, exploration, and interaction with the Minecraft world through natural language.\n\n## 🌟 Features\n\n- **AI-Powered Bot Control**: Interface directly with Claude Desktop to control Minecraft\n- **Pixel Art Creation**: Build complex pixel art designs automatically\n- **Navigation**: Move around the Minecraft world with ease\n- **Block Placement**: Place blocks precisely at specified coordinates\n- **Entity Detection**: Find entities and interact with the environment\n- **In-Game Chat**: Send and receive chat messages\n- **Creative Mode Support**: Special features for creative mode including teleportation and inventory manipulation\n\n## 📋 Prerequisites\n\n- Node.js v16 or higher\n- Minecraft Java Edition (tested on version 1.21.4)\n- Claude Desktop (or any compatible MCP client)\n\n## 🔧 Installation\n\n1. **Clone the repository and install dependencies:**\n   ```sh\n   git clone https://github.com/Jeremy-Min-Yang/minecraft-mcp-server-pixel.git\n   cd minecraft-mcp-server-pixel\n   npm install\n   ```\n\n2. **Build the project:**\n   ```sh\n   npm run build\n   ```\n\n## 🚀 Running the Bot\n\n1. **Start Minecraft and open a world to LAN:**\n   - Launch Minecraft 1.21.4\n   - Create a new world or open an existing one\n   - For best results, use Creative Mode\n   - Press Esc, click \"Open to LAN\"\n   - Enable cheats and set the game mode\n   - Click \"Start LAN World\" and note the port number\n\n2. **Run the bot locally:**\n   ```sh\n   node dist/bot.js --host localhost --port 25565 --username Bob_the_Builder\n   ```\n\n   Or, run directly from GitHub using npx:\n   ```sh\n   npx -y github:Jeremy-Min-Yang/minecraft-mcp-server-pixel --host localhost --port 25565 --username Bob_the_Builder\n   ```\n\n3. **Command Line Options:**\n   - `--host`: Minecraft server hostname (default: localhost)\n   - `--port`: Minecraft server port (default: 25565)\n   - `--username`: Bot's username (default: Bob_the_Builder)\n\n## 🔌 Claude Desktop Integration\n\nAdd this to your `claude_desktop_config.json` to enable the Minecraft MCP server:\n\n```json\n{\n  \"mcpServers\": {\n    \"minecraft\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"-y\",\n        \"github:Jeremy-Min-Yang/minecraft-mcp-server-pixel\",\n        \"--host\",\n        \"localhost\",\n        \"--port\",\n        \"25565\",\n        \"--username\",\n        \"Bob_the_Builder\"\n      ]\n    }\n  }\n}\n```\n\n## 🛠️ Available Commands\n\nOnce connected, Claude can use these commands to control the Minecraft bot:\n\n### Movement\n- `get-position` — Get the bot's current position\n- `move-to-position` — Move to specific coordinates (teleports in creative mode)\n\n### Inventory\n- `equip-item` — Equip an item to the bot's hand\n- `get-bot-status` — Show the current game mode and OP status\n- `list-block-names` — List all valid block names for this Minecraft version\n\n### Block Interaction\n- `place-block` — Place a block at specific coordinates\n\n### Entity Interaction\n- `find-entity` — Find the nearest entity of a specific type\n\n### Chat\n- `send-chat` — Send a chat message in-game\n\n### Pixel Art\n- `build-pixel-art` — Build a pixel art image from a 2D array of block types\n\n## 🎨 Pixel Art Example\n\nTo create pixel art, provide a 2D array of block types, an origin point, and a direction:\n\n```javascript\n// Example pixel art command\n{\n  \"pixels\": [\n    [\"wool_red\", \"wool_red\", \"wool_red\"],\n    [\"wool_blue\", \"wool_white\", \"wool_blue\"],\n    [\"wool_blue\", \"wool_blue\", \"wool_blue\"]\n  ],\n  \"origin\": { \"x\": 100, \"y\": 64, \"z\": 100 },\n  \"direction\": \"north\"\n}\n```\n\n## 📚 Documentation\n\n- See [schema.md](./schema.md) for detailed API documentation\n- Refer to the Mineflayer documentation for more information about the underlying bot API: [Mineflayer Documentation](https://github.com/PrismarineJS/mineflayer/blob/master/docs/api.md)\n\n## 🤝 Contributing\n\nContributions are welcome! Please feel free to submit a Pull Request.\n\n1. Fork the project\n2. Create your feature branch (`git checkout -b feature/amazing-feature`)\n3. Commit your changes (`git commit -m 'Add some amazing feature'`)\n4. Push to the branch (`git push origin feature/amazing-feature`)\n5. Open a Pull Request\n\n## 📄 License\n\nThis project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.\n\n## 👏 Acknowledgements\n\n- [Mineflayer](https://github.com/PrismarineJS/mineflayer) - The Minecraft bot library\n- [Model Context Protocol](https://modelcontextprotocol.ai) - The protocol for connecting LLMs to tools\n- [Anthropic](https://www.anthropic.com) - Creator of Claude AI\n\n---\n\nHappy building with AI! 🤖🏗️\n"
+}

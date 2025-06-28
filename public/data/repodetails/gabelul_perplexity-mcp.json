@@ -1,0 +1,53 @@
+{
+  "mcp_name": "gabelul/perplexity-mcp",
+  "mcp_description": "An intelligent research assistant leveraging Perplexity's AI models for automatic query complexity detection and optimal model routing.",
+  "mcp_id": "gabelul_perplexity-mcp",
+  "fetch_timestamp": "2025-06-23T03:39:51.482208Z",
+  "github_url": "https://github.com/gabelul/perplexity-mcp",
+  "repository": {
+    "name": "perplexity-mcp",
+    "full_name": "gabelul/perplexity-mcp",
+    "description": null,
+    "html_url": "https://github.com/gabelul/perplexity-mcp",
+    "created_at": "2025-04-16T16:16:27Z",
+    "updated_at": "2025-04-16T16:17:08Z",
+    "pushed_at": "2025-04-16T16:17:02Z",
+    "size": 76,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "JavaScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "gabelul",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8458444?v=4",
+      "html_url": "https://github.com/gabelul"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 8186,
+      "Dockerfile": 1053
+    },
+    "language_percentages": {
+      "JavaScript": 88.6,
+      "Dockerfile": 11.4
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 4,
+    "package_json_version": "0.2.0"
+  },
+  "readme": "# Perplexity MCP Server\n\nAn intelligent research assistant powered by Perplexity's specialized AI models. Features automatic query complexity detection to route requests to the most appropriate model for optimal results. Unlike the Official server, it has search capabilities FOR EVERY TASK, essentially \n\n## Tools\n\n**Quick Note: The Deep Research tool is going to timeout with some tools like cline, but not with others like cursor due to implementation differences, but the reason tool makes up for it.**\n\n### 1. Search (Sonar Pro)\nQuick search for simple queries and basic information lookup. Best for straightforward questions that need concise, direct answers.\n\n```javascript\nconst result = await use_mcp_tool({\n  server_name: \"perplexity\",\n  tool_name: \"search\",\n  arguments: {\n    query: \"What is the capital of France?\",\n    force_model: false // Optional: force using this model even if query seems complex\n  }\n});\n```\n\n### 2. Reason (Sonar Reasoning Pro)\nHandles complex, multi-step tasks requiring detailed analysis. Perfect for explanations, comparisons, and problem-solving.\n\n```javascript\nconst result = await use_mcp_tool({\n  server_name: \"perplexity\",\n  tool_name: \"reason\",\n  arguments: {\n    query: \"Compare and contrast REST and GraphQL APIs, explaining their pros and cons\",\n    force_model: false // Optional: force using this model even if query seems simple\n  }\n});\n```\n\n### 3. Deep Research (Sonar Deep Research)\nConducts comprehensive research and generates detailed reports. Ideal for in-depth analysis of complex topics.\n\n```javascript\nconst result = await use_mcp_tool({\n  server_name: \"perplexity\",\n  tool_name: \"deep_research\",\n  arguments: {\n    query: \"The impact of quantum computing on cryptography\",\n    focus_areas: [\n      \"Post-quantum cryptographic algorithms\",\n      \"Timeline for quantum threats\",\n      \"Practical mitigation strategies\"\n    ],\n    force_model: false // Optional: force using this model even if query seems simple\n  }\n});\n```\n\n## Intelligent Model Selection\n\nThe server automatically analyzes query complexity to route requests to the most appropriate model:\n\n1. **Simple Queries** → Sonar Pro\n   - Basic information lookup\n   - Straightforward questions\n   - Quick facts\n\n2. **Complex Queries** → Sonar Reasoning Pro\n   - How/why questions\n   - Comparisons\n   - Step-by-step explanations\n   - Problem-solving tasks\n\n3. **Research Queries** → Sonar Deep Research\n   - In-depth analysis\n   - Comprehensive research\n   - Detailed investigations\n   - Multi-faceted topics\n\nYou can override the automatic selection using `force_model: true` in any tool's arguments.\n\n## Setup\n\n1. **Prerequisites**\n   - Node.js (from [nodejs.org](https://nodejs.org))\n   - Perplexity API key (from [perplexity.ai/settings/api](https://www.perplexity.ai/settings/api))\n   - clone the repo somewhere\n\n2. **Configure MCP Settings**\n\nAdd to your MCP settings file (location varies by platform):\n\n```json\n{\n  \"mcpServers\": {\n    \"perplexity\": {\n      \"command\": \"node\",\n      \"args\": [\"/path/to/perplexity-server/build/index.js\"],\n      \"env\": {\n        \"PERPLEXITY_API_KEY\": \"YOUR_API_KEY_HERE\"\n      },\n      \"disabled\": false,\n      \"autoApprove\": []\n    }\n  }\n}\n```\n\n\nOr use NPX to not have to install it locally (recommended for macos): \n\n```json\n{\n  \"mcpServers\": {\n    \"perplexity\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"-y\",\n        \"perplexity-mcp\"\n      ],\n      \"env\": {\n        \"PERPLEXITY_API_KEY\": \"your_api_key\"\n      }\n    }\n  }\n}\n```\n\n"
+}

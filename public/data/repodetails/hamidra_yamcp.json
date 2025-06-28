@@ -1,0 +1,89 @@
+{
+  "mcp_name": "yamcp",
+  "mcp_description": "A Model Context Workspace Manager. Oraganize your MCP servers in local workspaces (coding, design, research, ...), scan, monitor, and integrate each workspace with AI apps via a unified CLI.",
+  "mcp_id": "hamidra_yamcp",
+  "fetch_timestamp": "2025-06-23T09:36:00.940930Z",
+  "github_url": "https://github.com/hamidra/yamcp",
+  "repository": {
+    "name": "yamcp",
+    "full_name": "hamidra/yamcp",
+    "description": "Organize your MCP servers in local workspaces, share them as Yet-Another-MCP through a single command",
+    "html_url": "https://github.com/hamidra/yamcp",
+    "created_at": "2025-04-19T01:37:57Z",
+    "updated_at": "2025-06-21T08:41:34Z",
+    "pushed_at": "2025-05-27T03:07:06Z",
+    "size": 10697,
+    "stargazers_count": 40,
+    "watchers_count": 40,
+    "forks_count": 7,
+    "open_issues_count": 2,
+    "language": "TypeScript",
+    "license": "Apache License 2.0",
+    "topics": [
+      "agent-toolkit",
+      "mcp",
+      "mcp-client",
+      "mcp-server"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "hamidra",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5099795?v=4",
+      "html_url": "https://github.com/hamidra"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 7,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 77322,
+      "JavaScript": 696
+    },
+    "language_percentages": {
+      "TypeScript": 99.11,
+      "JavaScript": 0.89
+    },
+    "pull_requests_count": 2,
+    "contributors_count": 2,
+    "latest_release": {
+      "tag_name": "v0.2.3",
+      "name": "v0.2.3",
+      "published_at": "2025-05-26T01:08:17Z",
+      "body": "## What's Changed\r\n* Add MseeP.ai badge by @lwsinclair in https://github.com/hamidra/yamcp/pull/3\r\n* fix relative commands not being resolved from local PATH by @hamidra in https://github.com/hamidra/yamcp/pull/5\r\n\r\n## New Contributors\r\n* @lwsinclair made their first contribution in https://github.com/hamidra/yamcp/pull/3\r\n* @hamidra made their first contribution in https://github.com/hamidra/yamcp/pull/5\r\n\r\n**Full Changelog**: https://github.com/hamidra/yamcp/compare/v0.2.2...v0.2.3",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.2.3",
+        "commit_sha": "04bd3b7d1b39f564f359ae700a1c5d68271e744d"
+      },
+      {
+        "name": "v0.2.2",
+        "commit_sha": "b903584ce4f460830a6e36e3db2fd0ce5423b1e9"
+      },
+      {
+        "name": "v0.2.1",
+        "commit_sha": "3e1559bc9ea0026e9cd783bc720aa229e0eea58f"
+      },
+      {
+        "name": "v0.2.0",
+        "commit_sha": "be8c8043f86c4097bd303a09a8c4ddc74afc3f76"
+      },
+      {
+        "name": "v0.1.0",
+        "commit_sha": "10b8a9f5d84dcf3683416ec812a5ca3be704312b"
+      }
+    ],
+    "latest_version": "v0.2.3",
+    "package_json_version": "0.2.2"
+  },
+  "readme": "# 🍠 YAMCP - A Model Context Workspace Manager\n\nYAMCP (YAM-C-P) is a command-line tool for organizing and managing MCP servers as local workspaces. It seamlessly connects to multiple MCP servers, local or remote, grouping them into a unified workspace exposed as Yet Another MCP server (YAM) for AI applications. You can create dedicated workspaces based on specific functionality (e.g., a YAM workspace for coding, design, research, ...) or based on the AI apps that consume servers (e.g., a YAM for Cursor, Claude, Windsurf) or any other combination in between. In addition, it simplifies monitoring and debugging MCP servers by centralizing all server communication logs in a single store, eliminating the need to dig through each AI client app’s logs separately.\n\n## Import and Create Workspaces\n\n<div align=\"center\">\n<img src=\"assets/demo/yamcp.gif\" alt=\"yamcp demoo\" width=\"700px\"/>\n</div>\n\n## Connect All Bundled Servers in a Workspace to Your AI Apps with One Config\n\n<div align=\"center\">\n<img src=\"assets/demo/cursor.gif\" alt=\"cursor demo\" width=\"700px\"/>\n</div>\n\n## 🚀 Quick Start\n\n```bash\n# Install YAMCP\nnpm install -g yamcp  # or use npx yamcp\n\n# Import servers (choose one)\nyamcp server import [config]    # import servers from config file (see src/example-servers.json for format)\nyamcp server add                # or add manually\n\n# create workspaces (e.g. a yam for coding, design, data, ...)\nyamcp yam create\n\n# Run workspace in your AI app\nyamcp run <yam-workspace-name>\n```\n\n## 🔑 Key Concepts\n\n- **MCP Servers**: Remote or local servers that provide Model Context Protocol services\n- **Workspaces (YAMs)**: Collections of MCP servers grouped together to be shared with AI Apps (e.g. a workspace for coding, writing, design, magic making!)\n- **Gateway**: A local MCP server that manages connections to configured MCP servers in a workspace and exposes them through a unified server to AI App's MCP clients\n\nWith YAMCP, you can:\n\n- Create workspaces to group MCP servers by AI application (e.g. Cursor, Claude, GitHub Copilot)\n- Group servers by workflow purpose (e.g. software development, data science, technical writing)\n- Connect AI apps to a single gateway that provides access to all workspace servers\n- Manage and monitor multiple MCP server connections through a unified interface\n- Track all server communications with detailed logging and debugging capabilities\n\n## Top-Level Commands\n\n```bash\nyamcp [command] [subcommand] [flags]\n```\n\nAvailable top-level commands:\n\n- `server` - Manage MCP providers\n- `yam` - Manage workspaces (yams)\n- `run` - Run the gateway with a workspace\n- `log` - View the server log location\n\n---\n\n## 🔧 **Mcp Server Management Commands**\n\n### Server Commands\n\n```bash\nyamcp server add      # Add a new MCP server (interactive)\nyamcp server list     # List all configured servers and their status\nyamcp server remove   # Remove a server configuration\nyamcp server import   # Import server configurations from a JSON file\n```\n\n---\n\n## 🍠 **Yam Workspace Management Commands**\n\n### Workspace Commands\n\n```bash\nyamcp yam create      # Create a new workspace (interactive)\nyamcp yam list        # List all workspaces or show specific workspace details\nyamcp yam edit        # Modify an existing workspace configuration\nyamcp yam scan            # Scan workspaces\nyamcp yam delete          # Delete a workspace\n```\n\n### Runtime Commands\n\n```bash\nyamcp run <yam-workspace-name>   # Start the gateway with specified workspace\nyamcp log                    # View server communication logs\n```\n\n---\n\n## ✅ Command Reference\n\n| Command           | Description             | Example                              |\n| ----------------- | ----------------------- | ------------------------------------ |\n| `server add`      | Add a new MCP server    | `yamcp server add`                   |\n| `server list`     | List configured servers | `yamcp server list`                  |\n| `server remove`   | Remove a server         | `yamcp server remove [name]`         |\n| `server import`   | Import server config    | `yamcp server import [config]`       |\n| `yam create`      | Create workspace        | `yamcp yam create`                   |\n| `yam list`        | List workspaces         | `yamcp yam list`                     |\n| `yam list --name` | Show workspace details  | `yamcp yam list --name my-workspace` |\n| `yam edit`        | Edit workspace          | `yamcp yam edit`                     |\n| `yam scan  `      | Scan workspace          | `yamcp yam scan   [workspace-name]`  |\n| `yam delete`      | Delete workspace        | `yamcp yam delete [workspace-name]`  |\n| `run`             | Start gateway           | `yamcp run <workspace-name>`         |\n| `log`             | View logs               | `yamcp log`                          |\n\n---\n\n## 🖥️ YAMCP UI (created by [@eladcandroid](https://github.com/eladcandroid))\n[YAMCP UI](https://github.com/eladcandroid/yamcp-ui) provides an intuitive web interface to manage your MCP servers and workspaces through a universal dashboard.\n\n```bash\n# Run directly with npx (recommended)\nnpx yamcp-ui\n\n# Or install globally\nnpm install -g yamcp-ui\nyamcp-ui\n```\n\nRefer to the project repo for full documentation: https://github.com/eladcandroid/yamcp-ui.\n\n## 🏗️ System Architecture\n\n```mermaid\ngraph TB\n    CLI[CLI Commands]\n    GW[McpGateway]\n    GS[GatewayServer]\n    GR[GatewayRouter]\n    LOG[Logger]\n    STORE[(Store)]\n    AI_APP[AI App]\n\n    %% CLI Command Flow\n    CLI -->|manages| STORE\n    CLI -->|runs| GW\n\n    %% Gateway Components\n    GW -->|uses| GS\n    GW -->|uses| GR\n    GW -->|logs| LOG\n\n    %% Server & Router\n    GS -->|stdio transport| AI_APP\n    GR -->|connects to| SERVERX\n    GR -->|connects to| SERVERY\n\n    %% Data Store\n    STORE -->|loads config| GW\n\n    %% External MCP Servers\n    subgraph \"Workspace Servers\"\n        SERVERX[\"Server x (Stdio)\"]\n        SERVERY[\"Server y (SSE)\"]\n    end\n    %% Store Components\n    subgraph \"Configuration Store\"\n        PROVIDERS[(Provider Config)]\n        WORKSPACES[(Workspace Config)]\n    end\n    STORE --- PROVIDERS\n    STORE --- WORKSPACES\n\n    classDef primary fill:#2374ab,stroke:#2374ab,color:#fff\n    classDef secondary fill:#ff7e67,stroke:#ff7e67,color:#fff\n    classDef store fill:#95b8d1,stroke:#95b8d1,color:#fff\n\n    class GW,GS,GR primary\n    class CLI,AI_APP secondary\n    class STORE,PROVIDERS,WORKSPACES store\n```\n\nThe diagram shows the main components of the YAMCP system:\n\n- **CLI Commands**: User interface for managing servers and workspaces\n- **McpGateway**: Core component that coordinates the Gateway Server and Router\n- **GatewayServer**: Handles communication with AI Apps via stdio transport\n- **GatewayRouter**: Manages connections to configured MCP servers\n- **Logger**: Provides consolidated logging for all components\n- **Store**: Manages configuration for providers and workspaces\n- **MCP Servers**: Both local (stdio) and remote (SSE) servers that provide MCP services\n\n## 🪪 Security Audits\n\n[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/hamidra-yamcp-badge.png)](https://mseep.ai/app/hamidra-yamcp)\n"
+}

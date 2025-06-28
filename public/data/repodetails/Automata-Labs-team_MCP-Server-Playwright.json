@@ -1,0 +1,104 @@
+{
+  "mcp_name": "automatalabs/mcp-server-playwright",
+  "mcp_description": "🐍 - An MCP server for browser automation using Playwright",
+  "mcp_id": "Automata-Labs-team_MCP-Server-Playwright",
+  "fetch_timestamp": "2025-06-23T01:22:47.960023Z",
+  "github_url": "https://github.com/Automata-Labs-team/MCP-Server-Playwright",
+  "repository": {
+    "name": "MCP-Server-Playwright",
+    "full_name": "Automata-Labs-team/MCP-Server-Playwright",
+    "description": "MCP server for browser automation using Playwright",
+    "html_url": "https://github.com/Automata-Labs-team/MCP-Server-Playwright",
+    "created_at": "2024-12-02T08:15:20Z",
+    "updated_at": "2025-06-21T07:34:35Z",
+    "pushed_at": "2025-06-05T21:48:28Z",
+    "size": 103,
+    "stargazers_count": 210,
+    "watchers_count": 210,
+    "forks_count": 26,
+    "open_issues_count": 7,
+    "language": "JavaScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "Automata-Labs-team",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/181803576?v=4",
+      "html_url": "https://github.com/Automata-Labs-team"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 26,
+    "subscribers_count": 2,
+    "languages": {
+      "JavaScript": 22738,
+      "Dockerfile": 780
+    },
+    "language_percentages": {
+      "JavaScript": 96.68,
+      "Dockerfile": 3.32
+    },
+    "pull_requests_count": 7,
+    "contributors_count": 5,
+    "latest_release": {
+      "tag_name": "v1.2.1",
+      "name": "v1.2.1",
+      "published_at": "2025-01-24T07:03:52Z",
+      "body": "### Bug Fixes\n\n* Revert \"feat: add xvfb support for linux\" ([b910dba](https://github.com/Automata-Labs-team/MCP-Server-Playwright/commit/b910dbab5de055611e91cceae46ae68b61d177db))\n* Revert \"feat: use chromium as default browser\" ([56934ed](https://github.com/Automata-Labs-team/MCP-Server-Playwright/commit/56934edaf4a595e0a893457030e735b7ab0d1fc0))",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v1.2.1",
+        "commit_sha": "337196c2de24405c35e1f1bcfc3cd13db783928b"
+      },
+      {
+        "name": "v1.2.0",
+        "commit_sha": "7db9a5a7b15b01bfdd5a72678c55f6228d7d49d9"
+      },
+      {
+        "name": "v1.1.0",
+        "commit_sha": "40e9f0fd8585b1d9553ad1b102738150685497f9"
+      },
+      {
+        "name": "v1.0.0",
+        "commit_sha": "9938daeefc4c5d000b9973dcb1ee6968a5205c73"
+      },
+      {
+        "name": "v0.9.0",
+        "commit_sha": "660c488cec96f0d44e7f094a35e8872cf3b0387d"
+      },
+      {
+        "name": "v0.8.0",
+        "commit_sha": "4b985c6ecf803e78718bc0c2c960a6164c43251b"
+      },
+      {
+        "name": "v0.7.2",
+        "commit_sha": "3e5c669e547a7154c4d68802d85c5f36e2d81643"
+      },
+      {
+        "name": "v0.7.1",
+        "commit_sha": "345cc583efef20b7c045a79952842f1324bdef96"
+      },
+      {
+        "name": "v0.7.0",
+        "commit_sha": "1d239e7938e19274bc575a7268341e9e0fd61ffd"
+      },
+      {
+        "name": "v0.6.5",
+        "commit_sha": "97a951ea9621d25fde1966b6aeea41c6e657b859"
+      }
+    ],
+    "latest_version": "v1.2.1",
+    "package_json_version": "1.2.1"
+  },
+  "readme": "<h1 align=\"center\">MCP Server Playwright</h1>\n<p align=\"center\">\n  <a href=\"https://www.automatalabs.io\"><img alt=\"MCP Playwright\" src=\"https://automatalabs.io/icon.svg\" height=\"250\"/></a>\n</p>\n<p align=\"center\">\n  <b>A Model Context Protocol server that provides browser automation capabilities using Playwright</b></br>\n  <sub>Enable LLMs to interact with web pages, take screenshots, and execute JavaScript in a real browser environment</sub>\n</p>\n\n<p align=\"center\">\n  <a href=\"https://www.npmjs.com/package/@automatalabs/mcp-server-playwright\"><img alt=\"NPM Version\" src=\"https://img.shields.io/npm/v/@automatalabs/mcp-server-playwright.svg\" height=\"20\"/></a>\n  <a href=\"https://npmcharts.com/compare/@automatalabs/mcp-server-playwright?minimal=true\"><img alt=\"Downloads per month\" src=\"https://img.shields.io/npm/dm/@automatalabs/mcp-server-playwright.svg\" height=\"20\"/></a>\n  <a href=\"https://github.com/Automata-Labs-team/MCP-Server-Playwright/blob/main/LICENSE\"><img alt=\"License\" src=\"https://img.shields.io/github/license/Automata-Labs-team/MCP-Server-Playwright.svg\" height=\"20\"/></a>\n  <a href=\"https://smithery.ai/server/@automatalabs/mcp-server-playwright\"><img alt=\"Smithery Installs\" src=\"https://smithery.ai/badge/@automatalabs/mcp-server-playwright\" height=\"20\"/></a>\n</p>\n\n<a href=\"https://glama.ai/mcp/servers/9q4zck8po5\"><img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/9q4zck8po5/badge\" alt=\"MCP-Server-Playwright MCP server\" /></a>\n\n## Table of Contents\n\n- [Features](#features)\n- [Installation](#installation)\n- [Configuration](#configuration)\n- [Components](#components)\n  - [Tools](#tools)\n  - [Resources](#resources)\n- [License](#license)\n\n## Features\n\n- 🌐 Full browser automation capabilities\n- 📸 Screenshot capture of entire pages or specific elements\n- 🖱️ Comprehensive web interaction (navigation, clicking, form filling)\n- 📊 Console log monitoring\n- 🔧 JavaScript execution in browser context\n\n## Installation\n\n### Installing via Smithery\n\nTo install MCP Server Playwright for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@automatalabs/mcp-server-playwright):\n\n```bash\nnpx -y @smithery/cli install @automatalabs/mcp-server-playwright --client claude\n```\n\nYou can install the package using either npx or mcp-get:\n\nUsing npx:\n```bash\nnpx @automatalabs/mcp-server-playwright install\n```\nThis command will:\n1. Check your operating system compatibility (Windows/macOS)\n2. Create or update the Claude configuration file\n3. Configure the Playwright server integration\n\nThe configuration file will be automatically created/updated at:\n- Windows: `%APPDATA%\\Claude\\claude_desktop_config.json`\n- macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`\n\nUsing mcp-get:\n```bash\nnpx @michaellatman/mcp-get@latest install @automatalabs/mcp-server-playwright\n```\n\n## Configuration\n\nThe installation process will automatically add the following configuration to your Claude config file:\n\n```json\n{\n  \"mcpServers\": {\n    \"playwright\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@automatalabs/mcp-server-playwright\"]\n    }\n  }\n}\n```\n## Using with Cursor\n\nYou can also use MCP Server Playwright with [Cursor](https://www.cursor.so/), an AI-powered code editor. To enable browser automation in Cursor via MCP:\n\n1. **Install Playwright browsers** (if not already):\n    ```bash\n    npx playwright install\n    ```\n\n2. **Install MCP Server Playwright for Cursor** using Smithery:\n    ```bash\n    npx -y @smithery/cli install @automatalabs/mcp-server-playwright --client cursor\n    ```\n\n3. **Configuration file setup**:  \n   If you do not use Claude, the configuration file (`claude_desktop_config.json`) may not be created automatically.  \n   - On Windows, create a folder named `Claude` in `%APPDATA%` (usually `C:\\Users\\<YourName>\\AppData\\Roaming\\Claude`).\n   - Inside that folder, create a file named `claude_desktop_config.json` with the following content:\n   \n    ```json\n    {\n      \"serverPort\": 3456\n    }\n    ```\n\n4. **Follow the remaining steps in the [Installation](#installation) section above** to complete the setup.\n\nNow, you can use all the browser automation tools provided by MCP Server Playwright directly from Cursor’s AI features, such as web navigation, screenshot capture, and JavaScript execution.\n\n> **Note:** Make sure you have Node.js installed and `npx` available in your system PATH.\n\n## Components\n\n### Tools\n\n#### `browser_navigate`\nNavigate to any URL in the browser\n```javascript\n{\n  \"url\": \"https://stealthbrowser.cloud\"\n}\n```\n\n#### `browser_screenshot`\nCapture screenshots of the entire page or specific elements\n```javascript\n{\n  \"name\": \"screenshot-name\",     // required\n  \"selector\": \"#element-id\",     // optional\n  \"fullPage\": true              // optional, default: false\n}\n```\n\n#### `browser_click`\nClick elements on the page using CSS selector\n```javascript\n{\n  \"selector\": \"#button-id\"\n}\n```\n\n#### `browser_click_text`\nClick elements on the page by their text content\n```javascript\n{\n  \"text\": \"Click me\"\n}\n```\n\n#### `browser_hover`\nHover over elements on the page using CSS selector\n```javascript\n{\n  \"selector\": \"#menu-item\"\n}\n```\n\n#### `browser_hover_text`\nHover over elements on the page by their text content\n```javascript\n{\n  \"text\": \"Hover me\"\n}\n```\n\n#### `browser_fill`\nFill out input fields\n```javascript\n{\n  \"selector\": \"#input-field\",\n  \"value\": \"Hello World\"\n}\n```\n\n#### `browser_select`\nSelect an option in a SELECT element using CSS selector\n```javascript\n{\n  \"selector\": \"#dropdown\",\n  \"value\": \"option-value\"\n}\n```\n\n#### `browser_select_text`\nSelect an option in a SELECT element by its text content\n```javascript\n{\n  \"text\": \"Choose me\",\n  \"value\": \"option-value\"\n}\n```\n\n#### `browser_evaluate`\nExecute JavaScript in the browser console\n```javascript\n{\n  \"script\": \"document.title\"\n}\n```\n\n### Resources\n\n1. **Console Logs** (`console://logs`)\n   - Access browser console output in text format\n   - Includes all console messages from the browser\n\n2. **Screenshots** (`screenshot://<n>`)\n   - Access PNG images of captured screenshots\n   - Referenced by the name specified during capture\n\n## License\n\nThis project is licensed under the MIT License - see the [LICENSE](https://github.com/Automata-Labs-team/MCP-Server-Playwright/blob/main/LICENSE) file for details.\n"
+}

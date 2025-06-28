@@ -1,0 +1,51 @@
+{
+  "mcp_name": "T1nker-1220/aws-postgress-mcp-server",
+  "mcp_description": "Facilitates read-only SQL query access to AWS PostgreSQL databases using the Model Context Protocol.",
+  "mcp_id": "T1nker-1220_aws-postgress-mcp-server",
+  "fetch_timestamp": "2025-06-23T08:46:11.875862Z",
+  "github_url": "https://github.com/T1nker-1220/aws-postgress-mcp-server",
+  "repository": {
+    "name": "aws-postgress-mcp-server",
+    "full_name": "T1nker-1220/aws-postgress-mcp-server",
+    "description": null,
+    "html_url": "https://github.com/T1nker-1220/aws-postgress-mcp-server",
+    "created_at": "2025-04-23T01:57:11Z",
+    "updated_at": "2025-04-24T02:00:02Z",
+    "pushed_at": "2025-04-24T01:59:59Z",
+    "size": 13,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 1,
+    "open_issues_count": 1,
+    "language": "JavaScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "T1nker-1220",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/183291505?v=4",
+      "html_url": "https://github.com/T1nker-1220"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 12232
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 1,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# AWS PostgreSQL MCP Server\n\nA Model Context Protocol (MCP) server providing read-only SQL query access to an AWS PostgreSQL database via the `query` tool. Configuration uses environment variables.\n\n## Setup\n\n1.  **Clone:**\n    ```bash\n    git clone https://github.com/T1nker-1220/aws-postgress-mcp-server.git\n    cd aws-postgress-mcp-server\n    ```\n2.  **Install & Build:**\n    ```bash\n    pnpm install\n    pnpm run build\n    ```\n\n## Configuration (for Cline/Windsurf)\n\nAdd this server to your MCP client's settings file (e.g., `c:\\Users\\<User>\\AppData\\Roaming\\Windsurf\\User\\globalStorage\\saoudrizwan.claude-dev\\settings\\cline_mcp_settings.json`):\n\n```json\n{\n  \"mcpServers\": {\n    // ... other servers ...\n\n    \"aws-postgres-mcp-server\": {\n      \"command\": \"node\",\n      \"args\": [\n        // Full path to the built index.js\n        \"C:\\\\Users\\\\NATH\\\\Documents\\\\Cline\\\\MCP\\\\aws-postgress-mcp-server\\\\build\\\\index.js\" \n      ],\n      // Database credentials go in the 'env' object\n      \"env\": {\n        \"DB_HOST\": \"YOUR_HOST.rds.amazonaws.com\",\n        \"DB_PORT\": \"5432\",\n        \"DB_NAME\": \"YOUR_DB_NAME\",\n        \"DB_USER\": \"YOUR_DB_USER\",\n        \"DB_PASSWORD\": \"YOUR_PASSWORD\"\n      },\n      \"transportType\": \"stdio\",\n      \"disabled\": false,\n      \"autoApprove\": [] \n    }\n    // ... other servers ...\n  }\n}\n```\n\n**-> Replace the placeholder values in the `env` object with your actual credentials.**\n\n## Usage\n\nOnce configured, the client will start the server. Use the `query` tool:\n\n```xml\n<use_mcp_tool>\n  <server_name>aws-postgres-mcp-server</server_name>\n  <tool_name>query</tool_name>\n  <arguments>\n  {\n    \"sql\": \"SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';\"\n  }\n  </arguments>\n</use_mcp_tool>\n```\n\n## Notes\n\n*   The server only allows read-only queries (SELECT, SHOW, etc.).\n*   To configure clients using `npx @t1nker-1220/aws-postgres-mcp-server ...`, the package must first be published to npm. The configuration would still use the `env` object for credentials.\n"
+}

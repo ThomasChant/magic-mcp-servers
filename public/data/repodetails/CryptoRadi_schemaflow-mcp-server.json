@@ -1,0 +1,51 @@
+{
+  "mcp_name": "SchemaFlow",
+  "mcp_description": "Real-time PostgreSQL & Supabase database schema access for AI-IDEs via Model Context Protocol. Provides live database context through secure SSE connections with three powerful tools: get_schema, analyze_database, and check_schema_alignment. [SchemaFlow](https://schemaflow.dev)",
+  "mcp_id": "CryptoRadi_schemaflow-mcp-server",
+  "fetch_timestamp": "2025-06-23T08:11:47.383957Z",
+  "github_url": "https://github.com/CryptoRadi/schemaflow-mcp-server",
+  "repository": {
+    "name": "schemaflow-mcp-server",
+    "full_name": "CryptoRadi/schemaflow-mcp-server",
+    "description": "SchemaFlow MCP Server",
+    "html_url": "https://github.com/CryptoRadi/schemaflow-mcp-server",
+    "created_at": "2025-06-02T20:51:48Z",
+    "updated_at": "2025-06-16T13:05:26Z",
+    "pushed_at": "2025-06-02T20:56:51Z",
+    "size": 5,
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 1,
+    "open_issues_count": 0,
+    "language": "JavaScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "CryptoRadi",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/54412522?v=4",
+      "html_url": "https://github.com/CryptoRadi"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 0,
+    "languages": {
+      "JavaScript": 2628
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "1.0.0"
+  },
+  "readme": "# SchemaFlow MCP Server\n\n> Real-time PostgreSQL & Supabase schema access for AI-IDEs via Model Context Protocol (MCP)\n\nSchemaFlow MCP Server provides your AI-IDE with live access to PostgreSQL and Supabase database schemas through the Model Context Protocol. Get real-time schema context for smarter code generation in tools like Cursor, Windsurf, and VS Code + Cline.\n\n## 🚀 Quick Start\n\n**[Visit SchemaFlow →](https://schemaflow.dev)**\n\n### 1. Get Your MCP Token\nVisit [SchemaFlow Dashboard](https://schemaflow.dev/dashboard) to:\n- Connect your PostgreSQL or Supabase database\n- Load and cache your schema\n- Generate an MCP token\n\n### 2. Configure Your AI-IDE\n\n#### For Cursor IDE:\n1. Open Cursor Settings\n2. Go to Features → MCP\n3. Click \"Add New MCP Server\"\n4. Use this configuration:\n\n```json\n{\n  \"name\": \"schemaflow\",\n  \"type\": \"sse\",\n  \"url\": \"https://api.schemaflow.dev/mcp/?token=your-token-here\"\n}\n```\n\n#### For Windsurf IDE:\nAdd to your MCP configuration:\n\n```json\n{\n  \"mcpServers\": {\n    \"schemaflow\": {\n      \"type\": \"sse\",\n      \"url\": \"https://api.schemaflow.dev/mcp/?token=your-token-here\"\n    }\n  }\n}\n```\n\n#### For VS Code + Cline:\nConfigure in Cline's MCP settings:\n\n```json\n{\n  \"mcpServers\": {\n    \"schemaflow\": {\n      \"type\": \"sse\", \n      \"url\": \"https://api.schemaflow.dev/mcp/?token=your-token-here\"\n    }\n  }\n}\n```\n\n## 🛠️ Available MCP Tools\n\n### `get_schema`\nRetrieves complete database schema information including tables, columns, relationships, functions, triggers, enums, and indexes from PostgreSQL or Supabase databases.\n\n**Parameters:**\n- `query_type` (optional): Filter specific information (`tables`, `columns`, `relationships`, `functions`, `triggers`, `enums`, `indexes`, `all`)\n\n**Example AI queries:**\n- \"Show me my database schema\"\n- \"What tables do I have?\"\n- \"Show me all relationships\"\n- \"List database functions\"\n\n### `analyze_database`\nPerforms comprehensive database analysis including performance insights, security assessment, and structural recommendations for PostgreSQL and Supabase databases.\n\n**Example AI queries:**\n- \"Analyze my database performance\"\n- \"Check database security\"\n- \"Review database structure\"\n- \"Give me a database overview\"\n\n### `check_schema_alignment`\nValidates your PostgreSQL or Supabase schema against best practices and identifies potential issues with actionable recommendations.\n\n**Example AI queries:**\n- \"Check schema alignment\"\n- \"Validate my database\"\n- \"Any schema issues?\"\n- \"Check naming conventions\"\n\n## 🔧 How It Works\n\n1. **Schema Caching**: When you load your schema in SchemaFlow dashboard, it's automatically cached for MCP access\n2. **Secure Connection**: Your AI-IDE connects using MCP with secure token authentication\n3. **Real-time Access**: Your AI assistant can query schema data in real-time for better code generation\n\n## 🔒 Security\n\n- **Schema metadata only** - No actual data is accessed or stored\n- **Token-based authentication** - Each user has a unique, revokable token\n- **Encrypted connections** - All MCP communication is encrypted\n- **User-specific access** - Tokens only access your own cached schema data\n\n## 📚 Complete Documentation\n\nFor detailed setup instructions, troubleshooting, and advanced configuration, visit:\n\n**[Complete MCP Integration Guide](https://schemaflow.dev/mcp-guide)**\n\n## 🌐 SchemaFlow Platform\n\nThis MCP server is part of the larger SchemaFlow platform which also provides:\n\n- **Interactive Schema Visualization** - Explore your PostgreSQL/Supabase database structure through intuitive diagrams\n- **Multi-Format Export** - Export schemas in JSON, Markdown, SQL, and Mermaid formats\n- **Schema Browser** - Navigate through tables, relationships, and database components\n- **Performance Analysis** - Get insights into your database structure and optimization opportunities\n- **Supabase Integration** - Native support for Supabase projects with direct connection\n\n**[Visit SchemaFlow →](https://schemaflow.dev)**\n\n## 🆘 Support\n\n- **Documentation**: [schemaflow.dev/mcp-guide](https://schemaflow.dev/mcp-guide)\n- **Dashboard**: [schemaflow.dev/dashboard](https://schemaflow.dev/dashboard)\n- **Issues**: Create an issue in this repository\n\n## 📄 License\n\nMIT License - see LICENSE file for details.\n"
+}

@@ -1,0 +1,83 @@
+{
+  "mcp_name": "qiniu/qiniu-mcp-server",
+  "mcp_description": "🐍 ☁️ - A MCP built on Qiniu Cloud products, supporting access to Qiniu Cloud Storage, media processing services, etc.",
+  "mcp_id": "qiniu_qiniu-mcp-server",
+  "fetch_timestamp": "2025-06-23T07:43:38.874679Z",
+  "github_url": "https://github.com/qiniu/qiniu-mcp-server",
+  "repository": {
+    "name": "qiniu-mcp-server",
+    "full_name": "qiniu/qiniu-mcp-server",
+    "description": null,
+    "html_url": "https://github.com/qiniu/qiniu-mcp-server",
+    "created_at": "2025-03-31T07:15:30Z",
+    "updated_at": "2025-06-17T12:59:15Z",
+    "pushed_at": "2025-05-14T06:26:42Z",
+    "size": 154,
+    "stargazers_count": 17,
+    "watchers_count": 17,
+    "forks_count": 8,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "qiniu",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1563636?v=4",
+      "html_url": "https://github.com/qiniu"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 8,
+    "subscribers_count": 3,
+    "languages": {
+      "Python": 60583,
+      "Dockerfile": 814
+    },
+    "language_percentages": {
+      "Python": 98.67,
+      "Dockerfile": 1.33
+    },
+    "pull_requests_count": 22,
+    "contributors_count": 4,
+    "latest_release": {
+      "tag_name": "v1.2.2",
+      "name": "Release 1.2.2",
+      "published_at": "2025-05-14T06:26:42Z",
+      "body": "- 适配 GPT 模型",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v1.2.2",
+        "commit_sha": "d645c602120dfbe1469a05d1c18d4e02a5373103"
+      },
+      {
+        "name": "v1.2.1",
+        "commit_sha": "58325ea27f34931e6de0c52274957d03def8398f"
+      },
+      {
+        "name": "v1.2.0",
+        "commit_sha": "e489fdd11dc991954d763cfd81bf37c8aa6a3419"
+      },
+      {
+        "name": "v1.1.0",
+        "commit_sha": "834ace56d81e77be0df6fe1555040f7271a21dd9"
+      },
+      {
+        "name": "v1.0.0",
+        "commit_sha": "9b3ac04cac9b2ed79e5d748ec959084ecb05292b"
+      }
+    ],
+    "latest_version": "v1.2.2"
+  },
+  "readme": "# Qiniu MCP Server\n\n## 概述\n\n基于七牛云产品构建的 Model Context Protocol (MCP) Server，支持用户在 AI 大模型客户端的上下文中通过该 MCP\nServer 来访问七牛云存储、智能多媒体服务等。\n\n关于访问七牛云存储详细情况请参考 [基于 MCP 使用大模型访问七牛云存储](https://developer.qiniu.com/kodo/12914/mcp-aimodel-kodo)。\n\n能力集：\n- 存储\n  - 获取 Bucket 列表\n  - 获取 Bucket 中的文件列表\n  - 上传本地文件，以及给出文件内容进行上传\n  - 读取文件内容\n  - 获取文件下载链接\n- 智能多媒体\n  - 图片缩放\n  - 图片切圆角\n- CDN\n  - 根据链接刷新文件\n  - 根据链接预取文件\n\n## 环境要求\n\n- Python 3.12 或更高版本\n- uv 包管理器\n\n如果还没有安装 uv，可以使用以下命令安装：\n```bash\n# Mac，推荐使用 brew 安装\nbrew install uv\n\n\n# Linux & Mac\n# 1. 安装\ncurl -LsSf https://astral.sh/uv/install.sh | sh\n# 2. 安装完成后，请确保将软件包安装路径（包含 uv 和 uvx 可执行文件的目录）添加到系统的 PATH 环境变量中。\n# 假设安装包路径为 /Users/xxx/.local/bin（见安装执行输出）\n### 临时生效（当前会话），在当前终端中执行以下命令：\nexport PATH=\"/Users/xxx/.local/bin:$PATH\"\n### 永久生效（推荐），在当前终端中执行以下命令：\necho 'export PATH=\"/Users/xxx/.local/bin:$PATH\"' >> ~/.bash_profile\nsource ~/.bash_profile\n\n\n# Windows\npowershell -ExecutionPolicy ByPass -c \"irm https://astral.sh/uv/install.ps1 | iex\"\n```\n\n具体安装方式参考 [uv 安装](https://docs.astral.sh/uv/getting-started/installation/#pypi)\n\n## 在 Cline 中使用：\n\n步骤：\n\n1. 在 vscode 下载 Cline 插件（下载后 Cline 插件后在侧边栏会增加 Cline 的图标）\n2. 配置大模型\n3. 配置 qiniu MCP\n    1. 点击 Cline 图标进入 Cline 插件，选择 MCP Server 模块\n    2. 选择 installed，点击 Advanced MCP Settings 配置 MCP Server，参考下面配置信息\n   ```\n   {\n     \"mcpServers\": {\n       \"qiniu\": {\n         \"command\": \"uvx\",\n         \"args\": [\n           \"qiniu-mcp-server\"\n         ],\n         \"env\": {\n           \"QINIU_ACCESS_KEY\": \"YOUR_ACCESS_KEY\",\n           \"QINIU_SECRET_KEY\": \"YOUR_SECRET_KEY\",\n           \"QINIU_REGION_NAME\": \"YOUR_REGION_NAME\",\n           \"QINIU_ENDPOINT_URL\": \"YOUR_ENDPOINT_URL\",\n           \"QINIU_BUCKETS\": \"YOUR_BUCKET_A,YOUR_BUCKET_B\"\n        },\n         \"disabled\": false\n       }\n     }\n   }\n   ```\n    3. 点击 qiniu MCP Server 的链接开关进行连接\n4. 在 Cline 中创建一个聊天窗口，此时我们可以和 AI 进行交互来使用 qiniu-mcp-server ，下面给出几个示例：\n    - 列举 qiniu 的资源信息\n    - 列举 qiniu 中所有的 Bucket\n    - 列举 qiniu 中 xxx Bucket 的文件\n    - 读取 qiniu xxx Bucket 中 yyy 的文件内容\n    - 对 qiniu xxx Bucket 中 yyy 的图片切个宽200像素的圆角\n    - 刷新下 qiniu 的这个 CDN 链接：https://developer.qiniu.com/test.txt\n\n注：\ncursor 中创建 MCP Server 可直接使用上述配置。\nclaude 中使用时可能会遇到：Error: spawn uvx ENOENT 错误，解决方案：command 中 参数填写 uvx 的绝对路径，eg: /usr/local/bin/uvx\n\n## 开发\n1. 克隆仓库：\n\n```bash\n# 克隆项目并进入目录\ngit clone git@github.com:qiniu/qiniu-mcp-server.git\ncd qiniu-mcp-server\n```\n\n2. 创建并激活虚拟环境：\n\n```bash\nuv venv\nsource .venv/bin/activate  # Linux/macOS\n# 或\n.venv\\Scripts\\activate  # Windows\n```\n\n3. 安装依赖：\n\n```bash\nuv pip install -e .\n```\n\n4. 配置\n\n复制环境变量模板：\n```bash\ncp .env.example .env\n```\n\n编辑 `.env` 文件，配置以下参数：\n```bash\n# S3/Kodo 认证信息\nQINIU_ACCESS_KEY=your_access_key\nQINIU_SECRET_KEY=your_secret_key\n\n# 区域信息\nQINIU_REGION_NAME=your_region\nQINIU_ENDPOINT_URL=endpoint_url # eg:https://s3.your_region.qiniucs.com\n\n# 配置 bucket，多个 bucket 使用逗号隔开，建议最多配置 20 个 bucket\nQINIU_BUCKETS=bucket1,bucket2,bucket3\n```\n\n扩展功能，首先在 core 目录下新增一个业务包目录（eg: 存储 -> storage），在此业务包目录下完成功能拓展。\n在业务包目录下的 `__init__.py` 文件中定义 load 函数用于注册业务工具或者资源，最后在 `core` 目录下的 `__init__.py`\n中调用此 load 函数完成工具或资源的注册。\n\n```shell\ncore\n├── __init__.py # 各个业务工具或者资源加载\n└── storage # 存储业务目录\n    ├── __init__.py # 加载存储工具或者资源\n    ├── resource.py # 存储资源扩展\n    ├── storage.py # 存储工具类\n    └── tools.py # 存储工具扩展\n```\n\n## 测试\n\n### 使用 Model Control Protocol Inspector 测试\n\n强烈推荐使用 [Model Control Protocol Inspector](https://github.com/modelcontextprotocol/inspector) 进行测试。\n\n```shell\n# node 版本为：v22.4.0\nnpx @modelcontextprotocol/inspector uv --directory . run qiniu-mcp-server\n```\n\n### 本地启动 MCP Server 示例\n\n1. 使用标准输入输出（stdio）模式启动（默认）：\n\n```bash\nuv --directory . run qiniu-mcp-server\n```\n\n2. 使用 SSE 模式启动（用于 Web 应用）：\n\n```bash\nuv --directory . run qiniu-mcp-server --transport sse --port 8000\n```\n\n\n\n\n"
+}

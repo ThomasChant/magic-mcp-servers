@@ -1,0 +1,56 @@
+{
+  "mcp_name": "Netbird",
+  "mcp_description": "List and analyze Netbird network peers, groups, policies, and more.",
+  "mcp_id": "aantti_mcp-netbird",
+  "fetch_timestamp": "2025-06-23T07:03:18.636072Z",
+  "github_url": "https://github.com/aantti/mcp-netbird",
+  "repository": {
+    "name": "mcp-netbird",
+    "full_name": "aantti/mcp-netbird",
+    "description": "MCP Server for Netbird",
+    "html_url": "https://github.com/aantti/mcp-netbird",
+    "created_at": "2025-03-24T19:21:55Z",
+    "updated_at": "2025-06-06T20:04:18Z",
+    "pushed_at": "2025-04-16T13:27:19Z",
+    "size": 82,
+    "stargazers_count": 33,
+    "watchers_count": 33,
+    "forks_count": 1,
+    "open_issues_count": 1,
+    "language": "Go",
+    "license": "Apache License 2.0",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "aantti",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56412611?v=4",
+      "html_url": "https://github.com/aantti"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 2,
+    "languages": {
+      "Go": 31176,
+      "Makefile": 988,
+      "Dockerfile": 791,
+      "Shell": 561
+    },
+    "language_percentages": {
+      "Go": 93.02,
+      "Makefile": 2.95,
+      "Dockerfile": 2.36,
+      "Shell": 1.67
+    },
+    "pull_requests_count": 2,
+    "contributors_count": 3
+  },
+  "readme": "# Netbird MCP Server\n\nA [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server for [Netbird](https://netbird.io/).\n\nThis project is derived from the [MCP Server for Grafana](https://github.com/grafana/mcp-grafana) by Grafana Labs and is licensed under the same Apache License 2.0.\n\nIt also uses [MCP Go](https://github.com/mark3labs/mcp-go) by Mark III Labs.\n\n**Note: this project is still in development.**\n\n## Installing\n\n### Installing from source\n\n#### Clone the repository\n\n```bash\ngit clone https://github.com/aantti/mcp-netbird\n```\n\n#### Build and install\n\n```bash\ncd mcp-netbird && \\\nmake install\n```\n\n### Installing from GitHub\n\n```bash\ngo install github.com/aantti/mcp-netbird/cmd/mcp-netbird@latest\n```\n\n### Installing via Smithery\n\n[![smithery badge](https://smithery.ai/badge/@aantti/mcp-netbird)](https://smithery.ai/server/@aantti/mcp-netbird)\n\nTo install Netbird MCP Server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@aantti/mcp-netbird):\n\n```bash\nnpx -y @smithery/cli install @aantti/mcp-netbird --client claude\n```\n\n## Configuration\n\nThe server requires the following environment variables:\n\n- `NETBIRD_API_TOKEN`: Your Netbird API token\n- `NETBIRD_HOST` (optional): The Netbird API host (default is `api.netbird.io`)\n\n## Features\n\nThis server uses the Netbird API to provide LLMs information about Netbird network. Currently it's a 1:1 mapping of select read-only Netbird API resources to tools.\n\n- [x] Uses Netbird API to access configuration and status\n- [x] Configurable API endpoint\n- [x] Secure token-based authentication for Netbird API\n\n### Tools\n\n| Tool | Description | Netbird API |\n| --- | --- | --- |\n| `list_netbird_peers` | All peers | [List all Peers](https://docs.netbird.io/api/resources/peers#list-all-peers) |\n| `list_netbird_port_allocations` | All ingress ports for `peerId` | [List all Port Allocations](https://docs.netbird.io/api/resources/ingress-ports) |\n| `list_netbird_groups` | All groups | [List all Groups](https://docs.netbird.io/api/resources/groups#list-all-groups) |\n| `list_netbird_policies` | All policies | [List all Policies](https://docs.netbird.io/api/resources/policies#list-all-policies) |\n| `list_netbird_posture_checks` | All posture checks | [List all Posture Checks](https://docs.netbird.io/api/resources/posture-checks#list-all-posture-checks) |\n| `list_netbird_networks` | All networks | [List all Networks](https://docs.netbird.io/api/resources/networks#list-all-networks) |\n| `list_netbird_nameservers` | All nameserver groups | [List all Nameserver Groups](https://docs.netbird.io/api/resources/dns) |\n\n### Adding tools\n\nTo add new tools:\n\n1. Create a new file in `tools` (e.g., `tools/users.go`), possibly use existing code as a template\n2. Add API route and response specifics to the new file\n3. Add the tool to `func newServer()` in `cmd/main.go`\n\n## Usage\n\n1. Get your [Netbird API token](https://docs.netbird.io/api/guides/authentication) from the Netbird management console.\n\n2. Install the `mcp-netbird` binary using one of the installation methods above. Make sure the binary is in your PATH.\n\n3. Add the server configuration to your client configuration file. E.g., for Codeium Windsurf add the following to `~/.codeium/windsurf/mcp_config.json`:\n\n   ```json\n   {\n     \"mcpServers\": {\n       \"netbird\": {\n         \"command\": \"mcp-netbird\",\n         \"args\": [],\n         \"env\": {\n           \"NETBIRD_API_TOKEN\": \"<your-api-token>\"\n         }\n       }\n     }\n   }\n   ```\n\nFor more information on how to add a similar configuration to Claude Desktop, see [here](https://modelcontextprotocol.io/quickstart/user).\n\n> Note: if you see something along the lines of `[netbird] [error] spawn mcp-netbird ENOENT` in Claude Desktop logs, you need to specify the full path to `mcp-netbird`. On macOS Claude Logs are in `~/Library/Logs/Claude`.\n\n4. Try asking questions along the lines of \"Can you explain my Netbird peers, groups and policies to me?\"\n   \n![claude-desktop-mcp-netbird](https://github.com/user-attachments/assets/094614cd-9399-4c90-adb3-06ae67c604e4)\n\n## Docker\n\nBuild an image and tag it:\n\n```bash\ndocker build -t mcp-netbird-sse:v1 -f Dockerfile.sse .\n```\n\nRun the image:\n\n```bash\ndocker run --name mcp-netbird -p 8001:8001 -e NETBIRD_API_TOKEN=<your-api-token> mcp-netbird-sse:v1\n\n```\n\n## ToolHive\n\n[ToolHive](https://github.com/StacklokLabs/toolhive) (thv) is a lightweight utility designed to simplify the deployment and management of MCP servers.\n\nYou can use ToolHive to deploy and run Netbird MCP as follows:\n\n1. Install `thv` as described in [ToolHive README](https://github.com/StacklokLabs/toolhive#installation).\n\n2. Add Netbird API token to `thv` secrets:\n\n```bash\nthv secret set netbird\n```\n\n3. Build an SSE image as described in the Docker section [above](#docker)\n\n4. Start Netbird MCP with `thv run` on port 8080:\n\n```bash\nthv run --secret netbird,target=NETBIRD_API_TOKEN --transport sse --name thv-mcp-netbird --port 8080 --target-port 8001 mcp-netbird-sse:v1\n```\n\n5. When you want to stop the server, use:\n\n```bash\nthv stop thv-mcp-netbird\n```\n\n## Development\n\nContributions are welcome! Please open an issue or submit a pull request if you have any suggestions or improvements.\n\nThis project is written in Go. Install Go following the instructions for your platform.\n\nTo run the server manually, use:\n\n```bash\nexport NETBIRD_API_TOKEN=your-token && \\\ngo run cmd/mcp-netbird/main.go\n```\n\nOr in SSE mode:\n\n```bash\nexport NETBIRD_API_TOKEN=your-token && \\\ngo run cmd/mcp-netbird/main.go --transport sse --sse-address :8001\n```\n\n### Debugging\n\nThe **MCP Inspector** is an interactive developer tool for testing and debugging MCP servers. Read more about it [here](https://modelcontextprotocol.io/docs/tools/inspector).\n\nHere's how to start the MCP Inspector:\n\n```bash\nexport NETBIRD_API_TOKEN=your-token && \\\nnpx @modelcontextprotocol/inspector\n```\n\nNetbird MCP Server can then be tested with either `stdio` or `SSE` transport type. For `stdio` specify the full path to `mcp-netbird` in the UI.\n\n### Testing\n\n**TODO: add more tests**\n\n### Linting\n\nTo lint the code, run:\n\n```bash\nmake lint\n```\n\n## License\n\nThis project is licensed under the [Apache License, Version 2.0](LICENSE).\n\nThis project includes software developed at Grafana Labs (https://grafana.com/).\n\nThis project includes software developed at Mark III Labs (https://github.com/mark3labs/mcp-go)."
+}

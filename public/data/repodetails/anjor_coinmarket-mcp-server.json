@@ -1,0 +1,52 @@
+{
+  "mcp_name": "CoinMarket",
+  "mcp_description": "🐍 ☁️ - Coinmarket API integration to fetch cryptocurrency listings and quotes",
+  "mcp_id": "anjor_coinmarket-mcp-server",
+  "fetch_timestamp": "2025-06-23T02:14:21.310463Z",
+  "github_url": "https://github.com/anjor/coinmarket-mcp-server",
+  "repository": {
+    "name": "coinmarket-mcp-server",
+    "full_name": "anjor/coinmarket-mcp-server",
+    "description": null,
+    "html_url": "https://github.com/anjor/coinmarket-mcp-server",
+    "created_at": "2024-11-29T23:29:03Z",
+    "updated_at": "2025-06-13T12:25:39Z",
+    "pushed_at": "2025-06-13T12:25:35Z",
+    "size": 31,
+    "stargazers_count": 33,
+    "watchers_count": 33,
+    "forks_count": 13,
+    "open_issues_count": 1,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "anjor",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1911631?v=4",
+      "html_url": "https://github.com/anjor"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 13,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 6108,
+      "Dockerfile": 427
+    },
+    "language_percentages": {
+      "Python": 93.47,
+      "Dockerfile": 6.53
+    },
+    "pull_requests_count": 3,
+    "contributors_count": 3
+  },
+  "readme": "[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/anjor-coinmarket-mcp-server-badge.png)](https://mseep.ai/app/anjor-coinmarket-mcp-server)\n\n# Coinmarket MCP server\n\nCoinmarket MCP Server\n\n<a href=\"https://glama.ai/mcp/servers/6ag7ms62ns\"><img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/6ag7ms62ns/badge\" alt=\"Coinmarket MCP server\" /></a>\n\n## Components\n\n### Resources\n\nThe server implements a few of the [Coinmarket API](https://coinmarketcap.com/api/documentation/v1/#section/Introduction) endpoints\n- Custom coinmarket:// URI scheme for accessing individual notes\n- Each note resource has a name, description and text/plain mimetype\n\n### Tools\n\nThe server implements two tools:\n- `get-currency-listings`: Get the latest currency listings\n- `get-quotes`: Get quotes for tokens\n  - Takes \"slug\" (example: bitcoin) or \"symbol\" (example: BTC) as optional string argument\n\n## Configuration\n\nRequires coinmarket API key.\n\n## Quickstart\n\n### Prerequisites\n\n- Python 3.12 or higher\n- [uv](https://docs.astral.sh/uv/getting-started/installation/) package manager\n\n### Install\n\nInstall uv if you haven't already:\n```bash\n# macOS and Linux\ncurl -LsSf https://astral.sh/uv/install.sh | sh\n\n# Windows\npowershell -c \"irm https://astral.sh/uv/install.ps1 | iex\"\n```\n\n#### Claude Desktop\n\nOn MacOS: `~/Library/Application\\ Support/Claude/claude_desktop_config.json`\nOn Windows: `%APPDATA%/Claude/claude_desktop_config.json`\n\n<details>\n  <summary>Development/Unpublished Servers Configuration</summary>\n  ```\n  \"mcpServers\": {\n    \"coinmarket_service\": {\n      \"command\": \"uv\",\n      \"args\": [\n        \"--directory\",\n        \"/path/to/coinmarket_service\",\n        \"run\",\n        \"coinmarket_service\"\n      ],\n      \"env\": {\n        \"COINMARKET_API_KEY\": \"<insert api key>\"\n      }\n    }\n  }\n  ```\n</details>\n\n#### Docker\n\nYou can also run the server using Docker:\n\n```bash\n# Build the image\ndocker build -t coinmarket-service .\n\n# Run the container\ndocker run -e COINMARKET_API_KEY=your_api_key_here coinmarket-service\n```\n\nFor Claude Desktop configuration with Docker:\n```json\n\"mcpServers\": {\n  \"coinmarket_service\": {\n    \"command\": \"docker\",\n    \"args\": [\n      \"run\",\n      \"--rm\",\n      \"-e\",\n      \"COINMARKET_API_KEY=<insert api key>\",\n      \"coinmarket-service\"\n    ]\n  }\n}\n```\n\n## Troubleshooting\n\n### \"spawn uv ENOENT\" Error\n\nIf you see this error, it means `uv` is not installed or not in your PATH:\n\n1. **Install uv** following the instructions above\n2. **Restart your terminal/Claude Desktop** after installation\n3. **Verify installation**: Run `uv --version` in terminal\n4. **Update PATH**: Make sure uv is in your system PATH\n\n### Configuration Issues\n\n- Replace `/path/to/coinmarket_service` with the actual path to your cloned repository\n- Ensure your `COINMARKET_API_KEY` is valid\n- The path should point to the root directory containing `pyproject.toml`\n\n\n"
+}

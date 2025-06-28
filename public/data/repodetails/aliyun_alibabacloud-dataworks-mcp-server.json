@@ -1,0 +1,66 @@
+{
+  "mcp_name": "DataWorks",
+  "mcp_description": "A Model Context Protocol (MCP) server that provides tools for AI, allowing it to interact with the DataWorks Open API through a standardized interface. This implementation is based on the Aliyun Open API and enables AI agents to perform cloud resources operations seamlessly.",
+  "mcp_id": "aliyun_alibabacloud-dataworks-mcp-server",
+  "fetch_timestamp": "2025-06-23T02:30:02.107323Z",
+  "github_url": "https://github.com/aliyun/alibabacloud-dataworks-mcp-server",
+  "repository": {
+    "name": "alibabacloud-dataworks-mcp-server",
+    "full_name": "aliyun/alibabacloud-dataworks-mcp-server",
+    "description": "A Model Context Protocol (MCP) server that provides tools for AI, allowing it to interact with the DataWorks Open API through a standardized interface. This implementation is based on the Aliyun Open API and enables AI agents to perform cloud resources operations seamlessly.",
+    "html_url": "https://github.com/aliyun/alibabacloud-dataworks-mcp-server",
+    "created_at": "2025-03-26T09:20:49Z",
+    "updated_at": "2025-06-16T03:03:47Z",
+    "pushed_at": "2025-06-13T22:22:14Z",
+    "size": 503,
+    "stargazers_count": 16,
+    "watchers_count": 16,
+    "forks_count": 3,
+    "open_issues_count": 1,
+    "language": "TypeScript",
+    "license": "Apache License 2.0",
+    "topics": [
+      "ai",
+      "aliyun",
+      "bigdata",
+      "data",
+      "data-analysis",
+      "data-science",
+      "data-visualization",
+      "database",
+      "ide",
+      "modeling",
+      "scheduler",
+      "sql"
+    ],
+    "default_branch": "master",
+    "owner": {
+      "login": "aliyun",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/941070?v=4",
+      "html_url": "https://github.com/aliyun"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 3,
+    "subscribers_count": 3,
+    "languages": {
+      "TypeScript": 44014,
+      "JavaScript": 3143
+    },
+    "language_percentages": {
+      "TypeScript": 93.34,
+      "JavaScript": 6.66
+    },
+    "pull_requests_count": 9,
+    "contributors_count": 3,
+    "package_json_version": "1.0.43"
+  },
+  "readme": "[![MseeP.ai Security Assessment Badge](https://mseep.net/mseep-audited.png)](https://mseep.ai/app/aliyun-alibabacloud-dataworks-mcp-server)\n\n# DataWorks MCP Server\n\nA Model Context Protocol (MCP) server that provides tools for AI, allowing it to interact with the DataWorks Open API through a standardized interface. This implementation is based on the Aliyun Open API and enables AI agents to perform cloud resources operations seamlessly.\n\n## Overview\n\nThis MCP server:\n\n* Interact with DataWorks Open API\n* Manage DataWorks resources\n\nThe server implements the Model Context Protocol specification to standardize cloud resource interactions for AI agents.\n\n## Prerequisites\n\n* Node.js (v16 or higher)\n* pnpm (recommended), npm, or yarn\n* DataWorks Open API with access key and secret key\n\n## Installation\n\n### Option 1: Install from npm (recommend for clients like Cursor/Cline)\n\n```bash\n# Install globally\nnpm install -g alibabacloud-dataworks-mcp-server\n\n# Or install locally in your project\nnpm install alibabacloud-dataworks-mcp-server\n```\n\n### Option 2: Build from Source (for developers)\n\n1. Clone this repository:\n```bash\ngit clone https://github.com/aliyun/alibabacloud-dataworks-mcp-server\ncd alibabacloud-dataworks-mcp-server\n```\n\n2. Install dependencies (pnpm is recommended, npm is supported):\n```bash\npnpm install\n```\n\n3. Build the project:\n```bash\npnpm run build\n```\n\n4. Development the project (by @modelcontextprotocol/inspector):\n```bash\npnpm run dev\n```\nopen http://localhost:5173\n\n## Configuration\n\n### MCP Server Configuration\n\nIf you installed via npm (Option 1):\n```json\n{\n  \"mcpServers\": {\n    \"alibabacloud-dataworks-mcp-server\": {\n      \"command\": \"npx\",\n      \"args\": [\"alibabacloud-dataworks-mcp-server\"],\n      \"env\": {\n        \"REGION\": \"your_dataworks_open_api_region_id_here\",\n        \"ALIBABA_CLOUD_ACCESS_KEY_ID\": \"your_alibaba_cloud_access_key_id\",\n        \"ALIBABA_CLOUD_ACCESS_KEY_SECRET\": \"your_alibaba_cloud_access_key_secret\",\n        \"TOOL_CATEGORIES\": \"optional_your_tool_categories_here_ex_UTILS\",\n        \"TOOL_NAMES\": \"optional_your_tool_names_here_ex_ListProjects\"\n      },\n      \"disabled\": false,\n      \"autoApprove\": []\n    }\n  }\n}\n```\n\nIf you built from source (Option 2):\n```json\n{\n  \"mcpServers\": {\n    \"alibabacloud-dataworks-mcp-server\": {\n      \"command\": \"node\",\n      \"args\": [\"/path/to/alibabacloud-dataworks-mcp-server/build/index.js\"],\n      \"env\": {\n        \"REGION\": \"your_dataworks_open_api_region_id_here\",\n        \"ALIBABA_CLOUD_ACCESS_KEY_ID\": \"your_alibaba_cloud_access_key_id\",\n        \"ALIBABA_CLOUD_ACCESS_KEY_SECRET\": \"your_alibaba_cloud_access_key_secret\",\n        \"TOOL_CATEGORIES\": \"optional_your_tool_categories_here_ex_SERVER_IDE_DEFAULT\",\n        \"TOOL_NAMES\": \"optional_your_tool_names_here_ex_ListProjects\"\n      },\n      \"disabled\": false,\n      \"autoApprove\": []\n    }\n  }\n}\n```\n\n### Environment Setup\n\ninit variables in your environment:\n\n```env\n# DataWorks Configuration\nREGION=your_dataworks_open_api_region_id_here\nALIBABA_CLOUD_ACCESS_KEY_ID=your_alibaba_cloud_access_key_id\nALIBABA_CLOUD_ACCESS_KEY_SECRET=your_alibaba_cloud_access_key_secret\nTOOL_CATEGORIES=optional_your_tool_categories_here_ex_SERVER_IDE_DEFAULT\nTOOL_NAMES=optional_your_tool_names_here_ex_ListProjects\n```\n\n### Configuration Description\n- Use Guide Description [Link](https://www.alibabacloud.com/help/dataworks/user-guide/dataworks-mcp-server-function-usage#1ecf2a04b5ilh)\n\n## Project Structure\n\n```\nalibabacloud-dataworks-mcp-server/\n├── src/\n│   ├── index.ts          # Main entry point\n├── package.json\n└── tsconfig.json\n```\n\n## Available Tools\n\nThe MCP server provides the following DataWorks tools:\n\nSee this [link](https://dataworks.data.aliyun.com/dw-pop-mcptools)\n\n## Security Considerations\n\n* Keep your private key secure and never share it\n* Use environment variables for sensitive information\n* Regularly monitor and audit AI agent activities\n\n## Troubleshooting\n\nIf you encounter issues:\n\n1. Verify your Aliyun Open API access key and secret key are correct\n2. Check your region id is correct\n3. Ensure you're on the intended network (mainnet, testnet, or devnet)\n4. Verify the build was successful\n\n## Dependencies\n\nKey dependencies include:\n* [@alicloud/dataworks-public20240518](https://github.com/alibabacloud-sdk-swift/dataworks-public-20240518)\n* [@alicloud/openapi-client](https://github.com/aliyun/darabonba-openapi)\n\n## Contributing\n\nContributions are welcome! Please feel free to submit a Pull Request.\n\n1. Fork the repository\n2. Create your feature branch (`git checkout -b feature/amazing-feature`)\n3. Commit your changes (`git commit -m 'Add some amazing feature'`)\n4. Push to the branch (`git push origin feature/amazing-feature`)\n5. Open a Pull Request\n\n## License\n\nThis project is licensed under the Apache 2.0 License.\n"
+}

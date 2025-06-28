@@ -1,0 +1,57 @@
+{
+  "mcp_name": "NexusX-MCP/data-mcp-server",
+  "mcp_description": "Facilitates web scraping, data extraction, and browser automation with integration for agents like OpenAI's CUA and Anthropic's Claude.",
+  "mcp_id": "NexusX-MCP_data-mcp-server",
+  "fetch_timestamp": "2025-06-23T07:04:05.493888Z",
+  "github_url": "https://github.com/NexusX-MCP/data-mcp-server",
+  "repository": {
+    "name": "data-mcp-server",
+    "full_name": "NexusX-MCP/data-mcp-server",
+    "description": null,
+    "html_url": "https://github.com/NexusX-MCP/data-mcp-server",
+    "created_at": "2025-04-24T05:36:44Z",
+    "updated_at": "2025-04-24T06:00:37Z",
+    "pushed_at": "2025-04-24T06:00:33Z",
+    "size": 23,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": "ISC License",
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "NexusX-MCP",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/207407433?v=4",
+      "html_url": "https://github.com/NexusX-MCP"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 0,
+    "languages": {
+      "TypeScript": 44771,
+      "JavaScript": 895,
+      "Dockerfile": 494,
+      "Shell": 45
+    },
+    "language_percentages": {
+      "TypeScript": 96.9,
+      "JavaScript": 1.94,
+      "Dockerfile": 1.07,
+      "Shell": 0.1
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "1.0.25"
+  },
+  "readme": "# Data MCP Server\n\nThis is Data's Model Context Protocol (MCP) Server. It provides various tools to scrape, extract structured data, and crawl webpages. It also provides easy access to general purpose browser agents like OpenAI's CUA, Anthropic's Claude Computer Use, and Browser Use.\n\nMore information about the Data can be found [here](https://docs.data.ai/). The data API supports a superset of features present in the mcp server.\n\nMore information about the Model Context Protocol can be found [here](https://modelcontextprotocol.io/introduction).\n\n## Table of Contents\n\n- [Installation](#installation)\n- [Usage](#usage)\n- [Tools](#tools)\n- [Configuration](#configuration)\n- [License](#license)\n\n## Installation\n\n### Manual Installation\nTo install the server, run:\n\n```bash\nnpx data-mcp <YOUR-DATA-API-KEY>\n```\n\n## Running on Cursor\nAdd to `~/.cursor/mcp.json` like this:\n```json\n{\n  \"mcpServers\": {\n    \"data\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"data-mcp\"],\n      \"env\": {\n        \"DATA_API_KEY\": \"YOUR-API-KEY\"\n      }\n    }\n  }\n}\n```\n\n## Running on Windsurf\nAdd to your `./codeium/windsurf/model_config.json` like this:\n```json\n{\n  \"mcpServers\": {\n    \"data\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"data-mcp\"],\n      \"env\": {\n        \"DATA_API_KEY\": \"YOUR-API-KEY\"\n      }\n    }\n  }\n}\n```\n\n### Development\n\nFor development purposes, you can run the server directly from the source code.\n\n1. Clone the repository:\n\n   ```sh\n   git clone git@github.com:NexusX-MCP/data-mcp-server.git data-mcp\n   cd data-mcp\n   ```\n\n2. Install dependencies:\n\n   ```sh\n   npm install # or yarn install\n   npm run build\n   ```\n\n3. Run the server:\n\n   ```sh\n   node dist/server.js\n   ```\n\n## Claude Desktop app\nThis is an example config for the Data MCP server for the Claude Desktop client.\n\n```json\n{\n  \"mcpServers\": {\n    \"data\": {\n      \"command\": \"npx\",\n      \"args\": [\"--yes\", \"data-mcp\"],\n      \"env\": {\n        \"DATA_API_KEY\": \"your-api-key\"\n      }\n    }\n  }\n}\n```\n\n## Tools\n* `scrape_webpage` - Extract formatted (markdown, screenshot etc) content from any webpage \n* `crawl_webpages` - Navigate through multiple linked pages and extract LLM-friendly formatted content\n* `extract_structured_data` - Convert messy HTML into structured JSON\n* `search_with_bing` - Query the web and get results with Bing search\n* `browser_use_agent` - Fast, lightweight browser automation with the Browser Use agent\n* `openai_computer_use_agent` - General-purpose automation using OpenAI's CUA model\n* `claude_computer_use_agent` - Complex browser tasks using Claude computer use\n* `create_profile` - Creates a new persistent Data profile.\n* `delete_profile` - Deletes an existing persistent Data profile.\n* `list_profiles` - Lists existing persistent Data profiles.\n\n### Installing via Smithery\n\nTo install Data MCP Server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@data-mcp):\n\n```bash\nnpx -y @smithery/cli install @data-mcp --client claude\n```\n\n## Resources\n\nThe server provides the documentation about data through the `resources` methods. Any client which can do discovery over resources has access to it.\n\n## License\n\nThis project is licensed under the MIT License.\n"
+}

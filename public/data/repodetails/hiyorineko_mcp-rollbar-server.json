@@ -1,0 +1,78 @@
+{
+  "mcp_name": "hiyorineko/mcp-rollbar-server",
+  "mcp_description": "Facilitates LLM interaction with Rollbar's error tracking data, offering comprehensive access to error details, deployments, and user information.",
+  "mcp_id": "hiyorineko_mcp-rollbar-server",
+  "fetch_timestamp": "2025-06-23T04:47:40.784289Z",
+  "github_url": "https://github.com/hiyorineko/mcp-rollbar-server",
+  "repository": {
+    "name": "mcp-rollbar-server",
+    "full_name": "hiyorineko/mcp-rollbar-server",
+    "description": "MCP server implementation for Rollbar API integration",
+    "html_url": "https://github.com/hiyorineko/mcp-rollbar-server",
+    "created_at": "2025-04-15T03:16:40Z",
+    "updated_at": "2025-05-22T06:35:12Z",
+    "pushed_at": "2025-04-18T01:28:37Z",
+    "size": 188,
+    "stargazers_count": 4,
+    "watchers_count": 4,
+    "forks_count": 3,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "hiyorineko",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5495063?v=4",
+      "html_url": "https://github.com/hiyorineko"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 3,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 33790,
+      "JavaScript": 3452,
+      "Dockerfile": 796
+    },
+    "language_percentages": {
+      "TypeScript": 88.83,
+      "JavaScript": 9.08,
+      "Dockerfile": 2.09
+    },
+    "pull_requests_count": 4,
+    "contributors_count": 4,
+    "tags": [
+      {
+        "name": "v1.1.5",
+        "commit_sha": "2945adfd79cdfef2b2394e08d1c9ad17d5aed269"
+      },
+      {
+        "name": "v1.1.4",
+        "commit_sha": "d874ed050b0e48bd904e6d5fc92853c8818f705a"
+      },
+      {
+        "name": "v1.1.3",
+        "commit_sha": "3942685db8f652aa6e1e5917935bbc8826e500b5"
+      },
+      {
+        "name": "v1.1.2",
+        "commit_sha": "7a40223b9595e2b442fbcc7067d4bc4f56cb71b1"
+      },
+      {
+        "name": "v1.1.1",
+        "commit_sha": "959a06bc2a4007944198117b07c8f48605470ff4"
+      }
+    ],
+    "latest_version": "v1.1.5",
+    "package_json_version": "1.1.5"
+  },
+  "readme": "# Rollbar MCP Server\n[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\n\nA dynamic MCP server implementation for Rollbar API integration, enabling LLMs to interact with Rollbar error tracking data.\n\n<a href=\"https://glama.ai/mcp/servers/@hiyorineko/mcp-rollbar-server\">\n  <img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/@hiyorineko/mcp-rollbar-server/badge\" alt=\"Rollbar Server MCP server\" />\n</a>\n\n## Features\n\n- List and filter error items\n- Get detailed error information\n- View error occurrences\n- Access project and environment details\n- Track deployments\n- List users and teams\n\n## Configuration\n\n### Environment Variables\n\n- `ROLLBAR_PROJECT_TOKEN`: Rollbar Project Access Token - Required for APIs to retrieve project error and deployment information\n- `ROLLBAR_ACCOUNT_TOKEN`: Rollbar Account Access Token - Required for APIs to access account-wide project and user information\n- `ROLLBAR_PROJECT_ID`: Default project ID (used when not specified in requests) - Optional\n- `ROLLBAR_PROJECT_NAME`: Default project name for reference - Optional\n\n> **Note**: Depending on the features you use, you'll need either `ROLLBAR_PROJECT_TOKEN`, `ROLLBAR_ACCOUNT_TOKEN`, or both.\n> For full functionality, it's recommended to configure both tokens, but the service will work with only the relevant token for specific APIs.\n\n#### Required Tokens and API Correspondence Table\n\n| API | Required Token |\n|-----|-------------|\n| `rollbar_list_items` | ROLLBAR_PROJECT_TOKEN |\n| `rollbar_get_item` | ROLLBAR_PROJECT_TOKEN |\n| `rollbar_get_item_by_counter` | ROLLBAR_PROJECT_TOKEN |\n| `rollbar_list_occurrences` | ROLLBAR_PROJECT_TOKEN |\n| `rollbar_get_occurrence` | ROLLBAR_PROJECT_TOKEN |\n| `rollbar_list_environments` | ROLLBAR_PROJECT_TOKEN |\n| `rollbar_list_deploys` | ROLLBAR_PROJECT_TOKEN |\n| `rollbar_get_deploy` | ROLLBAR_PROJECT_TOKEN |\n| `rollbar_list_projects` | ROLLBAR_ACCOUNT_TOKEN |\n| `rollbar_get_project` | ROLLBAR_ACCOUNT_TOKEN |\n| `rollbar_list_users` | ROLLBAR_ACCOUNT_TOKEN |\n| `rollbar_get_user` | ROLLBAR_ACCOUNT_TOKEN |\n\nYou can obtain Rollbar access tokens as follows:\n1. Log in to your Rollbar account (https://rollbar.com/)\n2. For project tokens: Settings -> Project Access Tokens (for project-level access)\n3. For account tokens: Settings -> Account Access Tokens (for account-level access)\n4. Create a new token with \"read\" scope\n\n## How to use\n\n### Cursor Integration\n\nAdd to your `~/.cursor/mcp.json`:\n\n```json\n{\n    \"mcpServers\": {\n      \"rollbar-mcp\": {\n        \"command\": \"npx\",\n        \"args\": [\"-y\", \"@hiyorineko/mcp-rollbar-server\"],\n        \"env\": {\n          \"ROLLBAR_PROJECT_TOKEN\": \"YOUR_PROJECT_ACCESS_TOKEN\",\n          \"ROLLBAR_ACCOUNT_TOKEN\": \"YOUR_ACCOUNT_ACCESS_TOKEN\",\n          \"ROLLBAR_PROJECT_ID\": \"YOUR_PROJECT_ID\",\n          \"ROLLBAR_PROJECT_NAME\": \"YOUR_PROJECT_NAME\"\n        }\n      }\n    }\n}\n```\n\n### Locally\n\nAfter cloning this repository, follow these steps to set up the MCP client:\n\n```bash\n$ cd mcp-rollbar-server\n$ npm install\n$ npm run build\n```\n\nAdd to your `~/.cursor/mcp.json`:\n\n```json\n{\n    \"mcpServers\": {\n      \"rollbar-mcp\": {\n        \"command\": \"YOUR_NODE_PATH\",\n        \"args\": [\"YOUR_PROJECT_PATH/mcp-rollbar-server/dist/src/index.js\"],\n        \"env\": {\n          \"ROLLBAR_PROJECT_TOKEN\": \"YOUR_PROJECT_ACCESS_TOKEN\",\n          \"ROLLBAR_ACCOUNT_TOKEN\": \"YOUR_ACCOUNT_ACCESS_TOKEN\",\n          \"ROLLBAR_PROJECT_ID\": \"YOUR_PROJECT_ID\",\n          \"ROLLBAR_PROJECT_NAME\": \"YOUR_PROJECT_NAME\"\n        }\n      }\n    }\n}\n```\n\nTo find the value for \"YOUR_NODE_PATH\", run which node in your terminal.\n\n## Usage Examples\n\n```\nList the most recent errors in my production environment.\n```\n\n### View Error Details\n\n```\nGet detailed information for error item with ID 12345, including stack trace and recent occurrences.\n```\n\n### Track Deployments\n\n```\nShow me the recent deployments for project 67890.\n```\n\n### Filter Errors by Level\n\n```\nList all critical errors that occurred in the last week.\n```\n\n## Tools\n\n### rollbar_list_items\nList items (errors) from Rollbar\n- Input:\n  - `status` (string, optional): Filter by status (active, resolved, muted, etc.)\n  - `level` (string, optional): Filter by level (critical, error, warning, info, debug)\n  - `environment` (string, optional): Filter by environment (production, staging, etc.)\n  - `limit` (number, optional): Maximum number of items to return (default: 20)\n  - `page` (number, optional): Page number for pagination (default: 1)\n- Returns: List of error items with details such as counter, level, total occurrences, etc.\n\n### rollbar_get_item\nGet a specific item (error) from Rollbar using the internal item ID maintained by Rollbar's system.\n- Input:\n  - `id` (number): Item ID\n- Returns: Detailed information about a specific error item\n\n### rollbar_get_item_by_counter\nGet a specific item by project counter from Rollbar. The counter is the visible ID that appears in the Rollbar UI.\n- Input:\n  - `counter` (number): Project counter for the item\n- Returns: Detailed information about a specific error item identified by its project counter\n\n### rollbar_list_occurrences\nList occurrences of errors from Rollbar\n- Input:\n  - `itemId` (number, optional): Item ID to filter occurrences\n  - `limit` (number, optional): Maximum number of occurrences to return (default: 20)\n  - `page` (number, optional): Page number for pagination (default: 1)\n- Returns: List of error occurrences with detailed information\n\n### rollbar_get_occurrence\nGet a specific occurrence of an error from Rollbar\n- Input:\n  - `id` (string): Occurrence ID\n- Returns: Detailed information about a specific error occurrence\n\n### rollbar_list_projects\nList projects from Rollbar\n- Input: None\n- Returns: List of projects with their IDs, names, and statuses\n\n### rollbar_get_project\nGet a specific project from Rollbar\n- Input:\n  - `id` (number): Project ID\n- Returns: Detailed information about a specific project\n\n### rollbar_list_environments\nList environments from Rollbar\n- Input:\n  - `projectId` (number): Project ID\n- Returns: List of environments for the specified project\n\n### rollbar_list_users\nList users from Rollbar\n- Input: None\n- Returns: List of users with their IDs, usernames, emails, and access levels\n\n### rollbar_get_user\nGet a specific user from Rollbar\n- Input:\n  - `id` (number): User ID\n- Returns: Detailed information about a specific user\n\n### rollbar_list_deploys\nList deploys from Rollbar\n- Input:\n  - `projectId` (number): Project ID\n  - `environment` (string, optional): Environment name\n  - `limit` (number, optional): Maximum number of deploys to return (default: 20)\n  - `page` (number, optional): Page number for pagination (default: 1)\n- Returns: List of deploys for the specified project and environment\n\n### rollbar_get_deploy\nGet a specific deploy from Rollbar\n- Input:\n  - `deployId` (number): Deploy ID\n- Returns: Detailed information about a specific deployment"
+}

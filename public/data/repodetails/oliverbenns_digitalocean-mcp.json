@@ -1,0 +1,50 @@
+{
+  "mcp_name": "oliverbenns/digitalocean-mcp",
+  "mcp_description": "Manage and monitor DigitalOcean app platform deployments and alerts using the Model Context Protocol.",
+  "mcp_id": "oliverbenns_digitalocean-mcp",
+  "fetch_timestamp": "2025-06-23T07:16:58.615470Z",
+  "github_url": "https://github.com/oliverbenns/digitalocean-mcp",
+  "repository": {
+    "name": "digitalocean-mcp",
+    "full_name": "oliverbenns/digitalocean-mcp",
+    "description": null,
+    "html_url": "https://github.com/oliverbenns/digitalocean-mcp",
+    "created_at": "2025-04-20T08:22:41Z",
+    "updated_at": "2025-04-20T10:58:01Z",
+    "pushed_at": "2025-04-20T10:57:58Z",
+    "size": 32,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "oliverbenns",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1992355?v=4",
+      "html_url": "https://github.com/oliverbenns"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 1405
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# DigitalOcean MCP Prototype\n\nList your app platform apps, view alerts and deployments using the [Model Context Protocol](https://www.anthropic.com/news/model-context-protocol).\n\n## Setup\n\n- Generate a Digital Ocean token [here](https://cloud.digitalocean.com/account/api/tokens)\n- `cp .env.example .env` and add your token.\n- Put this in your Claude config.\n\n```\n{\n  \"mcpServers\": {\n        \"digitalocean\": {\n            \"command\": \"uv\",\n            \"args\": [\n                \"--directory\",\n                \"/{ABSOLUTE_PATH_TO_REPO}\",\n                \"run\",\n                \"main.py\"\n            ]\n        }\n    }\n}\n```\n"
+}

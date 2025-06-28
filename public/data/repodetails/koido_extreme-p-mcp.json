@@ -1,0 +1,52 @@
+{
+  "mcp_name": "koido/extreme-p-mcp",
+  "mcp_description": "Facilitates extreme p-value calculations through an API interface using R scripts, integrated with Python via FastMCP.",
+  "mcp_id": "koido_extreme-p-mcp",
+  "fetch_timestamp": "2025-06-23T05:50:52.721747Z",
+  "github_url": "https://github.com/koido/extreme-p-mcp",
+  "repository": {
+    "name": "extreme-p-mcp",
+    "full_name": "koido/extreme-p-mcp",
+    "description": null,
+    "html_url": "https://github.com/koido/extreme-p-mcp",
+    "created_at": "2025-04-24T05:30:59Z",
+    "updated_at": "2025-04-24T11:06:23Z",
+    "pushed_at": "2025-04-24T11:06:20Z",
+    "size": 15,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "koido",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16730135?v=4",
+      "html_url": "https://github.com/koido"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 5010,
+      "R": 1809
+    },
+    "language_percentages": {
+      "Python": 73.47,
+      "R": 26.53
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# Extreme P-value MCP Server\n\n## Overview\n\nThis MCP server provides an API interface to extreme p-value calculation functions (z, t, F, chi-square, SAIGE) implemented in the R script `extreme-P.R`, via Python.\n\n- **Strongly depends on the R script `extreme-P.R` (except for Wald).**\n- Uses [pyper](https://github.com/nteract/pyper) to call R from Python.\n- The API server is built with [FastMCP](https://github.com/jlowin/fastmcp).\n- `extreme_p_helper.py` is a 1-to-1 wrapper for the R functions.\n- `server.py` provides the API endpoints.\n\n## Status\n\n🚧 **Under Active Development** 🚧\n\nThis project is under active development. APIs and features may change without notice.\n\n## Dependencies\n\n- uv\n- pyper\n- fastmcp\n- mcp[cli]\n\n## Directory structure\n\n```\n+.\n├── server.py              # Main FastMCP server\n├── extreme_p_helper.py    # R function wrapper\n├── extreme-P.R            # R script for extreme p-value calculation (see acknowledgements)\n├── pyproject.toml         # Dependencies\n└── README.md              # This document\n```\n\n## Setup and Running\n\n### Add the MCP server to your MCP server list (Claude, Cursor, etc.)\n\n```json\n{\n    \"mcpServers\": {\n      \"ExtremeP\": {\n        \"command\": \"uv\",\n        \"args\": [\"--directory\", \"where you cloned the repo\", \"run\", \"server.py\"],\n        \"env\": {}\n      }\n    }\n}\n```\n\n### Run MCP Inspector\n\n```bash\n# Install dependencies\nuv sync\n\n# Run MCP Inspector\nuv --directory ./ run mcp dev server.py\n```\n\n### Run the MCP server\n\n```bash\n# Install dependencies\nuv sync\n\n# Run the MCP server\nuv run server.py\n```\n\n### Example: Using from Python (not running as MCP server)\n\n```python\nfrom extreme_p_helper import ExtremePHelper\nhelper = ExtremePHelper()\nresult = helper.pvalue_extreme_z(10)\nprint(result)  # {'mantissa': ..., 'exponent': ...}\n```\n\n## License\n\nThis MCP server is released under the Apache License 2.0.\n\n## Acknowledgements\n\n- [skoyamamd](https://gist.github.com/skoyamamd/4f97b43c7171e01a8c50e9aa18b0ebf0) and [carbocation](https://gist.github.com/carbocation/d39a20ed028b25ff3528468b455b2bcc)\n- [pyper](https://github.com/nteract/pyper)\n- [FastMCP](https://github.com/jlowin/fastmcp)\n"
+}

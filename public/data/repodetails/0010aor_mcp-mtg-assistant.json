@@ -1,0 +1,50 @@
+{
+  "mcp_name": "0010aor/mcp-mtg-assistant",
+  "mcp_description": "Fetches Magic: The Gathering card details using the Scryfall API, aiding in rules queries and card information retrieval.",
+  "mcp_id": "0010aor_mcp-mtg-assistant",
+  "fetch_timestamp": "2025-06-23T00:04:52.743275Z",
+  "github_url": "https://github.com/0010aor/mcp-mtg-assistant",
+  "repository": {
+    "name": "mcp-mtg-assistant",
+    "full_name": "0010aor/mcp-mtg-assistant",
+    "description": null,
+    "html_url": "https://github.com/0010aor/mcp-mtg-assistant",
+    "created_at": "2025-04-17T12:11:49Z",
+    "updated_at": "2025-04-18T18:02:38Z",
+    "pushed_at": "2025-04-17T15:46:16Z",
+    "size": 39784,
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "0010aor",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/65469356?v=4",
+      "html_url": "https://github.com/0010aor"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 8279
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "A Model Context Protocol server that provides Magic: The Gathering card information fetching capabilities using the Scryfall API.\n### Example Rules Question Workflow\nWhile primarily used for looking up specific card details, this server can also be a crucial first step in answering MTG rules questions.\n**User Query:** \"If I cast a Finale of Devastation with X=10 and search for an Avenger of Zendikar, do the tokens also get +10/+10 and haste, or not?\"\n<img src=\"sample.gif\" alt=\"Example Video Walkthrough\" width=\"1000\"/>\n### Available Tools\n-   `get_mtg_card_info` - Retrieves details for a specific Magic: The Gathering card from Scryfall.\n    -   `query` (string, required): The search query string (e.g., card name, partial name, characteristics).\n\nThis project uses [`uv`](https://docs.astral.sh/uv/) for dependency management and running scripts.\n\n### Using uv (recommended)\n\nEnsure `uv` is installed. You can run the server directly from the project directory:\n\n\n\n### Using PIP (for distribution or alternative setup)\n\nIf the package were published, you could install it via pip:\n\n\n\nAfter installation, you could run it as a script:\n\n\n\nFor development, you typically run it using `uv run` as shown above."
+}

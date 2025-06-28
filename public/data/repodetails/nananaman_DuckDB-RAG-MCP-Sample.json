@@ -1,0 +1,50 @@
+{
+  "mcp_name": "nananaman/DuckDB-RAG-MCP-Sample",
+  "mcp_description": "Facilitates vectorized markdown document embedding and retrieval using DuckDB and MCP for enhanced RAG explanations.",
+  "mcp_id": "nananaman_DuckDB-RAG-MCP-Sample",
+  "fetch_timestamp": "2025-06-23T06:59:21.595369Z",
+  "github_url": "https://github.com/nananaman/DuckDB-RAG-MCP-Sample",
+  "repository": {
+    "name": "DuckDB-RAG-MCP-Sample",
+    "full_name": "nananaman/DuckDB-RAG-MCP-Sample",
+    "description": null,
+    "html_url": "https://github.com/nananaman/DuckDB-RAG-MCP-Sample",
+    "created_at": "2025-04-20T01:18:57Z",
+    "updated_at": "2025-06-16T14:41:03Z",
+    "pushed_at": "2025-04-20T02:24:33Z",
+    "size": 78,
+    "stargazers_count": 2,
+    "watchers_count": 2,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": "Apache License 2.0",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "nananaman",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/36331803?v=4",
+      "html_url": "https://github.com/nananaman"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 29374
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# DuckDB RAG MCP Sample\n\nmarkdown ドキュメントを埋め込みベクトル化して、MCP から RAG で解説できるようにするサンプルです。\n\nベクトル化には [Plamo-Embedding-1B](https://tech.preferred.jp/ja/blog/plamo-embedding-1b/) を使用しています。\n\n## 機能\n\n- markdown ファイルからテキスト抽出・ベクトル化\n- DuckDB を使用したベクトル検索\n- Parquet ファイルによるベクトルデータの永続化\n- MCP からベクトル検索\n\n## 使用方法\n\n### ベクトルデータ生成\n最初に検索対象にしたい markdown ファイルを特定のディレクトリに配置し、以下のコマンドで Parquet ファイルに変換してください。\n\n```bash\nuv run main.py --directory ~/path/to/markdown/files --parquet vectors.parquet\n```\n\n### MCP の設定\n#### ビルド\n以下のコマンドでシングルバイナリが `dist/server` として生成されます。\n```\nuv run pyinstaller --clean --strip --noconfirm --onefile server.py\n```\n\n#### MCP のクライアント設定\n利用したいクライアントに応じて設定してください。\n\nClaude Desktop の場合は以下のような感じです。\n\nVECTOR_PARQUET は先ほど変換したファイルを指定してください。\n\n```bash\nuv run mcp install server.py -v VECTOR_PARQUET=/path/to/vectors.parquet\n```\n\n以下のように設定されます。\n```JSON:~/Library/Application Support/Claude/claude_desktop_config.json\n{\n  \"mcpServers\": {\n    \"DuckDB-RAG-MCP-Sample\": {\n      \"command\": \"/path/to/dist/server\",\n      \"env\": {\n        \"VECTOR_PARQUET\": \"/path/to/vectors.parquet\"\n      }\n    }\n  }\n}\n```\n\n### 開発用サーバー起動\n\n```bash\nuv run mcp dev server.py\n```\n\n## ライセンス\n\nDuckDB RAG MCP Sampleは、Apache License, Version 2.0の下で提供されています。\n"
+}

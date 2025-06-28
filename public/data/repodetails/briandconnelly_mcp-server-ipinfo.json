@@ -1,0 +1,65 @@
+{
+  "mcp_name": "briandconnelly/mcp-server-ipinfo",
+  "mcp_description": "🐍 ☁️  - IP address geolocation and network information using IPInfo API",
+  "mcp_id": "briandconnelly_mcp-server-ipinfo",
+  "fetch_timestamp": "2025-06-23T01:46:40.859296Z",
+  "github_url": "https://github.com/briandconnelly/mcp-server-ipinfo",
+  "repository": {
+    "name": "mcp-server-ipinfo",
+    "full_name": "briandconnelly/mcp-server-ipinfo",
+    "description": "IP Geolocation Server for MCP",
+    "html_url": "https://github.com/briandconnelly/mcp-server-ipinfo",
+    "created_at": "2025-01-31T21:00:10Z",
+    "updated_at": "2025-06-22T14:39:05Z",
+    "pushed_at": "2025-06-21T23:21:33Z",
+    "size": 334,
+    "stargazers_count": 23,
+    "watchers_count": 23,
+    "forks_count": 10,
+    "open_issues_count": 2,
+    "language": "Python",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "briandconnelly",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/658158?v=4",
+      "html_url": "https://github.com/briandconnelly"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 10,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 11944
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 6,
+    "contributors_count": 2,
+    "latest_release": {
+      "tag_name": "v0.1.1",
+      "name": "mcp-server-ipinfo v0.1.1",
+      "published_at": "2025-06-21T23:21:33Z",
+      "body": "* Update tool docstrings to be more informative and discoverable\r\n* Add `get_ipinfo_api_token` tool for getting the current token (if set).",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.1.1",
+        "commit_sha": "97f750c873143071286fa21996717f16b0df26c2"
+      }
+    ],
+    "latest_version": "v0.1.1"
+  },
+  "readme": "# IP Geolocation MCP Server\n\nThis is a simple [Model Context Protocol](https://modelcontextprotocol.io) server that uses the [ipinfo.io](https://ipinfo.io) API to get detailed information about an IP address.\nThis can be used to determine where the user is located (approximately) and what network they are used.\n\n<a href=\"https://glama.ai/mcp/servers/pll7u5ak1h\">\n  <img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/pll7u5ak1h/badge\" alt=\"IP Geolocation Server MCP server\" />\n</a>\n\n![Example conversation using mcp-server-ipinfo](demo.png)\n\n\n## Installation\n\nYou'll need to create a token to use the IPInfo API.\nIf you don't already have one, you can sign up for a free account at https://ipinfo.io/signup.\n\nTo use with Claude desktop, add the following to the `mcpServers` section of your `claude_desktop_config.json` file:\n\n```yaml\n    \"ipinfo\": {\n      \"command\": \"uvx\",\n      \"args\": [\n        \"mcp-server-ipinfo\",\n        \"mcp-server-ipinfo\"\n      ],\n      \"env\": {\n        \"IPINFO_API_TOKEN\": \"<YOUR TOKEN HERE>\"\n      }\n    }\n```\n\n\n## Components\n\n### Tools\n\n- `get_ip_details`: This tool is used to get detailed information about an IP address.\n    - **Input:** `ip`: The IP address to get information about.\n    - **Output:** `IPDetails`: A Pydantic model containing detailed information about the IP, including location, organization, and country details.\n\n### Resources   \n\n_No custom resources are included_\n\n### Prompts\n\n_No custom prompts are included_\n\n\n## License\n\nMIT License - See [LICENSE](LICENSE) file for details.\n\n## Disclaimer\n\nThis project is not affiliated with [IPInfo](https://ipinfo.io).\n"
+}

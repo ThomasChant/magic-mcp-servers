@@ -1,0 +1,52 @@
+{
+  "mcp_name": "BioContext/PubChem-MCP",
+  "mcp_description": "Access PubChem data for compounds, substances, and bioassays through a Model Context Protocol server.",
+  "mcp_id": "BioContext_PubChem-MCP",
+  "fetch_timestamp": "2025-06-23T01:40:19.546193Z",
+  "github_url": "https://github.com/BioContext/PubChem-MCP",
+  "repository": {
+    "name": "PubChem-MCP",
+    "full_name": "BioContext/PubChem-MCP",
+    "description": null,
+    "html_url": "https://github.com/BioContext/PubChem-MCP",
+    "created_at": "2025-04-17T16:29:54Z",
+    "updated_at": "2025-04-17T20:18:58Z",
+    "pushed_at": "2025-04-17T20:18:55Z",
+    "size": 55,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": "Other",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "BioContext",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/208044616?v=4",
+      "html_url": "https://github.com/BioContext"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 0,
+    "languages": {
+      "Python": 166587,
+      "Dockerfile": 418
+    },
+    "language_percentages": {
+      "Python": 99.75,
+      "Dockerfile": 0.25
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# PubChem-MCP\n\nAn MCP (Model Context Protocol) server for accessing PubChem data. This server provides tools for querying the PubChem database for compounds, substances, bioassays, and related information.\n\n## Features\n\n* Search for compounds by name, structure, or identifier\n* Retrieve detailed information about compounds and substances\n* Access bioassay data and molecular properties\n* Query chemical classifications and cross-references\n* Compatible with any MCP client, including Claude for Desktop\n\n## Installation\n\n### Option 1: From GitHub\n\n```bash\n# Clone the repository\ngit clone https://github.com/BioContext/PubChem-MCP.git\ncd PubChem-MCP\n\n# Create a virtual environment\nuv venv\nsource .venv/bin/activate  # On Windows: .venv\\Scripts\\activate\n\n# Install dependencies\npip install -r requirements.txt\n```\n\n### Option 2: Using pip (Once published)\n\n```bash\npip install pubchem-mcp\n```\n\n## Usage\n\n### Running as a standalone server\n\n```bash\n# From source\npython -m mcp_server\n\n# If installed via pip\npubchem-mcp\n```\n\n### Using with Claude for Desktop\n\n1. Install Claude for Desktop\n2. Configure Claude for Desktop to use this server by editing `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS/Linux) or `%AppData%\\Claude\\claude_desktop_config.json` (Windows):\n\n```json\n{\n    \"mcpServers\": {\n        \"pubchem\": {\n            \"command\": \"python\",\n            \"args\": [\n                \"-m\",\n                \"mcp_server\"\n            ]\n        }\n    }\n}\n```\n\n3. Restart Claude for Desktop\n4. You can now use the PubChem tools in Claude\n\n### Example queries for Claude\n\n* \"Find information about aspirin in PubChem\"\n* \"What are the properties of compound CID 2244?\"\n* \"Show me the structure of paracetamol\"\n\n## Available Tools\n\n* `search_compound`: Search for compounds by name or identifier\n* `get_compound_details`: Get detailed information about a compound\n* `get_compound_properties`: Get physical and chemical properties of a compound\n* `search_bioassay`: Search for bioassays\n* `get_substance_details`: Get detailed information about a substance\n* And more...\n\n## Development\n\n```bash\n# Clone the repository\ngit clone https://github.com/BioContext/PubChem-MCP.git\ncd PubChem-MCP\n\n# Create a virtual environment\nuv venv\nsource .venv/bin/activate  # On Windows: .venv\\Scripts\\activate\n\n# Install development dependencies\npip install -e \".[dev]\"\n\n# Run tests\npytest\n```\n\n## License\n\nMIT License\n"
+}

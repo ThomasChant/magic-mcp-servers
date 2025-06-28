@@ -1,0 +1,69 @@
+{
+  "mcp_name": "Memory-Plus",
+  "mcp_description": "",
+  "mcp_id": "Yuchen20_Memory-Plus",
+  "fetch_timestamp": "2025-06-23T06:41:29.771288Z",
+  "github_url": "https://github.com/Yuchen20/Memory-Plus",
+  "repository": {
+    "name": "Memory-Plus",
+    "full_name": "Yuchen20/Memory-Plus",
+    "description": "🧠 𝑴𝒆𝒎𝒐𝒓𝒚-𝑷𝒍𝒖𝒔 is a lightweight, local RAG memory store for MCP agents. Easily record, retrieve, update, delete, and visualize persistent \"memories\" across sessions—perfect for developers working with multiple AI coders (like Windsurf, Cursor, or Copilot) or anyone who wants their AI to actually remember them.",
+    "html_url": "https://github.com/Yuchen20/Memory-Plus",
+    "created_at": "2025-05-01T20:25:42Z",
+    "updated_at": "2025-06-18T15:51:36Z",
+    "pushed_at": "2025-05-25T16:26:32Z",
+    "size": 3316,
+    "stargazers_count": 20,
+    "watchers_count": 20,
+    "forks_count": 1,
+    "open_issues_count": 1,
+    "language": "Python",
+    "license": "Apache License 2.0",
+    "topics": [
+      "agent",
+      "hackathon",
+      "mcp",
+      "mcp-server",
+      "memory",
+      "memory-store",
+      "model-context-protocol"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "Yuchen20",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/71852810?v=4",
+      "html_url": "https://github.com/Yuchen20"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 4,
+    "languages": {
+      "Python": 39738
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 1,
+    "tags": [
+      {
+        "name": "v0.1.4",
+        "commit_sha": "e2a46fa0e33ed91b385e555d05eaeb11f7b9e611"
+      },
+      {
+        "name": "v0.1.2",
+        "commit_sha": "27225f5ae5bc7df280a698c38a0cea5629b6a199"
+      }
+    ],
+    "latest_version": "v0.1.4"
+  },
+  "readme": "<!-- Badges -->\n\n\n![memory_plus](https://memory-plus.imgix.net/memory_plus.png)\n\n\n![pretty image](https://memory-plus.imgix.net/memory_server_banner.png)\n\n[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)   ![visitors](https://visitor-badge.laobi.icu/badge?page_id=Yuchen20.Memory-Plus) [![PyPI version](https://badge.fury.io/py/memory-plus.svg)](https://pypi.org/project/memory-plus/) [![PyPI Downloads](https://static.pepy.tech/badge/memory-plus)](https://pepy.tech/projects/memory-plus)\n\n\n\n# Memory-Plus\n\nA lightweight, local Retrieval-Augmented Generation (RAG) memory store for MCP agents. Memory-Plus lets your agent record, retrieve, update, and visualize persistent \"memories\"—notes, ideas, and session context—across runs.\n\n> 🏆 **First Place** at the [Infosys Cambridge AI Centre Hackathon](https://infosys-cam-ai-centre.github.io/Infosys-Cambridge-Hackathon/)!\n\n## Key Features\n\n* **Record Memories**：Save user data, ideas, and important context.\n* **Retrieve Memories**：Search by keywords or topics over past entries.\n* **Recent Memories**：Fetch the last *N* items quickly.\n* **Update Memories**：Append or modify existing entries seamlessly.\n* **Visualize Memories**：Interactive graph clusters revealing relationships.\n* **File Import** (*since v0.1.2*)：Ingest documents directly into memory.\n* **Delete Memories** (*since v0.1.2*)：Remove unwanted entries.\n* **Memory for Memories** (*since v0.1.4*)：Now we use `resources` to teach your AI exactly when (and when not) to recall past interactions.\n* **Memory Versioning** (*since v0.1.4*)：When memories are updated, we keep the old versions to provide a full history.\n\n\n---\n\n\n![alt text](https://memory-plus.imgix.net/memory_visualization.png)\n\n\n## Installation\n\n### 1. Prerequisites\n\n**Google API Key**\nObtain from [Google AI Studio](https://aistudio.google.com/apikey) and set as `GOOGLE_API_KEY` in your environment.\n> Note that we will only use the `Gemini Embedding API` with this API key, so it is **Entirely Free** for you to use!\n<details>\n<summary><b>Setup Google API Key Example</b></summary>\n\n  ```bash\n  # macOS/Linux\n  export GOOGLE_API_KEY=\"<YOUR_API_KEY>\"\n\n  # Windows (PowerShell)\n  setx GOOGLE_API_KEY \"<YOUR_API_KEY>\"\n  ```\n</details>\n\n**UV Runtime**\nRequired to serve the MCP plugin.\n<details>\n<summary><b>Install UV Runtime</b></summary>\n\n```bash\npip install uv\n```\n\nOr install via shell scripts:\n\n```bash\n# macOS/Linux\ncurl -LsSf https://astral.sh/uv/install.sh | sh\n\n# Windows (PowerShell)\npowershell -ExecutionPolicy ByPass -c \"irm https://astral.sh/uv/install.ps1 | iex\"\n```\n</details>\n\n\n### VS Code One-Click Setup\n\nClick the badge below to automatically install and configure Memory-Plus in VS Code:\n\n\n[![One Click Install in VS Code](https://img.shields.io/badge/VS_Code-UV-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=memory-plus&config=%7B%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22-q%22%2C%22memory-plus%40latest%22%5D%7D)\n\n\n\nThis will add the following to your `settings.json`:\n\n```json\n  {\n    \"mcpServers\": {\n      //...,  your other MCP servers\n      \"memory-plus\": {\n        \"command\": \"uvx\",\n        \"args\": [\n          \"-q\",\n          \"memory-plus@latest\"\n        ],\n      }\n    }\n  }\n```\n\nFor `cursor`, go to `file -> Preferences -> Cursor Settings -> MCP` and add the above config.\nIf you didn't add the `GOOGLE_API_KEY` to your secrets / environment variables, you can add it with:\n```json\n\"env\": {\n        \"GOOGLE_API_KEY\": \"<YOUR_API_KEY>\"\n      }\n```\njust after the `args` array with in the `memory-plus` dictionary.\n\n\nFor `Cline` add the following to your `cline_mcp_settings.json`:\n```json\n{\n  \"mcpServers\": {\n    //...,  your other MCP servers\n    \"memory-plus\": {\n      \"disabled\": false,\n      \"timeout\": 300,\n      \"command\": \"uvx\",\n      \"args\": [\n        \"-q\",\n        \"memory-plus@latest\"\n      ],\n      \"env\": {\n        \"GOOGLE_API_KEY\": \"${{ secrets.GOOGLE_API_KEY }}\"\n      },\n      \"transportType\": \"stdio\"\n    }\n  }\n}\n```\n\nFor other IDEs it should be mostly similar to the above.\n\n\n## Local Testing and Development\n\nUsing MCP Inspector, you can test the memory-plus server locally.\n\n```bash\ngit clone https://github.com/Yuchen20/Memory-Plus.git\ncd Memory-Plus\nnpx @modelcontextprotocol/inspector fastmcp run run .\\\\memory_plus\\\\mcp.py\n```\n\nOr If you prefer using this MCP in an actual Chat Session. There is a template chatbot in `agent.py`.\n\n```bash\n# Clone the repository\ngit clone https://github.com/Yuchen20/Memory-Plus.git\ncd Memory-Plus\n\n# Install dependencies\npip install uv\nuv pip install fast-agent-mcp\nuv run fast-agent setup        \n```\nsetup the `fastagent.config.yaml` and `fastagent.secrets.yaml` with your own API keys.\n```bash\n# Run the agent\nuv run agent_memory.py\n```\n\n\n## RoadMap\n- [x] Memory Update\n- [x] Improved prompt engineering for memory recording\n- [x] Better Visualization of Memory Graph\n- [x] File Import\n- [ ] Remote backup!\n- [ ] Web UI for Memory Management\n\n> If you have any feature requests, please feel free to add them by adding a new issue or by adding a new entry in the [Feature Request](https://voltaic-shell-9af.notion.site/1f84e395c1d18059849ce844fcbba903?pvs=105)\n\n\n## License\n\nThis project is licensed under the **Apache License 2.0**. See [LICENSE](./LICENSE) for details.\n\n\n## FAQ\n\n### 1. Why is memory-plus not working?\n- Memory-plus has a few dependencies that can be slow to download the first time. It typically takes around 1 minute to fetch everything needed.\n- Once dependencies are installed, subsequent usage will be much faster.\n- If you experience other issues, please feel free to open a new issue on the repository.\n\n### 2. How do I use memory-plus in a real chat session?\n- Simply add the MCP JSON file to your MCP setup.\n- Once added, memory-plus will automatically activate when needed.\n"
+}

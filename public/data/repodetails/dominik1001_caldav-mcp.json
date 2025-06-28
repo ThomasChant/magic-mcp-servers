@@ -1,0 +1,84 @@
+{
+  "mcp_name": "CalDAV MCP",
+  "mcp_description": "A CalDAV MCP server to expose calendar operations as tools for AI assistants.",
+  "mcp_id": "dominik1001_caldav-mcp",
+  "fetch_timestamp": "2025-06-23T01:54:16.005649Z",
+  "github_url": "https://github.com/dominik1001/caldav-mcp",
+  "repository": {
+    "name": "caldav-mcp",
+    "full_name": "dominik1001/caldav-mcp",
+    "description": "A CalDAV client using Model Context Protocol (MCP) to expose calendar operations as tools for AI assistants.",
+    "html_url": "https://github.com/dominik1001/caldav-mcp",
+    "created_at": "2025-05-16T11:35:54Z",
+    "updated_at": "2025-06-22T12:59:32Z",
+    "pushed_at": "2025-06-22T12:59:29Z",
+    "size": 355,
+    "stargazers_count": 7,
+    "watchers_count": 7,
+    "forks_count": 4,
+    "open_issues_count": 1,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [
+      "caldav",
+      "mcp-server",
+      "typescript"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "dominik1001",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2018053?v=4",
+      "html_url": "https://github.com/dominik1001"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 4,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 3446,
+      "JavaScript": 1408
+    },
+    "language_percentages": {
+      "TypeScript": 70.99,
+      "JavaScript": 29.01
+    },
+    "pull_requests_count": 2,
+    "contributors_count": 3,
+    "latest_release": {
+      "tag_name": "v0.2.0",
+      "name": "v0.2.0",
+      "published_at": "2025-06-13T07:46:58Z",
+      "body": "# [0.2.0](https://github.com/dominik1001/caldav-mcp/compare/v0.1.3...v0.2.0) (2025-06-13)\n\n\n### Features\n\n* add list-calendars ([23ec5bd](https://github.com/dominik1001/caldav-mcp/commit/23ec5bd12132346290f62efa0b8bef03d2c95596))\n\n\n\n",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.2.0",
+        "commit_sha": "cb7a291d85d65dd08a2322b3bbea093afeffef1d"
+      },
+      {
+        "name": "v0.1.3",
+        "commit_sha": "d45ab55bba9c0623fe80dd99410107c084855adc"
+      },
+      {
+        "name": "v0.1.2",
+        "commit_sha": "0ad5fa7372710d9db6191444a85a8252e28ef06c"
+      },
+      {
+        "name": "v0.1.1",
+        "commit_sha": "37286aed9812eaef5fa7af8813091901ef9f8a35"
+      }
+    ],
+    "latest_version": "v0.2.0",
+    "package_json_version": "0.2.0"
+  },
+  "readme": "# caldav-mcp\n\n<div align=\"center\">\n\n🗓️ A CalDAV Model Context Protocol (MCP) server to expose calendar operations as tools for AI assistants.\n\n[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)\n[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)\n[![MCP Compatible](https://img.shields.io/badge/MCP-Compatible-purple.svg)](https://modelcontextprotocol.io)\n[![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)\n\n</div>\n\n## ✨ Features\n\n- Connect to CalDAV servers\n- Create calendar events\n- List calendar events within a specific timeframe\n\n## Setup\n\n```\n{\n  \"mcpServers\": {\n    ...,\n    \"calendar\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"caldav-mcp\"\n      ],\n      \"env\": {\n        \"CALDAV_BASE_URL\": \"<CalDAV server URL>\",\n        \"CALDAV_USERNAME\": \"<CalDAV username>\",\n        \"CALDAV_PASSWORD\": \"<CalDAV password>\"\n      }\n    }\n  }\n}\n```\n\n## Usage\n\n1. Compile TypeScript to JavaScript:\n```bash\nnpx tsc\n```\n\n2. Run the MCP server:\n```bash\nnode index.js\n```\n\n## Available Tools\n\n### create-event\n\nCreates a new calendar event.\n\nParameters:\n- `summary`: String - Event title/summary\n- `start`: DateTime string - Event start time\n- `end`: DateTime string - Event end time\n\nReturns:\n- The unique ID of the created event\n\n### list-events\n\nLists events within a specified timeframe.\n\nParameters:\n- `start`: DateTime string - Start of the timeframe\n- `end`: DateTime string - End of the timeframe\n\nReturns:\n- A list of event summaries that fall within the given timeframe\n\n## License\n\nMIT"
+}

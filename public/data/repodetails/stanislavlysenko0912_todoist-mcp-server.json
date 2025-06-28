@@ -1,0 +1,55 @@
+{
+  "mcp_name": "Todoist",
+  "mcp_description": "Full implementation of Todoist Rest API for MCP server",
+  "mcp_id": "stanislavlysenko0912_todoist-mcp-server",
+  "fetch_timestamp": "2025-06-23T08:59:19.951568Z",
+  "github_url": "https://github.com/stanislavlysenko0912/todoist-mcp-server",
+  "repository": {
+    "name": "todoist-mcp-server",
+    "full_name": "stanislavlysenko0912/todoist-mcp-server",
+    "description": "Full implementation of Todoist Rest API & support Todoist Sync API for MCP server",
+    "html_url": "https://github.com/stanislavlysenko0912/todoist-mcp-server",
+    "created_at": "2025-03-29T16:13:53Z",
+    "updated_at": "2025-06-21T10:16:50Z",
+    "pushed_at": "2025-06-10T11:15:52Z",
+    "size": 132,
+    "stargazers_count": 27,
+    "watchers_count": 27,
+    "forks_count": 8,
+    "open_issues_count": 4,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "stanislavlysenko0912",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/86171768?v=4",
+      "html_url": "https://github.com/stanislavlysenko0912"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 8,
+    "subscribers_count": 2,
+    "languages": {
+      "TypeScript": 46843,
+      "JavaScript": 1903,
+      "Dockerfile": 180
+    },
+    "language_percentages": {
+      "TypeScript": 95.74,
+      "JavaScript": 3.89,
+      "Dockerfile": 0.37
+    },
+    "pull_requests_count": 14,
+    "contributors_count": 5,
+    "package_json_version": "1.2.3"
+  },
+  "readme": "<div align=\"center\">\n    <img src=\"https://static-00.iconduck.com/assets.00/todoist-icon-512x512-v3a6dxo9.png\" width=\"120\"/>\n    <h1>Todoist MCP Server</h1>\n    <p>A Model Context Protocol (MCP) server implementation that integrates Claude and other AI assistants with Todoist, enabling natural language task management.</p>\n    <div>\n        <img src=\"https://img.shields.io/badge/claude-mcp-blue\" alt=\"MCP Server\">\n        <img src=\"https://img.shields.io/badge/todoist-mcp-orange\" alt=\"Todoist Integration\">\n        <a href=\"https://www.npmjs.com/package/todoist-mcp\" target=\"_blank\">\n            <img src=\"https://img.shields.io/npm/v/todoist-mcp.svg\" alt=\"npm version\">\n        </a>\n    </div>\n</div>\n\n## Features\n\n- **Complete Todoist API Integration**: Access to the full Todoist REST API v2, and support for the Todoist Sync API through natural language\n- **Batch Processing**: Client can process multiple tasks in a single request\n- **Search by name**: AI can search for tasks, projects, and labels by name instead of ID\n- **Tasks**: Create, update, close, reopen, move, and delete tasks using conversational language\n- **Projects**: Create and manage projects and sections\n- **Comments**: Add and manage comments on tasks and projects\n- **Labels**: Create and manage personal and shared labels\n- **Prompt Support**: You can easily provide information about your projects to client\n\n## Configuration\n\nYou'll need a Todoist API token to use this MCP server.\n\n### Getting a Todoist API Token\n\n1. Log in to your Todoist account\n2. Navigate to Settings → Integrations\n3. Find your API token under \"Developer\"\n\n### Usage with Claude Desktop\n\nAdd to your `claude_desktop_config.json`:\n\n```json\n{\n    \"mcpServers\": {\n        \"todoist\": {\n            \"command\": \"npx\",\n            \"args\": [\"-y\", \"todoist-mcp\"],\n            \"env\": {\n                \"API_KEY\": \"your_todoist_api_token_here\"\n            }\n        }\n    }\n}\n```\n\n## Available Tools\n\n### Tasks\n\n- `get_tasks_list`: Get tasks with optional filtering by project, section, label, etc.\n- `create_tasks`: Create new tasks with various attributes\n- `get_tasks`: Get specific tasks by ID or name\n- `update_tasks`: Update existing tasks\n- `close_tasks`: Mark tasks as complete\n- `reopen_tasks`: Reopen completed tasks\n- `delete_tasks`: Delete tasks\n- `move_tasks`: Move tasks to a different project or section\n\n### Projects\n\n- `get_projects_list`: Get all projects\n- `create_projects`: Create new projects\n- `get_projects`: Get specific projects by ID or name\n- `update_projects`: Update existing projects\n- `delete_projects`: Delete projects\n- `get_collaborators`: Get all collaborators for a project\n- `move_projects`: Move projects to a different location or subproject\n\n### Sections\n\n- `get_sections_list`: Get all sections or filter by project\n- `create_sections`: Create new sections\n- `get_sections`: Get specific sections by ID or name\n- `update_sections`: Update sections\n- `delete_sections`: Delete sections\n\n### Comments\n\n- `get_comments_list`: Get comments for a project or task\n- `create_comments`: Create new comments\n- `get_comments`: Get specific comments by ID\n- `update_comments`: Update comments\n- `delete_comments`: Delete comments\n\n### Labels\n\n- `get_labels_list`: Get all personal labels\n- `create_labels`: Create new personal labels\n- `get_labels`: Get personal labels by ID or name\n- `update_labels`: Update personal labels\n- `delete_labels`: Delete personal labels\n- `get_shared_labels`: Get all shared labels\n- `rename_shared_labels`: Rename shared labels\n- `remove_shared_labels`: Remove shared labels\n\n### Utils\n\n- `utils_get_colors`: Get available colors for projects, labels, filters\n\n## Prompts\n\n- `projects_list`: Get list of projects with their sections and params in markdown format\n\n## Example Usage\n\nAsk your AI assistant (like Claude) questions such as:\n\n```\n\"What tasks do I have due today?\"\n\"Create a task to review the quarterly report by next Friday\"\n\"Make a new project called 'Home Renovation'\"\n\"Add a comment to my meeting prep task\"\n\"Show me all my high priority tasks\"\n\"Create a label for 'Urgent' tasks with a red color\"\n\"What projects do I have in my Todoist?\"\n\"Mark my dentist appointment task as complete\"\n```\n\n## Development\n\n```bash\n# Install dependencies\nnpm install\n\n# Build the project and run inspector\nnpm run build && npx @modelcontextprotocol/inspector -e API_KEY=YOUR_API_KEY_HERE node dist/index.js\n```\n\n## License\n\nThis project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.\n\n## Issues and Support\n\nIf you encounter any issues or need support, please file an issue on the GitHub repository.\n\n<a href=\"https://glama.ai/mcp/servers/@stanislavlysenko0912/todoist-mcp-server\">\n  <img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/@stanislavlysenko0912/todoist-mcp-server/badge\" />\n</a>\n"
+}

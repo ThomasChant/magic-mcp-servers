@@ -1,0 +1,60 @@
+{
+  "mcp_name": "jj3ny/reclaim-mcp-server",
+  "mcp_description": "A TypeScript-based MCP server enabling seamless interaction with Reclaim.ai's API for task management and scheduling.",
+  "mcp_id": "jj3ny_reclaim-mcp-server",
+  "fetch_timestamp": "2025-06-23T05:26:54.846827Z",
+  "github_url": "https://github.com/jj3ny/reclaim-mcp-server",
+  "repository": {
+    "name": "reclaim-mcp-server",
+    "full_name": "jj3ny/reclaim-mcp-server",
+    "description": "A Model Context Protocol (MCP) server implementation using TypeScript",
+    "html_url": "https://github.com/jj3ny/reclaim-mcp-server",
+    "created_at": "2025-04-20T23:34:51Z",
+    "updated_at": "2025-06-17T16:15:50Z",
+    "pushed_at": "2025-04-28T04:37:06Z",
+    "size": 254,
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "jj3ny",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/143737623?v=4",
+      "html_url": "https://github.com/jj3ny"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 50089,
+      "JavaScript": 5580
+    },
+    "language_percentages": {
+      "TypeScript": 89.98,
+      "JavaScript": 10.02
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "tags": [
+      {
+        "name": "v0.1.2",
+        "commit_sha": "f1e167ffc95bf5415e9226eb3a6cbf4b77b6747a"
+      }
+    ],
+    "latest_version": "v0.1.2",
+    "package_json_version": "0.1.2"
+  },
+  "readme": "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\n[![npm version](https://img.shields.io/npm/v/reclaim-mcp-server.svg)](https://www.npmjs.com/package/reclaim-mcp-server)\n\n# Reclaim.ai MCP Server 🚀 _(UNOFFICIAL)_\n\n> **⚠️ UNOFFICIAL & UNAFFILIATED** – This project is **not** endorsed, sponsored, or supported by Reclaim.ai. It simply uses Reclaim's public API. Use at your own risk and comply with Reclaim's Terms of Service.\n\nA community‑maintained [**Model Context Protocol**](https://modelcontextprotocol.io/) (MCP) server that lets _any_ MCP‑capable client (Claude Desktop, Continue, Cursor, custom scripts, …) interact with the [Reclaim.ai API](https://reclaim.ai/) through a set of standard **resources** & **tools**.\n\n---\n\n## 🧐 Why MCP?\n\n- MCP is the \"USB‑C\" of LLM integrations – one wire that lets every model talk to every tool.\n\n- Run this server once and _all_ your MCP‑aware apps instantly gain Reclaim super‑powers.\n\n---\n\n## ✨ Key Features\n\n- **Active‑tasks resource** (`tasks://active`)\n\n- **14 task‑operation tools** (list, create, update, complete, timers, …)\n\n- 🛡 Type‑safe (TypeScript + Zod) & solid error‑handling\n\n- 📦 Zero‑config stdio transport – perfect for local AI assistants\n\n---\n\n## 📚 MCP Capabilities\n\n### Tools (Actions)\n\n| Tool                       | Description                   | Parameters                                                | ✅ Idemp. | ☠️ Destr. |\n| -------------------------- | ----------------------------- | --------------------------------------------------------- | --------- | --------- |\n| `reclaim_list_tasks`       | List tasks (default = active) | `{ \"filter\"?: \"active\"\\|\"all\" }`                          | ✅        | ❌        |\n| `reclaim_get_task`         | Fetch a task                  | `{ \"taskId\": number }`                                    | ✅        | ❌        |\n| `reclaim_create_task`      | Create a new task             | `{ /* task properties */ }`                               | ❌        | ❌        |\n| `reclaim_update_task`      | Update task properties        | `{ \"taskId\": number, /* updated properties */ }`          | ✅        | ❌        |\n| `reclaim_mark_complete`    | Mark complete                 | `{ \"taskId\": number }`                                    | ✅        | ❌        |\n| `reclaim_mark_incomplete`  | Unarchive / mark incomplete   | `{ \"taskId\": number }`                                    | ✅        | ❌        |\n| `reclaim_delete_task`      | Delete permanently            | `{ \"taskId\": number }`                                    | ✅        | **✅**    |\n| `reclaim_add_time`         | Add schedule minutes          | `{ \"taskId\": number, \"minutes\": number }`                 | ❌        | ❌        |\n| `reclaim_start_timer`      | Start timer                   | `{ \"taskId\": number }`                                    | ✅        | ❌        |\n| `reclaim_stop_timer`       | Stop timer                    | `{ \"taskId\": number }`                                    | ✅        | ❌        |\n| `reclaim_log_work`         | Log work time                 | `{ \"taskId\": number, \"minutes\": number, \"end\"?: string }` | ❌        | ❌        |\n| `reclaim_clear_exceptions` | Clear scheduling exceptions   | `{ \"taskId\": number }`                                    | ✅        | ❌        |\n| `reclaim_prioritize`       | Prioritise in planner         | `{ \"taskId\": number }`                                    | ✅        | ❌        |\n\n---\n\n## ⚠️ Known Issues\n\n**`COMPLETE` ≠ done.** Reclaim marks a task `COMPLETE` when its _scheduled block_ ends, even if you haven't finished the work. This server does include those tasks as active when the LLM uses the tool to pull active tasks (and reminds the model that `COMPLETE` tasks are still active). However, LLMs (Claude) sometimes ignore `COMPLETE` tasks when asked for \"open\" or \"active\" tasks. If that happens, you may need to prompt the LLM explicitly to \"include tasks with status COMPLETE\".\n\n## 🚀 Quick Start\n\n1. **Prerequisites**\n   - Node.js ≥ 18  \n   - [Reclaim API key](https://app.reclaim.ai/settings/developer)\n\n2. **Claude Desktop configuration (minimal)**\n   ```json\n{\n  \"mcpServers\": {\n    \"reclaim\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"reclaim-mcp-server\"\n      ],\n      \"env\": { \"RECLAIM_API_KEY\": \"xxx\" }\n    }\n  }\n}\n   ```\n\n**Alternative Configuration:**\n\n   ```json\n{\n  \"mcpServers\": {\n    \"reclaim\": {\n      \"command\": \"absolute/path/to/node (run `which node` in terminal)\",\n      \"args\": [\n        \"/absolute/path/to/reclaim-mcp-server/dist/index.js\"\n      ],\n      \"env\": { \"RECLAIM_API_KEY\": \"xxx\" }\n    }\n  }\n}\n   ```\n\n\n### Alternative: Manual Installation\n\nIf you prefer to install from source:\n\n```bash\ngit clone https://github.com/jj3ny/reclaim-mcp-server.git\ncd reclaim-mcp-server\npnpm install && pnpm build\n\n# Run with your API key\nRECLAIM_API_KEY=your_api_key node dist/index.js\n```\n\n## 🤝 Contributing\n\nBug reports & PRs welcome! To contribute:\n\n1. Fork the repository\n2. Create a feature branch (`git checkout -b feature/amazing-feature`)\n3. Make your changes (following the code style)\n4. Commit using Conventional Commits (`feat:`, `fix:`, etc.)\n5. Push to your branch (`git push origin feature/amazing-feature`)\n6. Open a Pull Request\n\nPlease squash your commits before opening a PR.\n\n## 📄 License\n\nMIT – see LICENSE."
+}

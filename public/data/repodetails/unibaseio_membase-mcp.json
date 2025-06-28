@@ -1,0 +1,50 @@
+{
+  "mcp_name": "unibaseio/membase-mcp",
+  "mcp_description": "📇 ☁️ - Save and query your agent memory in distributed way by Membase",
+  "mcp_id": "unibaseio_membase-mcp",
+  "fetch_timestamp": "2025-06-23T09:10:48.398167Z",
+  "github_url": "https://github.com/unibaseio/membase-mcp",
+  "repository": {
+    "name": "membase-mcp",
+    "full_name": "unibaseio/membase-mcp",
+    "description": "A lightweight decentralized memory gateway that connects AI agents to Membase for persistent, verifiable multi-session memory.",
+    "html_url": "https://github.com/unibaseio/membase-mcp",
+    "created_at": "2025-03-31T03:54:26Z",
+    "updated_at": "2025-06-09T14:28:45Z",
+    "pushed_at": "2025-05-14T09:48:27Z",
+    "size": 295,
+    "stargazers_count": 4,
+    "watchers_count": 4,
+    "forks_count": 4,
+    "open_issues_count": 1,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "unibaseio",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/149583566?v=4",
+      "html_url": "https://github.com/unibaseio"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 4,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 4173
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 2
+  },
+  "readme": "# membase mcp server\n\n## Description\n\nMembase is the first decentralized memory layer for AI agents, powered by Unibase. It provides secure, persistent storage for conversation history, interaction records, and knowledge — ensuring agent continuity, personalization, and traceability.\n\nThe Membase-MCP Server enables seamless integration with the Membase protocol, allowing agents to upload and retrieve memory from the Unibase DA network for decentralized, verifiable storage.\n\n## Functions\n\nMessages or memoiries can be visit at: <https://testnet.hub.membase.io/>\n\n- **get_conversation_id**: Get the current conversation id.\n- **switch_conversation**: Switch to a different conversation.\n- **save_message**: Save a message/memory into the current conversation.\n- **get_messages**: Get the last n messages from the current conversation.\n\n## Installation\n\n```shell\ngit clone https://github.com/unibaseio/membase-mcp.git\ncd membase-mcp\nuv run src/membase_mcp/server.py\n```\n\n## Environment variables\n\n- MEMBASE_ACCOUNT: your account to upload\n- MEMBASE_CONVERSATION_ID: your conversation id, should be unique, will preload its history\n- MEMBASE_ID: your instance id\n\n## Configuration on Claude/Windsurf/Cursor/Cline\n\n```json\n{\n  \"mcpServers\": {\n    \"membase\": {\n      \"command\": \"uv\",\n      \"args\": [\n        \"--directory\",\n        \"path/to/membase-mcp\",\n        \"run\", \n        \"src/membase_mcp/server.py\"\n      ],\n      \"env\": {\n        \"MEMBASE_ACCOUNT\": \"your account, 0x...\",\n        \"MEMBASE_CONVERSATION_ID\": \"your conversation id, should be unique\",\n        \"MEMBASE_ID\": \"your sub account, any string\"\n      }\n    }\n  }\n}\n```\n\n## Usage\n\ncall functions in llm chat\n\n- get conversation id and switch conversation\n\n![get conversation id and switch conversation](./asset/switch.png)\n\n- save message and get messages\n\n![save message and get messages](./asset/save.png)\n"
+}

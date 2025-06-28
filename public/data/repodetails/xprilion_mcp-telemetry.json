@@ -1,0 +1,50 @@
+{
+  "mcp_name": "xprilion/mcp-telemetry",
+  "mcp_description": "Enhance your chat system's observability by tracing and analyzing conversations with LLMs using Weights & Biases Weave.",
+  "mcp_id": "xprilion_mcp-telemetry",
+  "fetch_timestamp": "2025-06-23T09:33:53.280678Z",
+  "github_url": "https://github.com/xprilion/mcp-telemetry",
+  "repository": {
+    "name": "mcp-telemetry",
+    "full_name": "xprilion/mcp-telemetry",
+    "description": "Observability helps. This MCP server adds tracing to all your conversations on Claude (or suitable MCP client) so that you can trace, understand, debug and report on your all your interactions.",
+    "html_url": "https://github.com/xprilion/mcp-telemetry",
+    "created_at": "2025-04-07T18:15:09Z",
+    "updated_at": "2025-04-07T18:17:32Z",
+    "pushed_at": "2025-04-07T18:17:29Z",
+    "size": 6,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Python",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "xprilion",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7047208?v=4",
+      "html_url": "https://github.com/xprilion"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Python": 1871
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 2
+  },
+  "readme": "# MCP Telemetry\n\n<div align=\"center\">\n\n<strong>A Model Context Protocol (MCP) server for telemetry within chat systems using Weights & Biases Weave</strong>\n\n</div>\n\n## Overview\n\nMCP Telemetry provides a simple interface for logging and tracking conversations between users and LLMs. It leverages the [Model Context Protocol](https://modelcontextprotocol.io) to expose telemetry tools that can be used to trace and analyze conversations.\n\n## Features\n\n- Start tracing sessions with custom identifiers\n- Log comprehensive conversation data including:\n  - User inputs\n  - LLM responses\n  - LLM actions\n  - Tool calls and their results\n- Seamless integration with Weights & Biases Weave for visualization and analysis\n- Real-time monitoring of conversation flows\n- Export and share conversation analytics\n\n## Installation\n\nFirst, get a WandB API Key from: https://wandb.ai/settings#api\n\nThis server can be installed by adding the following json to your Claude desktop config:\n\n```\n{\n  \"mcpServers\": {\n    \"MCP Telemetry\": {\n      \"command\": \"uv\", -- this needs to be the location where uv is available, check via 'which uv'\n      \"args\": [\n        \"run\",\n        \"--with\",\n        \"mcp[cli]\",\n        \"--with\",\n        \"weave\",\n        \"mcp\",\n        \"run\",\n        \"~/mcp-telemetry/server.py\"\n      ],\n      \"env\": {\n        \"WANDB_API_KEY\": \"...\" -- get one from wandb.com\n      }\n    }\n  }\n}\n```\n\n## Usage\n\nOnce installed, the MCP Telemetry server will automatically start when you launch Claude. It will begin collecting telemetry data for all conversations. You can view your telemetry data in the Weights & Biases dashboard.\n\n### Basic Usage\n\n1. Start a conversation with Claude\n2. The server will automatically track:\n   - User messages\n   - LLM responses\n   - Tool calls and their results\n   - Conversation metadata\n\n## Configuration\n\nThe server can be configured through environment variables:\n\n- `WANDB_API_KEY` - Your Weights & Biases API key (required)\n\n## Examples\n\n### Starting a Tracing Session\n\nPrompt Claude to trace that conversation. Example: `Log this conversation with MCP Telemetry, topic will be Cats`\n\n### Viewing Telemetry Data\n\n1. Log in to your Weights & Biases account\n2. Navigate to your project\n3. You'll see various visualizations including:\n   - Conversation flows\n   - Tool usage patterns\n   - Response times\n   - Error rates\n\n## Contributing\n\nContributions are welcome! Please feel free to submit a Pull Request.\n\n## License\n\nThis project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.\n"
+}

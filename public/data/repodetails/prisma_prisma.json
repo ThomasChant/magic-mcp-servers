@@ -1,0 +1,134 @@
+{
+  "mcp_name": "prisma/prisma",
+  "mcp_description": "🐍 🏠 - Gives LLMs the ability to manage Prisma Postgres databases (e.g. spin up new database instances or run schema migrations).",
+  "mcp_id": "prisma_prisma",
+  "fetch_timestamp": "2025-06-23T07:37:16.217305Z",
+  "github_url": "https://github.com/prisma/prisma",
+  "repository": {
+    "name": "prisma",
+    "full_name": "prisma/prisma",
+    "description": "Next-generation ORM for Node.js & TypeScript | PostgreSQL, MySQL, MariaDB, SQL Server, SQLite, MongoDB and CockroachDB",
+    "html_url": "https://github.com/prisma/prisma",
+    "created_at": "2019-06-20T13:33:47Z",
+    "updated_at": "2025-06-23T05:46:25Z",
+    "pushed_at": "2025-06-23T06:23:19Z",
+    "size": 148893,
+    "stargazers_count": 42629,
+    "watchers_count": 42629,
+    "forks_count": 1767,
+    "open_issues_count": 2316,
+    "language": "TypeScript",
+    "license": "Apache License 2.0",
+    "topics": [
+      "cockroachdb",
+      "database",
+      "javascript",
+      "mariadb",
+      "mongo",
+      "mongodb",
+      "mongodb-orm",
+      "mssql",
+      "mysql",
+      "nodejs",
+      "orm",
+      "postgres",
+      "postgresql",
+      "prisma",
+      "prisma-client",
+      "query-builder",
+      "sql-server",
+      "sqlite",
+      "sqlserver",
+      "typescript"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "prisma",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17219288?v=4",
+      "html_url": "https://github.com/prisma"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": true,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1767,
+    "subscribers_count": 236,
+    "languages": {
+      "TypeScript": 5922224,
+      "JavaScript": 69657,
+      "Shell": 5958,
+      "Dockerfile": 1783,
+      "PLpgSQL": 567,
+      "Batchfile": 270,
+      "TSQL": 258
+    },
+    "language_percentages": {
+      "TypeScript": 98.69,
+      "JavaScript": 1.16,
+      "Shell": 0.1,
+      "Dockerfile": 0.03,
+      "PLpgSQL": 0.01,
+      "Batchfile": 0,
+      "TSQL": 0
+    },
+    "pull_requests_count": 8917,
+    "contributors_count": 299,
+    "latest_release": {
+      "tag_name": "6.10.1",
+      "name": "6.10.1",
+      "published_at": "2025-06-18T20:51:03Z",
+      "body": "Today, we are issuing a 6.10.1 patch release.\r\n\r\n## Bug fixes\r\n\r\nIn Prisma ORM version 6.10.0, we shipped a bug fix for Prisma Migrate that ensured we always gracefully closed PostgreSQL connections by sending the Terminate message and not just abruptly closing the TCP connection. This fix was incomplete because it didn't work on Windows, which is now fixed. We highly recommend upgrading to version 6.10.1 if you are using Windows.\r\n\r\nWe also recommend upgrading to this version if you are currently using [local Prisma Postgres via the `prisma dev` command](https://www.prisma.io/docs/postgres/database/local-development) with an ORM version older than 6.10.x.\r\n\r\n## Performance improvements\r\n\r\nThe `queryCompiler` preview feature recently introduced a performance regression related to in-memory joins in TypeScript-based query execution (users who use the `queryCompiler` and the `relationJoins` preview features together were not affected, unless using `relationLoadStrategy: \"query\"`). This has now been fixed, leading to significant performance improvements: in our [Query Compiler benchmarks](https://github.com/prisma/query-compiler-benchmarks/), we are seeing up to 500x performance improvement compared to the previous implementation in the  TypeScript-based query executor, or up to 10–20x performance improvement compared to the Rust-based Query Engine.\r\n\r\n![query_type_movies findMany_include:__cast:_true__take:_2000__m2m](https://github.com/user-attachments/assets/19bd87ff-2276-4c63-8ff1-9cadf933ac17)\r\n\r\n## Other news\r\n\r\nPlease see the [release notes for Prisma ORM 6.10.0](https://github.com/prisma/prisma/releases/tag/6.10.0) for other recent news and announcements.",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "6.10.1",
+        "commit_sha": "c580b3670249a9628a07328de5abe01ab8cd50ad"
+      },
+      {
+        "name": "6.10.0",
+        "commit_sha": "4c2b06f345d3ef25dffeca05797b33f587568c9d"
+      },
+      {
+        "name": "6.9.0",
+        "commit_sha": "e76c7111ba4f190d443507bbfe8c41ff5507cbb0"
+      },
+      {
+        "name": "6.8.2",
+        "commit_sha": "7ce4f7ce7c6c70ce78d307347904ed297eb720a8"
+      },
+      {
+        "name": "6.8.1",
+        "commit_sha": "f36e3064a3f64975e74c4680a62ad541699741ec"
+      },
+      {
+        "name": "6.8.0",
+        "commit_sha": "780a1d123c09ff3e13749cec192f7cab0640b0fb"
+      },
+      {
+        "name": "6.7.0",
+        "commit_sha": "e4208dc0b983120feb89d38fd98bd10d33a32b70"
+      },
+      {
+        "name": "6.6.0",
+        "commit_sha": "c2b06af9d66614f955625150a3e5597245c47aa2"
+      },
+      {
+        "name": "6.5.0",
+        "commit_sha": "a7ce5412bd7afe6173568533e488be7b6ffdcddb"
+      },
+      {
+        "name": "6.4.1",
+        "commit_sha": "4b7b9b104d5ec4b8d56aa11de5f781656a942465"
+      }
+    ],
+    "latest_version": "6.10.1"
+  },
+  "readme": "![Prisma](https://i.imgur.com/h6UIYTu.png)\n\n<div align=\"center\">\n  <h1>Prisma</h1>\n  <a href=\"https://www.npmjs.com/package/prisma\"><img src=\"https://img.shields.io/npm/v/prisma.svg?style=flat\" /></a>\n  <a href=\"https://github.com/prisma/prisma/blob/main/CONTRIBUTING.md\"><img src=\"https://img.shields.io/badge/PRs-welcome-brightgreen.svg\" /></a>\n  <a href=\"https://github.com/prisma/prisma/blob/main/LICENSE\"><img src=\"https://img.shields.io/badge/license-Apache%202-blue\" /></a>\n  <a href=\"https://pris.ly/discord\"><img alt=\"Discord\" src=\"https://img.shields.io/discord/937751382725886062?label=Discord\"></a>\n  <br />\n  <br />\n  <a href=\"https://www.prisma.io/docs/getting-started/quickstart\">Quickstart</a>\n  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>\n  <a href=\"https://www.prisma.io/\">Website</a>\n  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>\n  <a href=\"https://www.prisma.io/docs/\">Docs</a>\n  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>\n  <a href=\"https://github.com/prisma/prisma-examples/\">Examples</a>\n  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>\n  <a href=\"https://www.prisma.io/blog\">Blog</a>\n  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>\n  <a href=\"https://pris.ly/discord?utm_source=github&utm_medium=prisma&utm_content=repo_readme\">Discord</a>\n  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>\n  <a href=\"https://pris.ly/x?utm_source=github&utm_medium=prisma&utm_content=repo_readme\">Twitter</a>\n  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>\n  <a href=\"https://pris.ly/youtube?utm_source=github&utm_medium=prisma&utm_content=repo_readme\">Youtube</a>\n  <br />\n  <hr />\n</div>\n\n## What is Prisma?\n\nPrisma ORM is a **next-generation ORM** that consists of these tools:\n\n- [**Prisma Client**](https://www.prisma.io/docs/concepts/components/prisma-client): Auto-generated and type-safe query builder for Node.js & TypeScript\n- [**Prisma Migrate**](https://www.prisma.io/docs/concepts/components/prisma-migrate): Declarative data modeling & migration system\n- [**Prisma Studio**](https://github.com/prisma/studio): GUI to view and edit data in your database\n\nPrisma Client can be used in _any_ Node.js or TypeScript backend application (including serverless applications and microservices). This can be a [REST API](https://www.prisma.io/docs/concepts/overview/prisma-in-your-stack/rest), a [GraphQL API](https://www.prisma.io/docs/concepts/overview/prisma-in-your-stack/graphql), a gRPC API, or anything else that needs a database.\n\n**If you need a database to use with Prisma ORM, check out [Prisma Postgres](https://www.prisma.io/docs/getting-started/quickstart-prismaPostgres?utm_source=github&utm_medium=prisma-readme).**\n\n## Getting started\n\n### Quickstart (5min)\n\nThe fastest way to get started with Prisma is by following the quickstart guides. You can choose either of two databases:\n\n- [Prisma Postgres](https://www.prisma.io/docs/getting-started/quickstart-prismaPostgres)\n- [SQLite](https://www.prisma.io/docs/getting-started/quickstart-sqlite)\n\n### Bring your own database\n\nIf you already have your own database, you can follow these guides:\n\n- [Add Prisma to an existing project](https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/relational-databases-typescript-postgresql)\n- [Set up a new project with Prisma from scratch](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases-typescript-postgresql)\n\n## How Prisma ORM works\n\nThis section provides a high-level overview of how Prisma ORM works and its most important technical components. For a more thorough introduction, visit the [Prisma documentation](https://www.prisma.io/docs/).\n\n### The Prisma schema\n\nEvery project that uses a tool from the Prisma toolkit starts with a [Prisma schema file](https://www.prisma.io/docs/concepts/components/prisma-schema). The Prisma schema allows developers to define their _application models_ in an intuitive data modeling language. It also contains the connection to a database and defines a _generator_:\n\n```prisma\n// Data source\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\n// Generator\ngenerator client {\n  provider = \"prisma-client-js\"\n}\n\n// Data model\nmodel Post {\n  id        Int     @id @default(autoincrement())\n  title     String\n  content   String?\n  published Boolean @default(false)\n  author    User?   @relation(fields:  [authorId], references: [id])\n  authorId  Int?\n}\n\nmodel User {\n  id    Int     @id @default(autoincrement())\n  email String  @unique\n  name  String?\n  posts Post[]\n}\n```\n\nIn this schema, you configure three things:\n\n- **Data source**: Specifies your database connection (via an environment variable)\n- **Generator**: Indicates that you want to generate Prisma Client\n- **Data model**: Defines your application models\n\n---\n\n### The Prisma data model\n\nOn this page, the focus is on the data model. You can learn more about [Data sources](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-schema/data-sources) and [Generators](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-schema/generators) on the respective docs pages.\n\n#### Functions of Prisma models\n\nThe data model is a collection of [models](https://www.prisma.io/docs/concepts/components/prisma-schema/data-model#defining-models). A model has two major functions:\n\n- Represent a table in the underlying database\n- Provide the foundation for the queries in the Prisma Client API\n\n#### Getting a data model\n\nThere are two major workflows for \"getting\" a data model into your Prisma schema:\n\n- Generate the data model from [introspecting](https://www.prisma.io/docs/concepts/components/introspection) a database\n- Manually writing the data model and mapping it to the database with [Prisma Migrate](https://www.prisma.io/docs/concepts/components/prisma-migrate)\n\nOnce the data model is defined, you can [generate Prisma Client](https://www.prisma.io/docs/concepts/components/prisma-client/generating-prisma-client) which will expose CRUD and more queries for the defined models. If you're using TypeScript, you'll get full type-safety for all queries (even when only retrieving the subsets of a model's fields).\n\n---\n\n### Accessing your database with Prisma Client\n\n#### Generating Prisma Client\n\nThe first step when using Prisma Client is installing its npm package:\n\n```\nnpm install @prisma/client\n```\n\nNote that the installation of this package invokes the `prisma generate` command which reads your Prisma schema and _generates_ the Prisma Client code. The code will be located in `node_modules/.prisma/client`, which is exported by `node_modules/@prisma/client/index.d.ts`.\n\nAfter you change your data model, you'll need to manually re-generate Prisma Client to ensure the code inside `node_modules/.prisma/client` gets updated:\n\n```\nnpx prisma generate\n```\n\nRefer to the documentation for more information about [\"generating the Prisma client\"](https://www.prisma.io/docs/concepts/components/prisma-client/generating-prisma-client).\n\n#### Using Prisma Client to send queries to your database\n\nOnce the Prisma Client is generated, you can import it in your code and send queries to your database. This is what the setup code looks like.\n\n##### Import and instantiate Prisma Client\n\nYou can import and instantiate Prisma Client as follows:\n\n```ts\nimport { PrismaClient } from '@prisma/client'\n\nconst prisma = new PrismaClient()\n```\n\nor\n\n```js\nconst { PrismaClient } = require('@prisma/client')\n\nconst prisma = new PrismaClient()\n```\n\nNow you can start sending queries via the generated Prisma Client API, here are a few sample queries. Note that all Prisma Client queries return _plain old JavaScript objects_.\n\nLearn more about the available operations in the [Prisma Client docs](https://www.prisma.io/docs/concepts/components/prisma-client) or watch this [demo video](https://www.youtube.com/watch?v=LggrE5kJ75I&list=PLn2e1F9Rfr6k9PnR_figWOcSHgc_erDr5&index=4) (2 min).\n\n##### Retrieve all `User` records from the database\n\n```ts\nconst allUsers = await prisma.user.findMany()\n```\n\n##### Include the `posts` relation on each returned `User` object\n\n```ts\nconst allUsers = await prisma.user.findMany({\n  include: { posts: true },\n})\n```\n\n##### Filter all `Post` records that contain `\"prisma\"`\n\n```ts\nconst filteredPosts = await prisma.post.findMany({\n  where: {\n    OR: [{ title: { contains: 'prisma' } }, { content: { contains: 'prisma' } }],\n  },\n})\n```\n\n##### Create a new `User` and a new `Post` record in the same query\n\n```ts\nconst user = await prisma.user.create({\n  data: {\n    name: 'Alice',\n    email: 'alice@prisma.io',\n    posts: {\n      create: { title: 'Join us for Prisma Day 2021' },\n    },\n  },\n})\n```\n\n##### Update an existing `Post` record\n\n```ts\nconst post = await prisma.post.update({\n  where: { id: 42 },\n  data: { published: true },\n})\n```\n\n#### Usage with TypeScript\n\nNote that when using TypeScript, the result of this query will be _statically typed_ so that you can't accidentally access a property that doesn't exist (and any typos are caught at compile-time). Learn more about leveraging Prisma Client's generated types on the [Advanced usage of generated types](https://www.prisma.io/docs/concepts/components/prisma-client/advanced-usage-of-generated-types) page in the docs.\n\n## Community\n\nPrisma has a large and supportive [community](https://www.prisma.io/community) of enthusiastic application developers. You can join us on [Discord](https://pris.ly/discord) and here on [GitHub](https://github.com/prisma/prisma/discussions).\n\n## Badges\n\n[![Made with Prisma](http://made-with.prisma.io/dark.svg)](https://prisma.io) [![Made with Prisma](http://made-with.prisma.io/indigo.svg)](https://prisma.io)\n\nBuilt something awesome with Prisma? 🌟 Show it off with these [badges](https://github.com/prisma/presskit?tab=readme-ov-file#badges), perfect for your readme or website.\n\n```\n[![Made with Prisma](http://made-with.prisma.io/dark.svg)](https://prisma.io)\n```\n\n```\n[![Made with Prisma](http://made-with.prisma.io/indigo.svg)](https://prisma.io)\n```\n\n## MCP server\n\nThe Prisma CLI includes a [Prisma MCP server](https://www.prisma.io/docs/postgres/mcp-server). It's started via this CLI command:\n\n```\nnpx prisma mcp\n```\n\nMost AI tools support a JSON-based configuration for MCP servers looking like this:\n\n```json\n{\n  \"mcpServers\": {\n    \"Prisma\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"prisma\", \"mcp\"]\n    }\n  }\n}\n```\n\nPrisma's MCP server gives AI agents the ability to manage [Prisma Postgres](https://www.prisma.io/postgres) databases (e.g. spin up new database instances or run schema migrations).\n\n## Security\n\nIf you have a security issue to report, please contact us at [security@prisma.io](mailto:security@prisma.io?subject=[GitHub]%20Prisma%202%20Security%20Report%20).\n\n## Support\n\n### Ask a question about Prisma\n\nYou can ask questions and initiate [discussions](https://github.com/prisma/prisma/discussions/) about Prisma-related topics in the `prisma` repository on GitHub.\n\n👉 [**Ask a question**](https://github.com/prisma/prisma/discussions/new)\n\n### Create a bug report for Prisma\n\nIf you see an error message or run into an issue, please make sure to create a bug report! You can find [best practices for creating bug reports](https://www.prisma.io/docs/guides/other/troubleshooting-orm/creating-bug-reports) (like including additional debugging output) in the docs.\n\n👉 [**Create bug report**](https://pris.ly/prisma-prisma-bug-report)\n\n### Submit a feature request\n\nIf Prisma currently doesn't have a certain feature, be sure to check out the [roadmap](https://www.prisma.io/docs/more/roadmap) to see if this is already planned for the future.\n\nIf the feature on the roadmap is linked to a GitHub issue, please make sure to leave a 👍 reaction on the issue and ideally a comment with your thoughts about the feature!\n\n👉 [**Submit feature request**](https://github.com/prisma/prisma/issues/new?assignees=&labels=&template=feature_request.md&title=)\n\n## Contributing\n\nRefer to our [contribution guidelines](https://github.com/prisma/prisma/blob/main/CONTRIBUTING.md) and [Code of Conduct for contributors](https://github.com/prisma/prisma/blob/main/CODE_OF_CONDUCT.md).\n\n## Tests Status\n\n- Prisma Tests Status:\n  [![Prisma Tests Status](https://github.com/prisma/prisma/workflows/CI/badge.svg)](https://github.com/prisma/prisma/actions/workflows/test.yml?query=branch%3Amain)\n- Ecosystem Tests Status:\n  [![Ecosystem Tests Status](https://github.com/prisma/ecosystem-tests/workflows/test/badge.svg)](https://github.com/prisma/ecosystem-tests/actions/workflows/test.yaml?query=branch%3Adev)\n"
+}

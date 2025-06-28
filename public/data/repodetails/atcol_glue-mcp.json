@@ -1,0 +1,52 @@
+{
+  "mcp_name": "atcol/glue-mcp",
+  "mcp_description": "Facilitates interaction with AWS Glue Data Catalog through a model context protocol server.",
+  "mcp_id": "atcol_glue-mcp",
+  "fetch_timestamp": "2025-06-23T01:19:57.823303Z",
+  "github_url": "https://github.com/atcol/glue-mcp",
+  "repository": {
+    "name": "glue-mcp",
+    "full_name": "atcol/glue-mcp",
+    "description": "A model context protocol (MCP) server to AWS Glue Data Catalog",
+    "html_url": "https://github.com/atcol/glue-mcp",
+    "created_at": "2025-04-27T10:49:09Z",
+    "updated_at": "2025-04-29T21:27:10Z",
+    "pushed_at": "2025-04-29T21:27:06Z",
+    "size": 40,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "Rust",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "master",
+    "owner": {
+      "login": "atcol",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1221721?v=4",
+      "html_url": "https://github.com/atcol"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "Rust": 8487,
+      "Nix": 1292
+    },
+    "language_percentages": {
+      "Rust": 86.79,
+      "Nix": 13.21
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 2
+  },
+  "readme": "# glue-mcp\nA model context protocol (MCP) server to AWS Glue Data Catalog\n\n## Usage\n\nOnce you've built a binary (see below), ensure you have your AWS credentials set.\n\nThen simply start the server:\n\n```bash\n./glue-mcp\n2025-04-29T21:25:37.623408Z  INFO glue_mcp: Metrics & logging initialised\n2025-04-29T21:25:37.623453Z  INFO glue_mcp::util: Starting server on 127.0.0.1:8000\n```\n\nThe server is ready for MCP calls on port 8000.\n\n## Development\n\n### Nix\n\nJust run `nix develop`, then `cargo build`.\n\n## Demo\n\nWe'll demonstrate using Ollama.\n\n#### 1. Install & configure `mcphost`\n\n```bash\ngo install github.com/mark3labs/mcphost@latest\n```\n\nConfigure mcphost with this MCP server:\n\n```json\n{\n  \"mcpServers\": {\n    \"aws_glue\": {\n      \"url\": \"http://localhost:8000/sse\",\n      \"transport\": \"sse\"\n    }\n  }\n}\n```\n\n####  2. Configure Ollama\n\nGet a model:\n\n```bash\nollama pull llama3.1:latest\n```\n\n#### 4. Run `glue-mcp`\n\n```bash\ncargo run\n```\n\n#### 5. Run mcphost & query\n\n```bash\n~/go/bin/mcphost --config ./mcp.json --model ollama:llama3.1\n2025/04/27 11:46:02 INFO Initializing server... name=aws_glue\n2025/04/27 11:46:02 INFO Server connected name=aws_glue             \n2025/04/27 11:46:02 INFO Tools loaded server=aws_glue count=3                                                                           \n                                                                                                                                        \n  You: list databases             \n2025/04/27 11:47:11 INFO 🔧 Using tool name=aws_glue__list_databases\n                                                                    \n  Assistant:                                                                                                          \n                                                                                                                                        \n                                                                    \n  The available databases are 'reference_data' and 'unstructured'.                                                                      \n                                                                                                                                        \n\n\n  You: list tables per database                                     \n2025/04/27 11:47:40 INFO 🔧 Using tool name=aws_glue__get_database_metadata\n2025/04/27 11:47:45 INFO 🔧 Using tool name=aws_glue__get_database_metadata\n\n  Assistant:                                                                                                          \n\n\n  The 'unstructured' database is currently empty of tables. The 'reference_data' database also does not contain any   \n  tables.                                                                                                             \n\n\n```\n"
+}

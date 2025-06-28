@@ -1,0 +1,77 @@
+{
+  "mcp_name": "Debugg AI",
+  "mcp_description": "Enable your code gen agents to create & run 0-config end-to-end tests against new code changes in remote browsers via the [Debugg AI](https://debugg.ai) testing platform.",
+  "mcp_id": "debugg-ai_debugg-ai-mcp",
+  "fetch_timestamp": "2025-06-23T02:33:23.136460Z",
+  "github_url": "https://github.com/debugg-ai/debugg-ai-mcp",
+  "repository": {
+    "name": "debugg-ai-mcp",
+    "full_name": "debugg-ai/debugg-ai-mcp",
+    "description": "Zero-Config, Fully AI-Managed End-to-End Testing for all code gen platforms.",
+    "html_url": "https://github.com/debugg-ai/debugg-ai-mcp",
+    "created_at": "2025-05-28T19:10:24Z",
+    "updated_at": "2025-06-22T09:57:27Z",
+    "pushed_at": "2025-06-16T19:34:58Z",
+    "size": 228,
+    "stargazers_count": 52,
+    "watchers_count": 52,
+    "forks_count": 11,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [
+      "automation",
+      "browser",
+      "end-to-end-testing",
+      "web"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "debugg-ai",
+      "type": "Organization",
+      "avatar_url": "https://avatars.githubusercontent.com/u/203699926?v=4",
+      "html_url": "https://github.com/debugg-ai"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 11,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 62543,
+      "JavaScript": 7057,
+      "Dockerfile": 415,
+      "Makefile": 103
+    },
+    "language_percentages": {
+      "TypeScript": 89.2,
+      "JavaScript": 10.06,
+      "Dockerfile": 0.59,
+      "Makefile": 0.15
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 2,
+    "latest_release": {
+      "tag_name": "v1.0.12",
+      "name": "Initial public release",
+      "published_at": "2025-06-02T17:50:10Z",
+      "body": "**Full Changelog**: https://github.com/debugg-ai/debugg-ai-mcp/commits/v1.0.12",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v1.0.12",
+        "commit_sha": "1e72a46773df26d4d0c4baf91504ecb1ded60798"
+      }
+    ],
+    "latest_version": "v1.0.12",
+    "package_json_version": "1.0.15"
+  },
+  "readme": "# 🧪 Official MCP Server for Debugg AI\n\n**AI-driven browser automation and E2E test server** implementing the [Model Context Protocol (MCP)](https://modelcontext.org), designed to help AI agents test UI changes, simulate user behavior, and analyze visual outputs of running web applications — all via natural language and CLI tools. \n\nEnd to end testing used to be a nightmare. Not just to setup, but to manage over time as you made changes to your app. \n\nDebugg AI's MCP server offers a NEW way to test, where you never have to worry about setting up `playwright`, local browsers or proxies with it fully remote, managed browsers that simply connect to a server running locally or remotely via a secure `tunnel`. \n\nThat means no distracting chrome pop ups as it's running tests, no managing chrome or playwright versions, and best of all - ZERO CONFIGURATION. Just grab an API key and add us to your MCP server list. \n\nShould you want to later rerun those tests or create a suite of them to run in your CI / CD pipeline, you can see all historical test results in your dashboard - [Debugg.AI App](https://app.debugg.ai) \n\n<a href=\"https://glama.ai/mcp/servers/@debugg-ai/debugg-ai-mcp\">\n  <img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/@debugg-ai/debugg-ai-mcp/badge\" alt=\"Debugg AI MCP server\" />\n</a>\n\n---\n\n## 🚀 Features\n\n* 🧠 **MCP Protocol Support**\n  Full MCP server implementation with CLI and tool registry support.\n\n* 🧪 **End-to-End Test Automation**\n  Trigger UI tests based on user stories or natural language descriptions via the `debugg_ai_test_page_changes` tool.\n\n* 🌐 **Localhost Web App Integration**\n  Test your running dev app on any `localhost` port with simulated user flows.\n\n* 🧾 **MCP Tool Notifications**\n  Sends real-time progress updates back to clients with step descriptions and UI state goals.\n\n* 🧷 **Screenshot Support**\n  Capture final visual state of the page for LLMs with image rendering support.\n\n* 🧱 **Stdio Server Compatible**\n  Plug into any MCP-compatible client (like Claude Desktop, LangChain agents, etc.) via stdin/stdout.\n\n---\n\n## Examples\n\n### Input prompt: \"Test the ability to create an account and login\"\n\n![Test Create Account and Login](/assets/recordings/test-create-account-login.gif)\n\n### Results:\n\n    **Task Completed**\n\n    - Duration: 86.80 seconds\n    - Final Result: Successfully completed the task of signing up and logging into the account with the email 'alice.wonderland1234@example.com'.\n    - Status: Success\n\n### Full Demo:\n\n> Watch a more in-depth, [Full Use Case Demo](https://debugg.ai/demo)\n\n\n--- \n\n\n\n## 🛠️ Quickstart\n\n### Ensure you have created a free account and generated an API Key - [DebuggAI](https://debugg.ai)\n\n### Option 1: NPX (Local Development)\n\n```bash\nnpx -y @debugg-ai/debugg-ai-mcp\n```\n\nUse this when testing or integrating into tools like Claude Desktop or your own AI agent.\n\n### Option 2: Docker\n\n```bash\ndocker run -i --rm --init \\\n  -e DEBUGGAI_API_KEY=your_api_key \\\n  -e TEST_USERNAME_EMAIL=your_test_email \\\n  -e TEST_USER_PASSWORD=your_password \\\n  -e DEBUGGAI_LOCAL_PORT=3000 \\\n  -e DEBUGGAI_LOCAL_REPO_NAME=your-org/your-repo \\\n  -e DEBUGGAI_LOCAL_BRANCH_NAME=main \\\n  -e DEBUGGAI_LOCAL_REPO_PATH=/app \\\n  -e DEBUGGAI_LOCAL_FILE_PATH=/app/index.ts \\\n  quinnosha/debugg-ai-mcp\n```\n\n---\n\n## 🧰 MCP Tool: `debugg_ai_test_page_changes`\n\n### Description\n\nRun an end-to-end test on a running web app, testing a UI feature or flow described in natural language. Allows AI agents in ANY code gen platform to quickly evaluate proposed changes and \nensure new functionality works as expected.\n\n### Input Parameters\n\n| Name          | Type   | Required  | Description                                            |\n| ------------- | ------ | --------- | ------------------------------------------------------ |\n| `description` | string | ✅        | What feature or page to test (e.g. \"Signup page form\") |\n| `localPort`   | number | ❌        | Port of your running app (default: `3000`)             |\n| `repoName`    | string | ❌        | GitHub repo name                                       |\n| `branchName`  | string | ❌        | Current branch                                         |\n| `repoPath`    | string | ❌        | Absolute path to the repo                              |\n| `filePath`    | string | ❌        | File to test                                           |\n\n---\n\n## 🧪 Example Claude Desktop Config\n\n```jsonc\n{\n  \"mcpServers\": {\n    \"debugg-ai-mcp\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@debugg-ai/debugg-ai-mcp\"],\n      \"env\": {\n        \"DEBUGGAI_API_KEY\": \"YOUR_API_KEY\",\n        \"TEST_USERNAME_EMAIL\": \"test@example.com\",\n        \"TEST_USER_PASSWORD\": \"supersecure\",\n        \"DEBUGGAI_LOCAL_PORT\": 3000,\n        \"DEBUGGAI_LOCAL_REPO_NAME\": \"org/project\",\n        \"DEBUGGAI_LOCAL_BRANCH_NAME\": \"main\",\n        \"DEBUGGAI_LOCAL_REPO_PATH\": \"/Users/you/project\",\n        \"DEBUGGAI_LOCAL_FILE_PATH\": \"/Users/you/project/index.ts\"\n      }\n    }\n  }\n}\n```\n\n---\n\n## 🔐 Environment Variables\n\n| Variable                                | Description                                | Required |\n| --------------------------------------- | ------------------------------------------ | -------- |\n| `DEBUGGAI_API_KEY`                      | API key for calling DebuggAI backend       | ✅       |\n| `TEST_USERNAME_EMAIL`                   | Email of test user account                 | ❌       |\n| `TEST_USER_PASSWORD`                    | Password of test user account              | ❌       |\n| `DEBUGGAI_LOCAL_PORT`                   | Local port your app runs on                | ✅       |\n| `DEBUGGAI_LOCAL_REPO_NAME`              | GitHub repo name                           | ❌       |\n| `DEBUGGAI_LOCAL_BRANCH_NAME`            | Branch name                                | ❌       |\n| `DEBUGGAI_LOCAL_REPO_PATH`              | Local path to repo root                    | ❌       |\n| `DEBUGGAI_LOCAL_FILE_PATH`              | File to test                               | ❌       |\n\n\n---\n\n## 🧑‍💻 Local Development\n\n```bash\n# Clone the repo and install dependencies\nnpm install\n\n# Copy the test config and insert your creds\ncp test-config-example.json test-config.json\n\n# Run the local node-built dist\nnpx @modelcontextprotocol/inspector --config test-config.json --server debugg-ai-mcp-node\n\n# OR Run the MCP server locally from above toplevel dir. \nnpx @modelcontextprotocol/inspector --config debugg-ai-mcp/test-config.json --server debugg-ai-mcp\n```\n\n---\n\n## 📁 Repo Structure\n\n```\n.\n├── e2e-agents/             # E2E browser test runners\n├── services/               # Client for DebuggAI API\n├── tunnels /               # Secure connections to remote web browsers\n├── index.ts                # Main MCP server entry\n├── Dockerfile              # Docker build config\n└── README.md\n```\n\n---\n\n## 🧱 Built With\n\n* [Model Context Protocol SDK](https://github.com/modelcontextprotocol)\n\n---\n\n## 💬 Feedback & Issues\n\nFor bugs, ideas, or integration help, open an issue or contact the DebuggAI team directly.\n\n---\n\n## 🔒 License\n\nMIT License © 2025 DebuggAI\n\n---\n\n\n<p style=\"padding-top: 20px; text-align: center;\">Made with 🩸, 💦, and 😭 in San Francisco</p>"
+}

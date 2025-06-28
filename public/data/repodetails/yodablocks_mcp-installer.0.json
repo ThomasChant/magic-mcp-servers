@@ -1,0 +1,51 @@
+{
+  "mcp_name": "yodablocks/mcp-installer.0",
+  "mcp_description": "Facilitates the installation of MCP servers from npm or PyPi using Claude, streamlining server setup processes.",
+  "mcp_id": "yodablocks_mcp-installer.0",
+  "fetch_timestamp": "2025-06-23T09:40:49.747666Z",
+  "github_url": "https://github.com/yodablocks/mcp-installer.0",
+  "repository": {
+    "name": "mcp-installer.0",
+    "full_name": "yodablocks/mcp-installer.0",
+    "description": null,
+    "html_url": "https://github.com/yodablocks/mcp-installer.0",
+    "created_at": "2025-04-14T03:17:49Z",
+    "updated_at": "2025-04-14T04:43:07Z",
+    "pushed_at": "2025-04-14T04:28:57Z",
+    "size": 41,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "JavaScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "yodablocks",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/83685559?v=4",
+      "html_url": "https://github.com/yodablocks"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 9917
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1,
+    "package_json_version": "0.1.0"
+  },
+  "readme": "# mcp-installer - A MCP Server to install MCP Servers\n\nThis server is a server that installs other MCP servers for you. Install it, and you can ask Claude to install MCP servers hosted in npm or PyPi for you. Requires `npx` and `uv` to be installed for node and Python servers respectively.\n\n### How to install:\n\nPut this into your `claude_desktop_config.json` (either at `~/Library/Application Support/Claude` on macOS or `C:\\Users\\NAME\\AppData\\Roaming\\Claude` on Windows):\n\n```json\n  \"mcpServers\": {\n    \"mcp-installer\": {\n      \"command\": \"npx\",\n      \"args\": [\n        \"@yodablocks/mcp-installer\"\n      ]\n    }\n  }\n```\n\n### Example prompts\n\n> - Hey Claude, install the MCP server named mcp-server-fetch </br>\n> - Hey Claude, install the @modelcontextprotocol/server-filesystem package as an MCP server. Use ['/Users/yodablocks/Desktop'] for the arguments </br>\n> - Hi Claude, please install the MCP server at /Users/anibetts/code/mcp-youtube, I'm too lazy to do it myself. </br>\n> - Install the server @modelcontextprotocol/server-github. Set the environment variable GITHUB_PERSONAL_ACCESS_TOKEN to '1234567890'\n"
+}

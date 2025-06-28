@@ -1,0 +1,84 @@
+{
+  "mcp_name": "zerubeus/elektron-mcp",
+  "mcp_description": "Facilitates interaction between LLMs and Elektron synthesizers via MIDI for real-time sound control and design.",
+  "mcp_id": "zerubeus_elektron-mcp",
+  "fetch_timestamp": "2025-06-23T09:47:20.250579Z",
+  "github_url": "https://github.com/zerubeus/elektron-mcp",
+  "repository": {
+    "name": "elektron-mcp",
+    "full_name": "zerubeus/elektron-mcp",
+    "description": "MCP sever for controlling Elektron devices using LLMs",
+    "html_url": "https://github.com/zerubeus/elektron-mcp",
+    "created_at": "2025-03-22T10:57:24Z",
+    "updated_at": "2025-06-07T23:12:37Z",
+    "pushed_at": "2025-04-17T20:34:53Z",
+    "size": 126,
+    "stargazers_count": 73,
+    "watchers_count": 73,
+    "forks_count": 4,
+    "open_issues_count": 3,
+    "language": "Python",
+    "license": null,
+    "topics": [
+      "generative-ai",
+      "llm",
+      "mcp",
+      "python"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "zerubeus",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6376307?v=4",
+      "html_url": "https://github.com/zerubeus"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 4,
+    "subscribers_count": 4,
+    "languages": {
+      "Python": 236973,
+      "Makefile": 3886
+    },
+    "language_percentages": {
+      "Python": 98.39,
+      "Makefile": 1.61
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 1,
+    "latest_release": {
+      "tag_name": "v0.2.4",
+      "name": "v0.2.4",
+      "published_at": "2025-03-27T01:52:09Z",
+      "body": "**Full Changelog**: https://github.com/zerubeus/elektron-mcp/compare/v0.2.3...v0.2.4",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v0.2.4",
+        "commit_sha": "0d562fe6252cc2361b5c1c85e5f0607095eca8a5"
+      },
+      {
+        "name": "v0.2.3",
+        "commit_sha": "178eebc6174add7588cebac7edb82dbcedb2b5cb"
+      },
+      {
+        "name": "v0.2.2",
+        "commit_sha": "53c2e073d8723463fbb882401f53995344ce8fad"
+      },
+      {
+        "name": "v0.2.0",
+        "commit_sha": "036590a6e3abf619743dd986f4e705e78eb676cd"
+      }
+    ],
+    "latest_version": "v0.2.4"
+  },
+  "readme": "# Elektron MCP\n\nA Model Context Protocol (MCP) server that allows Claude and other MCP-compatible LLMs to interact with and control Elektron synthesizers via MIDI.\n\n#### If you have a Moog Sub37/Subsequent37, check out our dedicated MCP server for it at [moog-sub37-mcp](https://github.com/zerubeus/moog-sub37-mcp).\n\n#### A web-based version of this MCP server can be found at [senthgenie.com](https://www.synthgenie.com/). (You can ask for API key for free on discord)\n\n#### If you want help or would like to contribute to development, please join our [Discord community](https://discord.gg/ZFuSuegBMS).\n\n# Prompt examples\n\n```\n\"Use Digitone MCP to design an evolving dark pad using the Wavetone machine on track 1.\"\n\"Use Digitone MPC to design a Dark thick pad using Wavetone machine on track 1.\"\n```\n\nOnly Wavetone machine is supported for now, other machines will be added soon, stay tuned!\n\n## Features\n\n- [x] Complete MIDI control interface for the Elektron Digitone synthesizer\n- [x] Structured controllers for all Digitone sound engines:\n  - [x] Wavetone (waveshaping synthesis)\n  - [ ] FM Tone (FM synthesis)\n  - [ ] FM Drum (percussive FM synthesis)\n  - [ ] Swarmer (unison/swarm synthesis)\n- [x] Comprehensive parameter control for:\n  - [x] All filter types\n    - [x] MultiMode\n    - [ ] Lowpass4\n    - [ ] Equalizer\n    - [ ] LegacyLpHp\n    - [ ] CombMinus\n    - [ ] CombPlus\n    - [ ] BaseWidth\n  - [x] Amplitude and envelope settings\n  - [x] Effects processing (delay, reverb, chorus, bit reduction, etc.)\n  - [x] LFOs control\n- [x] MCP server exposing all synth parameters as tools for LLMs\n- [x] Type-safe parameter validation using Pydantic\n- [x] Modular architecture for easy extension to other Elektron devices\n\n## Demo\n\nWatch Claude control the Elektron Digitone synthesizer in real-time:\n\n[![Claude controlling Elektron Digitone](https://img.youtube.com/vi/EXf6lOTjla8/0.jpg)](https://www.youtube.com/watch?v=EXf6lOTjla8)\n\n## Installation and Usage\n\n### Prerequisites\n\n- Python 3.10+\n- [uv](https://github.com/astral-sh/uv) for package management\n- An Elektron Digitone connected via USB\n- Claude Desktop app (for full integration)\n\n### Installing Dependencies\n\nuv is mandatory for this project so start by installing it:\n\n#### For macOS:\n\n```bash\nbrew install uv\n```\n\n#### For Windows:\n\nFollow the instructions [here](https://docs.astral.sh/uv/getting-started/installation/)\n\n### 3. Installing with Claude Desktop\n\nTo use with Claude AI, add the MCP server configuration in Claude Desktop:\n\n⚠️ **Important**: You don't need to clone the repository or install the packages, all you need is to add the MCP server configuration to your claude_desktop_config.json file the MPC server is already published on pypi.\n\nGo to Claude > Settings > Developer > Edit Config > claude_desktop_config.json to include the following:\n\n```json\n{\n  \"mcpServers\": {\n    \"Digitone 2\": {\n      \"command\": \"uvx\",\n      \"args\": [\"elektron-mcp\"]\n    }\n  }\n}\n```\n\n## Architecture\n\n- **Base Controllers**: Common functionality abstracted into base classes\n- **Specialized Controllers**: Dedicated controllers for each synth engine and module\n- **MCP Tools**: Direct interface between LLMs and the synth's parameters\n- **MIDI Interface**: Reliable communication with Digitone hardware\n\n## Implementation Details\n\nThis library uses:\n\n- **FastMCP**: For exposing synth controls to LLMs\n- **Pydantic models**: For data validation, serialization, and type safety\n- **mido**: For MIDI communication\n\n## Use Cases\n\n- Allow Claude and other LLMs to create and modify sounds on the Digitone\n- Programmatically control Digitone parameters for automated sound design\n- Bridge between AI-generated music and hardware synthesis\n\n## Future Extensions\n\n- Support for additional Elektron devices (Analog Four, Octatrack, etc.)\n- Pattern sequencing and automation\n- Sound preset management\n- Additional synthesis parameters\n"
+}

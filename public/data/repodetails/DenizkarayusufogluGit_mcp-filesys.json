@@ -1,0 +1,52 @@
+{
+  "mcp_name": "DenizkarayusufogluGit/mcp-filesys",
+  "mcp_description": "Facilitates secure filesystem access for AI models via JSON-RPC requests, adhering to the MCP specification.",
+  "mcp_id": "DenizkarayusufogluGit_mcp-filesys",
+  "fetch_timestamp": "2025-06-23T02:35:25.956294Z",
+  "github_url": "https://github.com/DenizkarayusufogluGit/mcp-filesys",
+  "repository": {
+    "name": "mcp-filesys",
+    "full_name": "DenizkarayusufogluGit/mcp-filesys",
+    "description": "Simple file system Model Context Protocol server application",
+    "html_url": "https://github.com/DenizkarayusufogluGit/mcp-filesys",
+    "created_at": "2025-03-30T02:00:32Z",
+    "updated_at": "2025-03-30T02:03:32Z",
+    "pushed_at": "2025-03-30T02:03:29Z",
+    "size": 5882,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "forks_count": 0,
+    "open_issues_count": 0,
+    "language": "TypeScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "DenizkarayusufogluGit",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/205226981?v=4",
+      "html_url": "https://github.com/DenizkarayusufogluGit"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 0,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 8413,
+      "JavaScript": 7761
+    },
+    "language_percentages": {
+      "TypeScript": 52.02,
+      "JavaScript": 47.98
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 1
+  },
+  "readme": "# MCP Filesystem Server\n\nA Model Context Protocol (MCP) server implementation that provides filesystem access capabilities for AI models and applications.\n\n## Overview\n\nThe MCP Filesystem Server enables AI models to securely list directory contents and interact with the filesystem through standardized JSON-RPC requests. It implements the Model Context Protocol (MCP) specification for interoperable AI tools.\n\n## Features\n\n- **Filesystem Access**: List directory contents on the host system\n- **JSON-RPC Interface**: Compliant with the MCP specification\n- **Secure Access Controls**: Resource access is limited to specific capabilities\n- **Standard I/O Transport**: Communicates using stdio for easy integration\n\n## Installation\n\n```bash\n# Clone the repository\ngit clone https://github.com/yourusername/mcp-filesys.git\ncd mcp-filesys\n\n# Install dependencies\nnpm install\n\n# Build the project\nnpm run build\n```\n\n## Usage with Cursor or Ollama\n\n### Configuration\n\n1. Create a configuration file for your AI tool:\n\n**For Ollama** (ollama-config.json):\n```json\n{\n  \"mcpServers\": {\n    \"filesys\": {\n      \"command\": \"node\",\n      \"args\": [\"/Users/denizkarayusufoglu/Desktop/cursor-projects/mcp-filesys/dist/index.js\"],\n      \"env\": {\n        \"NODE_ENV\": \"production\",\n        \"DEBUG\": \"mcp:*\"\n      }\n    }\n  }\n}\n```\n\n**For Cursor** (cursor-mcp-config.json):\n```json\n{\n  \"mcpServers\": {\n    \"filesys\": {\n      \"command\": \"node\",\n      \"args\": [\"/Users/denizkarayusufoglu/Desktop/cursor-projects/mcp-filesys/dist/index.js\"],\n      \"env\": {\n        \"NODE_ENV\": \"production\",\n        \"DEBUG\": \"mcp:*\"\n      }\n    }\n  }\n}\n```\n\n2. Set the environment variable to point to your configuration file:\n\n```bash\n# For Ollama\nexport OLLAMA_MCP_CONFIG=/Users/denizkarayusufoglu/Desktop/cursor-projects/mcp-filesys/ollama-config.json\n\n# For Cursor\nexport CURSOR_MCP_CONFIG=/Users/denizkarayusufoglu/Desktop/cursor-projects/mcp-filesys/cursor-mcp-config.json\n```\n\n3. Add the environment variables to your shell configuration for persistence:\n\n```bash\necho 'export OLLAMA_MCP_CONFIG=/Users/denizkarayusufoglu/Desktop/cursor-projects/mcp-filesys/ollama-config.json' >> ~/.zshrc\necho 'export CURSOR_MCP_CONFIG=/Users/denizkarayusufoglu/Desktop/cursor-projects/mcp-filesys/cursor-mcp-config.json' >> ~/.zshrc\n```\n\n## Available Resources\n\nThe MCP Filesystem Server provides the following resources:\n\n| Resource URI | Description | Capabilities |\n|--------------|-------------|--------------|\n| `list-contents://` | Lists contents of a directory | `read` |\n| `file://` | File access | `read`, `write`, `list` |\n\n## Example Usage\n\n### Direct Command Line Usage\n\nYou can interact with the MCP server directly using simple command-line pipes:\n\n```bash\n# List the contents of a directory\necho '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"resources/read\",\"params\":{\"uri\":\"list-contents://\",\"parameters\":{\"path\":\"/Users\"}}}' | node dist/index.js\n```\n\n### Listing Directory Contents Example\n\nRequest:\n```json\n{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"resources/read\",\n  \"params\": {\n    \"uri\": \"list-contents://\",\n    \"parameters\": {\n      \"path\": \"/Users/denizkarayusufoglu/Desktop\"\n    }\n  }\n}\n```\n\nResponse:\n```json\n{\n  \"jsonrpc\": \"2.0\",\n  \"result\": {\n    \"contents\": [\n      {\n        \"mimeType\": \"application/json\",\n        \"text\": \"[{\\\"name\\\":\\\".DS_Store\\\",\\\"type\\\":\\\"file\\\",\\\"path\\\":\\\"/Users/denizkarayusufoglu/Desktop/.DS_Store\\\"},{\\\"name\\\":\\\".localized\\\",\\\"type\\\":\\\"file\\\",\\\"path\\\":\\\"/Users/denizkarayusufoglu/Desktop/.localized\\\"},{\\\"name\\\":\\\"cursor-projects\\\",\\\"type\\\":\\\"directory\\\",\\\"path\\\":\\\"/Users/denizkarayusufoglu/Desktop/cursor-projects\\\"}]\"\n      }\n    ]\n  }\n}\n```\n\n## Development\n\n```bash\n# Clean build files\nnpm run clean\n\n# Build the project\nnpm run build\n\n# Start the server\nnode dist/index.js\n```\n\n## License\n\n[MIT License](LICENSE) \n"
+}

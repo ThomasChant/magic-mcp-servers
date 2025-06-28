@@ -1,0 +1,53 @@
+{
+  "mcp_name": "nvsofts/jlcpcb-parts-mcp",
+  "mcp_description": "Facilitates component search for JLCPCB PCBA using a dedicated MCP server.",
+  "mcp_id": "nvsofts_jlcpcb-parts-mcp",
+  "fetch_timestamp": "2025-06-23T07:12:58.420393Z",
+  "github_url": "https://github.com/nvsofts/jlcpcb-parts-mcp",
+  "repository": {
+    "name": "jlcpcb-parts-mcp",
+    "full_name": "nvsofts/jlcpcb-parts-mcp",
+    "description": "JLCPCB PCBA向けの、部品探しを補助するためのMCPサーバー",
+    "html_url": "https://github.com/nvsofts/jlcpcb-parts-mcp",
+    "created_at": "2025-04-19T19:46:35Z",
+    "updated_at": "2025-06-14T18:54:22Z",
+    "pushed_at": "2025-04-20T13:37:33Z",
+    "size": 166,
+    "stargazers_count": 30,
+    "watchers_count": 30,
+    "forks_count": 5,
+    "open_issues_count": 1,
+    "language": "Python",
+    "license": "GNU General Public License v3.0",
+    "topics": [
+      "jlcpcb",
+      "mcp-server"
+    ],
+    "default_branch": "master",
+    "owner": {
+      "login": "nvsofts",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/243709?v=4",
+      "html_url": "https://github.com/nvsofts"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 5,
+    "subscribers_count": 2,
+    "languages": {
+      "Python": 7209
+    },
+    "language_percentages": {
+      "Python": 100
+    },
+    "pull_requests_count": 1,
+    "contributors_count": 1
+  },
+  "readme": "# JLCPCB Parts MCP Server\n\n## これは何\n\nJLCPCBのPCBA向けの、部品探しを補助するMCPサーバーです。\n\n## 会話例\n\nBasic Partsに分類されている、フェライトビーズを検索した例です。\n![会話例](images/sample_conversation.png)\n\nまた、以下のページでは降圧型DC-DCコンバータの抵抗値の選定を行っています。\nhttps://claude.ai/share/9f02f1a4-7b38-48fb-b29a-f10cf1e608ba\n\n## 設定\n\nデータベースとして、[JLC PCB SMD Assembly Component Catalogue](https://github.com/yaqwsx/jlcparts)を使用しています。\nここで分割ZIPにして提供されている `cache.sqlite3` が必要です。2025年4月現在、番号は `cache.z19` まで存在します。\n\nPythonでMCPが利用可能な環境を作り、サーバーとして `server.py` を指定してください。\nまた、データベースへのパスを `JLCPCB_DB_PATH` 環境変数へ設定する必要があります。\n\nClaude Desktopでの設定例を以下に示します。\n\n```json\n{\n  \"mcpServers\": {\n    \"JLCPCB parts\": {\n      \"command\": \"python\",\n      \"args\": [\n        \"path/to/server.py\"\n      ],\n      \"env\": {\n        \"JLCPCB_DB_PATH\": \"path/to/database.sqlite3\"\n      }\n    }\n  }\n}\n```\n"
+}

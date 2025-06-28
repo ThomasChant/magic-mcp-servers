@@ -1,0 +1,51 @@
+{
+  "mcp_name": "pskill9/website-downloader",
+  "mcp_description": "🗄️ 🚀 - This MCP server provides a tool to download entire websites using wget. It preserves the website structure and converts links to work locally.",
+  "mcp_id": "pskill9_website-downloader",
+  "fetch_timestamp": "2025-06-23T07:38:49.553597Z",
+  "github_url": "https://github.com/pskill9/website-downloader",
+  "repository": {
+    "name": "website-downloader",
+    "full_name": "pskill9/website-downloader",
+    "description": "MCP server to download entire websites",
+    "html_url": "https://github.com/pskill9/website-downloader",
+    "created_at": "2024-12-23T23:41:16Z",
+    "updated_at": "2025-06-19T13:11:39Z",
+    "pushed_at": "2024-12-24T20:29:17Z",
+    "size": 9,
+    "stargazers_count": 100,
+    "watchers_count": 100,
+    "forks_count": 18,
+    "open_issues_count": 2,
+    "language": "JavaScript",
+    "license": null,
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "pskill9",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/188422281?v=4",
+      "html_url": "https://github.com/pskill9"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 18,
+    "subscribers_count": 2,
+    "languages": {
+      "JavaScript": 4869
+    },
+    "language_percentages": {
+      "JavaScript": 100
+    },
+    "pull_requests_count": 3,
+    "contributors_count": 3,
+    "package_json_version": "0.1.0"
+  },
+  "readme": "# Website Downloader MCP Server\n\nThis MCP server provides a tool to download entire websites using wget. It preserves the website structure and converts links to work locally.\n\n<a href=\"https://glama.ai/mcp/servers/egcwr79vu2\"><img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/egcwr79vu2/badge\" alt=\"Google Workspace Server MCP server\" /></a>\n\n## Prerequisites\n\nThe server requires `wget` to be installed on your system.\n\n### Installing wget\n\n#### macOS\nUsing Homebrew:\n```bash\nbrew install wget\n```\n\n#### Linux (Debian/Ubuntu)\n```bash\nsudo apt-get update\nsudo apt-get install wget\n```\n\n#### Linux (Red Hat/Fedora)\n```bash\nsudo dnf install wget\n```\n\n#### Windows\n1. Using [Chocolatey](https://chocolatey.org/):\n```bash\nchoco install wget\n```\n\n2. Or download the binary from: https://eternallybored.org/misc/wget/\n   - Download the latest wget.exe\n   - Place it in a directory that's in your PATH (e.g., C:\\Windows\\System32)\n\n## Usage\n\nThe server provides a tool called `download_website` with the following parameters:\n\n- `url` (required): The URL of the website to download\n- `outputPath` (optional): The directory where the website should be downloaded. Defaults to the current directory.\n- `depth` (optional): Maximum depth level for recursive downloading. Defaults to infinite. Set to 0 for just the specified page, 1 for direct links, etc.\n\n### Example\n\n```json\n{\n  \"url\": \"https://example.com\",\n  \"outputPath\": \"/path/to/output\",\n  \"depth\": 2  // Optional: Download up to 2 levels deep\n}\n```\n\n## Features\n\nThe website downloader:\n- Downloads recursively with infinite depth\n- Includes all page requisites (CSS, images, etc.)\n- Converts links to work locally\n- Adds appropriate extensions to files\n- Restricts downloads to the same domain\n- Preserves the website structure\n\n## Installation\n\n1. Build the server:\n```bash\nnpm install\nnpm run build\n```\n\n2. Add to MCP settings:\n```json\n{\n  \"mcpServers\": {\n    \"website-downloader\": {\n      \"command\": \"node\",\n      \"args\": [\"/path/to/website-downloader/build/index.js\"]\n    }\n  }\n}\n"
+}

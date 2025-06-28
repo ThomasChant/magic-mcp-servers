@@ -1,0 +1,79 @@
+{
+  "mcp_name": "kiwamizamurai/mcp-kibela-server",
+  "mcp_description": "📇 ☁️ Powerfully interact with Kibela API.",
+  "mcp_id": "kiwamizamurai_mcp-kibela-server",
+  "fetch_timestamp": "2025-06-23T05:49:16.021432Z",
+  "github_url": "https://github.com/kiwamizamurai/mcp-kibela-server",
+  "repository": {
+    "name": "mcp-kibela-server",
+    "full_name": "kiwamizamurai/mcp-kibela-server",
+    "description": "MCP server implementation for Kibela API integration",
+    "html_url": "https://github.com/kiwamizamurai/mcp-kibela-server",
+    "created_at": "2025-02-01T23:38:02Z",
+    "updated_at": "2025-05-26T03:22:58Z",
+    "pushed_at": "2025-05-26T03:22:55Z",
+    "size": 163,
+    "stargazers_count": 6,
+    "watchers_count": 6,
+    "forks_count": 5,
+    "open_issues_count": 1,
+    "language": "TypeScript",
+    "license": "MIT License",
+    "topics": [
+      "kibela",
+      "kibela-web-api",
+      "mcp",
+      "modelcontextprotocol"
+    ],
+    "default_branch": "main",
+    "owner": {
+      "login": "kiwamizamurai",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/24860100?v=4",
+      "html_url": "https://github.com/kiwamizamurai"
+    },
+    "has_issues": true,
+    "has_projects": false,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 5,
+    "subscribers_count": 1,
+    "languages": {
+      "TypeScript": 24892,
+      "Dockerfile": 796,
+      "JavaScript": 530
+    },
+    "language_percentages": {
+      "TypeScript": 94.94,
+      "Dockerfile": 3.04,
+      "JavaScript": 2.02
+    },
+    "pull_requests_count": 4,
+    "contributors_count": 4,
+    "latest_release": {
+      "tag_name": "v1.1.0",
+      "name": "v1.1.0",
+      "published_at": "2025-04-17T07:16:38Z",
+      "body": "## What's Changed\r\n* add include_image_data properties to kibela_get_note_content and kibela_get_note_from_path for avoiding heavy context by @hiyorineko in https://github.com/kiwamizamurai/mcp-kibela-server/pull/4\r\n\r\n## New Contributors\r\n* @hiyorineko made their first contribution in https://github.com/kiwamizamurai/mcp-kibela-server/pull/4\r\n\r\n**Full Changelog**: https://github.com/kiwamizamurai/mcp-kibela-server/compare/v1.0.0...v1.1.0",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "v1.1.0",
+        "commit_sha": "e2a9d32f487f4bb3556410261ac25d71ae926d97"
+      },
+      {
+        "name": "v1.0.0",
+        "commit_sha": "5fd5fc508c3b48aaa55f0e477a2830d12bb38054"
+      }
+    ],
+    "latest_version": "v1.1.0",
+    "package_json_version": "1.1.1"
+  },
+  "readme": "# Kibela MCP Server\n![NPM Version](https://img.shields.io/npm/v/%40kiwamizamurai%2Fmcp-kibela-server)\n![NPM Downloads](https://img.shields.io/npm/dm/%40kiwamizamurai%2Fmcp-kibela-server)\n[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\n[![smithery badge](https://smithery.ai/badge/@kiwamizamurai/mcp-kibela-server)](https://smithery.ai/server/@kiwamizamurai/mcp-kibela-server)\n[![Build and Push Docker Image](https://github.com/kiwamizamurai/mcp-kibela-server/actions/workflows/docker.yml/badge.svg?branch=main)](https://github.com/kiwamizamurai/mcp-kibela-server/actions/workflows/docker.yml)\n[![Lint](https://github.com/kiwamizamurai/mcp-kibela-server/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/kiwamizamurai/mcp-kibela-server/actions/workflows/lint.yml)\n\nMCP server implementation for Kibela API integration, enabling LLMs to interact with Kibela content.\n\n<img width=\"320\" alt=\"Example\" src=\"https://github.com/user-attachments/assets/eeed8f45-eb24-456d-bb70-9e738aa1bfb3\" />\n\n<a href=\"https://glama.ai/mcp/servers/m21nkeig1p\"><img width=\"380\" height=\"200\" src=\"https://glama.ai/mcp/servers/m21nkeig1p/badge\" alt=\"Kibela Server MCP server\" /></a>\n\n## Features\n\n- Search notes with advanced filters\n- Get your latest notes\n- Get note content and comments\n- Manage groups and folders\n- Like/unlike notes\n- List users\n- View note attachments\n- View recently viewed notes\n- Get notes by path\n\n## Configuration\n\n### Environment Variables\n\n- `KIBELA_TEAM`: Your Kibela team name (required)\n- `KIBELA_TOKEN`: Your Kibela API token (required)\n\n## Cursor Integration\n\nAdd to your `~/.cursor/mcp.json`:\n\n```json\n{\n    \"mcpServers\": {\n        \"kibela\": {\n            \"command\": \"npx\",\n            \"args\": [\"-y\", \"@kiwamizamurai/mcp-kibela-server\"],\n            \"env\": {\n                \"KIBELA_TEAM\": \"YOUR_TEAM_NAME\",\n                \"KIBELA_TOKEN\": \"YOUR_TOKEN\"\n            }\n        }\n    }\n}\n```\n\nIf you want to use docker instead\n\n```json\n{\n    \"mcpServers\": {\n        \"kibela\": {\n            \"command\": \"docker\",\n            \"args\": [\n                \"run\",\n                \"-i\",\n                \"--rm\",\n                \"-e\",\n                \"KIBELA_TEAM\",\n                \"-e\",\n                \"KIBELA_TOKEN\",\n                \"ghcr.io/kiwamizamurai/mcp-kibela-server:latest\"\n            ],\n            \"env\": {\n                \"KIBELA_TEAM\": \"YOUR_TEAM_NAME\",\n                \"KIBELA_TOKEN\": \"YOUR_TOKEN\"\n            }\n        }\n    }\n}\n```\n\n## Tools\n\n### kibela_search_notes\nSearch Kibela notes with given query\n- Input:\n  - `query` (string): Search query\n  - `coediting` (boolean, optional): Filter by co-editing status\n  - `isArchived` (boolean, optional): Filter by archive status\n  - `sortBy` (string, optional): Sort by (RELEVANT, CONTENT_UPDATED_AT)\n  - `userIds` (string[], optional): Filter by user IDs\n  - `folderIds` (string[], optional): Filter by folder IDs\n- Returns: List of matching notes with ID, title, URL, author, groups and more\n\n### kibela_get_my_notes\nGet your latest notes from Kibela\n- Input:\n  - `limit` (number, optional): Number of notes to fetch (default: 15)\n- Returns: List of your latest notes with author information\n\n### kibela_get_note_content\nGet content and comments of a specific note\n- Input:\n  - `id` (string): Note ID\n  - `include_image_data` (boolean, optional): Whether to include image data URLs in the response (default: false)\n- Returns: Full note content including HTML, comments, attachments, groups, folders and more\n\n### kibela_get_groups\nGet list of accessible groups\n- Input: None\n- Returns: List of groups with details like privacy settings and permissions\n\n### kibela_get_group_folders\nGet folders in a group\n- Input:\n  - `groupId` (string): Group ID\n  - `parentFolderId` (string, optional): Parent folder ID for nested folders\n- Returns: List of folders with their notes and metadata\n\n### kibela_get_group_notes\nGet notes in a group that are not attached to any folder\n- Input:\n  - `groupId` (string): Group ID\n- Returns: List of notes with author information, sorted by last update time\n\n### kibela_get_folder_notes\nGet notes in a folder\n- Input:\n  - `folderId` (string): Folder ID\n  - `limit` (number, optional): Number of notes to fetch (default: 100)\n- Returns: List of notes with author information, sorted by last update time\n\n### kibela_get_users\nGet list of users\n- Input: None\n- Returns: List of users with ID, account and real name\n\n### kibela_like_note\nLike a note\n- Input:\n  - `noteId` (string): Note ID\n- Returns: Updated likers list\n\n### kibela_unlike_note\nUnlike a note\n- Input:\n  - `noteId` (string): Note ID\n- Returns: Updated likers list\n\n### kibela_get_recently_viewed_notes\nGet your recently viewed notes\n- Input:\n  - `limit` (number, optional): Number of notes to fetch (max 15)\n- Returns: List of recently viewed notes with author information\n\n### kibela_get_note_from_path\nGet note content by its path or URL\n- Input:\n  - `path` (string): Note path (e.g. '/group/folder/note') or full Kibela URL (e.g. 'https://team.kibe.la/notes/123')\n  - `include_image_data` (boolean, optional): Whether to include image data URLs in the response (default: false)\n- Returns: Full note content including HTML, comments, attachments, groups, folders and more\n\n## Local Development\n\n### Running from Source\n\n1. Clone the repository\n2. Install dependencies: `npm install`\n\n### Environment Setup\n\nFor local development, update your `~/.cursor/mcp.json`:\n\n```json\n{\n    \"mcpServers\": {\n        \"kibela\": {\n            \"command\": \"node\",\n            \"args\": [\"path/to/mcp-kibela-server/dist/src/index.js\"],\n            \"env\": {\n                \"KIBELA_TEAM\": \"YOUR_TEAM_NAME\",\n                \"KIBELA_TOKEN\": \"YOUR_TOKEN\"\n            }\n        }\n    }\n}\n```\n\n### MCP inspector\n\n```bash\nnpx @modelcontextprotocol/inspector node ./dist/src/index.js\n```\n\nand set environemtns\n\n\n### Docker\n\nBuild and run locally:\n\n```bash\ndocker build -t mcp-kibela-server .\n```\n\nThen use this configuration:\n\n```json\n{\n    \"mcpServers\": {\n        \"kibela\": {\n            \"command\": \"docker\",\n            \"args\": [\n                \"run\",\n                \"-i\",\n                \"--rm\",\n                \"-e\",\n                \"KIBELA_TEAM\",\n                \"-e\",\n                \"KIBELA_TOKEN\",\n                \"mcp-kibela-server\"\n            ],\n            \"env\": {\n                \"KIBELA_TEAM\": \"YOUR_TEAM_NAME\",\n                \"KIBELA_TOKEN\": \"YOUR_TOKEN\"\n            }\n        }\n    }\n}\n```\nFor SSE transport, ensure the server URL is set to: `http://localhost:3000/sse`\n\n\n# Other products\n\n- [vscode extension for kibela](https://marketplace.visualstudio.com/items?itemName=kiwamizamurai-vscode.kibela-vscode)"
+}

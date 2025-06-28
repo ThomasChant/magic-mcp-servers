@@ -1,0 +1,82 @@
+{
+  "mcp_name": "lq0910/vuesage",
+  "mcp_description": "VueSage enhances Vue component quality through intelligent analysis and optimization, leveraging MCP for seamless integration with editors.",
+  "mcp_id": "lq0910_vuesage",
+  "fetch_timestamp": "2025-06-23T06:16:29.701857Z",
+  "github_url": "https://github.com/lq0910/vuesage",
+  "repository": {
+    "name": "vuesage",
+    "full_name": "lq0910/vuesage",
+    "description": "Vue 组件智能分析与优化引擎 - 你的 Vue 代码质量守护者",
+    "html_url": "https://github.com/lq0910/vuesage",
+    "created_at": "2025-04-13T02:16:02Z",
+    "updated_at": "2025-04-22T06:20:08Z",
+    "pushed_at": "2025-04-18T08:26:48Z",
+    "size": 23811,
+    "stargazers_count": 2,
+    "watchers_count": 2,
+    "forks_count": 1,
+    "open_issues_count": 0,
+    "language": "JavaScript",
+    "license": "MIT License",
+    "topics": [],
+    "default_branch": "main",
+    "owner": {
+      "login": "lq0910",
+      "type": "User",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19302074?v=4",
+      "html_url": "https://github.com/lq0910"
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "archived": false,
+    "disabled": false,
+    "visibility": "public",
+    "network_count": 1,
+    "subscribers_count": 1,
+    "languages": {
+      "JavaScript": 150167,
+      "HTML": 142807,
+      "Vue": 4533
+    },
+    "language_percentages": {
+      "JavaScript": 50.48,
+      "HTML": 48,
+      "Vue": 1.52
+    },
+    "pull_requests_count": 0,
+    "contributors_count": 2,
+    "latest_release": {
+      "tag_name": "1.1.44",
+      "name": "首个正式版",
+      "published_at": "2025-04-17T01:22:08Z",
+      "body": "",
+      "prerelease": false,
+      "draft": false
+    },
+    "tags": [
+      {
+        "name": "1.1.44",
+        "commit_sha": "4aa773de09a63e30c98799c2dd6a276b7834169a"
+      },
+      {
+        "name": "1.1.0",
+        "commit_sha": "5dc6bee8db29337bb715da7d849e17c3f8e6374c"
+      },
+      {
+        "name": "1.0.1",
+        "commit_sha": "1c436be24ce96f8a8bb6575cb0e82c003e34018a"
+      },
+      {
+        "name": "1.0.0",
+        "commit_sha": "2fd66d81208cf2a6ba22b7f9474b0522163559cf"
+      }
+    ],
+    "latest_version": "1.1.44",
+    "package_json_version": "1.2.3"
+  },
+  "readme": "# VueSage 🧙‍♂️\n\nVue 组件智能分析与优化引擎 - 基于 MCP (Model-Code-Prompt) 的 Vue 代码质量分析工具\n\n## 功能特性 ✨\n\n- 🔍 **智能分析**: \n  - 自动检测 Vue 组件中的潜在问题\n  - 基于 AST 的代码结构分析\n  - 组件复杂度评估\n  - 性能隐患识别\n  \n- 🛠 **自动修复**: \n  - 一键修复常见代码问题\n  - 自动应用最佳实践\n  - 代码规范自动化\n  - 安全模式下的代码重构\n  \n- 📊 **性能优化**: \n  - 组件渲染性能分析\n  - 响应式依赖优化\n  - 内存泄漏检测\n  - 打包体积优化建议\n  \n- 🎯 **最佳实践**: \n  - Vue.js 官方推荐规范\n  - 组件设计模式指导\n  - TypeScript 类型优化\n  - 代码可维护性建议\n\n## 安装使用 📦\n\n### 全局安装（推荐）\n\n```bash\nnpm install -g vuesage\n```\n\n### 项目中安装\n\n```bash\nnpm install vuesage\n```\n\n### 1. 作为 MCP 服务使用\n\n#### 安装\n\n```bash\nnpm install -g vuesage-mcp\n```\n\n#### 配置 MCP\n\n在编辑器的 MCP 配置文件中添加：\n\n```json\n{\n  \"mcpServers\": {\n    \"vuesage\": {\n      \"command\": \"vuesage-mcp\",\n      \"enabled\": true,\n      \"capabilities\": {\n        \"tools\": [\n          {\n            \"name\": \"analyze\",\n            \"description\": \"分析Vue组件代码质量\",\n            \"parameters\": {\n              \"type\": \"object\",\n              \"properties\": {\n                \"component\": {\n                  \"type\": \"string\",\n                  \"description\": \"Vue组件代码\"\n                }\n              },\n              \"required\": [\"component\"]\n            }\n          }\n        ]\n      },\n      \"version\": \"1.1.44\"\n    }\n  }\n}\n```\n\n支持的编辑器：\n- Cursor (推荐)\n- VSCode (需要安装 MCP 插件)\n\n#### 使用方法\n\n1. 在编辑器中打开 Vue 组件文件\n2. 使用以下方式之一：\n   - 命令面板（Command Palette）调用：\n     - `VueSage: Analyze Component` - 分析当前组件\n   - 对话形式（仅 Cursor）：\n     - 直接输入 \"分析当前组件\" 或类似的自然语言指令\n     - AI 助手会调用 vuesage 服务分析代码\n\n#### 返回结果说明\n\n分析结果包含以下信息：\n```json\n{\n  \"score\": 95,        // 代码质量得分\n  \"issues\": 0,        // 严重问题数量\n  \"warnings\": 1,      // 警告数量\n  \"details\": [        // 详细问题列表\n    {\n      \"type\": \"warning\",\n      \"message\": \"具体的问题描述\",\n      \"line\": 16      // 问题所在行号\n    }\n  ]\n}\n```\n\n#### 调试模式\n\n如果需要查看详细日志，可以设置环境变量：\n```bash\nexport VUESAGE_DEBUG=true\n```\n\n日志文件位置：`~/.vuesage/logs/vuesage.log`\n\n### 2. 作为 Node.js 模块使用\n\n```javascript\nimport { VueSage } from 'vuesage';\n\n// 创建实例\nconst vueSage = new VueSage();\n\n// 分析组件\nconst analysis = await vueSage.analyze(componentCode);\n\n// 修复问题\nconst fixed = await vueSage.fix(componentCode, analysis.issues);\n```\n\n### 3. 作为独立服务使用\n\n```bash\n# 启动服务\nvuesage serve\n```\n\n服务将在 http://localhost:6188 启动\n\n## API 使用说明 📚\n\n### analyze(code: string): Promise<Analysis>\n\n分析 Vue 组件代码，返回分析结果。\n\n#### 参数\n- `code` (string): Vue 组件代码\n\n#### 返回值\n```typescript\ninterface Analysis {\n  summary: {\n    totalIssues: number;\n    categories: string[];\n    hasAutoFixableIssues: boolean;\n  };\n  issues: Array<{\n    category: string;\n    issues: Array<{\n      id: string;\n      message: string;\n      severity: 'error' | 'warning';\n      autofix: boolean;\n      line?: number;\n      column?: number;\n    }>;\n  }>;\n}\n```\n\n### fix(code: string, issues: Issue[]): Promise<FixResult>\n\n根据分析结果修复组件代码。\n\n#### 参数\n- `code` (string): Vue 组件代码\n- `issues` (Issue[]): 需要修复的问题列表\n\n#### 返回值\n```typescript\ninterface FixResult {\n  success: boolean;\n  fixedComponent: string;\n  appliedFixes: Array<{\n    id: string;\n    message: string;\n    type: string;\n  }>;\n}\n```\n\n## HTTP API\n\n### POST /analyze\n\n分析组件代码。\n\n#### 请求体\n```json\n{\n  \"component\": \"Vue组件代码\"\n}\n```\n\n#### 响应\n```json\n{\n  \"summary\": {\n    \"totalIssues\": 5,\n    \"categories\": [\"naming\", \"props\", \"performance\"],\n    \"hasAutoFixableIssues\": true\n  },\n  \"issues\": [\n    {\n      \"category\": \"naming\",\n      \"issues\": [\n        {\n          \"id\": \"naming-001\",\n          \"message\": \"组件名称应使用 PascalCase\",\n          \"severity\": \"warning\",\n          \"autofix\": true\n        }\n      ]\n    }\n  ]\n}\n```\n\n### POST /fix\n\n修复组件代码中的问题。\n\n#### 请求体\n```json\n{\n  \"component\": \"组件代码\",\n  \"issues\": [\"issue_id_1\", \"issue_id_2\"]\n}\n```\n\n## 配置说明 ⚙️\n\n### 1. 基础配置\n在项目根目录创建 `.vuesagerc.json`：\n\n```json\n{\n  \"rules\": {\n    \"naming\": {\n      \"enabled\": true,\n      \"severity\": \"warning\",\n      \"options\": {\n        \"componentPrefix\": \"App\",\n        \"propsCasing\": \"camelCase\"\n      }\n    },\n    \"props\": {\n      \"enabled\": true,\n      \"severity\": \"warning\",\n      \"options\": {\n        \"requireType\": true,\n        \"requireDefault\": true\n      }\n    },\n    \"template\": {\n      \"enabled\": true,\n      \"severity\": \"error\",\n      \"options\": {\n        \"maxLength\": 80,\n        \"requireKey\": true\n      }\n    }\n  },\n  \"autofix\": {\n    \"safeMode\": true,\n    \"backup\": true,\n    \"ignoreFiles\": [\"dist/**/*\", \"node_modules/**/*\"]\n  },\n  \"formatting\": {\n    \"indentSize\": 2,\n    \"maxLineLength\": 100,\n    \"singleQuote\": true\n  }\n}\n```\n\n### 2. 规则说明\n\n# VueSage MCP\n\nVue 组件智能分析工具，基于 Model Context Protocol (MCP)。\n\n## 特性\n\n- 🔍 **智能分析**\n  - Vue 组件代码质量检查\n  - UI/UX 最佳实践验证\n  - 可访问性(A11Y)检查\n  - 响应式设计分析\n\n- 🛠 **自动修复**\n  - 一键修复常见代码问题\n  - 自动应用最佳实践\n  - 代码规范自动化\n  - 安全模式下的代码重构\n\n- 📊 **详细报告**\n  - 组件健康评分\n  - 问题分类统计\n  - 可视化分析结果\n  - 优化建议清单\n\n## 快速开始\n\n使用 npx 运行（推荐）:\n\n```bash\n# 分析单个组件\nnpx vuesage-mcp@latest analyze <file>\n\n# 批量分析\nnpx vuesage-mcp@latest analyzeBatch \"src/**/*.vue\"\n\n# 自动修复\nnpx vuesage-mcp@latest autoFix <file>\n```\n\n## Cursor 编辑器配置\n\n在 `~/.cursor/mcp.json` 中添加:\n\n```json\n{\n  \"mcpServers\": {\n    \"vuesage\": {\n      \"command\": \"npx\",\n      \"args\": [\"vuesage-mcp@latest\"],\n      \"version\": \"1.1.43\"\n    }\n  }\n}\n```\n\n## 分析规则\n\n### UI 分析\n- ✨ 可访问性 (ARIA属性、alt文本等)\n- 📱 响应式设计\n- 🏗 语义化结构\n- 🎨 样式最佳实践\n\n### 代码质量\n- 🔄 v-for 指令规范\n- ⚡️ Props 类型验证\n- 📢 事件声明检查\n- 🎯 样式隔离验证\n\n## 自动修复功能\n\n支持自动修复的问题类型：\n- ARIA 属性补充\n- 响应式样式优化\n- 语义化标签转换\n- Props 类型添加\n- 事件声明补充\n- 样式作用域添加\n\n## API\n\n### analyze\n分析单个 Vue 组件文件：\n```typescript\ninterface AnalyzeResult {\n  score: number;          // 总分 (0-100)\n  issues: string[];       // 严重问题\n  warnings: string[];     // 警告\n  fixes: Fix[];          // 可用的修复方案\n  details: {\n    ui: {\n      accessibility: string;\n      responsiveness: string;\n      semantics: string;\n    };\n    code: {\n      props: string;\n      emits: string;\n      style: string;\n    };\n  };\n}\n```\n\n### analyzeBatch\n批量分析多个组件：\n```typescript\ninterface BatchResult {\n  summary: {\n    totalFiles: number;\n    averageScore: number;\n    totalIssues: number;\n    totalWarnings: number;\n    passRate: string;\n  };\n  details: AnalyzeResult[];\n}\n```\n\n### autoFix\n自动修复检测到的问题：\n```typescript\ninterface Fix {\n  type: string;\n  element?: string;\n  attribute?: string;\n  value?: string;\n  content?: string;\n  from?: string;\n  to?: string;\n}\n```\n\n## 版本历史\n\n### 1.1.43\n- ✨ 新增 UI 分析功能\n- 🔧 添加自动修复能力\n- 📊 增强分析报告\n- 🚀 支持 npx 运行方式\n- 📦 优化依赖管理\n\n## 许可证\n\nMIT"
+}
