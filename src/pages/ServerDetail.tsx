@@ -31,7 +31,8 @@ import { FavoriteButton } from "../components/FavoriteButton";
 const ServerDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const { data: server, isLoading, error } = useServer(id!);
-    const { data: readmeData } = useServerReadme(server?.owner+"_"+server?.name|| '');
+    console.log("server", server)
+    const { data: readmeData } = useServerReadme(server?.owner && server?.name ? `${server.owner}_${server.name}` : '');
     // Remove activeTab state as we're using StructuredReadme component
     const [copiedStates, setCopiedStates] = useState<{ [key: string]: boolean }>({});
     const [showShareMenu, setShowShareMenu] = useState(false);

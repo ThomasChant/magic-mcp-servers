@@ -320,7 +320,7 @@ export const useCoreServers = () => {
         queryKey: ["servers", "core"],
         queryFn: async (): Promise<CoreServerData[]> => {
             await delay(200); // 模拟网络延迟
-            const response = await fetch("/data/servers-core.json");
+            const response = await fetch("/data/servers-core1.json");
             if (!response.ok) {
                 throw new Error("Failed to fetch core server data");
             }
@@ -422,26 +422,47 @@ export const useServerReadme = (mcpId: string) => {
     return useQuery({
         queryKey: ["readme", mcpId],
         queryFn: async (): Promise<ServerReadme | null> => {
-            if (!mcpId) return null;
+            console.log("mcpid", mcpId)
+            if (!mcpId || mcpId.trim() === '' || !mcpId.includes('_')) {
+                return null;
+            }
             
             try {
-                console.log(mcpId)
                 const response = await fetch(`/data/reporeadmes/${mcpId}.md`);
-                console.log(response)
+                
                 if (!response.ok) {
                     return null;
-                }                
+                }
+                
+                // Check if content-type is HTML - this indicates Vite SPA fallback
+                const contentType = response.headers.get('content-type');
+                if (contentType && contentType.includes('text/html')) {
+                    return null;
+                }
+                
+                const content = await response.text();
+                console.log("content", content)
+                // Additional safety check for HTML content patterns
+                const trimmedContent = content.trim().toLowerCase();
+                if (trimmedContent.startsWith('<!doctype html') || 
+                    trimmedContent.startsWith('<html') ||
+                    content.includes('<script type="module">') ||
+                    content.includes('/@vite/client') ||
+                    content.includes('window.$RefreshReg$')) {
+                    return null;
+                }
+                
                 return {
                     filename: mcpId,
                     projectName: mcpId,
-                    rawContent: await response.text(),
+                    rawContent: content,
                 }
             } catch (error) {
                 console.error(`Failed to load README for ${mcpId}:`, error);
                 return null;
             }
         },
-        enabled: !!mcpId,
+        enabled: !!mcpId && mcpId.trim() !== '' && mcpId.includes('_'),
         staleTime: 10 * 60 * 1000, // 10 minutes
     });
 };
