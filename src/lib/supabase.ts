@@ -17,8 +17,12 @@ export interface Comment {
   user_name: string;
   user_email?: string;
   content: string;
+  parent_id?: string | null;
+  level?: number;
   created_at: string;
   updated_at: string;
+  replies?: Comment[];
+  reply_count?: number;
 }
 
 export interface CommentInsert {
@@ -27,6 +31,7 @@ export interface CommentInsert {
   user_name: string;
   user_email?: string;
   content: string;
+  parent_id?: string | null;
 }
 
 export interface CommentUpdate {

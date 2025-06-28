@@ -4,13 +4,14 @@ import { supabase } from '../lib/supabase';
 import type { Comment, CommentInsert, CommentUpdate } from '../types';
 
 /**
- * Hook to fetch comments for a specific server
+ * Hook to fetch comments for a specific server with nested replies
  */
 export const useComments = (serverId: string) => {
   return useQuery({
     queryKey: ['comments', serverId],
     queryFn: async (): Promise<Comment[]> => {
-      const { data, error } = await supabase
+      // First, fetch all comments for this server
+      const { data: allComments, error } = await supabase
         .from('comments')
         .select('*')
         .eq('server_id', serverId)
@@ -20,7 +21,50 @@ export const useComments = (serverId: string) => {
         throw new Error(`Failed to fetch comments: ${error.message}`);
       }
 
-      return data || [];
+      if (!allComments || allComments.length === 0) {
+        return [];
+      }
+
+      // Build a tree structure for nested comments
+      const commentMap = new Map<string, Comment>();
+      const rootComments: Comment[] = [];
+
+      // First pass: create all comment objects with empty replies arrays
+      allComments.forEach(comment => {
+        commentMap.set(comment.id, { ...comment, replies: [] });
+      });
+
+      // Second pass: build the tree structure
+      allComments.forEach(comment => {
+        const commentWithReplies = commentMap.get(comment.id)!;
+        
+        if (!comment.parent_id) {
+          // This is a root comment
+          rootComments.push(commentWithReplies);
+        } else {
+          // This is a reply, add it to its parent's replies array
+          const parent = commentMap.get(comment.parent_id);
+          if (parent) {
+            parent.replies!.push(commentWithReplies);
+          }
+        }
+      });
+
+      // Sort replies by creation date (oldest first)
+      const sortReplies = (comments: Comment[]) => {
+        comments.forEach(comment => {
+          if (comment.replies && comment.replies.length > 0) {
+            comment.replies.sort((a, b) => 
+              new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+            );
+            sortReplies(comment.replies);
+          }
+        });
+      };
+
+      sortReplies(rootComments);
+
+      return rootComments;
     },
     enabled: !!serverId,
     staleTime: 2 * 60 * 1000, // 2 minutes
@@ -28,7 +72,7 @@ export const useComments = (serverId: string) => {
 };
 
 /**
- * Hook to add a new comment
+ * Hook to add a new comment or reply
  */
 export const useAddComment = () => {
   const queryClient = useQueryClient();
@@ -63,6 +107,10 @@ export const useAddComment = () => {
       // Invalidate and refetch comments for this server
       queryClient.invalidateQueries({ 
         queryKey: ['comments', newComment.server_id] 
+      });
+      // Also invalidate comment stats
+      queryClient.invalidateQueries({ 
+        queryKey: ['comments', 'stats', newComment.server_id] 
       });
     },
   });
