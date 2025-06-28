@@ -209,3 +209,27 @@ export interface ServerReadme {
     projectName: string;
     rawContent: string;
 }
+
+// Comment types for Supabase integration
+export interface Comment {
+    id: string;
+    server_id: string;
+    user_id: string;
+    user_name: string;
+    user_email?: string;
+    content: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface CommentInsert {
+    server_id: string;
+    user_id: string;
+    user_name: string;
+    user_email?: string;
+    content: string;
+}
+
+export interface CommentUpdate {
+    content: string;
+}

@@ -21,6 +21,7 @@
   "dependencies": {
     "@clerk/clerk-react": "^5.32.2",
     "@playwright/test": "^1.53.1",
+    "@supabase/supabase-js": "^2.50.2",
     "@tanstack/react-query": "^5.80.11",
     "lucide-react": "^0.522.0",
     "react": "^19.1.0",
