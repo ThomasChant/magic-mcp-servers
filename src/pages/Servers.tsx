@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
     Search,
@@ -33,6 +33,7 @@ interface ServerData extends Omit<MCPServer, 'verified'> {
 const Servers: React.FC = () => {
     // State management
     const [sidebarSearch, setSidebarSearch] = useState("");
+    const [debouncedSearch, setDebouncedSearch] = useState("");
     const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
     const [sortBy, setSortBy] = useState("stars");
     const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
@@ -45,15 +46,24 @@ const Servers: React.FC = () => {
         status: [] as string[],
     });
 
+    // Debounce search input to avoid excessive API calls
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDebouncedSearch(sidebarSearch);
+        }, 1000); // 500ms delay
+
+        return () => clearTimeout(timer);
+    }, [sidebarSearch]);
+
     // Get real categories with server counts
     const { data: categories } = useCategories();
 
     // Build filters for the hook
     const hookFilters = useMemo(() => {
-        const result: any = {};
+        const result: Record<string, unknown> = {};
         
-        if (sidebarSearch.trim()) {
-            result.search = sidebarSearch.trim();
+        if (debouncedSearch.trim()) {
+            result.search = debouncedSearch.trim();
         }
         
         if (filters.categories.length > 0) {
@@ -67,7 +77,7 @@ const Servers: React.FC = () => {
         }
         
         return Object.keys(result).length > 0 ? result : undefined;
-    }, [sidebarSearch, filters, quickFilter]);
+    }, [debouncedSearch, filters, quickFilter]);
 
     // Use paginated hook
     const { 
@@ -183,7 +193,7 @@ const Servers: React.FC = () => {
     // Reset page when filters change
     React.useEffect(() => {
         setCurrentPage(1);
-    }, [sidebarSearch, quickFilter, filters, sortBy, sortOrder]);
+    }, [debouncedSearch, quickFilter, filters, sortBy, sortOrder]);
 
     // Servers are already paginated from the server
     const paginatedServers = filteredAndSortedServers;
@@ -463,6 +473,7 @@ const Servers: React.FC = () => {
                                             status: [],
                                         });
                                         setSidebarSearch("");
+                                        setDebouncedSearch("");
                                     }}
                                     className="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline"
                                 >
@@ -481,7 +492,7 @@ const Servers: React.FC = () => {
                                         placeholder="Filter by name or description..."
                                         value={sidebarSearch}
                                         onChange={(e) => setSidebarSearch(e.target.value)}
-                                        className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm placeholder-gray-500 dark:placeholder-gray-400"
+                                        className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg text-sm placeholder-gray-500 dark:placeholder-gray-400"
                                     />
                                     <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400 dark:text-gray-500" />
                                 </div>
