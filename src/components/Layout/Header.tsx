@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Search, Menu, X, Globe, Sun, Moon, User } from "lucide-react";
 import { useUser, UserButton, SignInButton } from "@clerk/clerk-react";
 import { useAppStore } from "../../store/useAppStore";
@@ -7,6 +7,7 @@ import type { Language } from "../../types/language";
 
 const Header: React.FC = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const { isSignedIn, user } = useUser();
     const {
@@ -17,6 +18,34 @@ const Header: React.FC = () => {
         toggleTheme,
         setSearchQuery,
     } = useAppStore();
+
+    // Handle search functionality
+    const handleSearchChange = (query: string) => {
+        setSearchQuery(query);
+        // If on home page, search immediately; if on other pages, wait for Enter or explicit search
+        if (location.pathname === "/") {
+            // On home page, search is immediate
+            return;
+        }
+    };
+
+    // Handle search navigation (for non-home pages)
+    const handleSearchSubmit = (query: string) => {
+        setSearchQuery(query);
+        // Navigate to home page if not already there and there's a search query
+        if (query.trim() && location.pathname !== "/") {
+            navigate("/");
+        }
+    };
+
+    // Handle search input key press
+    const handleSearchKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            const target = e.target as HTMLInputElement;
+            handleSearchSubmit(target.value);
+        }
+    };
 
     const navigation = [
         { name: "Home", href: "/", current: location.pathname === "/" },
@@ -95,8 +124,9 @@ const Header: React.FC = () => {
                                     placeholder="Search servers..."
                                     value={searchQuery}
                                     onChange={(e) =>
-                                        setSearchQuery(e.target.value)
+                                        handleSearchChange(e.target.value)
                                     }
+                                    onKeyPress={handleSearchKeyPress}
                                     className="w-64 pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                                     data-testid="header-search-input"
                                 />
@@ -200,8 +230,9 @@ const Header: React.FC = () => {
                                     placeholder="Search servers..."
                                     value={searchQuery}
                                     onChange={(e) =>
-                                        setSearchQuery(e.target.value)
+                                        handleSearchChange(e.target.value)
                                     }
+                                    onKeyPress={handleSearchKeyPress}
                                     className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                                 />
                                 <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
