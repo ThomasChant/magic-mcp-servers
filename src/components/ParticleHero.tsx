@@ -4,12 +4,13 @@ import Particles from 'react-particles';
 import { loadSlim } from 'tsparticles-slim';
 import type { Container, Engine } from 'tsparticles-engine';
 import type { MCPServer } from '../types';
+import type { StarServer } from '../hooks/useTopStarServers';
 import StarTooltip from './StarTooltip';
 import { useStarData, type StarData } from '../hooks/useStarData';
 import { useParticleConfig } from '../hooks/useParticleConfig';
 
 interface ParticleHeroProps {
-  servers: MCPServer[];
+  servers: (MCPServer | StarServer)[];
   searchQuery?: string;
   selectedCategory?: string;
   enableCategoryFilter?: boolean;
@@ -21,7 +22,7 @@ const ParticleHero: React.FC<ParticleHeroProps> = ({
   searchQuery = '',
   selectedCategory,
   enableCategoryFilter = false,
-  maxStars = 200,
+  maxStars = 500,
 }) => {
   const navigate = useNavigate();
   const [hoveredStar, setHoveredStar] = useState<StarData | null>(null);
@@ -32,15 +33,18 @@ const ParticleHero: React.FC<ParticleHeroProps> = ({
     { 
       id: 'demo', 
       name: 'Demo Server', 
-      stats: { stars: 10, forks: 5 }, 
+      stats: { stars: 10 }, 
+      repository: { stars: 10 },
       category: 'development', 
       description: { en: 'Demo server for particle effects', 'zh-CN': 'Demo server for particle effects' }, 
       tags: ['demo', 'particle'],
       slug: 'demo-server',
-      owner: 'demo'
+      owner: 'demo',
+      metadata: { featured: false, verified: false }
     }
-  ] as MCPServer[];
+  ] as (MCPServer | StarServer)[];
 
+  console.log("particleServers count", particleServers.length);
   // Get star data for interactive particles - always try to use real servers for stars
   const starData = useStarData(particleServers, {
     maxStars,
@@ -112,9 +116,13 @@ const ParticleHero: React.FC<ParticleHeroProps> = ({
     return starData.map((star) => {
       const isHighlighted = highlightedStars.has(star.id);
       const sizeMultiplier = deviceCapabilities.isMobile ? 0.8 : 1;
-      const baseSize = (star.size === 'extra-large' ? 8 : 
-                       star.size === 'large' ? 6 : 
-                       star.size === 'medium' ? 4 : 3) * sizeMultiplier;
+      const baseSize = (star.size === 'extra-large' ? 12 : 
+                       star.size === 'large' ? 8 : 
+                       star.size === 'medium' ? 5 : 3) * sizeMultiplier;
+      
+      // Generate random animation delay for natural twinkling effect
+      const animationDelay = Math.random() * 3;
+      const blinkDuration = 2 + Math.random() * 2; // 2-4 seconds
       
       return (
         <div
@@ -126,7 +134,7 @@ const ParticleHero: React.FC<ParticleHeroProps> = ({
             transform: 'translate(-50%, -50%)',
             zIndex: 3,
           }}
-          onClick={() => navigate(`/servers/${star.server.slug}`)}
+          onClick={() => navigate(`/servers/${star.server.slug || star.server.id}`)}
           onMouseEnter={() => setHoveredStar(star)}
           onMouseLeave={() => setHoveredStar(null)}
         >
@@ -138,11 +146,13 @@ const ParticleHero: React.FC<ParticleHeroProps> = ({
             style={{
               width: `${baseSize}px`,
               height: `${baseSize}px`,
-              background: isHighlighted ? star.categoryColor : '#ffffff',
+              background: '#ffffff',
               boxShadow: isHighlighted 
-                ? `0 0 ${baseSize * 3}px ${star.categoryColor}` 
+                ? `0 0 ${baseSize * 4}px ${star.categoryColor}, 0 0 ${baseSize * 2}px rgba(255, 255, 255, 0.9)` 
                 : `0 0 ${baseSize * 2}px rgba(255, 255, 255, 0.8)`,
               opacity: star.brightness,
+              animation: `starTwinkle ${blinkDuration}s ease-in-out infinite`,
+              animationDelay: `${animationDelay}s`,
             }}
           />
           

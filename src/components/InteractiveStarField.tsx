@@ -17,7 +17,7 @@ const InteractiveStarField: React.FC<InteractiveStarFieldProps> = ({
   searchQuery = '',
   selectedCategory,
   enableCategoryFilter = false,
-  maxStars = 250,
+  maxStars = 500,
 }) => {
   const [hoveredStar, setHoveredStar] = useState<StarData | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });

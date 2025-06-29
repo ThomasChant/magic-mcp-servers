@@ -25,7 +25,9 @@ import {
 import { useAppStore } from "../store/useAppStore";
 import ParticleHero from "../components/ParticleHero";
 import { useHomePageData, useServerStats, useSearchServersPaginated } from "../hooks/useUnifiedData";
+import { useTopStarServers, type StarServer } from "../hooks/useTopStarServers";
 import CategorySection from "../components/Home/CategorySection";
+import type { MCPServer } from "../types";
 
 // Helper functions moved outside component to prevent recreation on every render
 const getCategoryIcon = (category: string) => {
@@ -194,6 +196,7 @@ const Home: React.FC = () => {
     const { searchQuery, setSearchQuery } = useAppStore();
     const { data: homePageData, isLoading: homeDataLoading } = useHomePageData();
     const { data: serverStats } = useServerStats();
+    const { data: topStarServers } = useTopStarServers(300); // Get top 300 servers by stars
     
     // Use paginated search with larger limit for home page
     const { data: searchResults } = useSearchServersPaginated(
@@ -210,13 +213,6 @@ const Home: React.FC = () => {
         [homePageData]
     );
     
-    // Create a flat list of all servers for search functionality
-    const allServers = useMemo(() => {
-        if (searchQuery.trim()) {
-            return searchResults?.data || [];
-        }
-        return homePageData?.flatMap(item => item.servers) || [];
-    }, [homePageData, searchResults, searchQuery]);
     
     // Use server stats for statistics display with fallbacks
     const statistics = useMemo(() => {
@@ -278,7 +274,7 @@ const Home: React.FC = () => {
             return grouped;
         } else if (homePageData) {
             // When not searching, use the optimized home page data
-            const grouped: Record<string, typeof allServers> = {};
+            const grouped: Record<string, MCPServer[]> = {};
             homePageData.forEach(item => {
                 grouped[item.category.id] = item.servers;
             });
@@ -293,9 +289,9 @@ const Home: React.FC = () => {
             {/* Hero Section */}
             <section className="relative overflow-hidden cosmic-bg h-[80vh] flex items-center" style={{ isolation: 'isolate' }}>
                 <ParticleHero 
-                    servers={allServers || []}
+                    servers={(topStarServers || []) as (MCPServer | StarServer)[]}
                     searchQuery={searchQuery}
-                    maxStars={200}
+                    maxStars={300}
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black opacity-30" style={{ zIndex: 5 }}></div>
                 <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32" style={{ zIndex: 10 }}>

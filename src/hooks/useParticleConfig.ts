@@ -1,9 +1,10 @@
 import { useMemo, useEffect, useState } from 'react';
 import type { ISourceOptions } from 'tsparticles-engine';
 import type { MCPServer } from '../types';
+import type { StarServer } from './useTopStarServers';
 
 interface UseParticleConfigOptions {
-  servers: MCPServer[];
+  servers: (MCPServer | StarServer)[];
   searchQuery?: string;
 }
 
