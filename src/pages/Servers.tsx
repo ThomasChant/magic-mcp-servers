@@ -382,6 +382,100 @@ const Servers: React.FC = () => {
         </Link>
     );
 
+    // Server List Item Component
+    const ServerListItem: React.FC<{ server: ServerData }> = ({ server }) => (
+        <Link to={`/servers/${server.id}`}>
+            <div 
+                className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 hover-lift cursor-pointer mb-4"
+                data-testid="server-list-item"
+            >
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center min-w-0 flex-1">
+                        <div className={`w-12 h-12 ${getServerIconBg(server)} rounded-lg flex items-center justify-center mr-4 flex-shrink-0`}>
+                            {getServerIcon(server)}
+                        </div>
+                        <div className="min-w-0 flex-1">
+                            <div className="flex items-center space-x-3 mb-2">
+                                <h3 className="server-name text-lg font-semibold text-gray-900 dark:text-white" data-testid="server-name">
+                                    <ProgressiveEllipsis 
+                                        text={server.name}
+                                        maxLength={25}
+                                        preserveStart={10}
+                                        preserveEnd={8}
+                                    />
+                                </h3>
+                                {server.owner && (
+                                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                                        @{server.owner}
+                                    </span>
+                                )}
+                                <div className="flex items-center space-x-2">
+                                    {server.official && (
+                                        <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-2 py-1 rounded-full">
+                                            Official
+                                        </span>
+                                    )}
+                                    {server.featured && (
+                                        <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs px-2 py-1 rounded-full">
+                                            Featured
+                                        </span>
+                                    )}
+                                    {server.usage.downloads >= 10000 && (
+                                        <span className="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 text-xs px-2 py-1 rounded-full">
+                                            Popular
+                                        </span>
+                                    )}
+                                </div>
+                            </div>
+                            <p className="server-description text-gray-600 dark:text-gray-300 text-sm mb-2 line-clamp-1">
+                                {server.descriptionEn || server.description["zh-CN"]}
+                            </p>
+                            <div className="flex items-center space-x-4 text-xs text-gray-500 dark:text-gray-400">
+                                <span className="flex items-center">
+                                    <Download className="h-3 w-3 mr-1" />
+                                    {formatNumber(server.usage.downloads)}
+                                </span>
+                                <span className="flex items-center">
+                                    <Calendar className="h-3 w-3 mr-1" />
+                                    {formatTimeAgo(server.repository.lastUpdate || server.repository.lastUpdated || "")}
+                                </span>
+                                <div className="flex flex-wrap gap-1">
+                                    {server.tags.slice(0, 2).map((tag: string) => (
+                                        <span
+                                            key={tag}
+                                            className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded"
+                                        >
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex items-center space-x-4 flex-shrink-0">
+                        <div className="flex items-center text-yellow-500">
+                            <Star className="h-4 w-4 fill-current" />
+                            <span className="ml-1 text-gray-900 dark:text-white font-medium text-sm">
+                                {(server.quality.score / 20).toFixed(1)}
+                            </span>
+                        </div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400">
+                            {formatNumber(server.repository.stars)} stars
+                        </div>
+                        <FavoriteButton 
+                            serverId={server.id} 
+                            size="sm"
+                        />
+                        <span className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium text-sm flex items-center">
+                            View
+                            <ArrowRight className="h-3 w-3 ml-1" />
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </Link>
+    );
+
     if (serversLoading) {
         return (
             <div className="bg-gray-50 dark:bg-gray-900 min-h-screen" data-testid="loading">
@@ -740,13 +834,21 @@ const Servers: React.FC = () => {
                             </div>
                         </div>
 
-                        {/* Server Grid */}
+                        {/* Server Grid/List */}
                         {paginatedServers.length > 0 ? (
-                            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                                {paginatedServers.map((server) => (
-                                    <ServerCard key={server.id} server={server} />
-                                ))}
-                            </div>
+                            viewMode === "grid" ? (
+                                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                                    {paginatedServers.map((server) => (
+                                        <ServerCard key={server.id} server={server} />
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="space-y-2">
+                                    {paginatedServers.map((server) => (
+                                        <ServerListItem key={server.id} server={server} />
+                                    ))}
+                                </div>
+                            )
                         ) : (
                             <div className="text-center py-12">
                                 <div className="max-w-md mx-auto">
