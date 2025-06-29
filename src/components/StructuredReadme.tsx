@@ -27,6 +27,41 @@ const StructuredReadme: React.FC<StructuredReadmeProps> = ({readme, copiedStates
                 className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline"
               />
             ),
+            // Custom image component
+            img: ({ src, alt, title, ...props }) => (
+              <div className="my-6">
+                <img
+                  {...props}
+                  src={src}
+                  alt={alt || ''}
+                  title={title}
+                  className="max-w-full h-auto rounded-lg shadow-sm border border-gray-200 dark:border-gray-700"
+                  loading="lazy"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    // Show a placeholder div instead
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'flex items-center justify-center h-32 bg-gray-100 dark:bg-gray-800 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600';
+                    placeholder.innerHTML = `
+                      <div class="text-center">
+                        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Image failed to load</p>
+                        ${alt ? `<p class="text-xs text-gray-400 dark:text-gray-500 mt-1">${alt}</p>` : ''}
+                      </div>
+                    `;
+                    target.parentNode?.replaceChild(placeholder, target);
+                  }}
+                />
+                {title && (
+                  <p className="text-sm text-gray-500 dark:text-gray-400 text-center mt-2 italic">
+                    {title}
+                  </p>
+                )}
+              </div>
+            ),
             // Custom pre component for code blocks
             pre: ({ children, ...props }) => {
               // 提取代码文本内容
@@ -207,6 +242,27 @@ const StructuredReadme: React.FC<StructuredReadmeProps> = ({readme, copiedStates
           .prose ul ul, .prose ol ol, .prose ul ol, .prose ol ul {
             margin-left: 1.5rem !important;
             margin-top: 0.5rem !important;
+          }
+          
+          /* Image styling overrides */
+          .prose img {
+            max-width: 100% !important;
+            height: auto !important;
+            border-radius: 0.5rem !important;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
+            border: 1px solid #e5e7eb !important;
+            margin: 1.5rem 0 !important;
+          }
+          
+          .dark .prose img {
+            border-color: #374151 !important;
+          }
+          
+          /* Ensure images don't break layout */
+          .prose img {
+            display: block !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
           }
         `}</style>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-8">
