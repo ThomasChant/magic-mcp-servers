@@ -29,6 +29,76 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run supabase:diagnose`: Diagnose Supabase connection issues
 - `npm run supabase:debug-insert`: Debug data insertion into Supabase
 
+### GitHub Integration
+- `npm run github:update-stats`: Fetch latest GitHub repository stats (stars, forks, watchers) and update database
+- `npm run github:test-rate-limiting`: Test rate limiting logic and environment setup
+
+#### Enhanced Rate Limiting Features
+The GitHub stats updater includes advanced flow control to prevent rate limiting:
+
+**Smart Rate Limiting:**
+- ✅ **Dynamic delays** based on remaining API quota
+- ✅ **Exponential backoff** with jitter for retries  
+- ✅ **Real-time rate limit monitoring** from GitHub headers
+- ✅ **Automatic waiting** when rate limit is exceeded
+- ✅ **Batch processing** for large datasets
+- ✅ **Progress tracking** with detailed status updates
+
+**Usage Options:**
+```bash
+# Basic update (processes all servers)
+npm run github:update-stats
+
+# Batch mode (recommended for large datasets)
+npm run github:update-stats -- --batch --batch-size=50
+
+# Update specific server only
+npm run github:update-stats -- --server=server-id-here
+
+# Dry run (test without database updates)
+npm run github:update-stats -- --dry-run
+
+# Show help and options
+npm run github:update-stats -- --help
+
+# Test rate limiting logic
+npm run github:test-rate-limiting
+```
+
+#### GitHub API Rate Limits
+- **Without token**: 60 requests per hour (intelligent spacing prevents rate limiting)
+- **With token**: 5,000 requests per hour (can process all servers efficiently)
+
+**To use with higher rate limits:**
+1. Create a Personal Access Token at https://github.com/settings/tokens/new
+2. Select scope: `public_repo` (for reading public repository data)
+3. Add to your `.env.local` file: `GITHUB_TOKEN=your_token_here`
+4. Run: `npm run github:update-stats`
+
+#### Production Recommendations
+
+**For Regular Updates:**
+- Use `--batch` mode for processing large datasets
+- Set up GitHub token for higher rate limits
+- Monitor rate limit usage with built-in tracking
+- Schedule updates during off-peak hours
+
+**For Initial Setup:**
+- Start with `npm run github:test-rate-limiting` to verify configuration
+- Use `--dry-run` to test before making database changes
+- Process in small batches first: `--batch --batch-size=10`
+
+#### Automated Updates
+Consider setting up a scheduled job (cron, GitHub Actions, etc.) to run the update script periodically:
+
+```bash
+# Daily update with batch processing
+0 2 * * * npm run github:update-stats -- --batch --batch-size=100
+
+# Weekly full update
+0 3 * * 0 npm run github:update-stats
+```
+
 ## Project Overview
 
 This is a React-based MCP (Model Context Protocol) Hub - a discovery platform for MCP servers. The application helps developers find, explore, and integrate MCP servers through an intuitive web interface.
