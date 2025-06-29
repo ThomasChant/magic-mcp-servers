@@ -56,12 +56,12 @@ const Header: React.FC = () => {
                     <div className="flex items-center">
                         <Link to="/" className="flex items-center">
                             <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center mr-3">
-                                {/* <span className="text-white text-sm font-bold">
+                                <span className="text-white text-sm font-bold">
                                     M
-                                </span> */}
-                                <img src="/logo.jpeg" alt="Magic MCP" className="w-8 h-8" />
+                                </span>
+                                {/* <img src="/logo.jpeg" alt="Magic MCP" className="w-10 h-10" /> */}
                             </div>
-                            <span className="text-xl font-bold text-gray-900 dark:text-white">
+                            <span className="text-xxl font-bold text-gray-900 dark:text-white">
                                 Magic MCP
                             </span>
                         </Link>
