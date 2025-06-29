@@ -167,16 +167,6 @@ const ParticleHero: React.FC<ParticleHeroProps> = ({
             }}
           />
           
-          {/* Featured/verified pulse */}
-          {(star.server.metadata?.featured || star.server.metadata?.verified) && (
-            <div
-              className="absolute inset-0 rounded-full border border-cyan-400 opacity-60 pointer-events-none"
-              style={{
-                animation: 'ping 2s cubic-bezier(0, 0, 0.2, 1) infinite',
-                transform: 'scale(2)',
-              }}
-            />
-          )}
         </div>
       );
     });
