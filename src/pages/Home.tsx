@@ -14,6 +14,13 @@ import {
     Link2,
     Briefcase,
     Shield,
+    Cloud,
+    Globe,
+    Settings,
+    Layers,
+    Image,
+    CreditCard,
+    Wrench,
 } from "lucide-react";
 import { useAppStore } from "../store/useAppStore";
 import ParticleHero from "../components/ParticleHero";
@@ -22,54 +29,151 @@ import CategorySection from "../components/Home/CategorySection";
 
 // Helper functions moved outside component to prevent recreation on every render
 const getCategoryIcon = (category: string) => {
+    console.log("category", category);
     switch (category) {
+        // File system and storage
         case 'filesystem':
             return <Folder className="text-white w-5 h-5" />;
         case 'database':
+        case 'database-storage':
             return <Database className="text-white w-5 h-5" />;
+        
+        // Communication and collaboration
         case 'communication':
+        case 'communication-collaboration':
             return <MessageCircle className="text-white w-5 h-5" />;
+        
+        // Development and tools
         case 'development':
+        case 'development-tools':
             return <Code className="text-white w-5 h-5" />;
         case 'api-integration':
             return <Link2 className="text-white w-5 h-5" />;
+        case 'utilities':
+        case 'utilities-tools':
+            return <Wrench className="text-white w-5 h-5" />;
+        
+        // Search and analysis
         case 'search':
             return <Search className="text-white w-5 h-5" />;
-        case 'ai-ml':
-            return <Brain className="text-white w-5 h-5" />;
         case 'monitoring':
             return <Activity className="text-white w-5 h-5" />;
+        
+        // AI and machine learning
+        case 'ai-ml':
+        case 'ai-machine-learning':
+            return <Brain className="text-white w-5 h-5" />;
+        
+        // Business and productivity
         case 'productivity':
+        case 'business-productivity':
             return <Briefcase className="text-white w-5 h-5" />;
+        
+        // Cloud and infrastructure
+        case 'cloud':
+        case 'cloud-infrastructure':
+            return <Cloud className="text-white w-5 h-5" />;
+        
+        // Content and media
+        case 'content':
+        case 'content-media':
+            return <Image className="text-white w-5 h-5" />;
+        
+        // Finance and payments
+        case 'finance':
+        case 'finance-payments':
+            return <CreditCard className="text-white w-5 h-5" />;
+        
+        // Web and network
+        case 'web':
+        case 'web-network':
+            return <Globe className="text-white w-5 h-5" />;
+        
+        // Security
         case 'security':
             return <Shield className="text-white w-5 h-5" />;
+        
+        // Specialized domains
+        case 'specialized':
+        case 'specialized-domains':
+            return <Layers className="text-white w-5 h-5" />;
+        
+        // Default fallback
         default:
-            return <Code className="text-white w-5 h-5" />;
+            return <Settings className="text-white w-5 h-5" />;
     }
 };
 
 const getCategoryColor = (category: string) => {
     switch (category) {
+        // File system and storage
         case 'filesystem':
             return 'bg-blue-600';
         case 'database':
+        case 'database-storage':
             return 'bg-green-600';
+        
+        // Communication and collaboration
         case 'communication':
+        case 'communication-collaboration':
             return 'bg-purple-600';
+        
+        // Development and tools
         case 'development':
+        case 'development-tools':
             return 'bg-indigo-600';
         case 'api-integration':
             return 'bg-teal-600';
+        case 'utilities':
+        case 'utilities-tools':
+            return 'bg-slate-600';
+        
+        // Search and analysis
         case 'search':
             return 'bg-orange-600';
-        case 'ai-ml':
-            return 'bg-pink-600';
         case 'monitoring':
             return 'bg-yellow-600';
+        
+        // AI and machine learning
+        case 'ai-ml':
+        case 'ai-machine-learning':
+            return 'bg-pink-600';
+        
+        // Business and productivity
         case 'productivity':
+        case 'business-productivity':
             return 'bg-lime-600';
+        
+        // Cloud and infrastructure
+        case 'cloud':
+        case 'cloud-infrastructure':
+            return 'bg-sky-600';
+        
+        // Content and media
+        case 'content':
+        case 'content-media':
+            return 'bg-amber-600';
+        
+        // Finance and payments
+        case 'finance':
+        case 'finance-payments':
+            return 'bg-emerald-600';
+        
+        // Web and network
+        case 'web':
+        case 'web-network':
+            return 'bg-cyan-600';
+        
+        // Security
         case 'security':
             return 'bg-red-600';
+        
+        // Specialized domains
+        case 'specialized':
+        case 'specialized-domains':
+            return 'bg-violet-600';
+        
+        // Default fallback
         default:
             return 'bg-gray-600';
     }
