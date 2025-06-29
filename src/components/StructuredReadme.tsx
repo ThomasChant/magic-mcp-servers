@@ -121,13 +121,13 @@ const StructuredReadme: React.FC<StructuredReadmeProps> = ({readme, copiedStates
             ),
             // Custom list components
             ul: ({ ...props }) => (
-              <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300" {...props} />
+              <ul className="list-disc list-outside ml-6 space-y-1 text-gray-600 dark:text-gray-300 my-4" {...props} />
             ),
             ol: ({ ...props }) => (
-              <ol className="list-decimal list-inside space-y-2 text-gray-600 dark:text-gray-300" {...props} />
+              <ol className="list-decimal list-outside ml-6 space-y-1 text-gray-600 dark:text-gray-300 my-4" {...props} />
             ),
             li: ({ ...props }) => (
-              <li className="ml-4" {...props} />
+              <li className="pl-2" {...props} />
             ),
             // Custom heading components
             h1: ({ ...props }) => (

@@ -32,7 +32,7 @@ const ServerDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const { data: server, isLoading, error } = useServer(id!);
     console.log("server", server)
-    const { data: readmeData } = useServerReadme(server?.owner && server?.name ? `${server.owner}_${server.name}` : '');
+    const { data: readmeData, isLoading: readmeLoading } = useServerReadme(server?.owner+"_"+server?.name || '');
     // Remove activeTab state as we're using StructuredReadme component
     const [copiedStates, setCopiedStates] = useState<{ [key: string]: boolean }>({});
     const [showShareMenu, setShowShareMenu] = useState(false);
@@ -329,9 +329,31 @@ const ServerDetail: React.FC = () => {
                     {/* Main Content */}
                     <div className="lg:w-2/3">
                         {/* Documentation Content */}
-                        {readmeData ? (
+                        {readmeLoading ? (
+                            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-8">
+                                <div className="animate-pulse">
+                                    <div className="h-6 bg-gray-300 dark:bg-gray-600 rounded mb-4 w-1/3"></div>
+                                    <div className="space-y-3">
+                                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div>
+                                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-4/6"></div>
+                                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/6"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        ) : readmeData ? (
                             <StructuredReadme 
                                 readme={readmeData}
+                                copiedStates={copiedStates}
+                                onCopy={copyToClipboard}
+                            />
+                        ) : server?.documentation?.readme ? (
+                            <StructuredReadme 
+                                readme={{
+                                    filename: 'README.md',
+                                    projectName: server.name,
+                                    rawContent: server.documentation.readme
+                                }}
                                 copiedStates={copiedStates}
                                 onCopy={copyToClipboard}
                             />

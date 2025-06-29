@@ -748,31 +748,36 @@ export const useSupabaseServerReadme = (serverId: string) => {
         return null;
       }
 
-      const { data, error } = await supabase
-        .from('server_readmes')
-        .select('*')
-        .eq('server_id', serverId)
-        .single();
+      try {
+        const { data, error } = await supabase
+          .from('server_readmes')
+          .select('*')
+          .eq('server_id', serverId)
+          .maybeSingle(); // Use maybeSingle instead of single to handle no results
 
-      if (error) {
-        if (error.code === 'PGRST116') { // Not found
+        if (error) {
+          console.warn(`README fetch error for server ${serverId}:`, error);
+          return null; // Return null instead of throwing for any error
+        }
+
+        if (!data) {
+          console.log(`No README found for server ${serverId}`);
           return null;
         }
-        throw new Error(`Failed to fetch README: ${error.message}`);
-      }
 
-      if (!data) {
-        return null;
+        return {
+          filename: data.filename,
+          projectName: data.project_name,
+          rawContent: data.raw_content,
+        };
+      } catch (error) {
+        console.warn(`README fetch failed for server ${serverId}:`, error);
+        return null; // Always return null on error instead of throwing
       }
-
-      return {
-        filename: data.filename,
-        projectName: data.project_name,
-        rawContent: data.raw_content,
-      };
     },
     enabled: !!serverId && serverId.trim() !== '',
     staleTime: 10 * 60 * 1000, // 10 minutes
+    retry: false, // Don't retry on failure
   });
 };
 
