@@ -85,6 +85,16 @@ export const useTopStarServers = (limit: number = 300) => {
 
       console.log("transformedData", transformedData);
       console.log("transformedData length", transformedData.length);
+      
+      // Log first few items to debug IDs and slugs
+      if (transformedData.length > 0) {
+        console.log("Sample transformed data:", transformedData.slice(0, 3).map(item => ({
+          id: item.id,
+          slug: item.slug,
+          name: item.name
+        })));
+      }
+      
       return transformedData;
     },
     // Cache for 5 minutes to reduce database load

@@ -293,8 +293,10 @@ const Home: React.FC = () => {
                     searchQuery={searchQuery}
                     maxStars={300}
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black opacity-30" style={{ zIndex: 5 }}></div>
-                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32" style={{ zIndex: 10 }}>
+                
+                
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black opacity-30 pointer-events-none" style={{ zIndex: 5 }}></div>
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 pointer-events-none" style={{ zIndex: 10 }}>
                     <div className="text-center animate-fade-in-up">
                         <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 relative z-10">
                             Discover the Best
@@ -305,7 +307,7 @@ const Home: React.FC = () => {
                         </p>
 
                         {/* Search Bar */}
-                        <div className="max-w-2xl mx-auto mb-8 relative z-10">
+                        <div className="max-w-2xl mx-auto mb-8 relative z-10 pointer-events-auto">
                             <div className="relative rounded-xl p-2" style={{
                                 background: 'rgba(100, 255, 218, 0.1)',
                                 backdropFilter: 'blur(15px)',
@@ -328,7 +330,7 @@ const Home: React.FC = () => {
                         </div>
 
                         {/* Quick Stats */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto relative z-10">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto relative z-10 pointer-events-auto">
                             <div className="rounded-lg p-4 text-center hover-lift" style={{
                                 background: 'rgba(100, 255, 218, 0.1)',
                                 backdropFilter: 'blur(15px)',
