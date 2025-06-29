@@ -49,7 +49,9 @@ export const useRecentServers = () => {
   return useSupabaseRecentServers();
 };
 
+// Legacy hook - use useSearchServersPaginated instead for better performance
 export const useSearchServers = (query: string) => {
+  console.warn('useSearchServers is deprecated. Use useSearchServersPaginated instead for better performance.');
   return useSupabaseSearchServers(query);
 };
 

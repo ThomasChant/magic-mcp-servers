@@ -16,7 +16,7 @@ import {
     Bot,
     FileText,
 } from "lucide-react";
-import { useServersPaginated, type PaginatedResult } from "../hooks/useUnifiedData";
+import { useServersPaginated, useCategories, type PaginatedResult } from "../hooks/useUnifiedData";
 import type { MCPServer } from "../types";
 import ProgressiveEllipsis from "../components/ProgressiveEllipsis";
 import { FavoriteButton } from "../components/FavoriteButton";
@@ -44,6 +44,9 @@ const Servers: React.FC = () => {
         languages: [] as string[],
         status: [] as string[],
     });
+
+    // Get real categories with server counts
+    const { data: categories } = useCategories();
 
     // Build filters for the hook
     const hookFilters = useMemo(() => {
@@ -84,20 +87,6 @@ const Servers: React.FC = () => {
     const hasNextPage = paginatedResult?.hasNextPage || false;
     const hasPreviousPage = paginatedResult?.hasPreviousPage || false;
     const totalPages = paginatedResult?.totalPages || 0;
-
-    // Static filter options (simplified since filtering is now server-side)
-    const filterCategories = [
-        { id: "web-network", name: "Web & Network" },
-        { id: "data-storage", name: "Data & Storage" },
-        { id: "ai-ml", name: "AI & Machine Learning" },
-        { id: "development", name: "Development" },
-        { id: "communication", name: "Communication" },
-        { id: "filesystem", name: "File System" },
-        { id: "productivity", name: "Productivity" },
-        { id: "monitoring", name: "Monitoring" },
-        { id: "security", name: "Security" },
-        { id: "entertainment", name: "Entertainment" },
-    ];
 
     const platformFilters = [
         { id: "web", name: "Web" },
@@ -400,7 +389,7 @@ const Servers: React.FC = () => {
                             <p className="text-lg text-gray-600 dark:text-gray-300">
                                 Discover and integrate powerful Model Context Protocol servers
                                 <span className="block text-sm mt-1">
-                                    {totalServers} servers available across {filterCategories.length} categories
+                                    {totalServers} servers available across {categories?.length || 0} categories
                                 </span>
                             </p>
                         </div>
@@ -488,7 +477,7 @@ const Servers: React.FC = () => {
                                     Categories
                                 </label>
                                 <div className="space-y-2">
-                                    {filterCategories.map((category) => (
+                                    {categories?.map((category) => (
                                         <label key={category.id} className="flex items-center">
                                             <input
                                                 type="checkbox"
@@ -509,7 +498,7 @@ const Servers: React.FC = () => {
                                                 className="rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-blue-600 focus:ring-blue-500"
                                             />
                                             <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-                                                {category.name} ({category.count})
+                                                {category.name.en} ({category.serverCount || 0})
                                             </span>
                                         </label>
                                     ))}
@@ -611,7 +600,7 @@ const Servers: React.FC = () => {
                                                 className="rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-blue-600 focus:ring-blue-500"
                                             />
                                             <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-                                                {status.name} ({status.count || 0})
+                                                {status.name}
                                             </span>
                                         </label>
                                     ))}

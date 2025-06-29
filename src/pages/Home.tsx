@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { useAppStore } from "../store/useAppStore";
 import ParticleHero from "../components/ParticleHero";
-import { useHomePageData, useServerStats, useSearchServers } from "../hooks/useUnifiedData";
+import { useHomePageData, useServerStats, useSearchServersPaginated } from "../hooks/useUnifiedData";
 import CategorySection from "../components/Home/CategorySection";
 
 // Helper functions moved outside component to prevent recreation on every render
@@ -91,7 +91,15 @@ const Home: React.FC = () => {
     const { searchQuery, setSearchQuery } = useAppStore();
     const { data: homePageData, isLoading: homeDataLoading } = useHomePageData();
     const { data: serverStats } = useServerStats();
-    const { data: searchResults } = useSearchServers(searchQuery);
+    
+    // Use paginated search with larger limit for home page
+    const { data: searchResults } = useSearchServersPaginated(
+        searchQuery, 
+        1, // page
+        50, // limit - get more results for home page display
+        'stars', // sortBy
+        'desc' // sortOrder
+    );
     
     // Extract categories and servers from home page data
     const categories = useMemo(() => 
@@ -102,12 +110,12 @@ const Home: React.FC = () => {
     // Create a flat list of all servers for search functionality
     const allServers = useMemo(() => {
         if (searchQuery.trim()) {
-            return searchResults || [];
+            return searchResults?.data || [];
         }
         return homePageData?.flatMap(item => item.servers) || [];
     }, [homePageData, searchResults, searchQuery]);
     
-    // Use server stats for statistics display
+    // Use server stats for statistics display with fallbacks
     const statistics = useMemo(() => {
         if (serverStats) {
             return {
@@ -118,18 +126,36 @@ const Home: React.FC = () => {
             };
         }
         
+        // Fallback to calculated stats from home page data if server stats not available
+        if (homePageData) {
+            const allHomeServers = homePageData.flatMap(item => item.servers);
+            const totalServers = allHomeServers.length;
+            const totalDownloads = allHomeServers.reduce((sum, server) => sum + (server.usage?.downloads || 0), 0);
+            const uniqueCategories = homePageData.length;
+            const averageQualityScore = totalServers > 0 
+                ? Math.round(allHomeServers.reduce((sum, server) => sum + (server.quality?.score || 0), 0) / totalServers)
+                : 90;
+            
+            return {
+                totalServers,
+                totalDownloads,
+                uniqueCategories,
+                averageQualityScore
+            };
+        }
+        
         return {
             totalServers: 0,
             totalDownloads: 0,
             uniqueCategories: 0,
             averageQualityScore: 90
         };
-    }, [serverStats]);
+    }, [serverStats, homePageData]);
 
     // Filter servers based on search query (for search mode)
     const filteredServers = useMemo(() => {
         if (!searchQuery.trim()) return null; // Don't filter when no search query
-        return searchResults || [];
+        return searchResults?.data || [];
     }, [searchResults, searchQuery]);
 
     // Group servers by category - use homePageData when not searching
@@ -205,7 +231,7 @@ const Home: React.FC = () => {
                                 boxShadow: '0 8px 32px rgba(100, 255, 218, 0.1)'
                             }}>
                                 <div className="text-3xl font-bold bg-gradient-to-r from-cyan-300 to-white bg-clip-text text-transparent">
-                                    {statistics.totalServers > 0 ? `${statistics.totalServers}+` : '200+'}
+                                    {statistics.totalServers > 0 ? statistics.totalServers.toLocaleString() : '...'}
                                 </div>
                                 <div className="text-gray-300">MCP Servers</div>
                             </div>
@@ -216,7 +242,7 @@ const Home: React.FC = () => {
                                 boxShadow: '0 8px 32px rgba(147, 51, 234, 0.1)'
                             }}>
                                 <div className="text-3xl font-bold bg-gradient-to-r from-purple-300 to-white bg-clip-text text-transparent">
-                                    {statistics.uniqueCategories > 0 ? statistics.uniqueCategories : '10'}
+                                    {statistics.uniqueCategories > 0 ? statistics.uniqueCategories : '...'}
                                 </div>
                                 <div className="text-gray-300">Categories</div>
                             </div>
@@ -228,10 +254,12 @@ const Home: React.FC = () => {
                             }}>
                                 <div className="text-3xl font-bold bg-gradient-to-r from-green-300 to-white bg-clip-text text-transparent">
                                     {statistics.totalDownloads > 0 
-                                        ? statistics.totalDownloads >= 1000 
-                                            ? `${Math.floor(statistics.totalDownloads / 1000)}K+` 
-                                            : `${statistics.totalDownloads}+`
-                                        : '50K+'
+                                        ? statistics.totalDownloads >= 1000000
+                                            ? `${(statistics.totalDownloads / 1000000).toFixed(1)}M`
+                                            : statistics.totalDownloads >= 1000 
+                                            ? `${Math.floor(statistics.totalDownloads / 1000)}K` 
+                                            : statistics.totalDownloads.toLocaleString()
+                                        : '...'
                                     }
                                 </div>
                                 <div className="text-gray-300">Downloads</div>
@@ -243,7 +271,7 @@ const Home: React.FC = () => {
                                 boxShadow: '0 8px 32px rgba(249, 115, 22, 0.1)'
                             }}>
                                 <div className="text-3xl font-bold bg-gradient-to-r from-orange-300 to-white bg-clip-text text-transparent">
-                                    {statistics.averageQualityScore}%
+                                    {statistics.averageQualityScore > 0 ? `${statistics.averageQualityScore}%` : '...'}
                                 </div>
                                 <div className="text-gray-300">Quality Score</div>
                             </div>
@@ -261,7 +289,9 @@ const Home: React.FC = () => {
                         <div className="flex flex-wrap justify-space-between gap-4 mb-16">
                             {categories.map((category) => {
                                 const categoryServers = serversByCategory[category.id] || [];
-                                if (categoryServers.length === 0) return null;
+                                // Show category even if no servers are loaded for display (we still have count)
+                                const serverCount = category.serverCount || categoryServers.length;
+                                if (serverCount === 0) return null;
                                 
                                 return (
                                     <button
@@ -285,7 +315,7 @@ const Home: React.FC = () => {
                                                 {category.name.en}
                                             </div>
                                             <div className="text-sm text-gray-500 dark:text-gray-400">
-                                                {categoryServers.length} servers
+                                                {serverCount} servers
                                             </div>
                                         </div>
                                     </button>

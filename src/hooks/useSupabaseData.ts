@@ -334,36 +334,97 @@ export const useSupabaseServerStats = () => {
   return useQuery({
     queryKey: ["supabase", "server-stats"],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from('servers_with_details')
-        .select('category_id, quality_score, downloads, stars, verified, featured');
+      try {
+        // Run multiple queries in parallel for better performance
+        const [serversResult, categoriesResult] = await Promise.all([
+          // Get server count and sample data for calculations
+          supabase
+            .from('servers_with_details')
+            .select('downloads, weekly_downloads, quality_score, featured, verified', { count: 'exact' })
+            .limit(1000),
+          
+          // Get total categories count directly from categories table
+          supabase
+            .from('categories')
+            .select('id', { count: 'exact', head: true })
+        ]);
 
-      if (error) {
-        throw new Error(`Failed to fetch server stats: ${error.message}`);
+        if (serversResult.error) {
+          console.error('Server stats query error:', serversResult.error);
+          throw new Error(`Failed to fetch server stats: ${serversResult.error.message}`);
+        }
+
+        if (categoriesResult.error) {
+          console.error('Categories count query error:', categoriesResult.error);
+        }
+
+        const { data: serversData, count: totalServers } = serversResult;
+        const { count: totalCategories } = categoriesResult;
+
+        console.log('Server stats - total servers:', totalServers);
+        console.log('Server stats - total categories:', totalCategories);
+        console.log('Server stats - sample data:', serversData?.slice(0, 2));
+
+        if (!serversData || serversData.length === 0) {
+          console.warn('No server data found');
+          return {
+            totalServers: totalServers || 0,
+            totalDownloads: 0,
+            averageQualityScore: 0,
+            uniqueCategories: totalCategories || 0,
+            featuredCount: 0,
+            verifiedCount: 0,
+          };
+        }
+
+        // Calculate stats from available data
+        const serverCount = totalServers || serversData.length;
+        
+        // Calculate total downloads
+        const totalDownloads = serversData.reduce((sum, server) => {
+          const downloads = server.downloads || server.weekly_downloads || 0;
+          return sum + (typeof downloads === 'number' ? downloads : 0);
+        }, 0);
+        
+        // Calculate average quality score
+        const validQualityScores = serversData
+          .map(server => server.quality_score)
+          .filter(score => typeof score === 'number' && score > 0);
+        
+        const averageQualityScore = validQualityScores.length > 0 
+          ? Math.round(validQualityScores.reduce((sum, score) => sum + score, 0) / validQualityScores.length)
+          : 0;
+        
+        const featuredCount = serversData.filter(s => s.featured === true).length;
+        const verifiedCount = serversData.filter(s => s.verified === true).length;
+        const uniqueCategories = totalCategories || 0;
+
+        const stats = {
+          totalServers: serverCount,
+          totalDownloads,
+          averageQualityScore,
+          uniqueCategories,
+          featuredCount,
+          verifiedCount,
+        };
+
+        console.log('Final calculated stats:', stats);
+        return stats;
+      } catch (error) {
+        console.error('Failed to fetch server stats:', error);
+        // Return default stats on error
+        return {
+          totalServers: 0,
+          totalDownloads: 0,
+          averageQualityScore: 0,
+          uniqueCategories: 0,
+          featuredCount: 0,
+          verifiedCount: 0,
+        };
       }
-
-      // Calculate aggregated stats
-      const totalServers = data?.length || 0;
-      const totalDownloads = data?.reduce((sum, server) => sum + (server.downloads || 0), 0) || 0;
-      const averageQualityScore = data?.length 
-        ? Math.round(data.reduce((sum, server) => sum + (server.quality_score || 0), 0) / data.length)
-        : 0;
-      const featuredCount = data?.filter(s => s.featured).length || 0;
-      const verifiedCount = data?.filter(s => s.verified).length || 0;
-
-      // Get unique categories count
-      const uniqueCategories = new Set(data?.map(s => s.category_id)).size;
-
-      return {
-        totalServers,
-        totalDownloads,
-        averageQualityScore,
-        uniqueCategories,
-        featuredCount,
-        verifiedCount,
-      };
     },
     staleTime: 10 * 60 * 1000, // 10 minutes
+    retry: 3,
   });
 };
 
@@ -439,27 +500,43 @@ export const useSupabaseHomePageData = () => {
         throw new Error(`Failed to fetch categories: ${categoriesResult.error.message}`);
       }
 
-      // Get top servers for each category (limit 6 per category)
+      // Get top servers for each category (limit 6 per category) + total count
       const categoriesWithServers = await Promise.all(
         (categoriesResult.data || []).map(async (category) => {
-          const serversResult = await supabase
-            .from('servers_with_details')
-            .select('*')
-            .eq('category_id', category.id)
-            .order('stars', { ascending: false })
-            .limit(6);
+          // Get both sample servers and total count in parallel
+          const [serversResult, countResult] = await Promise.all([
+            supabase
+              .from('servers_with_details')
+              .select('*')
+              .eq('category_id', category.id)
+              .order('stars', { ascending: false })
+              .limit(6),
+            
+            supabase
+              .from('servers_with_details')
+              .select('id', { count: 'exact', head: true })
+              .eq('category_id', category.id)
+          ]);
 
           if (serversResult.error) {
             console.warn(`Failed to fetch servers for category ${category.id}:`, serversResult.error);
-            return {
-              category: transformCategory(category),
-              servers: [],
-            };
           }
 
+          if (countResult.error) {
+            console.warn(`Failed to fetch count for category ${category.id}:`, countResult.error);
+          }
+
+          const transformedCategory = transformCategory(category);
+          const servers = serversResult.data ? serversResult.data.map(transformServer) : [];
+          const totalCount = countResult.count || servers.length;
+
+          // Update category with server count
           return {
-            category: transformCategory(category),
-            servers: (serversResult.data || []).map(transformServer),
+            category: {
+              ...transformedCategory,
+              serverCount: totalCount
+            },
+            servers,
           };
         })
       );

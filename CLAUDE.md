@@ -395,10 +395,16 @@ useSearchServers(query) // Use paginated version instead
 ```
 
 ### Data Loading Strategy
-- **Home Page**: Loads categories + 6 servers per category + aggregated stats
+- **Home Page**: Loads categories + 6 servers per category + aggregated statistics from database
 - **Servers Page**: 12 servers per page with server-side filtering and sorting
-- **Category Page**: 12 servers per page for specific category with pagination
-- **Search Results**: 12 results per page with real-time search
+- **Category Page**: 12 servers per page for specific category with pagination  
+- **Search Results**: 50 results for home page, 12 results per page on dedicated search pages
+- **Statistics**: Real-time calculation from database with fallback to cached data
+
+### Search Implementation
+- **Database-Powered Search**: All search queries now use Supabase full-text search capabilities
+- **Real-Time Results**: Search results are fetched directly from database, not client-side filtering
+- **Optimized Performance**: Paginated search results reduce data transfer and improve response time
 
 ### Other Optimizations
 - TanStack Query handles caching and background updates
