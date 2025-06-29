@@ -17,6 +17,8 @@ import {
     Search,
     Eye,
     GitFork,
+    Brain,
+    MessageCircle,
     // MessageSquare removed as comments are handled separately
     Twitter,
     Facebook,
@@ -24,6 +26,7 @@ import {
     Link2,
 } from "lucide-react";
 import { useServer, useServerReadme } from "../hooks/useUnifiedData";
+import { useRelatedServers } from "../hooks/useRelatedServers";
 import StructuredReadme from "../components/StructuredReadme";
 import ServerCommentsWithReplies from "../components/ServerCommentsWithReplies";
 import { FavoriteButton } from "../components/FavoriteButton";
@@ -33,6 +36,7 @@ const ServerDetail: React.FC = () => {
     const { data: server, isLoading, error } = useServer(id!);
     console.log("server", server)
     const { data: readmeData, isLoading: readmeLoading } = useServerReadme(server?.owner+"_"+server?.name || '');
+    const { relatedServers, isLoading: relatedLoading } = useRelatedServers(server, 10);
     // Remove activeTab state as we're using StructuredReadme component
     const [copiedStates, setCopiedStates] = useState<{ [key: string]: boolean }>({});
     const [showShareMenu, setShowShareMenu] = useState(false);
@@ -602,62 +606,103 @@ const ServerDetail: React.FC = () => {
                                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                                     Related Servers
                                 </h3>
-                                <div className="space-y-3">
-                                    <Link
-                                        to="/servers/sqlite-mcp"
-                                        className="block p-3 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                                    >
-                                        <div className="flex items-center">
-                                            <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center mr-3">
-                                                <Database className="h-4 w-4 text-white" />
-                                            </div>
-                                            <div>
-                                                <div className="text-sm font-medium text-gray-900 dark:text-white">
-                                                    SQLite MCP
-                                                </div>
-                                                <div className="text-xs text-gray-500 dark:text-gray-400">
-                                                    Database operations
+                                {relatedLoading ? (
+                                    <div className="space-y-3">
+                                        {[...Array(3)].map((_, i) => (
+                                            <div key={i} className="animate-pulse p-3 border border-gray-200 dark:border-gray-600 rounded-lg">
+                                                <div className="flex items-center">
+                                                    <div className="w-8 h-8 bg-gray-200 dark:bg-gray-600 rounded-lg mr-3"></div>
+                                                    <div>
+                                                        <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded w-24 mb-1"></div>
+                                                        <div className="h-3 bg-gray-200 dark:bg-gray-600 rounded w-16"></div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </Link>
-                                    <Link
-                                        to="/servers/aws-s3-mcp"
-                                        className="block p-3 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                                    >
-                                        <div className="flex items-center">
-                                            <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center mr-3">
-                                                <Cloud className="h-4 w-4 text-white" />
-                                            </div>
-                                            <div>
-                                                <div className="text-sm font-medium text-gray-900 dark:text-white">
-                                                    AWS S3 MCP
-                                                </div>
-                                                <div className="text-xs text-gray-500 dark:text-gray-400">
-                                                    Cloud storage
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                    <Link
-                                        to="/servers/search-mcp"
-                                        className="block p-3 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                                    >
-                                        <div className="flex items-center">
-                                            <div className="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center mr-3">
-                                                <Search className="h-4 w-4 text-white" />
-                                            </div>
-                                            <div>
-                                                <div className="text-sm font-medium text-gray-900 dark:text-white">
-                                                    Search MCP
-                                                </div>
-                                                <div className="text-xs text-gray-500 dark:text-gray-400">
-                                                    File search
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                </div>
+                                        ))}
+                                    </div>
+                                ) : relatedServers && relatedServers.length > 0 ? (
+                                    <div className="space-y-3">
+                                        {relatedServers.map((relatedServer) => {
+                                            // Get category-based icon and color
+                                            const getServerIcon = () => {
+                                                const category = relatedServer.category?.toLowerCase() || '';
+                                                const tags = relatedServer.tags?.join(' ').toLowerCase() || '';
+                                                const combined = `${category} ${tags}`;
+                                                
+                                                if (combined.includes('database') || combined.includes('sql')) {
+                                                    return <Database className="h-4 w-4 text-white" />;
+                                                } else if (combined.includes('storage') || combined.includes('cloud') || combined.includes('s3')) {
+                                                    return <Cloud className="h-4 w-4 text-white" />;
+                                                } else if (combined.includes('search') || combined.includes('file')) {
+                                                    return <Search className="h-4 w-4 text-white" />;
+                                                } else if (combined.includes('communication') || combined.includes('slack') || combined.includes('messaging')) {
+                                                    return <MessageCircle className="h-4 w-4 text-white" />;
+                                                } else if (combined.includes('ai') || combined.includes('ml')) {
+                                                    return <Brain className="h-4 w-4 text-white" />;
+                                                } else if (combined.includes('development') || combined.includes('github') || combined.includes('git')) {
+                                                    return <GitBranch className="h-4 w-4 text-white" />;
+                                                } else {
+                                                    return <Folder className="h-4 w-4 text-white" />;
+                                                }
+                                            };
+                                            
+                                            const getServerColor = () => {
+                                                const category = relatedServer.category?.toLowerCase() || '';
+                                                const tags = relatedServer.tags?.join(' ').toLowerCase() || '';
+                                                const combined = `${category} ${tags}`;
+                                                
+                                                if (combined.includes('database') || combined.includes('sql')) {
+                                                    return 'bg-green-600';
+                                                } else if (combined.includes('storage') || combined.includes('cloud') || combined.includes('s3')) {
+                                                    return 'bg-purple-600';
+                                                } else if (combined.includes('search') || combined.includes('file')) {
+                                                    return 'bg-orange-600';
+                                                } else if (combined.includes('communication') || combined.includes('slack') || combined.includes('messaging')) {
+                                                    return 'bg-blue-600';
+                                                } else if (combined.includes('ai') || combined.includes('ml')) {
+                                                    return 'bg-pink-600';
+                                                } else if (combined.includes('development') || combined.includes('github') || combined.includes('git')) {
+                                                    return 'bg-indigo-600';
+                                                } else {
+                                                    return 'bg-gray-600';
+                                                }
+                                            };
+                                            
+                                            return (
+                                                <Link
+                                                    key={relatedServer.id}
+                                                    to={`/servers/${relatedServer.id}`}
+                                                    className="block p-3 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                                                >
+                                                    <div className="flex items-center justify-between">
+                                                        <div className="flex items-center flex-1 min-w-0">
+                                                            <div className={`w-8 h-8 ${getServerColor()} rounded-lg flex items-center justify-center mr-3 flex-shrink-0`}>
+                                                                {getServerIcon()}
+                                                            </div>
+                                                            <div className="min-w-0 flex-1">
+                                                                <div className="text-sm font-medium text-gray-900 dark:text-white truncate">
+                                                                    {relatedServer.name}
+                                                                </div>
+                                                                <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                                                                    {relatedServer.description?.en || relatedServer.description?.["zh-CN"] || 'No description available'}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex items-center space-x-2 text-xs text-gray-400 dark:text-gray-500 flex-shrink-0 ml-3">
+                                                            <Star className="h-3 w-3 text-yellow-500" />
+                                                            <span>{relatedServer.repository?.stars || 0}</span>
+                                                        </div>
+                                                    </div>
+                                                </Link>
+                                            );
+                                        })}
+                                    </div>
+                                ) : (
+                                    <div className="text-center py-6 text-gray-500 dark:text-gray-400">
+                                        <Search className="h-8 w-8 mx-auto mb-2 opacity-50" />
+                                        <p className="text-sm">No related servers found</p>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
