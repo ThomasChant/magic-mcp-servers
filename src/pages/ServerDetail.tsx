@@ -30,13 +30,14 @@ import { useRelatedServers } from "../hooks/useRelatedServers";
 import StructuredReadme from "../components/StructuredReadme";
 import ServerCommentsWithReplies from "../components/ServerCommentsWithReplies";
 import { FavoriteButton } from "../components/FavoriteButton";
+import ServerTooltip from "../components/ServerTooltip";
 
 const ServerDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const { data: server, isLoading, error } = useServer(id!);
     console.log("server", server)
     const { data: readmeData, isLoading: readmeLoading } = useServerReadme(server?.owner+"_"+server?.name || '');
-    const { relatedServers, isLoading: relatedLoading } = useRelatedServers(server, 10);
+    const { relatedServers, isLoading: relatedLoading } = useRelatedServers(server, 3);
     // Remove activeTab state as we're using StructuredReadme component
     const [copiedStates, setCopiedStates] = useState<{ [key: string]: boolean }>({});
     const [showShareMenu, setShowShareMenu] = useState(false);
@@ -668,32 +669,46 @@ const ServerDetail: React.FC = () => {
                                                 }
                                             };
                                             
+                                            const fullDescription = relatedServer.fullDescription || 
+                                                relatedServer.description?.en || 
+                                                relatedServer.description?.["zh-CN"] || 
+                                                'No description available';
+                                                
+                                            const shortDescription = fullDescription.length > 60 
+                                                ? fullDescription.substring(0, 60) + '...' 
+                                                : fullDescription;
+                                            
                                             return (
-                                                <Link
+                                                <ServerTooltip
                                                     key={relatedServer.id}
-                                                    to={`/servers/${relatedServer.id}`}
-                                                    className="block p-3 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                                                    server={relatedServer}
+                                                    delay={300}
                                                 >
-                                                    <div className="flex items-center justify-between">
-                                                        <div className="flex items-center flex-1 min-w-0">
-                                                            <div className={`w-8 h-8 ${getServerColor()} rounded-lg flex items-center justify-center mr-3 flex-shrink-0`}>
-                                                                {getServerIcon()}
+                                                    <Link
+                                                        to={`/servers/${relatedServer.id}`}
+                                                        className="block p-3 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                                                    >
+                                                        <div className="flex items-center justify-between">
+                                                            <div className="flex items-center flex-1 min-w-0">
+                                                                <div className={`w-8 h-8 ${getServerColor()} rounded-lg flex items-center justify-center mr-3 flex-shrink-0`}>
+                                                                    {getServerIcon()}
+                                                                </div>
+                                                                <div className="min-w-0 flex-1">
+                                                                    <div className="text-sm font-medium text-gray-900 dark:text-white truncate" title={relatedServer.name}>
+                                                                        {relatedServer.name}
+                                                                    </div>
+                                                                    <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                                                                        {shortDescription}
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div className="min-w-0 flex-1">
-                                                                <div className="text-sm font-medium text-gray-900 dark:text-white truncate">
-                                                                    {relatedServer.name}
-                                                                </div>
-                                                                <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
-                                                                    {relatedServer.description?.en || relatedServer.description?.["zh-CN"] || 'No description available'}
-                                                                </div>
+                                                            <div className="flex items-center space-x-2 text-xs text-gray-400 dark:text-gray-500 flex-shrink-0 ml-3">
+                                                                <Star className="h-3 w-3 text-yellow-500" />
+                                                                <span>{relatedServer.repository?.stars || 0}</span>
                                                             </div>
                                                         </div>
-                                                        <div className="flex items-center space-x-2 text-xs text-gray-400 dark:text-gray-500 flex-shrink-0 ml-3">
-                                                            <Star className="h-3 w-3 text-yellow-500" />
-                                                            <span>{relatedServer.repository?.stars || 0}</span>
-                                                        </div>
-                                                    </div>
-                                                </Link>
+                                                    </Link>
+                                                </ServerTooltip>
                                             );
                                         })}
                                     </div>
