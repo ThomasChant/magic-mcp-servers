@@ -13,25 +13,43 @@ import {
     Grid3X3,
     List,
     ChevronDown,
+    ChevronLeft,
+    ChevronRight,
 } from "lucide-react";
-import { useServersByCategory, useCategories } from "../hooks/useUnifiedData";
+import { useServersByCategoryPaginated, useCategories, type PaginatedResult } from "../hooks/useUnifiedData";
 import type { MCPServer, SearchFilters, SortOption } from "../types";
 
 const CategoryDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
-    const { data: servers, isLoading: serversLoading } = useServersByCategory(
-        id!
-    );
     const { data: categories } = useCategories();
 
     const [searchQuery, setSearchQuery] = useState("");
     const [filters, setFilters] = useState<SearchFilters>({});
     const [sortBy, setSortBy] = useState<SortOption>({
-        key: "quality",
+        key: "quality_score",
         label: "Quality Score",
         direction: "desc",
     });
     const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+    const [currentPage, setCurrentPage] = useState(1);
+
+    // Use paginated hook for better performance
+    const { 
+        data: paginatedResult, 
+        isLoading: serversLoading 
+    } = useServersByCategoryPaginated(
+        id!,
+        currentPage,
+        12, // items per page
+        sortBy.key,
+        sortBy.direction
+    );
+
+    const servers = paginatedResult?.data || [];
+    const totalServers = paginatedResult?.total || 0;
+    const hasNextPage = paginatedResult?.hasNextPage || false;
+    const hasPreviousPage = paginatedResult?.hasPreviousPage || false;
+    const totalPages = paginatedResult?.totalPages || 0;
 
     const category = categories?.find((cat) => cat.id === id);
 
@@ -39,95 +57,17 @@ const CategoryDetail: React.FC = () => {
         { key: "name", label: "Name", direction: "asc" },
         { key: "stars", label: "Stars", direction: "desc" },
         { key: "downloads", label: "Downloads", direction: "desc" },
-        { key: "quality", label: "Quality Score", direction: "desc" },
-        { key: "updated", label: "Last Updated", direction: "desc" },
+        { key: "quality_score", label: "Quality Score", direction: "desc" },
+        { key: "last_updated", label: "Last Updated", direction: "desc" },
     ];
 
-    const filteredAndSortedServers = useMemo(() => {
-        if (!servers) return [];
+    // Reset page when filters change
+    React.useEffect(() => {
+        setCurrentPage(1);
+    }, [sortBy, filters]);
 
-        const filtered = servers.filter((server) => {
-            // Search filter
-            if (searchQuery) {
-                const query = searchQuery.toLowerCase();
-                if (
-                    !server.name.toLowerCase().includes(query) &&
-                    !server.description["zh-CN"].toLowerCase().includes(query) &&
-                    !server.tags.some((tag) =>
-                        tag.toLowerCase().includes(query)
-                    )
-                ) {
-                    return false;
-                }
-            }
-
-            // Subcategory filter
-            if (
-                filters.subcategory &&
-                !server.subcategory.includes(filters.subcategory)
-            ) {
-                return false;
-            }
-
-            // Featured/verified filter
-            if (filters.featured && !server.featured) {
-                return false;
-            }
-
-            if (filters.verified && !server.verified) {
-                return false;
-            }
-
-            // Quality score filter
-            if (
-                filters.qualityScore &&
-                server.quality.score < filters.qualityScore
-            ) {
-                return false;
-            }
-
-            return true;
-        });
-
-        // Sorting
-        filtered.sort((a, b) => {
-            let aValue: number | string;
-            let bValue: number | string;
-
-            switch (sortBy.key) {
-                case "name":
-                    aValue = a.name.toLowerCase();
-                    bValue = b.name.toLowerCase();
-                    break;
-                case "stars":
-                    aValue = a.repository.stars;
-                    bValue = b.repository.stars;
-                    break;
-                case "downloads":
-                    aValue = a.usage.downloads;
-                    bValue = b.usage.downloads;
-                    break;
-                case "quality":
-                    aValue = a.quality.score;
-                    bValue = b.quality.score;
-                    break;
-                case "updated":
-                    aValue = new Date(a.updatedAt || a.stats.lastUpdated || new Date()).getTime();
-                    bValue = new Date(b.updatedAt || b.stats.lastUpdated || new Date()).getTime();
-                    break;
-                default:
-                    return 0;
-            }
-
-            if (sortBy.direction === "asc") {
-                return aValue > bValue ? 1 : -1;
-            } else {
-                return aValue < bValue ? 1 : -1;
-            }
-        });
-
-        return filtered;
-    }, [servers, searchQuery, filters, sortBy]);
+    // Server data is already filtered and sorted on the server side
+    const filteredAndSortedServers = servers;
 
     const ServerCard: React.FC<{ server: MCPServer }> = ({ server }) => {
         if (viewMode === "list") {
@@ -392,7 +332,7 @@ const CategoryDetail: React.FC = () => {
                                                 color: category.color,
                                             }}
                                         >
-                                            {filteredAndSortedServers.length} servers
+                                            {totalServers} servers
                                         </span>
                                     </div>
                                     <p className="text-lg text-gray-600 dark:text-gray-300">
@@ -616,7 +556,8 @@ const CategoryDetail: React.FC = () => {
                         {/* Results Header */}
                         <div className="mb-6 flex items-center justify-between">
                             <p className="text-gray-600 dark:text-gray-400">
-                                Showing {filteredAndSortedServers.length} of {servers?.length || 0} servers
+                                Showing {filteredAndSortedServers.length} of {totalServers} servers
+                                (Page {currentPage} of {totalPages})
                             </p>
                         </div>
 
@@ -685,12 +626,74 @@ const CategoryDetail: React.FC = () => {
                             </div>
                         )}
 
-                        {/* Load More Button - Placeholder for pagination */}
-                        {!serversLoading && filteredAndSortedServers.length > 0 && filteredAndSortedServers.length >= 9 && (
-                            <div className="text-center mt-12">
-                                <button className="px-8 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                                    Load More Servers
-                                </button>
+                        {/* Pagination */}
+                        {!serversLoading && totalPages > 1 && (
+                            <div className="mt-12 flex items-center justify-between">
+                                <div className="text-sm text-gray-600 dark:text-gray-400">
+                                    Showing <span className="font-medium">{filteredAndSortedServers.length}</span> of{" "}
+                                    <span className="font-medium">{totalServers}</span> servers
+                                </div>
+
+                                <div className="flex items-center space-x-2">
+                                    <button
+                                        onClick={() => setCurrentPage(currentPage - 1)}
+                                        disabled={!hasPreviousPage}
+                                        className="px-3 py-2 text-sm text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                                    >
+                                        <ChevronLeft className="h-4 w-4 mr-1" />
+                                        Previous
+                                    </button>
+
+                                    <div className="flex items-center space-x-1">
+                                        {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                                            let pageNum;
+                                            if (totalPages <= 5) {
+                                                pageNum = i + 1;
+                                            } else if (currentPage <= 3) {
+                                                pageNum = i + 1;
+                                            } else if (currentPage >= totalPages - 2) {
+                                                pageNum = totalPages - 4 + i;
+                                            } else {
+                                                pageNum = currentPage - 2 + i;
+                                            }
+
+                                            return (
+                                                <button
+                                                    key={pageNum}
+                                                    onClick={() => setCurrentPage(pageNum)}
+                                                    className={`px-3 py-2 text-sm rounded-md ${
+                                                        currentPage === pageNum
+                                                            ? "bg-primary-600 text-white"
+                                                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                                    }`}
+                                                >
+                                                    {pageNum}
+                                                </button>
+                                            );
+                                        })}
+
+                                        {totalPages > 5 && currentPage < totalPages - 2 && (
+                                            <>
+                                                <span className="px-2 text-gray-500 dark:text-gray-400">...</span>
+                                                <button
+                                                    onClick={() => setCurrentPage(totalPages)}
+                                                    className="px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+                                                >
+                                                    {totalPages}
+                                                </button>
+                                            </>
+                                        )}
+                                    </div>
+
+                                    <button
+                                        onClick={() => setCurrentPage(currentPage + 1)}
+                                        disabled={!hasNextPage}
+                                        className="px-3 py-2 text-sm text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                                    >
+                                        Next
+                                        <ChevronRight className="h-4 w-4 ml-1" />
+                                    </button>
+                                </div>
                             </div>
                         )}
                     </div>

@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { useAppStore } from "../store/useAppStore";
 import ParticleHero from "../components/ParticleHero";
-import { useServers, useCategories } from "../hooks/useUnifiedData";
+import { useHomePageData, useServerStats, useSearchServers } from "../hooks/useUnifiedData";
 import CategorySection from "../components/Home/CategorySection";
 
 // Helper functions moved outside component to prevent recreation on every render
@@ -89,63 +89,69 @@ const formatLastUpdated = (dateString: string) => {
 
 const Home: React.FC = () => {
     const { searchQuery, setSearchQuery } = useAppStore();
-    const { data: allServers } = useServers();
-    const { data: categories } = useCategories();
+    const { data: homePageData, isLoading: homeDataLoading } = useHomePageData();
+    const { data: serverStats } = useServerStats();
+    const { data: searchResults } = useSearchServers(searchQuery);
     
-    // Memoize expensive calculations
+    // Extract categories and servers from home page data
+    const categories = useMemo(() => 
+        homePageData?.map(item => item.category) || [], 
+        [homePageData]
+    );
+    
+    // Create a flat list of all servers for search functionality
+    const allServers = useMemo(() => {
+        if (searchQuery.trim()) {
+            return searchResults || [];
+        }
+        return homePageData?.flatMap(item => item.servers) || [];
+    }, [homePageData, searchResults, searchQuery]);
+    
+    // Use server stats for statistics display
     const statistics = useMemo(() => {
-        // Use all servers for overall statistics, not filtered ones
-        if (!allServers || allServers.length === 0) {
+        if (serverStats) {
             return {
-                totalServers: 0,
-                totalDownloads: 0,
-                uniqueCategories: 0,
-                averageQualityScore: 90
+                totalServers: serverStats.totalServers,
+                totalDownloads: serverStats.totalDownloads,
+                uniqueCategories: serverStats.uniqueCategories,
+                averageQualityScore: serverStats.averageQualityScore
             };
         }
         
-        const totalServers = categories?.reduce((sum, cat) => sum + cat.serverCount, 0) || 0;
-        const totalDownloads = allServers.reduce((sum, server) => sum + (server.usage?.downloads || 0), 0);
-        const uniqueCategories = categories?.length || 0;
-        const averageQualityScore = Math.round(
-            allServers.reduce((sum, server) => sum + (server.quality?.score || 90), 0) / allServers.length
-        );
-        
         return {
-            totalServers,
-            totalDownloads,
-            uniqueCategories,
-            averageQualityScore
+            totalServers: 0,
+            totalDownloads: 0,
+            uniqueCategories: 0,
+            averageQualityScore: 90
         };
-    }, [allServers, categories]);
+    }, [serverStats]);
 
-    // Filter servers based on search query
+    // Filter servers based on search query (for search mode)
     const filteredServers = useMemo(() => {
-        if (!allServers || !searchQuery.trim()) return allServers;
-        
-        const query = searchQuery.toLowerCase().trim();
-        return allServers.filter(server => 
-            server.name.toLowerCase().includes(query) ||
-            server.description["zh-CN"].toLowerCase().includes(query) ||
-            server.description.en.toLowerCase().includes(query) ||
-            (server.fullDescription && server.fullDescription.toLowerCase().includes(query)) ||
-            server.tags.some(tag => tag.toLowerCase().includes(query)) ||
-            server.category.toLowerCase().includes(query) ||
-            (server.owner && server.owner.toLowerCase().includes(query))
-        );
-    }, [allServers, searchQuery]);
+        if (!searchQuery.trim()) return null; // Don't filter when no search query
+        return searchResults || [];
+    }, [searchResults, searchQuery]);
 
-    // Group servers by category
+    // Group servers by category - use homePageData when not searching
     const serversByCategory = useMemo(() => {
-        if (!filteredServers || !categories) return {};
+        if (searchQuery.trim() && filteredServers) {
+            // When searching, group search results by category
+            const grouped: Record<string, typeof filteredServers> = {};
+            categories.forEach(category => {
+                grouped[category.id] = filteredServers.filter(server => server.category === category.id);
+            });
+            return grouped;
+        } else if (homePageData) {
+            // When not searching, use the optimized home page data
+            const grouped: Record<string, typeof allServers> = {};
+            homePageData.forEach(item => {
+                grouped[item.category.id] = item.servers;
+            });
+            return grouped;
+        }
         
-        const grouped: Record<string, typeof filteredServers> = {};
-        categories.forEach(category => {
-            grouped[category.id] = filteredServers.filter(server => server.category === category.id);
-        });
-        
-        return grouped;
-    }, [filteredServers, categories]);
+        return {};
+    }, [homePageData, filteredServers, categories, searchQuery]);
 
     return (
         <div className="min-h-screen bg-white dark:bg-gray-900">
@@ -288,7 +294,7 @@ const Home: React.FC = () => {
                         </div>
                     )}
 
-                    {categories && allServers ? (
+                    {!homeDataLoading && categories ? (
                         categories.map((category) => {
                             const categoryServers = serversByCategory[category.id] || [];
                             return (

@@ -240,12 +240,43 @@ const { setLanguage, toggleTheme, setSearchQuery } = useAppStore();
 
 ### Data Fetching Patterns
 ```typescript
-// Using unified data hooks (uses Supabase)
-const { data: servers, isLoading, error } = useServers();
-const { data: server } = useServer(serverId);
-const { data: featuredServers } = useFeaturedServers();
-const { data: popularServers } = usePopularServers();
-const { data: searchResults } = useSearchServers(query);
+// IMPORTANT: Use optimized hooks for better performance
+
+// For pages requiring paginated server data
+const { data: paginatedResult, isLoading, error } = useServersPaginated(
+  page, 
+  limit, 
+  sortBy, 
+  sortOrder, 
+  filters
+);
+
+// For home page - optimized with limited servers per category
+const { data: homePageData } = useHomePageData();
+const { data: serverStats } = useServerStats();
+
+// For category pages - with pagination
+const { data: categoryResult } = useServersByCategoryPaginated(
+  categoryId, 
+  page, 
+  limit, 
+  sortBy, 
+  sortOrder
+);
+
+// For search - with pagination
+const { data: searchResult } = useSearchServersPaginated(
+  query, 
+  page, 
+  limit, 
+  sortBy, 
+  sortOrder
+);
+
+// Legacy hooks (avoid for performance)
+const { data: servers } = useServers(); // WARNING: Loads all servers
+const { data: server } = useServer(serverId); // OK for single server
+const { data: featuredServers } = useFeaturedServers(); // OK for small datasets
 
 // Check current data source (always 'supabase' now)
 const dataSource = getDataSource(); // 'supabase'
@@ -341,6 +372,35 @@ Run tests with: `npm test` or `npx playwright test`
 
 ## Performance Considerations
 
+The application implements several performance optimizations:
+
+### Database Query Optimization
+- **Paginated Data Loading**: All major data fetching now uses server-side pagination to avoid loading large datasets
+- **Optimized Home Page**: `useHomePageData()` loads only necessary data (6 servers per category) instead of all servers
+- **Server-Side Filtering**: Search and filtering operations happen in Supabase, reducing client-side processing
+- **Lightweight Statistics**: `useServerStats()` fetches only aggregated data for dashboard statistics
+
+### Recommended Hook Usage
+```typescript
+// ✅ RECOMMENDED: Use paginated hooks
+useServersPaginated(page, limit, sortBy, sortOrder, filters)
+useServersByCategoryPaginated(categoryId, page, limit, sortBy, sortOrder)  
+useSearchServersPaginated(query, page, limit, sortBy, sortOrder)
+useHomePageData() // Optimized for home page
+useServerStats() // Lightweight statistics
+
+// ⚠️ AVOID: These load all data at once
+useServers() // WARNING: Loads all servers - use only when necessary
+useSearchServers(query) // Use paginated version instead
+```
+
+### Data Loading Strategy
+- **Home Page**: Loads categories + 6 servers per category + aggregated stats
+- **Servers Page**: 12 servers per page with server-side filtering and sorting
+- **Category Page**: 12 servers per page for specific category with pagination
+- **Search Results**: 12 results per page with real-time search
+
+### Other Optimizations
 - TanStack Query handles caching and background updates
 - Images are optimized and lazy-loaded where appropriate
 - Bundle size is optimized through Vite's tree-shaking

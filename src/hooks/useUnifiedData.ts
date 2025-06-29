@@ -7,7 +7,13 @@ import {
   useSupabasePopularServers,
   useSupabaseRecentServers,
   useSupabaseSearchServers,
-  useSupabaseServerReadme
+  useSupabaseServerReadme,
+  useSupabaseServersPaginated,
+  useSupabaseServerStats,
+  useSupabaseServersByCategoryPaginated,
+  useSupabaseHomePageData,
+  useSupabaseSearchServersPaginated,
+  type PaginatedResult
 } from "./useSupabaseData";
 
 // Unified data hooks - now only using Supabase
@@ -46,6 +52,56 @@ export const useRecentServers = () => {
 export const useSearchServers = (query: string) => {
   return useSupabaseSearchServers(query);
 };
+
+// Optimized hooks for better performance
+export const useServersPaginated = (
+  page: number = 1,
+  limit: number = 12,
+  sortBy: string = 'stars',
+  sortOrder: 'asc' | 'desc' = 'desc',
+  filters?: {
+    search?: string;
+    category?: string;
+    platforms?: string[];
+    languages?: string[];
+    featured?: boolean;
+    verified?: boolean;
+    qualityScore?: number;
+  }
+) => {
+  return useSupabaseServersPaginated(page, limit, sortBy, sortOrder, filters);
+};
+
+export const useServerStats = () => {
+  return useSupabaseServerStats();
+};
+
+export const useServersByCategoryPaginated = (
+  categoryId: string,
+  page: number = 1,
+  limit: number = 12,
+  sortBy: string = 'stars',
+  sortOrder: 'asc' | 'desc' = 'desc'
+) => {
+  return useSupabaseServersByCategoryPaginated(categoryId, page, limit, sortBy, sortOrder);
+};
+
+export const useHomePageData = () => {
+  return useSupabaseHomePageData();
+};
+
+export const useSearchServersPaginated = (
+  query: string,
+  page: number = 1,
+  limit: number = 12,
+  sortBy: string = 'stars',
+  sortOrder: 'asc' | 'desc' = 'desc'
+) => {
+  return useSupabaseSearchServersPaginated(query, page, limit, sortBy, sortOrder);
+};
+
+// Export PaginatedResult type for component use
+export type { PaginatedResult };
 
 // Data source info - always Supabase now
 export const getDataSource = () => 'supabase';

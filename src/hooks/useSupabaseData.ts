@@ -227,7 +227,7 @@ export const useSupabaseCategories = () => {
   });
 };
 
-// Servers hook with enhanced data
+// Servers hook with enhanced data - WARNING: Loads all servers, use paginated version for better performance
 export const useSupabaseServers = () => {
   return useQuery({
     queryKey: ["supabase", "servers"],
@@ -244,6 +244,286 @@ export const useSupabaseServers = () => {
       return (data || []).map(transformServer);
     },
     staleTime: 5 * 60 * 1000,
+  });
+};
+
+// Paginated servers hook - optimized for large datasets
+export interface PaginatedResult<T> {
+  data: T[];
+  total: number;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+  currentPage: number;
+  totalPages: number;
+}
+
+export const useSupabaseServersPaginated = (
+  page: number = 1,
+  limit: number = 12,
+  sortBy: string = 'stars',
+  sortOrder: 'asc' | 'desc' = 'desc',
+  filters?: {
+    search?: string;
+    category?: string;
+    platforms?: string[];
+    languages?: string[];
+    featured?: boolean;
+    verified?: boolean;
+    qualityScore?: number;
+  }
+) => {
+  return useQuery({
+    queryKey: ["supabase", "servers", "paginated", page, limit, sortBy, sortOrder, filters],
+    queryFn: async (): Promise<PaginatedResult<MCPServer>> => {
+      let query = supabase
+        .from('servers_with_details')
+        .select('*', { count: 'exact' });
+
+      // Apply filters
+      if (filters?.search) {
+        query = query.or(`name.ilike.%${filters.search}%,description_en.ilike.%${filters.search}%,full_description.ilike.%${filters.search}%`);
+      }
+      
+      if (filters?.category) {
+        query = query.eq('category_id', filters.category);
+      }
+
+      if (filters?.featured) {
+        query = query.eq('featured', true);
+      }
+
+      if (filters?.verified) {
+        query = query.eq('verified', true);
+      }
+
+      if (filters?.qualityScore) {
+        query = query.gte('quality_score', filters.qualityScore);
+      }
+
+      // Apply sorting
+      query = query.order(sortBy, { ascending: sortOrder === 'asc' });
+
+      // Apply pagination
+      const offset = (page - 1) * limit;
+      query = query.range(offset, offset + limit - 1);
+
+      const { data, error, count } = await query;
+
+      if (error) {
+        throw new Error(`Failed to fetch paginated servers: ${error.message}`);
+      }
+
+      const total = count || 0;
+      const totalPages = Math.ceil(total / limit);
+
+      return {
+        data: (data || []).map(transformServer),
+        total,
+        hasNextPage: page < totalPages,
+        hasPreviousPage: page > 1,
+        currentPage: page,
+        totalPages,
+      };
+    },
+    staleTime: 2 * 60 * 1000, // 2 minutes for paginated results
+  });
+};
+
+// Server stats for home page - lightweight version
+export const useSupabaseServerStats = () => {
+  return useQuery({
+    queryKey: ["supabase", "server-stats"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('servers_with_details')
+        .select('category_id, quality_score, downloads, stars, verified, featured');
+
+      if (error) {
+        throw new Error(`Failed to fetch server stats: ${error.message}`);
+      }
+
+      // Calculate aggregated stats
+      const totalServers = data?.length || 0;
+      const totalDownloads = data?.reduce((sum, server) => sum + (server.downloads || 0), 0) || 0;
+      const averageQualityScore = data?.length 
+        ? Math.round(data.reduce((sum, server) => sum + (server.quality_score || 0), 0) / data.length)
+        : 0;
+      const featuredCount = data?.filter(s => s.featured).length || 0;
+      const verifiedCount = data?.filter(s => s.verified).length || 0;
+
+      // Get unique categories count
+      const uniqueCategories = new Set(data?.map(s => s.category_id)).size;
+
+      return {
+        totalServers,
+        totalDownloads,
+        averageQualityScore,
+        uniqueCategories,
+        featuredCount,
+        verifiedCount,
+      };
+    },
+    staleTime: 10 * 60 * 1000, // 10 minutes
+  });
+};
+
+// Servers by category with pagination
+export const useSupabaseServersByCategoryPaginated = (
+  categoryId: string,
+  page: number = 1,
+  limit: number = 12,
+  sortBy: string = 'stars',
+  sortOrder: 'asc' | 'desc' = 'desc'
+) => {
+  return useQuery({
+    queryKey: ["supabase", "servers", "category", categoryId, "paginated", page, limit, sortBy, sortOrder],
+    queryFn: async (): Promise<PaginatedResult<MCPServer>> => {
+      if (!categoryId) {
+        return {
+          data: [],
+          total: 0,
+          hasNextPage: false,
+          hasPreviousPage: false,
+          currentPage: page,
+          totalPages: 0,
+        };
+      }
+
+      let query = supabase
+        .from('servers_with_details')
+        .select('*', { count: 'exact' })
+        .eq('category_id', categoryId);
+
+      // Apply sorting
+      query = query.order(sortBy, { ascending: sortOrder === 'asc' });
+
+      // Apply pagination
+      const offset = (page - 1) * limit;
+      query = query.range(offset, offset + limit - 1);
+
+      const { data, error, count } = await query;
+
+      if (error) {
+        throw new Error(`Failed to fetch servers by category: ${error.message}`);
+      }
+
+      const total = count || 0;
+      const totalPages = Math.ceil(total / limit);
+
+      return {
+        data: (data || []).map(transformServer),
+        total,
+        hasNextPage: page < totalPages,
+        hasPreviousPage: page > 1,
+        currentPage: page,
+        totalPages,
+      };
+    },
+    enabled: !!categoryId,
+    staleTime: 5 * 60 * 1000,
+  });
+};
+
+// Home page optimized hook - gets categories with limited servers for each
+export const useSupabaseHomePageData = () => {
+  return useQuery({
+    queryKey: ["supabase", "home-page-data"],
+    queryFn: async () => {
+      // Get categories
+      const categoriesResult = await supabase
+        .from('categories')
+        .select('*')
+        .order('name_en');
+
+      if (categoriesResult.error) {
+        throw new Error(`Failed to fetch categories: ${categoriesResult.error.message}`);
+      }
+
+      // Get top servers for each category (limit 6 per category)
+      const categoriesWithServers = await Promise.all(
+        (categoriesResult.data || []).map(async (category) => {
+          const serversResult = await supabase
+            .from('servers_with_details')
+            .select('*')
+            .eq('category_id', category.id)
+            .order('stars', { ascending: false })
+            .limit(6);
+
+          if (serversResult.error) {
+            console.warn(`Failed to fetch servers for category ${category.id}:`, serversResult.error);
+            return {
+              category: transformCategory(category),
+              servers: [],
+            };
+          }
+
+          return {
+            category: transformCategory(category),
+            servers: (serversResult.data || []).map(transformServer),
+          };
+        })
+      );
+
+      return categoriesWithServers;
+    },
+    staleTime: 10 * 60 * 1000, // 10 minutes
+  });
+};
+
+// Optimized search with pagination
+export const useSupabaseSearchServersPaginated = (
+  query: string,
+  page: number = 1,
+  limit: number = 12,
+  sortBy: string = 'stars',
+  sortOrder: 'asc' | 'desc' = 'desc'
+) => {
+  return useQuery({
+    queryKey: ["supabase", "servers", "search", "paginated", query, page, limit, sortBy, sortOrder],
+    queryFn: async (): Promise<PaginatedResult<MCPServer>> => {
+      if (!query.trim()) {
+        return {
+          data: [],
+          total: 0,
+          hasNextPage: false,
+          hasPreviousPage: false,
+          currentPage: page,
+          totalPages: 0,
+        };
+      }
+
+      let queryBuilder = supabase
+        .from('servers_with_details')
+        .select('*', { count: 'exact' })
+        .or(`name.ilike.%${query}%,description_en.ilike.%${query}%,full_description.ilike.%${query}%`);
+
+      // Apply sorting
+      queryBuilder = queryBuilder.order(sortBy, { ascending: sortOrder === 'asc' });
+
+      // Apply pagination
+      const offset = (page - 1) * limit;
+      queryBuilder = queryBuilder.range(offset, offset + limit - 1);
+
+      const { data, error, count } = await queryBuilder;
+
+      if (error) {
+        throw new Error(`Failed to search servers: ${error.message}`);
+      }
+
+      const total = count || 0;
+      const totalPages = Math.ceil(total / limit);
+
+      return {
+        data: (data || []).map(transformServer),
+        total,
+        hasNextPage: page < totalPages,
+        hasPreviousPage: page > 1,
+        currentPage: page,
+        totalPages,
+      };
+    },
+    enabled: !!query.trim(),
+    staleTime: 2 * 60 * 1000, // 2 minutes for search results
   });
 };
 
