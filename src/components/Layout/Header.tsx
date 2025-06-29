@@ -56,12 +56,13 @@ const Header: React.FC = () => {
                     <div className="flex items-center">
                         <Link to="/" className="flex items-center">
                             <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center mr-3">
-                                <span className="text-white text-sm font-bold">
+                                {/* <span className="text-white text-sm font-bold">
                                     M
-                                </span>
+                                </span> */}
+                                <img src="/logo.jpeg" alt="Magic MCP" className="w-8 h-8" />
                             </div>
                             <span className="text-xl font-bold text-gray-900 dark:text-white">
-                                MCP Hub
+                                Magic MCP
                             </span>
                         </Link>
                     </div>

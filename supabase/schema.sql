@@ -1,5 +1,5 @@
 -- Supabase Schema for MCP Server Registry
--- This file defines the database schema for the MCP Hub application
+-- This file defines the database schema for the Magic MCP application
 
 -- Enable required extensions
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";

@@ -1,6 +1,6 @@
-# MCP Hub - Model Context Protocol 服务器发现平台
+# Magic MCP - Model Context Protocol 服务器发现平台
 
-MCP Hub 是一个专为 Model Context Protocol (MCP) 生态系统设计的服务器发现和展示平台。我们致力于为开发者提供最全面、最友好的 MCP 服务器目录，帮助您快速找到并集成适合的解决方案。
+Magic MCP 是一个专为 Model Context Protocol (MCP) 生态系统设计的服务器发现和展示平台。我们致力于为开发者提供最全面、最友好的 MCP 服务器目录，帮助您快速找到并集成适合的解决方案。
 
 ## 🚀 项目特色
 
@@ -202,4 +202,4 @@ mcp-hub-react/
 
 ---
 
-感谢您对 MCP Hub 的关注和支持！🚀
+感谢您对 Magic MCP 的关注和支持！🚀

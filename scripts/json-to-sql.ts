@@ -329,7 +329,7 @@ function generateServerDeploymentSQL(): string {
 }
 
 function generateCompleteSQL(): string {
-  let sql = `-- MCP Hub Database Data Import\n`;
+  let sql = `-- Magic MCP Database Data Import\n`;
   sql += `-- Generated on ${new Date().toISOString()}\n`;
   sql += `-- This file contains all data converted from JSON files\n\n`;
   
