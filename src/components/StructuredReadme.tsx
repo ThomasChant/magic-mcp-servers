@@ -119,15 +119,15 @@ const StructuredReadme: React.FC<StructuredReadmeProps> = ({readme, copiedStates
             p: ({ ...props }) => (
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4" {...props} />
             ),
-            // Custom list components
+            // Custom list components - override prose defaults
             ul: ({ ...props }) => (
-              <ul className="list-disc list-outside ml-6 space-y-1 text-gray-600 dark:text-gray-300 my-4" {...props} />
+              <ul className="!list-disc !list-outside !ml-6 !pl-0 space-y-2 text-gray-600 dark:text-gray-300 !my-4" {...props} />
             ),
             ol: ({ ...props }) => (
-              <ol className="list-decimal list-outside ml-6 space-y-1 text-gray-600 dark:text-gray-300 my-4" {...props} />
+              <ol className="!list-decimal !list-outside !ml-6 !pl-0 space-y-2 text-gray-600 dark:text-gray-300 !my-4" {...props} />
             ),
             li: ({ ...props }) => (
-              <li className="pl-2" {...props} />
+              <li className="!ml-0 !pl-2 leading-relaxed" {...props} />
             ),
             // Custom heading components
             h1: ({ ...props }) => (
@@ -181,6 +181,32 @@ const StructuredReadme: React.FC<StructuredReadmeProps> = ({readme, copiedStates
           .dark details > *:not(summary) {
             background-color: rgb(17 24 39);
             border-top-color: rgb(75 85 99);
+          }
+          
+          /* Ensure list markers are visible and properly positioned */
+          .prose ul {
+            list-style-type: disc !important;
+            list-style-position: outside !important;
+            margin-left: 1.5rem !important;
+            padding-left: 0 !important;
+          }
+          
+          .prose ol {
+            list-style-type: decimal !important;
+            list-style-position: outside !important;
+            margin-left: 1.5rem !important;
+            padding-left: 0 !important;
+          }
+          
+          .prose li {
+            margin-left: 0 !important;
+            padding-left: 0.5rem !important;
+            display: list-item !important;
+          }
+          
+          .prose ul ul, .prose ol ol, .prose ul ol, .prose ol ul {
+            margin-left: 1.5rem !important;
+            margin-top: 0.5rem !important;
           }
         `}</style>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-8">

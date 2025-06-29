@@ -50,7 +50,12 @@ const Servers: React.FC = () => {
 
     // Build filters for the hook
     const hookFilters = useMemo(() => {
-        const result: any = {};
+        const result: {
+            search?: string;
+            category?: string;
+            featured?: boolean;
+            verified?: boolean;
+        } = {};
         
         if (sidebarSearch.trim()) {
             result.search = sidebarSearch.trim();
