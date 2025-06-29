@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Star } from "lucide-react";
-import { useCategories } from "../hooks/useUnifiedData";
+import { useCategories, useServerStats } from "../hooks/useUnifiedData";
 import { useAppStore } from "../store/useAppStore";
-import { useServers } from "../hooks/useUnifiedData";
 import { useFeaturedServersByCategory, getFeaturedServersByCategory } from "../hooks/useFeaturedServers";
 
 const Categories: React.FC = () => {
   const [activeTab, setActiveTab] = useState("database");
   const { data: categories, isLoading } = useCategories();
-  const { data: servers } = useServers();
+  const { data: serverStats } = useServerStats();
   const { data: featuredServers } = useFeaturedServersByCategory();
   const { language } = useAppStore();
   const isZh = language === "zh-CN";
@@ -18,12 +17,10 @@ const Categories: React.FC = () => {
   const mainCategories = categories?.sort((a, b) => b.serverCount - a.serverCount)?.slice(0, 6) || [];
   const additionalCategories = categories?.slice(6) || [];
   
-  // Calculate total stats from actual server data
-  console.log('servers count0', servers?.length);
-  console.log('servers count1', categories?.reduce((sum, cat) => sum + cat.serverCount, 0));
-  const totalServers = categories?.reduce((sum, cat) => sum + cat.serverCount, 0) || 0;
-  const totalDownloads = servers?.reduce((sum, server) => sum + (server.usage?.downloads || 0), 0) || 0;
-  const averageUptime = 98; // This could be calculated from server health data if available
+  // Use consistent stats from serverStats hook  
+  const totalServers = serverStats?.totalServers || 0;
+  const averageStars = serverStats?.averageStars || 0;
+  const activeRepos = serverStats?.activeRepos || 0;
 
   if (isLoading || !categories) {
     return (
@@ -104,18 +101,20 @@ const Categories: React.FC = () => {
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">
-                {totalDownloads >= 1000 ? `${Math.floor(totalDownloads / 1000)}K+` : `${totalDownloads}+`}
+                {averageStars >= 1000 
+                  ? `${Math.floor(averageStars / 1000)}K` 
+                  : averageStars.toLocaleString()}
               </div>
               <div className="text-gray-600 dark:text-gray-400">
-                {isZh ? "下载量" : "Downloads"}
+                {isZh ? "平均星标" : "Avg Stars"}
               </div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-orange-600 dark:text-orange-400">
-                {averageUptime}%
+                {activeRepos}
               </div>
               <div className="text-gray-600 dark:text-gray-400">
-                {isZh ? "在线率" : "Uptime"}
+                {isZh ? "活跃仓库" : "Active Repos"}
               </div>
             </div>
           </div>

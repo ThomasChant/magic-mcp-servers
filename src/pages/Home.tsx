@@ -29,7 +29,6 @@ import CategorySection from "../components/Home/CategorySection";
 
 // Helper functions moved outside component to prevent recreation on every render
 const getCategoryIcon = (category: string) => {
-    console.log("category", category);
     switch (category) {
         // File system and storage
         case 'filesystem':
@@ -224,9 +223,9 @@ const Home: React.FC = () => {
         if (serverStats) {
             return {
                 totalServers: serverStats.totalServers,
-                totalDownloads: serverStats.totalDownloads,
+                averageStars: serverStats.averageStars || 0,
                 uniqueCategories: serverStats.uniqueCategories,
-                averageQualityScore: serverStats.averageQualityScore
+                activeRepos: serverStats.activeRepos || 0
             };
         }
         
@@ -234,25 +233,31 @@ const Home: React.FC = () => {
         if (homePageData) {
             const allHomeServers = homePageData.flatMap(item => item.servers);
             const totalServers = allHomeServers.length;
-            const totalDownloads = allHomeServers.reduce((sum, server) => sum + (server.usage?.downloads || 0), 0);
+            const totalStars = allHomeServers.reduce((sum, server) => sum + (server.repository?.stars || server.stats?.stars || 0), 0);
+            const averageStars = totalServers > 0 ? Math.round(totalStars / totalServers) : 0;
             const uniqueCategories = homePageData.length;
-            const averageQualityScore = totalServers > 0 
-                ? Math.round(allHomeServers.reduce((sum, server) => sum + (server.quality?.score || 0), 0) / totalServers)
-                : 90;
+            
+            // Calculate active repos (repos updated in last 30 days)
+            const thirtyDaysAgo = new Date();
+            thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+            const activeRepos = allHomeServers.filter(server => {
+                const lastUpdated = new Date(server.repository?.lastUpdated || server.stats?.lastUpdated || 0);
+                return lastUpdated > thirtyDaysAgo;
+            }).length;
             
             return {
                 totalServers,
-                totalDownloads,
+                averageStars,
                 uniqueCategories,
-                averageQualityScore
+                activeRepos
             };
         }
         
         return {
             totalServers: 0,
-            totalDownloads: 0,
+            averageStars: 0,
             uniqueCategories: 0,
-            averageQualityScore: 90
+            activeRepos: 0
         };
     }, [serverStats, homePageData]);
 
@@ -357,16 +362,14 @@ const Home: React.FC = () => {
                                 boxShadow: '0 8px 32px rgba(34, 197, 94, 0.1)'
                             }}>
                                 <div className="text-3xl font-bold bg-gradient-to-r from-green-300 to-white bg-clip-text text-transparent">
-                                    {statistics.totalDownloads > 0 
-                                        ? statistics.totalDownloads >= 1000000
-                                            ? `${(statistics.totalDownloads / 1000000).toFixed(1)}M`
-                                            : statistics.totalDownloads >= 1000 
-                                            ? `${Math.floor(statistics.totalDownloads / 1000)}K` 
-                                            : statistics.totalDownloads.toLocaleString()
+                                    {statistics.averageStars > 0 
+                                        ? statistics.averageStars >= 1000
+                                            ? `${Math.floor(statistics.averageStars / 1000)}K`
+                                            : statistics.averageStars.toLocaleString()
                                         : '...'
                                     }
                                 </div>
-                                <div className="text-gray-300">Downloads</div>
+                                <div className="text-gray-300">Avg Stars</div>
                             </div>
                             <div className="rounded-lg p-4 text-center hover-lift" style={{
                                 background: 'rgba(249, 115, 22, 0.1)',
@@ -375,9 +378,9 @@ const Home: React.FC = () => {
                                 boxShadow: '0 8px 32px rgba(249, 115, 22, 0.1)'
                             }}>
                                 <div className="text-3xl font-bold bg-gradient-to-r from-orange-300 to-white bg-clip-text text-transparent">
-                                    {statistics.averageQualityScore > 0 ? `${statistics.averageQualityScore}%` : '...'}
+                                    {statistics.activeRepos > 0 ? statistics.activeRepos.toLocaleString() : '...'}
                                 </div>
-                                <div className="text-gray-300">Quality Score</div>
+                                <div className="text-gray-300">Active Repos</div>
                             </div>
                         </div>
                     </div>
