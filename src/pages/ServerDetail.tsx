@@ -259,28 +259,28 @@ const ServerDetail: React.FC = () => {
                             </div>
                         </div>
 
-                        <div className="flex flex-row sm:flex-row gap-3 min-w-fit">
+                        <div className="flex flex-row sm:flex-row gap-2 min-w-fit">
                             <a
                                 href={server.repository.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center px-2 py-3 bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition-all duration-200 shadow-lg hover:shadow-xl font-sm min-w-[140px]"
+                                className="inline-flex items-center justify-center px-3 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-all duration-200 shadow-sm hover:shadow-md text-sm font-medium min-w-[120px]"
                             >
-                                <GitBranch className="mr-2 h-5 w-5" />
+                                <GitBranch className="mr-1.5 h-4 w-4" />
                                 View on GitHub
                             </a>
                             <FavoriteButton 
                                 serverId={server.id}
                                 showText={true}
-                                size="lg"
-                                className="min-w-[140px] border-2 shadow-sm hover:shadow-md"
+                                size="md"
+                                className="min-w-[100px] border-2 shadow-sm hover:shadow-md text-sm"
                             />
                             <div className="relative" ref={shareMenuRef}>
                                 <button 
                                     onClick={() => setShowShareMenu(!showShareMenu)}
-                                    className="inline-flex items-center justify-center px-6 py-3 border-2 border-gray-200 bg-white text-gray-700 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md font-sm min-w-[100px]"
+                                    className="inline-flex items-center justify-center px-3 py-2 border-2 border-gray-200 bg-white text-gray-700 rounded-lg hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md text-sm font-medium min-w-[80px]"
                                 >
-                                    <Share className="mr-2 h-5 w-5" />
+                                    <Share className="mr-1.5 h-4 w-4" />
                                     Share
                                 </button>
                                 {showShareMenu && (
