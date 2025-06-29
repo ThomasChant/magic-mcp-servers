@@ -1,4 +1,4 @@
--- MCP Hub Database Data Import
+-- Magic MCP Database Data Import
 -- Generated on 2025-06-28T13:01:38.166Z
 -- This file contains all data converted from JSON files
 

@@ -14,16 +14,22 @@ const Footer: React.FC = () => {
                                     M
                                 </span>
                             </div>
-                            <span className="text-xl font-bold text-white dark:text-gray-100">MCP Hub</span>
+                            <span className="text-xl font-bold text-white dark:text-gray-100">
+                                Magic MCP
+                            </span>
                         </div>
                         <p className="text-gray-300 dark:text-gray-400 mb-6 max-w-md">
-                            Your gateway to discover and integrate the best Model Context Protocol servers, empowering AI capabilities.
+                            Your gateway to discover and integrate the best
+                            Model Context Protocol servers, empowering AI
+                            capabilities.
                         </p>
                     </div>
 
                     {/* Quick Links */}
                     <div>
-                        <h3 className="text-lg font-semibold mb-4 text-white dark:text-gray-100">Quick Links</h3>
+                        <h3 className="text-lg font-semibold mb-4 text-white dark:text-gray-100">
+                            Quick Links
+                        </h3>
                         <ul className="space-y-2">
                             <li>
                                 <Link
@@ -62,7 +68,9 @@ const Footer: React.FC = () => {
 
                     {/* Resources */}
                     <div>
-                        <h3 className="text-lg font-semibold mb-4 text-white dark:text-gray-100">Resources</h3>
+                        <h3 className="text-lg font-semibold mb-4 text-white dark:text-gray-100">
+                            Resources
+                        </h3>
                         <ul className="space-y-2">
                             <li>
                                 <a
@@ -100,7 +108,7 @@ const Footer: React.FC = () => {
 
                 <div className="border-t border-gray-800 dark:border-gray-700 pt-8 mt-8 transition-colors duration-200">
                     <p className="text-center text-gray-400 dark:text-gray-500">
-                        © 2024 MCP Hub. Built with ❤️ for the AI community
+                        © 2024 Magic MCP. Built with ❤️ for the AI community
                     </p>
                 </div>
             </div>

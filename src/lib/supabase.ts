@@ -9,7 +9,7 @@ if (!supabaseUrl || !supabaseAnonKey) {
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
-    persistSession: false, // We don't need authentication for this read-only app
+    persistSession: false, // We'll use Clerk user ID directly, no Supabase auth needed
   },
 });
 
@@ -247,6 +247,22 @@ export interface Database {
         Insert: CommentInsert;
         Update: CommentUpdate;
       };
+      user_favorites: {
+        Row: {
+          id: string;
+          user_id: string;
+          server_id: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          user_id: string;
+          server_id: string;
+        };
+        Update: {
+          updated_at?: string;
+        };
+      };
     };
     Views: {
       servers_with_details: {
@@ -267,6 +283,15 @@ export interface Database {
       };
       recent_servers: {
         Row: Database['public']['Views']['servers_with_details']['Row'];
+      };
+      user_favorite_servers: {
+        Row: {
+          favorite_id: string;
+          user_id: string;
+          server_id: string;
+          favorited_at: string;
+          favorite_updated_at: string;
+        } & Database['public']['Views']['servers_with_details']['Row'];
       };
     };
   };

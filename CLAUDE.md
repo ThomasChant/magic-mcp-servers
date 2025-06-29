@@ -283,6 +283,41 @@ The application uses Clerk for user authentication:
 3. Protected routes require authentication
 4. User preferences sync across devices
 
+### Favorites System
+
+The application includes a comprehensive favorites system with Supabase integration:
+
+**Architecture**:
+- **Local Storage**: Favorites stored locally when user not authenticated
+- **Supabase Database**: Favorites synced to Supabase when user authenticated
+- **Cross-Device Sync**: Favorites automatically sync across devices for authenticated users
+- **Migration**: Local favorites automatically migrated to Supabase on first login
+
+**Database Structure**:
+```sql
+-- user_favorites table in Supabase
+CREATE TABLE user_favorites (
+    id UUID PRIMARY KEY,
+    user_id TEXT NOT NULL,      -- Clerk user ID
+    server_id TEXT NOT NULL,    -- MCP server ID
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ,
+    UNIQUE(user_id, server_id)
+);
+```
+
+**Key Services**:
+- `useSupabaseFavoritesService()`: Main service for favorites management
+- `useFavoritesSync()`: Handles authentication state changes and sync
+- `FavoriteButton`: UI component with real-time sync status
+
+**Features**:
+- Real-time favorites updates across the application
+- Offline support with automatic sync when online
+- Category-based filtering on favorites page
+- Public favorite counts for popular servers
+- Batch operations for performance optimization
+
 ## Development Workflow
 
 ### Adding New Servers

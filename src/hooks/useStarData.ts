@@ -1,9 +1,10 @@
 import { useMemo } from 'react';
 import type { MCPServer } from '../types';
+import type { StarServer } from './useTopStarServers';
 
 interface StarData {
   id: string;
-  server: MCPServer;
+  server: MCPServer | StarServer;
   x: number;
   y: number;
   size: 'small' | 'medium' | 'large' | 'extra-large';
@@ -37,18 +38,20 @@ const getCategoryColor = (category: string): string => {
   return colors[category] || '#6b7280';
 };
 
-const getStarSize = (stars: number): 'small' | 'medium' | 'large' | 'extra-large' => {
-  if (stars >= 50) return 'extra-large';
-  if (stars >= 11) return 'large';
-  if (stars >= 1) return 'medium';
+const getStarSize = (stars: number, maxStars: number): 'small' | 'medium' | 'large' | 'extra-large' => {
+  const percentage = maxStars > 0 ? stars / maxStars : 0;
+  if (percentage >= 0.8) return 'extra-large';
+  if (percentage >= 0.6) return 'large';
+  if (percentage >= 0.4) return 'medium';
   return 'small';
 };
 
-const getStarBrightness = (forks: number): number => {
-  if (forks >= 20) return 1.0;
-  if (forks >= 6) return 0.8;
-  if (forks >= 1) return 0.6;
-  return 0.4;
+const getStarBrightness = (stars: number, maxStars: number): number => {
+  const percentage = maxStars > 0 ? stars / maxStars : 0;
+  if (percentage >= 0.8) return 1.0;
+  if (percentage >= 0.6) return 0.85;
+  if (percentage >= 0.4) return 0.7;
+  return 0.55;
 };
 
 const generateStarPositions = (count: number): Array<{x: number, y: number}> => {
@@ -81,11 +84,11 @@ const generateStarPositions = (count: number): Array<{x: number, y: number}> => 
 };
 
 export const useStarData = (
-  servers: MCPServer[], 
+  servers: (MCPServer | StarServer)[], 
   options: UseStarDataOptions = {}
 ): StarData[] => {
   const {
-    maxStars = 250,
+    maxStars = 500,
     enableCategoryFilter = false,
     selectedCategory,
     searchQuery = '',
@@ -101,8 +104,8 @@ export const useStarData = (
       const query = searchQuery.toLowerCase();
       filteredServers = filteredServers.filter(server =>
         server.name.toLowerCase().includes(query) ||
-        server.description["zh-CN"].toLowerCase().includes(query) ||
-        server.tags.some(tag => tag.toLowerCase().includes(query))
+        (server.description?.["zh-CN"] || '').toLowerCase().includes(query) ||
+        (server.tags || []).some(tag => tag.toLowerCase().includes(query))
       );
     }
     
@@ -112,29 +115,41 @@ export const useStarData = (
       );
     }
 
-    // Sort by popularity (stars + forks + quality score)
-    const sortedServers = filteredServers
+    // Sort by star count to get top 20% by stars
+    const serversByStars = filteredServers
       .map(server => ({
         server,
-        popularity: (server.stats?.stars || 0) * 3 + 
-                   (server.stats?.forks || 0) * 2 + 
-                   (server.quality?.score || 0) * 0.1 +
-                   (server.metadata?.featured ? 50 : 0) +
-                   (server.metadata?.verified ? 25 : 0)
+        stars: server.stats?.stars || server.repository?.stars || 0
       }))
-      .sort((a, b) => b.popularity - a.popularity)
-      .slice(0, maxStars)
-      .map(item => item.server);
+      .sort((a, b) => b.stars - a.stars);
+
+    // Calculate top 20% threshold
+    // const top20PercentCount = Math.max(1, Math.ceil(serversByStars.length * 0.2));
+    // const topStarServers = serversByStars.slice(0, top20PercentCount);
+    
+    // Limit to maxStars for performance
+    const selectedServers = serversByStars
+        .slice(0, maxStars)
+        .map((item) => item.server);
 
     // Generate positions for stars
-    const positions = generateStarPositions(sortedServers.length);
+    const positions = generateStarPositions(selectedServers.length);
+
+    // Find the maximum star count for scaling
+    const starCnt = [
+      ...selectedServers.map(server =>
+        server.stats?.stars || server.repository?.stars || 0
+      )
+    ]
+
+    const sumStars = starCnt.reduce((sum, curr) => sum + curr, 0);
+    const avgStars = sumStars / selectedServers.length;
 
     // Create star data
-    return sortedServers.map((server, index) => {
-      const stars = server.stats?.stars || 0;
-      const forks = server.stats?.forks || 0;
-      const size = getStarSize(stars);
-      const brightness = getStarBrightness(forks);
+    return selectedServers.map((server, index) => {
+      const stars = server.stats?.stars || server.repository?.stars || 0;
+      const size = getStarSize(stars, avgStars);
+      const brightness = getStarBrightness(stars, avgStars);
       const categoryColor = getCategoryColor(server.category);
       
       // Calculate z-index based on popularity

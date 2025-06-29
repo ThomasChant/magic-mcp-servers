@@ -16,29 +16,70 @@ import {
   CheckSquare,
   Shield,
   Star,
+  Globe,
+  Settings,
+  Wifi,
+  Image,
+  CreditCard,
+  Monitor,
+  Palette,
+  Activity,
+  Link2,
   type LucideIcon,
 } from "lucide-react";
 
 // Map icon string names to Lucide icon components
 export const iconMap: Record<string, LucideIcon> = {
+  // Core database and storage
   database: Database,
-  code: Code,
-  cloud: Cloud,
-  briefcase: Briefcase,
-  brain: Brain,
-  "message-circle": MessageCircle,
-  "file-text": FileText,
-  "dollar-sign": DollarSign,
-  tool: Wrench,
-  layers: Layers,
   folder: Folder,
+  
+  // Development and coding
+  code: Code,
+  wrench: Wrench,
+  tool: Wrench,
+  settings: Settings,
+  
+  // Cloud and infrastructure
+  cloud: Cloud,
+  layers: Layers,
+  
+  // Business and productivity
+  briefcase: Briefcase,
+  
+  // AI and intelligence
+  brain: Brain,
+  
+  // Communication
+  "message-circle": MessageCircle,
+  
+  // Content and media
+  "file-text": FileText,
+  image: Image,
+  palette: Palette,
+  
+  // Finance and payments
+  "dollar-sign": DollarSign,
+  "credit-card": CreditCard,
+  
+  // Web and network
+  globe: Globe,
+  wifi: Wifi,
+  "link-2": Link2,
+  
+  // Monitoring and analytics
   search: Search,
   "bar-chart": BarChart3,
-  plug: Plug,
-  "check-square": CheckSquare,
+  activity: Activity,
+  monitor: Monitor,
+  
+  // Security and verification
   shield: Shield,
+  "check-square": CheckSquare,
+  
+  // General utility
+  plug: Plug,
   star: Star,
-  wrench: Wrench,
 };
 
 export const getIcon = (iconName: string): LucideIcon => {

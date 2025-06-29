@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Star, GitFork, Tag } from 'lucide-react';
 import type { StarData } from '../hooks/useStarData';
 
@@ -8,7 +9,41 @@ interface StarTooltipProps {
 }
 
 const StarTooltip: React.FC<StarTooltipProps> = ({ starData, mousePosition }) => {
-  if (!starData) return null;
+  const [portalRoot, setPortalRoot] = useState<HTMLDivElement | null>(null);
+  
+  useEffect(() => {
+    // Create portal container only once
+    const container = document.createElement('div');
+    container.id = 'star-tooltip-portal';
+    container.style.position = 'fixed';
+    container.style.top = '0';
+    container.style.left = '0';
+    container.style.zIndex = '999999';
+    container.style.pointerEvents = 'none';
+    container.style.width = '100%';
+    container.style.height = '100%';
+    
+    // Check if portal already exists and remove it
+    const existingPortal = document.getElementById('star-tooltip-portal');
+    if (existingPortal) {
+      document.body.removeChild(existingPortal);
+    }
+    
+    document.body.appendChild(container);
+    setPortalRoot(container);
+    
+    return () => {
+      if (document.body.contains(container)) {
+        document.body.removeChild(container);
+      }
+      setPortalRoot(null);
+    };
+  }, []);
+
+  // Don't render if no star data or portal not ready
+  if (!starData || !portalRoot) {
+    return null;
+  }
 
   const { server } = starData;
 
@@ -18,11 +53,11 @@ const StarTooltip: React.FC<StarTooltipProps> = ({ starData, mousePosition }) =>
     left: mousePosition.x + 15,
     top: mousePosition.y - 10,
     transform: mousePosition.x > window.innerWidth - 300 ? 'translateX(-100%)' : 'none',
-    zIndex: 9999,
+    zIndex: 999999,
     pointerEvents: 'none' as const,
   };
 
-  return (
+  const tooltipContent = (
     <div
       style={tooltipStyle}
       className="bg-gray-900 text-white p-3 rounded-lg shadow-xl border border-gray-700 max-w-xs animate-in fade-in duration-200"
@@ -122,6 +157,8 @@ const StarTooltip: React.FC<StarTooltipProps> = ({ starData, mousePosition }) =>
       />
     </div>
   );
+
+  return createPortal(tooltipContent, portalRoot);
 };
 
 export default StarTooltip;

@@ -1,10 +1,10 @@
 # Supabase Integration Guide
 
-This document explains how to set up and use Supabase as the data backend for the MCP Hub application.
+This document explains how to set up and use Supabase as the data backend for the Magic MCP application.
 
 ## Overview
 
-The MCP Hub now supports two data sources:
+The Magic MCP now supports two data sources:
 1. **JSON Files** (default) - Static data files for development and simple deployments
 2. **Supabase Database** - Scalable PostgreSQL database for production use
 

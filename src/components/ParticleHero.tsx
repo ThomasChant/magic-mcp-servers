@@ -4,12 +4,13 @@ import Particles from 'react-particles';
 import { loadSlim } from 'tsparticles-slim';
 import type { Container, Engine } from 'tsparticles-engine';
 import type { MCPServer } from '../types';
+import type { StarServer } from '../hooks/useTopStarServers';
 import StarTooltip from './StarTooltip';
 import { useStarData, type StarData } from '../hooks/useStarData';
 import { useParticleConfig } from '../hooks/useParticleConfig';
 
 interface ParticleHeroProps {
-  servers: MCPServer[];
+  servers: (MCPServer | StarServer)[];
   searchQuery?: string;
   selectedCategory?: string;
   enableCategoryFilter?: boolean;
@@ -21,7 +22,7 @@ const ParticleHero: React.FC<ParticleHeroProps> = ({
   searchQuery = '',
   selectedCategory,
   enableCategoryFilter = false,
-  maxStars = 200,
+  maxStars = 500,
 }) => {
   const navigate = useNavigate();
   const [hoveredStar, setHoveredStar] = useState<StarData | null>(null);
@@ -32,14 +33,16 @@ const ParticleHero: React.FC<ParticleHeroProps> = ({
     { 
       id: 'demo', 
       name: 'Demo Server', 
-      stats: { stars: 10, forks: 5 }, 
+      stats: { stars: 10 }, 
+      repository: { stars: 10 },
       category: 'development', 
       description: { en: 'Demo server for particle effects', 'zh-CN': 'Demo server for particle effects' }, 
       tags: ['demo', 'particle'],
       slug: 'demo-server',
-      owner: 'demo'
+      owner: 'demo',
+      metadata: { featured: false, verified: false }
     }
-  ] as MCPServer[];
+  ] as (MCPServer | StarServer)[];
 
   // Get star data for interactive particles - always try to use real servers for stars
   const starData = useStarData(particleServers, {
@@ -48,8 +51,6 @@ const ParticleHero: React.FC<ParticleHeroProps> = ({
     selectedCategory,
     searchQuery,
   });
-
-  console.log('ParticleHero - servers count:', servers.length, 'starData count:', starData.length);
 
   // Get optimized particle configuration
   const { particleOptions, deviceCapabilities } = useParticleConfig({
@@ -108,62 +109,64 @@ const ParticleHero: React.FC<ParticleHeroProps> = ({
 
   // Interactive stars overlays
   const renderInteractiveStars = () => {
-    console.log('Rendering interactive stars:', starData.length);
     return starData.map((star) => {
       const isHighlighted = highlightedStars.has(star.id);
       const sizeMultiplier = deviceCapabilities.isMobile ? 0.8 : 1;
-      const baseSize = (star.size === 'extra-large' ? 8 : 
-                       star.size === 'large' ? 6 : 
-                       star.size === 'medium' ? 4 : 3) * sizeMultiplier;
+      const baseSize = (star.size === 'extra-large' ? 12 : 
+                       star.size === 'large' ? 8 : 
+                       star.size === 'medium' ? 5 : 3) * sizeMultiplier;
+      
+      // Generate random animation delay for natural twinkling effect
+      const animationDelay = Math.random() * 3;
+      const blinkDuration = 2 + Math.random() * 2; // 2-4 seconds
       
       return (
         <div
           key={`interactive-${star.id}`}
-          className="absolute cursor-pointer group"
+          className="absolute cursor-pointer"
           style={{
             left: `${star.x}%`,
             top: `${star.y}%`,
             transform: 'translate(-50%, -50%)',
-            zIndex: 3,
+            zIndex: 100,
+            minWidth: '30px',
+            minHeight: '30px',
+            padding: '10px',
+            borderRadius: '50%',
+            border: '2px solid transparent',
+            transition: 'all 0.3s ease',
+            ...(hoveredStar?.id === star.id ? {
+              backgroundColor: 'rgba(100, 255, 218, 0.2)',
+              border: '2px solid rgba(100, 255, 218, 0.5)',
+              transform: 'translate(-50%, -50%) scale(1.5)',
+            } : {})
           }}
-          onClick={() => navigate(`/servers/${star.server.slug}`)}
+          onClick={() => {
+            const serverId = star.server.id; // Always use id field for navigation
+            console.log('Navigating to server:', { id: star.server.id, slug: star.server.slug, using: serverId });
+            navigate(`/servers/${serverId}`);
+          }}
           onMouseEnter={() => setHoveredStar(star)}
           onMouseLeave={() => setHoveredStar(null)}
         >
           {/* Main interactive star */}
           <div
-            className={`rounded-full transition-all duration-300 ${
-              isHighlighted ? 'animate-pulse' : ''
-            }`}
+            className="rounded-full transition-all duration-300"
             style={{
               width: `${baseSize}px`,
               height: `${baseSize}px`,
-              background: isHighlighted ? star.categoryColor : '#ffffff',
+              background: '#ffffff',
               boxShadow: isHighlighted 
-                ? `0 0 ${baseSize * 3}px ${star.categoryColor}` 
+                ? `0 0 ${baseSize * 4}px ${star.categoryColor}, 0 0 ${baseSize * 2}px rgba(255, 255, 255, 0.9)` 
                 : `0 0 ${baseSize * 2}px rgba(255, 255, 255, 0.8)`,
-              opacity: star.brightness,
+              opacity: hoveredStar?.id === star.id ? 1 : star.brightness,
+              animation: `starTwinkle ${blinkDuration}s ease-in-out infinite`,
+              animationDelay: `${animationDelay}s`,
+              transform: hoveredStar?.id === star.id ? 'scale(1.5)' : 'scale(1)',
+              filter: hoveredStar?.id === star.id ? 'brightness(1.5) drop-shadow(0 0 10px white)' : 'none',
             }}
           />
           
-          {/* Hover effect ring */}
-          <div 
-            className="absolute inset-0 rounded-full border-2 border-white opacity-0 group-hover:opacity-60 transition-all duration-300 group-hover:scale-150"
-            style={{
-              animation: hoveredStar?.id === star.id ? 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite' : 'none',
-            }}
-          />
-          
-          {/* Featured/verified pulse */}
-          {(star.server.metadata?.featured || star.server.metadata?.verified) && (
-            <div
-              className="absolute inset-0 rounded-full border border-cyan-400 opacity-60"
-              style={{
-                animation: 'ping 2s cubic-bezier(0, 0, 0.2, 1) infinite',
-                transform: 'scale(2)',
-              }}
-            />
-          )}
         </div>
       );
     });
@@ -190,14 +193,9 @@ const ParticleHero: React.FC<ParticleHeroProps> = ({
         }}
       />
       
-      {/* Interactive server stars */}
-      <div className="absolute inset-0" style={{ zIndex: 3 }}>
-        {renderInteractiveStars()}
-      </div>
-      
       {/* Shooting stars effect - reduced on low-end devices */}
       {!deviceCapabilities.isLowEndDevice && (
-        <div className="absolute inset-0" style={{ zIndex: 4 }}>
+        <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 4 }}>
           {[1, 2].map((i) => (
             <div
               key={`shooting-${i}`}
@@ -215,7 +213,7 @@ const ParticleHero: React.FC<ParticleHeroProps> = ({
       )}
       
       {/* Additional cosmic effects - simplified on mobile */}
-      <div className="absolute inset-0" style={{ zIndex: 5 }}>
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 5 }}>
         {/* Nebula effects */}
         {(deviceCapabilities.isLowEndDevice ? [1] : [1, 2, 3]).map((i) => (
           <div
@@ -239,7 +237,15 @@ const ParticleHero: React.FC<ParticleHeroProps> = ({
         ))}
       </div>
       
-      {/* Tooltip */}
+      {/* Interactive server stars - moved to top layer for proper interaction */}
+      <div className="absolute inset-0" style={{ zIndex: 100, pointerEvents: 'none' }}>
+        <div style={{ pointerEvents: 'auto' }}>
+          {renderInteractiveStars()}
+        </div>
+      </div>
+      
+      
+      {/* Tooltip - rendered via Portal */}
       <StarTooltip 
         starData={hoveredStar} 
         mousePosition={mousePosition}
@@ -249,11 +255,12 @@ const ParticleHero: React.FC<ParticleHeroProps> = ({
       {starData.length > 0 && (
         <div 
           className="absolute bottom-4 right-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-xs backdrop-blur-sm"
-          style={{ zIndex: 10 }}
+          style={{ zIndex: 15 }}
         >
           ✨ {starData.length} servers visible
         </div>
       )}
+      
     </div>
   );
 };

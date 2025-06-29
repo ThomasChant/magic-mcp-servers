@@ -340,7 +340,7 @@ export const useSupabaseServerStats = () => {
           // Get server count and sample data for calculations
           supabase
             .from('servers_with_details')
-            .select('downloads, weekly_downloads, quality_score, featured, verified', { count: 'exact' })
+            .select('stars, last_updated, featured, verified', { count: 'exact' })
             .limit(1000),
           
           // Get total categories count directly from categories table
@@ -369,8 +369,9 @@ export const useSupabaseServerStats = () => {
           console.warn('No server data found');
           return {
             totalServers: totalServers || 0,
-            totalDownloads: 0,
-            averageQualityScore: 0,
+            totalStars: 0,
+            averageStars: 0,
+            activeRepos: 0,
             uniqueCategories: totalCategories || 0,
             featuredCount: 0,
             verifiedCount: 0,
@@ -380,20 +381,21 @@ export const useSupabaseServerStats = () => {
         // Calculate stats from available data
         const serverCount = totalServers || serversData.length;
         
-        // Calculate total downloads
-        const totalDownloads = serversData.reduce((sum, server) => {
-          const downloads = server.downloads || server.weekly_downloads || 0;
-          return sum + (typeof downloads === 'number' ? downloads : 0);
+        // Calculate total GitHub stars
+        const totalStars = serversData.reduce((sum, server) => {
+          const stars = server.stars || 0;
+          return sum + (typeof stars === 'number' ? stars : 0);
         }, 0);
         
-        // Calculate average quality score
-        const validQualityScores = serversData
-          .map(server => server.quality_score)
-          .filter(score => typeof score === 'number' && score > 0);
+        // Calculate active repos (repos updated in last 30 days)
+        const thirtyDaysAgo = new Date();
+        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
         
-        const averageQualityScore = validQualityScores.length > 0 
-          ? Math.round(validQualityScores.reduce((sum, score) => sum + score, 0) / validQualityScores.length)
-          : 0;
+        const activeRepos = serversData.filter(server => {
+          if (!server.last_updated) return false;
+          const lastUpdated = new Date(server.last_updated);
+          return lastUpdated > thirtyDaysAgo;
+        }).length;
         
         const featuredCount = serversData.filter(s => s.featured === true).length;
         const verifiedCount = serversData.filter(s => s.verified === true).length;
@@ -401,8 +403,9 @@ export const useSupabaseServerStats = () => {
 
         const stats = {
           totalServers: serverCount,
-          totalDownloads,
-          averageQualityScore,
+          totalStars,
+          averageStars: serverCount > 0 ? Math.round(totalStars / serverCount) : 0,
+          activeRepos,
           uniqueCategories,
           featuredCount,
           verifiedCount,
@@ -415,8 +418,9 @@ export const useSupabaseServerStats = () => {
         // Return default stats on error
         return {
           totalServers: 0,
-          totalDownloads: 0,
-          averageQualityScore: 0,
+          totalStars: 0,
+          averageStars: 0,
+          activeRepos: 0,
           uniqueCategories: 0,
           featuredCount: 0,
           verifiedCount: 0,

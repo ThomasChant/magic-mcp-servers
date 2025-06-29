@@ -110,7 +110,9 @@ const Docs: React.FC = () => {
             <div className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-700 dark:to-purple-700 text-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                     <div className="text-center">
-                        <h1 className="text-4xl font-bold mb-4">Documentation</h1>
+                        <h1 className="text-4xl font-bold mb-4">
+                            Documentation
+                        </h1>
                         <p className="text-xl text-blue-100 dark:text-blue-200 max-w-3xl mx-auto">
                             Everything you need to know about discovering,
                             integrating, and using MCP servers effectively.
@@ -133,35 +135,57 @@ const Docs: React.FC = () => {
                                     <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
                                         Getting Started
                                     </h4>
-                                    <NavItem sectionId="introduction">Introduction</NavItem>
-                                    <NavItem sectionId="quick-start">Quick Start</NavItem>
-                                    <NavItem sectionId="installation">Installation</NavItem>
+                                    <NavItem sectionId="introduction">
+                                        Introduction
+                                    </NavItem>
+                                    <NavItem sectionId="quick-start">
+                                        Quick Start
+                                    </NavItem>
+                                    <NavItem sectionId="installation">
+                                        Installation
+                                    </NavItem>
                                 </div>
 
                                 <div className="mb-4">
                                     <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
                                         Core Concepts
                                     </h4>
-                                    <NavItem sectionId="what-is-mcp">What is MCP?</NavItem>
-                                    <NavItem sectionId="server-types">Server Types</NavItem>
-                                    <NavItem sectionId="integration">Integration Guide</NavItem>
+                                    <NavItem sectionId="what-is-mcp">
+                                        What is MCP?
+                                    </NavItem>
+                                    <NavItem sectionId="server-types">
+                                        Server Types
+                                    </NavItem>
+                                    <NavItem sectionId="integration">
+                                        Integration Guide
+                                    </NavItem>
                                 </div>
 
                                 <div className="mb-4">
                                     <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
                                         Advanced
                                     </h4>
-                                    <NavItem sectionId="custom-servers">Building Servers</NavItem>
-                                    <NavItem sectionId="best-practices">Best Practices</NavItem>
-                                    <NavItem sectionId="troubleshooting">Troubleshooting</NavItem>
+                                    <NavItem sectionId="custom-servers">
+                                        Building Servers
+                                    </NavItem>
+                                    <NavItem sectionId="best-practices">
+                                        Best Practices
+                                    </NavItem>
+                                    <NavItem sectionId="troubleshooting">
+                                        Troubleshooting
+                                    </NavItem>
                                 </div>
 
                                 <div>
                                     <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
                                         Reference
                                     </h4>
-                                    <NavItem sectionId="api-reference">API Reference</NavItem>
-                                    <NavItem sectionId="examples">Examples</NavItem>
+                                    <NavItem sectionId="api-reference">
+                                        API Reference
+                                    </NavItem>
+                                    <NavItem sectionId="examples">
+                                        Examples
+                                    </NavItem>
                                     <NavItem sectionId="faq">FAQ</NavItem>
                                 </div>
                             </nav>
@@ -174,32 +198,37 @@ const Docs: React.FC = () => {
                             {/* Introduction Section */}
                             <section id="introduction" className="mb-12">
                                 <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-                                    Introduction to MCP Hub
+                                    Introduction to Magic MCP
                                 </h2>
                                 <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-                                    MCP Hub is your comprehensive platform for
-                                    discovering, evaluating, and integrating Model
-                                    Context Protocol (MCP) servers. Whether you're
-                                    building AI applications or enhancing existing
-                                    systems, MCP Hub provides the tools and
-                                    resources you need.
+                                    Magic MCP is your comprehensive platform for
+                                    discovering, evaluating, and integrating
+                                    Model Context Protocol (MCP) servers.
+                                    Whether you're building AI applications or
+                                    enhancing existing systems, Magic MCP
+                                    provides the tools and resources you need.
                                 </p>
 
                                 <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-400 dark:border-blue-500 p-4 mb-6">
                                     <div className="flex">
                                         <div className="flex-shrink-0">
-                                            <Info className="text-blue-400 dark:text-blue-400" size={20} />
+                                            <Info
+                                                className="text-blue-400 dark:text-blue-400"
+                                                size={20}
+                                            />
                                         </div>
                                         <div className="ml-3">
                                             <p className="text-sm text-blue-700 dark:text-blue-300">
                                                 <strong>New to MCP?</strong> The
                                                 Model Context Protocol is a
-                                                standardized way for AI applications
-                                                to connect with external data
-                                                sources and tools.{" "}
+                                                standardized way for AI
+                                                applications to connect with
+                                                external data sources and tools.{" "}
                                                 <button
                                                     onClick={() =>
-                                                        scrollToSection("what-is-mcp")
+                                                        scrollToSection(
+                                                            "what-is-mcp"
+                                                        )
                                                     }
                                                     className="underline hover:no-underline"
                                                 >
@@ -216,37 +245,47 @@ const Docs: React.FC = () => {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                                     <div className="flex items-start">
                                         <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-3 mt-1">
-                                            <Search className="text-blue-600 dark:text-blue-400" size={16} />
+                                            <Search
+                                                className="text-blue-600 dark:text-blue-400"
+                                                size={16}
+                                            />
                                         </div>
                                         <div>
                                             <h4 className="font-medium text-gray-900 dark:text-gray-100">
                                                 Smart Discovery
                                             </h4>
                                             <p className="text-sm text-gray-600 dark:text-gray-400">
-                                                Find the perfect MCP server using
-                                                intelligent search and filtering
+                                                Find the perfect MCP server
+                                                using intelligent search and
+                                                filtering
                                             </p>
                                         </div>
                                     </div>
 
                                     <div className="flex items-start">
                                         <div className="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mr-3 mt-1">
-                                            <Star className="text-green-600 dark:text-green-400" size={16} />
+                                            <Star
+                                                className="text-green-600 dark:text-green-400"
+                                                size={16}
+                                            />
                                         </div>
                                         <div>
                                             <h4 className="font-medium text-gray-900 dark:text-gray-100">
                                                 Quality Ratings
                                             </h4>
                                             <p className="text-sm text-gray-600 dark:text-gray-400">
-                                                Community-driven ratings and reviews
-                                                for reliable choices
+                                                Community-driven ratings and
+                                                reviews for reliable choices
                                             </p>
                                         </div>
                                     </div>
 
                                     <div className="flex items-start">
                                         <div className="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mr-3 mt-1">
-                                            <Code className="text-purple-600 dark:text-purple-400" size={16} />
+                                            <Code
+                                                className="text-purple-600 dark:text-purple-400"
+                                                size={16}
+                                            />
                                         </div>
                                         <div>
                                             <h4 className="font-medium text-gray-900 dark:text-gray-100">
@@ -261,15 +300,18 @@ const Docs: React.FC = () => {
 
                                     <div className="flex items-start">
                                         <div className="w-8 h-8 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mr-3 mt-1">
-                                            <Users className="text-orange-600 dark:text-orange-400" size={16} />
+                                            <Users
+                                                className="text-orange-600 dark:text-orange-400"
+                                                size={16}
+                                            />
                                         </div>
                                         <div>
                                             <h4 className="font-medium text-gray-900 dark:text-gray-100">
                                                 Active Community
                                             </h4>
                                             <p className="text-sm text-gray-600 dark:text-gray-400">
-                                                Connect with developers and share
-                                                knowledge
+                                                Connect with developers and
+                                                share knowledge
                                             </p>
                                         </div>
                                     </div>
@@ -282,8 +324,8 @@ const Docs: React.FC = () => {
                                     Quick Start Guide
                                 </h2>
                                 <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                    Get up and running with MCP servers in just a
-                                    few minutes. Follow these simple steps to
+                                    Get up and running with MCP servers in just
+                                    a few minutes. Follow these simple steps to
                                     integrate your first server.
                                 </p>
 
@@ -298,16 +340,19 @@ const Docs: React.FC = () => {
                                                 Discover a Server
                                             </h3>
                                             <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                                Browse our catalog or use the search
-                                                function to find a server that meets
-                                                your needs.
+                                                Browse our catalog or use the
+                                                search function to find a server
+                                                that meets your needs.
                                             </p>
                                             <Link
                                                 to="/servers"
                                                 className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
                                             >
                                                 Browse Servers
-                                                <ArrowRight className="ml-1" size={16} />
+                                                <ArrowRight
+                                                    className="ml-1"
+                                                    size={16}
+                                                />
                                             </Link>
                                         </div>
                                     </div>
@@ -322,9 +367,9 @@ const Docs: React.FC = () => {
                                                 Install the Server
                                             </h3>
                                             <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                                Follow the installation instructions
-                                                for your preferred method (npm, pip,
-                                                Docker).
+                                                Follow the installation
+                                                instructions for your preferred
+                                                method (npm, pip, Docker).
                                             </p>
                                             <div className="group">
                                                 <CodeBlock
@@ -345,9 +390,9 @@ const Docs: React.FC = () => {
                                                 Configure Your Application
                                             </h3>
                                             <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                                Connect your AI application to the
-                                                MCP server using the provided
-                                                configuration.
+                                                Connect your AI application to
+                                                the MCP server using the
+                                                provided configuration.
                                             </p>
                                             <div className="group">
                                                 <CodeBlock
@@ -375,16 +420,21 @@ const Docs: React.FC = () => {
                                                 Start Building
                                             </h3>
                                             <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                                Your MCP server is now ready! Start
-                                                building amazing AI-powered
-                                                applications.
+                                                Your MCP server is now ready!
+                                                Start building amazing
+                                                AI-powered applications.
                                             </p>
                                             <button
-                                                onClick={() => scrollToSection("examples")}
+                                                onClick={() =>
+                                                    scrollToSection("examples")
+                                                }
                                                 className="inline-flex items-center text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-medium"
                                             >
                                                 View Examples
-                                                <ArrowRight className="ml-1" size={16} />
+                                                <ArrowRight
+                                                    className="ml-1"
+                                                    size={16}
+                                                />
                                             </button>
                                         </div>
                                     </div>
@@ -397,32 +447,55 @@ const Docs: React.FC = () => {
                                     Installation
                                 </h2>
                                 <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                    MCP servers can be installed using various package managers and deployment methods. 
-                                    Choose the method that best fits your development environment.
+                                    MCP servers can be installed using various
+                                    package managers and deployment methods.
+                                    Choose the method that best fits your
+                                    development environment.
                                 </p>
 
                                 <div className="space-y-6">
                                     <div>
-                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">NPM Installation</h3>
-                                        <p className="text-gray-600 dark:text-gray-300 mb-3">For Node.js-based MCP servers:</p>
+                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                                            NPM Installation
+                                        </h3>
+                                        <p className="text-gray-600 dark:text-gray-300 mb-3">
+                                            For Node.js-based MCP servers:
+                                        </p>
                                         <div className="group">
-                                            <CodeBlock code="npm install @modelcontextprotocol/server-filesystem" id="npm-install" />
+                                            <CodeBlock
+                                                code="npm install @modelcontextprotocol/server-filesystem"
+                                                id="npm-install"
+                                            />
                                         </div>
                                     </div>
 
                                     <div>
-                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Python Installation</h3>
-                                        <p className="text-gray-600 dark:text-gray-300 mb-3">For Python-based MCP servers:</p>
+                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                                            Python Installation
+                                        </h3>
+                                        <p className="text-gray-600 dark:text-gray-300 mb-3">
+                                            For Python-based MCP servers:
+                                        </p>
                                         <div className="group">
-                                            <CodeBlock code="pip install mcp-server-filesystem" id="pip-install" />
+                                            <CodeBlock
+                                                code="pip install mcp-server-filesystem"
+                                                id="pip-install"
+                                            />
                                         </div>
                                     </div>
 
                                     <div>
-                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Docker Installation</h3>
-                                        <p className="text-gray-600 dark:text-gray-300 mb-3">Run MCP servers in containers:</p>
+                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                                            Docker Installation
+                                        </h3>
+                                        <p className="text-gray-600 dark:text-gray-300 mb-3">
+                                            Run MCP servers in containers:
+                                        </p>
                                         <div className="group">
-                                            <CodeBlock code="docker run -p 3000:3000 mcp-hub/filesystem-server" id="docker-install" />
+                                            <CodeBlock
+                                                code="docker run -p 3000:3000 mcp-hub/filesystem-server"
+                                                id="docker-install"
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -437,10 +510,10 @@ const Docs: React.FC = () => {
                                     The Model Context Protocol (MCP) is an open
                                     standard that enables AI applications to
                                     securely connect with external data sources,
-                                    tools, and services. It provides a standardized
-                                    way for AI models to access and interact with
-                                    various resources while maintaining security and
-                                    control.
+                                    tools, and services. It provides a
+                                    standardized way for AI models to access and
+                                    interact with various resources while
+                                    maintaining security and control.
                                 </p>
 
                                 <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-lg p-6 mb-6">
@@ -449,25 +522,37 @@ const Docs: React.FC = () => {
                                     </h3>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div className="flex items-center">
-                                            <Shield className="text-blue-600 dark:text-blue-400 mr-3" size={20} />
+                                            <Shield
+                                                className="text-blue-600 dark:text-blue-400 mr-3"
+                                                size={20}
+                                            />
                                             <span className="text-gray-700 dark:text-gray-300">
                                                 Secure data access
                                             </span>
                                         </div>
                                         <div className="flex items-center">
-                                            <Plug className="text-green-600 dark:text-green-400 mr-3" size={20} />
+                                            <Plug
+                                                className="text-green-600 dark:text-green-400 mr-3"
+                                                size={20}
+                                            />
                                             <span className="text-gray-700 dark:text-gray-300">
                                                 Standardized integration
                                             </span>
                                         </div>
                                         <div className="flex items-center">
-                                            <Expand className="text-purple-600 dark:text-purple-400 mr-3" size={20} />
+                                            <Expand
+                                                className="text-purple-600 dark:text-purple-400 mr-3"
+                                                size={20}
+                                            />
                                             <span className="text-gray-700 dark:text-gray-300">
                                                 Scalable architecture
                                             </span>
                                         </div>
                                         <div className="flex items-center">
-                                            <Settings className="text-orange-600 dark:text-orange-400 mr-3" size={20} />
+                                            <Settings
+                                                className="text-orange-600 dark:text-orange-400 mr-3"
+                                                size={20}
+                                            />
                                             <span className="text-gray-700 dark:text-gray-300">
                                                 Easy maintenance
                                             </span>
@@ -482,16 +567,20 @@ const Docs: React.FC = () => {
                                     <div className="flex items-start">
                                         <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full mt-2 mr-3"></div>
                                         <p className="text-gray-600 dark:text-gray-300">
-                                            <strong>Client-Server Architecture:</strong>
-                                            AI applications (clients) connect to MCP
-                                            servers that provide specific
+                                            <strong>
+                                                Client-Server Architecture:
+                                            </strong>
+                                            AI applications (clients) connect to
+                                            MCP servers that provide specific
                                             capabilities
                                         </p>
                                     </div>
                                     <div className="flex items-start">
                                         <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full mt-2 mr-3"></div>
                                         <p className="text-gray-600 dark:text-gray-300">
-                                            <strong>Standardized Protocol:</strong>
+                                            <strong>
+                                                Standardized Protocol:
+                                            </strong>
                                             All communication follows the MCP
                                             specification for consistency
                                         </p>
@@ -500,17 +589,17 @@ const Docs: React.FC = () => {
                                         <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full mt-2 mr-3"></div>
                                         <p className="text-gray-600 dark:text-gray-300">
                                             <strong>Resource Access:</strong>
-                                            Servers expose resources (data, tools,
-                                            prompts) that clients can discover and
-                                            use
+                                            Servers expose resources (data,
+                                            tools, prompts) that clients can
+                                            discover and use
                                         </p>
                                     </div>
                                     <div className="flex items-start">
                                         <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full mt-2 mr-3"></div>
                                         <p className="text-gray-600 dark:text-gray-300">
-                                            <strong>Secure Boundaries:</strong> Each
-                                            server operates within defined security
-                                            boundaries and permissions
+                                            <strong>Secure Boundaries:</strong>{" "}
+                                            Each server operates within defined
+                                            security boundaries and permissions
                                         </p>
                                     </div>
                                 </div>
@@ -522,17 +611,20 @@ const Docs: React.FC = () => {
                                     Server Types & Categories
                                 </h2>
                                 <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                    MCP servers come in various types, each designed
-                                    for specific use cases. Understanding these
-                                    categories helps you choose the right server for
-                                    your needs.
+                                    MCP servers come in various types, each
+                                    designed for specific use cases.
+                                    Understanding these categories helps you
+                                    choose the right server for your needs.
                                 </p>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-6 hover:shadow-md hover:-translate-y-1 transition-all duration-300 bg-white dark:bg-gray-700/50">
                                         <div className="flex items-center mb-4">
                                             <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-3">
-                                                <Folder className="text-blue-600 dark:text-blue-400" size={20} />
+                                                <Folder
+                                                    className="text-blue-600 dark:text-blue-400"
+                                                    size={20}
+                                                />
                                             </div>
                                             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                                                 File System
@@ -555,15 +647,18 @@ const Docs: React.FC = () => {
                                     <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-6 hover:shadow-md hover:-translate-y-1 transition-all duration-300 bg-white dark:bg-gray-700/50">
                                         <div className="flex items-center mb-4">
                                             <div className="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mr-3">
-                                                <Database className="text-green-600 dark:text-green-400" size={20} />
+                                                <Database
+                                                    className="text-green-600 dark:text-green-400"
+                                                    size={20}
+                                                />
                                             </div>
                                             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                                                 Database
                                             </h3>
                                         </div>
                                         <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                            Connect to SQL and NoSQL databases for
-                                            data operations.
+                                            Connect to SQL and NoSQL databases
+                                            for data operations.
                                         </p>
                                         <div className="text-sm text-gray-500 dark:text-gray-400">
                                             <span className="bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded mr-2">
@@ -578,7 +673,10 @@ const Docs: React.FC = () => {
                                     <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-6 hover:shadow-md hover:-translate-y-1 transition-all duration-300 bg-white dark:bg-gray-700/50">
                                         <div className="flex items-center mb-4">
                                             <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mr-3">
-                                                <MessageCircle className="text-purple-600 dark:text-purple-400" size={20} />
+                                                <MessageCircle
+                                                    className="text-purple-600 dark:text-purple-400"
+                                                    size={20}
+                                                />
                                             </div>
                                             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                                                 Communication
@@ -601,7 +699,10 @@ const Docs: React.FC = () => {
                                     <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-6 hover:shadow-md hover:-translate-y-1 transition-all duration-300 bg-white dark:bg-gray-700/50">
                                         <div className="flex items-center mb-4">
                                             <div className="w-10 h-10 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mr-3">
-                                                <Code className="text-orange-600 dark:text-orange-400" size={20} />
+                                                <Code
+                                                    className="text-orange-600 dark:text-orange-400"
+                                                    size={20}
+                                                />
                                             </div>
                                             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                                                 Development
@@ -629,15 +730,20 @@ const Docs: React.FC = () => {
                                     Integration Guide
                                 </h2>
                                 <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                    Integrating MCP servers with your AI application requires configuring the connection
-                                    and understanding the available resources and tools.
+                                    Integrating MCP servers with your AI
+                                    application requires configuring the
+                                    connection and understanding the available
+                                    resources and tools.
                                 </p>
 
                                 <div className="space-y-6">
                                     <div>
-                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Configuration Setup</h3>
+                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                                            Configuration Setup
+                                        </h3>
                                         <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                            Add your MCP server configuration to your application's config file:
+                                            Add your MCP server configuration to
+                                            your application's config file:
                                         </p>
                                         <div className="group">
                                             <CodeBlock
@@ -658,9 +764,12 @@ const Docs: React.FC = () => {
                                     </div>
 
                                     <div>
-                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Connection Testing</h3>
+                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                                            Connection Testing
+                                        </h3>
                                         <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                            Test your connection to ensure the server is responding correctly:
+                                            Test your connection to ensure the
+                                            server is responding correctly:
                                         </p>
                                         <div className="group">
                                             <CodeBlock
@@ -678,13 +787,16 @@ const Docs: React.FC = () => {
                                     Building Custom Servers
                                 </h2>
                                 <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                    Create your own MCP servers to expose custom functionality and data sources
-                                    to AI applications.
+                                    Create your own MCP servers to expose custom
+                                    functionality and data sources to AI
+                                    applications.
                                 </p>
 
                                 <div className="space-y-6">
                                     <div>
-                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Server Structure</h3>
+                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                                            Server Structure
+                                        </h3>
                                         <p className="text-gray-600 dark:text-gray-300 mb-3">
                                             A basic MCP server implementation:
                                         </p>
@@ -726,28 +838,57 @@ await server.connect(transport);`}
                                     Best Practices
                                 </h2>
                                 <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                    Follow these best practices to ensure optimal performance, security, and maintainability
-                                    of your MCP server implementations.
+                                    Follow these best practices to ensure
+                                    optimal performance, security, and
+                                    maintainability of your MCP server
+                                    implementations.
                                 </p>
 
                                 <div className="space-y-6">
                                     <div className="bg-green-50 dark:bg-green-900/20 border-l-4 border-green-400 dark:border-green-500 p-4">
-                                        <h3 className="text-lg font-semibold text-green-800 dark:text-green-300 mb-2">Security</h3>
+                                        <h3 className="text-lg font-semibold text-green-800 dark:text-green-300 mb-2">
+                                            Security
+                                        </h3>
                                         <ul className="text-green-700 dark:text-green-300 space-y-1">
-                                            <li>• Always validate input parameters</li>
-                                            <li>• Implement proper authentication and authorization</li>
-                                            <li>• Use environment variables for sensitive data</li>
-                                            <li>• Regularly update dependencies</li>
+                                            <li>
+                                                • Always validate input
+                                                parameters
+                                            </li>
+                                            <li>
+                                                • Implement proper
+                                                authentication and authorization
+                                            </li>
+                                            <li>
+                                                • Use environment variables for
+                                                sensitive data
+                                            </li>
+                                            <li>
+                                                • Regularly update dependencies
+                                            </li>
                                         </ul>
                                     </div>
 
                                     <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-400 dark:border-blue-500 p-4">
-                                        <h3 className="text-lg font-semibold text-blue-800 dark:text-blue-300 mb-2">Performance</h3>
+                                        <h3 className="text-lg font-semibold text-blue-800 dark:text-blue-300 mb-2">
+                                            Performance
+                                        </h3>
                                         <ul className="text-blue-700 dark:text-blue-300 space-y-1">
-                                            <li>• Implement caching for frequently accessed data</li>
-                                            <li>• Use connection pooling for database connections</li>
-                                            <li>• Optimize resource loading and memory usage</li>
-                                            <li>• Monitor and log performance metrics</li>
+                                            <li>
+                                                • Implement caching for
+                                                frequently accessed data
+                                            </li>
+                                            <li>
+                                                • Use connection pooling for
+                                                database connections
+                                            </li>
+                                            <li>
+                                                • Optimize resource loading and
+                                                memory usage
+                                            </li>
+                                            <li>
+                                                • Monitor and log performance
+                                                metrics
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -759,7 +900,8 @@ await server.connect(transport);`}
                                     Troubleshooting
                                 </h2>
                                 <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                    Common issues and solutions when working with MCP servers.
+                                    Common issues and solutions when working
+                                    with MCP servers.
                                 </p>
 
                                 <div className="space-y-6">
@@ -771,10 +913,22 @@ await server.connect(transport);`}
                                             If your MCP server fails to connect:
                                         </p>
                                         <ul className="text-gray-600 dark:text-gray-300 space-y-1 ml-4">
-                                            <li>• Check that the server process is running</li>
-                                            <li>• Verify the configuration file paths</li>
-                                            <li>• Ensure all required dependencies are installed</li>
-                                            <li>• Check the server logs for error messages</li>
+                                            <li>
+                                                • Check that the server process
+                                                is running
+                                            </li>
+                                            <li>
+                                                • Verify the configuration file
+                                                paths
+                                            </li>
+                                            <li>
+                                                • Ensure all required
+                                                dependencies are installed
+                                            </li>
+                                            <li>
+                                                • Check the server logs for
+                                                error messages
+                                            </li>
                                         </ul>
                                     </div>
 
@@ -783,13 +937,26 @@ await server.connect(transport);`}
                                             Permission Errors
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                            For file system or resource access issues:
+                                            For file system or resource access
+                                            issues:
                                         </p>
                                         <ul className="text-gray-600 dark:text-gray-300 space-y-1 ml-4">
-                                            <li>• Verify file and directory permissions</li>
-                                            <li>• Check that the server has access to required paths</li>
-                                            <li>• Ensure API keys and credentials are correct</li>
-                                            <li>• Review security policies and access controls</li>
+                                            <li>
+                                                • Verify file and directory
+                                                permissions
+                                            </li>
+                                            <li>
+                                                • Check that the server has
+                                                access to required paths
+                                            </li>
+                                            <li>
+                                                • Ensure API keys and
+                                                credentials are correct
+                                            </li>
+                                            <li>
+                                                • Review security policies and
+                                                access controls
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -801,19 +968,23 @@ await server.connect(transport);`}
                                     API Reference
                                 </h2>
                                 <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                    Complete reference for the MCP protocol methods and data structures.
+                                    Complete reference for the MCP protocol
+                                    methods and data structures.
                                 </p>
 
                                 <div className="space-y-6">
                                     <div>
-                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Core Methods</h3>
+                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                                            Core Methods
+                                        </h3>
                                         <div className="space-y-4">
                                             <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-4 bg-white dark:bg-gray-700/50">
                                                 <h4 className="font-mono text-sm font-semibold text-purple-600 dark:text-purple-400 mb-2">
                                                     resources/list
                                                 </h4>
                                                 <p className="text-gray-600 dark:text-gray-300 text-sm">
-                                                    Lists all available resources from the server.
+                                                    Lists all available
+                                                    resources from the server.
                                                 </p>
                                             </div>
                                             <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-4 bg-white dark:bg-gray-700/50">
@@ -821,7 +992,8 @@ await server.connect(transport);`}
                                                     resources/read
                                                 </h4>
                                                 <p className="text-gray-600 dark:text-gray-300 text-sm">
-                                                    Reads the contents of a specific resource.
+                                                    Reads the contents of a
+                                                    specific resource.
                                                 </p>
                                             </div>
                                             <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-4 bg-white dark:bg-gray-700/50">
@@ -829,7 +1001,8 @@ await server.connect(transport);`}
                                                     tools/list
                                                 </h4>
                                                 <p className="text-gray-600 dark:text-gray-300 text-sm">
-                                                    Lists all available tools provided by the server.
+                                                    Lists all available tools
+                                                    provided by the server.
                                                 </p>
                                             </div>
                                         </div>
@@ -843,14 +1016,19 @@ await server.connect(transport);`}
                                     Examples
                                 </h2>
                                 <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                    Practical examples of MCP server implementations and integrations.
+                                    Practical examples of MCP server
+                                    implementations and integrations.
                                 </p>
 
                                 <div className="space-y-6">
                                     <div>
-                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">File System Server</h3>
+                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                                            File System Server
+                                        </h3>
                                         <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                            A simple file system server that provides read/write access to a specific directory:
+                                            A simple file system server that
+                                            provides read/write access to a
+                                            specific directory:
                                         </p>
                                         <div className="group">
                                             <CodeBlock
@@ -875,9 +1053,12 @@ await server.connect(transport);`}
                                     </div>
 
                                     <div>
-                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Database Server</h3>
+                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                                            Database Server
+                                        </h3>
                                         <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                            Connect to a PostgreSQL database and execute queries:
+                                            Connect to a PostgreSQL database and
+                                            execute queries:
                                         </p>
                                         <div className="group">
                                             <CodeBlock
@@ -911,15 +1092,17 @@ await server.connect(transport);`}
                                 <div className="space-y-6">
                                     <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-6 bg-white dark:bg-gray-700/50">
                                         <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                                            How do I choose the right MCP server?
+                                            How do I choose the right MCP
+                                            server?
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-300">
                                             Consider your specific use case, the
-                                            type of data or functionality you need,
-                                            and the server's compatibility with your
-                                            tech stack. Use our filtering and search
-                                            features to narrow down options, and
-                                            check community ratings and reviews.
+                                            type of data or functionality you
+                                            need, and the server's compatibility
+                                            with your tech stack. Use our
+                                            filtering and search features to
+                                            narrow down options, and check
+                                            community ratings and reviews.
                                         </p>
                                     </div>
 
@@ -929,25 +1112,28 @@ await server.connect(transport);`}
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-300">
                                             Yes, MCP servers are designed with
-                                            security in mind. They operate within
-                                            defined boundaries, support permission
-                                            controls, and follow the MCP security
-                                            specifications. Always review the
-                                            server's documentation and configure
-                                            appropriate access controls.
+                                            security in mind. They operate
+                                            within defined boundaries, support
+                                            permission controls, and follow the
+                                            MCP security specifications. Always
+                                            review the server's documentation
+                                            and configure appropriate access
+                                            controls.
                                         </p>
                                     </div>
 
                                     <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-6 bg-white dark:bg-gray-700/50">
                                         <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                                            Can I use multiple MCP servers together?
+                                            Can I use multiple MCP servers
+                                            together?
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-300">
                                             Absolutely! Most AI applications use
-                                            multiple MCP servers to access different
-                                            types of resources. The MCP protocol is
-                                            designed to support multiple concurrent
-                                            server connections.
+                                            multiple MCP servers to access
+                                            different types of resources. The
+                                            MCP protocol is designed to support
+                                            multiple concurrent server
+                                            connections.
                                         </p>
                                     </div>
 
@@ -956,12 +1142,12 @@ await server.connect(transport);`}
                                             How do I contribute a new server?
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-300">
-                                            We welcome community contributions! You
-                                            can submit your MCP server through our
-                                            GitHub repository or contact us
-                                            directly. Make sure your server follows
-                                            MCP specifications and includes proper
-                                            documentation.
+                                            We welcome community contributions!
+                                            You can submit your MCP server
+                                            through our GitHub repository or
+                                            contact us directly. Make sure your
+                                            server follows MCP specifications
+                                            and includes proper documentation.
                                         </p>
                                     </div>
                                 </div>
@@ -973,8 +1159,9 @@ await server.connect(transport);`}
                                     Ready to Get Started?
                                 </h2>
                                 <p className="text-blue-100 dark:text-blue-200 mb-6">
-                                    Explore our collection of MCP servers and start
-                                    building amazing AI applications today.
+                                    Explore our collection of MCP servers and
+                                    start building amazing AI applications
+                                    today.
                                 </p>
                                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                     <Link
@@ -988,7 +1175,10 @@ await server.connect(transport);`}
                                         to="/categories"
                                         className="inline-flex items-center px-6 py-3 border-2 border-white text-white font-medium rounded-lg hover:bg-white hover:text-blue-600 dark:hover:text-blue-700 transition-colors"
                                     >
-                                        <LayoutGrid className="mr-2" size={20} />
+                                        <LayoutGrid
+                                            className="mr-2"
+                                            size={20}
+                                        />
                                         View Categories
                                     </Link>
                                 </div>

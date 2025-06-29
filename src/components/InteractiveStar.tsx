@@ -18,7 +18,7 @@ const InteractiveStar: React.FC<InteractiveStarProps> = ({
   const starRef = useRef<HTMLDivElement>(null);
 
   const handleClick = () => {
-    navigate(`/servers/${starData.server.slug}`);
+    navigate(`/servers/${starData.server.id}`);
   };
 
   const handleMouseEnter = () => {

@@ -14,62 +14,167 @@ import {
     Link2,
     Briefcase,
     Shield,
+    Cloud,
+    Globe,
+    Settings,
+    Layers,
+    Image,
+    CreditCard,
+    Wrench,
 } from "lucide-react";
 import { useAppStore } from "../store/useAppStore";
 import ParticleHero from "../components/ParticleHero";
 import { useHomePageData, useServerStats, useSearchServersPaginated } from "../hooks/useUnifiedData";
+import { useTopStarServers, type StarServer } from "../hooks/useTopStarServers";
 import CategorySection from "../components/Home/CategorySection";
+import type { MCPServer } from "../types";
 
 // Helper functions moved outside component to prevent recreation on every render
 const getCategoryIcon = (category: string) => {
     switch (category) {
+        // File system and storage
         case 'filesystem':
             return <Folder className="text-white w-5 h-5" />;
         case 'database':
+        case 'database-storage':
             return <Database className="text-white w-5 h-5" />;
+        
+        // Communication and collaboration
         case 'communication':
+        case 'communication-collaboration':
             return <MessageCircle className="text-white w-5 h-5" />;
+        
+        // Development and tools
         case 'development':
+        case 'development-tools':
             return <Code className="text-white w-5 h-5" />;
         case 'api-integration':
             return <Link2 className="text-white w-5 h-5" />;
+        case 'utilities':
+        case 'utilities-tools':
+            return <Wrench className="text-white w-5 h-5" />;
+        
+        // Search and analysis
         case 'search':
             return <Search className="text-white w-5 h-5" />;
-        case 'ai-ml':
-            return <Brain className="text-white w-5 h-5" />;
         case 'monitoring':
             return <Activity className="text-white w-5 h-5" />;
+        
+        // AI and machine learning
+        case 'ai-ml':
+        case 'ai-machine-learning':
+            return <Brain className="text-white w-5 h-5" />;
+        
+        // Business and productivity
         case 'productivity':
+        case 'business-productivity':
             return <Briefcase className="text-white w-5 h-5" />;
+        
+        // Cloud and infrastructure
+        case 'cloud':
+        case 'cloud-infrastructure':
+            return <Cloud className="text-white w-5 h-5" />;
+        
+        // Content and media
+        case 'content':
+        case 'content-media':
+            return <Image className="text-white w-5 h-5" />;
+        
+        // Finance and payments
+        case 'finance':
+        case 'finance-payments':
+            return <CreditCard className="text-white w-5 h-5" />;
+        
+        // Web and network
+        case 'web':
+        case 'web-network':
+            return <Globe className="text-white w-5 h-5" />;
+        
+        // Security
         case 'security':
             return <Shield className="text-white w-5 h-5" />;
+        
+        // Specialized domains
+        case 'specialized':
+        case 'specialized-domains':
+            return <Layers className="text-white w-5 h-5" />;
+        
+        // Default fallback
         default:
-            return <Code className="text-white w-5 h-5" />;
+            return <Settings className="text-white w-5 h-5" />;
     }
 };
 
 const getCategoryColor = (category: string) => {
     switch (category) {
+        // File system and storage
         case 'filesystem':
             return 'bg-blue-600';
         case 'database':
+        case 'database-storage':
             return 'bg-green-600';
+        
+        // Communication and collaboration
         case 'communication':
+        case 'communication-collaboration':
             return 'bg-purple-600';
+        
+        // Development and tools
         case 'development':
+        case 'development-tools':
             return 'bg-indigo-600';
         case 'api-integration':
             return 'bg-teal-600';
+        case 'utilities':
+        case 'utilities-tools':
+            return 'bg-slate-600';
+        
+        // Search and analysis
         case 'search':
             return 'bg-orange-600';
-        case 'ai-ml':
-            return 'bg-pink-600';
         case 'monitoring':
             return 'bg-yellow-600';
+        
+        // AI and machine learning
+        case 'ai-ml':
+        case 'ai-machine-learning':
+            return 'bg-pink-600';
+        
+        // Business and productivity
         case 'productivity':
+        case 'business-productivity':
             return 'bg-lime-600';
+        
+        // Cloud and infrastructure
+        case 'cloud':
+        case 'cloud-infrastructure':
+            return 'bg-sky-600';
+        
+        // Content and media
+        case 'content':
+        case 'content-media':
+            return 'bg-amber-600';
+        
+        // Finance and payments
+        case 'finance':
+        case 'finance-payments':
+            return 'bg-emerald-600';
+        
+        // Web and network
+        case 'web':
+        case 'web-network':
+            return 'bg-cyan-600';
+        
+        // Security
         case 'security':
             return 'bg-red-600';
+        
+        // Specialized domains
+        case 'specialized':
+        case 'specialized-domains':
+            return 'bg-violet-600';
+        
+        // Default fallback
         default:
             return 'bg-gray-600';
     }
@@ -91,6 +196,7 @@ const Home: React.FC = () => {
     const { searchQuery, setSearchQuery } = useAppStore();
     const { data: homePageData, isLoading: homeDataLoading } = useHomePageData();
     const { data: serverStats } = useServerStats();
+    const { data: topStarServers } = useTopStarServers(300); // Get top 300 servers by stars
     
     // Use paginated search with larger limit for home page
     const { data: searchResults } = useSearchServersPaginated(
@@ -107,22 +213,15 @@ const Home: React.FC = () => {
         [homePageData]
     );
     
-    // Create a flat list of all servers for search functionality
-    const allServers = useMemo(() => {
-        if (searchQuery.trim()) {
-            return searchResults?.data || [];
-        }
-        return homePageData?.flatMap(item => item.servers) || [];
-    }, [homePageData, searchResults, searchQuery]);
     
     // Use server stats for statistics display with fallbacks
     const statistics = useMemo(() => {
         if (serverStats) {
             return {
                 totalServers: serverStats.totalServers,
-                totalDownloads: serverStats.totalDownloads,
+                averageStars: serverStats.averageStars || 0,
                 uniqueCategories: serverStats.uniqueCategories,
-                averageQualityScore: serverStats.averageQualityScore
+                activeRepos: serverStats.activeRepos || 0
             };
         }
         
@@ -130,25 +229,31 @@ const Home: React.FC = () => {
         if (homePageData) {
             const allHomeServers = homePageData.flatMap(item => item.servers);
             const totalServers = allHomeServers.length;
-            const totalDownloads = allHomeServers.reduce((sum, server) => sum + (server.usage?.downloads || 0), 0);
+            const totalStars = allHomeServers.reduce((sum, server) => sum + (server.repository?.stars || server.stats?.stars || 0), 0);
+            const averageStars = totalServers > 0 ? Math.round(totalStars / totalServers) : 0;
             const uniqueCategories = homePageData.length;
-            const averageQualityScore = totalServers > 0 
-                ? Math.round(allHomeServers.reduce((sum, server) => sum + (server.quality?.score || 0), 0) / totalServers)
-                : 90;
+            
+            // Calculate active repos (repos updated in last 30 days)
+            const thirtyDaysAgo = new Date();
+            thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+            const activeRepos = allHomeServers.filter(server => {
+                const lastUpdated = new Date(server.repository?.lastUpdated || server.stats?.lastUpdated || 0);
+                return lastUpdated > thirtyDaysAgo;
+            }).length;
             
             return {
                 totalServers,
-                totalDownloads,
+                averageStars,
                 uniqueCategories,
-                averageQualityScore
+                activeRepos
             };
         }
         
         return {
             totalServers: 0,
-            totalDownloads: 0,
+            averageStars: 0,
             uniqueCategories: 0,
-            averageQualityScore: 90
+            activeRepos: 0
         };
     }, [serverStats, homePageData]);
 
@@ -169,7 +274,7 @@ const Home: React.FC = () => {
             return grouped;
         } else if (homePageData) {
             // When not searching, use the optimized home page data
-            const grouped: Record<string, typeof allServers> = {};
+            const grouped: Record<string, MCPServer[]> = {};
             homePageData.forEach(item => {
                 grouped[item.category.id] = item.servers;
             });
@@ -184,12 +289,14 @@ const Home: React.FC = () => {
             {/* Hero Section */}
             <section className="relative overflow-hidden cosmic-bg h-[80vh] flex items-center" style={{ isolation: 'isolate' }}>
                 <ParticleHero 
-                    servers={allServers || []}
+                    servers={(topStarServers || []) as (MCPServer | StarServer)[]}
                     searchQuery={searchQuery}
-                    maxStars={200}
+                    maxStars={300}
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black opacity-30" style={{ zIndex: 5 }}></div>
-                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32" style={{ zIndex: 10 }}>
+                
+                
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black opacity-30 pointer-events-none" style={{ zIndex: 5 }}></div>
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 pointer-events-none" style={{ zIndex: 10 }}>
                     <div className="text-center animate-fade-in-up">
                         <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 relative z-10">
                             Discover the Best
@@ -200,7 +307,7 @@ const Home: React.FC = () => {
                         </p>
 
                         {/* Search Bar */}
-                        <div className="max-w-2xl mx-auto mb-8 relative z-10">
+                        <div className="max-w-2xl mx-auto mb-8 relative z-10 pointer-events-auto">
                             <div className="relative rounded-xl p-2" style={{
                                 background: 'rgba(100, 255, 218, 0.1)',
                                 backdropFilter: 'blur(15px)',
@@ -212,7 +319,7 @@ const Home: React.FC = () => {
                                     placeholder="Search for MCP servers, categories, or features..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="w-full px-6 py-4 bg-white dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 rounded-lg border-0 focus:ring-2 focus:ring-blue-400 text-lg"
+                                    className="w-full px-6 py-4 bg-white dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 rounded-lg border-0 text-lg"
                                     data-testid="home-search-input"
                                 />
                                 <button className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-6 py-2 rounded-lg hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 shadow-lg hover:shadow-cyan-500/25">
@@ -223,7 +330,7 @@ const Home: React.FC = () => {
                         </div>
 
                         {/* Quick Stats */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto relative z-10">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto relative z-10 pointer-events-auto">
                             <div className="rounded-lg p-4 text-center hover-lift" style={{
                                 background: 'rgba(100, 255, 218, 0.1)',
                                 backdropFilter: 'blur(15px)',
@@ -253,16 +360,14 @@ const Home: React.FC = () => {
                                 boxShadow: '0 8px 32px rgba(34, 197, 94, 0.1)'
                             }}>
                                 <div className="text-3xl font-bold bg-gradient-to-r from-green-300 to-white bg-clip-text text-transparent">
-                                    {statistics.totalDownloads > 0 
-                                        ? statistics.totalDownloads >= 1000000
-                                            ? `${(statistics.totalDownloads / 1000000).toFixed(1)}M`
-                                            : statistics.totalDownloads >= 1000 
-                                            ? `${Math.floor(statistics.totalDownloads / 1000)}K` 
-                                            : statistics.totalDownloads.toLocaleString()
+                                    {statistics.averageStars > 0 
+                                        ? statistics.averageStars >= 1000
+                                            ? `${Math.floor(statistics.averageStars / 1000)}K`
+                                            : statistics.averageStars.toLocaleString()
                                         : '...'
                                     }
                                 </div>
-                                <div className="text-gray-300">Downloads</div>
+                                <div className="text-gray-300">Avg Stars</div>
                             </div>
                             <div className="rounded-lg p-4 text-center hover-lift" style={{
                                 background: 'rgba(249, 115, 22, 0.1)',
@@ -271,9 +376,9 @@ const Home: React.FC = () => {
                                 boxShadow: '0 8px 32px rgba(249, 115, 22, 0.1)'
                             }}>
                                 <div className="text-3xl font-bold bg-gradient-to-r from-orange-300 to-white bg-clip-text text-transparent">
-                                    {statistics.averageQualityScore > 0 ? `${statistics.averageQualityScore}%` : '...'}
+                                    {statistics.activeRepos > 0 ? statistics.activeRepos.toLocaleString() : '...'}
                                 </div>
-                                <div className="text-gray-300">Quality Score</div>
+                                <div className="text-gray-300">Active Repos</div>
                             </div>
                         </div>
                     </div>

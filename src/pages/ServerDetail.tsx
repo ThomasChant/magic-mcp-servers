@@ -4,7 +4,6 @@ import {
     ArrowLeft,
     ArrowRight,
     Star,
-    Download,
     GitBranch,
     // Copy and CheckCircle now handled by StructuredReadme component
     AlertCircle,
@@ -231,6 +230,7 @@ const ServerDetail: React.FC = () => {
                                 </div>
                                 <p className="text-lg text-gray-600 dark:text-gray-300 mb-4">
                                     {server.fullDescription || server.description.en || server.description["zh-CN"]}
+
                                 </p>
                                 <div className="flex items-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
                                     <div className="flex items-center">
@@ -243,82 +243,121 @@ const ServerDetail: React.FC = () => {
                                     {server.repository.forks !== undefined && (
                                         <div className="flex items-center">
                                             <GitFork className="h-4 w-4 mr-1" />
-                                            <span>{server.repository.forks.toLocaleString()} forks</span>
+                                            <span>
+                                                {server.repository.forks.toLocaleString()}{" "}
+                                                forks
+                                            </span>
                                         </div>
                                     )}
-                                    {server.repository.watchers !== undefined && (
+                                    {server.repository.watchers !==
+                                        undefined && (
                                         <div className="flex items-center">
                                             <Eye className="h-4 w-4 mr-1" />
-                                            <span>{server.repository.watchers.toLocaleString()} watchers</span>
+                                            <span>
+                                                {server.repository.watchers.toLocaleString()}{" "}
+                                                watchers
+                                            </span>
                                         </div>
                                     )}
-                                    <div className="flex items-center">
+                                    {/* <div className="flex items-center">
                                         <Download className="h-4 w-4 mr-1" />
                                         <span>{server.usage.downloads.toLocaleString()} downloads</span>
+                                    </div> */}
+                                    <div className="flex items-center">
+                                        <Calendar className="h-4 w-4 mr-1" />
+                                        <span>
+                                            CreatedAt{" "}
+                                            {server.stats.createdAt
+                                                ? new Date(
+                                                      server.stats.createdAt
+                                                  ).toLocaleDateString()
+                                                : "Recently"}
+                                        </span>
                                     </div>
                                     <div className="flex items-center">
                                         <Calendar className="h-4 w-4 mr-1" />
-                                        <span>Updated {server.stats.lastUpdated ? new Date(server.stats.lastUpdated).toLocaleDateString() : 'Recently'}</span>
+                                        <span>
+                                            Updated{" "}
+                                            {server.stats.lastUpdated
+                                                ? new Date(
+                                                      server.stats.lastUpdated
+                                                  ).toLocaleDateString()
+                                                : "Recently"}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="flex flex-row sm:flex-row gap-3 min-w-fit">
+                        <div className="flex flex-row sm:flex-row gap-2 min-w-fit">
                             <a
                                 href={server.repository.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center px-2 py-3 bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition-all duration-200 shadow-lg hover:shadow-xl font-sm min-w-[140px]"
+                                className="inline-flex items-center justify-center px-3 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-all duration-200 shadow-sm hover:shadow-md text-sm font-medium min-w-[120px]"
                             >
-                                <GitBranch className="mr-2 h-5 w-5" />
+                                <GitBranch className="mr-1.5 h-4 w-4" />
                                 View on GitHub
                             </a>
-                            <FavoriteButton 
+                            <FavoriteButton
                                 serverId={server.id}
                                 showText={true}
-                                size="lg"
-                                className="min-w-[140px] border-2 shadow-sm hover:shadow-md"
+                                size="md"
+                                className="min-w-[100px] border-2 shadow-sm hover:shadow-md text-sm"
                             />
                             <div className="relative" ref={shareMenuRef}>
-                                <button 
-                                    onClick={() => setShowShareMenu(!showShareMenu)}
-                                    className="inline-flex items-center justify-center px-6 py-3 border-2 border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-600 hover:border-gray-300 dark:hover:border-gray-500 transition-all duration-200 shadow-sm hover:shadow-md font-sm min-w-[100px]"
+
+                                <button
+                                    onClick={() =>
+                                        setShowShareMenu(!showShareMenu)
+                                    }
+                                    className="inline-flex items-center justify-center px-3 py-2 border-2 border-gray-200 bg-white text-gray-700 rounded-lg hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md text-sm font-medium min-w-[80px]"
                                 >
-                                    <Share className="mr-2 h-5 w-5" />
+                                    <Share className="mr-1.5 h-4 w-4" />
                                     Share
                                 </button>
                                 {showShareMenu && (
                                     <div className="absolute right-0 mt-2 w-52 bg-white dark:bg-gray-700 rounded-xl shadow-xl border border-gray-100 dark:border-gray-600 z-10 overflow-hidden">
                                         <div className="py-2">
                                             <button
-                                                onClick={() => handleShare('twitter')}
-                                                className="flex items-center w-full px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-700 dark:hover:text-blue-400 transition-colors duration-150"
+
+                                                onClick={() =>
+                                                    handleShare("twitter")
+                                                }
+                                                className="flex items-center w-full px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150"
                                             >
                                                 <Twitter className="h-4 w-4 mr-3 text-blue-400" />
                                                 Share on Twitter
                                             </button>
                                             <button
-                                                onClick={() => handleShare('facebook')}
-                                                className="flex items-center w-full px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-700 dark:hover:text-blue-400 transition-colors duration-150"
+                                                onClick={() =>
+                                                    handleShare("facebook")
+                                                }
+                                                className="flex items-center w-full px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150"
                                             >
                                                 <Facebook className="h-4 w-4 mr-3 text-blue-600" />
                                                 Share on Facebook
                                             </button>
                                             <button
-                                                onClick={() => handleShare('linkedin')}
-                                                className="flex items-center w-full px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-700 dark:hover:text-blue-400 transition-colors duration-150"
+                                                onClick={() =>
+                                                    handleShare("linkedin")
+                                                }
+                                                className="flex items-center w-full px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150"
                                             >
                                                 <Linkedin className="h-4 w-4 mr-3 text-blue-700" />
                                                 Share on LinkedIn
                                             </button>
                                             <div className="border-t border-gray-100 dark:border-gray-600 my-1"></div>
                                             <button
-                                                onClick={() => handleShare('copy')}
-                                                className="flex items-center w-full px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 hover:text-gray-900 dark:hover:text-white transition-colors duration-150"
+                                                onClick={() =>
+                                                    handleShare("copy")
+                                                }
+                                                className="flex items-center w-full px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-150"
                                             >
                                                 <Link2 className="h-4 w-4 mr-3 text-gray-500" />
-                                                {copiedStates['share-link'] ? 'Copied!' : 'Copy Link'}
+                                                {copiedStates["share-link"]
+                                                    ? "Copied!"
+                                                    : "Copy Link"}
                                             </button>
                                         </div>
                                     </div>
@@ -368,12 +407,17 @@ const ServerDetail: React.FC = () => {
                                     About {server.name}
                                 </h2>
                                 <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                    {server.fullDescription || server.description.en || server.description["zh-CN"]}
+                                    {server.fullDescription ||
+                                        server.description.en ||
+                                        server.description["zh-CN"]}
                                 </p>
-                                
+
                                 <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg">
                                     <p className="text-sm text-gray-600 dark:text-gray-300">
-                                        Detailed documentation is being processed. Please check back later or visit the repository for more information.
+                                        Detailed documentation is being
+                                        processed. Please check back later or
+                                        visit the repository for more
+                                        information.
                                     </p>
                                     <a
                                         href={server.repository.url}
@@ -426,7 +470,8 @@ const ServerDetail: React.FC = () => {
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                             >
-                                                {server.repository.owner}/{server.repository.name}
+                                                {server.repository.owner}/
+                                                {server.repository.name}
                                             </a>
                                         </dd>
                                     </div>
@@ -448,7 +493,8 @@ const ServerDetail: React.FC = () => {
                                             </dd>
                                         </div>
                                     )}
-                                    {server.repository.watchers !== undefined && (
+                                    {server.repository.watchers !==
+                                        undefined && (
                                         <div>
                                             <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
                                                 Watchers
@@ -582,18 +628,31 @@ const ServerDetail: React.FC = () => {
                                             Languages
                                         </h4>
                                         <div className="flex flex-wrap gap-2">
-                                            {server.compatibility.pythonVersion && (
+                                            {server.compatibility
+                                                .pythonVersion && (
                                                 <span className="inline-flex items-center px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">
-                                                    Python {server.compatibility.pythonVersion}
+                                                    Python{" "}
+                                                    {
+                                                        server.compatibility
+                                                            .pythonVersion
+                                                    }
                                                 </span>
                                             )}
-                                            {server.compatibility.nodeVersion && (
+                                            {server.compatibility
+                                                .nodeVersion && (
                                                 <span className="inline-flex items-center px-2 py-1 bg-green-100 text-green-700 text-xs rounded">
-                                                    Node.js {server.compatibility.nodeVersion}
+                                                    Node.js{" "}
+                                                    {
+                                                        server.compatibility
+                                                            .nodeVersion
+                                                    }
                                                 </span>
                                             )}
-                                            {server.techStack.map(tech => (
-                                                <span key={tech} className="inline-flex items-center px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded">
+                                            {server.techStack.map((tech) => (
+                                                <span
+                                                    key={tech}
+                                                    className="inline-flex items-center px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded"
+                                                >
                                                     {tech}
                                                 </span>
                                             ))}
@@ -722,7 +781,7 @@ const ServerDetail: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                
+
                 {/* Comments Section */}
                 <div className="mt-8">
                     <ServerCommentsWithReplies serverId={server.id} />
