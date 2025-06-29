@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
     Star,
@@ -15,8 +15,9 @@ import {
     CloudOff,
     AlertCircle,
     RefreshCw,
+    Filter,
 } from "lucide-react";
-import { useServers } from "../hooks/useUnifiedData";
+import { useServers, useCategories } from "../hooks/useUnifiedData";
 import { useAppStore } from "../store/useAppStore";
 import { FavoriteButton } from "../components/FavoriteButton";
 import ProgressiveEllipsis from "../components/ProgressiveEllipsis";
@@ -33,9 +34,13 @@ interface ServerData extends Omit<MCPServer, 'verified'> {
 
 const Favorites: React.FC = () => {
     const { data: servers, isLoading, error } = useServers();
+    const { data: categories } = useCategories();
     const { favorites } = useAppStore();
     const syncData = useFavoritesSync();
     const { isOnline, favoritesError, retrySync, isSignedIn } = syncData;
+    
+    // Filter state
+    const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
     // 使用ref跟踪favorites的实际内容，避免Set对象引用变化导致的重渲染
     const favoritesContentRef = useRef<string>('');
@@ -50,9 +55,30 @@ const Favorites: React.FC = () => {
 
     const favoriteServers = useMemo(() => {
         if (!servers) return [];
-        return servers.filter((server) => stableFavoritesRef.current.has(server.id));
+        let filtered = servers.filter((server) => stableFavoritesRef.current.has(server.id));
+        
+        // Apply category filter
+        if (selectedCategories.length > 0) {
+            filtered = filtered.filter((server) => selectedCategories.includes(server.category));
+        }
+        
+        return filtered;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [servers, currentContent]);
+    }, [servers, currentContent, selectedCategories]);
+    
+    // Count servers per category from favorites
+    const categoryCounts = useMemo(() => {
+        if (!servers || !categories) return {};
+        
+        const counts: Record<string, number> = {};
+        servers.forEach(server => {
+            if (stableFavoritesRef.current.has(server.id)) {
+                counts[server.category] = (counts[server.category] || 0) + 1;
+            }
+        });
+        return counts;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [servers, categories, currentContent]);
 
     const getServerIcon = (server: ServerData) => {
         const tags = server.tags.join(" ").toLowerCase();
@@ -320,7 +346,17 @@ const Favorites: React.FC = () => {
                     <p className="text-lg text-gray-600 dark:text-gray-300">
                         Your saved MCP servers for quick access
                         <span className="block text-sm mt-1">
-                            {favoriteServers.length} server{favoriteServers.length !== 1 ? 's' : ''} in your favorites
+                            {selectedCategories.length > 0 ? (
+                                <>
+                                    Showing {favoriteServers.length} of{' '}
+                                    {servers?.filter(s => stableFavoritesRef.current.has(s.id)).length || 0}{' '}
+                                    favorite server{favoriteServers.length !== 1 ? 's' : ''}
+                                </>
+                            ) : (
+                                <>
+                                    {favoriteServers.length} server{favoriteServers.length !== 1 ? 's' : ''} in your favorites
+                                </>
+                            )}
                             {!isSignedIn && (
                                 <span className="text-amber-600 dark:text-amber-400 ml-2">
                                     • Sign in to sync across devices
@@ -330,32 +366,113 @@ const Favorites: React.FC = () => {
                     </p>
                 </div>
 
-                {favoriteServers.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                        {favoriteServers.map((server) => (
-                            <ServerCard key={server.id} server={server as ServerData} />
-                        ))}
-                    </div>
-                ) : (
-                    <div className="text-center py-12">
-                        <div className="max-w-md mx-auto">
-                            <Heart className="h-12 w-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
-                            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                                No favorites yet
-                            </h3>
-                            <p className="text-gray-600 dark:text-gray-400 mb-6">
-                                Start exploring MCP servers and save your favorites for quick access
-                            </p>
-                            <Link
-                                to="/servers"
-                                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                            >
-                                Browse Servers
-                                <ArrowRight className="ml-2 h-4 w-4" />
-                            </Link>
+                <div className="flex flex-col lg:flex-row gap-8">
+                    {/* Sidebar with category filters */}
+                    {categories && categories.length > 0 && (
+                        <div className="lg:w-1/4">
+                            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 sticky top-24">
+                                <div className="flex items-center justify-between mb-4">
+                                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center">
+                                        <Filter className="h-5 w-5 mr-2" />
+                                        Filter by Category
+                                    </h3>
+                                    {selectedCategories.length > 0 && (
+                                        <button
+                                            onClick={() => setSelectedCategories([])}
+                                            className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                                        >
+                                            Clear
+                                        </button>
+                                    )}
+                                </div>
+
+                                <div className="space-y-2">
+                                    {categories.map((category) => {
+                                        const categoryCount = categoryCounts[category.id] || 0;
+                                        if (categoryCount === 0) return null;
+
+                                        return (
+                                            <label key={category.id} className="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 rounded px-2 py-1.5 transition-colors">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={selectedCategories.includes(category.id)}
+                                                    onChange={(e) => {
+                                                        if (e.target.checked) {
+                                                            setSelectedCategories([...selectedCategories, category.id]);
+                                                        } else {
+                                                            setSelectedCategories(selectedCategories.filter(c => c !== category.id));
+                                                        }
+                                                    }}
+                                                    className="rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-blue-600 focus:ring-blue-500 mr-3"
+                                                />
+                                                <span className="flex-1 text-sm text-gray-700 dark:text-gray-300">
+                                                    {category.name.en}
+                                                </span>
+                                                <span className="text-xs text-gray-500 dark:text-gray-400">
+                                                    ({categoryCount})
+                                                </span>
+                                            </label>
+                                        );
+                                    })}
+                                </div>
+                            </div>
                         </div>
+                    )}
+
+                    {/* Main content */}
+                    <div className={categories && categories.length > 0 ? "lg:flex-1" : "w-full"}>
+                        {favoriteServers.length > 0 ? (
+                            <div className={`grid grid-cols-1 gap-6 ${
+                                categories && categories.length > 0 
+                                    ? "lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3" 
+                                    : "md:grid-cols-2 xl:grid-cols-3"
+                            }`}>
+                                {favoriteServers.map((server) => (
+                                    <ServerCard key={server.id} server={server as ServerData} />
+                                ))}
+                            </div>
+                        ) : (
+                            selectedCategories.length > 0 ? (
+                                <div className="text-center py-12">
+                                    <div className="max-w-md mx-auto">
+                                        <Filter className="h-12 w-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
+                                        <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                                            No favorites in selected categories
+                                        </h3>
+                                        <p className="text-gray-600 dark:text-gray-400 mb-6">
+                                            Try selecting different categories or clear the filter
+                                        </p>
+                                        <button
+                                            onClick={() => setSelectedCategories([])}
+                                            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                        >
+                                            Clear Filter
+                                        </button>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="text-center py-12">
+                                    <div className="max-w-md mx-auto">
+                                        <Heart className="h-12 w-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
+                                        <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                                            No favorites yet
+                                        </h3>
+                                        <p className="text-gray-600 dark:text-gray-400 mb-6">
+                                            Start exploring MCP servers and save your favorites for quick access
+                                        </p>
+                                        <Link
+                                            to="/servers"
+                                            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                        >
+                                            Browse Servers
+                                            <ArrowRight className="ml-2 h-4 w-4" />
+                                        </Link>
+                                    </div>
+                                </div>
+                            )
+                        )}
                     </div>
-                )}
+                </div>
             </div>
         </div>
     );

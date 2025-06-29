@@ -227,7 +227,7 @@ export const useSupabaseCategories = () => {
   });
 };
 
-// Servers hook with enhanced data
+// Servers hook with enhanced data - WARNING: Loads all servers, use paginated version for better performance
 export const useSupabaseServers = () => {
   return useQuery({
     queryKey: ["supabase", "servers"],
@@ -244,6 +244,363 @@ export const useSupabaseServers = () => {
       return (data || []).map(transformServer);
     },
     staleTime: 5 * 60 * 1000,
+  });
+};
+
+// Paginated servers hook - optimized for large datasets
+export interface PaginatedResult<T> {
+  data: T[];
+  total: number;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+  currentPage: number;
+  totalPages: number;
+}
+
+export const useSupabaseServersPaginated = (
+  page: number = 1,
+  limit: number = 12,
+  sortBy: string = 'stars',
+  sortOrder: 'asc' | 'desc' = 'desc',
+  filters?: {
+    search?: string;
+    category?: string;
+    platforms?: string[];
+    languages?: string[];
+    featured?: boolean;
+    verified?: boolean;
+    qualityScore?: number;
+  }
+) => {
+  return useQuery({
+    queryKey: ["supabase", "servers", "paginated", page, limit, sortBy, sortOrder, filters],
+    queryFn: async (): Promise<PaginatedResult<MCPServer>> => {
+      let query = supabase
+        .from('servers_with_details')
+        .select('*', { count: 'exact' });
+
+      // Apply filters
+      if (filters?.search) {
+        query = query.or(`name.ilike.%${filters.search}%,description_en.ilike.%${filters.search}%,full_description.ilike.%${filters.search}%`);
+      }
+      
+      if (filters?.category) {
+        query = query.eq('category_id', filters.category);
+      }
+
+      if (filters?.featured) {
+        query = query.eq('featured', true);
+      }
+
+      if (filters?.verified) {
+        query = query.eq('verified', true);
+      }
+
+      if (filters?.qualityScore) {
+        query = query.gte('quality_score', filters.qualityScore);
+      }
+
+      // Apply sorting
+      query = query.order(sortBy, { ascending: sortOrder === 'asc' });
+
+      // Apply pagination
+      const offset = (page - 1) * limit;
+      query = query.range(offset, offset + limit - 1);
+
+      const { data, error, count } = await query;
+
+      if (error) {
+        throw new Error(`Failed to fetch paginated servers: ${error.message}`);
+      }
+
+      const total = count || 0;
+      const totalPages = Math.ceil(total / limit);
+
+      return {
+        data: (data || []).map(transformServer),
+        total,
+        hasNextPage: page < totalPages,
+        hasPreviousPage: page > 1,
+        currentPage: page,
+        totalPages,
+      };
+    },
+    staleTime: 2 * 60 * 1000, // 2 minutes for paginated results
+  });
+};
+
+// Server stats for home page - lightweight version
+export const useSupabaseServerStats = () => {
+  return useQuery({
+    queryKey: ["supabase", "server-stats"],
+    queryFn: async () => {
+      try {
+        // Run multiple queries in parallel for better performance
+        const [serversResult, categoriesResult] = await Promise.all([
+          // Get server count and sample data for calculations
+          supabase
+            .from('servers_with_details')
+            .select('downloads, weekly_downloads, quality_score, featured, verified', { count: 'exact' })
+            .limit(1000),
+          
+          // Get total categories count directly from categories table
+          supabase
+            .from('categories')
+            .select('id', { count: 'exact', head: true })
+        ]);
+
+        if (serversResult.error) {
+          console.error('Server stats query error:', serversResult.error);
+          throw new Error(`Failed to fetch server stats: ${serversResult.error.message}`);
+        }
+
+        if (categoriesResult.error) {
+          console.error('Categories count query error:', categoriesResult.error);
+        }
+
+        const { data: serversData, count: totalServers } = serversResult;
+        const { count: totalCategories } = categoriesResult;
+
+        console.log('Server stats - total servers:', totalServers);
+        console.log('Server stats - total categories:', totalCategories);
+        console.log('Server stats - sample data:', serversData?.slice(0, 2));
+
+        if (!serversData || serversData.length === 0) {
+          console.warn('No server data found');
+          return {
+            totalServers: totalServers || 0,
+            totalDownloads: 0,
+            averageQualityScore: 0,
+            uniqueCategories: totalCategories || 0,
+            featuredCount: 0,
+            verifiedCount: 0,
+          };
+        }
+
+        // Calculate stats from available data
+        const serverCount = totalServers || serversData.length;
+        
+        // Calculate total downloads
+        const totalDownloads = serversData.reduce((sum, server) => {
+          const downloads = server.downloads || server.weekly_downloads || 0;
+          return sum + (typeof downloads === 'number' ? downloads : 0);
+        }, 0);
+        
+        // Calculate average quality score
+        const validQualityScores = serversData
+          .map(server => server.quality_score)
+          .filter(score => typeof score === 'number' && score > 0);
+        
+        const averageQualityScore = validQualityScores.length > 0 
+          ? Math.round(validQualityScores.reduce((sum, score) => sum + score, 0) / validQualityScores.length)
+          : 0;
+        
+        const featuredCount = serversData.filter(s => s.featured === true).length;
+        const verifiedCount = serversData.filter(s => s.verified === true).length;
+        const uniqueCategories = totalCategories || 0;
+
+        const stats = {
+          totalServers: serverCount,
+          totalDownloads,
+          averageQualityScore,
+          uniqueCategories,
+          featuredCount,
+          verifiedCount,
+        };
+
+        console.log('Final calculated stats:', stats);
+        return stats;
+      } catch (error) {
+        console.error('Failed to fetch server stats:', error);
+        // Return default stats on error
+        return {
+          totalServers: 0,
+          totalDownloads: 0,
+          averageQualityScore: 0,
+          uniqueCategories: 0,
+          featuredCount: 0,
+          verifiedCount: 0,
+        };
+      }
+    },
+    staleTime: 10 * 60 * 1000, // 10 minutes
+    retry: 3,
+  });
+};
+
+// Servers by category with pagination
+export const useSupabaseServersByCategoryPaginated = (
+  categoryId: string,
+  page: number = 1,
+  limit: number = 12,
+  sortBy: string = 'stars',
+  sortOrder: 'asc' | 'desc' = 'desc'
+) => {
+  return useQuery({
+    queryKey: ["supabase", "servers", "category", categoryId, "paginated", page, limit, sortBy, sortOrder],
+    queryFn: async (): Promise<PaginatedResult<MCPServer>> => {
+      if (!categoryId) {
+        return {
+          data: [],
+          total: 0,
+          hasNextPage: false,
+          hasPreviousPage: false,
+          currentPage: page,
+          totalPages: 0,
+        };
+      }
+
+      let query = supabase
+        .from('servers_with_details')
+        .select('*', { count: 'exact' })
+        .eq('category_id', categoryId);
+
+      // Apply sorting
+      query = query.order(sortBy, { ascending: sortOrder === 'asc' });
+
+      // Apply pagination
+      const offset = (page - 1) * limit;
+      query = query.range(offset, offset + limit - 1);
+
+      const { data, error, count } = await query;
+
+      if (error) {
+        throw new Error(`Failed to fetch servers by category: ${error.message}`);
+      }
+
+      const total = count || 0;
+      const totalPages = Math.ceil(total / limit);
+
+      return {
+        data: (data || []).map(transformServer),
+        total,
+        hasNextPage: page < totalPages,
+        hasPreviousPage: page > 1,
+        currentPage: page,
+        totalPages,
+      };
+    },
+    enabled: !!categoryId,
+    staleTime: 5 * 60 * 1000,
+  });
+};
+
+// Home page optimized hook - gets categories with limited servers for each
+export const useSupabaseHomePageData = () => {
+  return useQuery({
+    queryKey: ["supabase", "home-page-data"],
+    queryFn: async () => {
+      // Get categories
+      const categoriesResult = await supabase
+        .from('categories')
+        .select('*')
+        .order('name_en');
+
+      if (categoriesResult.error) {
+        throw new Error(`Failed to fetch categories: ${categoriesResult.error.message}`);
+      }
+
+      // Get top servers for each category (limit 6 per category) + total count
+      const categoriesWithServers = await Promise.all(
+        (categoriesResult.data || []).map(async (category) => {
+          // Get both sample servers and total count in parallel
+          const [serversResult, countResult] = await Promise.all([
+            supabase
+              .from('servers_with_details')
+              .select('*')
+              .eq('category_id', category.id)
+              .order('stars', { ascending: false })
+              .limit(6),
+            
+            supabase
+              .from('servers_with_details')
+              .select('id', { count: 'exact', head: true })
+              .eq('category_id', category.id)
+          ]);
+
+          if (serversResult.error) {
+            console.warn(`Failed to fetch servers for category ${category.id}:`, serversResult.error);
+          }
+
+          if (countResult.error) {
+            console.warn(`Failed to fetch count for category ${category.id}:`, countResult.error);
+          }
+
+          const transformedCategory = transformCategory(category);
+          const servers = serversResult.data ? serversResult.data.map(transformServer) : [];
+          const totalCount = countResult.count || servers.length;
+
+          // Update category with server count
+          return {
+            category: {
+              ...transformedCategory,
+              serverCount: totalCount
+            },
+            servers,
+          };
+        })
+      );
+
+      return categoriesWithServers;
+    },
+    staleTime: 10 * 60 * 1000, // 10 minutes
+  });
+};
+
+// Optimized search with pagination
+export const useSupabaseSearchServersPaginated = (
+  query: string,
+  page: number = 1,
+  limit: number = 12,
+  sortBy: string = 'stars',
+  sortOrder: 'asc' | 'desc' = 'desc'
+) => {
+  return useQuery({
+    queryKey: ["supabase", "servers", "search", "paginated", query, page, limit, sortBy, sortOrder],
+    queryFn: async (): Promise<PaginatedResult<MCPServer>> => {
+      if (!query.trim()) {
+        return {
+          data: [],
+          total: 0,
+          hasNextPage: false,
+          hasPreviousPage: false,
+          currentPage: page,
+          totalPages: 0,
+        };
+      }
+
+      let queryBuilder = supabase
+        .from('servers_with_details')
+        .select('*', { count: 'exact' })
+        .or(`name.ilike.%${query}%,description_en.ilike.%${query}%,full_description.ilike.%${query}%`);
+
+      // Apply sorting
+      queryBuilder = queryBuilder.order(sortBy, { ascending: sortOrder === 'asc' });
+
+      // Apply pagination
+      const offset = (page - 1) * limit;
+      queryBuilder = queryBuilder.range(offset, offset + limit - 1);
+
+      const { data, error, count } = await queryBuilder;
+
+      if (error) {
+        throw new Error(`Failed to search servers: ${error.message}`);
+      }
+
+      const total = count || 0;
+      const totalPages = Math.ceil(total / limit);
+
+      return {
+        data: (data || []).map(transformServer),
+        total,
+        hasNextPage: page < totalPages,
+        hasPreviousPage: page > 1,
+        currentPage: page,
+        totalPages,
+      };
+    },
+    enabled: !!query.trim(),
+    staleTime: 2 * 60 * 1000, // 2 minutes for search results
   });
 };
 

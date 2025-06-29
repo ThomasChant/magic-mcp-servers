@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run optimize-data && tsc -b && vite build",
+    "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "npx playwright test",
@@ -14,8 +14,6 @@
     "test:all": "npm run test:unit && npm run test:e2e",
     "todo:watch": "node todo-monitor.js",
     "todo:check": "node todo-monitor.js --once",
-    "integrate-data": "node scripts/integrate-data.js",
-    "optimize-data": "node scripts/optimize-data.js",
     "typecheck": "tsc --noEmit",
     "supabase:migrate": "npx tsx scripts/migrate-to-supabase.ts",
     "supabase:migrate-readmes": "npx tsx scripts/migrate-readmes-only.ts",
@@ -24,9 +22,7 @@
     "supabase:debug-insert": "npx tsx scripts/debug-insert.ts",
     "supabase:create-and-migrate": "npx tsx scripts/create-and-migrate-readmes.ts",
     "supabase:sql": "npx tsx scripts/json-to-sql.ts",
-    "supabase:readme": "npx tsx scripts/import-readmes.ts",
-    "supabase:dev": "VITE_USE_SUPABASE=true npm run dev",
-    "supabase:build": "VITE_USE_SUPABASE=true npm run build"
+    "supabase:readme": "npx tsx scripts/import-readmes.ts"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.32.2",
