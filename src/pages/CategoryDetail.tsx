@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
     ArrowLeft,
@@ -16,7 +16,7 @@ import {
     ChevronLeft,
     ChevronRight,
 } from "lucide-react";
-import { useServersByCategoryPaginated, useCategories, type PaginatedResult } from "../hooks/useUnifiedData";
+import { useServersByCategoryPaginated, useCategories } from "../hooks/useUnifiedData";
 import type { MCPServer, SearchFilters, SortOption } from "../types";
 
 const CategoryDetail: React.FC = () => {
@@ -26,7 +26,7 @@ const CategoryDetail: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [filters, setFilters] = useState<SearchFilters>({});
     const [sortBy, setSortBy] = useState<SortOption>({
-        key: "quality_score",
+        key: "quality",
         label: "Quality Score",
         direction: "desc",
     });
@@ -57,8 +57,8 @@ const CategoryDetail: React.FC = () => {
         { key: "name", label: "Name", direction: "asc" },
         { key: "stars", label: "Stars", direction: "desc" },
         { key: "downloads", label: "Downloads", direction: "desc" },
-        { key: "quality_score", label: "Quality Score", direction: "desc" },
-        { key: "last_updated", label: "Last Updated", direction: "desc" },
+        { key: "quality", label: "Quality Score", direction: "desc" },
+        { key: "updated", label: "Last Updated", direction: "desc" },
     ];
 
     // Reset page when filters change

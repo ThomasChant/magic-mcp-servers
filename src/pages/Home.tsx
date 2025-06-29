@@ -281,91 +281,169 @@ const Home: React.FC = () => {
             </section>
 
 
-            {/* Servers by Category Section */}
+            {/* Search Results or Servers by Category Section */}
             <section className="py-16 bg-white dark:bg-gray-900">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    {/* Category Navigation */}
-                    {categories && (
-                        <div className="flex flex-wrap justify-space-between gap-4 mb-16">
-                            {categories.map((category) => {
-                                const categoryServers = serversByCategory[category.id] || [];
-                                // Show category even if no servers are loaded for display (we still have count)
-                                const serverCount = category.serverCount || categoryServers.length;
-                                if (serverCount === 0) return null;
-                                
-                                return (
-                                    <button
-                                        key={category.id}
-                                        onClick={() => {
-                                            const element = document.getElementById(`category-${category.id}`);
-                                            if (element) {
-                                                element.scrollIntoView({ 
-                                                    behavior: 'smooth',
-                                                    block: 'start'
-                                                });
-                                            }
-                                        }}
-                                        className="group flex items-center px-6 py-3 bg-gray-100 dark:bg-gray-800 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600 cursor-pointer"
-                                    >
-                                        <div className={`w-8 h-8 rounded-lg ${getCategoryColor(category.id)} flex items-center justify-center mr-3 group-hover:scale-110 transition-transform`}>
-                                            {getCategoryIcon(category.id)}
-                                        </div>
-                                        <div>
-                                            <div className="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                                                {category.name.en}
-                                            </div>
-                                            <div className="text-sm text-gray-500 dark:text-gray-400">
-                                                {serverCount} servers
-                                            </div>
-                                        </div>
-                                    </button>
-                                );
-                            })}
-                        </div>
-                    )}
-
-                    {!homeDataLoading && categories ? (
-                        categories.map((category) => {
-                            const categoryServers = serversByCategory[category.id] || [];
-                            return (
-                                <CategorySection
-                                    key={category.id}
-                                    category={category}
-                                    servers={categoryServers}
-                                    getCategoryIcon={getCategoryIcon}
-                                    getCategoryColor={getCategoryColor}
-                                    formatLastUpdated={formatLastUpdated}
-                                />
-                            );
-                        })
-                    ) : (
-                        <div className="text-center">
-                            <div className="animate-pulse loading spinner" data-testid="loading-skeleton">
-                                <div className="h-8 bg-gray-300 dark:bg-gray-600 rounded w-64 mx-auto mb-4"></div>
-                                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-96 mx-auto mb-8"></div>
+                    {/* Display search results when there's a search query */}
+                    {searchQuery.trim() ? (
+                        <div>
+                            <div className="mb-8">
+                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                                    Search Results for "{searchQuery}"
+                                </h2>
+                                <p className="text-gray-600 dark:text-gray-400">
+                                    {filteredServers?.length === 0 
+                                        ? "No servers found matching your search" 
+                                        : `Found ${filteredServers?.length || 0} servers`
+                                    }
+                                </p>
+                                <button
+                                    onClick={() => setSearchQuery("")}
+                                    className="mt-4 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium"
+                                >
+                                    ← Back to all categories
+                                </button>
+                            </div>
+                            
+                            {filteredServers && filteredServers.length > 0 ? (
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                                    {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                                        <div key={i} className="bg-white dark:bg-gray-700 rounded-xl p-6 border border-gray-200 dark:border-gray-600">
+                                    {filteredServers.map((server) => (
+                                        <div key={server.id} className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow">
                                             <div className="flex items-center mb-4">
-                                                <div className="w-10 h-10 bg-gray-300 dark:bg-gray-600 rounded-lg mr-3"></div>
+                                                <div className={`w-10 h-10 rounded-lg ${getCategoryColor(server.category)} flex items-center justify-center mr-3`}>
+                                                    {getCategoryIcon(server.category)}
+                                                </div>
                                                 <div className="flex-1">
-                                                    <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-24 mb-2"></div>
-                                                    <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
+                                                    <h3 className="font-semibold text-gray-900 dark:text-white">{server.name}</h3>
+                                                    <p className="text-sm text-gray-500 dark:text-gray-400">{server.owner}</p>
                                                 </div>
                                             </div>
-                                            <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded mb-4"></div>
-                                            <div className="flex gap-2 mb-4">
-                                                <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-12"></div>
-                                                <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
+                                            <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
+                                                {server.description.en}
+                                            </p>
+                                            <div className="flex flex-wrap gap-2 mb-4">
+                                                {server.tags.slice(0, 2).map((tag, index) => (
+                                                    <span key={index} className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full">
+                                                        {tag}
+                                                    </span>
+                                                ))}
                                             </div>
-                                            <div className="flex justify-between">
-                                                <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
-                                                <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-12"></div>
+                                            <div className="flex justify-between items-center">
+                                                <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                                                    <span>⭐ {server.stats.stars}</span>
+                                                </div>
+                                                <div className="text-xs text-gray-400 dark:text-gray-500">
+                                                    {formatLastUpdated(server.stats.lastUpdated)}
+                                                </div>
                                             </div>
+                                            <Link
+                                                to={`/servers/${server.slug}`}
+                                                className="block mt-4 text-center px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-800 transition-colors"
+                                            >
+                                                View Details
+                                            </Link>
                                         </div>
                                     ))}
                                 </div>
-                            </div>
+                            ) : searchQuery.trim() && (
+                                <div className="text-center py-12">
+                                    <div className="text-6xl mb-4">🔍</div>
+                                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                                        No servers found
+                                    </h3>
+                                    <p className="text-gray-600 dark:text-gray-400 mb-4">
+                                        Try adjusting your search terms or browse our categories below.
+                                    </p>
+                                </div>
+                            )}
+                        </div>
+                    ) : (
+                        /* Default category view when no search query */
+                        <div>
+                            {/* Category Navigation */}
+                            {categories && (
+                                <div className="flex flex-wrap justify-space-between gap-4 mb-16">
+                                    {categories.map((category) => {
+                                        const categoryServers = serversByCategory[category.id] || [];
+                                        // Show category even if no servers are loaded for display (we still have count)
+                                        const serverCount = category.serverCount || categoryServers.length;
+                                        if (serverCount === 0) return null;
+                                        
+                                        return (
+                                            <button
+                                                key={category.id}
+                                                onClick={() => {
+                                                    const element = document.getElementById(`category-${category.id}`);
+                                                    if (element) {
+                                                        element.scrollIntoView({ 
+                                                            behavior: 'smooth',
+                                                            block: 'start'
+                                                        });
+                                                    }
+                                                }}
+                                                className="group flex items-center px-6 py-3 bg-gray-100 dark:bg-gray-800 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600 cursor-pointer"
+                                            >
+                                                <div className={`w-8 h-8 rounded-lg ${getCategoryColor(category.id)} flex items-center justify-center mr-3 group-hover:scale-110 transition-transform`}>
+                                                    {getCategoryIcon(category.id)}
+                                                </div>
+                                                <div>
+                                                    <div className="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                                        {category.name.en}
+                                                    </div>
+                                                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                                                        {serverCount} servers
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+                            )}
+
+                            {!homeDataLoading && categories ? (
+                                categories.map((category) => {
+                                    const categoryServers = serversByCategory[category.id] || [];
+                                    return (
+                                        <CategorySection
+                                            key={category.id}
+                                            category={category}
+                                            servers={categoryServers}
+                                            getCategoryIcon={getCategoryIcon}
+                                            getCategoryColor={getCategoryColor}
+                                            formatLastUpdated={formatLastUpdated}
+                                        />
+                                    );
+                                })
+                            ) : (
+                                <div className="text-center">
+                                    <div className="animate-pulse loading spinner" data-testid="loading-skeleton">
+                                        <div className="h-8 bg-gray-300 dark:bg-gray-600 rounded w-64 mx-auto mb-4"></div>
+                                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-96 mx-auto mb-8"></div>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                                            {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+                                                <div key={i} className="bg-white dark:bg-gray-700 rounded-xl p-6 border border-gray-200 dark:border-gray-600">
+                                                    <div className="flex items-center mb-4">
+                                                        <div className="w-10 h-10 bg-gray-300 dark:bg-gray-600 rounded-lg mr-3"></div>
+                                                        <div className="flex-1">
+                                                            <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-24 mb-2"></div>
+                                                            <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded mb-4"></div>
+                                                    <div className="flex gap-2 mb-4">
+                                                        <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-12"></div>
+                                                        <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
+                                                    </div>
+                                                    <div className="flex justify-between">
+                                                        <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
+                                                        <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-12"></div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     )}
 

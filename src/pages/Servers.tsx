@@ -16,7 +16,7 @@ import {
     Bot,
     FileText,
 } from "lucide-react";
-import { useServersPaginated, useCategories, type PaginatedResult } from "../hooks/useUnifiedData";
+import { useServersPaginated, useCategories } from "../hooks/useUnifiedData";
 import type { MCPServer } from "../types";
 import ProgressiveEllipsis from "../components/ProgressiveEllipsis";
 import { FavoriteButton } from "../components/FavoriteButton";
