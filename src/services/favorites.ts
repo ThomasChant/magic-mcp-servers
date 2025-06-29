@@ -161,14 +161,11 @@ export function createFavoritesService(user: UserResource): FavoritesService {
 
 /**
  * @hook useFavoritesService
- * @description 获取收藏服务实例的 Hook
+ * @description 获取收藏服务实例的 Hook - 使用Supabase实现
  */
 export function useFavoritesService(): FavoritesService | null {
-    const { user } = useUser();
-    
-    if (!user) {
-        return null;
-    }
-    
-    return createFavoritesService(user);
+    // Import from supabase-favorites instead
+    // This is kept for backward compatibility
+    console.warn('useFavoritesService from favorites.ts is deprecated. Use useSupabaseFavoritesService from supabase-favorites.ts');
+    return null;
 }

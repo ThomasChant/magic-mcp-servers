@@ -1,7 +1,7 @@
 import { useEffect, useCallback, useRef, useMemo } from "react";
 import { useUser } from "@clerk/clerk-react";
 import { useAppStore } from "../store/useAppStore";
-import { useFavoritesService } from "../services/favorites";
+import { useSupabaseFavoritesService } from "../services/supabase-favorites";
 
 /**
  * @hook useFavoritesSync
@@ -9,7 +9,7 @@ import { useFavoritesService } from "../services/favorites";
  */
 export function useFavoritesSync() {
     const { isSignedIn } = useUser();
-    const favoritesService = useFavoritesService();
+    const favoritesService = useSupabaseFavoritesService();
     const { 
         isOnline, 
         lastSynced, 
