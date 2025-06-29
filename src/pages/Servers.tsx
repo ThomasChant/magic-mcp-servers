@@ -16,7 +16,7 @@ import {
     Bot,
     FileText,
 } from "lucide-react";
-import { useServersPaginated, useCategories, type PaginatedResult } from "../hooks/useUnifiedData";
+import { useServersPaginated, useCategories } from "../hooks/useUnifiedData";
 import type { MCPServer } from "../types";
 import ProgressiveEllipsis from "../components/ProgressiveEllipsis";
 import { FavoriteButton } from "../components/FavoriteButton";
@@ -450,9 +450,25 @@ const Servers: React.FC = () => {
                     {/* Sidebar Filters */}
                     <div className="lg:w-1/4">
                         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 sticky top-24">
-                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                                Filters
-                            </h3>
+                            <div className="flex items-center justify-between mb-4">
+                                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                                    Filters
+                                </h3>
+                                <button
+                                    onClick={() => {
+                                        setFilters({
+                                            categories: [],
+                                            platforms: [],
+                                            languages: [],
+                                            status: [],
+                                        });
+                                        setSidebarSearch("");
+                                    }}
+                                    className="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline"
+                                >
+                                    Clear All
+                                </button>
+                            </div>
 
                             {/* Search Filter */}
                             <div className="mb-6">
@@ -606,21 +622,6 @@ const Servers: React.FC = () => {
                                     ))}
                                 </div>
                             </div>
-
-                            <button
-                                onClick={() => {
-                                    setFilters({
-                                        categories: [],
-                                        platforms: [],
-                                        languages: [],
-                                        status: [],
-                                    });
-                                    setSidebarSearch("");
-                                }}
-                                className="w-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 py-2 px-4 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-sm"
-                            >
-                                Clear All Filters
-                            </button>
                         </div>
                     </div>
 
