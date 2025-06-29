@@ -61,19 +61,18 @@ export function useFavoritesSync() {
             }
         } else if (!isSignedIn && wasSignedIn && !hasHandledSignOut.current) {
             // 从登录变为未登录状态
-            console.log("User just signed out, switching to local storage mode");
+            console.log("User just signed out, clearing favorites and switching to local storage mode");
             hasHandledSignOut.current = true;
             hasSyncedOnSignIn.current = false;
             
-            // 检查当前状态，只在需要时才更新
-            const currentState = useAppStore.getState();
-            if (currentState.isOnline || currentState.lastSynced || currentState.favoritesError) {
-                useAppStore.setState({ 
-                    isOnline: false, 
-                    lastSynced: null,
-                    favoritesError: null
-                });
-            }
+            // 清除收藏数据和相关状态
+            useAppStore.setState({ 
+                favorites: new Set<string>(),
+                isOnline: false, 
+                lastSynced: null,
+                favoritesError: null,
+                favoritesLoading: false
+            });
         }
     }, [isSignedIn]);
 
