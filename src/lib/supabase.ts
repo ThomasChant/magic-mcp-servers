@@ -211,7 +211,7 @@ export interface Database {
           server_id: string;
           method: string | null;
           command: string | null;
-          instructions: any | null; // JSONB type
+          instructions: Record<string, unknown> | null; // JSONB type
           created_at: string;
         };
         Insert: Omit<Database['public']['Tables']['server_installation']['Row'], 'id' | 'created_at'>;

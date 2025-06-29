@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Core Development
 - `npm run dev`: Start development server on port 3000 (auto-opens browser)
-- `npm run build`: Build production version (includes data optimization, TypeScript compilation + Vite build)
+- `npm run build`: Build production version (TypeScript compilation + Vite build)
 - `npm run lint`: Run ESLint with TypeScript support
 - `npm run preview`: Preview built application
 - `npm run typecheck`: Run TypeScript type checking
@@ -17,15 +17,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run test:e2e`: Run Playwright E2E tests
 - `npm run test:all`: Run all tests (unit + E2E)
 
-### Data Management
-- `npm run optimize-data`: Optimize JSON data files for production
-- `npm run integrate-data`: Process and integrate server data
+### TODO Management
 - `npm run todo:watch`: Monitor TODO items in real-time
 - `npm run todo:check`: One-time TODO analysis
 
 ### Supabase Integration
-- `npm run supabase:dev`: Start development server with Supabase data source
-- `npm run supabase:build`: Build production version with Supabase
+- `npm run dev`: Start development server (now uses Supabase by default)
+- `npm run build`: Build production version (now uses Supabase by default)
 - `npm run supabase:migrate`: Migrate JSON data to Supabase database
 - `npm run supabase:migrate-readmes`: Migrate README data to Supabase
 - `npm run supabase:diagnose`: Diagnose Supabase connection issues
@@ -110,22 +108,17 @@ supabase/              # Supabase schema and migration files
 
 ## Data Architecture
 
-The application uses a unified data layer that supports both JSON files and Supabase database as data sources, controlled by the `VITE_USE_SUPABASE` environment variable.
+The application uses Supabase as the primary and only data source for all data operations.
 
-### Dual Data Source Support
+### Data Source
 
-**JSON Mode (Default)**:
-- Static JSON files served from `public/data/`
-- Client-side filtering and searching
-- No authentication required
-- Suitable for static deployment
-
-**Supabase Mode**:
+**Supabase Database**:
 - PostgreSQL database with real-time capabilities
 - Server-side querying and filtering
 - User authentication with Clerk
 - Comments and favorites system
 - Advanced features like popularity tracking
+- Full-text search and advanced filtering
 
 ### Server Data Structure
 Servers are defined with rich metadata including:
@@ -145,13 +138,6 @@ All user-facing content supports 7 languages:
 - French (fr), Japanese (ja), Korean (ko), Russian (ru)
 
 ### Data Sources
-
-**JSON Files**:
-- `public/data/categories.json`: Category definitions with i18n
-- `public/data/servers-core1.json`: Core server registry
-- `public/data/servers-extended.json`: Extended server data
-- `public/structured_readme_data/`: Processed README files
-- `src/data/categoriesData.ts`: Static category data
 
 **Supabase Database Tables**:
 - `categories`: Internationalized categories
@@ -211,21 +197,16 @@ npm run supabase:migrate-readmes
 npm run supabase:diagnose
 ```
 
-### Development Modes
+### Development Mode
 
-**JSON Mode Development** (default):
+**Development with Supabase**:
 ```bash
 npm run dev
 ```
 
-**Supabase Mode Development**:
-```bash
-npm run supabase:dev
-```
-
 ### Authentication Flow
 
-The application uses Clerk for user authentication in Supabase mode:
+The application uses Clerk for user authentication:
 1. Users sign up/in via Clerk
 2. Clerk user ID is used to associate comments and favorites
 3. Protected routes require authentication
@@ -235,16 +216,9 @@ The application uses Clerk for user authentication in Supabase mode:
 
 ### Adding New Servers
 
-**For JSON Mode**:
-1. Update `public/data/servers-core1.json` or `servers-extended.json` with server information
-2. Ensure all required fields are populated (name, description, category, stats, etc.)
-3. Add structured README data to `public/structured_readme_data/` if available
-4. Run `npm run optimize-data` to process the data
-5. Test search and filtering functionality
-
-**For Supabase Mode**:
+**Adding Server Data**:
 1. Add server data directly to Supabase database via admin panel or migration script
-2. Use `npm run supabase:migrate` to sync from JSON if needed
+2. Use `npm run supabase:migrate` to sync from external data sources if needed
 3. Verify data appears correctly in the application
 4. Test real-time updates and user interactions
 
@@ -266,19 +240,19 @@ const { setLanguage, toggleTheme, setSearchQuery } = useAppStore();
 
 ### Data Fetching Patterns
 ```typescript
-// Using unified data hooks (automatically uses JSON or Supabase based on env)
+// Using unified data hooks (uses Supabase)
 const { data: servers, isLoading, error } = useServers();
 const { data: server } = useServer(serverId);
 const { data: featuredServers } = useFeaturedServers();
-const { data: popularServers } = usePopularServers(); // Supabase only
+const { data: popularServers } = usePopularServers();
 const { data: searchResults } = useSearchServers(query);
 
-// Check current data source
-const dataSource = getDataSource(); // 'json' or 'supabase'
-const usingSupabase = isUsingSupabase(); // boolean
+// Check current data source (always 'supabase' now)
+const dataSource = getDataSource(); // 'supabase'
+const usingSupabase = isUsingSupabase(); // always true
 ```
 
-### Authentication Patterns (Supabase Mode)
+### Authentication Patterns
 ```typescript
 // Using Clerk authentication
 import { useUser } from '@clerk/clerk-react';
@@ -375,23 +349,16 @@ Run tests with: `npm test` or `npx playwright test`
 
 ## Deployment Notes
 
-The application supports two deployment modes:
+The application is a full-stack SPA with database backend:
 
-### JSON Mode Deployment (Static)
-- Static SPA suitable for deployment on Vercel, Netlify, GitHub Pages
-- No server-side dependencies
-- All data served from static JSON files
-- Build with: `npm run build`
-
-### Supabase Mode Deployment (Full-Stack)
+### Production Deployment
 - Requires Supabase database and Clerk authentication setup
 - Environment variables must be configured
 - Supports real-time features and user authentication
-- Build with: `npm run supabase:build`
+- Build with: `npm run build`
 
 ### Environment Variables for Production
 ```env
-VITE_USE_SUPABASE=true/false
 VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
