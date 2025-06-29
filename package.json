@@ -24,7 +24,8 @@
     "supabase:sql": "npx tsx scripts/json-to-sql.ts",
     "supabase:readme": "npx tsx scripts/import-readmes.ts",
     "github:update-stats": "npx tsx scripts/update-github-stats.ts",
-    "github:test-rate-limiting": "npx tsx scripts/test-rate-limiting.ts"
+    "github:test-rate-limiting": "npx tsx scripts/test-rate-limiting.ts",
+    "github:test-delay": "npx tsx scripts/test-delay-simple.ts"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.32.2",

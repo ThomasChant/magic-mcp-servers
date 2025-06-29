@@ -55,27 +55,27 @@ const ServerDetail: React.FC = () => {
         return (
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="animate-pulse">
-                    <div className="h-8 bg-gray-300 rounded w-1/4 mb-6"></div>
-                    <div className="h-12 bg-gray-300 rounded mb-4"></div>
-                    <div className="h-6 bg-gray-200 rounded w-3/4 mb-8"></div>
+                    <div className="h-8 bg-gray-300 dark:bg-gray-600 rounded w-1/4 mb-6"></div>
+                    <div className="h-12 bg-gray-300 dark:bg-gray-600 rounded mb-4"></div>
+                    <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-8"></div>
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         <div className="lg:col-span-2">
-                            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                                <div className="h-6 bg-gray-300 rounded mb-4"></div>
+                            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                                <div className="h-6 bg-gray-300 dark:bg-gray-600 rounded mb-4"></div>
                                 <div className="space-y-3">
-                                    <div className="h-4 bg-gray-200 rounded"></div>
-                                    <div className="h-4 bg-gray-200 rounded w-5/6"></div>
-                                    <div className="h-4 bg-gray-200 rounded w-4/6"></div>
+                                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div>
+                                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-4/6"></div>
                                 </div>
                             </div>
                         </div>
                         <div>
-                            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                                <div className="h-6 bg-gray-300 rounded mb-4"></div>
+                            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                                <div className="h-6 bg-gray-300 dark:bg-gray-600 rounded mb-4"></div>
                                 <div className="space-y-3">
-                                    <div className="h-4 bg-gray-200 rounded"></div>
-                                    <div className="h-4 bg-gray-200 rounded"></div>
-                                    <div className="h-4 bg-gray-200 rounded"></div>
+                                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
                                 </div>
                             </div>
                         </div>
@@ -91,10 +91,10 @@ const ServerDetail: React.FC = () => {
                 <div className="text-red-400 mb-4">
                     <AlertCircle className="h-12 w-12 mx-auto" />
                 </div>
-                <h1 className="text-2xl font-bold text-gray-900 mb-4">
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                     Server Not Found
                 </h1>
-                <p className="text-gray-600 mb-8">
+                <p className="text-gray-600 dark:text-gray-400 mb-8">
                     Sorry, we couldn't find the MCP server you're looking for.
                 </p>
                 <Link
@@ -151,16 +151,16 @@ const ServerDetail: React.FC = () => {
     // Tabs removed - using StructuredReadme component
 
     return (
-        <div className="bg-gray-50 min-h-screen">
+        <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
             {/* Breadcrumb */}
-            <div className="bg-white border-b border-gray-200">
+            <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
                     <nav className="flex" aria-label="Breadcrumb">
                         <ol className="flex items-center space-x-4">
                             <li>
                                 <Link
                                     to="/"
-                                    className="text-gray-500 hover:text-gray-700"
+                                    className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
                                 >
                                     Home
                                 </Link>
@@ -171,7 +171,7 @@ const ServerDetail: React.FC = () => {
                             <li>
                                 <Link
                                     to="/servers"
-                                    className="text-gray-500 hover:text-gray-700"
+                                    className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
                                 >
                                     Servers
                                 </Link>
@@ -182,7 +182,7 @@ const ServerDetail: React.FC = () => {
                             <li>
                                 <Link
                                     to={`/categories/${server.category}`}
-                                    className="text-gray-500 hover:text-gray-700"
+                                    className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
                                 >
                                     {server.category}
                                 </Link>
@@ -190,7 +190,7 @@ const ServerDetail: React.FC = () => {
                             <li>
                                 <ChevronRight className="h-4 w-4 text-gray-400 dark:text-gray-500" />
                             </li>
-                            <li className="text-gray-900 font-medium">
+                            <li className="text-gray-900 dark:text-white font-medium">
                                 {server.name}
                             </li>
                         </ol>
@@ -199,7 +199,7 @@ const ServerDetail: React.FC = () => {
             </div>
 
             {/* Server Header */}
-            <div className="bg-white border-b border-gray-200">
+            <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between">
                         <div className="flex items-start space-x-4 mb-6 lg:mb-0">
@@ -208,7 +208,7 @@ const ServerDetail: React.FC = () => {
                             </div>
                             <div>
                                 <div className="flex items-center space-x-3 mb-2">
-                                    <h1 className="text-3xl font-bold text-gray-900">
+                                    <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
                                         {server.name}
                                     </h1>
                                     <div className="flex items-center space-x-2">
@@ -224,13 +224,13 @@ const ServerDetail: React.FC = () => {
                                         )}
                                     </div>
                                 </div>
-                                <p className="text-lg text-gray-600 mb-4">
+                                <p className="text-lg text-gray-600 dark:text-gray-300 mb-4">
                                     {server.fullDescription || server.description.en || server.description["zh-CN"]}
                                 </p>
-                                <div className="flex items-center space-x-6 text-sm text-gray-500">
+                                <div className="flex items-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
                                     <div className="flex items-center">
                                         <Star className="h-4 w-4 text-yellow-500 mr-1" />
-                                        <span className="font-medium text-gray-900">
+                                        <span className="font-medium text-gray-900 dark:text-white">
                                             {server.repository.stars.toLocaleString()}
                                         </span>
                                         <span className="ml-1">stars</span>
@@ -278,39 +278,39 @@ const ServerDetail: React.FC = () => {
                             <div className="relative" ref={shareMenuRef}>
                                 <button 
                                     onClick={() => setShowShareMenu(!showShareMenu)}
-                                    className="inline-flex items-center justify-center px-6 py-3 border-2 border-gray-200 bg-white text-gray-700 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md font-sm min-w-[100px]"
+                                    className="inline-flex items-center justify-center px-6 py-3 border-2 border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-600 hover:border-gray-300 dark:hover:border-gray-500 transition-all duration-200 shadow-sm hover:shadow-md font-sm min-w-[100px]"
                                 >
                                     <Share className="mr-2 h-5 w-5" />
                                     Share
                                 </button>
                                 {showShareMenu && (
-                                    <div className="absolute right-0 mt-2 w-52 bg-white rounded-xl shadow-xl border border-gray-100 z-10 overflow-hidden">
+                                    <div className="absolute right-0 mt-2 w-52 bg-white dark:bg-gray-700 rounded-xl shadow-xl border border-gray-100 dark:border-gray-600 z-10 overflow-hidden">
                                         <div className="py-2">
                                             <button
                                                 onClick={() => handleShare('twitter')}
-                                                className="flex items-center w-full px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150"
+                                                className="flex items-center w-full px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-700 dark:hover:text-blue-400 transition-colors duration-150"
                                             >
                                                 <Twitter className="h-4 w-4 mr-3 text-blue-400" />
                                                 Share on Twitter
                                             </button>
                                             <button
                                                 onClick={() => handleShare('facebook')}
-                                                className="flex items-center w-full px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150"
+                                                className="flex items-center w-full px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-700 dark:hover:text-blue-400 transition-colors duration-150"
                                             >
                                                 <Facebook className="h-4 w-4 mr-3 text-blue-600" />
                                                 Share on Facebook
                                             </button>
                                             <button
                                                 onClick={() => handleShare('linkedin')}
-                                                className="flex items-center w-full px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150"
+                                                className="flex items-center w-full px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-700 dark:hover:text-blue-400 transition-colors duration-150"
                                             >
                                                 <Linkedin className="h-4 w-4 mr-3 text-blue-700" />
                                                 Share on LinkedIn
                                             </button>
-                                            <div className="border-t border-gray-100 my-1"></div>
+                                            <div className="border-t border-gray-100 dark:border-gray-600 my-1"></div>
                                             <button
                                                 onClick={() => handleShare('copy')}
-                                                className="flex items-center w-full px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-150"
+                                                className="flex items-center w-full px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 hover:text-gray-900 dark:hover:text-white transition-colors duration-150"
                                             >
                                                 <Link2 className="h-4 w-4 mr-3 text-gray-500" />
                                                 {copiedStates['share-link'] ? 'Copied!' : 'Copy Link'}
@@ -369,33 +369,33 @@ const ServerDetail: React.FC = () => {
                     <div className="lg:w-1/3">
                         <div className="space-y-6">
                             {/* Quick Info */}
-                            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                                     Quick Info
                                 </h3>
                                 <dl className="space-y-3">
                                     <div>
-                                        <dt className="text-sm font-medium text-gray-500">
+                                        <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
                                             Category
                                         </dt>
-                                        <dd className="text-sm text-gray-900">
+                                        <dd className="text-sm text-gray-900 dark:text-white">
                                             {server.category}
                                         </dd>
                                     </div>
                                     <div>
-                                        <dt className="text-sm font-medium text-gray-500">
+                                        <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
                                             Maturity
                                         </dt>
-                                        <dd className="text-sm text-gray-900">{server.metadata.maturity}</dd>
+                                        <dd className="text-sm text-gray-900 dark:text-white">{server.metadata.maturity}</dd>
                                     </div>
                                     <div>
-                                        <dt className="text-sm font-medium text-gray-500">
+                                        <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
                                             Repository
                                         </dt>
                                         <dd className="text-sm">
                                             <a
                                                 href={server.repository.url}
-                                                className="text-blue-600 hover:text-blue-700"
+                                                className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                             >
@@ -404,41 +404,41 @@ const ServerDetail: React.FC = () => {
                                         </dd>
                                     </div>
                                     <div>
-                                        <dt className="text-sm font-medium text-gray-500">
+                                        <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
                                             Stars
                                         </dt>
-                                        <dd className="text-sm text-gray-900">
+                                        <dd className="text-sm text-gray-900 dark:text-white">
                                             {server.repository.stars.toLocaleString()}
                                         </dd>
                                     </div>
                                     {server.repository.forks !== undefined && (
                                         <div>
-                                            <dt className="text-sm font-medium text-gray-500">
+                                            <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
                                                 Forks
                                             </dt>
-                                            <dd className="text-sm text-gray-900">
+                                            <dd className="text-sm text-gray-900 dark:text-white">
                                                 {server.repository.forks.toLocaleString()}
                                             </dd>
                                         </div>
                                     )}
                                     {server.repository.watchers !== undefined && (
                                         <div>
-                                            <dt className="text-sm font-medium text-gray-500">
+                                            <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
                                                 Watchers
                                             </dt>
-                                            <dd className="text-sm text-gray-900">
+                                            <dd className="text-sm text-gray-900 dark:text-white">
                                                 {server.repository.watchers.toLocaleString()}
                                             </dd>
                                         </div>
                                     )}
                                     <div>
-                                        <dt className="text-sm font-medium text-gray-500">
+                                        <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
                                             Issues
                                         </dt>
                                         <dd className="text-sm">
                                             <a
                                                 href={`${server.repository.url}/issues`}
-                                                className="text-blue-600 hover:text-blue-700"
+                                                className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                             >
@@ -528,13 +528,13 @@ const ServerDetail: React.FC = () => {
                             </div> */}
 
                             {/* Compatibility */}
-                            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                                     Compatibility
                                 </h3>
                                 <div className="space-y-3">
                                     <div>
-                                        <h4 className="text-sm font-medium text-gray-700 mb-2">
+                                        <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                             Platforms
                                         </h4>
                                         <div className="flex flex-wrap gap-2">
@@ -542,7 +542,7 @@ const ServerDetail: React.FC = () => {
                                                 (platform) => (
                                                     <span
                                                         key={platform}
-                                                        className="inline-flex items-center px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded"
+                                                        className="inline-flex items-center px-2 py-1 bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-200 text-xs rounded"
                                                     >
                                                         {platform}
                                                     </span>
@@ -551,7 +551,7 @@ const ServerDetail: React.FC = () => {
                                         </div>
                                     </div>
                                     <div>
-                                        <h4 className="text-sm font-medium text-gray-700 mb-2">
+                                        <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                             Languages
                                         </h4>
                                         <div className="flex flex-wrap gap-2">
@@ -576,24 +576,24 @@ const ServerDetail: React.FC = () => {
                             </div>
 
                             {/* Related Servers */}
-                            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                                     Related Servers
                                 </h3>
                                 <div className="space-y-3">
                                     <Link
                                         to="/servers/sqlite-mcp"
-                                        className="block p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                                        className="block p-3 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                                     >
                                         <div className="flex items-center">
                                             <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center mr-3">
                                                 <Database className="h-4 w-4 text-white" />
                                             </div>
                                             <div>
-                                                <div className="text-sm font-medium text-gray-900">
+                                                <div className="text-sm font-medium text-gray-900 dark:text-white">
                                                     SQLite MCP
                                                 </div>
-                                                <div className="text-xs text-gray-500">
+                                                <div className="text-xs text-gray-500 dark:text-gray-400">
                                                     Database operations
                                                 </div>
                                             </div>
@@ -601,17 +601,17 @@ const ServerDetail: React.FC = () => {
                                     </Link>
                                     <Link
                                         to="/servers/aws-s3-mcp"
-                                        className="block p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                                        className="block p-3 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                                     >
                                         <div className="flex items-center">
                                             <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center mr-3">
                                                 <Cloud className="h-4 w-4 text-white" />
                                             </div>
                                             <div>
-                                                <div className="text-sm font-medium text-gray-900">
+                                                <div className="text-sm font-medium text-gray-900 dark:text-white">
                                                     AWS S3 MCP
                                                 </div>
-                                                <div className="text-xs text-gray-500">
+                                                <div className="text-xs text-gray-500 dark:text-gray-400">
                                                     Cloud storage
                                                 </div>
                                             </div>
@@ -619,17 +619,17 @@ const ServerDetail: React.FC = () => {
                                     </Link>
                                     <Link
                                         to="/servers/search-mcp"
-                                        className="block p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                                        className="block p-3 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                                     >
                                         <div className="flex items-center">
                                             <div className="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center mr-3">
                                                 <Search className="h-4 w-4 text-white" />
                                             </div>
                                             <div>
-                                                <div className="text-sm font-medium text-gray-900">
+                                                <div className="text-sm font-medium text-gray-900 dark:text-white">
                                                     Search MCP
                                                 </div>
-                                                <div className="text-xs text-gray-500">
+                                                <div className="text-xs text-gray-500 dark:text-gray-400">
                                                     File search
                                                 </div>
                                             </div>

@@ -32,6 +32,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### GitHub Integration
 - `npm run github:update-stats`: Fetch latest GitHub repository stats (stars, forks, watchers) and update database
 - `npm run github:test-rate-limiting`: Test rate limiting logic and environment setup
+- `npm run github:test-delay`: Test actual delay timing configuration
 
 #### Enhanced Rate Limiting Features
 The GitHub stats updater includes advanced flow control to prevent rate limiting:
@@ -66,8 +67,8 @@ npm run github:test-rate-limiting
 ```
 
 #### GitHub API Rate Limits
-- **Without token**: 60 requests per hour (intelligent spacing prevents rate limiting)
-- **With token**: 5,000 requests per hour (can process all servers efficiently)
+- **Without token**: 60 requests per hour (750ms delay between requests)
+- **With token**: 5,000 requests per hour (200ms delay between requests)
 
 **To use with higher rate limits:**
 1. Create a Personal Access Token at https://github.com/settings/tokens/new

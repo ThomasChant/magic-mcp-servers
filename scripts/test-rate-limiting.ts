@@ -106,7 +106,7 @@ async function testRateLimiting() {
   console.log('   Optional variables:');
   optionalEnvVars.forEach(varName => {
     const value = process.env[varName];
-    console.log(`   ${varName}: ${value ? '✅ Set (recommended)' : '⚠️ Not set (60/hour limit)'}`);
+    console.log(`   ${varName}: ${value ? '✅ Set (recommended)' : '⚠️ Not set (60/hour, 750ms delay)'}`);
   });
   
   console.log('\n🎉 All rate limiting tests completed!');

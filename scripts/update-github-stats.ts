@@ -15,8 +15,8 @@ if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) {
 }
 
 if (!GITHUB_TOKEN) {
-  console.log('⚠️  No GitHub token provided. Rate limit: 60 requests/hour');
-  console.log('💡 Set GITHUB_TOKEN environment variable for 5,000 requests/hour');
+  console.log('⚠️  No GitHub token provided. Rate limit: 60 requests/hour (750ms delay)');
+  console.log('💡 Set GITHUB_TOKEN environment variable for 5,000 requests/hour (200ms delay)');
   console.log('📝 Create token at: https://github.com/settings/tokens/new');
   console.log('🔑 Required scopes: public_repo (for public repositories)\n');
 }
@@ -65,11 +65,11 @@ class GitHubRateLimiter {
   private requestQueue: Array<() => Promise<void>> = [];
   private isProcessing = false;
   private maxConcurrent = 1; // GitHub recommends sequential requests
-  private baseDelay = 1000; // 1 second base delay
+  private baseDelay = 2000; // 0.75 second base delay
   private maxRetries = 3;
 
   constructor(private hasToken: boolean) {
-    this.baseDelay = hasToken ? 100 : 1000; // 100ms with token, 1s without
+    this.baseDelay = hasToken ? 750 : 2000; // 200ms with token, 750ms without
   }
 
   // Calculate delay based on remaining rate limit
@@ -533,8 +533,8 @@ if (help) {
   console.log('  VITE_SUPABASE_URL      Supabase project URL');
   console.log('  SUPABASE_SERVICE_KEY   Supabase service key\n');
   console.log('Rate Limits:');
-  console.log('  Without token: 60 requests/hour');
-  console.log('  With token: 5,000 requests/hour\n');
+  console.log('  Without token: 60 requests/hour (750ms delay)');
+  console.log('  With token: 5,000 requests/hour (200ms delay)\n');
   process.exit(0);
 }
 
