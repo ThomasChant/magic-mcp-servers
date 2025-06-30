@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
     Search,
     Star,
@@ -31,6 +31,21 @@ interface ServerData extends Omit<MCPServer, 'verified'> {
 }
 
 const Servers: React.FC = () => {
+    const location = useLocation();
+    
+    // Get initial category from URL query parameters
+    const getInitialFilters = () => {
+        const searchParams = new URLSearchParams(location.search);
+        const categoryParam = searchParams.get('category');
+        
+        return {
+            categories: categoryParam ? [categoryParam] : [] as string[],
+            platforms: [] as string[],
+            languages: [] as string[],
+            status: [] as string[],
+        };
+    };
+
     // State management
     const [sidebarSearch, setSidebarSearch] = useState("");
     const [debouncedSearch, setDebouncedSearch] = useState("");
@@ -39,12 +54,7 @@ const Servers: React.FC = () => {
     const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
     const [quickFilter, setQuickFilter] = useState("all");
     const [currentPage, setCurrentPage] = useState(1);
-    const [filters, setFilters] = useState({
-        categories: [] as string[],
-        platforms: [] as string[],
-        languages: [] as string[],
-        status: [] as string[],
-    });
+    const [filters, setFilters] = useState(getInitialFilters());
 
     // Debounce search input to avoid excessive API calls
     useEffect(() => {
@@ -55,12 +65,33 @@ const Servers: React.FC = () => {
         return () => clearTimeout(timer);
     }, [sidebarSearch]);
 
+    // Update filters when URL changes (e.g., when coming from category page)
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const categoryParam = searchParams.get('category');
+        
+        if (categoryParam && !filters.categories.includes(categoryParam)) {
+            setFilters(prevFilters => ({
+                ...prevFilters,
+                categories: [categoryParam]
+            }));
+        }
+    }, [location.search, filters.categories]);
+
     // Get real categories with server counts
     const { data: categories } = useCategories();
 
     // Build filters for the hook
     const hookFilters = useMemo(() => {
-        const result: any = {};
+        const result: {
+            search?: string;
+            category?: string;
+            platforms?: string[];
+            languages?: string[];
+            featured?: boolean;
+            verified?: boolean;
+            qualityScore?: number;
+        } = {};
         
         if (debouncedSearch.trim()) {
             result.search = debouncedSearch.trim();
@@ -380,7 +411,7 @@ const Servers: React.FC = () => {
                             size="sm"
                         />
                         <span className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium text-sm flex items-center">
-                            View
+                            View Details
                             <ArrowRight className="h-3 w-3 ml-1" />
                         </span>
                     </div>
