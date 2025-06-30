@@ -65,7 +65,7 @@ function AppContent() {
                         <Route index element={<Home />} />
                         <Route path="servers" element={<ServersPage />} />
                         <Route
-                            path="servers/:id"
+                            path="servers/:slug"
                             element={<ServerDetailPage />}
                         />
                         <Route path="categories" element={<CategoriesPage />} />

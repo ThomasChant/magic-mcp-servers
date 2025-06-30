@@ -666,16 +666,16 @@ export const useSupabaseSearchServersPaginated = (
 };
 
 // Single server hook
-export const useSupabaseServer = (id: string) => {
+export const useSupabaseServer = (slug: string) => {
   return useQuery({
-    queryKey: ["supabase", "server", id],
+    queryKey: ["supabase", "server", slug],
     queryFn: async (): Promise<MCPServer | null> => {
-      if (!id) return null;
+      if (!slug) return null;
 
       const { data, error } = await supabase
         .from('servers_with_details')
         .select('*')
-        .eq('id', id)
+        .eq('slug', slug)
         .single();
 
       if (error) {
@@ -687,7 +687,7 @@ export const useSupabaseServer = (id: string) => {
 
       return data ? transformServer(data) : null;
     },
-    enabled: !!id,
+    enabled: !!slug,
     staleTime: 5 * 60 * 1000,
   });
 };
