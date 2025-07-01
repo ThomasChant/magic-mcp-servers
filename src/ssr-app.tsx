@@ -15,8 +15,10 @@ import { isClientSide } from "./utils/environment";
 
 // Create a context for SSR data
 export const SSRDataContext = React.createContext<{
-  serverData?: any;
-  readmeData?: any;
+  serverData?: unknown;
+  readmeData?: unknown;
+  categoryData?: unknown;
+  pageType?: string;
   url?: string;
 }>({});
 
@@ -33,8 +35,10 @@ const NotFoundPage = () => (
 interface SSRAppProps {
   queryClient: QueryClient;
   ssrData?: {
-    serverData?: any;
-    readmeData?: any;
+    serverData?: unknown;
+    readmeData?: unknown;
+    categoryData?: unknown;
+    pageType?: string;
     url?: string;
   };
 }
