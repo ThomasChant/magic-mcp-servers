@@ -46,7 +46,14 @@ const ServerDetail: React.FC = () => {
     console.log("ServerDetail - Final server:", server ? server.name : 'NULL');
     console.log("ServerDetail - isLoading:", isLoading);
     console.log("ServerDetail - error:", error);
-    const { data: readmeData, isLoading: readmeLoading } = useServerReadme(server?.slug || '');
+    // Use SSR README data if available, otherwise query
+    const { data: queryReadmeData, isLoading: readmeLoading } = useServerReadme(server?.slug || '');
+    const readmeData = ssrData.readmeData || queryReadmeData;
+    
+    console.log("ServerDetail - SSR README:", ssrData.readmeData ? 'FOUND' : 'NULL');
+    console.log("ServerDetail - Query README:", queryReadmeData ? 'FOUND' : 'NULL');
+    console.log("ServerDetail - Final README:", readmeData ? 'FOUND' : 'NULL');
+    console.log("ServerDetail - README loading:", readmeLoading);
     const { relatedServers, isLoading: relatedLoading } = useRelatedServers(server, 3);
     // Remove activeTab state as we're using StructuredReadme component
     const [copiedStates, setCopiedStates] = useState<{ [key: string]: boolean }>({});

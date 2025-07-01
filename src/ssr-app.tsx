@@ -16,6 +16,7 @@ import { isClientSide } from "./utils/environment";
 // Create a context for SSR data
 export const SSRDataContext = React.createContext<{
   serverData?: any;
+  readmeData?: any;
   url?: string;
 }>({});
 
@@ -33,6 +34,7 @@ interface SSRAppProps {
   queryClient: QueryClient;
   ssrData?: {
     serverData?: any;
+    readmeData?: any;
     url?: string;
   };
 }
