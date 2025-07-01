@@ -1,0 +1,54 @@
+{
+    "nav": {
+        "home": "Home",
+        "servers": "Servers",
+        "categories": "Categories",
+        "favorites": "Favorites",
+        "documentation": "Documentation"
+    },
+    "header": {
+        "title": "Magic MCP",
+        "subtitle": "Model Context Protocol Server Discovery Platform",
+        "searchPlaceholder": "Search servers..."
+    },
+    "footer": {
+        "about": "About",
+        "contact": "Contact",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service",
+        "copyright": "© 2024 Magic MCP. All rights reserved."
+    },
+    "common": {
+        "loading": "Loading...",
+        "error": "Error",
+        "notFound": "Not Found",
+        "backToHome": "Back to Home",
+        "viewMore": "View More",
+        "showLess": "Show Less",
+        "search": "Search",
+        "filter": "Filter",
+        "sort": "Sort",
+        "share": "Share",
+        "copy": "Copy",
+        "copied": "Copied!",
+        "install": "Install",
+        "documentation": "Documentation",
+        "github": "GitHub",
+        "demo": "Demo",
+        "website": "Website"
+    },
+    "auth": {
+        "signIn": "Sign In",
+        "signOut": "Sign Out",
+        "profile": "Profile",
+        "settings": "Settings"
+    },
+    "theme": {
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System"
+    },
+    "language": {
+        "selectLanguage": "Select Language"
+    }
+}

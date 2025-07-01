@@ -1,0 +1,47 @@
+{
+    "hero": {
+        "title": "Discover the Best",
+        "titleHighlight": "MCP Servers",
+        "subtitle": "Your gateway to enhanced AI capabilities. Explore, integrate, and supercharge your applications with Model Context Protocol servers.",
+        "searchPlaceholder": "Search for MCP servers, categories, or features...",
+        "searchButton": "Search",
+        "stats": {
+            "servers": "MCP Servers",
+            "categories": "Categories",
+            "averageStars": "Average Stars",
+            "activeThisMonth": "Active This Month"
+        }
+    },
+    "search": {
+        "resultsFor": "Search results for:",
+        "noResults": "No matching servers found",
+        "tryDifferent": "Try different search terms"
+    },
+    "categories": {
+        "title": "Browse by Category",
+        "subtitle": "Find servers organized by their primary functionality",
+        "viewAll": "View All",
+        "servers": "servers"
+    },
+    "featured": {
+        "title": "Featured Servers",
+        "subtitle": "Hand-picked servers with exceptional quality and functionality"
+    },
+    "popular": {
+        "title": "Popular Servers",
+        "subtitle": "Most starred and actively maintained servers"
+    },
+    "recent": {
+        "title": "Recently Updated",
+        "subtitle": "Servers with the latest updates and improvements"
+    },
+    "server": {
+        "stars": "stars",
+        "forks": "forks",
+        "install": "Install",
+        "viewDetails": "View Details",
+        "qualityScore": "Quality Score",
+        "lastUpdated": "Last updated",
+        "createdBy": "Created by"
+    }
+}

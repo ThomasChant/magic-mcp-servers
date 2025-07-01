@@ -1,9 +1,11 @@
 import { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ClerkProvider } from "@clerk/clerk-react";
 import Layout from "./components/Layout/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { ClientOnly } from "./components/ClientOnly";
+import "./i18n"; // Initialize i18n
 import Home from "./pages/Home";
 import ServersPage from "./pages/Servers";
 import ServerDetailPage from "./pages/ServerDetail";
@@ -14,13 +16,10 @@ import ProfilePage from "./pages/Profile";
 import FavoritesPage from "./pages/Favorites";
 import { useAppStore } from "./store/useAppStore";
 import { useFavoritesSync } from "./hooks/useFavoritesSync";
+import { isClientSide } from "./utils/environment";
 
-// Get Clerk publishable key
-const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
-
-if (!clerkPubKey) {
-    throw new Error("Missing Clerk publishable key");
-}
+// Get Clerk publishable key - only on client side
+const clerkPubKey = isClientSide() ? import.meta.env.VITE_CLERK_PUBLISHABLE_KEY : null;
 
 // Create Query Client
 const queryClient = new QueryClient({
@@ -43,10 +42,51 @@ const NotFoundPage = () => (
     </div>
 );
 
-function AppContent() {
+// SSR兼容的AppContent - 不包含Clerk相关功能
+function AppContentSSR() {
+    const theme = useAppStore((state) => state.theme);
+
+    useEffect(() => {
+        // Only access document on client side
+        if (isClientSide()) {
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+    }, [theme]);
+
+    return (
+        <QueryClientProvider client={queryClient}>
+            {/* Router is now provided by entry-client.tsx or entry-server.tsx */}
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<Home />} />
+                    <Route path="servers" element={<ServersPage />} />
+                    <Route
+                        path="servers/:id"
+                        element={<ServerDetailPage />}
+                    />
+                    <Route path="categories" element={<CategoriesPage />} />
+                    <Route
+                        path="categories/:id"
+                        element={<CategoryDetailPage />}
+                    />
+                    <Route path="docs" element={<DocsPage />} />
+                    <Route path="favorites" element={<FavoritesPage />} />
+                    <Route path="*" element={<NotFoundPage />} />
+                </Route>
+            </Routes>
+        </QueryClientProvider>
+    );
+}
+
+// 客户端专用的AppContent - 包含Clerk功能
+function AppContentWithClerk() {
     const theme = useAppStore((state) => state.theme);
     
-    // Initialize favorites sync (now inside ClerkProvider)
+    // Initialize favorites sync (需要Clerk Provider)
     useFavoritesSync();
 
     useEffect(() => {
@@ -59,43 +99,47 @@ function AppContent() {
 
     return (
         <QueryClientProvider client={queryClient}>
-            <Router>
-                <Routes>
-                    <Route path="/" element={<Layout />}>
-                        <Route index element={<Home />} />
-                        <Route path="servers" element={<ServersPage />} />
-                        <Route
-                            path="servers/:id"
-                            element={<ServerDetailPage />}
-                        />
-                        <Route path="categories" element={<CategoriesPage />} />
-                        <Route
-                            path="categories/:id"
-                            element={<CategoryDetailPage />}
-                        />
-                        <Route path="docs" element={<DocsPage />} />
-                        <Route 
-                            path="profile" 
-                            element={
-                                <ProtectedRoute>
-                                    <ProfilePage />
-                                </ProtectedRoute>
-                            } 
-                        />
-                        <Route path="favorites" element={<FavoritesPage />} />
-                        <Route path="*" element={<NotFoundPage />} />
-                    </Route>
-                </Routes>
-            </Router>
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<Home />} />
+                    <Route path="servers" element={<ServersPage />} />
+                    <Route
+                        path="servers/:id"
+                        element={<ServerDetailPage />}
+                    />
+                    <Route path="categories" element={<CategoriesPage />} />
+                    <Route
+                        path="categories/:id"
+                        element={<CategoryDetailPage />}
+                    />
+                    <Route path="docs" element={<DocsPage />} />
+                    <Route 
+                        path="profile" 
+                        element={
+                            <ProtectedRoute>
+                                <ProfilePage />
+                            </ProtectedRoute>
+                        } 
+                    />
+                    <Route path="favorites" element={<FavoritesPage />} />
+                    <Route path="*" element={<NotFoundPage />} />
+                </Route>
+            </Routes>
         </QueryClientProvider>
     );
 }
 
 function App() {
     return (
-        <ClerkProvider publishableKey={clerkPubKey}>
-            <AppContent />
-        </ClerkProvider>
+        <ClientOnly fallback={<AppContentSSR />}>
+            {clerkPubKey ? (
+                <ClerkProvider publishableKey={clerkPubKey}>
+                    <AppContentWithClerk />
+                </ClerkProvider>
+            ) : (
+                <AppContentSSR />
+            )}
+        </ClientOnly>
     );
 }
 

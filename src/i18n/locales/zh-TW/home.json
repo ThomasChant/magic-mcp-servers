@@ -1,0 +1,47 @@
+{
+    "hero": {
+        "title": "发现最优秀的",
+        "titleHighlight": "MCP 服务器",
+        "subtitle": "您增强 AI 能力的门户。探索、集成并使用 Model Context Protocol 服务器为您的应用程序增强功能。",
+        "searchPlaceholder": "搜索 MCP 服务器、分类或功能...",
+        "searchButton": "搜索",
+        "stats": {
+            "servers": "MCP 服务器",
+            "categories": "分类",
+            "averageStars": "平均星数",
+            "activeThisMonth": "本月活跃"
+        }
+    },
+    "search": {
+        "resultsFor": "搜索结果：",
+        "noResults": "未找到匹配的服务器",
+        "tryDifferent": "尝试不同的搜索词"
+    },
+    "categories": {
+        "title": "按分类浏览",
+        "subtitle": "根据主要功能查找服务器",
+        "viewAll": "查看全部",
+        "servers": "个服务器"
+    },
+    "featured": {
+        "title": "精选服务器",
+        "subtitle": "精心挑选的高质量和功能出色的服务器"
+    },
+    "popular": {
+        "title": "热门服务器",
+        "subtitle": "最受欢迎和积极维护的服务器"
+    },
+    "recent": {
+        "title": "最近更新",
+        "subtitle": "具有最新更新和改进的服务器"
+    },
+    "server": {
+        "stars": "星标",
+        "forks": "分支",
+        "install": "安装",
+        "viewDetails": "查看详情",
+        "qualityScore": "质量评分",
+        "lastUpdated": "最后更新",
+        "createdBy": "创建者"
+    }
+}
