@@ -99,32 +99,34 @@ function AppContentWithClerk() {
 
     return (
         <QueryClientProvider client={queryClient}>
-            <Routes>
-                <Route path="/" element={<Layout />}>
-                    <Route index element={<Home />} />
-                    <Route path="servers" element={<ServersPage />} />
-                    <Route
-                        path="servers/:id"
-                        element={<ServerDetailPage />}
-                    />
-                    <Route path="categories" element={<CategoriesPage />} />
-                    <Route
-                        path="categories/:id"
-                        element={<CategoryDetailPage />}
-                    />
-                    <Route path="docs" element={<DocsPage />} />
-                    <Route 
-                        path="profile" 
-                        element={
-                            <ProtectedRoute>
-                                <ProfilePage />
-                            </ProtectedRoute>
-                        } 
-                    />
-                    <Route path="favorites" element={<FavoritesPage />} />
-                    <Route path="*" element={<NotFoundPage />} />
-                </Route>
-            </Routes>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<Layout />}>
+                        <Route index element={<Home />} />
+                        <Route path="servers" element={<ServersPage />} />
+                        <Route
+                            path="servers/:slug"
+                            element={<ServerDetailPage />}
+                        />
+                        <Route path="categories" element={<CategoriesPage />} />
+                        <Route
+                            path="categories/:id"
+                            element={<CategoryDetailPage />}
+                        />
+                        <Route path="docs" element={<DocsPage />} />
+                        <Route 
+                            path="profile" 
+                            element={
+                                <ProtectedRoute>
+                                    <ProfilePage />
+                                </ProtectedRoute>
+                            } 
+                        />
+                        <Route path="favorites" element={<FavoritesPage />} />
+                        <Route path="*" element={<NotFoundPage />} />
+                    </Route>
+                </Routes>
+            </Router>
         </QueryClientProvider>
     );
 }

@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "../lib/supabase";
 import type { Category, MCPServer, ServerReadme } from "../types";
-import { type LucideIcon, Database, Code, Search, MessageCircle, Brain, Wrench, CheckSquare, Shield, FileText, Cloud, Briefcase, DollarSign, Layers, Folder, BarChart3, Plug } from "lucide-react";
+import { type LucideIcon, Database, Code, Search, MessageCircle, Brain, Wrench, CheckSquare, Shield, FileText, Cloud, Briefcase, DollarSign, Layers, Folder, BarChart3, Plug, Settings, Globe, Image, CreditCard, Activity, Link2 } from "lucide-react";
 import type { FeaturedServer } from "./useFeaturedServers";
 
-// Icon name mapping for featured servers
+// Comprehensive icon name mapping for all categories
 const iconNameMap: { [key: string]: LucideIcon } = {
+  // Basic icon names (as stored in database)
   'Database': Database,
   'Code': Code,
   'Search': Search,
@@ -21,7 +22,63 @@ const iconNameMap: { [key: string]: LucideIcon } = {
   'Layers': Layers,
   'Folder': Folder,
   'BarChart3': BarChart3,
-  'Plug': Plug
+  'Plug': Plug,
+  'Settings': Settings,
+  'Globe': Globe,
+  'Image': Image,
+  'CreditCard': CreditCard,
+  'Activity': Activity,
+  'Link2': Link2,
+
+  // Lowercase variants
+  'database': Database,
+  'code': Code,
+  'search': Search,
+  'messagecircle': MessageCircle,
+  'brain': Brain,
+  'wrench': Wrench,
+  'checksquare': CheckSquare,
+  'shield': Shield,
+  'filetext': FileText,
+  'cloud': Cloud,
+  'briefcase': Briefcase,
+  'dollarsign': DollarSign,
+  'layers': Layers,
+  'folder': Folder,
+  'barchart3': BarChart3,
+  'plug': Plug,
+  'settings': Settings,
+  'globe': Globe,
+  'image': Image,
+  'creditcard': CreditCard,
+  'activity': Activity,
+  'link2': Link2,
+
+  // Category-specific mappings (matching database category IDs)
+  'filesystem': Folder,
+  'database-storage': Database,
+  'communication': MessageCircle,
+  'communication-collaboration': MessageCircle,
+  'development': Code,
+  'development-tools': Code,
+  'api-integration': Link2,
+  'utilities': Wrench,
+  'utilities-tools': Wrench,
+  'monitoring': Activity,
+  'ai-ml': Brain,
+  'ai-machine-learning': Brain,
+  'productivity': Briefcase,
+  'business-productivity': Briefcase,
+  'cloud-infrastructure': Cloud,
+  'content': Image,
+  'content-media': Image,
+  'finance': CreditCard,
+  'finance-payments': CreditCard,
+  'web': Globe,
+  'web-network': Globe,
+  'security': Shield,
+  'specialized': Layers,
+  'specialized-domains': Layers,
 };
 
 // Helper function to transform database category to app Category type
@@ -46,7 +103,7 @@ function transformCategory(dbCategory: Record<string, unknown>, subcategories: R
       ko: (dbCategory.description_ko || dbCategory.description_en) as string,
       ru: (dbCategory.description_ru || dbCategory.description_en) as string,
     },
-    icon: iconNameMap[dbCategory.icon as string] || FileText,
+    icon: iconNameMap[dbCategory.icon as string] || Settings,
     color: (dbCategory.color || "#6B7280") as string,
     serverCount: dbCategory.server_count as number,
     subcategories: subcategories.map(sub => ({
@@ -609,16 +666,16 @@ export const useSupabaseSearchServersPaginated = (
 };
 
 // Single server hook
-export const useSupabaseServer = (id: string) => {
+export const useSupabaseServer = (slug: string) => {
   return useQuery({
-    queryKey: ["supabase", "server", id],
+    queryKey: ["supabase", "server", slug],
     queryFn: async (): Promise<MCPServer | null> => {
-      if (!id) return null;
+      if (!slug) return null;
 
       const { data, error } = await supabase
         .from('servers_with_details')
         .select('*')
-        .eq('id', id)
+        .eq('slug', slug)
         .single();
 
       if (error) {
@@ -630,7 +687,7 @@ export const useSupabaseServer = (id: string) => {
 
       return data ? transformServer(data) : null;
     },
-    enabled: !!id,
+    enabled: !!slug,
     staleTime: 5 * 60 * 1000,
   });
 };

@@ -25,8 +25,8 @@ export const useServers = () => {
   return useSupabaseServers();
 };
 
-export const useServer = (id: string) => {
-  return useSupabaseServer(id);
+export const useServer = (slug: string) => {
+  return useSupabaseServer(slug);
 };
 
 export const useFeaturedServers = () => {

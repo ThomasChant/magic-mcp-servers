@@ -28,3 +28,4 @@ dist-ssr
 *.sw?
 archive
 public/
+scripts/python/__pycache__/

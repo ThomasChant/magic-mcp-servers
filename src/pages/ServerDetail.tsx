@@ -32,10 +32,10 @@ import { FavoriteButton } from "../components/FavoriteButton";
 import ServerTooltip from "../components/ServerTooltip";
 
 const ServerDetail: React.FC = () => {
-    const { id } = useParams<{ id: string }>();
-    const { data: server, isLoading, error } = useServer(id!);
+    const { slug } = useParams<{ slug: string }>();
+    const { data: server, isLoading, error } = useServer(slug!);
     console.log("server", server)
-    const { data: readmeData, isLoading: readmeLoading } = useServerReadme(server?.owner+"_"+server?.name || '');
+    const { data: readmeData, isLoading: readmeLoading } = useServerReadme(server?.slug || '');
     const { relatedServers, isLoading: relatedLoading } = useRelatedServers(server, 3);
     // Remove activeTab state as we're using StructuredReadme component
     const [copiedStates, setCopiedStates] = useState<{ [key: string]: boolean }>({});

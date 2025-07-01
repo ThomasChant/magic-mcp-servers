@@ -142,9 +142,9 @@ const ParticleHero: React.FC<ParticleHeroProps> = ({
             } : {})
           }}
           onClick={() => {
-            const serverId = star.server.id; // Always use id field for navigation
-            console.log('Navigating to server:', { id: star.server.id, slug: star.server.slug, using: serverId });
-            navigate(`/servers/${serverId}`);
+            const slug = star.server.slug; // Always use id field for navigation
+            console.log('Navigating to server:', { id: star.server.id, slug: star.server.slug, using: star.server.id });
+            navigate(`/servers/${slug}`);
           }}
           onMouseEnter={() => setHoveredStar(star)}
           onMouseLeave={() => setHoveredStar(null)}
