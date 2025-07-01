@@ -59,7 +59,7 @@ const Servers: React.FC = () => {
 
     // Build filters for the hook
     const hookFilters = useMemo(() => {
-        const result: any = {};
+        const result: Record<string, unknown> = {};
         
         if (debouncedSearch.trim()) {
             result.search = debouncedSearch.trim();
