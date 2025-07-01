@@ -92,7 +92,7 @@ const CategoryDetail: React.FC = () => {
                                 )}
                                 <div className="flex items-center gap-2 mb-2">
                                     <Link
-                                        to={`/servers/${server.id}`}
+                                        to={`/servers/${server.slug}`}
                                         className="text-lg font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors break-words"
                                         title={server.name}
                                     >
@@ -159,7 +159,7 @@ const CategoryDetail: React.FC = () => {
                                     <Github className="h-5 w-5" />
                                 </Link>
                                 <Link
-                                    to={`/servers/${server.id}`}
+                                    to={`/servers/${server.slug}`}
                                     className="p-2 text-gray-400 dark:text-gray-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/30"
                                 >
                                     <ExternalLink className="h-5 w-5" />
@@ -192,7 +192,7 @@ const CategoryDetail: React.FC = () => {
                             )}
                             <div className="flex items-center gap-2 mb-1">
                                 <Link
-                                    to={`/servers/${server.id}`}
+                                    to={`/servers/${server.slug}`}
                                     className="text-lg font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors break-words"
                                     title={server.name}
                                 >
@@ -259,7 +259,7 @@ const CategoryDetail: React.FC = () => {
                             <Github className="h-4 w-4" />
                         </Link>
                         <Link
-                            to={`/servers/${server.id}`}
+                            to={`/servers/${server.slug}`}
                             className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium text-sm"
                         >
                             View Details <ExternalLink className="h-3 w-3 inline ml-1" />

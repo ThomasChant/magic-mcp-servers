@@ -53,7 +53,7 @@ const CategorySection: React.FC<CategorySectionProps> = ({
                 {displayServers.map((server) => (
                     <Link
                         key={server.id}
-                        to={`/servers/${server.id}`}
+                        to={`/servers/${server.slug}`}
                         className="block group server-card"
                         data-testid={`server-result-${server.id}`}
                     >

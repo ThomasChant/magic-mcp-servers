@@ -99,7 +99,6 @@ function AppContentWithClerk() {
 
     return (
         <QueryClientProvider client={queryClient}>
-            <Router>
                 <Routes>
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Home />} />
@@ -126,7 +125,7 @@ function AppContentWithClerk() {
                         <Route path="*" element={<NotFoundPage />} />
                     </Route>
                 </Routes>
-            </Router>
+            {/* Router已由上层组件提供，此处无需包裹 */}
         </QueryClientProvider>
     );
 }

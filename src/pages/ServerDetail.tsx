@@ -744,7 +744,7 @@ const ServerDetail: React.FC = () => {
                                                     delay={300}
                                                 >
                                                     <Link
-                                                        to={`/servers/${relatedServer.id}`}
+                                                        to={`/servers/${relatedServer.slug}`}
                                                         className="block p-3 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                                                     >
                                                         <div className="flex items-center justify-between">

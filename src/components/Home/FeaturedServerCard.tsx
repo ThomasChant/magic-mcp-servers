@@ -96,7 +96,7 @@ const FeaturedServerCard: React.FC<FeaturedServerCardProps> = React.memo(({
                     </span>
                 </div>
                 <Link
-                    to={`/servers/${server.id}`}
+                    to={`/servers/${server.slug}`}
                     className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
                 >
                     View Details

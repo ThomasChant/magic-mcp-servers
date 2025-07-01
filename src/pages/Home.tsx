@@ -448,7 +448,7 @@ const Home: React.FC = () => {
                                                 </div>
                                             </div>
                                             <Link
-                                                to={`/servers/${server.id}`}
+                                                to={`/servers/${server.slug}`}
                                                 className="block mt-4 text-center px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-800 transition-colors"
                                             >
                                                 View Details

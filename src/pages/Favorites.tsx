@@ -143,7 +143,7 @@ const Favorites: React.FC = () => {
     };
 
     const ServerCard: React.FC<{ server: ServerData }> = ({ server }) => (
-        <Link to={`/servers/${server.id}`}>
+        <Link to={`/servers/${server.slug}`}>
             <div 
                 className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover-lift cursor-pointer"
                 data-testid="favorite-server-card"
