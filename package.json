@@ -54,6 +54,7 @@
     "rehype-raw": "^7.0.0",
     "sirv": "^3.0.1",
     "tsparticles-slim": "^2.12.0",
+    "vike": "^0.4.235",
     "zustand": "^5.0.5"
   },
   "devDependencies": {

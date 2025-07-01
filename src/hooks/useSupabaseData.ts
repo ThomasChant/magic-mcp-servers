@@ -668,7 +668,7 @@ export const useSupabaseSearchServersPaginated = (
 // Single server hook
 export const useSupabaseServer = (slug: string) => {
   return useQuery({
-    queryKey: ["supabase", "server", slug],
+    queryKey: ["supabase", "server", slug || ''],
     queryFn: async (): Promise<MCPServer | null> => {
       if (!slug) return null;
 
@@ -687,7 +687,7 @@ export const useSupabaseServer = (slug: string) => {
 
       return data ? transformServer(data) : null;
     },
-    enabled: !!slug,
+    enabled: true, // Always enabled to allow cached data retrieval in SSR
     staleTime: 5 * 60 * 1000,
   });
 };

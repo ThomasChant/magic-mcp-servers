@@ -2,7 +2,7 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 
-import { isClientSide, isDevelopment } from "~/utils/environment";
+import { isClientSide, isDevelopment } from "../utils/environment";
 
 // Import all translations
 import enCommon from "./locales/en/common.json";

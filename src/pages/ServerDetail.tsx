@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
     ArrowLeft,
@@ -27,14 +27,25 @@ import {
 import { useServer, useServerReadme } from "../hooks/useUnifiedData";
 import { useRelatedServers } from "../hooks/useRelatedServers";
 import StructuredReadme from "../components/StructuredReadme";
-import ServerCommentsWithReplies from "../components/ServerCommentsWithReplies";
-import { FavoriteButton } from "../components/FavoriteButton";
+import { SSRSafeServerComments } from "../components/SSRSafeServerComments";
+import { SSRSafeFavoriteButton } from "../components/SSRSafeFavoriteButton";
 import ServerTooltip from "../components/ServerTooltip";
+import { SSRDataContext } from "../ssr-app";
 
 const ServerDetail: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();
-    const { data: server, isLoading, error } = useServer(slug!);
-    console.log("server", server)
+    const ssrData = useContext(SSRDataContext);
+    
+    // Use SSR data if available
+    const { data: queryData, isLoading, error } = useServer(slug || '');
+    const server = ssrData.serverData || queryData;
+    
+    console.log("ServerDetail - slug:", slug);
+    console.log("ServerDetail - SSR server:", ssrData.serverData ? ssrData.serverData.name : 'NULL');
+    console.log("ServerDetail - Query server:", queryData ? queryData.name : 'NULL');
+    console.log("ServerDetail - Final server:", server ? server.name : 'NULL');
+    console.log("ServerDetail - isLoading:", isLoading);
+    console.log("ServerDetail - error:", error);
     const { data: readmeData, isLoading: readmeLoading } = useServerReadme(server?.slug || '');
     const { relatedServers, isLoading: relatedLoading } = useRelatedServers(server, 3);
     // Remove activeTab state as we're using StructuredReadme component
@@ -299,7 +310,7 @@ const ServerDetail: React.FC = () => {
                                 <GitBranch className="mr-1.5 h-4 w-4" />
                                 View on GitHub
                             </a>
-                            <FavoriteButton
+                            <SSRSafeFavoriteButton
                                 serverId={server.id}
                                 showText={true}
                                 size="md"
@@ -784,7 +795,7 @@ const ServerDetail: React.FC = () => {
 
                 {/* Comments Section */}
                 <div className="mt-8">
-                    <ServerCommentsWithReplies serverId={server.id} />
+                    <SSRSafeServerComments serverId={server.id} />
                 </div>
             </div>
 
