@@ -137,9 +137,7 @@ export const useStarData = (
 
     // Find the maximum star count for scaling
     // const sumStars = starCnt.reduce((sum, curr) => sum + curr, 0);
-    const maxStarCount : number = selectedServers.map((item) => item.stats?.stars || item.repository?.stars || 0).reduce((max: number, item: number) => {
-      return Math.max(max, item);
-    }, 0) as number;
+    const maxStarCount : number = selectedServers.map((item) => item.stats?.stars || item.repository?.stars || 0).reduce((max, item) => Math.max(max, item)) as number;
 
     // Create star data
     return selectedServers.map((server, index: number) => {
