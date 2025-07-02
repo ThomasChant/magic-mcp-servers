@@ -131,7 +131,7 @@ function transformCategory(dbCategory: Record<string, unknown>, subcategories: R
 }
 
 // Helper function to transform database server to app MCPServer type
-function transformServer(dbServer: Record<string, unknown>): MCPServer {
+export function transformServer(dbServer: Record<string, unknown>): MCPServer {
   return {
     id: dbServer.id as string,
     name: dbServer.name as string,
@@ -376,8 +376,21 @@ export const useSupabaseServersPaginated = (
         query = query.gte('quality_score', filters.qualityScore);
       }
 
+      // Map sort field to actual database column names
+      const sortColumnMap: Record<string, string> = {
+        'quality': 'quality_score',
+        'stars': 'stars',
+        'updated': 'last_updated',
+        'created': 'repo_created_at',
+        'name': 'name',
+        'downloads': 'downloads',
+        'forks': 'forks'
+      };
+      
+      const actualSortColumn = sortColumnMap[sortBy] || sortBy;
+
       // Apply sorting
-      query = query.order(sortBy, { ascending: sortOrder === 'asc' });
+      query = query.order(actualSortColumn, { ascending: sortOrder === 'asc' });
 
       // Apply pagination
       const offset = (page - 1) * limit;
@@ -535,8 +548,21 @@ export const useSupabaseServersByCategoryPaginated = (
         .select('*', { count: 'exact' })
         .eq('category_id', categoryId);
 
+      // Map sort field to actual database column names
+      const sortColumnMap: Record<string, string> = {
+        'quality': 'quality_score',
+        'stars': 'stars',
+        'updated': 'last_updated',
+        'created': 'repo_created_at',
+        'name': 'name',
+        'downloads': 'downloads',
+        'forks': 'forks'
+      };
+      
+      const actualSortColumn = sortColumnMap[sortBy] || sortBy;
+
       // Apply sorting
-      query = query.order(sortBy, { ascending: sortOrder === 'asc' });
+      query = query.order(actualSortColumn, { ascending: sortOrder === 'asc' });
 
       // Apply pagination
       const offset = (page - 1) * limit;
@@ -654,8 +680,21 @@ export const useSupabaseSearchServersPaginated = (
         .select('*', { count: 'exact' })
         .or(`name.ilike.%${query}%,description_en.ilike.%${query}%,full_description.ilike.%${query}%`);
 
+      // Map sort field to actual database column names
+      const sortColumnMap: Record<string, string> = {
+        'quality': 'quality_score',
+        'stars': 'stars',
+        'updated': 'last_updated',
+        'created': 'repo_created_at',
+        'name': 'name',
+        'downloads': 'downloads',
+        'forks': 'forks'
+      };
+      
+      const actualSortColumn = sortColumnMap[sortBy] || sortBy;
+
       // Apply sorting
-      queryBuilder = queryBuilder.order(sortBy, { ascending: sortOrder === 'asc' });
+      queryBuilder = queryBuilder.order(actualSortColumn, { ascending: sortOrder === 'asc' });
 
       // Apply pagination
       const offset = (page - 1) * limit;
