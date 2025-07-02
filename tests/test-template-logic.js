@@ -15,7 +15,7 @@ async function testTemplateLogic() {
     console.log('✅ Has <!--app-html-->:', hasAppHtml);
     
     // Test 3: Can we import and call SSR?
-    const serverModule = await import('./dist/server/entry-server.js');
+    const serverModule = await import('../dist/server/entry-server.js');
     const { html: renderedHtml, seoData } = await serverModule.render('/servers/InditexTech_mcp-teams-server');
     console.log('✅ SSR executed, html length:', renderedHtml.length);
     console.log('✅ SEO data generated:', !!seoData);

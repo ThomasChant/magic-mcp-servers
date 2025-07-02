@@ -21,7 +21,7 @@ app.get('/servers/:slug', async (req, res) => {
     console.log('Has app-html placeholder:', template.includes('<!--app-html-->'));
     
     // Import SSR
-    const serverModule = await import('./dist/server/entry-server.js');
+    const serverModule = await import('../dist/server/entry-server.js');
     console.log('SSR module imported');
     
     // Execute SSR

@@ -25,7 +25,7 @@ app.get('/servers/:slug', async (req, res) => {
     
     // Test SSR import
     console.log('📡 DEBUG: Importing SSR module...');
-    const serverModule = await import('./dist/server/entry-server.js');
+    const serverModule = await import('../dist/server/entry-server.js');
     console.log('📡 DEBUG: SSR module imported successfully');
     
     // Test SSR execution

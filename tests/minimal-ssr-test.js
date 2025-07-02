@@ -16,7 +16,7 @@ app.get('/test-ssr', async (req, res) => {
     
     // Step 1: Import SSR
     console.log('Step 1: Importing SSR...');
-    const serverModule = await import('./dist/server/entry-server.js');
+    const serverModule = await import('../dist/server/entry-server.js');
     
     // Step 2: Execute SSR
     console.log('Step 2: Executing SSR...');

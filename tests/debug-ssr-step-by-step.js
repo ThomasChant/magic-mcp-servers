@@ -20,7 +20,7 @@ async function debugSSR() {
     
     // Step 2: Test SSR module import
     console.log('\n--- Step 2: Importing SSR module ---');
-    const serverModule = await import('./dist/server/entry-server.js');
+    const serverModule = await import('../dist/server/entry-server.js');
     console.log('✅ SSR module imported successfully');
     console.log('Render function exists:', typeof serverModule.render === 'function');
     

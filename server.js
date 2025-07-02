@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import express from "express";
 import dotenv from "dotenv";
+import cron from "node-cron";
 
 // Load environment variables
 dotenv.config({ path: '.env.local' });
@@ -11,6 +12,143 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const isProduction = process.env.NODE_ENV === "production";
 const port = process.env.PORT || 5173;
 const base = process.env.BASE || "/";
+
+// Static cache configuration
+const STATIC_CACHE_DIR = path.join(__dirname, "static-cache");
+const HOME_STATIC_FILE = path.join(STATIC_CACHE_DIR, "home.html");
+const HOME_META_FILE = path.join(STATIC_CACHE_DIR, "home-meta.json");
+
+// Static cache functions
+async function ensureStaticDir() {
+    try {
+        await fs.access(STATIC_CACHE_DIR);
+    } catch {
+        await fs.mkdir(STATIC_CACHE_DIR, { recursive: true });
+    }
+}
+
+async function generateStaticHome() {
+    if (!isProduction) {
+        console.log("⚠️ Static generation skipped in development mode");
+        return { success: false, error: "Development mode" };
+    }
+
+    try {
+        console.log("🏗️ Generating static home page...");
+        const startTime = Date.now();
+        
+        await ensureStaticDir();
+        
+        // Import and use SSR render function
+        const serverModule = await import("./dist/server/entry-server.js");
+        const result = await serverModule.render("/");
+        
+        if (!result.html || !result.seoData) {
+            throw new Error("Failed to render home page");
+        }
+        
+        // Read template and inject content
+        let template = await fs.readFile("./index-ssr.html", "utf-8");
+        
+        // Helper function to escape HTML
+        const escapeHtml = (text) => text
+            .replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+        
+        // Inject SEO data
+        const dynamicHead = `
+    <title>${escapeHtml(result.seoData.title)}</title>
+    <meta name="description" content="${escapeHtml(result.seoData.description)}" />
+    <meta name="keywords" content="${escapeHtml(result.seoData.keywords)}" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="${escapeHtml(result.seoData.ogTitle)}" />
+    <meta property="og:description" content="${escapeHtml(result.seoData.ogDescription)}" />
+    <meta property="og:url" content="${escapeHtml(result.seoData.ogUrl)}" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:title" content="${escapeHtml(result.seoData.ogTitle)}" />
+    <meta property="twitter:description" content="${escapeHtml(result.seoData.ogDescription)}" />
+    <meta property="twitter:url" content="${escapeHtml(result.seoData.ogUrl)}" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="${escapeHtml(result.seoData.canonicalUrl)}" />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    ${JSON.stringify(result.seoData.structuredData, null, 2)}
+    </script>`;
+        
+        template = template.replace('<!--app-head-->', dynamicHead);
+        template = template.replace('<!--app-html-->', result.html);
+        
+        // Update asset paths
+        try {
+            const assetsDir = await fs.readdir("./dist/client/assets");
+            const clientSSRFile = assetsDir.find(file => file.startsWith('client-ssr-'));
+            const serverDetailFile = assetsDir.find(file => file.startsWith('ServerDetail-'));
+            const queryClientJSFile = assetsDir.find(file => file.startsWith('queryClient-') && file.endsWith('.js'));
+            const queryClientCSSFile = assetsDir.find(file => file.startsWith('queryClient-') && file.endsWith('.css'));
+            
+            if (clientSSRFile && serverDetailFile && queryClientJSFile && queryClientCSSFile) {
+                template = template.replace('src="/src/entry-client.tsx"', `type="module" crossorigin src="/assets/${clientSSRFile}"`);
+                template = template.replace('</head>', `    <link rel="modulepreload" crossorigin href="/assets/${serverDetailFile}">
+    <link rel="modulepreload" crossorigin href="/assets/${queryClientJSFile}">
+    <link rel="stylesheet" crossorigin href="/assets/${queryClientCSSFile}">
+  </head>`);
+            }
+        } catch (assetsError) {
+            console.warn("⚠️ Could not update asset paths:", assetsError.message);
+        }
+        
+        // Save static HTML and metadata
+        await fs.writeFile(HOME_STATIC_FILE, template, "utf-8");
+        
+        const metadata = {
+            generatedAt: new Date().toISOString(),
+            renderTime: Date.now() - startTime,
+            htmlSize: template.length,
+            version: "1.0"
+        };
+        await fs.writeFile(HOME_META_FILE, JSON.stringify(metadata, null, 2), "utf-8");
+        
+        console.log(`✅ Static home page generated (${metadata.renderTime}ms, ${metadata.htmlSize} chars)`);
+        return { success: true, metadata };
+        
+    } catch (error) {
+        console.error("❌ Static home generation failed:", error.message);
+        return { success: false, error: error.message };
+    }
+}
+
+async function getStaticHome() {
+    try {
+        const [html, metaContent] = await Promise.all([
+            fs.readFile(HOME_STATIC_FILE, "utf-8"),
+            fs.readFile(HOME_META_FILE, "utf-8")
+        ]);
+        
+        const metadata = JSON.parse(metaContent);
+        return { html, metadata, exists: true };
+    } catch {
+        return { exists: false };
+    }
+}
+
+async function isStaticHomeExpired() {
+    try {
+        const metaContent = await fs.readFile(HOME_META_FILE, "utf-8");
+        const metadata = JSON.parse(metaContent);
+        const generatedAt = new Date(metadata.generatedAt);
+        const hoursSinceGeneration = (Date.now() - generatedAt.getTime()) / (1000 * 60 * 60);
+        return hoursSinceGeneration >= 1;
+    } catch {
+        return true; // 文件不存在视为过期
+    }
+}
 
 // Create http server
 const app = express();
@@ -50,6 +188,30 @@ app.use("*", async (req, res) => {
         }
         
         console.log(`📡 Processing request: ${url}`);
+
+        // Special handling for home page - check static cache first
+        if (url === '' || url === '/') {
+            if (isProduction) {
+                console.log(`🏠 Home page request - checking static cache`);
+                
+                const staticHome = await getStaticHome();
+                const isExpired = await isStaticHomeExpired();
+                
+                if (staticHome.exists && !isExpired) {
+                    console.log(`✅ Serving static home page (generated: ${staticHome.metadata.generatedAt})`);
+                    return res.status(200).set({ "Content-Type": "text/html" }).send(staticHome.html);
+                } else {
+                    console.log(`⚠️ Static home ${!staticHome.exists ? 'not found' : 'expired'} - regenerating in background`);
+                    
+                    // Generate static home in background (don't wait)
+                    generateStaticHome().catch(error => {
+                        console.error("Background static generation failed:", error);
+                    });
+                    
+                    // Fall through to normal SSR for this request
+                }
+            }
+        }
 
         let template;
         let render;
@@ -216,7 +378,45 @@ app.use("*", async (req, res) => {
     }
 });
 
-// Start http server
-app.listen(port, () => {
+// Initialize static cache and set up cron job
+async function initializeStaticCache() {
+    if (isProduction) {
+        console.log("🏗️ Initializing static cache system...");
+        
+        // Generate initial static home page
+        const result = await generateStaticHome();
+        if (result.success) {
+            console.log("✅ Initial static home page generated");
+        } else {
+            console.warn("⚠️ Initial static generation failed:", result.error);
+        }
+        
+        // Set up cron job to regenerate every hour (at minute 0)
+        cron.schedule('0 * * * *', async () => {
+            console.log("⏰ Hourly static home page regeneration started");
+            try {
+                const result = await generateStaticHome();
+                if (result.success) {
+                    console.log("✅ Scheduled static home page regeneration completed");
+                } else {
+                    console.error("❌ Scheduled static generation failed:", result.error);
+                }
+            } catch (error) {
+                console.error("❌ Cron job error:", error);
+            }
+        }, {
+            scheduled: true,
+            timezone: "UTC"
+        });
+        
+        console.log("✅ Static cache system initialized with hourly regeneration");
+    }
+}
+
+// Start http server and initialize static cache
+app.listen(port, async () => {
     console.log(`Server started at http://localhost:${port}`);
+    
+    // Initialize static cache system
+    await initializeStaticCache();
 });

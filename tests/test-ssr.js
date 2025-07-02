@@ -1,4 +1,4 @@
-import { render } from './dist/server/entry-server.js';
+import { render } from '../dist/server/entry-server.js';
 
 async function testSSR() {
   try {

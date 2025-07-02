@@ -1,7 +1,7 @@
 async function testImport() {
   try {
     console.log('Testing server module import...');
-    const serverModule = await import("./dist/server/entry-server.js");
+    const serverModule = await import("../dist/server/entry-server.js");
     console.log('✅ Server module imported successfully');
     
     console.log('Testing render function...');
