@@ -114,12 +114,13 @@ const CategoryDetail: React.FC = () => {
                                 </p>
                                 <div className="flex flex-wrap gap-2 mb-3">
                                     {server.tags.slice(0, 4).map((tag) => (
-                                        <span
+                                        <Link
                                             key={tag}
-                                            className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
+                                            to={`/tags/${encodeURIComponent(tag)}`}
+                                            className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-800 dark:hover:text-primary-200 transition-colors"
                                         >
-                                            {tag}
-                                        </span>
+                                            #{tag}
+                                        </Link>
                                     ))}
                                 </div>
                                 <div className="flex items-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
@@ -229,12 +230,13 @@ const CategoryDetail: React.FC = () => {
                 
                 <div className="flex flex-wrap gap-2 mb-4">
                     {server.tags.slice(0, 3).map((tag) => (
-                        <span
+                        <Link
                             key={tag}
-                            className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
+                            to={`/tags/${encodeURIComponent(tag)}`}
+                            className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-800 dark:hover:text-primary-200 transition-colors"
                         >
-                            {tag}
-                        </span>
+                            #{tag}
+                        </Link>
                     ))}
                 </div>
 

@@ -346,6 +346,7 @@ export const useSupabaseServersPaginated = (
     featured?: boolean;
     verified?: boolean;
     qualityScore?: number;
+    tags?: string[];
   }
 ) => {
   return useQuery({
@@ -374,6 +375,12 @@ export const useSupabaseServersPaginated = (
 
       if (filters?.qualityScore) {
         query = query.gte('quality_score', filters.qualityScore);
+      }
+
+      if (filters?.tags && filters.tags.length > 0) {
+        // Filter servers that contain ANY of the selected tags
+        const tagFilters = filters.tags.map(tag => `tags.cs.{"${tag}"}`);
+        query = query.or(tagFilters.join(','));
       }
 
       // Map sort field to actual database column names
@@ -939,4 +946,48 @@ export const getSupabaseFeaturedServersByCategory = (categoryId: string, feature
     return featuredData[categoryId] || [];
   }
   return [];
+};
+
+// Popular tags hook
+export interface PopularTag {
+  tag: string;
+  count: number;
+}
+
+export const useSupabasePopularTags = (limit: number = 12) => {
+  return useQuery({
+    queryKey: ["supabase", "popular-tags", limit],
+    queryFn: async (): Promise<PopularTag[]> => {
+      const { data, error } = await supabase
+        .from('servers_with_details')
+        .select('tags');
+
+      if (error) {
+        throw new Error(`Failed to fetch popular tags: ${error.message}`);
+      }
+
+      // Count tag frequency
+      const tagCounts: Record<string, number> = {};
+      
+      (data || []).forEach(server => {
+        if (server.tags && Array.isArray(server.tags)) {
+          server.tags.forEach((tag: string) => {
+            if (tag && tag.trim()) {
+              const cleanTag = tag.trim().toLowerCase();
+              tagCounts[cleanTag] = (tagCounts[cleanTag] || 0) + 1;
+            }
+          });
+        }
+      });
+
+      // Convert to array and sort by frequency
+      const popularTags = Object.entries(tagCounts)
+        .map(([tag, count]) => ({ tag, count }))
+        .sort((a, b) => b.count - a.count)
+        .slice(0, limit);
+
+      return popularTags;
+    },
+    staleTime: 15 * 60 * 1000, // 15 minutes
+  });
 };

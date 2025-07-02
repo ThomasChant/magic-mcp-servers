@@ -210,12 +210,13 @@ const Favorites: React.FC = () => {
 
                 <div className="flex flex-wrap gap-1 mb-4">
                     {server.tags.slice(0, 3).map((tag: string) => (
-                        <span
+                        <Link
                             key={tag}
-                            className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded"
+                            to={`/tags/${encodeURIComponent(tag)}`}
+                            className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-800 dark:hover:text-primary-200 text-xs px-2 py-1 rounded transition-colors"
                         >
-                            {tag}
-                        </span>
+                            #{tag}
+                        </Link>
                     ))}
                 </div>
 

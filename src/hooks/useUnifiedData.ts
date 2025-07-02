@@ -6,7 +6,9 @@ import {
   useSupabaseServersByCategoryPaginated,
   useSupabaseHomePageData,
   useSupabaseServerStats,
-  transformServer
+  useSupabasePopularTags,
+  transformServer,
+  type PopularTag
 } from "./useSupabaseData";
 import { supabase } from "../lib/supabase";
 import type { MCPServer } from "../types";
@@ -20,6 +22,9 @@ export interface PaginatedResult<T> {
   currentPage: number;
   totalPages: number;
 }
+
+// Re-export PopularTag interface
+export type { PopularTag };
 
 // Re-export main hooks for unified API
 export const useCategories = useSupabaseCategories;
@@ -37,6 +42,7 @@ export const useServersByCategory = (categoryId: string) => {
 export const useServersByCategoryPaginated = useSupabaseServersByCategoryPaginated;
 export const useHomePageData = useSupabaseHomePageData;
 export const useServerStats = useSupabaseServerStats;
+export const usePopularTags = useSupabasePopularTags;
 
 // Search servers with full-text search and tag filtering
 export const useSearchServersPaginated = (

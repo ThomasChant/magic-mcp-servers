@@ -57,6 +57,14 @@ const Footer: React.FC = () => {
                             </li>
                             <li>
                                 <Link
+                                    to="/tags"
+                                    className="text-gray-300 dark:text-gray-400 hover:text-white dark:hover:text-gray-100 transition-colors duration-200"
+                                >
+                                    Tags
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
                                     to="/docs"
                                     className="text-gray-300 dark:text-gray-400 hover:text-white dark:hover:text-gray-100 transition-colors duration-200"
                                 >

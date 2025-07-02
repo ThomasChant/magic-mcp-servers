@@ -76,9 +76,13 @@ const FeaturedServerCard: React.FC<FeaturedServerCardProps> = React.memo(({
 
             <div className="flex flex-wrap gap-2 mb-4">
                 {server.tags.slice(0, 3).map((tag) => (
-                    <span key={tag} className="bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded">
-                        {tag}
-                    </span>
+                    <Link
+                        key={tag}
+                        to={`/tags/${encodeURIComponent(tag)}`}
+                        className="bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-800 dark:hover:text-primary-200 text-xs px-2 py-1 rounded transition-colors"
+                    >
+                        #{tag}
+                    </Link>
                 ))}
             </div>
 

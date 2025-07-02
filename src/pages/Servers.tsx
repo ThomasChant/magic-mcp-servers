@@ -15,7 +15,7 @@ import {
     Bot,
     FileText,
 } from "lucide-react";
-import { useServersPaginated, useCategories } from "../hooks/useUnifiedData";
+import { useServersPaginated, useCategories, usePopularTags } from "../hooks/useUnifiedData";
 import type { MCPServer } from "../types";
 import ProgressiveEllipsis from "../components/ProgressiveEllipsis";
 import { FavoriteButton } from "../components/FavoriteButton";
@@ -49,6 +49,7 @@ const Servers: React.FC = () => {
                 platforms: [] as string[],
                 languages: [] as string[],
                 status: [] as string[],
+                tags: [] as string[],
             },
             page: pageParam ? parseInt(pageParam, 10) : 1,
             search: searchParam || '',
@@ -131,6 +132,9 @@ const Servers: React.FC = () => {
 
     // Get real categories with server counts
     const { data: categories } = useCategories();
+    
+    // Get popular tags for filtering
+    const { data: popularTags } = usePopularTags(20);
 
     // Build filters for the hook
     const hookFilters = useMemo(() => {
@@ -142,6 +146,10 @@ const Servers: React.FC = () => {
         
         if (filters.categories.length > 0) {
             result.category = filters.categories[0]; // For simplicity, use first category
+        }
+        
+        if (filters.tags.length > 0) {
+            result.tags = filters.tags;
         }
         
         if (quickFilter === "featured") {
@@ -348,12 +356,13 @@ const Servers: React.FC = () => {
 
                 <div className="flex flex-wrap gap-1 mb-4">
                     {server.tags.slice(0, 3).map((tag: string) => (
-                        <span
+                        <Link
                             key={tag}
-                            className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded"
+                            to={`/tags/${encodeURIComponent(tag)}`}
+                            className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-800 dark:hover:text-primary-200 text-xs px-2 py-1 rounded transition-colors"
                         >
-                            {tag}
-                        </span>
+                            #{tag}
+                        </Link>
                     ))}
                 </div>
 
@@ -463,12 +472,13 @@ const Servers: React.FC = () => {
                                     {server.tags
                                         .slice(0, 2)
                                         .map((tag: string) => (
-                                            <span
+                                            <Link
                                                 key={tag}
-                                                className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded"
+                                                to={`/tags/${encodeURIComponent(tag)}`}
+                                                className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-800 dark:hover:text-primary-200 text-xs px-2 py-1 rounded transition-colors"
                                             >
-                                                {tag}
-                                            </span>
+                                                #{tag}
+                                            </Link>
                                         ))}
                                 </div>
                             </div>
@@ -669,6 +679,7 @@ const Servers: React.FC = () => {
                                             platforms: [],
                                             languages: [],
                                             status: [],
+                                            tags: [],
                                         });
                                         setSidebarSearch("");
                                         setDebouncedSearch("");
@@ -831,6 +842,42 @@ const Servers: React.FC = () => {
                                     ))}
                                 </div>
                             </div>
+
+                            {/* Tags Filter */}
+                            {popularTags && popularTags.length > 0 && (
+                                <div className="mb-6">
+                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                                        Popular Tags
+                                    </label>
+                                    <div className="space-y-2 max-h-48 overflow-y-auto">
+                                        {popularTags.slice(0, 15).map((tag) => (
+                                            <label key={tag.tag} className="flex items-center">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={filters.tags.includes(tag.tag)}
+                                                    onChange={(e) => {
+                                                        if (e.target.checked) {
+                                                            setFilters({
+                                                                ...filters,
+                                                                tags: [...filters.tags, tag.tag]
+                                                            });
+                                                        } else {
+                                                            setFilters({
+                                                                ...filters,
+                                                                tags: filters.tags.filter(t => t !== tag.tag)
+                                                            });
+                                                        }
+                                                    }}
+                                                    className="rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-blue-600 focus:ring-blue-500"
+                                                />
+                                                <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
+                                                    #{tag.tag} ({tag.count})
+                                                </span>
+                                            </label>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
 
