@@ -72,7 +72,7 @@ const HeaderSSR: React.FC = () => {
             current: location.pathname === "/favorites",
         },
         {
-            name: "Tags",
+            name: t("nav.tag"),
             href: "/tags",
             current: location.pathname === "/tags" || location.pathname.startsWith("/tags/"),
         },
@@ -320,7 +320,7 @@ const HeaderWithClerk: React.FC = () => {
             current: location.pathname === "/favorites",
         },
         {
-            name: "Tags",
+            name: t("nav.tag"),
             href: "/tags",
             current: location.pathname === "/tags" || location.pathname.startsWith("/tags/"),
         },

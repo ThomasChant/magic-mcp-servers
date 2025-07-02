@@ -1,8 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { Search, Tag, Hash, TrendingUp, Clock, Filter } from "lucide-react";
+import { Search, Tag, Hash, TrendingUp} from "lucide-react";
 import { useServers } from "../hooks/useUnifiedData";
-import { useTranslation } from "react-i18next";
 import StructuredData from "../components/StructuredData";
 import Breadcrumbs from "../components/Breadcrumbs";
 
@@ -14,7 +13,6 @@ interface TagInfo {
 }
 
 const Tags: React.FC = () => {
-    const { t } = useTranslation('common');
     const { data: servers, isLoading } = useServers();
     const [searchTerm, setSearchTerm] = useState("");
     const [sortBy, setSortBy] = useState<'popularity' | 'alphabetical' | 'recent'>('popularity');

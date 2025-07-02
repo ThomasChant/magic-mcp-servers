@@ -4,7 +4,8 @@
         "servers": "Servers",
         "categories": "Categories",
         "favorites": "Favorites",
-        "documentation": "Documentation"
+        "documentation": "Documentation",
+        "tag": "Tags"
     },
     "header": {
         "title": "Magic MCP",

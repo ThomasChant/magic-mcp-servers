@@ -4,7 +4,8 @@
         "servers": "服务器",
         "categories": "分类",
         "favorites": "收藏",
-        "documentation": "文档"
+        "documentation": "文档",
+        "tag": "标签"
     },
     "header": {
         "title": "Magic MCP",
