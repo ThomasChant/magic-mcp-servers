@@ -136,13 +136,6 @@ const Servers: React.FC = () => {
         { id: "java", name: "Java" },
     ];
 
-    const statusFilters = [
-        { id: "official", name: "Official" },
-        { id: "featured", name: "Featured" },
-        { id: "verified", name: "Verified" },
-        { id: "popular", name: "Popular" },
-    ];
-
     // Get server icon based on category or tags
     const getServerIcon = (server: ServerData) => {
         const tags = server.tags.join(" ").toLowerCase();
@@ -587,8 +580,6 @@ const Servers: React.FC = () => {
                             >
                                 <option value="stars-desc">Sort by Stars (High to Low)</option>
                                 <option value="stars-asc">Sort by Stars (Low to High)</option>
-                                <option value="downloads-desc">Sort by Downloads (High to Low)</option>
-                                <option value="downloads-asc">Sort by Downloads (Low to High)</option>
                                 <option value="quality_score-desc">Sort by Quality (High to Low)</option>
                                 <option value="quality_score-asc">Sort by Quality (Low to High)</option>
                                 <option value="name-asc">Sort by Name (A to Z)</option>
@@ -746,39 +737,7 @@ const Servers: React.FC = () => {
                                 </div>
                             </div>
 
-                            {/* Status Filter */}
-                            <div className="mb-6">
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                                    Status
-                                </label>
-                                <div className="space-y-2">
-                                    {statusFilters.map((status) => (
-                                        <label key={status.id} className="flex items-center">
-                                            <input
-                                                type="checkbox"
-                                                checked={filters.status.includes(status.id)}
-                                                onChange={(e) => {
-                                                    if (e.target.checked) {
-                                                        setFilters({
-                                                            ...filters,
-                                                            status: [...filters.status, status.id]
-                                                        });
-                                                    } else {
-                                                        setFilters({
-                                                            ...filters,
-                                                            status: filters.status.filter(s => s !== status.id)
-                                                        });
-                                                    }
-                                                }}
-                                                className="rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-blue-600 focus:ring-blue-500"
-                                            />
-                                            <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-                                                {status.name}
-                                            </span>
-                                        </label>
-                                    ))}
-                                </div>
-                            </div>
+                       
                         </div>
                     </div>
 
