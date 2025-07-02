@@ -4,13 +4,13 @@ import { Search, Menu, X, Globe, Sun, Moon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useAppStore } from "../../store/useAppStore";
 import { ClientOnly } from "../ClientOnly";
+
 import { 
     AuthSectionWithClerk, 
     MobileAuthSectionWithClerk,
     AuthSectionSSR,
     MobileAuthSectionSSR 
 } from "./AuthSection";
-import { isClientSide } from "../../utils/environment";
 
 // SSR兼容的Header组件，不包含Clerk功能
 const HeaderSSR: React.FC = () => {
@@ -18,6 +18,7 @@ const HeaderSSR: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    // const { isSignedIn } = useUser();
     const {
         theme,
         searchQuery,
@@ -143,8 +144,8 @@ const HeaderSSR: React.FC = () => {
                             </div>
                         </div>
 
-                        {/* Auth Section */}
-                        <AuthSectionSSR />
+                     
+                        
 
                         {/* Theme Toggle */}
                         <button
@@ -193,6 +194,9 @@ const HeaderSSR: React.FC = () => {
                             </div>
                         </ClientOnly>
 
+                        
+                        <AuthSectionSSR />
+                        
                         {/* Mobile menu button */}
                         <div className="md:hidden">
                             <button
@@ -386,8 +390,7 @@ const HeaderWithClerk: React.FC = () => {
                             </div>
                         </div>
 
-                        {/* Auth Section */}
-                        <AuthSectionWithClerk />
+                  
 
                         {/* Theme Toggle */}
                         <button
@@ -435,6 +438,9 @@ const HeaderWithClerk: React.FC = () => {
                                 </div>
                             </div>
                         </ClientOnly>
+
+                        {/* Auth Section */}
+                        <AuthSectionWithClerk />
 
                         {/* Mobile menu button */}
                         <div className="md:hidden">

@@ -29,4 +29,9 @@ dist-ssr
 archive
 public/
 scripts/python/__pycache__/
+<<<<<<< HEAD
 static-cache/
+=======
+test-results/
+playwright-report/
+>>>>>>> main

@@ -6,19 +6,14 @@ import { useTranslation } from 'react-i18next';
 
 // 客户端认证部分 - 包含完整Clerk功能
 export const AuthSectionWithClerk: React.FC = () => {
-    const { isSignedIn, user } = useUser();
+    const { isSignedIn } = useUser();
     const { t } = useTranslation('common');
 
     return (
         <div className="flex items-center space-x-3">
             {isSignedIn ? (
                 <div className="flex items-center space-x-3">
-                    <Link
-                        to="/profile"
-                        className="text-sm font-medium text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors"
-                    >
-                        {t("auth.profile")}
-                    </Link>
+                    
                     <UserButton 
                         appearance={{
                             elements: {
