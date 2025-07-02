@@ -89,13 +89,23 @@ const Servers: React.FC = () => {
         }
         
         if (filters.categories.length > 0) {
-            result.category = filters.categories[0]; // For simplicity, use first category
+           result.category = filters.categories;
+        }
+        
+        if (filters.platforms.length > 0) {
+            result.platforms = filters.platforms;
+        }
+        
+        if (filters.languages.length > 0) {
+            result.languages = filters.languages;
         }
         
         if (quickFilter === "featured") {
             result.featured = true;
         } else if (quickFilter === "verified") {
             result.verified = true;
+        } else if (quickFilter === "popular") {
+            result.popular = true;
         }
         
         return Object.keys(result).length > 0 ? result : undefined;
@@ -202,6 +212,10 @@ const Servers: React.FC = () => {
         return `${Math.floor(diffInDays / 7)}w ago`;
     };
 
+    const isPopular = (server: ServerData) => {
+        return server.stats.stars >= 1000 || server.stats.forks >= 100;
+    };
+
     // Server data is already filtered and sorted on the server side
     const filteredAndSortedServers = servers;
 
@@ -256,7 +270,7 @@ const Servers: React.FC = () => {
                                         Featured
                                     </span>
                                 )}
-                                {server.usage.downloads >= 10000 && (
+                                {isPopular(server) && (
                                     <span className="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 text-xs px-2 py-1 rounded-full">
                                         Popular
                                     </span>
@@ -371,7 +385,7 @@ const Servers: React.FC = () => {
                                             Featured
                                         </span>
                                     )}
-                                    {server.usage.downloads >= 10000 && (
+                                    {isPopular(server) && (
                                         <span className="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 text-xs px-2 py-1 rounded-full">
                                             Popular
                                         </span>
