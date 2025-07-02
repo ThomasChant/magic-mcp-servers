@@ -6,7 +6,7 @@ import Backend from "i18next-http-backend";
 // Supported languages
 export const locales = ["en", "zh-CN", "zh-TW", "fr", "ja", "ko", "ru"] as const;
 export type Locale = (typeof locales)[number];
-export const defaultLocale: Locale = "zh-CN";
+export const defaultLocale: Locale = "en";
 
 // Language display names
 export const languageNames: Record<Locale, string> = {

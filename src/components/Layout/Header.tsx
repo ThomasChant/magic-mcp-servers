@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Search, Menu, X, Globe, Sun, Moon } from "lucide-react";
+import { Search, Menu, X, Sun, Moon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useAppStore } from "../../store/useAppStore";
 import { ClientOnly } from "../ClientOnly";
@@ -160,11 +160,11 @@ const HeaderSSR: React.FC = () => {
                             )}
                         </button>
 
-                        {/* Language Selector */}
-                        <ClientOnly fallback={
+                        {/* Language Selector - Temporarily disabled for SSR */}
+                        {/* <ClientOnly fallback={
                             <div className="flex items-center p-2 text-gray-600 dark:text-gray-300 rounded-md">
                                 <Globe className="h-5 w-5 mr-1" />
-                                <span className="text-sm font-medium">zh-CN</span>
+                                <span className="text-sm font-medium">en</span>
                             </div>
                         }>
                             <div className="relative group">
@@ -192,7 +192,7 @@ const HeaderSSR: React.FC = () => {
                                     ))}
                                 </div>
                             </div>
-                        </ClientOnly>
+                        </ClientOnly> */}
 
                         
                         <AuthSectionSSR />
@@ -405,11 +405,11 @@ const HeaderWithClerk: React.FC = () => {
                             )}
                         </button>
 
-                        {/* Language Selector */}
-                        <ClientOnly fallback={
+                        {/* Language Selector - Temporarily disabled for Client */}
+                        {/* <ClientOnly fallback={
                             <div className="flex items-center p-2 text-gray-600 dark:text-gray-300 rounded-md">
                                 <Globe className="h-5 w-5 mr-1" />
-                                <span className="text-sm font-medium">zh-CN</span>
+                                <span className="text-sm font-medium">en</span>
                             </div>
                         }>
                             <div className="relative group">
@@ -437,7 +437,7 @@ const HeaderWithClerk: React.FC = () => {
                                     ))}
                                 </div>
                             </div>
-                        </ClientOnly>
+                        </ClientOnly> */}
 
                         {/* Auth Section */}
                         <AuthSectionWithClerk />

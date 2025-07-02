@@ -54,8 +54,8 @@ const resources = {
 // 基础i18n配置
 const i18nConfig = {
     resources,
-    lng: "zh-CN", // 默认语言
-    fallbackLng: "zh-CN",
+    lng: "en", // 默认语言
+    fallbackLng: "en",
     
     ns: ["common", "home"],
     defaultNS: "common",
