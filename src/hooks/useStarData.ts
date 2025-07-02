@@ -136,20 +136,14 @@ export const useStarData = (
     const positions = generateStarPositions(selectedServers.length);
 
     // Find the maximum star count for scaling
-    const starCnt = [
-      ...selectedServers.map(server =>
-        server.stats?.stars || server.repository?.stars || 0
-      )
-    ]
-
-    const sumStars = starCnt.reduce((sum, curr) => sum + curr, 0);
-    const avgStars = sumStars / selectedServers.length;
+    // const sumStars = starCnt.reduce((sum, curr) => sum + curr, 0);
+    const maxStarCount : number = selectedServers.map((item) => item.stats?.stars || item.repository?.stars || 0).reduce((max, item) => Math.max(max, item)) as number;
 
     // Create star data
-    return selectedServers.map((server, index) => {
+    return selectedServers.map((server, index: number) => {
       const stars = server.stats?.stars || server.repository?.stars || 0;
-      const size = getStarSize(stars, avgStars);
-      const brightness = getStarBrightness(stars, avgStars);
+      const size = getStarSize(stars, maxStarCount);
+      const brightness = getStarBrightness(stars, maxStarCount);
       const categoryColor = getCategoryColor(server.category);
       
       // Calculate z-index based on popularity

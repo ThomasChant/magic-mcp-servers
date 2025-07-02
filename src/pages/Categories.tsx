@@ -16,11 +16,6 @@ const Categories: React.FC = () => {
   // Take first 6 categories as main categories
   const mainCategories = categories?.sort((a, b) => b.serverCount - a.serverCount)?.slice(0, 6) || [];
   const additionalCategories = categories?.slice(6) || [];
-  
-  // Use consistent stats from serverStats hook  
-  const totalServers = serverStats?.totalServers || 0;
-  const averageStars = serverStats?.averageStars || 0;
-  const activeRepos = serverStats?.activeRepos || 0;
 
   if (isLoading || !categories) {
     return (
@@ -93,7 +88,7 @@ const Categories: React.FC = () => {
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-green-600 dark:text-green-400">
-                {totalServers}
+                {serverStats?.totalServers || 0}
               </div>
               <div className="text-gray-600 dark:text-gray-400">
                 {isZh ? "服务器总数" : "Total Servers"}
@@ -101,9 +96,9 @@ const Categories: React.FC = () => {
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">
-                {averageStars >= 1000 
-                  ? `${Math.floor(averageStars / 1000)}K` 
-                  : averageStars.toLocaleString()}
+                {(serverStats?.averageStars || 0) >= 1000 
+                  ? `${Math.floor((serverStats?.averageStars || 0) / 1000)}K` 
+                  : (serverStats?.averageStars || 0).toLocaleString()}
               </div>
               <div className="text-gray-600 dark:text-gray-400">
                 {isZh ? "平均星标" : "Avg Stars"}
@@ -111,7 +106,7 @@ const Categories: React.FC = () => {
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-orange-600 dark:text-orange-400">
-                {activeRepos}
+                {serverStats?.activeRepos || 0}
               </div>
               <div className="text-gray-600 dark:text-gray-400">
                 {isZh ? "活跃仓库" : "Active Repos"}

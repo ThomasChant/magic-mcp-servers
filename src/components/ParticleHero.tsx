@@ -1,8 +1,5 @@
 import React, { useCallback, useMemo, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Particles from 'react-particles';
-import { loadSlim } from 'tsparticles-slim';
-import type { Container, Engine } from 'tsparticles-engine';
 import type { MCPServer } from '../types';
 import type { StarServer } from '../hooks/useTopStarServers';
 import StarTooltip from './StarTooltip';
@@ -53,31 +50,31 @@ const ParticleHero: React.FC<ParticleHeroProps> = ({
   });
 
   // Get optimized particle configuration
-  const { particleOptions, deviceCapabilities } = useParticleConfig({
+  const { deviceCapabilities } = useParticleConfig({
     servers: particleServers,
     searchQuery,
   });
 
-  // Initialize particles engine
-  const particlesInit = useCallback(async (engine: Engine) => {
-    try {
-      await loadSlim(engine);
-      console.log('Particles engine initialized successfully');
-    } catch (error) {
-      console.error('Failed to initialize particles engine:', error);
-    }
-  }, []);
+  // // Initialize particles engine
+  // const particlesInit = useCallback(async (engine: Engine) => {
+  //   try {
+  //     await loadSlim(engine);
+  //     console.log('Particles engine initialized successfully');
+  //   } catch (error) {
+  //     console.error('Failed to initialize particles engine:', error);
+  //   }
+  // }, []);
 
-  // Handle particles container load  
-  const particlesLoaded = useCallback(async (container: Container | undefined) => {
-    if (container) {
-      console.log('Particles container loaded successfully:', container.id);
-      // Force a refresh to ensure particles are visible
-      container.refresh();
-    } else {
-      console.warn('Particles container failed to load');
-    }
-  }, []);
+  // // Handle particles container load  
+  // const particlesLoaded = useCallback(async (container: Container | undefined) => {
+  //   if (container) {
+  //     console.log('Particles container loaded successfully:', container.id);
+  //     // Force a refresh to ensure particles are visible
+  //     container.refresh();
+  //   } else {
+  //     console.warn('Particles container failed to load');
+  //   }
+  // }, []);
 
   // Handle mouse movement for tooltip positioning
   const handleMouseMove = useCallback((e: MouseEvent) => {
@@ -175,14 +172,14 @@ const ParticleHero: React.FC<ParticleHeroProps> = ({
   return (
     <div className="absolute inset-0 overflow-hidden particle-hero-container" style={{ zIndex: 0, contain: 'layout style paint', visibility: 'visible', opacity: 1, position: 'absolute' }}>
       {/* Particles background */}
-      <Particles
+      {/* <Particles
         id="particle-hero"
         init={particlesInit}
         loaded={particlesLoaded}
         options={particleOptions}
         className="absolute inset-0 particles-container"
         style={{ zIndex: 1, visibility: 'visible', opacity: 1 }}
-      />
+      /> */}
       
       {/* Cosmic background gradient overlay */}
       <div 
@@ -194,7 +191,7 @@ const ParticleHero: React.FC<ParticleHeroProps> = ({
       />
       
       {/* Shooting stars effect - reduced on low-end devices */}
-      {!deviceCapabilities.isLowEndDevice && (
+      {/* {!deviceCapabilities.isLowEndDevice && (
         <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 4 }}>
           {[1, 2].map((i) => (
             <div
@@ -211,10 +208,10 @@ const ParticleHero: React.FC<ParticleHeroProps> = ({
           ))}
         </div>
       )}
-      
+       */}
       {/* Additional cosmic effects - simplified on mobile */}
-      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 5 }}>
-        {/* Nebula effects */}
+      {/* <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 5 }}>
+       
         {(deviceCapabilities.isLowEndDevice ? [1] : [1, 2, 3]).map((i) => (
           <div
             key={`nebula-${i}`}
@@ -235,7 +232,7 @@ const ParticleHero: React.FC<ParticleHeroProps> = ({
             }}
           />
         ))}
-      </div>
+      </div> */}
       
       {/* Interactive server stars - moved to top layer for proper interaction */}
       <div className="absolute inset-0" style={{ zIndex: 100, pointerEvents: 'none' }}>
