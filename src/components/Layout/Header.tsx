@@ -136,33 +136,7 @@ const Header: React.FC = () => {
                             </div>
                         </div>
 
-                        {/* Auth Section */}
-                        <div className="flex items-center space-x-3">
-                            {isSignedIn ? (
-                                <div className="flex items-center space-x-3">
-                                    <Link
-                                        to="/profile"
-                                        className="text-sm font-medium text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors"
-                                    >
-                                        Profile
-                                    </Link>
-                                    <UserButton 
-                                        appearance={{
-                                            elements: {
-                                                avatarBox: "h-8 w-8"
-                                            }
-                                        }}
-                                    />
-                                </div>
-                            ) : (
-                                <SignInButton mode="modal">
-                                    <button className="flex items-center px-4 py-2 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-colors">
-                                        <User className="h-4 w-4" />
-                                        Sign In
-                                    </button>
-                                </SignInButton>
-                            )}
-                        </div>
+                        
 
                         {/* Theme Toggle */}
                         <button
@@ -203,6 +177,34 @@ const Header: React.FC = () => {
                             </div>
                         </div>
 
+                        {/* Auth Section */}
+                        <div className="flex items-center space-x-3">
+                            {isSignedIn ? (
+                                <div className="flex items-center space-x-3">
+                                    {/* <Link
+                                        to="/profile"
+                                        className="text-sm font-medium text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors"
+                                    >
+                                        Profile
+                                    </Link> */}
+                                    <UserButton 
+                                        appearance={{
+                                            elements: {
+                                                avatarBox: "h-8 w-8"
+                                            }
+                                        }}
+                                    />
+                                </div>
+                            ) : (
+                                <SignInButton mode="modal">
+                                    <button className="flex items-center px-4 py-2 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-colors">
+                                        <User className="h-4 w-4" />
+                                        Sign In
+                                    </button>
+                                </SignInButton>
+                            )}
+                        </div>
+                        
                         {/* Mobile menu button */}
                         <div className="md:hidden">
                             <button
