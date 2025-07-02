@@ -138,12 +138,49 @@ const Servers: React.FC = () => {
     ];
 
     const languageFilters = [
-        { id: "python", name: "Python" },
-        { id: "typescript", name: "TypeScript" },
-        { id: "javascript", name: "JavaScript" },
-        { id: "go", name: "Go" },
-        { id: "rust", name: "Rust" },
-        { id: "java", name: "Java" },
+        // 主流编程语言
+        { id: "Python", name: "Python" },
+        { id: "JavaScript", name: "JavaScript" },
+        { id: "TypeScript", name: "TypeScript" },
+        { id: "Java", name: "Java" },
+        { id: "Go", name: "Go" },
+        { id: "Rust", name: "Rust" },
+        { id: "C#", name: "C#" },
+        { id: "PHP", name: "PHP" },
+        { id: "Ruby", name: "Ruby" },
+        { id: "C++", name: "C++" },
+        { id: "C", name: "C" },
+        { id: "Swift", name: "Swift" },
+        { id: "Kotlin", name: "Kotlin" },
+        { id: "Dart", name: "Dart" },
+        
+        // 前端技术
+        { id: "HTML", name: "HTML" },
+        { id: "CSS", name: "CSS" },
+        { id: "SCSS", name: "SCSS" },
+        { id: "Vue", name: "Vue" },
+        
+        // 脚本和Shell
+        { id: "Shell", name: "Shell" },
+        { id: "PowerShell", name: "PowerShell" },
+        { id: "Batchfile", name: "Batch" },
+        
+        // 配置和工具
+        { id: "Dockerfile", name: "Docker" },
+        { id: "Makefile", name: "Makefile" },
+        { id: "CMake", name: "CMake" },
+        
+        // 数据和科学计算
+        { id: "R", name: "R" },
+        { id: "MATLAB", name: "MATLAB" },
+        { id: "Jupyter Notebook", name: "Jupyter" },
+        
+        // 其他重要语言
+        { id: "Lua", name: "Lua" },
+        { id: "Clojure", name: "Clojure" },
+        { id: "Solidity", name: "Solidity" },
+        { id: "HCL", name: "HCL" },
+        { id: "Nix", name: "Nix" }
     ];
 
     // Get server icon based on category or tags
