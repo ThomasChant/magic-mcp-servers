@@ -289,16 +289,35 @@ export const useSupabaseServers = () => {
   return useQuery({
     queryKey: ["supabase", "servers"],
     queryFn: async (): Promise<MCPServer[]> => {
-      const { data, error } = await supabase
-        .from('servers_with_details')
-        .select('*')
-        .order('stars', { ascending: false });
+      const pageSize = 1000;
+      let allServers: Record<string, unknown>[] = [];
+      let page = 0;
+      let hasMore = true;
 
-      if (error) {
-        throw new Error(`Failed to fetch servers: ${error.message}`);
+      while (hasMore) {
+        const from = page * pageSize;
+        const to = from + pageSize - 1;
+
+        const { data, error, count } = await supabase
+          .from('servers_with_details')
+          .select('*', { count: 'exact' })
+          .order('stars', { ascending: false })
+          .range(from, to);
+
+        if (error) {
+          throw new Error(`Failed to fetch servers (page ${page + 1}): ${error.message}`);
+        }
+
+        if (data && data.length > 0) {
+          allServers = [...allServers, ...data];
+        }
+
+        // 检查是否还有更多数据
+        hasMore = data && data.length === pageSize && (!count || allServers.length < count);
+        page++;
       }
 
-      return (data || []).map(transformServer);
+      return allServers.map(transformServer);
     },
     staleTime: 5 * 60 * 1000,
   });

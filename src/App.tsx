@@ -14,6 +14,8 @@ import CategoryDetailPage from "./pages/CategoryDetail";
 import DocsPage from "./pages/Docs";
 import ProfilePage from "./pages/Profile";
 import FavoritesPage from "./pages/Favorites";
+import TagDetailPage from "./pages/TagDetail";
+import TagsPage from "./pages/Tags";
 import { useAppStore } from "./store/useAppStore";
 import { useFavoritesSync } from "./hooks/useFavoritesSync";
 import { isClientSide } from "./utils/environment";
@@ -73,6 +75,11 @@ function AppContentSSR() {
                         path="categories/:id"
                         element={<CategoryDetailPage />}
                     />
+                    <Route path="tags" element={<TagsPage />} />
+                    <Route
+                        path="tags/:tag"
+                        element={<TagDetailPage />}
+                    />
                     <Route path="docs" element={<DocsPage />} />
                     <Route path="favorites" element={<FavoritesPage />} />
                     <Route path="*" element={<NotFoundPage />} />
@@ -111,6 +118,11 @@ function AppContentWithClerk() {
                         <Route
                             path="categories/:id"
                             element={<CategoryDetailPage />}
+                        />
+                        <Route path="tags" element={<TagsPage />} />
+                        <Route
+                            path="tags/:tag"
+                            element={<TagDetailPage />}
                         />
                         <Route path="docs" element={<DocsPage />} />
                         <Route 

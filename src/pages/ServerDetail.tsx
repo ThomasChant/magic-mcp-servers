@@ -7,7 +7,6 @@ import {
     GitBranch,
     // Copy and CheckCircle now handled by StructuredReadme component
     AlertCircle,
-    ChevronRight,
     Folder,
     Share,
     Calendar,
@@ -31,6 +30,8 @@ import { SSRSafeServerComments } from "../components/SSRSafeServerComments";
 import { SSRSafeFavoriteButton } from "../components/SSRSafeFavoriteButton";
 import ServerTooltip from "../components/ServerTooltip";
 import { SSRDataContext } from "../ssr-app";
+import StructuredData from "../components/StructuredData";
+import Breadcrumbs from "../components/Breadcrumbs";
 
 const ServerDetail: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();
@@ -172,51 +173,33 @@ const ServerDetail: React.FC = () => {
 
     // Tabs removed - using StructuredReadme component
 
+    const breadcrumbItems = [
+        { name: 'Servers', url: '/servers' },
+        { name: server.category, url: `/categories/${server.category}` },
+        { name: server.name, url: `/servers/${server.slug}`, current: true }
+    ];
+
+    const breadcrumbsForStructuredData = [
+        { name: 'Home', url: '/' },
+        ...breadcrumbItems
+    ];
+
     return (
         <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
+            {/* Structured Data */}
+            <StructuredData 
+                type="server" 
+                data={{ server }} 
+            />
+            <StructuredData 
+                type="breadcrumbs" 
+                data={{ breadcrumbs: breadcrumbsForStructuredData }} 
+            />
+            
             {/* Breadcrumb */}
             <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-                    <nav className="flex" aria-label="Breadcrumb">
-                        <ol className="flex items-center space-x-4">
-                            <li>
-                                <Link
-                                    to="/"
-                                    className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
-                                >
-                                    Home
-                                </Link>
-                            </li>
-                            <li>
-                                <ChevronRight className="h-4 w-4 text-gray-400 dark:text-gray-500" />
-                            </li>
-                            <li>
-                                <Link
-                                    to="/servers"
-                                    className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
-                                >
-                                    Servers
-                                </Link>
-                            </li>
-                            <li>
-                                <ChevronRight className="h-4 w-4 text-gray-400 dark:text-gray-500" />
-                            </li>
-                            <li>
-                                <Link
-                                    to={`/categories/${server.category}`}
-                                    className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
-                                >
-                                    {server.category}
-                                </Link>
-                            </li>
-                            <li>
-                                <ChevronRight className="h-4 w-4 text-gray-400 dark:text-gray-500" />
-                            </li>
-                            <li className="text-gray-900 dark:text-white font-medium">
-                                {server.name}
-                            </li>
-                        </ol>
-                    </nav>
+                    <Breadcrumbs items={breadcrumbItems} />
                 </div>
             </div>
 
@@ -250,6 +233,25 @@ const ServerDetail: React.FC = () => {
                                     {server.fullDescription || server.description.en || server.description["zh-CN"]}
 
                                 </p>
+                                
+                                {/* Tags */}
+                                {server.tags && server.tags.length > 0 && (
+                                    <div className="mb-6">
+                                        <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Tags</h4>
+                                        <div className="flex flex-wrap gap-2">
+                                            {server.tags.map((tag) => (
+                                                <Link
+                                                    key={tag}
+                                                    to={`/tags/${encodeURIComponent(tag)}`}
+                                                    className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-800 dark:hover:text-primary-200 transition-colors"
+                                                >
+                                                    #{tag}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                                
                                 <div className="flex items-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
                                     <div className="flex items-center">
                                         <Star className="h-4 w-4 text-yellow-500 mr-1" />
@@ -795,6 +797,57 @@ const ServerDetail: React.FC = () => {
                                         <p className="text-sm">No related servers found</p>
                                     </div>
                                 )}
+                            </div>
+
+                            {/* Category Navigation */}
+                            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                                    Explore Category
+                                </h3>
+                                <div className="space-y-3">
+                                    <Link
+                                        to={`/categories/${server.category}`}
+                                        className="block p-3 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                                    >
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center">
+                                                <Folder className="h-4 w-4 text-primary-600 dark:text-primary-400 mr-3" />
+                                                <span className="text-sm font-medium text-gray-900 dark:text-white">
+                                                    More in {server.category}
+                                                </span>
+                                            </div>
+                                            <ArrowRight className="h-4 w-4 text-gray-400 dark:text-gray-500" />
+                                        </div>
+                                    </Link>
+                                    <Link
+                                        to="/servers"
+                                        className="block p-3 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                                    >
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center">
+                                                <Search className="h-4 w-4 text-primary-600 dark:text-primary-400 mr-3" />
+                                                <span className="text-sm font-medium text-gray-900 dark:text-white">
+                                                    Browse All Servers
+                                                </span>
+                                            </div>
+                                            <ArrowRight className="h-4 w-4 text-gray-400 dark:text-gray-500" />
+                                        </div>
+                                    </Link>
+                                    <Link
+                                        to="/categories"
+                                        className="block p-3 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                                    >
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center">
+                                                <Folder className="h-4 w-4 text-primary-600 dark:text-primary-400 mr-3" />
+                                                <span className="text-sm font-medium text-gray-900 dark:text-white">
+                                                    All Categories
+                                                </span>
+                                            </div>
+                                            <ArrowRight className="h-4 w-4 text-gray-400 dark:text-gray-500" />
+                                        </div>
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </div>

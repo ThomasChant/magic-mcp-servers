@@ -25,7 +25,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
 
 // Helper functions
 const loadJsonFile = (filename: string) => {
-  const filePath = path.join(__dirname, '../public/data', filename);
+  const filePath = path.join(__dirname, '../../src/data', filename);
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
 };
 

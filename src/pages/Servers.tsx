@@ -1,5 +1,5 @@
-import React, { useState, useMemo, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
     Search,
     Star,
@@ -31,29 +31,81 @@ interface ServerData extends Omit<MCPServer, 'verified'> {
 
 const Servers: React.FC = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     
-    // Get initial category from URL query parameters
-    const getInitialFilters = () => {
+    // Get initial values from URL query parameters
+    const getInitialValues = () => {
         const searchParams = new URLSearchParams(location.search);
         const categoryParam = searchParams.get('category');
+        const pageParam = searchParams.get('page');
+        const searchParam = searchParams.get('search');
+        const sortParam = searchParams.get('sort');
+        const orderParam = searchParams.get('order');
+        const filterParam = searchParams.get('filter');
         
         return {
-            categories: categoryParam ? [categoryParam] : [] as string[],
-            platforms: [] as string[],
-            languages: [] as string[],
-            status: [] as string[],
+            filters: {
+                categories: categoryParam ? [categoryParam] : [] as string[],
+                platforms: [] as string[],
+                languages: [] as string[],
+                status: [] as string[],
+            },
+            page: pageParam ? parseInt(pageParam, 10) : 1,
+            search: searchParam || '',
+            sortBy: sortParam || 'stars',
+            sortOrder: (orderParam as 'asc' | 'desc') || 'desc',
+            quickFilter: filterParam || 'all'
         };
     };
 
+    const initialValues = getInitialValues();
+
     // State management
-    const [sidebarSearch, setSidebarSearch] = useState("");
-    const [debouncedSearch, setDebouncedSearch] = useState("");
+    const [sidebarSearch, setSidebarSearch] = useState(initialValues.search);
+    const [debouncedSearch, setDebouncedSearch] = useState(initialValues.search);
     const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-    const [sortBy, setSortBy] = useState("stars");
-    const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
-    const [quickFilter, setQuickFilter] = useState("all");
-    const [currentPage, setCurrentPage] = useState(1);
-    const [filters, setFilters] = useState(getInitialFilters());
+    const [sortBy, setSortBy] = useState(initialValues.sortBy);
+    const [sortOrder, setSortOrder] = useState<"asc" | "desc">(initialValues.sortOrder);
+    const [quickFilter, setQuickFilter] = useState(initialValues.quickFilter);
+    const [currentPage, setCurrentPage] = useState(initialValues.page);
+    const [filters, setFilters] = useState(initialValues.filters);
+
+    // Update URL with current state
+    const updateURL = useCallback((newParams: {
+        page?: number;
+        search?: string;
+        sort?: string;
+        order?: 'asc' | 'desc';
+        filter?: string;
+        category?: string;
+    }) => {
+        const searchParams = new URLSearchParams(location.search);
+        
+        // Update or remove parameters
+        Object.entries(newParams).forEach(([key, value]) => {
+            if (value && value !== '' && (key !== 'page' || value !== 1)) {
+                searchParams.set(key, value.toString());
+            } else {
+                searchParams.delete(key);
+            }
+        });
+
+        // Navigate to new URL
+        navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
+    }, [navigate, location.pathname, location.search]);
+
+    // Update page and URL
+    const handlePageChange = useCallback((page: number) => {
+        setCurrentPage(page);
+        updateURL({ 
+            page,
+            search: debouncedSearch,
+            sort: sortBy,
+            order: sortOrder,
+            filter: quickFilter,
+            category: filters.categories[0]
+        });
+    }, [updateURL, debouncedSearch, sortBy, sortOrder, quickFilter, filters.categories]);
 
     // Debounce search input to avoid excessive API calls
     useEffect(() => {
@@ -214,7 +266,7 @@ const Servers: React.FC = () => {
 
     // Reset page when filters change
     React.useEffect(() => {
-        setCurrentPage(1);
+        handlePageChange(1);
     }, [debouncedSearch, quickFilter, filters, sortBy, sortOrder]);
 
     // Servers are already paginated from the server
@@ -849,7 +901,7 @@ const Servers: React.FC = () => {
 
                                 <div className="flex items-center space-x-2">
                                     <button
-                                        onClick={() => setCurrentPage(currentPage - 1)}
+                                        onClick={() => handlePageChange(currentPage - 1)}
                                         disabled={!hasPreviousPage}
                                         className="px-3 py-2 text-sm text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
                                     >
@@ -874,7 +926,7 @@ const Servers: React.FC = () => {
                                             return (
                                                 <button
                                                     key={pageNum}
-                                                    onClick={() => setCurrentPage(pageNum)}
+                                                    onClick={() => handlePageChange(pageNum)}
                                                     className={`px-3 py-2 text-sm rounded-md ${
                                                         currentPage === pageNum
                                                             ? "bg-blue-600 text-white"
@@ -890,7 +942,7 @@ const Servers: React.FC = () => {
                                             <>
                                                 <span className="px-2 text-gray-500 dark:text-gray-400">...</span>
                                                 <button
-                                                    onClick={() => setCurrentPage(totalPages)}
+                                                    onClick={() => handlePageChange(totalPages)}
                                                     className="px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
                                                 >
                                                     {totalPages}
@@ -900,7 +952,7 @@ const Servers: React.FC = () => {
                                     </div>
 
                                     <button
-                                        onClick={() => setCurrentPage(currentPage + 1)}
+                                        onClick={() => handlePageChange(currentPage + 1)}
                                         disabled={!hasNextPage}
                                         className="px-3 py-2 text-sm text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
                                     >

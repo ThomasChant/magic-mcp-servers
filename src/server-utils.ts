@@ -77,11 +77,11 @@ export async function getServerBySlug(slug: string): Promise<MCPServer | null> {
   if (!slug) return null;
 
   // For SSR, try different environment variable sources
-  let supabaseUrl = process.env.VITE_SUPABASE_URL || 
+  const supabaseUrl = process.env.VITE_SUPABASE_URL || 
                     process.env.NEXT_PUBLIC_SUPABASE_URL || 
                     'https://lptsvryohchbklxcyoyc.supabase.co';
                     
-  let supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || 
+  const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || 
                         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
                         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxwdHN2cnlvaGNoYmtseGN5b3ljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwODY0MzUsImV4cCI6MjA2NjY2MjQzNX0.hEleXmYktD79nKq4Q6Ow-9KF0RWRgGOJjXLgglyK2GQ';
   
@@ -199,11 +199,11 @@ export async function getServerReadmeBySlug(slug: string): Promise<ServerReadme 
   if (!slug) return null;
 
   // For SSR, try different environment variable sources
-  let supabaseUrl = process.env.VITE_SUPABASE_URL || 
+  const supabaseUrl = process.env.VITE_SUPABASE_URL || 
                     process.env.NEXT_PUBLIC_SUPABASE_URL || 
                     'https://lptsvryohchbklxcyoyc.supabase.co';
                     
-  let supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || 
+  const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || 
                         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
                         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxwdHN2cnlvaGNoYmtseGN5b3ljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwODY0MzUsImV4cCI6MjA2NjY2MjQzNX0.hEleXmYktD79nKq4Q6Ow-9KF0RWRgGOJjXLgglyK2GQ';
   
@@ -350,11 +350,11 @@ export async function getCategoryById(categoryId: string): Promise<any | null> {
   if (!categoryId) return null;
 
   // For SSR, try different environment variable sources
-  let supabaseUrl = process.env.VITE_SUPABASE_URL || 
+  const supabaseUrl = process.env.VITE_SUPABASE_URL || 
                     process.env.NEXT_PUBLIC_SUPABASE_URL || 
                     'https://lptsvryohchbklxcyoyc.supabase.co';
                     
-  let supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || 
+  const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || 
                         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
                         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxwdHN2cnlvaGNoYmtseGN5b3ljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwODY0MzUsImV4cCI6MjA2NjY2MjQzNX0.hEleXmYktD79nKq4Q6Ow-9KF0RWRgGOJjXLgglyK2GQ';
   

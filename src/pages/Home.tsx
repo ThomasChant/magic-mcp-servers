@@ -26,6 +26,7 @@ import { ClientOnly } from "../components/ClientOnly";
 import type { MCPServer } from "../types";
 import ProgressiveEllipsis from "../components/ProgressiveEllipsis";
 import { FavoriteButton } from "../components/FavoriteButton";
+import StructuredData from "../components/StructuredData";
 
 // Extended interface for JSON data structure
 interface ServerData extends Omit<MCPServer, 'verified'> {
@@ -297,12 +298,14 @@ const Home: React.FC = () => {
 
                 <div className="flex flex-wrap gap-1 mb-4">
                     {server.tags.slice(0, 3).map((tag: string) => (
-                        <span
+                        <Link
                             key={tag}
-                            className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded"
+                            to={`/tags/${encodeURIComponent(tag)}`}
+                            className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-800 dark:hover:text-primary-200 text-xs px-2 py-1 rounded transition-colors"
+                            onClick={(e) => e.stopPropagation()}
                         >
-                            {tag}
-                        </span>
+                            #{tag}
+                        </Link>
                     ))}
                 </div>
 
@@ -404,12 +407,14 @@ const Home: React.FC = () => {
                                     {server.tags
                                         .slice(0, 2)
                                         .map((tag: string) => (
-                                            <span
+                                            <Link
                                                 key={tag}
-                                                className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded"
+                                                to={`/tags/${encodeURIComponent(tag)}`}
+                                                className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-800 dark:hover:text-primary-200 text-xs px-2 py-1 rounded transition-colors"
+                                                onClick={(e) => e.stopPropagation()}
                                             >
-                                                {tag}
-                                            </span>
+                                                #{tag}
+                                            </Link>
                                         ))}
                                 </div>
                             </div>
@@ -508,6 +513,9 @@ const Home: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-white dark:bg-gray-900">
+            {/* Structured Data */}
+            <StructuredData type="website" />
+            
             {/* Hero Section */}
             <section className="relative overflow-hidden cosmic-bg h-[80vh] flex items-center" style={{ isolation: 'isolate' }}>
                 <ClientOnly fallback={

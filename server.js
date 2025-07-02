@@ -171,6 +171,71 @@ if (!isProduction) {
     app.use(base, sirv("./dist/client", { extensions: [] }));
 }
 
+// Import sitemap generators
+import { 
+    generateMainSitemap, 
+    generateServersSitemap, 
+    generateCategoriesSitemap, 
+    generateTagsSitemap,
+    generateSitemapIndex 
+} from "./src/utils/sitemapGenerator.js";
+
+// Sitemap routes
+app.get('/sitemap.xml', async (req, res) => {
+    try {
+        const sitemap = await generateMainSitemap();
+        res.set('Content-Type', 'application/xml');
+        res.send(sitemap);
+    } catch (error) {
+        console.error('Error generating main sitemap:', error);
+        res.status(500).send('Error generating sitemap');
+    }
+});
+
+app.get('/sitemap-servers.xml', async (req, res) => {
+    try {
+        const sitemap = await generateServersSitemap();
+        res.set('Content-Type', 'application/xml');
+        res.send(sitemap);
+    } catch (error) {
+        console.error('Error generating servers sitemap:', error);
+        res.status(500).send('Error generating sitemap');
+    }
+});
+
+app.get('/sitemap-categories.xml', async (req, res) => {
+    try {
+        const sitemap = await generateCategoriesSitemap();
+        res.set('Content-Type', 'application/xml');
+        res.send(sitemap);
+    } catch (error) {
+        console.error('Error generating categories sitemap:', error);
+        res.status(500).send('Error generating sitemap');
+    }
+});
+
+app.get('/sitemap-tags.xml', async (req, res) => {
+    try {
+        const sitemap = await generateTagsSitemap();
+        res.set('Content-Type', 'application/xml');
+        res.send(sitemap);
+    } catch (error) {
+        console.error('Error generating tags sitemap:', error);
+        res.status(500).send('Error generating sitemap');
+    }
+});
+
+app.get('/sitemap-index.xml', async (req, res) => {
+    try {
+        const sitemapIndex = generateSitemapIndex();
+        res.set('Content-Type', 'application/xml');
+        res.send(sitemapIndex);
+    } catch (error) {
+        console.error('Error generating sitemap index:', error);
+        res.status(500).send('Error generating sitemap');
+    }
+});
+
 // Serve HTML - only for non-static routes
 app.use("*", async (req, res) => {
     try {

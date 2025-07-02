@@ -537,3 +537,17 @@ VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
 ```
 
 Build artifacts are generated in `dist/` directory after running the appropriate build command.
+
+### SEO Considerations
+- **Sitemap Generation**: `sitemapGenerator.js` generates a sitemap.xml file for search engines
+- **Metadata**: Each server page includes metadata for SEO, including title, description, and tags
+- **Social Media Sharing**: Optimized images and rich preview cards for social media sharing
+- **Robots.txt**: `robots.txt` file is generated to allow search engines to crawl the site and follow the sitemap
+- **Canonical URLs**: Each server page has a canonical URL to prevent duplicate content
+- **Language Alternates**: Each server page has language alternates for multi-language support
+- **Open Graph**: Each server page has Open Graph metadata for social sharing
+- **Twitter Cards**: Each server page has Twitter Card metadata for social sharing
+- **Breadcrumbs**: Breadcrumbs are included on server detail pages for navigation
+- **Robots.txt**: `robots.txt` file is generated to allow search engines to crawl the site
+- **Sitemap.xml**: Sitemap.xml file is generated to allow search engines to crawl the site
+- reference @SEO核心知识点与实战案例大全 to do seo

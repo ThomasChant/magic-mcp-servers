@@ -320,35 +320,62 @@ async function updateAllGitHubStats() {
   console.log('🚀 Starting GitHub stats update...');
   
   try {
-    // Fetch all servers with GitHub URLs
-    const { data: servers, error } = await supabase
-      .from('mcp_servers')
-      .select('id, name, github_url, repository_owner, repository_name')
-      .not('github_url', 'is', null)
-      .neq('github_url', '');
+    // Fetch all servers with GitHub URLs (with pagination to avoid 1000 record limit)
+    const pageSize = 1000;
+    let allServers: Array<{
+      id: string;
+      name: string;
+      github_url: string;
+      repository_owner: string;
+      repository_name: string;
+    }> = [];
+    let page = 0;
+    let hasMore = true;
 
-    if (error) {
-      throw new Error(`Failed to fetch servers: ${error.message}`);
+    console.log('开始分页获取服务器数据...');
+
+    while (hasMore) {
+      const from = page * pageSize;
+      const to = from + pageSize - 1;
+
+      const { data: servers, error, count } = await supabase
+        .from('mcp_servers')
+        .select('id, name, github_url, repository_owner, repository_name', { count: 'exact' })
+        .not('github_url', 'is', null)
+        .neq('github_url', '')
+        .range(from, to);
+
+      if (error) {
+        throw new Error(`Failed to fetch servers (page ${page + 1}): ${error.message}`);
+      }
+
+      if (servers && servers.length > 0) {
+        allServers = [...allServers, ...servers];
+        console.log(`获取第 ${page + 1} 页，本页 ${servers.length} 条，累计 ${allServers.length} 条`);
+      }
+
+      // 检查是否还有更多数据
+      hasMore = servers && servers.length === pageSize && (!count || allServers.length < count);
+      page++;
     }
 
-    if (!servers || servers.length === 0) {
+    if (!allServers || allServers.length === 0) {
       console.log('No servers with GitHub URLs found');
       return;
     }
 
-    console.log(`Found ${servers.length} servers with GitHub URLs`);
+    console.log(`Found ${allServers.length} servers with GitHub URLs`);
 
     let updated = 0;
     let failed = 0;
     let notFound = 0;
     let processed = 0;
-    let skipped = 0;
 
     console.log('\n🎯 Starting enhanced rate-limited processing...\n');
 
-    for (const server of servers) {
+    for (const server of allServers) {
       processed++;
-      const progress = `[${processed}/${servers.length}]`;
+      const progress = `[${processed}/${allServers.length}]`;
       console.log(`\n${progress} Processing: ${server.name}`);
       
       try {
