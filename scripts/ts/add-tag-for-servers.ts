@@ -41,10 +41,18 @@ interface CategoryData {
   name_zh_cn: string;
 }
 
+interface TagMatch {
+  tagId: number;
+  tagName: string;
+  score: number;
+  reason: string;
+}
+
 interface TagMatchResult {
   serverId: string;
   tagIds: number[];
   matchReasons: string[];
+  matches: TagMatch[];
 }
 
 /**
@@ -158,17 +166,17 @@ async function getExistingServerTags(serverId: string): Promise<number[]> {
 }
 
 /**
- * 标签匹配算法
- * 基于服务器描述、分类和关键词为服务器匹配合适的标签
+ * 增强的标签匹配算法
+ * 基于服务器描述、分类和关键词为服务器匹配合适的标签，并计算相关度分数
+ * 最多返回5个相关度最高的标签
  */
 function matchTagsForServer(
   server: ServerData,
   tags: TagData[],
   categories: Map<string, CategoryData>,
   subcategories: Map<string, CategoryData>
-): { tagIds: number[]; reasons: string[] } {
-  const matchedTags = new Set<number>();
-  const reasons: string[] = [];
+): { tagIds: number[]; reasons: string[]; matches: TagMatch[] } {
+  const matchCandidates: TagMatch[] = [];
 
   // 构建搜索文本，包含所有可搜索的内容
   const searchTexts: string[] = [];
@@ -209,101 +217,145 @@ function matchTagsForServer(
 
   const fullSearchText = searchTexts.join(' ');
 
-  // 遍历所有标签，检查是否匹配
+  // 特殊的技术栈和框架匹配
+  const techKeywords = {
+    'javascript': ['js', 'node', 'npm', 'yarn'],
+    'python': ['py', 'pip', 'pypi'],
+    'typescript': ['ts', 'tsc'],
+    'react': ['jsx', 'tsx'],
+    'docker': ['dockerfile', 'container'],
+    'api': ['rest', 'graphql', 'endpoint'],
+    'database': ['sql', 'postgres', 'mysql', 'mongo'],
+    'ai': ['llm', 'gpt', 'claude', 'openai', 'machine learning', 'ml'],
+    'web': ['http', 'https', 'browser', 'frontend'],
+    'backend': ['server', 'service'],
+    'data': ['json', 'csv', 'xml', 'yaml'],
+    'security': ['auth', 'jwt', 'oauth', 'encryption'],
+    'testing': ['test', 'spec', 'mock', 'jest'],
+    'development': ['dev', 'debug', 'build'],
+    'utility': ['util', 'helper', 'tool'],
+    'integration': ['connector', 'plugin', 'extension']
+  };
+
+  // 遍历所有标签，计算相关度分数
   tags.forEach(tag => {
     const tagName = tag.name.toLowerCase();
     const tagWords = tagName.split(/[-_\s]+/); // 支持连字符、下划线和空格分割
     
-    let matchFound = false;
+    let score = 0;
     let matchReason = '';
 
-    // 1. 精确匹配标签名
+    // 1. 精确匹配标签名 (最高分)
     if (fullSearchText.includes(tagName)) {
-      matchFound = true;
+      score = 100;
       matchReason = `精确匹配标签名 "${tag.name}"`;
     }
     
     // 2. 匹配标签中的各个单词
-    if (!matchFound && tagWords.length > 1) {
+    else if (tagWords.length > 1) {
       const wordMatches = tagWords.filter(word => 
         word.length > 2 && fullSearchText.includes(word)
       );
-      if (wordMatches.length >= Math.ceil(tagWords.length * 0.6)) {
-        matchFound = true;
+      const matchRatio = wordMatches.length / tagWords.length;
+      if (matchRatio >= 0.6) {
+        score = Math.round(80 * matchRatio);
         matchReason = `匹配标签关键词 "${wordMatches.join(', ')}" 来自 "${tag.name}"`;
       }
     }
 
     // 3. 特殊的技术栈和框架匹配
-    const techKeywords = {
-      'javascript': ['js', 'node', 'npm', 'yarn'],
-      'python': ['py', 'pip', 'pypi'],
-      'typescript': ['ts', 'tsc'],
-      'react': ['jsx', 'tsx'],
-      'docker': ['dockerfile', 'container'],
-      'api': ['rest', 'graphql', 'endpoint'],
-      'database': ['sql', 'postgres', 'mysql', 'mongo'],
-      'ai': ['llm', 'gpt', 'claude', 'openai', 'machine learning', 'ml'],
-      'web': ['http', 'https', 'browser', 'frontend'],
-      'backend': ['server', 'service'],
-      'data': ['json', 'csv', 'xml', 'yaml'],
-      'security': ['auth', 'jwt', 'oauth', 'encryption'],
-      'testing': ['test', 'spec', 'mock', 'jest'],
-      'development': ['dev', 'debug', 'build'],
-      'utility': ['util', 'helper', 'tool'],
-      'integration': ['connector', 'plugin', 'extension']
-    };
-
-    if (!matchFound && techKeywords[tagName]) {
+    if (score === 0 && techKeywords[tagName]) {
       const relatedKeywords = techKeywords[tagName];
       const foundKeywords = relatedKeywords.filter(keyword => 
         fullSearchText.includes(keyword)
       );
       if (foundKeywords.length > 0) {
-        matchFound = true;
+        const keywordRatio = foundKeywords.length / relatedKeywords.length;
+        score = Math.round(60 * keywordRatio);
         matchReason = `通过相关技术关键词 "${foundKeywords.join(', ')}" 匹配到 "${tag.name}"`;
       }
     }
 
-    if (matchFound) {
-      matchedTags.add(tag.id);
-      reasons.push(`${server.name}: ${matchReason}`);
+    // 4. 部分匹配 (较低分数)
+    if (score === 0) {
+      // 检查标签名是否作为子字符串出现
+      if (tagName.length > 3 && fullSearchText.includes(tagName)) {
+        score = 40;
+        matchReason = `部分匹配标签名 "${tag.name}"`;
+      }
+      // 检查是否有单个重要单词匹配
+      else if (tagWords.length === 1 && tagName.length > 3 && fullSearchText.includes(tagName)) {
+        score = 30;
+        matchReason = `单词匹配 "${tag.name}"`;
+      }
+    }
+
+    // 只保留有一定相关度的标签
+    if (score >= 30) {
+      matchCandidates.push({
+        tagId: tag.id,
+        tagName: tag.name,
+        score,
+        reason: matchReason
+      });
     }
   });
 
+  // 按分数排序，取前5个
+  const topMatches = matchCandidates
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 5);
+
+  const tagIds = topMatches.map(match => match.tagId);
+  const reasons = topMatches.map(match => `${server.name}: ${match.reason} (分数: ${match.score})`);
+
   return {
-    tagIds: Array.from(matchedTags),
-    reasons
+    tagIds,
+    reasons,
+    matches: topMatches
   };
 }
 
 /**
- * 批量保存服务器标签关联到Supabase
+ * 清除服务器现有标签并保存新标签到Supabase
+ * 这个函数会先删除所有现有标签，然后插入新的标签
  */
 async function saveServerTags(
   serverId: string, 
   tagIds: number[], 
-  existingTagIds: number[]
+  _existingTagIds: number[] // 保留参数兼容性，但不再使用
 ): Promise<void> {
-  // 找出需要添加的新标签
-  const newTagIds = tagIds.filter(tagId => !existingTagIds.includes(tagId));
-  
-  if (newTagIds.length === 0) {
-    return; // 没有新标签需要添加
+  if (tagIds.length === 0) {
+    console.log(`服务器 ${serverId} 没有匹配到标签，跳过`);
+    return;
   }
 
-  const insertData = newTagIds.map(tagId => ({
+  // 第一步：删除服务器的所有现有标签
+  const { error: deleteError } = await supabase
+    .from('server_tags')
+    .delete()
+    .eq('server_id', serverId);
+
+  if (deleteError) {
+    throw new Error(`Failed to clear existing tags for server ${serverId}: ${deleteError.message}`);
+  }
+
+  // 第二步：插入新的标签（限制最多5个）
+  const limitedTagIds = tagIds.slice(0, 5);
+  const insertData = limitedTagIds.map(tagId => ({
     server_id: serverId,
     tag_id: tagId
   }));
 
-  const { error } = await supabase
+  const { error: insertError } = await supabase
     .from('server_tags')
     .insert(insertData);
 
-  if (error) {
-    throw new Error(`Failed to save tags for server ${serverId}: ${error.message}`);
+  if (insertError) {
+    throw new Error(`Failed to save new tags for server ${serverId}: ${insertError.message}`);
   }
+
+  console.log(`✅ 服务器 ${serverId} 已更新标签: ${limitedTagIds.length} 个`);
 }
 
 /**
@@ -366,7 +418,7 @@ export async function addTagForServers(options: {
       await Promise.all(batch.map(async (server) => {
         try {
           // 匹配标签
-          const { tagIds, reasons } = matchTagsForServer(
+          const { tagIds, reasons, matches } = matchTagsForServer(
             server, 
             tags, 
             categoryMap, 
@@ -377,17 +429,23 @@ export async function addTagForServers(options: {
             matchResults.push({
               serverId: server.id,
               tagIds,
-              matchReasons: reasons
+              matchReasons: reasons,
+              matches
             });
 
             // 如果不是干运行模式，保存到数据库
             if (!dryRun) {
               const existingTagIds = await getExistingServerTags(server.id);
               await saveServerTags(server.id, tagIds, existingTagIds);
-              console.log(`为服务器 ${server.name} 添加了 ${tagIds.length - existingTagIds.filter(id => tagIds.includes(id)).length} 个新标签`);
+              console.log(`🏷️  ${server.name}: 已更新为前${tagIds.length}个最相关标签 (${matches.map(m => `${m.tagName}:${m.score}`).join(', ')})`);
             } else {
-              console.log(`[DRY RUN] 服务器 ${server.name} 将匹配 ${tagIds.length} 个标签:`, reasons);
+              console.log(`[DRY RUN] ${server.name} 将获得 ${tagIds.length} 个标签:`);
+              matches.forEach(match => {
+                console.log(`  - ${match.tagName} (分数: ${match.score}) - ${match.reason}`);
+              });
             }
+          } else {
+            console.log(`⚠️  ${server.name}: 未找到匹配的标签`);
           }
 
           processedCount++;
@@ -521,18 +579,34 @@ async function main() {
   --batch-size <n>   批处理大小，默认50
   --help             显示此帮助信息
 
+⚠️  重要说明:
+  本脚本会自动清除每个服务器的现有标签，然后重新分配最多5个相关度最高的标签。
+
+功能特点:
+  ✅ 智能相关度评分系统 (分数范围: 30-100)
+  ✅ 自动限制每个服务器最多5个标签
+  ✅ 清除旧标签后重新分配
+  ✅ 支持技术栈和框架的特殊匹配规则
+
 示例:
-  npm run supabase:addtag
-  npm run supabase:addtag -- --dry-run
-  npm run supabase:addtag -- --server-id mcp-server-sqlite
-  npm run supabase:addtag -- --batch-size 100
+  npm run supabase:addtag                           # 处理所有服务器
+  npm run supabase:addtag -- --dry-run             # 预览匹配结果
+  npm run supabase:addtag -- --server-id mcp-server-sqlite  # 只处理指定服务器
+  npm run supabase:addtag -- --batch-size 100      # 调整批处理大小
         `);
         process.exit(0);
     }
   }
 
   try {
-    console.log('🏷️  开始为MCP服务器添加标签...\n');
+    console.log('🏷️  开始为MCP服务器重新分配标签...\n');
+    
+    if (!options.dryRun) {
+      console.log('⚠️  注意: 此操作会清除每个服务器的现有标签，重新分配最多5个相关度最高的标签');
+      console.log('📋 建议先使用 --dry-run 参数预览结果\n');
+    } else {
+      console.log('🔍 预览模式: 只显示匹配结果，不会修改数据库\n');
+    }
     
     const result = await addTagForServers(options);
     
@@ -547,8 +621,15 @@ async function main() {
         console.log(`\n前 ${showCount} 个匹配结果:`);
         result.matchResults.slice(0, showCount).forEach(match => {
           console.log(`\n🔖 服务器: ${match.serverId}`);
-          console.log(`   标签数量: ${match.tagIds.length}`);
-          console.log(`   匹配原因: ${match.matchReasons.slice(0, 3).join('; ')}`);
+          console.log(`   标签数量: ${match.tagIds.length} (限制为最多5个)`);
+          if (match.matches && match.matches.length > 0) {
+            console.log(`   最佳匹配标签:`);
+            match.matches.slice(0, 3).forEach(m => {
+              console.log(`     - ${m.tagName} (分数: ${m.score})`);
+            });
+          } else {
+            console.log(`   匹配原因: ${match.matchReasons.slice(0, 3).join('; ')}`);
+          }
         });
         
         if (result.matchResults.length > showCount) {
