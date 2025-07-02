@@ -37,7 +37,7 @@ interface ServerData extends Omit<MCPServer, 'verified'> {
 }
 
 const Home: React.FC = () => {
-    const { t } = useTranslation();
+    const { t } = useTranslation('home');
     // State management
     const [sidebarSearch, setSidebarSearch] = useState("");
     const [debouncedSearch, setDebouncedSearch] = useState("");
