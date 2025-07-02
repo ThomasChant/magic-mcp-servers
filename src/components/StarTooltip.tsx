@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Star, GitFork, Tag } from 'lucide-react';
 import type { StarData } from '../hooks/useStarData';
@@ -64,7 +64,7 @@ const StarTooltip: React.FC<StarTooltipProps> = ({ starData, mousePosition }) =>
     >
       {/* Header with icon and name */}
       <div className="flex items-center gap-2 mb-2">
-        <span className="text-lg">{server.icon}</span>
+        <span className="text-lg">{'icon' in server ? server.icon : '📦'}</span>
         <div className="flex-1 min-w-0">
           {server.owner && (
             <div className="text-xs text-gray-400 mb-1">
@@ -79,7 +79,7 @@ const StarTooltip: React.FC<StarTooltipProps> = ({ starData, mousePosition }) =>
             </div>
             <div className="flex items-center gap-1">
               <GitFork className="w-3 h-3" />
-              <span>{server.stats?.forks || 0}</span>
+              <span>{('forks' in (server.stats || {})) ? (server.stats as any).forks : 0}</span>
             </div>
           </div>
         </div>

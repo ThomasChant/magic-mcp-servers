@@ -9,8 +9,8 @@ export async function testSupabaseFavorites(): Promise<{
     results: string[];
     errors: string[];
 }> {
-    const results = [];
-    const errors = [];
+    const results: string[] = [];
+    const errors: string[] = [];
     let success = true;
 
     try {

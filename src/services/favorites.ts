@@ -1,4 +1,3 @@
-import { useUser } from "@clerk/clerk-react";
 import type { UserResource } from "@clerk/types";
 
 /**
