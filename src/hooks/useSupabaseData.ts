@@ -3,6 +3,7 @@ import { supabase } from "../lib/supabase";
 import type { Category, MCPServer, ServerReadme } from "../types";
 import { type LucideIcon, Database, Code, Search, MessageCircle, Brain, Wrench, CheckSquare, Shield, FileText, Cloud, Briefcase, DollarSign, Layers, Folder, BarChart3, Plug, Settings, Globe, Image, CreditCard, Activity, Link2 } from "lucide-react";
 import type { FeaturedServer } from "./useFeaturedServers";
+import { extractMonorepoName } from "../utils/monorepoNameExtractor";
 
 // Comprehensive icon name mapping for all categories
 const iconNameMap: { [key: string]: LucideIcon } = {
@@ -132,9 +133,17 @@ function transformCategory(dbCategory: Record<string, unknown>, subcategories: R
 
 // Helper function to transform database server to app MCPServer type
 function transformServer(dbServer: Record<string, unknown>): MCPServer {
+  // Extract monorepo name if this is a monorepo project
+  const originalName = dbServer.name as string;
+  const isMonorepo = dbServer.is_monorepo as boolean;
+  const githubUrl = dbServer.github_url as string;
+  const processedName = isMonorepo 
+    ? extractMonorepoName(githubUrl, originalName)
+    : originalName;
+
   return {
     id: dbServer.id as string,
-    name: dbServer.name as string,
+    name: processedName,
     owner: dbServer.owner as string,
     slug: dbServer.slug as string,
     description: {

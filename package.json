@@ -38,7 +38,8 @@
     "db:test-rebuild": "npx tsx scripts/test-complete-rebuild.ts",
     "db:test-voting": "npx tsx scripts/test-voting-fix.ts",
     "db:test-rls": "npx tsx scripts/test-rls-fix.ts",
-    "db:test-real-voting": "npx tsx scripts/test-real-voting.ts"
+    "db:test-real-voting": "npx tsx scripts/test-real-voting.ts",
+    "test:monorepo-names": "npx tsx scripts/test-monorepo-name-extraction-20250703185500.ts"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.32.2",
