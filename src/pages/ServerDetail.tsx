@@ -23,6 +23,8 @@ import {
     Facebook,
     Linkedin,
     Link2,
+    FileText,
+    MessageSquare,
 } from "lucide-react";
 import { useServer, useServerReadme } from "../hooks/useUnifiedData";
 import { useRelatedServers } from "../hooks/useRelatedServers";
@@ -37,7 +39,7 @@ const ServerDetail: React.FC = () => {
     console.log("server", server)
     const { data: readmeData, isLoading: readmeLoading } = useServerReadme(server?.slug || '');
     const { relatedServers, isLoading: relatedLoading } = useRelatedServers(server, 3);
-    // Remove activeTab state as we're using StructuredReadme component
+    const [activeTab, setActiveTab] = useState<'overview' | 'comments'>('overview');
     const [copiedStates, setCopiedStates] = useState<{ [key: string]: boolean }>({});
     const [showShareMenu, setShowShareMenu] = useState(false);
     const shareMenuRef = useRef<HTMLDivElement>(null);
@@ -370,70 +372,110 @@ const ServerDetail: React.FC = () => {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="flex flex-col lg:flex-row gap-8">
-                    {/* Main Content */}
+                    {/* Main Content with Tabs */}
                     <div className="lg:w-2/3">
-                        {/* Documentation Content */}
-                        {readmeLoading ? (
-                            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-8">
-                                <div className="animate-pulse">
-                                    <div className="h-6 bg-gray-300 dark:bg-gray-600 rounded mb-4 w-1/3"></div>
-                                    <div className="space-y-3">
-                                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
-                                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div>
-                                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-4/6"></div>
-                                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/6"></div>
-                                    </div>
-                                </div>
+                        {/* Tab Navigation */}
+                        <div className="bg-white dark:bg-gray-800 rounded-t-xl border border-gray-200 dark:border-gray-700 border-b-0">
+                            <div className="flex space-x-0">
+                                <button
+                                    onClick={() => setActiveTab('overview')}
+                                    className={`flex items-center px-6 py-4 text-sm font-medium border-b-2 transition-colors ${
+                                        activeTab === 'overview'
+                                            ? 'border-blue-500 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                                            : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/30'
+                                    }`}
+                                >
+                                    <FileText className="h-4 w-4 mr-2" />
+                                    Overview
+                                </button>
+                                <button
+                                    onClick={() => setActiveTab('comments')}
+                                    className={`flex items-center px-6 py-4 text-sm font-medium border-b-2 transition-colors ${
+                                        activeTab === 'comments'
+                                            ? 'border-blue-500 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                                            : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/30'
+                                    }`}
+                                >
+                                    <MessageSquare className="h-4 w-4 mr-2" />
+                                    Comments
+                                </button>
                             </div>
-                        ) : readmeData ? (
-                            <StructuredReadme 
-                                readme={readmeData}
-                                copiedStates={copiedStates}
-                                onCopy={copyToClipboard}
-                            />
-                        ) : server?.documentation?.readme ? (
-                            <StructuredReadme 
-                                readme={{
-                                    filename: 'README.md',
-                                    projectName: server.name,
-                                    rawContent: server.documentation.readme
-                                }}
-                                copiedStates={copiedStates}
-                                onCopy={copyToClipboard}
-                            />
-                        ) : (
-                            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-8">
-                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                                    About {server.name}
-                                </h2>
-                                <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                    {server.fullDescription ||
-                                        server.description.en ||
-                                        server.description["zh-CN"]}
-                                </p>
+                        </div>
 
-                                <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg">
-                                    <p className="text-sm text-gray-600 dark:text-gray-300">
-                                        Detailed documentation is being
-                                        processed. Please check back later or
-                                        visit the repository for more
-                                        information.
-                                    </p>
-                                    <a
-                                        href={server.repository.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center mt-4 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-                                    >
-                                        <Link2 className="ml-1 h-4 w-4" />
-                                        View Repository
-                                        <ArrowRight className="ml-1 h-4 w-4" />
-                                    </a>
+                        {/* Tab Content */}
+                        <div className="bg-white dark:bg-gray-800 rounded-b-xl border border-gray-200 dark:border-gray-700 border-t-0">
+                            {activeTab === 'overview' ? (
+                                <div className="p-6">
+                                    {/* Documentation Content */}
+                                    {readmeLoading ? (
+                                        <div className="animate-pulse">
+                                            <div className="h-6 bg-gray-300 dark:bg-gray-600 rounded mb-4 w-1/3"></div>
+                                            <div className="space-y-3">
+                                                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                                                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div>
+                                                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-4/6"></div>
+                                                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/6"></div>
+                                            </div>
+                                        </div>
+                                    ) : readmeData ? (
+                                        <div className="-m-6">
+                                            <StructuredReadme 
+                                                readme={readmeData}
+                                                copiedStates={copiedStates}
+                                                onCopy={copyToClipboard}
+                                            />
+                                        </div>
+                                    ) : server?.documentation?.readme ? (
+                                        <div className="-m-6">
+                                            <StructuredReadme 
+                                                readme={{
+                                                    filename: 'README.md',
+                                                    projectName: server.name,
+                                                    rawContent: server.documentation.readme
+                                                }}
+                                                copiedStates={copiedStates}
+                                                onCopy={copyToClipboard}
+                                            />
+                                        </div>
+                                    ) : (
+                                        <div className="p-2">
+                                            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                                                About {server.name}
+                                            </h2>
+                                            <p className="text-gray-600 dark:text-gray-300 mb-6">
+                                                {server.fullDescription ||
+                                                    server.description.en ||
+                                                    server.description["zh-CN"]}
+                                            </p>
+
+                                            <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg">
+                                                <p className="text-sm text-gray-600 dark:text-gray-300">
+                                                    Detailed documentation is being
+                                                    processed. Please check back later or
+                                                    visit the repository for more
+                                                    information.
+                                                </p>
+                                                <a
+                                                    href={server.repository.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center mt-4 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                                                >
+                                                    <Link2 className="ml-1 h-4 w-4" />
+                                                    View Repository
+                                                    <ArrowRight className="ml-1 h-4 w-4" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
-                            </div>
-                        )}
-
-                        {/* Content is now handled by StructuredReadme component above */}
+                            ) : (
+                                <div className="p-6">
+                                    {/* Comments Section */}
+                                    <ServerCommentsWithReplies serverId={server.id} />
+                                </div>
+                            )}
+                        </div>
                     </div>
 
                     {/* Sidebar */}
@@ -780,11 +822,6 @@ const ServerDetail: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                </div>
-
-                {/* Comments Section */}
-                <div className="mt-8">
-                    <ServerCommentsWithReplies serverId={server.id} />
                 </div>
             </div>
 
