@@ -20,6 +20,7 @@ import type { MCPServer } from "../types";
 import ProgressiveEllipsis from "../components/ProgressiveEllipsis";
 import { FavoriteButton } from "../components/FavoriteButton";
 import VoteButtons from "../components/VoteButtons";
+import { useAppStore } from "../store/useAppStore";
 
 // Extended interface for JSON data structure
 interface ServerData extends Omit<MCPServer, 'verified'> {
@@ -32,6 +33,9 @@ interface ServerData extends Omit<MCPServer, 'verified'> {
 
 const Servers: React.FC = () => {
     const location = useLocation();
+    
+    // Get global search query from app store
+    const { searchQuery } = useAppStore();
     
     // Get initial category from URL query parameters
     const getInitialFilters = () => {
@@ -56,14 +60,35 @@ const Servers: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [filters, setFilters] = useState(getInitialFilters());
 
-    // Debounce search input to avoid excessive API calls
+    // Handle global search query immediately (from home page search)
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setDebouncedSearch(sidebarSearch);
-        }, 1000);
+        if (searchQuery.trim()) {
+            setDebouncedSearch(searchQuery.trim());
+            // Sync the local search input with global search (avoid triggering local debounce)
+            if (sidebarSearch !== searchQuery) {
+                setSidebarSearch(searchQuery);
+            }
+            // Reset to first page when searching
+            setCurrentPage(1);
+        } else if (searchQuery === '') {
+            // If global search is cleared, clear debounced search too
+            setDebouncedSearch('');
+        }
+    }, [searchQuery]);
 
-        return () => clearTimeout(timer);
-    }, [sidebarSearch]);
+    // Debounce local sidebar search input to avoid excessive API calls
+    useEffect(() => {
+        // Only apply debounce if there's no global search query active
+        if (!searchQuery.trim()) {
+            const timer = setTimeout(() => {
+                setDebouncedSearch(sidebarSearch.trim());
+                // Reset to first page when local search changes
+                setCurrentPage(1);
+            }, 1000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [sidebarSearch, searchQuery]);
 
     // Update filters when URL changes
     useEffect(() => {
@@ -80,6 +105,11 @@ const Servers: React.FC = () => {
 
     // Get real categories with server counts
     const { data: categories } = useCategories();
+
+    // Reset page when filters change
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [filters, quickFilter]);
 
     // Build filters for the hook
     const hookFilters = useMemo(() => {

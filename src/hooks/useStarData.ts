@@ -56,6 +56,12 @@ const getStarBrightness = (stars: number, maxStars: number): number => {
 
 const generateStarPositions = (count: number): Array<{x: number, y: number}> => {
   const positions: Array<{x: number, y: number}> = [];
+  
+  // Handle edge cases
+  if (count <= 0) {
+    return positions;
+  }
+  
   const minDistance = 8; // Minimum distance between stars (percentage)
   
   for (let i = 0; i < count; i++) {
@@ -132,12 +138,17 @@ export const useStarData = (
         .slice(0, maxStars)
         .map((item) => item.server);
 
+    // Early return if no servers to avoid unnecessary processing
+    if (selectedServers.length === 0) {
+      return [];
+    }
+
     // Generate positions for stars
     const positions = generateStarPositions(selectedServers.length);
 
     // Find the maximum star count for scaling
     // const sumStars = starCnt.reduce((sum, curr) => sum + curr, 0);
-    const maxStarCount : number = selectedServers.map((item) => item.stats?.stars || item.repository?.stars || 0).reduce((max, item) => Math.max(max, item)) as number;
+    const maxStarCount : number = selectedServers.map((item) => item.stats?.stars || item.repository?.stars || 0).reduce((max, item) => Math.max(max, item), 0) as number;
 
     // Create star data
     return selectedServers.map((server, index: number) => {
