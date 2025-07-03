@@ -25,7 +25,20 @@
     "supabase:readme": "npx tsx scripts/import-readmes.ts",
     "github:update-stats": "npx tsx scripts/update-github-stats.ts",
     "github:test-rate-limiting": "npx tsx scripts/test-rate-limiting.ts",
-    "github:test-delay": "npx tsx scripts/test-delay-simple.ts"
+    "github:test-delay": "npx tsx scripts/test-delay-simple.ts",
+    "anti-cheat:test": "npx tsx scripts/test-anti-cheat.ts",
+    "db:test-view": "npx tsx scripts/test-view-update.ts",
+    "db:migrate": "npx tsx scripts/apply-migrations.ts",
+    "db:check-voting": "npx tsx scripts/check-voting-system.ts",
+    "db:update-view": "npx tsx scripts/update-view-simple.ts",
+    "db:verify-fix": "npx tsx scripts/verify-fix.ts",
+    "db:test-ambiguity": "npx tsx scripts/test-ambiguity.ts",
+    "db:test-final": "npx tsx scripts/test-final-fix.ts",
+    "db:debug": "npx tsx scripts/debug-current-state.ts",
+    "db:test-rebuild": "npx tsx scripts/test-complete-rebuild.ts",
+    "db:test-voting": "npx tsx scripts/test-voting-fix.ts",
+    "db:test-rls": "npx tsx scripts/test-rls-fix.ts",
+    "db:test-real-voting": "npx tsx scripts/test-real-voting.ts"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.32.2",
