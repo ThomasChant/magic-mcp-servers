@@ -294,12 +294,12 @@ const Servers: React.FC = () => {
                                     @{server.owner}
                                 </div>
                             )}
-                            <h3 className="server-name text-lg font-semibold text-gray-900 dark:text-white">
+                            <h3 className="server-name text-base font-semibold text-gray-900 dark:text-white">
                                 <ProgressiveEllipsis
                                     text={server.name}
-                                    maxLength={15}
-                                    preserveStart={6}
-                                    preserveEnd={4}
+                                    maxLength={18}
+                                    preserveStart={8}
+                                    preserveEnd={5}
                                 />
                             </h3>
                             <div className="flex items-center flex-wrap gap-1 mt-1">
@@ -396,12 +396,12 @@ const Servers: React.FC = () => {
                     </div>
                     <div className="min-w-0 flex-1">
                         <div className="flex items-center space-x-3 mb-2">
-                            <h3 className="server-name text-lg font-semibold text-gray-900 dark:text-white">
+                            <h3 className="server-name text-base font-semibold text-gray-900 dark:text-white">
                                 <ProgressiveEllipsis
                                     text={server.name}
-                                    maxLength={25}
-                                    preserveStart={10}
-                                    preserveEnd={8}
+                                    maxLength={30}
+                                    preserveStart={12}
+                                    preserveEnd={10}
                                 />
                             </h3>
                             {server.owner && (

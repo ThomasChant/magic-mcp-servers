@@ -31,7 +31,7 @@ const FeaturedServerCard: React.FC<FeaturedServerCardProps> = React.memo(({
                             </div>
                         )}
                         <h3 
-                            className="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2"
+                            className="text-base font-semibold text-gray-900 dark:text-white line-clamp-2"
                             title={server.name}
                         >
                             {server.name}
