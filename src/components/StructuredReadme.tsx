@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import { Book, Copy, Check } from 'lucide-react';
 import type { ServerReadme } from '../types';
@@ -16,6 +17,7 @@ const StructuredReadme: React.FC<StructuredReadmeProps> = ({readme, copiedStates
     return (
       <div className="prose prose-gray max-w-none dark:prose-invert">
         <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw]}
           components={{
             // Custom link component
@@ -28,7 +30,7 @@ const StructuredReadme: React.FC<StructuredReadmeProps> = ({readme, copiedStates
               />
             ),
             // Custom image component
-            img: ({ src, alt, title, ...props }) => {
+            img: function CustomImage({ src, alt, title, ...props }) {
               const [imageError, setImageError] = React.useState(false);
               
               if (imageError) {
@@ -199,6 +201,27 @@ const StructuredReadme: React.FC<StructuredReadmeProps> = ({readme, copiedStates
                 {children}
               </summary>
             ),
+            // Table components for proper markdown table rendering
+            table: ({ ...props }) => (
+              <div className="overflow-x-auto my-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700" {...props} />
+              </div>
+            ),
+            thead: ({ ...props }) => (
+              <thead className="bg-gray-50 dark:bg-gray-800" {...props} />
+            ),
+            tbody: ({ ...props }) => (
+              <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700" {...props} />
+            ),
+            tr: ({ ...props }) => (
+              <tr className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-150" {...props} />
+            ),
+            th: ({ ...props }) => (
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider border-r border-gray-200 dark:border-gray-700 last:border-r-0" {...props} />
+            ),
+            td: ({ ...props }) => (
+              <td className="px-4 py-3 text-sm text-gray-900 dark:text-gray-100 border-r border-gray-200 dark:border-gray-700 last:border-r-0" {...props} />
+            ),
           }}
         >
           {content}
@@ -267,6 +290,73 @@ const StructuredReadme: React.FC<StructuredReadmeProps> = ({readme, copiedStates
             display: block !important;
             margin-left: auto !important;
             margin-right: auto !important;
+          }
+          
+          /* Table styling overrides for proper GFM table rendering */
+          .prose table {
+            width: 100% !important;
+            margin: 0 !important;
+            border-collapse: separate !important;
+            border-spacing: 0 !important;
+            background-color: white !important;
+          }
+          
+          .dark .prose table {
+            background-color: rgb(17 24 39) !important;
+          }
+          
+          .prose th {
+            background-color: rgb(249 250 251) !important;
+            font-weight: 500 !important;
+            text-align: left !important;
+            padding: 0.75rem 1rem !important;
+            border-bottom: 2px solid rgb(209 213 219) !important;
+            border-right: 1px solid rgb(229 231 235) !important;
+            font-size: 0.875rem !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.05em !important;
+            color: rgb(107 114 128) !important;
+          }
+          
+          .prose th:last-child {
+            border-right: none !important;
+          }
+          
+          .dark .prose th {
+            background-color: rgb(31 41 55) !important;
+            border-bottom-color: rgb(55 65 81) !important;
+            border-right-color: rgb(75 85 99) !important;
+            color: rgb(156 163 175) !important;
+          }
+          
+          .prose td {
+            padding: 0.75rem 1rem !important;
+            border-bottom: 1px solid rgb(229 231 235) !important;
+            border-right: 1px solid rgb(229 231 235) !important;
+            vertical-align: top !important;
+            color: rgb(17 24 39) !important;
+          }
+          
+          .prose td:last-child {
+            border-right: none !important;
+          }
+          
+          .prose tbody tr:last-child td {
+            border-bottom: none !important;
+          }
+          
+          .dark .prose td {
+            border-bottom-color: rgb(75 85 99) !important;
+            border-right-color: rgb(75 85 99) !important;
+            color: rgb(243 244 246) !important;
+          }
+          
+          .prose tbody tr:hover {
+            background-color: rgb(249 250 251) !important;
+          }
+          
+          .dark .prose tbody tr:hover {
+            background-color: rgb(31 41 55) !important;
           }
         `}</style>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-8">
