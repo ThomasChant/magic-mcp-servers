@@ -588,8 +588,6 @@ const Servers: React.FC = () => {
                                 <option value="total_score-asc">Sort by Community Score (Low to High)</option>
                                 <option value="stars-desc">Sort by GitHub Stars (High to Low)</option>
                                 <option value="stars-asc">Sort by GitHub Stars (Low to High)</option>
-                                <option value="quality_score-desc">Sort by Quality (High to Low)</option>
-                                <option value="quality_score-asc">Sort by Quality (Low to High)</option>
                                 <option value="name-asc">Sort by Name (A to Z)</option>
                                 <option value="name-desc">Sort by Name (Z to A)</option>
                                 <option value="repo_created_at-desc">Sort by Created (Newest First)</option>
