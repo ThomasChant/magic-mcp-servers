@@ -194,8 +194,7 @@ const ServerDetail: React.FC = () => {
                         ? ["-y", server.installation.npm]
                         : server.installation?.pip
                         ? ["-m", server.installation.pip]
-                        : ["index.js"],
-                    ...(server.config?.env && { env: server.config.env })
+                        : ["index.js"]
                 }
             }
         };

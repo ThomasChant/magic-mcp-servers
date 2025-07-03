@@ -17,7 +17,6 @@ import {
 } from "lucide-react";
 import { useServersPaginated, useCategories } from "../hooks/useUnifiedData";
 import type { MCPServer } from "../types";
-import ProgressiveEllipsis from "../components/ProgressiveEllipsis";
 import { FavoriteButton } from "../components/FavoriteButton";
 import VoteButtons from "../components/VoteButtons";
 
@@ -354,7 +353,8 @@ const Servers: React.FC = () => {
                     <span className="flex items-center">
                         <Calendar className="h-3 w-3" />
                         {formatTimeAgo(
-                            server.repository.lastUpdate ||
+                            server.stats.createdAt ||
+                                server.repository.lastUpdate ||
                                 server.repository.lastUpdated ||
                                 ""
                         )}
@@ -431,7 +431,8 @@ const Servers: React.FC = () => {
                             <span className="flex items-center">
                                 <Calendar className="h-3 w-3 mr-1" />
                                 {formatTimeAgo(
-                                    server.repository.lastUpdate ||
+                                    server.stats.createdAt ||
+                                        server.repository.lastUpdate ||
                                         server.repository.lastUpdated ||
                                         ""
                                 )}
@@ -561,6 +562,8 @@ const Servers: React.FC = () => {
                                 <option value="quality_score-asc">Sort by Quality (Low to High)</option>
                                 <option value="name-asc">Sort by Name (A to Z)</option>
                                 <option value="name-desc">Sort by Name (Z to A)</option>
+                                <option value="repo_created_at-desc">Sort by Created (Newest First)</option>
+                                <option value="repo_created_at-asc">Sort by Created (Oldest First)</option>
                                 <option value="last_updated-desc">Sort by Updated (Recent First)</option>
                                 <option value="last_updated-asc">Sort by Updated (Oldest First)</option>
                             </select>

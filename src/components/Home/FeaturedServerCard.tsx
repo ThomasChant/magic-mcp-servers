@@ -92,7 +92,7 @@ const FeaturedServerCard: React.FC<FeaturedServerCardProps> = React.memo(({
                     </span>
                     <span>
                         <Calendar className="w-4 h-4 mr-1 inline" />
-                        Updated {formatLastUpdated(server.repository.lastUpdated)}
+                        Created {formatLastUpdated(server.stats.createdAt || server.repository.lastUpdated)}
                     </span>
                 </div>
                 <Link
