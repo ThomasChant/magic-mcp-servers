@@ -23,6 +23,14 @@ import {
     Facebook,
     Linkedin,
     Link2,
+    FileText,
+    MessageSquare,
+    Settings,
+    Copy,
+    CheckCircle,
+    ExternalLink,
+    Code2,
+    Terminal,
 } from "lucide-react";
 import { useServer, useServerReadme } from "../hooks/useUnifiedData";
 import { useRelatedServers } from "../hooks/useRelatedServers";
@@ -35,8 +43,10 @@ const ServerDetail: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();
     const { data: server, isLoading, error } = useServer(slug!);
     console.log("server", server)
+
+    const { relatedServers, isLoading: relatedLoading } = useRelatedServers(server, 30);
+    const [activeTab, setActiveTab] = useState<'overview' | 'comments' | 'config'>('overview');
     const { data: readmeData, isLoading: readmeLoading } = useServerReadme(server?.id || '');
-    const { relatedServers, isLoading: relatedLoading } = useRelatedServers(server, 3);
     // Remove activeTab state as we're using StructuredReadme component
     const [copiedStates, setCopiedStates] = useState<{ [key: string]: boolean }>({});
     const [showShareMenu, setShowShareMenu] = useState(false);
@@ -121,6 +131,77 @@ const ServerDetail: React.FC = () => {
                 }, 2000);
             }
         });
+    };
+
+    // Extract MCP configuration from README content
+    const extractConfigFromReadme = () => {
+        if (!readmeData?.rawContent && !server?.documentation?.readme) {
+            return null;
+        }
+
+        const content = readmeData?.rawContent || server?.documentation?.readme || '';
+        
+        // Look for JSON code blocks that contain mcpServers configuration
+        const codeBlockRegex = /```(?:json|javascript)?\s*\n?([\s\S]*?)\n?```/gi;
+        let match;
+        
+        while ((match = codeBlockRegex.exec(content)) !== null) {
+            try {
+                const jsonStr = match[1].trim();
+                const parsed = JSON.parse(jsonStr);
+                
+                // Check if this JSON contains mcpServers configuration
+                if (parsed.mcpServers || parsed.command || parsed.args) {
+                    if (parsed.mcpServers) {
+                        return parsed;
+                    } else if (parsed.command || parsed.args) {
+                        // If it's a single server config, wrap it
+                        return {
+                            mcpServers: {
+                                [server.name]: parsed
+                            }
+                        };
+                    }
+                }
+            } catch (e) {
+                // Continue searching if JSON parse fails
+                continue;
+            }
+        }
+        
+        return null;
+    };
+
+    // Get the configuration to use (from README or generated)
+    const getMcpConfiguration = () => {
+        try {
+            const extractedConfig = extractConfigFromReadme();
+            if (extractedConfig && extractedConfig.mcpServers && Object.keys(extractedConfig.mcpServers).length > 0) {
+                return extractedConfig;
+            }
+        } catch (error) {
+            console.error('Error extracting config from README:', error);
+        }
+
+        // Fallback to generated configuration
+        const fallbackConfig = {
+            mcpServers: {
+                [server.name]: {
+                    command: server.installation?.npm 
+                        ? "npx" 
+                        : server.installation?.pip
+                        ? "python"
+                        : "node",
+                    args: server.installation?.npm 
+                        ? ["-y", server.installation.npm]
+                        : server.installation?.pip
+                        ? ["-m", server.installation.pip]
+                        : ["index.js"]
+                }
+            }
+        };
+
+        return fallbackConfig;
     };
 
     const handleShare = (platform: string) => {
@@ -370,70 +451,418 @@ const ServerDetail: React.FC = () => {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="flex flex-col lg:flex-row gap-8">
-                    {/* Main Content */}
+                    {/* Main Content with Tabs */}
                     <div className="lg:w-2/3">
-                        {/* Documentation Content */}
-                        {readmeLoading ? (
-                            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-8">
-                                <div className="animate-pulse">
-                                    <div className="h-6 bg-gray-300 dark:bg-gray-600 rounded mb-4 w-1/3"></div>
-                                    <div className="space-y-3">
-                                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
-                                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div>
-                                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-4/6"></div>
-                                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/6"></div>
+                        {/* Tab Navigation */}
+                        <div className="bg-white dark:bg-gray-800 rounded-t-xl border border-gray-200 dark:border-gray-700 border-b-0">
+                            <div className="flex space-x-0">
+                                <button
+                                    onClick={() => setActiveTab('overview')}
+                                    className={`flex items-center px-6 py-4 text-sm font-medium border-b-2 transition-colors ${
+                                        activeTab === 'overview'
+                                            ? 'border-blue-500 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                                            : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/30'
+                                    }`}
+                                >
+                                    <FileText className="h-4 w-4 mr-2" />
+                                    Overview
+                                </button>
+                               
+                                <button
+                                    onClick={() => setActiveTab('config')}
+                                    className={`flex items-center px-6 py-4 text-sm font-medium border-b-2 transition-colors ${
+                                        activeTab === 'config'
+                                            ? 'border-blue-500 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                                            : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/30'
+                                    }`}
+                                >
+                                    <Settings className="h-4 w-4 mr-2" />
+                                    Config
+                                </button>
+                                <button
+                                    onClick={() => setActiveTab('comments')}
+                                    className={`flex items-center px-6 py-4 text-sm font-medium border-b-2 transition-colors ${
+                                        activeTab === 'comments'
+                                            ? 'border-blue-500 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                                            : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/30'
+                                    }`}
+                                >
+                                    <MessageSquare className="h-4 w-4 mr-2" />
+                                    Comments
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Tab Content */}
+                        <div className="bg-white dark:bg-gray-800 rounded-b-xl border border-gray-200 dark:border-gray-700 border-t-0">
+                            {activeTab === 'overview' ? (
+                                <div className="p-6">
+                                    {/* Documentation Content */}
+                                    {readmeLoading ? (
+                                        <div className="animate-pulse">
+                                            <div className="h-6 bg-gray-300 dark:bg-gray-600 rounded mb-4 w-1/3"></div>
+                                            <div className="space-y-3">
+                                                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                                                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div>
+                                                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-4/6"></div>
+                                                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/6"></div>
+                                            </div>
+                                        </div>
+                                    ) : readmeData ? (
+                                        <div className="-m-6">
+                                            <StructuredReadme 
+                                                readme={readmeData}
+                                                copiedStates={copiedStates}
+                                                onCopy={copyToClipboard}
+                                            />
+                                        </div>
+                                    ) : server?.documentation?.readme ? (
+                                        <div className="-m-6">
+                                            <StructuredReadme 
+                                                readme={{
+                                                    filename: 'README.md',
+                                                    projectName: server.name,
+                                                    rawContent: server.documentation.readme
+                                                }}
+                                                copiedStates={copiedStates}
+                                                onCopy={copyToClipboard}
+                                            />
+                                        </div>
+                                    ) : (
+                                        <div className="p-2">
+                                            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                                                About {server.name}
+                                            </h2>
+                                            <p className="text-gray-600 dark:text-gray-300 mb-6">
+                                                {server.fullDescription ||
+                                                    server.description.en ||
+                                                    server.description["zh-CN"]}
+                                            </p>
+
+                                            <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg">
+                                                <p className="text-sm text-gray-600 dark:text-gray-300">
+                                                    Detailed documentation is being
+                                                    processed. Please check back later or
+                                                    visit the repository for more
+                                                    information.
+                                                </p>
+                                                <a
+                                                    href={server.repository.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center mt-4 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                                                >
+                                                    <Link2 className="ml-1 h-4 w-4" />
+                                                    View Repository
+                                                    <ArrowRight className="ml-1 h-4 w-4" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            ) : activeTab === 'comments' ? (
+                                <div className="p-6">
+                                    {/* Comments Section */}
+                                    <ServerCommentsWithReplies serverId={server.id} />
+                                </div>
+                            ) : (
+                                <div className="p-6">
+                                    {/* Config Section */}
+                                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
+                                        MCP Server Configuration
+                                    </h3>
+                                    
+                                    {/* Configuration JSON */}
+                                    <div className="mb-8">
+                                        <div className="flex items-center justify-between mb-4">
+                                            <div>
+                                                <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                                                    Configuration JSON
+                                                </h4>
+                                                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                                    {extractConfigFromReadme() 
+                                                        ? "Extracted from README documentation" 
+                                                        : "Auto-generated based on installation method"}
+                                                </p>
+                                            </div>
+                                            <button
+                                                onClick={() => {
+                                                    const config = getMcpConfiguration();
+                                                    copyToClipboard(JSON.stringify(config, null, 2), 'config-json');
+                                                }}
+                                                className={`flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                                                    copiedStates['config-json']
+                                                        ? 'bg-green-600 text-white hover:bg-green-700'
+                                                        : 'bg-blue-600 text-white hover:bg-blue-700'
+                                                }`}
+                                            >
+                                                {copiedStates['config-json'] ? (
+                                                    <>
+                                                        <CheckCircle className="h-4 w-4 mr-2" />
+                                                        Copied!
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <Copy className="h-4 w-4 mr-2" />
+                                                        Copy Configuration
+                                                    </>
+                                                )}
+                                            </button>
+                                        </div>
+                                        <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+                                            <code className="text-sm">{JSON.stringify(getMcpConfiguration(), null, 2)}</code>
+                                        </pre>
+                                    </div>
+
+                                    {/* Quick Open in Clients */}
+                                    <div className="mb-8">
+                                        <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                                            Quick Open in AI Clients
+                                        </h4>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            {/* Claude Desktop */}
+                                            <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                                                <div className="flex items-start justify-between mb-3">
+                                                    <div className="flex items-center">
+                                                        <Terminal className="h-5 w-5 text-blue-600 mr-2" />
+                                                        <h5 className="font-medium text-gray-900 dark:text-white">Claude Desktop</h5>
+                                                    </div>
+                                                    <button
+                                                        onClick={() => {
+                                                            const fullConfig = getMcpConfiguration();
+                                                            const serverConfig = fullConfig.mcpServers[server.name] || Object.values(fullConfig.mcpServers)[0];
+                                                            copyToClipboard(JSON.stringify({ [server.name]: serverConfig }, null, 2), 'claude-config');
+                                                        }}
+                                                        className={`text-xs px-3 py-1.5 rounded transition-colors flex-shrink-0 ${
+                                                            copiedStates['claude-config']
+                                                                ? 'bg-green-600 text-white hover:bg-green-700'
+                                                                : 'bg-blue-600 text-white hover:bg-blue-700'
+                                                        }`}
+                                                    >
+                                                        {copiedStates['claude-config'] ? 'Copied!' : 'Copy Config'}
+                                                    </button>
+                                                </div>
+                                                <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
+                                                    Add to your Claude Desktop config file
+                                                </p>
+                                                
+                                                {/* macOS Path */}
+                                                <div className="mb-2">
+                                                    <div className="flex items-center justify-between mb-1">
+                                                        <span className="text-xs font-medium text-gray-500 dark:text-gray-400">macOS:</span>
+                                                        <button
+                                                            onClick={() => copyToClipboard(`~/Library/Application Support/Claude/claude_desktop_config.json`, 'claude-path-mac')}
+                                                            className={`text-xs px-2 py-1 rounded transition-colors ${
+                                                                copiedStates['claude-path-mac']
+                                                                    ? 'text-green-600 dark:text-green-400'
+                                                                    : 'text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20'
+                                                            }`}
+                                                        >
+                                                            {copiedStates['claude-path-mac'] ? 'Copied!' : 'Copy'}
+                                                        </button>
+                                                    </div>
+                                                    <code className="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded block w-full break-all">
+                                                        ~/Library/Application Support/Claude/claude_desktop_config.json
+                                                    </code>
+                                                </div>
+
+                                                {/* Windows Path */}
+                                                <div>
+                                                    <div className="flex items-center justify-between mb-1">
+                                                        <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Windows:</span>
+                                                        <button
+                                                            onClick={() => copyToClipboard(`%APPDATA%\\Claude\\claude_desktop_config.json`, 'claude-path-win')}
+                                                            className={`text-xs px-2 py-1 rounded transition-colors ${
+                                                                copiedStates['claude-path-win']
+                                                                    ? 'text-green-600 dark:text-green-400'
+                                                                    : 'text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20'
+                                                            }`}
+                                                        >
+                                                            {copiedStates['claude-path-win'] ? 'Copied!' : 'Copy'}
+                                                        </button>
+                                                    </div>
+                                                    <code className="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded block w-full break-all">
+                                                        %APPDATA%\Claude\claude_desktop_config.json
+                                                    </code>
+                                                </div>
+                                            </div>
+
+                                            {/* Cursor */}
+                                            <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                                                <div className="flex items-start justify-between mb-3">
+                                                    <div className="flex items-center">
+                                                        <Code2 className="h-5 w-5 text-purple-600 mr-2" />
+                                                        <h5 className="font-medium text-gray-900 dark:text-white">Cursor</h5>
+                                                    </div>
+                                                    <a
+                                                        href={(() => {
+                                                            try {
+                                                                const fullConfig = getMcpConfiguration();
+                                                                const serverConfig = fullConfig.mcpServers[server.name] || Object.values(fullConfig.mcpServers)[0];
+                                                                
+                                                                if (!serverConfig) {
+                                                                    return '#';
+                                                                }
+                                                                
+                                                                // For Cursor, we need to format the command properly
+                                                                const cursorConfig = {
+                                                                    command: Array.isArray(serverConfig.args) && serverConfig.args.length > 0
+                                                                        ? `${serverConfig.command} ${serverConfig.args.join(' ')}`
+                                                                        : serverConfig.command || 'node index.js'
+                                                                };
+                                                                
+                                                                const encodedConfig = btoa(JSON.stringify(cursorConfig));
+                                                                return `https://cursor.com/en/install-mcp?name=${encodeURIComponent(server.name)}&config=${encodeURIComponent(encodedConfig)}`;
+                                                            } catch (error) {
+                                                                console.error('Error generating Cursor URL:', error);
+                                                                return '#';
+                                                            }
+                                                        })()}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="flex items-center text-xs bg-purple-600 text-white px-3 py-1.5 rounded hover:bg-purple-700 transition-colors flex-shrink-0"
+                                                    >
+                                                        <ExternalLink className="h-3 w-3 mr-1" />
+                                                        Quick Install
+                                                    </a>
+                                                </div>
+                                                <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
+                                                    Click to install directly in Cursor
+                                                </p>
+                                                <div className="space-y-2">
+                                                    <div className="flex items-center justify-between">
+                                                        <span className="text-xs text-gray-500 dark:text-gray-400">Install URL:</span>
+                                                        <button
+                                                            onClick={() => {
+                                                                try {
+                                                                    const fullConfig = getMcpConfiguration();
+                                                                    const serverConfig = fullConfig.mcpServers[server.name] || Object.values(fullConfig.mcpServers)[0];
+                                                                    
+                                                                    if (!serverConfig) {
+                                                                        copyToClipboard('Configuration not available', 'cursor-url');
+                                                                        return;
+                                                                    }
+                                                                    
+                                                                    // For Cursor, we need to format the command properly
+                                                                    const cursorConfig = {
+                                                                        command: Array.isArray(serverConfig.args) && serverConfig.args.length > 0
+                                                                            ? `${serverConfig.command} ${serverConfig.args.join(' ')}`
+                                                                            : serverConfig.command || 'node index.js'
+                                                                    };
+                                                                    
+                                                                    const encodedConfig = btoa(JSON.stringify(cursorConfig));
+                                                                    const url = `https://cursor.com/en/install-mcp?name=${encodeURIComponent(server.name)}&config=${encodeURIComponent(encodedConfig)}`;
+                                                                    copyToClipboard(url, 'cursor-url');
+                                                                } catch (error) {
+                                                                    console.error('Error generating Cursor URL:', error);
+                                                                    copyToClipboard('Error generating URL', 'cursor-url');
+                                                                }
+                                                            }}
+                                                            className={`text-xs px-2 py-1 rounded transition-colors ${
+                                                                copiedStates['cursor-url']
+                                                                    ? 'text-green-600 dark:text-green-400'
+                                                                    : 'text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20'
+                                                            }`}
+                                                        >
+                                                            {copiedStates['cursor-url'] ? 'Copied!' : 'Copy URL'}
+                                                        </button>
+                                                    </div>
+                                                    <div className="bg-gray-50 dark:bg-gray-700 p-2 rounded border">
+                                                        <code className="text-xs text-gray-700 dark:text-gray-300 break-all leading-relaxed">
+                                                            {(() => {
+                                                                try {
+                                                                    const fullConfig = getMcpConfiguration();
+                                                                    const serverConfig = fullConfig.mcpServers[server.name] || Object.values(fullConfig.mcpServers)[0];
+                                                                    
+                                                                    if (!serverConfig) {
+                                                                        return 'Configuration not available';
+                                                                    }
+                                                                    
+                                                                    // For Cursor, we need to format the command properly
+                                                                    const cursorConfig = {
+                                                                        command: Array.isArray(serverConfig.args) && serverConfig.args.length > 0
+                                                                            ? `${serverConfig.command} ${serverConfig.args.join(' ')}`
+                                                                            : serverConfig.command || 'node index.js'
+                                                                    };
+                                                                    
+                                                                    const encodedConfig = btoa(JSON.stringify(cursorConfig));
+                                                                    return `https://cursor.com/en/install-mcp?name=${encodeURIComponent(server.name)}&config=${encodeURIComponent(encodedConfig)}`;
+                                                                } catch (error) {
+                                                                    console.error('Error generating Cursor URL:', error);
+                                                                    return 'Error generating URL';
+                                                                }
+                                                            })()}
+                                                        </code>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* Cline */}
+                                            <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                                                <div className="flex items-start justify-between mb-3">
+                                                    <div className="flex items-center">
+                                                        <Terminal className="h-5 w-5 text-green-600 mr-2" />
+                                                        <h5 className="font-medium text-gray-900 dark:text-white">Cline</h5>
+                                                    </div>
+                                                    <a
+                                                        href="https://github.com/cline/cline#mcp-support"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="flex items-center text-xs bg-green-600 text-white px-3 py-1.5 rounded hover:bg-green-700 transition-colors flex-shrink-0"
+                                                    >
+                                                        <ExternalLink className="h-3 w-3 mr-1" />
+                                                        Docs
+                                                    </a>
+                                                </div>
+                                                <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
+                                                    VS Code extension with MCP support
+                                                </p>
+                                                <div className="flex items-center justify-between">
+                                                    <span className="text-xs text-gray-500 dark:text-gray-400">Setup:</span>
+                                                    <code className="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
+                                                        Settings → MCP Servers
+                                                    </code>
+                                                </div>
+                                            </div>
+
+                                            {/* Others */}
+                                            <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                                                <div className="flex items-start justify-between mb-3">
+                                                    <div className="flex items-center">
+                                                        <Code2 className="h-5 w-5 text-orange-600 mr-2" />
+                                                        <h5 className="font-medium text-gray-900 dark:text-white">Other Clients</h5>
+                                                    </div>
+                                                </div>
+                                                <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
+                                                    Works with any MCP-compatible client
+                                                </p>
+                                                <div className="flex items-center justify-between">
+                                                    <span className="text-xs text-gray-500 dark:text-gray-400">Compatible with:</span>
+                                                    <div className="text-xs text-gray-600 dark:text-gray-300 font-medium">
+                                                        Claude Code, Void, Trae, etc.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Installation Instructions */}
+                                    <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                                        <h4 className="text-sm font-semibold text-blue-900 dark:text-blue-100 mb-2">
+                                            Quick Setup Instructions
+                                        </h4>
+                                        <ol className="text-sm text-blue-800 dark:text-blue-200 space-y-2">
+                                            <li>1. Copy the configuration JSON above</li>
+                                            <li>2. Open your AI client's MCP configuration file</li>
+                                            <li>3. Paste the configuration into the mcpServers section</li>
+                                            <li>4. Restart your AI client to load the new server</li>
+                                        </ol>
                                     </div>
                                 </div>
-                            </div>
-                        ) : readmeData ? (
-                            <StructuredReadme 
-                                readme={readmeData}
-                                copiedStates={copiedStates}
-                                onCopy={copyToClipboard}
-                            />
-                        ) : server?.documentation?.readme ? (
-                            <StructuredReadme 
-                                readme={{
-                                    filename: 'README.md',
-                                    projectName: server.name,
-                                    rawContent: server.documentation.readme
-                                }}
-                                copiedStates={copiedStates}
-                                onCopy={copyToClipboard}
-                            />
-                        ) : (
-                            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-8">
-                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                                    About {server.name}
-                                </h2>
-                                <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                    {server.fullDescription ||
-                                        server.description.en ||
-                                        server.description["zh-CN"]}
-                                </p>
+                            )}
+                        </div>
 
-                                <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg">
-                                    <p className="text-sm text-gray-600 dark:text-gray-300">
-                                        Detailed documentation is being
-                                        processed. Please check back later or
-                                        visit the repository for more
-                                        information.
-                                    </p>
-                                    <a
-                                        href={server.repository.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center mt-4 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-                                    >
-                                        <Link2 className="ml-1 h-4 w-4" />
-                                        View Repository
-                                        <ArrowRight className="ml-1 h-4 w-4" />
-                                    </a>
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Content is now handled by StructuredReadme component above */}
+                    
                     </div>
 
                     {/* Sidebar */}
@@ -661,27 +1090,33 @@ const ServerDetail: React.FC = () => {
                                 </div>
                             </div>
 
-                            {/* Related Servers */}
-                            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-                                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                        </div>
+                    </div>
+                </div>
+                    {/* Related Servers Section */}
+                    <div className="mt-8">
+                            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+                                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
                                     Related Servers
                                 </h3>
                                 {relatedLoading ? (
-                                    <div className="space-y-3">
-                                        {[...Array(3)].map((_, i) => (
-                                            <div key={i} className="animate-pulse p-3 border border-gray-200 dark:border-gray-600 rounded-lg">
-                                                <div className="flex items-center">
-                                                    <div className="w-8 h-8 bg-gray-200 dark:bg-gray-600 rounded-lg mr-3"></div>
-                                                    <div>
-                                                        <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded w-24 mb-1"></div>
-                                                        <div className="h-3 bg-gray-200 dark:bg-gray-600 rounded w-16"></div>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                                        {[...Array(20)].map((_, i) => (
+                                            <div key={i} className="animate-pulse p-4 border border-gray-200 dark:border-gray-600 rounded-lg">
+                                                <div className="flex items-center mb-3">
+                                                    <div className="w-10 h-10 bg-gray-200 dark:bg-gray-600 rounded-lg mr-3"></div>
+                                                    <div className="flex-1">
+                                                        <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded w-3/4 mb-1"></div>
+                                                        <div className="h-3 bg-gray-200 dark:bg-gray-600 rounded w-1/2"></div>
                                                     </div>
                                                 </div>
+                                                <div className="h-3 bg-gray-200 dark:bg-gray-600 rounded w-full mb-2"></div>
+                                                <div className="h-3 bg-gray-200 dark:bg-gray-600 rounded w-2/3"></div>
                                             </div>
                                         ))}
                                     </div>
                                 ) : relatedServers && relatedServers.length > 0 ? (
-                                    <div className="space-y-3">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                                         {relatedServers.map((relatedServer) => {
                                             // Get category-based icon and color
                                             const getServerIcon = () => {
@@ -690,19 +1125,19 @@ const ServerDetail: React.FC = () => {
                                                 const combined = `${category} ${tags}`;
                                                 
                                                 if (combined.includes('database') || combined.includes('sql')) {
-                                                    return <Database className="h-4 w-4 text-white" />;
+                                                    return <Database className="h-5 w-5 text-white" />;
                                                 } else if (combined.includes('storage') || combined.includes('cloud') || combined.includes('s3')) {
-                                                    return <Cloud className="h-4 w-4 text-white" />;
+                                                    return <Cloud className="h-5 w-5 text-white" />;
                                                 } else if (combined.includes('search') || combined.includes('file')) {
-                                                    return <Search className="h-4 w-4 text-white" />;
+                                                    return <Search className="h-5 w-5 text-white" />;
                                                 } else if (combined.includes('communication') || combined.includes('slack') || combined.includes('messaging')) {
-                                                    return <MessageCircle className="h-4 w-4 text-white" />;
+                                                    return <MessageCircle className="h-5 w-5 text-white" />;
                                                 } else if (combined.includes('ai') || combined.includes('ml')) {
-                                                    return <Brain className="h-4 w-4 text-white" />;
+                                                    return <Brain className="h-5 w-5 text-white" />;
                                                 } else if (combined.includes('development') || combined.includes('github') || combined.includes('git')) {
-                                                    return <GitBranch className="h-4 w-4 text-white" />;
+                                                    return <GitBranch className="h-5 w-5 text-white" />;
                                                 } else {
-                                                    return <Folder className="h-4 w-4 text-white" />;
+                                                    return <Folder className="h-5 w-5 text-white" />;
                                                 }
                                             };
                                             
@@ -733,8 +1168,8 @@ const ServerDetail: React.FC = () => {
                                                 relatedServer.description?.["zh-CN"] || 
                                                 'No description available';
                                                 
-                                            const shortDescription = fullDescription.length > 60 
-                                                ? fullDescription.substring(0, 60) + '...' 
+                                            const shortDescription = fullDescription.length > 80 
+                                                ? fullDescription.substring(0, 80) + '...' 
                                                 : fullDescription;
                                             
                                             return (
@@ -745,26 +1180,39 @@ const ServerDetail: React.FC = () => {
                                                 >
                                                     <Link
                                                         to={`/servers/${relatedServer.id}`}
-                                                        className="block p-3 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                                                        className="group block p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:border-blue-300 dark:hover:border-blue-500 transition-all duration-200 hover:shadow-md"
                                                     >
-                                                        <div className="flex items-center justify-between">
-                                                            <div className="flex items-center flex-1 min-w-0">
-                                                                <div className={`w-8 h-8 ${getServerColor()} rounded-lg flex items-center justify-center mr-3 flex-shrink-0`}>
-                                                                    {getServerIcon()}
-                                                                </div>
-                                                                <div className="min-w-0 flex-1">
-                                                                    <div className="text-sm font-medium text-gray-900 dark:text-white truncate" title={relatedServer.name}>
-                                                                        {relatedServer.name}
-                                                                    </div>
-                                                                    <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
-                                                                        {shortDescription}
+                                                        <div className="flex items-start space-x-3 mb-3">
+                                                            <div className={`w-10 h-10 ${getServerColor()} rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-200`}>
+                                                                {getServerIcon()}
+                                                            </div>
+                                                            <div className="min-w-0 flex-1">
+                                                                <h4 className="text-sm font-semibold text-gray-900 dark:text-white truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" title={relatedServer.name}>
+                                                                    {relatedServer.name}
+                                                                </h4>
+                                                                <div className="flex items-center space-x-2 mt-1">
+                                                                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                                                                        {relatedServer.category}
+                                                                    </span>
+                                                                    <div className="flex items-center text-xs text-gray-400 dark:text-gray-500">
+                                                                        <Star className="h-3 w-3 text-yellow-500 mr-1" />
+                                                                        <span>{relatedServer.repository?.stars || 0}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div className="flex items-center space-x-2 text-xs text-gray-400 dark:text-gray-500 flex-shrink-0 ml-3">
-                                                                <Star className="h-3 w-3 text-yellow-500" />
-                                                                <span>{relatedServer.repository?.stars || 0}</span>
-                                                            </div>
+                                                        </div>
+                                                        <p className="text-xs text-gray-600 dark:text-gray-300 line-clamp-2 leading-relaxed">
+                                                            {shortDescription}
+                                                        </p>
+                                                        <div className="flex flex-wrap gap-1 mt-3">
+                                                            {relatedServer.tags?.slice(0, 2).map((tag) => (
+                                                                <span
+                                                                    key={tag}
+                                                                    className="inline-flex items-center px-2 py-0.5 bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300 text-[10px] rounded font-medium"
+                                                                >
+                                                                    {tag}
+                                                                </span>
+                                                            ))}
                                                         </div>
                                                     </Link>
                                                 </ServerTooltip>
@@ -772,20 +1220,14 @@ const ServerDetail: React.FC = () => {
                                         })}
                                     </div>
                                 ) : (
-                                    <div className="text-center py-6 text-gray-500 dark:text-gray-400">
-                                        <Search className="h-8 w-8 mx-auto mb-2 opacity-50" />
-                                        <p className="text-sm">No related servers found</p>
+                                    <div className="text-center py-12 text-gray-500 dark:text-gray-400">
+                                        <Search className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                                        <h4 className="text-lg font-medium mb-2">No related servers found</h4>
+                                        <p className="text-sm">We couldn't find any servers related to this one.</p>
                                     </div>
                                 )}
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                {/* Comments Section */}
-                <div className="mt-8">
-                    <ServerCommentsWithReplies serverId={server.id} />
-                </div>
             </div>
 
             {/* CSS for hover effects */}

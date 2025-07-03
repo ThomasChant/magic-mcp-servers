@@ -31,19 +31,19 @@ const FeaturedServerCard: React.FC<FeaturedServerCardProps> = React.memo(({
                             </div>
                         )}
                         <h3 
-                            className="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2"
+                            className="text-base font-semibold text-gray-900 dark:text-white truncate"
                             title={server.name}
                         >
                             {server.name}
                         </h3>
-                        <div className="flex items-center space-x-2 mt-1">
+                        <div className="flex items-center flex-wrap gap-1 mt-1">
                             {server.verified && (
-                                <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-xs px-2 py-1 rounded-full">
+                                <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
                                     Official
                                 </span>
                             )}
                             {server.featured && (
-                                <span className="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 text-xs px-2 py-1 rounded-full">
+                                <span className="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
                                     Featured
                                 </span>
                             )}
@@ -92,7 +92,7 @@ const FeaturedServerCard: React.FC<FeaturedServerCardProps> = React.memo(({
                     </span>
                     <span>
                         <Calendar className="w-4 h-4 mr-1 inline" />
-                        Updated {formatLastUpdated(server.repository.lastUpdated)}
+                        Created {formatLastUpdated(server.stats.createdAt || server.repository.lastUpdated)}
                     </span>
                 </div>
                 <Link
