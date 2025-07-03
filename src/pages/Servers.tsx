@@ -302,25 +302,25 @@ const Servers: React.FC = () => {
                                     preserveEnd={4}
                                 />
                             </h3>
-                            <div className="flex items-center space-x-2 mt-1 flex-wrap">
+                            <div className="flex items-center flex-wrap gap-1 mt-1">
                                 {server.official && (
-                                    <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-2 py-1 rounded-full">
+                                    <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
                                         Official
                                     </span>
                                 )}
                                 {server.featured && (
-                                    <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs px-2 py-1 rounded-full">
+                                    <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
                                         Featured
                                     </span>
                                 )}
                                 {isPopular(server) && (
-                                    <span className="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 text-xs px-2 py-1 rounded-full">
+                                    <span className="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
                                         Popular
                                     </span>
                                 )}
                                 {getMonorepoInfo(server.repository.url) && (
-                                    <span className="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs px-2 py-1 rounded-full flex items-center">
-                                        <GitBranch className="h-3 w-3 mr-1" />
+                                    <span className="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-[10px] px-1.5 py-0.5 rounded-full flex items-center font-medium">
+                                        <GitBranch className="h-2.5 w-2.5 mr-0.5" />
                                         Monorepo
                                     </span>
                                 )}
@@ -409,25 +409,25 @@ const Servers: React.FC = () => {
                                     @{server.owner}
                                 </span>
                             )}
-                            <div className="flex items-center space-x-2">
+                            <div className="flex items-center flex-wrap gap-1">
                                 {server.official && (
-                                    <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-2 py-1 rounded-full">
+                                    <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
                                         Official
                                     </span>
                                 )}
                                 {server.featured && (
-                                    <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs px-2 py-1 rounded-full">
+                                    <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
                                         Featured
                                     </span>
                                 )}
                                 {isPopular(server) && (
-                                    <span className="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 text-xs px-2 py-1 rounded-full">
+                                    <span className="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
                                         Popular
                                     </span>
                                 )}
                                 {getMonorepoInfo(server.repository.url) && (
-                                    <span className="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs px-2 py-1 rounded-full flex items-center">
-                                        <GitBranch className="h-3 w-3 mr-1" />
+                                    <span className="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-[10px] px-1.5 py-0.5 rounded-full flex items-center font-medium">
+                                        <GitBranch className="h-2.5 w-2.5 mr-0.5" />
                                         Monorepo
                                     </span>
                                 )}
