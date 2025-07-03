@@ -47,6 +47,11 @@ const FeaturedServerCard: React.FC<FeaturedServerCardProps> = React.memo(({
                                     Featured
                                 </span>
                             )}
+                            {server.latest && (
+                                <span className="bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
+                                    Latest
+                                </span>
+                            )}
                         </div>
                     </div>
                 </div>

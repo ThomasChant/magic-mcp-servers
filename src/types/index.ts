@@ -109,6 +109,7 @@ export interface MCPServer {
     };
     featured?: boolean;
     verified?: boolean;
+    latest?: boolean;
     createdAt?: string;
     updatedAt?: string;
 }

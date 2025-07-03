@@ -136,6 +136,8 @@ const Servers: React.FC = () => {
             result.verified = true;
         } else if (quickFilter === "popular") {
             result.popular = true;
+        } else if (quickFilter === "latest") {
+            result.latest = true;
         }
         
         return Object.keys(result).length > 0 ? result : undefined;
@@ -342,6 +344,11 @@ const Servers: React.FC = () => {
                                         Popular
                                     </span>
                                 )}
+                                {server.latest && (
+                                    <span className="bg-emerald-100 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-200 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
+                                        Latest
+                                    </span>
+                                )}
                                 {getMonorepoInfo(server.repository.url) && (
                                     <span className="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-[10px] px-1.5 py-0.5 rounded-full flex items-center font-medium">
                                         <GitBranch className="h-2.5 w-2.5 mr-0.5" />
@@ -443,6 +450,11 @@ const Servers: React.FC = () => {
                                 {isPopular(server) && (
                                     <span className="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
                                         Popular
+                                    </span>
+                                )}
+                                {server.latest && (
+                                    <span className="bg-emerald-100 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-200 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
+                                        Latest
                                     </span>
                                 )}
                                 {getMonorepoInfo(server.repository.url) && (
@@ -759,7 +771,7 @@ const Servers: React.FC = () => {
 
                             {/* Quick Filters */}
                             <div className="flex flex-wrap gap-2">
-                                {["all", "official", "featured", "popular"].map((filter) => (
+                                {["all", "official", "featured", "popular", "latest"].map((filter) => (
                                     <span
                                         key={filter}
                                         onClick={() => setQuickFilter(filter)}
