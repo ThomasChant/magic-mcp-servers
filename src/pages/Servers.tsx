@@ -14,6 +14,7 @@ import {
     Bot,
     FileText,
     GitBranch,
+    Star,
 } from "lucide-react";
 import { useServersPaginated, useCategories } from "../hooks/useUnifiedData";
 import type { MCPServer } from "../types";
@@ -53,7 +54,7 @@ const Servers: React.FC = () => {
     const [sidebarSearch, setSidebarSearch] = useState("");
     const [debouncedSearch, setDebouncedSearch] = useState("");
     const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-    const [sortBy, setSortBy] = useState("total_score"); // 默认按社区评分排序
+    const [sortBy, setSortBy] = useState("stars"); // 默认按星标数排序
     const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
     const [quickFilter, setQuickFilter] = useState("all");
     const [currentPage, setCurrentPage] = useState(1);
@@ -73,7 +74,7 @@ const Servers: React.FC = () => {
             // If global search is cleared, clear debounced search too
             setDebouncedSearch('');
         }
-    }, [searchQuery]);
+    }, [searchQuery, sidebarSearch]);
 
     // Debounce local sidebar search input to avoid excessive API calls
     useEffect(() => {
@@ -256,6 +257,18 @@ const Servers: React.FC = () => {
     };
 
 
+    // Format star count like GitHub
+    const formatStarCount = (count: number): string => {
+        if (count >= 1000000) {
+            const m = count / 1000000;
+            return m >= 10 ? Math.floor(m) + 'm' : m.toFixed(1) + 'm';
+        } else if (count >= 1000) {
+            const k = count / 1000;
+            return k >= 10 ? Math.floor(k) + 'k' : k.toFixed(1) + 'k';
+        }
+        return count.toString();
+    };
+
     // Format time ago
     const formatTimeAgo = (dateString: string) => {
         const date = new Date(dateString);
@@ -381,7 +394,11 @@ const Servers: React.FC = () => {
             <div className="flex items-center justify-between mt-auto">
                 <div className="server-stats flex items-center space-x-3 text-xs text-gray-500 dark:text-gray-400">
                     <span className="flex items-center">
-                        <Calendar className="h-3 w-3" />
+                        <Star className="h-3 w-3 mr-1" />
+                        {formatStarCount(server.stats.stars || 0)}
+                    </span>
+                    <span className="flex items-center">
+                        <Calendar className="h-3 w-3 mr-1" />
                         {formatTimeAgo(
                             server.stats.createdAt ||
                                 server.repository.lastUpdate ||
@@ -458,6 +475,10 @@ const Servers: React.FC = () => {
                                 server.description["zh-CN"]}
                         </p>
                         <div className="flex items-center space-x-4 text-xs text-gray-500 dark:text-gray-400">
+                            <span className="flex items-center">
+                                <Star className="h-3 w-3 mr-1" />
+                                {formatStarCount(server.stats.stars || 0)}
+                            </span>
                             <span className="flex items-center">
                                 <Calendar className="h-3 w-3 mr-1" />
                                 {formatTimeAgo(
