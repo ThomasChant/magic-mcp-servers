@@ -273,16 +273,29 @@ const Servers: React.FC = () => {
     const formatTimeAgo = (dateString: string) => {
         const date = new Date(dateString);
         const now = new Date();
-        const diffInDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
+        const diffInMs = now.getTime() - date.getTime();
+        const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
         
         if (diffInDays === 0) return "today";
-        if (diffInDays === 1) return "1d ago";
-        if (diffInDays === 2) return "2d ago";
-        if (diffInDays === 3) return "3d ago";
-        if (diffInDays === 5) return "5d ago";
-        if (diffInDays < 7) return `${diffInDays}d ago`;
-        if (diffInDays < 14) return "1w ago";
-        return `${Math.floor(diffInDays / 7)}w ago`;
+        
+        // Calculate years, months, weeks, and days
+        const years = Math.floor(diffInDays / 365);
+        const months = Math.floor((diffInDays % 365) / 30);
+        const weeks = Math.floor((diffInDays % 30) / 7);
+        const days = diffInDays % 7;
+        
+        // Build array of time units
+        const units: { value: number; label: string }[] = [];
+        if (years > 0) units.push({ value: years, label: "y" });
+        if (months > 0) units.push({ value: months, label: "m" });
+        if (weeks > 0) units.push({ value: weeks, label: "w" });
+        if (days > 0) units.push({ value: days, label: "d" });
+        
+        // Take only the two largest units
+        const displayUnits = units.slice(0, 2);
+        
+        // Format the output
+        return displayUnits.map(unit => `${unit.value}${unit.label}`).join('');
     };
 
     const isPopular = (server: ServerData) => {
