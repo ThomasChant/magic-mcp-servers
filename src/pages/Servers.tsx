@@ -372,6 +372,12 @@ const Servers: React.FC = () => {
                     size="sm"
                     className="ml-2"
                 />
+                {/* <Link to={`/servers/${server.slug}`}>
+                        <span className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-sm text-sm flex items-end">
+                            View Details
+                            <ArrowRight className="h-3 w-3 ml-1" />
+                        </span>
+                </Link> */}
             </div>
         </div>
     );
