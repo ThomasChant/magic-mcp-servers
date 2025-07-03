@@ -38,7 +38,7 @@ const ServerDetail: React.FC = () => {
     const { data: server, isLoading, error } = useServer(slug!);
     console.log("server", server)
     const { data: readmeData, isLoading: readmeLoading } = useServerReadme(server?.slug || '');
-    const { relatedServers, isLoading: relatedLoading } = useRelatedServers(server, 3);
+    const { relatedServers, isLoading: relatedLoading } = useRelatedServers(server, 20);
     const [activeTab, setActiveTab] = useState<'overview' | 'comments'>('overview');
     const [copiedStates, setCopiedStates] = useState<{ [key: string]: boolean }>({});
     const [showShareMenu, setShowShareMenu] = useState(false);
@@ -476,6 +476,8 @@ const ServerDetail: React.FC = () => {
                                 </div>
                             )}
                         </div>
+
+                    
                     </div>
 
                     {/* Sidebar */}
@@ -703,27 +705,33 @@ const ServerDetail: React.FC = () => {
                                 </div>
                             </div>
 
-                            {/* Related Servers */}
-                            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-                                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                        </div>
+                    </div>
+                </div>
+                    {/* Related Servers Section */}
+                    <div className="mt-8">
+                            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+                                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
                                     Related Servers
                                 </h3>
                                 {relatedLoading ? (
-                                    <div className="space-y-3">
-                                        {[...Array(3)].map((_, i) => (
-                                            <div key={i} className="animate-pulse p-3 border border-gray-200 dark:border-gray-600 rounded-lg">
-                                                <div className="flex items-center">
-                                                    <div className="w-8 h-8 bg-gray-200 dark:bg-gray-600 rounded-lg mr-3"></div>
-                                                    <div>
-                                                        <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded w-24 mb-1"></div>
-                                                        <div className="h-3 bg-gray-200 dark:bg-gray-600 rounded w-16"></div>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                                        {[...Array(20)].map((_, i) => (
+                                            <div key={i} className="animate-pulse p-4 border border-gray-200 dark:border-gray-600 rounded-lg">
+                                                <div className="flex items-center mb-3">
+                                                    <div className="w-10 h-10 bg-gray-200 dark:bg-gray-600 rounded-lg mr-3"></div>
+                                                    <div className="flex-1">
+                                                        <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded w-3/4 mb-1"></div>
+                                                        <div className="h-3 bg-gray-200 dark:bg-gray-600 rounded w-1/2"></div>
                                                     </div>
                                                 </div>
+                                                <div className="h-3 bg-gray-200 dark:bg-gray-600 rounded w-full mb-2"></div>
+                                                <div className="h-3 bg-gray-200 dark:bg-gray-600 rounded w-2/3"></div>
                                             </div>
                                         ))}
                                     </div>
                                 ) : relatedServers && relatedServers.length > 0 ? (
-                                    <div className="space-y-3">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                                         {relatedServers.map((relatedServer) => {
                                             // Get category-based icon and color
                                             const getServerIcon = () => {
@@ -732,19 +740,19 @@ const ServerDetail: React.FC = () => {
                                                 const combined = `${category} ${tags}`;
                                                 
                                                 if (combined.includes('database') || combined.includes('sql')) {
-                                                    return <Database className="h-4 w-4 text-white" />;
+                                                    return <Database className="h-5 w-5 text-white" />;
                                                 } else if (combined.includes('storage') || combined.includes('cloud') || combined.includes('s3')) {
-                                                    return <Cloud className="h-4 w-4 text-white" />;
+                                                    return <Cloud className="h-5 w-5 text-white" />;
                                                 } else if (combined.includes('search') || combined.includes('file')) {
-                                                    return <Search className="h-4 w-4 text-white" />;
+                                                    return <Search className="h-5 w-5 text-white" />;
                                                 } else if (combined.includes('communication') || combined.includes('slack') || combined.includes('messaging')) {
-                                                    return <MessageCircle className="h-4 w-4 text-white" />;
+                                                    return <MessageCircle className="h-5 w-5 text-white" />;
                                                 } else if (combined.includes('ai') || combined.includes('ml')) {
-                                                    return <Brain className="h-4 w-4 text-white" />;
+                                                    return <Brain className="h-5 w-5 text-white" />;
                                                 } else if (combined.includes('development') || combined.includes('github') || combined.includes('git')) {
-                                                    return <GitBranch className="h-4 w-4 text-white" />;
+                                                    return <GitBranch className="h-5 w-5 text-white" />;
                                                 } else {
-                                                    return <Folder className="h-4 w-4 text-white" />;
+                                                    return <Folder className="h-5 w-5 text-white" />;
                                                 }
                                             };
                                             
@@ -775,8 +783,8 @@ const ServerDetail: React.FC = () => {
                                                 relatedServer.description?.["zh-CN"] || 
                                                 'No description available';
                                                 
-                                            const shortDescription = fullDescription.length > 60 
-                                                ? fullDescription.substring(0, 60) + '...' 
+                                            const shortDescription = fullDescription.length > 80 
+                                                ? fullDescription.substring(0, 80) + '...' 
                                                 : fullDescription;
                                             
                                             return (
@@ -787,26 +795,39 @@ const ServerDetail: React.FC = () => {
                                                 >
                                                     <Link
                                                         to={`/servers/${relatedServer.id}`}
-                                                        className="block p-3 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                                                        className="group block p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:border-blue-300 dark:hover:border-blue-500 transition-all duration-200 hover:shadow-md"
                                                     >
-                                                        <div className="flex items-center justify-between">
-                                                            <div className="flex items-center flex-1 min-w-0">
-                                                                <div className={`w-8 h-8 ${getServerColor()} rounded-lg flex items-center justify-center mr-3 flex-shrink-0`}>
-                                                                    {getServerIcon()}
-                                                                </div>
-                                                                <div className="min-w-0 flex-1">
-                                                                    <div className="text-sm font-medium text-gray-900 dark:text-white truncate" title={relatedServer.name}>
-                                                                        {relatedServer.name}
-                                                                    </div>
-                                                                    <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
-                                                                        {shortDescription}
+                                                        <div className="flex items-start space-x-3 mb-3">
+                                                            <div className={`w-10 h-10 ${getServerColor()} rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-200`}>
+                                                                {getServerIcon()}
+                                                            </div>
+                                                            <div className="min-w-0 flex-1">
+                                                                <h4 className="text-sm font-semibold text-gray-900 dark:text-white truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" title={relatedServer.name}>
+                                                                    {relatedServer.name}
+                                                                </h4>
+                                                                <div className="flex items-center space-x-2 mt-1">
+                                                                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                                                                        {relatedServer.category}
+                                                                    </span>
+                                                                    <div className="flex items-center text-xs text-gray-400 dark:text-gray-500">
+                                                                        <Star className="h-3 w-3 text-yellow-500 mr-1" />
+                                                                        <span>{relatedServer.repository?.stars || 0}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div className="flex items-center space-x-2 text-xs text-gray-400 dark:text-gray-500 flex-shrink-0 ml-3">
-                                                                <Star className="h-3 w-3 text-yellow-500" />
-                                                                <span>{relatedServer.repository?.stars || 0}</span>
-                                                            </div>
+                                                        </div>
+                                                        <p className="text-xs text-gray-600 dark:text-gray-300 line-clamp-2 leading-relaxed">
+                                                            {shortDescription}
+                                                        </p>
+                                                        <div className="flex flex-wrap gap-1 mt-3">
+                                                            {relatedServer.tags?.slice(0, 2).map((tag) => (
+                                                                <span
+                                                                    key={tag}
+                                                                    className="inline-flex items-center px-2 py-0.5 bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300 text-[10px] rounded font-medium"
+                                                                >
+                                                                    {tag}
+                                                                </span>
+                                                            ))}
                                                         </div>
                                                     </Link>
                                                 </ServerTooltip>
@@ -814,15 +835,14 @@ const ServerDetail: React.FC = () => {
                                         })}
                                     </div>
                                 ) : (
-                                    <div className="text-center py-6 text-gray-500 dark:text-gray-400">
-                                        <Search className="h-8 w-8 mx-auto mb-2 opacity-50" />
-                                        <p className="text-sm">No related servers found</p>
+                                    <div className="text-center py-12 text-gray-500 dark:text-gray-400">
+                                        <Search className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                                        <h4 className="text-lg font-medium mb-2">No related servers found</h4>
+                                        <p className="text-sm">We couldn't find any servers related to this one.</p>
                                     </div>
                                 )}
                             </div>
                         </div>
-                    </div>
-                </div>
             </div>
 
             {/* CSS for hover effects */}
