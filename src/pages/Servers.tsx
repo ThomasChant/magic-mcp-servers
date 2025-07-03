@@ -119,7 +119,7 @@ const Servers: React.FC = () => {
         error: serversError 
     } = useServersPaginated(
         currentPage,
-        12, // items per page
+        36, // items per page
         sortBy,
         sortOrder,
         hookFilters
