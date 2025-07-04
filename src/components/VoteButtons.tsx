@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Triangle, LogIn } from "lucide-react";
+import { ThumbsUp, LogIn } from "lucide-react";
 import { useUser, useClerk } from "@clerk/clerk-react";
 import { useServerScore, useUserVote, useVoteMutation } from "../services/voting";
 
@@ -17,12 +17,13 @@ interface VoteButtonsProps {
 }
 
 /**
- * Reddit风格投票组件
- * 特点：
- * - 选中后箭头变为实心
- * - 可以点击实心箭头取消投票
- * - 也可以点击相反箭头来改变投票
- * - 水平紧凑布局：上箭头 + 分数 + 下箭头
+ * "I'm using this" feature component
+ * Features:
+ * - Users can mark "I'm using" a server
+ * - Thumbs up icon becomes solid when selected
+ * - Can click solid thumbs up to remove mark
+ * - Shows total user count
+ * - Clean single button layout
  */
 
 const VoteButtons: React.FC<VoteButtonsProps> = ({
@@ -34,14 +35,14 @@ const VoteButtons: React.FC<VoteButtonsProps> = ({
     const { isSignedIn } = useUser();
     const { openSignIn } = useClerk();
     
-    // 获取服务器分数和用户投票状态
+    // Get server score and user vote status
     const { data: serverScore, isLoading: scoreLoading } = useServerScore(serverId);
     const { data: userVote, isLoading: voteLoading } = useUserVote(serverId);
     
-    // 投票操作
+    // Vote operations
     const { vote, removeVote, isVoting, lastVoteResult } = useVoteMutation(serverId);
 
-    // 监听投票结果，提供反馈
+    // Listen to vote results, provide feedback
     useEffect(() => {
         if (lastVoteResult) {
             if (lastVoteResult.rateLimited) {
@@ -49,162 +50,138 @@ const VoteButtons: React.FC<VoteButtonsProps> = ({
             } else if (lastVoteResult.success) {
                 const voteType = lastVoteResult.userVote;
                 if (voteType) {
-                    notify(voteType === 'up' ? 'Upvoted!' : 'Downvoted!');
+                    notify('Marked as using!');
                 } else {
-                    notify('Vote removed');
+                    notify('Usage mark removed');
                 }
             }
         }
     }, [lastVoteResult]);
 
-    // 处理投票 - 可以点击相同箭头取消
-    const handleVote = async (voteType: 'up' | 'down') => {
+    // Handle "I'm using this" marking
+    const handleUsage = async () => {
         if (!isSignedIn) {
             openSignIn();
             return;
         }
 
         try {
-            if (userVote === voteType) {
-                // 如果点击的是已选择的投票，则取消投票
+            if (userVote === 'up') {
+                // If already marked as using, remove the mark
                 removeVote();
-                notify('Vote removed');
+                notify('Usage mark removed');
             } else {
-                // 否则投票或更改投票（反馈由useEffect处理）
-                vote(voteType);
+                // Otherwise mark as using
+                vote('up');
             }
         } catch {
-            notify('Failed to vote. Please try again.', 'error');
+            notify('Operation failed, please try again', 'error');
         }
     };
 
-    // Reddit风格样式配置 - 水平排列紧凑
+    // Style configuration - clean single button layout
     const sizeConfig = {
         sm: {
             button: 'w-6 h-6',
             icon: 'h-3 w-3',
-            score: 'text-xs font-medium px-0.5 min-w-[1.25rem]',
-            container: 'gap-0'
+            score: 'text-xs font-medium px-1 min-w-[1.5rem]',
+            container: 'gap-1'
         },
         md: {
             button: 'w-8 h-8',
             icon: 'h-4 w-4',
-            score: 'text-sm font-bold px-0.5 min-w-[1.75rem]',
-            container: 'gap-0'
+            score: 'text-sm font-medium px-1 min-w-[2rem]',
+            container: 'gap-1'
         },
         lg: {
             button: 'w-10 h-10',
             icon: 'h-5 w-5',
-            score: 'text-base font-bold px-1 min-w-[2rem]',
-            container: 'gap-0'
+            score: 'text-base font-medium px-1 min-w-[2.5rem]',
+            container: 'gap-1'
         }
     };
 
     const config = sizeConfig[size];
     const isLoading = scoreLoading || voteLoading || isVoting;
 
-    // Reddit风格按钮样式
-    const getButtonStyle = (voteType: 'up' | 'down') => {
-        const baseStyle = `flex items-center justify-center rounded-sm transition-all duration-150 ${config.button}`;
-        const isSelected = userVote === voteType;
+    // Button style
+    const getButtonStyle = () => {
+        const baseStyle = `flex items-center justify-center rounded-full transition-all duration-150 ${config.button}`;
+        const isSelected = userVote === 'up';
         const isDisabled = isLoading || !isSignedIn;
 
         if (isDisabled) {
             return `${baseStyle} text-gray-300 cursor-not-allowed dark:text-gray-600`;
         }
 
-        if (voteType === 'up') {
-            return isSelected
-                ? `${baseStyle} text-orange-500 hover:text-orange-600 hover:bg-orange-50 dark:text-orange-400 dark:hover:bg-orange-900/20`
-                : `${baseStyle} text-gray-400 hover:text-orange-500 hover:bg-orange-50 dark:text-gray-500 dark:hover:text-orange-400 dark:hover:bg-orange-900/20`;
-        } else {
-            return isSelected
-                ? `${baseStyle} text-purple-500 hover:text-purple-600 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-purple-900/20`
-                : `${baseStyle} text-gray-400 hover:text-purple-500 hover:bg-purple-50 dark:text-gray-500 dark:hover:text-purple-400 dark:hover:bg-purple-900/20`;
-        }
+        return isSelected
+            ? `${baseStyle} text-blue-500 hover:text-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-900/20`
+            : `${baseStyle} text-gray-400 hover:text-blue-500 hover:bg-blue-50 dark:text-gray-500 dark:hover:text-blue-400 dark:hover:bg-blue-900/20`;
     };
 
-    // 分数样式 - 水平布局优化
+    // User count style
     const getScoreStyle = () => {
         const baseStyle = `text-center flex items-center justify-center ${config.score}`;
-        const score = serverScore?.total_score || 0;
+        const upvotes = serverScore?.upvotes || 0;
 
-        if (score > 0) {
-            return `${baseStyle} text-orange-600 dark:text-orange-400`;
-        } else if (score < 0) {
-            return `${baseStyle} text-purple-600 dark:text-purple-400`;
+        if (upvotes > 0) {
+            return `${baseStyle} text-blue-600 dark:text-blue-400`;
         } else {
             return `${baseStyle} text-gray-600 dark:text-gray-400`;
         }
     };
 
-    // 登录提示
+    // Login prompt
     if (!isSignedIn) {
         return (
             <div className={`flex items-center ${config.container} ${className}`}>
                 <button
                     onClick={() => openSignIn()}
-                    className={`flex items-center justify-center ${config.button} bg-blue-100 text-blue-600 hover:bg-blue-200 rounded-sm transition-all duration-150 dark:bg-blue-900/20 dark:text-blue-400`}
-                    title="Sign in to vote"
+                    className={`flex items-center justify-center ${config.button} bg-blue-100 text-blue-600 hover:bg-blue-200 rounded-full transition-all duration-150 dark:bg-blue-900/20 dark:text-blue-400`}
+                    title="Sign in to mark as using"
                 >
                     <LogIn className={config.icon} />
                 </button>
                 {showScore && serverScore && (
                     <div className={getScoreStyle()}>
-                        {serverScore.total_score > 0 ? '+' : ''}{serverScore.total_score}
+                        {serverScore.upvotes || 0} users
                     </div>
                 )}
-                <div className={`${config.button} flex items-center justify-center`}>
-                    <Triangle className={`${config.icon} rotate-180 text-gray-300 dark:text-gray-600`} fill="none" />
-                </div>
             </div>
         );
     }
 
     return (
         <div className={`flex items-center ${config.container} ${className}`}>
-            {/* Upvote Button - Reddit风格上箭头 */}
+            {/* I'm using this button */}
             <button
-                onClick={() => handleVote('up')}
+                onClick={handleUsage}
                 disabled={isLoading}
-                className={getButtonStyle('up')}
-                title={userVote === 'up' ? 'Remove upvote' : 'Upvote'}
+                className={getButtonStyle()}
+                title={userVote === 'up' ? 'Remove usage mark' : 'Mark as using'}
             >
-                <Triangle 
+                <ThumbsUp 
                     className={config.icon} 
                     fill={userVote === 'up' ? 'currentColor' : 'none'} 
                 />
             </button>
 
-            {/* Score Display - Reddit风格分数 */}
+            {/* User count display */}
             {showScore && serverScore && (
                 <div className={getScoreStyle()}>
-                    {serverScore.total_score > 0 ? '+' : ''}{serverScore.total_score}
+                    {serverScore.upvotes || 0} users
                 </div>
             )}
-
-            {/* Downvote Button - Reddit风格下箭头 */}
-            <button
-                onClick={() => handleVote('down')}
-                disabled={isLoading}
-                className={getButtonStyle('down')}
-                title={userVote === 'down' ? 'Remove downvote' : 'Downvote'}
-            >
-                <Triangle 
-                    className={`${config.icon} rotate-180`} 
-                    fill={userVote === 'down' ? 'currentColor' : 'none'} 
-                />
-            </button>
         </div>
     );
 };
 
-// 紧凑版投票组件（小尺寸）
+// Compact usage button (small size)
 export const CompactVoteButtons: React.FC<Omit<VoteButtonsProps, 'size'>> = (props) => {
     return <VoteButtons {...props} size="sm" />;
 };
 
-// 详细版投票组件（带投票详情）
+// Detailed usage button (with usage details)
 export const DetailedVoteButtons: React.FC<VoteButtonsProps & { 
     showDetails?: boolean;
 }> = ({ showDetails = false, ...props }) => {
@@ -219,9 +196,9 @@ export const DetailedVoteButtons: React.FC<VoteButtonsProps & {
             <VoteButtons {...props} />
             {serverScore && (
                 <div className="text-xs text-gray-500 dark:text-gray-400 space-y-1">
-                    <div>↑ {serverScore.upvotes} · ↓ {serverScore.downvotes}</div>
-                    <div>Initial: {serverScore.initial_score}</div>
-                    <div>Votes: {serverScore.vote_score > 0 ? '+' : ''}{serverScore.vote_score}</div>
+                    <div>👍 {serverScore.upvotes} users</div>
+                    <div>Base score: {serverScore.initial_score}</div>
+                    <div>User score: {serverScore.vote_score > 0 ? '+' : ''}{serverScore.vote_score}</div>
                     {serverScore.is_monorepo && (
                         <div className="text-yellow-600 dark:text-yellow-400">
                             📦 Monorepo
