@@ -115,8 +115,8 @@ const VoteButtons: React.FC<VoteButtonsProps> = ({
         }
 
         return isSelected
-            ? `${baseStyle} text-blue-500 hover:text-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-900/20`
-            : `${baseStyle} text-gray-400 hover:text-blue-500 hover:bg-blue-50 dark:text-gray-500 dark:hover:text-blue-400 dark:hover:bg-blue-900/20`;
+            ? `${baseStyle} text-red-500 hover:text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20`
+            : `${baseStyle} text-gray-400 hover:text-red-500 hover:bg-red-50 dark:text-gray-500 dark:hover:text-red-400 dark:hover:bg-red-900/20`;
     };
 
     // User count style
@@ -125,7 +125,7 @@ const VoteButtons: React.FC<VoteButtonsProps> = ({
         const upvotes = serverScore?.upvotes || 0;
 
         if (upvotes > 0) {
-            return `${baseStyle} text-blue-600 dark:text-blue-400`;
+            return `${baseStyle} text-red-600 dark:text-red-400`;
         } else {
             return `${baseStyle} text-gray-600 dark:text-gray-400`;
         }
@@ -137,7 +137,7 @@ const VoteButtons: React.FC<VoteButtonsProps> = ({
             <div className={`flex items-center ${config.container} ${className}`}>
                 <button
                     onClick={() => openSignIn()}
-                    className={`flex items-center justify-center ${config.button} bg-blue-100 text-blue-600 hover:bg-blue-200 rounded-full transition-all duration-150 dark:bg-blue-900/20 dark:text-blue-400`}
+                    className={`flex items-center justify-center ${config.button} bg-red-100 text-red-600 hover:bg-red-200 rounded-full transition-all duration-150 dark:bg-red-900/20 dark:text-red-400`}
                     title="Sign in to mark as using"
                 >
                     <LogIn className={config.icon} />
