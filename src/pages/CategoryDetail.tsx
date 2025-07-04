@@ -26,24 +26,32 @@ const CategoryDetail: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [filters, setFilters] = useState<SearchFilters>({});
     const [sortBy, setSortBy] = useState<SortOption>({
-        key: "quality",
-        label: "Quality Score",
+        key: "quality_score",
+        label: "Quality Score", 
         direction: "desc",
     });
     const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
     const [currentPage, setCurrentPage] = useState(1);
 
-    // Use paginated hook for better performance
+    // Use paginated hook for better performance with filters
     const { 
         data: paginatedResult, 
-        isLoading: serversLoading 
+        isLoading: serversLoading
     } = useServersByCategoryPaginated(
         id!,
         currentPage,
         12, // items per page
         sortBy.key,
-        sortBy.direction
+        sortBy.direction,
+        {
+            search: searchQuery.trim() || undefined,
+            subcategory: filters.subcategory,
+            qualityScore: filters.qualityScore,
+            featured: filters.featured,
+            verified: filters.verified,
+        }
     );
+
 
     const servers = paginatedResult?.data || [];
     const totalServers = paginatedResult?.total || 0;
@@ -57,14 +65,14 @@ const CategoryDetail: React.FC = () => {
         { key: "name", label: "Name", direction: "asc" },
         { key: "stars", label: "Stars", direction: "desc" },
         { key: "downloads", label: "Downloads", direction: "desc" },
-        { key: "quality", label: "Quality Score", direction: "desc" },
-        { key: "updated", label: "Last Updated", direction: "desc" },
+        { key: "quality_score", label: "Quality Score", direction: "desc" },
+        { key: "last_updated", label: "Last Updated", direction: "desc" },
     ];
 
     // Reset page when filters change
     React.useEffect(() => {
         setCurrentPage(1);
-    }, [sortBy, filters]);
+    }, [sortBy, filters, searchQuery]);
 
     // Server data is already filtered and sorted on the server side
     const filteredAndSortedServers = servers;

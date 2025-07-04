@@ -172,7 +172,7 @@ export interface SearchFilters {
 }
 
 export interface SortOption {
-    key: "name" | "stars" | "downloads" | "quality" | "updated";
+    key: "name" | "stars" | "downloads" | "quality_score" | "last_updated";
     label: string;
     direction: "asc" | "desc";
 }

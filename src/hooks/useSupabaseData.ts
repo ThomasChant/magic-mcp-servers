@@ -525,10 +525,17 @@ export const useSupabaseServersByCategoryPaginated = (
   page: number = 1,
   limit: number = 12,
   sortBy: string = 'stars',
-  sortOrder: 'asc' | 'desc' = 'desc'
+  sortOrder: 'asc' | 'desc' = 'desc',
+  filters?: {
+    search?: string;
+    subcategory?: string;
+    qualityScore?: number;
+    featured?: boolean;
+    verified?: boolean;
+  }
 ) => {
   return useQuery({
-    queryKey: ["supabase", "servers", "category", categoryId, "paginated", page, limit, sortBy, sortOrder],
+    queryKey: ["supabase", "servers", "category", categoryId, "paginated", page, limit, sortBy, sortOrder, filters],
     queryFn: async (): Promise<PaginatedResult<MCPServer>> => {
       if (!categoryId) {
         return {
@@ -545,6 +552,27 @@ export const useSupabaseServersByCategoryPaginated = (
         .from('servers_with_details')
         .select('*', { count: 'exact' })
         .eq('category_id', categoryId);
+
+      // Apply filters
+      if (filters?.search) {
+        query = query.or(`name.ilike.%${filters.search}%,description_en.ilike.%${filters.search}%,full_description.ilike.%${filters.search}%`);
+      }
+
+      if (filters?.subcategory) {
+        query = query.eq('subcategory_id', filters.subcategory);
+      }
+
+      if (filters?.featured) {
+        query = query.eq('featured', true);
+      }
+
+      if (filters?.verified) {
+        query = query.eq('verified', true);
+      }
+
+      if (filters?.qualityScore) {
+        query = query.gte('quality_score', filters.qualityScore);
+      }
 
       // Apply sorting
       query = query.order(sortBy, { ascending: sortOrder === 'asc' });

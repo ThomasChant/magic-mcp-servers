@@ -83,9 +83,16 @@ export const useServersByCategoryPaginated = (
   page: number = 1,
   limit: number = 12,
   sortBy: string = 'stars',
-  sortOrder: 'asc' | 'desc' = 'desc'
+  sortOrder: 'asc' | 'desc' = 'desc',
+  filters?: {
+    search?: string;
+    subcategory?: string;
+    qualityScore?: number;
+    featured?: boolean;
+    verified?: boolean;
+  }
 ) => {
-  return useSupabaseServersByCategoryPaginated(categoryId, page, limit, sortBy, sortOrder);
+  return useSupabaseServersByCategoryPaginated(categoryId, page, limit, sortBy, sortOrder, filters);
 };
 
 export const useHomePageData = () => {
