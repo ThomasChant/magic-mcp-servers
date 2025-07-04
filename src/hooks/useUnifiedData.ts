@@ -11,7 +11,6 @@ import {
   useSupabasePopularServers,
   useSupabaseRecentServers,
   useSupabaseSearchServers,
-  useSupabaseServersByCategory,
   transformServer,
   type PopularTag
 } from "./useSupabaseData";
@@ -61,25 +60,6 @@ export const useRecentServers = () => {
 export const useSearchServers = (query: string) => {
   console.warn('useSearchServers is deprecated. Use useSearchServersPaginated instead for better performance.');
   return useSupabaseSearchServers(query);
-};
-
-// Optimized hooks for better performance
-export const useServersPaginated = (
-  page: number = 1,
-  limit: number = 12,
-  sortBy: string = 'stars',
-  sortOrder: 'asc' | 'desc' = 'desc',
-  filters?: {
-    search?: string;
-    category?: string;
-    platforms?: string[];
-    languages?: string[];
-    featured?: boolean;
-    verified?: boolean;
-    qualityScore?: number;
-  }
-) => {
-  return useSupabaseServersPaginated(page, limit, sortBy, sortOrder, filters);
 };
 
 export const useServerStats = () => {
@@ -213,16 +193,6 @@ export const useSearchServersPaginated = (
   });
 };
 
-// Legacy search hook - deprecated
-export const useSearchServers = (query: string) => {
-  console.warn('useSearchServers is deprecated. Use useSearchServersPaginated instead for better performance.');
-  const { data: paginatedResult } = useSearchServersPaginated(query, 1, 1000);
-  return {
-    data: paginatedResult?.data || [],
-    isLoading: false,
-    error: null
-  };
-};
 
 // Server by slug/id
 export const useServer = (slug: string) => {
@@ -270,57 +240,6 @@ export const useFeaturedServers = () => {
 
       return (data || []).map(transformServer);
     },
-    staleTime: 10 * 60 * 1000, // 10 minutes
-  });
-};
-
-// Popular servers (alias for featured)
-export const usePopularServers = useFeaturedServers;
-
-// Recent servers
-export const useRecentServers = () => {
-  return useQuery({
-    queryKey: ["recent", "servers"],
-    queryFn: async (): Promise<MCPServer[]> => {
-      const { data, error } = await supabase
-        .from('servers_with_details')
-        .select('*')
-        .order('last_updated', { ascending: false })
-        .limit(12);
-
-      if (error) {
-        throw new Error(`Failed to fetch recent servers: ${error.message}`);
-      }
-
-      return (data || []).map(transformServer);
-    },
-    staleTime: 5 * 60 * 1000, // 5 minutes
-  });
-};
-
-// Server README
-export const useServerReadme = (serverId: string) => {
-  return useQuery({
-    queryKey: ["server", "readme", serverId],
-    queryFn: async () => {
-      if (!serverId) return null;
-
-      const { data, error } = await supabase
-        .from('server_readmes')
-        .select('*')
-        .eq('server_id', serverId)
-        .single();
-
-      if (error) {
-        if (error.code === 'PGRST116') {
-          return null; // Not found
-        }
-        throw new Error(`Failed to fetch README: ${error.message}`);
-      }
-
-      return data;
-    },
-    enabled: !!serverId,
     staleTime: 10 * 60 * 1000, // 10 minutes
   });
 };
