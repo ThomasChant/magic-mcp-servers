@@ -23,8 +23,8 @@ interface ServerData extends Omit<MCPServer, 'verified'> {
     };
 }
 
-// Helper functions
-const getServerIcon = (server: ServerData | MCPServer) => {
+ // Get server icon based on category or tags
+ const getServerIcon = (server: ServerData) => {
     const tags = server.tags.join(" ").toLowerCase();
     const category = Array.isArray(server.category) ? server.category.join(" ").toLowerCase() : server.category.toLowerCase();
     const combined = `${tags} ${category}`;
@@ -43,6 +43,57 @@ const getServerIcon = (server: ServerData | MCPServer) => {
         return <FileText className="h-5 w-5 text-white" />;
     }
 };
+
+
+
+
+// Format time ago
+const formatTimeAgo = (dateString: string) => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffInMs = now.getTime() - date.getTime();
+    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+    
+    if (diffInDays === 0) return "today";
+    
+    // Calculate years, months, weeks, and days
+    const years = Math.floor(diffInDays / 365);
+    const months = Math.floor((diffInDays % 365) / 30);
+    const weeks = Math.floor((diffInDays % 30) / 7);
+    const days = diffInDays % 7;
+    
+    // Build array of time units
+    const units: { value: number; label: string }[] = [];
+    if (years > 0) units.push({ value: years, label: "y" });
+    if (months > 0) units.push({ value: months, label: "m" });
+    if (weeks > 0) units.push({ value: weeks, label: "w" });
+    if (days > 0) units.push({ value: days, label: "d" });
+    
+    // Take only the two largest units
+    const displayUnits = units.slice(0, 2);
+    
+    // Format the output
+    return displayUnits.map(unit => `${unit.value}${unit.label}`).join('');
+};
+
+// Detect if server is part of a monorepo
+const getMonorepoInfo = (githubUrl: string) => {
+    if (!githubUrl) return null;
+    
+    // Pattern to match monorepo URLs like github.com/owner/repo/tree/main/path
+    const monorepoPattern = /github\.com\/([^/]+\/[^/]+)\/(tree|blob)\/[^/]+\/(.+)/;
+    const match = githubUrl.match(monorepoPattern);
+    
+    if (match) {
+        return {
+            parentRepo: match[1],
+            path: match[3]
+        };
+    }
+    
+    return null;
+};
+
 
 const getServerIconBg = (server: ServerData | MCPServer) => {
     const tags = server.tags.join(" ").toLowerCase();
@@ -64,49 +115,18 @@ const getServerIconBg = (server: ServerData | MCPServer) => {
     }
 };
 
-const formatTimeAgo = (dateString: string) => {
-    const date = new Date(dateString);
-    const now = new Date();
-    const diffInDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
-    
-    if (diffInDays === 0) return "today";
-    if (diffInDays === 1) return "1d ago";
-    if (diffInDays === 2) return "2d ago";
-    if (diffInDays === 3) return "3d ago";
-    if (diffInDays === 5) return "5d ago";
-    if (diffInDays < 7) return `${diffInDays}d ago`;
-    if (diffInDays < 14) return "1w ago";
-    return `${Math.floor(diffInDays / 7)}w ago`;
-};
-
 const isPopular = (server: ServerData | MCPServer) => {
-    return server.stats?.stars >= 1000 || server.repository?.stars >= 1000 || server.stats?.forks >= 100 || server.repository?.forks >= 100;
+    return (server.stats?.stars || 0) >= 1000 || (server.repository?.stars || 0) >= 1000 || (server.stats?.forks || 0) >= 100 || (server.repository?.forks || 0) >= 100;
 };
 
-// Detect if server is part of a monorepo
-const getMonorepoInfo = (githubUrl: string) => {
-    if (!githubUrl) return null;
-    
-    // Pattern to match monorepo URLs like github.com/owner/repo/tree/main/path
-    const monorepoPattern = /github\.com\/([^/]+\/[^/]+)\/(tree|blob)\/[^/]+\/(.+)/;
-    const match = githubUrl.match(monorepoPattern);
-    
-    if (match) {
-        return {
-            parentRepo: match[1],
-            path: match[3]
-        };
-    }
-    
-    return null;
-};
-
+// Server Card Props
 interface ServerCardProps {
-    server: MCPServer;
+    server: ServerData | MCPServer;
 }
 
+// Server List Item Props
 interface ServerListItemProps {
-    server: MCPServer;
+    server: ServerData | MCPServer;
 }
 
 // Server Card Component for Grid View

@@ -36,6 +36,7 @@ import { useRelatedServers } from "../hooks/useRelatedServers";
 import StructuredReadme from "../components/StructuredReadme";
 import ServerCommentsWithReplies from "../components/ServerCommentsWithReplies";
 import { FavoriteButton } from "../components/FavoriteButton";
+import VoteButtons from "../components/VoteButtons";
 import ServerTooltip from "../components/ServerTooltip";
 import InstallationTab from "../components/InstallationTab";
 import APIReferenceTab from "../components/APIReferenceTab";
@@ -386,6 +387,12 @@ const ServerDetail: React.FC = () => {
                                 showText={true}
                                 size="md"
                                 className="min-w-[100px] border-2 shadow-sm hover:shadow-md text-sm"
+                            />
+                            <VoteButtons
+                                serverId={server.id}
+                                size="md"
+                                showScore={true}
+                                className="min-w-[120px] border-2 border-blue-200 bg-white hover:bg-blue-50 hover:border-blue-300 shadow-sm hover:shadow-md text-sm px-3 py-2 rounded-lg"
                             />
                             <div className="relative" ref={shareMenuRef}>
 

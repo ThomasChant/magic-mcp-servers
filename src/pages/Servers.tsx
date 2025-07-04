@@ -34,7 +34,7 @@ const Servers: React.FC = () => {
     const [sidebarSearch, setSidebarSearch] = useState("");
     const [debouncedSearch, setDebouncedSearch] = useState("");
     const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-    const [sortBy, setSortBy] = useState("total_score"); // 默认按社区评分排序
+    const [sortBy, setSortBy] = useState("upvotes"); // 默认按使用人数排序
     const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
     const [quickFilter, setQuickFilter] = useState("all");
     const [currentPage, setCurrentPage] = useState(1);
@@ -54,7 +54,7 @@ const Servers: React.FC = () => {
             // If global search is cleared, clear debounced search too
             setDebouncedSearch('');
         }
-    }, [searchQuery]);
+    }, [searchQuery, sidebarSearch]);
 
     // Debounce local sidebar search input to avoid excessive API calls
     useEffect(() => {
@@ -196,6 +196,19 @@ const Servers: React.FC = () => {
         { id: "Nix", name: "Nix" }
     ];
 
+    
+    // Format star count like GitHub
+    // const formatStarCount = (count: number): string => {
+    //     if (count >= 1000000) {
+    //         const m = count / 1000000;
+    //         return m >= 10 ? Math.floor(m) + 'm' : m.toFixed(1) + 'm';
+    //     } else if (count >= 1000) {
+    //         const k = count / 1000;
+    //         return k >= 10 ? Math.floor(k) + 'k' : k.toFixed(1) + 'k';
+    //     }
+    //     return count.toString();
+    // };
+
     // Server data is already filtered and sorted on the server side
     const filteredAndSortedServers = servers;
 
@@ -206,7 +219,7 @@ const Servers: React.FC = () => {
 
     // Servers are already paginated from the server
     const paginatedServers = filteredAndSortedServers;
-    // Server List Item Component
+
     if (serversLoading) {
         return (
             <div className="bg-gray-50 dark:bg-gray-900 min-h-screen" data-testid="loading">
@@ -292,8 +305,8 @@ const Servers: React.FC = () => {
                                 }}
                                 className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             >
-                                <option value="total_score-desc">Sort by Community Score (High to Low)</option>
-                                <option value="total_score-asc">Sort by Community Score (Low to High)</option>
+                                <option value="upvotes-desc">Sort by Usage Count (High to Low)</option>
+                                <option value="upvotes-asc">Sort by Usage Count (Low to High)</option>
                                 <option value="stars-desc">Sort by GitHub Stars (High to Low)</option>
                                 <option value="stars-asc">Sort by GitHub Stars (Low to High)</option>
                                 <option value="name-asc">Sort by Name (A to Z)</option>
