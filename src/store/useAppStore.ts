@@ -18,6 +18,8 @@ interface AppStore {
     theme: "light" | "dark";
     /** @property {boolean} sidebarOpen - 侧边栏的可见状态。 */
     sidebarOpen: boolean;
+    /** @property {'grid' | 'list'} favoriteViewMode - 收藏页面的视图模式。 */
+    favoriteViewMode: "grid" | "list";
 
     // --- 搜索和过滤状态 ---
 
@@ -49,6 +51,8 @@ interface AppStore {
     toggleTheme: () => void;
     /** @method toggleSidebar - 切换侧边栏的可见性。 */
     toggleSidebar: () => void;
+    /** @method setFavoriteViewMode - 设置收藏页面的视图模式。 */
+    setFavoriteViewMode: (mode: "grid" | "list") => void;
     /** @method setSearchQuery - 设置搜索查询文本。 */
     setSearchQuery: (query: string) => void;
     /** @method setFilters - 设置搜索过滤器。 */
@@ -101,6 +105,7 @@ export const useAppStore = create<AppStore>()(
             language: "en",
             theme: "light",
             sidebarOpen: false,
+            favoriteViewMode: "grid",
             searchQuery: "",
             filters: {},
             sortBy: {
@@ -126,6 +131,8 @@ export const useAppStore = create<AppStore>()(
                 set((state) => ({
                     sidebarOpen: !state.sidebarOpen,
                 })),
+
+            setFavoriteViewMode: (mode) => set({ favoriteViewMode: mode }),
 
             setSearchQuery: (searchQuery) => set({ searchQuery }),
 
@@ -312,6 +319,7 @@ export const useAppStore = create<AppStore>()(
             partialize: (state) => ({
                 language: state.language,
                 theme: state.theme,
+                favoriteViewMode: state.favoriteViewMode,
                 filters: state.filters,
                 sortBy: state.sortBy,
                 favorites: Array.from(state.favorites),

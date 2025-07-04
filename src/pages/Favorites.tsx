@@ -8,10 +8,12 @@ import {
     AlertCircle,
     RefreshCw,
     Filter,
+    Grid3X3,
+    List,
 } from "lucide-react";
 import { useServers, useCategories } from "../hooks/useUnifiedData";
 import { useAppStore } from "../store/useAppStore";
-import { ServerCard } from "../components/ServerCard";
+import { ServerCard, ServerListItem } from "../components/ServerCard";
 import { useFavoritesSync } from "../hooks/useFavoritesSync";
 import type { MCPServer } from "../types";
 
@@ -26,7 +28,7 @@ interface ServerData extends Omit<MCPServer, 'verified'> {
 const Favorites: React.FC = () => {
     const { data: servers, isLoading, error } = useServers();
     const { data: categories } = useCategories();
-    const { favorites } = useAppStore();
+    const { favorites, favoriteViewMode, setFavoriteViewMode } = useAppStore();
     const syncData = useFavoritesSync();
     const { isOnline, favoritesError, retrySync, isSignedIn } = syncData;
     
@@ -136,42 +138,69 @@ const Favorites: React.FC = () => {
                             My Favorites
                         </h1>
                         
-                        {/* Sync Status */}
-                        {isSignedIn && (
-                            <div className="flex items-center gap-3">
-                                {favoritesError ? (
-                                    <div className="flex items-center gap-2 text-red-600 dark:text-red-400 text-sm">
-                                        <AlertCircle className="h-4 w-4" />
-                                        <span>Sync failed</span>
-                                        <button
-                                            onClick={retrySync}
-                                            className="flex items-center gap-1 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 underline"
-                                        >
-                                            <RefreshCw className="h-3 w-3" />
-                                            Retry
-                                        </button>
-                                    </div>
-                                ) : (
-                                    <div className={`flex items-center gap-2 text-sm ${
-                                        isOnline 
-                                            ? "text-green-600 dark:text-green-400" 
-                                            : "text-amber-600 dark:text-amber-400"
-                                    }`}>
-                                        {isOnline ? (
-                                            <>
-                                                <Cloud className="h-4 w-4" />
-                                                <span>Synced</span>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <CloudOff className="h-4 w-4" />
-                                                <span>Local only</span>
-                                            </>
-                                        )}
-                                    </div>
-                                )}
+                        <div className="flex items-center gap-4">
+                            {/* View Toggle */}
+                            <div className="flex items-center space-x-2">
+                                <span className="text-sm text-gray-600 dark:text-gray-400">View:</span>
+                                <button
+                                    onClick={() => setFavoriteViewMode("grid")}
+                                    className={`p-2 rounded-md ${
+                                        favoriteViewMode === "grid"
+                                            ? "bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300"
+                                            : "text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
+                                    }`}
+                                >
+                                    <Grid3X3 className="h-4 w-4" />
+                                </button>
+                                <button
+                                    onClick={() => setFavoriteViewMode("list")}
+                                    className={`p-2 rounded-md ${
+                                        favoriteViewMode === "list"
+                                            ? "bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300"
+                                            : "text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
+                                    }`}
+                                >
+                                    <List className="h-4 w-4" />
+                                </button>
                             </div>
-                        )}
+                            
+                            {/* Sync Status */}
+                            {isSignedIn && (
+                                <div className="flex items-center gap-3">
+                                    {favoritesError ? (
+                                        <div className="flex items-center gap-2 text-red-600 dark:text-red-400 text-sm">
+                                            <AlertCircle className="h-4 w-4" />
+                                            <span>Sync failed</span>
+                                            <button
+                                                onClick={retrySync}
+                                                className="flex items-center gap-1 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                                            >
+                                                <RefreshCw className="h-3 w-3" />
+                                                Retry
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <div className={`flex items-center gap-2 text-sm ${
+                                            isOnline 
+                                                ? "text-green-600 dark:text-green-400" 
+                                                : "text-amber-600 dark:text-amber-400"
+                                        }`}>
+                                            {isOnline ? (
+                                                <>
+                                                    <Cloud className="h-4 w-4" />
+                                                    <span>Synced</span>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <CloudOff className="h-4 w-4" />
+                                                    <span>Local only</span>
+                                                </>
+                                            )}
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                        </div>
                     </div>
                     
                     <p className="text-lg text-gray-600 dark:text-gray-300">
@@ -253,15 +282,23 @@ const Favorites: React.FC = () => {
                     {/* Main content */}
                     <div className={categories && categories.length > 0 ? "lg:flex-1" : "w-full"}>
                         {favoriteServers.length > 0 ? (
-                            <div className={`grid grid-cols-1 gap-6 ${
-                                categories && categories.length > 0 
-                                    ? "lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3" 
-                                    : "md:grid-cols-2 xl:grid-cols-3"
-                            }`}>
-                                {favoriteServers.map((server) => (
-                                    <ServerCard key={server.slug} server={server as ServerData} />
-                                ))}
-                            </div>
+                            favoriteViewMode === "grid" ? (
+                                <div className={`grid grid-cols-1 gap-6 ${
+                                    categories && categories.length > 0 
+                                        ? "lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3" 
+                                        : "md:grid-cols-2 xl:grid-cols-3"
+                                }`}>
+                                    {favoriteServers.map((server) => (
+                                        <ServerCard key={server.slug} server={server as ServerData} />
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="space-y-2">
+                                    {favoriteServers.map((server) => (
+                                        <ServerListItem key={server.slug} server={server as ServerData} />
+                                    ))}
+                                </div>
+                            )
                         ) : (
                             selectedCategories.length > 0 ? (
                                 <div className="text-center py-12">
