@@ -39,7 +39,18 @@
     "db:test-voting": "npx tsx scripts/test-voting-fix.ts",
     "db:test-rls": "npx tsx scripts/test-rls-fix.ts",
     "db:test-real-voting": "npx tsx scripts/test-real-voting.ts",
-    "test:monorepo-names": "npx tsx scripts/test-monorepo-name-extraction-20250703185500.ts"
+    "test:monorepo-names": "npx tsx scripts/test-monorepo-name-extraction-20250703185500.ts",
+    "claude:parse-readmes": "npx tsx scripts/parse-readmes-with-claude.ts",
+    "claude:parse-readmes-agents": "npx tsx scripts/parse-readmes-with-claude-agents.ts",
+    "claude:parse-readmes-real-agents": "npx tsx scripts/parse-readmes-with-real-agents.ts",
+    "claude:demo-agent-analysis": "npx tsx scripts/demo-claude-agent-analysis.ts",
+    "claude:parse-readmes-deepseek": "npx tsx scripts/parse-readmes-with-deepseek.ts",
+    "claude:parse-readmes-ai": "npx tsx scripts/parse-readmes-with-ai.ts",
+    "claude:test-deepseek": "npx tsx scripts/test-deepseek-api.ts",
+    "claude:test-gemini": "npx tsx scripts/test-gemini-api.ts",
+    "claude:test-timeout": "npx tsx scripts/test-deepseek-timeout.ts",
+    "db:migrate-extraction": "npx tsx scripts/run-migration.ts",
+    "db:check-schema": "npx tsx scripts/check-db-schema.ts"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.32.2",
@@ -67,7 +78,7 @@
     "@vitejs/plugin-react": "^4.4.1",
     "autoprefixer": "^10.4.21",
     "claude-flow": "^1.0.72",
-    "dotenv": "^17.0.0",
+    "dotenv": "^17.0.1",
     "eslint": "^9.25.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",

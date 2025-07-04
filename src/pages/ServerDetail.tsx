@@ -25,7 +25,6 @@ import {
     Link2,
     FileText,
     MessageSquare,
-    Settings,
     Copy,
     CheckCircle,
     ExternalLink,
@@ -38,6 +37,8 @@ import StructuredReadme from "../components/StructuredReadme";
 import ServerCommentsWithReplies from "../components/ServerCommentsWithReplies";
 import { FavoriteButton } from "../components/FavoriteButton";
 import ServerTooltip from "../components/ServerTooltip";
+import InstallationTab from "../components/InstallationTab";
+import APIReferenceTab from "../components/APIReferenceTab";
 
 const ServerDetail: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();
@@ -45,7 +46,7 @@ const ServerDetail: React.FC = () => {
     console.log("server", server)
 
     const { relatedServers, isLoading: relatedLoading } = useRelatedServers(server, 30);
-    const [activeTab, setActiveTab] = useState<'overview' | 'comments' | 'config'>('overview');
+    const [activeTab, setActiveTab] = useState<'overview' | 'installation' | 'api-reference' | 'comments'>('overview');
     const { data: readmeData, isLoading: readmeLoading } = useServerReadme(server?.id || '');
     // Remove activeTab state as we're using StructuredReadme component
     const [copiedStates, setCopiedStates] = useState<{ [key: string]: boolean }>({});
@@ -469,15 +470,27 @@ const ServerDetail: React.FC = () => {
                                 </button>
                                
                                 <button
-                                    onClick={() => setActiveTab('config')}
+                                    onClick={() => setActiveTab('installation')}
                                     className={`flex items-center px-6 py-4 text-sm font-medium border-b-2 transition-colors ${
-                                        activeTab === 'config'
+                                        activeTab === 'installation'
                                             ? 'border-blue-500 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
                                             : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/30'
                                     }`}
                                 >
-                                    <Settings className="h-4 w-4 mr-2" />
-                                    Config
+                                    <Terminal className="h-4 w-4 mr-2" />
+                                    Installation
+                                </button>
+                                
+                                <button
+                                    onClick={() => setActiveTab('api-reference')}
+                                    className={`flex items-center px-6 py-4 text-sm font-medium border-b-2 transition-colors ${
+                                        activeTab === 'api-reference'
+                                            ? 'border-blue-500 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                                            : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/30'
+                                    }`}
+                                >
+                                    <Code2 className="h-4 w-4 mr-2" />
+                                    API Reference
                                 </button>
                                 <button
                                     onClick={() => setActiveTab('comments')}
@@ -560,6 +573,20 @@ const ServerDetail: React.FC = () => {
                                         </div>
                                     )}
                                 </div>
+                            ) : activeTab === 'installation' ? (
+                                <InstallationTab
+                                    installation={readmeData?.extractedInstallation}
+                                    repositoryUrl={server.repository.url}
+                                    copiedStates={copiedStates}
+                                    onCopy={copyToClipboard}
+                                />
+                            ) : activeTab === 'api-reference' ? (
+                                <APIReferenceTab
+                                    apiReference={readmeData?.extractedApiReference}
+                                    repositoryUrl={server.repository.url}
+                                    copiedStates={copiedStates}
+                                    onCopy={copyToClipboard}
+                                />
                             ) : activeTab === 'comments' ? (
                                 <div className="p-6">
                                     {/* Comments Section */}

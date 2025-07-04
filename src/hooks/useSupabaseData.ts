@@ -875,6 +875,10 @@ export const useSupabaseServerReadme = (serverId: string) => {
           filename: data.filename,
           projectName: data.project_name,
           rawContent: data.raw_content,
+          extractedInstallation: data.extracted_installation,
+          extractedApiReference: data.extracted_api_reference,
+          extractionStatus: data.extraction_status,
+          extractedAt: data.extracted_at,
         };
       } catch (error) {
         console.warn(`README fetch failed for server ${serverId}:`, error);
