@@ -230,6 +230,13 @@ function transformServer(dbServer: Record<string, unknown>): MCPServer {
     },
     featured: (dbServer.featured as boolean) || false,
     verified: (dbServer.verified as boolean) || false,
+    latest: (() => {
+      // Check if the repository was created within the last 10 days
+      const createdAt = new Date(dbServer.repo_created_at as string);
+      const now = new Date();
+      const tenDaysAgo = new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000);
+      return createdAt > tenDaysAgo;
+    })(),
     createdAt: (dbServer.repo_created_at as string) || new Date().toISOString(),
     updatedAt: (dbServer.last_updated as string) || new Date().toISOString(),
   };
@@ -337,6 +344,7 @@ export const useSupabaseServersPaginated = (
     verified?: boolean;
     qualityScore?: number;
     popular?: boolean;
+    latest?: boolean;
   }
 ) => {
   return useQuery({
@@ -375,6 +383,13 @@ export const useSupabaseServersPaginated = (
 
       if (filters?.popular) {
         query = query.or(`stars.gte.1000,forks.gte.100`);
+      }
+
+      if (filters?.latest) {
+        // Filter for repositories created in the last 10 days
+        const tenDaysAgo = new Date();
+        tenDaysAgo.setDate(tenDaysAgo.getDate() - 10);
+        query = query.gte('repo_created_at', tenDaysAgo.toISOString());
       }
 
       if (filters?.platforms && filters.platforms.length > 0) {
@@ -905,6 +920,10 @@ export const useSupabaseServerReadme = (serverId: string) => {
           filename: data.filename,
           projectName: data.project_name,
           rawContent: data.raw_content,
+          extractedInstallation: data.extracted_installation,
+          extractedApiReference: data.extracted_api_reference,
+          extractionStatus: data.extraction_status,
+          extractedAt: data.extracted_at,
         };
       } catch (error) {
         console.warn(`README fetch failed for server ${serverId}:`, error);
