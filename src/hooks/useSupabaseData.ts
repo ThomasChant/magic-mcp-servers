@@ -529,9 +529,12 @@ export const useSupabaseServersByCategoryPaginated = (
   filters?: {
     search?: string;
     subcategory?: string;
+    platforms?: string[];
+    languages?: string[];
     qualityScore?: number;
     featured?: boolean;
     verified?: boolean;
+    popular?: boolean;
   }
 ) => {
   return useQuery({
@@ -572,6 +575,20 @@ export const useSupabaseServersByCategoryPaginated = (
 
       if (filters?.qualityScore) {
         query = query.gte('quality_score', filters.qualityScore);
+      }
+
+      if (filters?.popular) {
+        query = query.or(`stars.gte.1000,forks.gte.100`);
+      }
+
+      if (filters?.platforms && filters.platforms.length > 0) {
+        // Use overlaps operator to check if platforms array contains any of the selected platforms
+        query = query.overlaps('platforms', filters.platforms);
+      }
+
+      if (filters?.languages && filters.languages.length > 0) {
+        // Use overlaps operator to check if tech_stack array contains any of the selected languages
+        query = query.overlaps('tech_stack', filters.languages);
       }
 
       // Apply sorting

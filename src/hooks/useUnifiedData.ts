@@ -87,9 +87,12 @@ export const useServersByCategoryPaginated = (
   filters?: {
     search?: string;
     subcategory?: string;
+    platforms?: string[];
+    languages?: string[];
     qualityScore?: number;
     featured?: boolean;
     verified?: boolean;
+    popular?: boolean;
   }
 ) => {
   return useSupabaseServersByCategoryPaginated(categoryId, page, limit, sortBy, sortOrder, filters);

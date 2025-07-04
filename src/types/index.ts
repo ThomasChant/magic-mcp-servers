@@ -166,6 +166,8 @@ export interface SearchFilters {
     subcategory?: string;
     tags?: string[];
     compatibility?: string[];
+    platforms?: string[];
+    languages?: string[];
     qualityScore?: number;
     featured?: boolean;
     verified?: boolean;
