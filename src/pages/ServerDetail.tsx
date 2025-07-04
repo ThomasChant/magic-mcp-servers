@@ -288,27 +288,108 @@ const ServerDetail: React.FC = () => {
             {/* Server Header */}
             <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                    <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between">
-                        <div className="flex items-start space-x-4 mb-6 lg:mb-0">
+                    <div className="w-full">
+                        <div className="flex items-start space-x-4 w-full">
                             <div className="w-16 h-16 bg-blue-600 rounded-xl flex items-center justify-center">
                                 <Folder className="h-8 w-8 text-white" />
                             </div>
-                            <div>
-                                <div className="flex items-center space-x-3 mb-2">
-                                    <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-                                        {server.name}
-                                    </h1>
-                                    <div className="flex items-center space-x-2">
-                                        {server.verified && (
-                                            <span className="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
-                                                Official
-                                            </span>
-                                        )}
-                                        {server.featured && (
-                                            <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">
-                                                Featured
-                                            </span>
-                                        )}
+                            <div className="flex-grow">
+                                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-2">
+                                    <div className="flex items-center space-x-3 mb-4 lg:mb-0">
+                                        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+                                            {server.name}
+                                        </h1>
+                                        <div className="flex items-center space-x-2">
+                                            {server.verified && (
+                                                <span className="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
+                                                    Official
+                                                </span>
+                                            )}
+                                            {server.featured && (
+                                                <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">
+                                                    Featured
+                                                </span>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-row items-center gap-2">
+                                        <a
+                                            href={server.repository.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center justify-center w-8 h-8 bg-gray-50 border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-100 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700"
+                                            title="View on GitHub"
+                                        >
+                                            <GitBranch className="h-4 w-4" />
+                                        </a>
+                                        <FavoriteButton
+                                            serverId={server.id}
+                                            showText={false}
+                                            size="sm"
+                                            className="shadow-sm hover:shadow-md"
+                                        />
+                                        <VoteButtons
+                                            serverId={server.id}
+                                            size="sm"
+                                            showScore={false}
+                                            className="flex items-center"
+                                        />
+                                        <div className="relative" ref={shareMenuRef}>
+                                            <button
+                                                onClick={() =>
+                                                    setShowShareMenu(!showShareMenu)
+                                                }
+                                                className="inline-flex items-center justify-center w-8 h-8 border border-gray-200 bg-white text-gray-700 rounded-lg hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700"
+                                                title="Share"
+                                            >
+                                                <Share className="h-4 w-4" />
+                                            </button>
+                                            {showShareMenu && (
+                                                <div className="absolute right-0 mt-2 w-52 bg-white dark:bg-gray-700 rounded-xl shadow-xl border border-gray-100 dark:border-gray-600 z-10 overflow-hidden">
+                                                    <div className="py-2">
+                                                        <button
+                                                            onClick={() =>
+                                                                handleShare("twitter")
+                                                            }
+                                                            className="flex items-center w-full px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150"
+                                                        >
+                                                            <Twitter className="h-4 w-4 mr-3 text-blue-400" />
+                                                            Share on Twitter
+                                                        </button>
+                                                        <button
+                                                            onClick={() =>
+                                                                handleShare("facebook")
+                                                            }
+                                                            className="flex items-center w-full px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150"
+                                                        >
+                                                            <Facebook className="h-4 w-4 mr-3 text-blue-600" />
+                                                            Share on Facebook
+                                                        </button>
+                                                        <button
+                                                            onClick={() =>
+                                                                handleShare("linkedin")
+                                                            }
+                                                            className="flex items-center w-full px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150"
+                                                        >
+                                                            <Linkedin className="h-4 w-4 mr-3 text-blue-700" />
+                                                            Share on LinkedIn
+                                                        </button>
+                                                        <div className="border-t border-gray-100 dark:border-gray-600 my-1"></div>
+                                                        <button
+                                                            onClick={() =>
+                                                                handleShare("copy")
+                                                            }
+                                                            className="flex items-center w-full px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-150"
+                                                        >
+                                                            <Link2 className="h-4 w-4 mr-3 text-gray-500" />
+                                                            {copiedStates["share-link"]
+                                                                ? "Copied!"
+                                                                : "Copy Link"}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                                 <p className="text-lg text-gray-600 dark:text-gray-300 mb-4">
@@ -369,88 +450,6 @@ const ServerDetail: React.FC = () => {
                                         </span>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div className="flex flex-row sm:flex-row gap-2 min-w-fit">
-                            <a
-                                href={server.repository.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center px-3 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-all duration-200 shadow-sm hover:shadow-md text-sm font-medium min-w-[120px]"
-                            >
-                                <GitBranch className="mr-1.5 h-4 w-4" />
-                                View on GitHub
-                            </a>
-                            <FavoriteButton
-                                serverId={server.id}
-                                showText={true}
-                                size="md"
-                                className="min-w-[100px] border-2 shadow-sm hover:shadow-md text-sm"
-                            />
-                            <VoteButtons
-                                serverId={server.id}
-                                size="md"
-                                showScore={true}
-                                className="min-w-[120px] border-2 border-blue-200 bg-white hover:bg-blue-50 hover:border-blue-300 shadow-sm hover:shadow-md text-sm px-3 py-2 rounded-lg"
-                            />
-                            <div className="relative" ref={shareMenuRef}>
-
-                                <button
-                                    onClick={() =>
-                                        setShowShareMenu(!showShareMenu)
-                                    }
-                                    className="inline-flex items-center justify-center px-3 py-2 border-2 border-gray-200 bg-white text-gray-700 rounded-lg hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md text-sm font-medium min-w-[80px]"
-                                >
-                                    <Share className="mr-1.5 h-4 w-4" />
-                                    Share
-                                </button>
-                                {showShareMenu && (
-                                    <div className="absolute right-0 mt-2 w-52 bg-white dark:bg-gray-700 rounded-xl shadow-xl border border-gray-100 dark:border-gray-600 z-10 overflow-hidden">
-                                        <div className="py-2">
-                                            <button
-
-                                                onClick={() =>
-                                                    handleShare("twitter")
-                                                }
-                                                className="flex items-center w-full px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150"
-                                            >
-                                                <Twitter className="h-4 w-4 mr-3 text-blue-400" />
-                                                Share on Twitter
-                                            </button>
-                                            <button
-                                                onClick={() =>
-                                                    handleShare("facebook")
-                                                }
-                                                className="flex items-center w-full px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150"
-                                            >
-                                                <Facebook className="h-4 w-4 mr-3 text-blue-600" />
-                                                Share on Facebook
-                                            </button>
-                                            <button
-                                                onClick={() =>
-                                                    handleShare("linkedin")
-                                                }
-                                                className="flex items-center w-full px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-150"
-                                            >
-                                                <Linkedin className="h-4 w-4 mr-3 text-blue-700" />
-                                                Share on LinkedIn
-                                            </button>
-                                            <div className="border-t border-gray-100 dark:border-gray-600 my-1"></div>
-                                            <button
-                                                onClick={() =>
-                                                    handleShare("copy")
-                                                }
-                                                className="flex items-center w-full px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-150"
-                                            >
-                                                <Link2 className="h-4 w-4 mr-3 text-gray-500" />
-                                                {copiedStates["share-link"]
-                                                    ? "Copied!"
-                                                    : "Copy Link"}
-                                            </button>
-                                        </div>
-                                    </div>
-                                )}
                             </div>
                         </div>
                     </div>

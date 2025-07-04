@@ -82,8 +82,8 @@ const VoteButtons: React.FC<VoteButtonsProps> = ({
     // Style configuration - clean single button layout
     const sizeConfig = {
         sm: {
-            button: 'w-6 h-6',
-            icon: 'h-3 w-3',
+            button: showScore ? 'w-6 h-6' : 'w-8 h-8',
+            icon: showScore ? 'h-3 w-3' : 'h-4 w-4',
             score: 'text-xs font-medium px-1 min-w-[1.5rem]',
             container: 'gap-1'
         },
@@ -106,12 +106,19 @@ const VoteButtons: React.FC<VoteButtonsProps> = ({
 
     // Button style
     const getButtonStyle = () => {
-        const baseStyle = `flex items-center justify-center rounded-full transition-all duration-150 ${config.button}`;
+        const roundedStyle = showScore ? 'rounded-full' : 'rounded-lg';
+        const baseStyle = `flex items-center justify-center ${roundedStyle} transition-all duration-150 ${config.button}`;
         const isSelected = userVote === 'up';
         const isDisabled = isLoading || !isSignedIn;
 
         if (isDisabled) {
             return `${baseStyle} text-gray-300 cursor-not-allowed dark:text-gray-600`;
+        }
+
+        if (!showScore) {
+            return isSelected
+                ? `${baseStyle} text-red-500 bg-red-50 border border-red-200 hover:bg-red-100 dark:text-red-400 dark:bg-red-900/20 dark:border-red-800 dark:hover:bg-red-900/30`
+                : `${baseStyle} text-gray-600 bg-gray-50 border border-gray-200 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700`;
         }
 
         return isSelected
@@ -133,14 +140,20 @@ const VoteButtons: React.FC<VoteButtonsProps> = ({
 
     // Login prompt
     if (!isSignedIn) {
+        const buttonClass = showScore ? 'w-6 h-6' : 'w-8 h-8';
+        const iconClass = showScore ? 'h-3 w-3' : 'h-4 w-4';
+        const buttonStyle = showScore 
+            ? `flex items-center justify-center ${buttonClass} bg-red-100 text-red-600 hover:bg-red-200 rounded-full transition-all duration-150 dark:bg-red-900/20 dark:text-red-400`
+            : `flex items-center justify-center ${buttonClass} bg-gray-50 border border-gray-200 text-gray-600 hover:bg-gray-100 rounded-lg transition-all duration-150 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700`;
+        
         return (
             <div className={`flex items-center ${config.container} ${className}`}>
                 <button
                     onClick={() => openSignIn()}
-                    className={`flex items-center justify-center ${config.button} bg-red-100 text-red-600 hover:bg-red-200 rounded-full transition-all duration-150 dark:bg-red-900/20 dark:text-red-400`}
-                    title="Sign in to mark as using"
+                    className={buttonStyle}
+                    title={`Sign in to mark as using (${serverScore?.upvotes || 0} users)`}
                 >
-                    <LogIn className={config.icon} />
+                    <LogIn className={iconClass} />
                 </button>
                 {showScore && serverScore && (
                     <div className={getScoreStyle()}>
@@ -158,7 +171,7 @@ const VoteButtons: React.FC<VoteButtonsProps> = ({
                 onClick={handleUsage}
                 disabled={isLoading}
                 className={getButtonStyle()}
-                title={userVote === 'up' ? 'Remove usage mark' : 'Mark as using'}
+                title={userVote === 'up' ? `Remove usage mark (${serverScore?.upvotes || 0} users)` : `Mark as using (${serverScore?.upvotes || 0} users)`}
             >
                 <ThumbsUp 
                     className={config.icon} 
