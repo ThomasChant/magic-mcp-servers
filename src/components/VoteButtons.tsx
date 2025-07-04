@@ -32,8 +32,10 @@ const VoteButtons: React.FC<VoteButtonsProps> = ({
     className = '',
     showScore = true
 }) => {
-    const { isSignedIn } = useUser();
-    const { openSignIn } = useClerk();
+    // Check if we're in a client environment to avoid SSR issues
+    const isClient = typeof window !== 'undefined';
+    const { isSignedIn } = isClient ? useUser() : { isSignedIn: false };
+    const { openSignIn } = isClient ? useClerk() : { openSignIn: () => {} };
     
     // Get server score and user vote status
     const { data: serverScore, isLoading: scoreLoading } = useServerScore(serverId);

@@ -12,7 +12,8 @@ import {
   generateCategoriesListSEO,
   getCategoryById,
   generateCategorySEO,
-  generateDocsSEO
+  generateDocsSEO,
+  getHomePageData
 } from "./server-utils";
 // Import i18n to ensure it's initialized during SSR
 import "./i18n";
@@ -54,6 +55,48 @@ export async function render(url: string, context?: any) {
         if (routes.home) {
             console.log(`🏠 Processing home page SSR`);
             seoData = generateHomeSEO(fullUrl);
+            
+            // Fetch home page data for SSR
+            const homeData = await getHomePageData();
+            if (homeData) {
+                // Pre-populate QueryClient cache with home page data
+                if (homeData.serverStats) {
+                    queryClient.setQueryData(["supabase", "server-stats"], homeData.serverStats);
+                    console.log(`✅ Pre-populated server stats cache`);
+                }
+                
+                if (homeData.categories && homeData.categories.length > 0) {
+                    queryClient.setQueryData(["supabase", "categories"], homeData.categories);
+                    console.log(`✅ Pre-populated categories cache with ${homeData.categories.length} categories`);
+                }
+                
+                if (homeData.featuredServers && homeData.featuredServers.length > 0) {
+                    queryClient.setQueryData(["supabase", "servers", "featured"], homeData.featuredServers);
+                    console.log(`✅ Pre-populated featured servers cache with ${homeData.featuredServers.length} servers`);
+                }
+                
+                // Pre-populate paginated servers cache for the home page Servers component
+                if (homeData.homeServers && homeData.homeServers.length > 0) {
+                    const paginatedResult = {
+                        data: homeData.homeServers,
+                        total: homeData.homeServers.length,
+                        hasNextPage: false,
+                        hasPreviousPage: false,
+                        currentPage: 1,
+                        totalPages: 1,
+                    };
+                    
+                    // Cache for the default parameters that Servers component uses on first load
+                    queryClient.setQueryData(
+                        ["supabase", "servers", "paginated", 1, 36, "upvotes", "desc", undefined], 
+                        paginatedResult
+                    );
+                    console.log(`✅ Pre-populated paginated servers cache with ${homeData.homeServers.length} servers`);
+                }
+                
+                // Store home data in additional data
+                additionalData.homeData = homeData;
+            }
             
         } else if (routes.serversList) {
             console.log(`📋 Processing servers list page SSR`);

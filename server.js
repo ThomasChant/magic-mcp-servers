@@ -89,13 +89,16 @@ async function generateStaticHome() {
         try {
             const assetsDir = await fs.readdir("./dist/client/assets");
             const clientSSRFile = assetsDir.find(file => file.startsWith('client-ssr-'));
-            const serverDetailFile = assetsDir.find(file => file.startsWith('ServerDetail-'));
+            const clientFile = assetsDir.find(file => file.startsWith('client-') && file.endsWith('.js') && !file.includes('ssr'));
             const queryClientJSFile = assetsDir.find(file => file.startsWith('queryClient-') && file.endsWith('.js'));
             const queryClientCSSFile = assetsDir.find(file => file.startsWith('queryClient-') && file.endsWith('.css'));
             
-            if (clientSSRFile && serverDetailFile && queryClientJSFile && queryClientCSSFile) {
+            if (clientSSRFile) {
                 template = template.replace('src="/src/entry-client.tsx"', `type="module" crossorigin src="/assets/${clientSSRFile}"`);
-                template = template.replace('</head>', `    <link rel="modulepreload" crossorigin href="/assets/${serverDetailFile}">
+            }
+            
+            if (clientFile && queryClientJSFile && queryClientCSSFile) {
+                template = template.replace('</head>', `    <link rel="modulepreload" crossorigin href="/assets/${clientFile}">
     <link rel="modulepreload" crossorigin href="/assets/${queryClientJSFile}">
     <link rel="stylesheet" crossorigin href="/assets/${queryClientCSSFile}">
   </head>`);
@@ -307,17 +310,22 @@ app.use("*", async (req, res) => {
                 // Update asset paths for production - dynamically find correct files
                 const assetsDir = await fs.readdir("./dist/client/assets");
                 const clientSSRFile = assetsDir.find(file => file.startsWith('client-ssr-'));
-                const serverDetailFile = assetsDir.find(file => file.startsWith('ServerDetail-'));
+                const clientFile = assetsDir.find(file => file.startsWith('client-') && file.endsWith('.js') && !file.includes('ssr'));
                 const queryClientJSFile = assetsDir.find(file => file.startsWith('queryClient-') && file.endsWith('.js'));
                 const queryClientCSSFile = assetsDir.find(file => file.startsWith('queryClient-') && file.endsWith('.css'));
                 
-                console.log(`✅ Found assets: ${clientSSRFile}, ${serverDetailFile}, ${queryClientJSFile}, ${queryClientCSSFile}`);
+                console.log(`✅ Found assets: clientSSR=${clientSSRFile}, client=${clientFile}, queryJS=${queryClientJSFile}, queryCSS=${queryClientCSSFile}`);
                 
-                template = template.replace('src="/src/entry-client.tsx"', `type="module" crossorigin src="/assets/${clientSSRFile}"`);
-                template = template.replace('</head>', `    <link rel="modulepreload" crossorigin href="/assets/${serverDetailFile}">
+                if (clientSSRFile) {
+                    template = template.replace('src="/src/entry-client.tsx"', `type="module" crossorigin src="/assets/${clientSSRFile}"`);
+                }
+                
+                if (clientFile && queryClientJSFile && queryClientCSSFile) {
+                    template = template.replace('</head>', `    <link rel="modulepreload" crossorigin href="/assets/${clientFile}">
     <link rel="modulepreload" crossorigin href="/assets/${queryClientJSFile}">
     <link rel="stylesheet" crossorigin href="/assets/${queryClientCSSFile}">
   </head>`);
+                }
                 console.log(`✅ Asset paths updated`);
                 
                 let finalHtml = template;

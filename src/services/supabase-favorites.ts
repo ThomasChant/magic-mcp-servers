@@ -184,6 +184,11 @@ export function createSupabaseFavoritesService(userId: string): FavoritesService
  * @description Hook to get Supabase favorites service instance
  */
 export function useSupabaseFavoritesService(): FavoritesService | null {
+    // Check if we're in a client environment to avoid SSR issues
+    if (typeof window === 'undefined') {
+        return null;
+    }
+    
     const { user } = useUser();
     
     if (!user) {

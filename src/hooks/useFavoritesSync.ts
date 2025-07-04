@@ -8,7 +8,9 @@ import { useSupabaseFavoritesService } from "../services/supabase-favorites";
  * @description 处理收藏功能的同步逻辑，包括登录状态变化时的数据迁移和自动同步
  */
 export function useFavoritesSync() {
-    const { isSignedIn } = useUser();
+    // Check if we're in a client environment to avoid SSR issues
+    const isClient = typeof window !== 'undefined';
+    const { isSignedIn } = isClient ? useUser() : { isSignedIn: false };
     const favoritesService = useSupabaseFavoritesService();
     const { 
         isOnline, 

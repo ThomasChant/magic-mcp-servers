@@ -1,5 +1,4 @@
 import { createClient } from '@supabase/supabase-js';
-import type { Database } from './lib/supabase';
 import type { MCPServer, ServerReadme } from "./types";
 
 // Helper function to transform database server to app MCPServer type (server-side version)
@@ -460,4 +459,151 @@ export function generateDocsSEO(url: string) {
       }
     }
   };
+}
+
+// Server-side function to fetch home page data
+export async function getHomePageData(): Promise<{
+  serverStats?: any;
+  categories?: any[];
+  featuredServers?: MCPServer[];
+  recentServers?: MCPServer[];
+  homeServers?: MCPServer[];
+} | null> {
+  // For SSR, try different environment variable sources
+  const supabaseUrl = process.env.VITE_SUPABASE_URL || 
+                    process.env.NEXT_PUBLIC_SUPABASE_URL || 
+                    'https://lptsvryohchbklxcyoyc.supabase.co';
+                    
+  const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || 
+                        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxwdHN2cnlvaGNoYmtseGN5b3ljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwODY0MzUsImV4cCI6MjA2NjY2MjQzNX0.hEleXmYktD79nKq4Q6Ow-9KF0RWRgGOJjXLgglyK2GQ';
+  
+  if (!supabaseUrl || !supabaseAnonKey) {
+    console.error('Missing Supabase environment variables for SSR');
+    return null;
+  }
+  
+  const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+    auth: {
+      persistSession: false,
+    },
+  });
+
+  try {
+    console.log('🏠 Fetching home page data from Supabase...');
+    
+    // Fetch multiple data sources in parallel
+    const [
+      serversResult,
+      categoriesResult,
+      featuredResult
+    ] = await Promise.all([
+      // Get server stats
+      supabase
+        .from('servers_with_details')
+        .select('stars, last_updated, featured, verified', { count: 'exact' })
+        .limit(1000),
+      
+      // Get categories with counts
+      supabase
+        .from('categories')
+        .select('id, name_en, description_en, icon, color', { count: 'exact' }),
+      
+      // Get featured servers
+      supabase
+        .from('servers_with_details')
+        .select('*')
+        .eq('featured', true)
+        .order('stars', { ascending: false })
+        .limit(6)
+    ]);
+
+    console.log('📊 Supabase queries completed');
+
+    if (serversResult.error) {
+      console.error('Server stats query error:', serversResult.error);
+      throw new Error(`Failed to fetch server stats: ${serversResult.error.message}`);
+    }
+
+    if (categoriesResult.error) {
+      console.error('Categories query error:', categoriesResult.error);
+    }
+
+    if (featuredResult.error) {
+      console.error('Featured servers query error:', featuredResult.error);
+    }
+
+    const { data: serversData, count: totalServers } = serversResult;
+    const { data: categoriesData, count: totalCategories } = categoriesResult;
+    const { data: featuredData } = featuredResult;
+
+    // Calculate server statistics
+    let serverStats = null;
+    if (serversData && serversData.length > 0) {
+      const totalStars = serversData.reduce((sum, server) => {
+        const stars = server.stars || 0;
+        return sum + (typeof stars === 'number' ? stars : 0);
+      }, 0);
+      
+      const thirtyDaysAgo = new Date();
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+      
+      const activeRepos = serversData.filter(server => {
+        if (!server.last_updated) return false;
+        const lastUpdated = new Date(server.last_updated);
+        return lastUpdated > thirtyDaysAgo;
+      }).length;
+      
+      const featuredCount = serversData.filter(s => s.featured === true).length;
+      const verifiedCount = serversData.filter(s => s.verified === true).length;
+
+      serverStats = {
+        totalServers: totalServers || 0,
+        totalStars,
+        averageStars: totalServers > 0 ? Math.round(totalStars / totalServers) : 0,
+        activeRepos,
+        uniqueCategories: totalCategories || 0,
+        featuredCount,
+        verifiedCount,
+      };
+    }
+
+    // Transform featured servers
+    const featuredServers = featuredData ? featuredData.map(transformServer) : [];
+
+    // Get some servers for the home page Servers component
+    console.log('🔍 Fetching home servers for SSR...');
+    const homeServersResult = await supabase
+      .from('servers_with_details')
+      .select('*')
+      .order('upvotes', { ascending: false })
+      .limit(36); // Match the default limit in Servers component
+
+    console.log('📊 Home servers query result:', {
+      data: homeServersResult.data ? `${homeServersResult.data.length} servers` : 'null',
+      error: homeServersResult.error ? homeServersResult.error.message : 'none'
+    });
+
+    let homeServers: MCPServer[] = [];
+    if (homeServersResult.data && !homeServersResult.error) {
+      homeServers = homeServersResult.data.map(transformServer);
+      console.log(`✅ Transformed ${homeServers.length} home servers for SSR`);
+    } else {
+      console.log('❌ No home servers data or error occurred:', homeServersResult.error?.message);
+    }
+
+    console.log(`✅ Home page data prepared - ${totalServers} servers, ${totalCategories} categories, ${featuredServers.length} featured, ${homeServers.length} home servers`);
+
+    return {
+      serverStats,
+      categories: categoriesData || [],
+      featuredServers,
+      recentServers: [], // Could add recent servers query if needed
+      homeServers,
+    };
+
+  } catch (err) {
+    console.error('Error fetching home page data:', err);
+    return null;
+  }
 }

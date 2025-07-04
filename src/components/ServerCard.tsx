@@ -13,6 +13,7 @@ import {
 import type { MCPServer } from "../types";
 import { FavoriteButton } from "./FavoriteButton";
 import VoteButtons from "./VoteButtons";
+import { ClientOnly } from "./ClientOnly";
 
 // Extended interface for JSON data structure compatibility
 interface ServerData extends Omit<MCPServer, 'verified'> {
@@ -178,11 +179,13 @@ export const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                         </div>
                     </Link>
                     <div className="text-right flex-shrink-0 space-y-2">
-                        <FavoriteButton
-                            serverId={server.id}
-                            size="sm"
-                            className="mb-2"
-                        />
+                        <ClientOnly>
+                            <FavoriteButton
+                                serverId={server.id}
+                                size="sm"
+                                className="mb-2"
+                            />
+                        </ClientOnly>
                     </div>
                 </div>
 
@@ -218,11 +221,13 @@ export const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                     </span>
                 </div>
                 
-                <VoteButtons 
-                    serverId={server.id}
-                    size="sm"
-                    className="ml-2"
-                />
+                <ClientOnly>
+                    <VoteButtons 
+                        serverId={server.id}
+                        size="sm"
+                        className="ml-2"
+                    />
+                </ClientOnly>
             </div>
         </div>
     );
@@ -305,11 +310,15 @@ export const ServerListItem: React.FC<ServerListItemProps> = ({ server }) => {
                     </div>
                 </Link>
                 <div className="flex items-center space-x-4 flex-shrink-0">
-                    <FavoriteButton serverId={server.id} size="sm" />
-                    <VoteButtons 
-                        serverId={server.id}
-                        size="sm"
-                    />
+                    <ClientOnly>
+                        <FavoriteButton serverId={server.id} size="sm" />
+                    </ClientOnly>
+                    <ClientOnly>
+                        <VoteButtons 
+                            serverId={server.id}
+                            size="sm"
+                        />
+                    </ClientOnly>
                     <Link to={`/servers/${server.slug}`}>
                         <span className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium text-sm flex items-center">
                             View Details

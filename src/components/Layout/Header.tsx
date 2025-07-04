@@ -14,7 +14,7 @@ import {
 
 // SSR兼容的Header组件，不包含Clerk功能
 const HeaderSSR: React.FC = () => {
-    const { t, i18n } = useTranslation("common");
+    const { t } = useTranslation("common");
     const location = useLocation();
     const navigate = useNavigate();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -75,15 +75,15 @@ const HeaderSSR: React.FC = () => {
         { name: t("nav.documentation"), href: "/docs", current: location.pathname === "/docs" },
     ];
 
-    const languages = [
-        { code: "zh-CN", name: "简体中文" },
-        { code: "en", name: "English" },
-        { code: "zh-TW", name: "繁體中文" },
-        { code: "ja", name: "日本語" },
-        { code: "ko", name: "한국어" },
-        { code: "fr", name: "Français" },
-        { code: "ru", name: "Русский" },
-    ];
+    // const languages = [
+    //     { code: "zh-CN", name: "简体中文" },
+    //     { code: "en", name: "English" },
+    //     { code: "zh-TW", name: "繁體中文" },
+    //     { code: "ja", name: "日本語" },
+    //     { code: "ko", name: "한국어" },
+    //     { code: "fr", name: "Français" },
+    //     { code: "ru", name: "Русский" },
+    // ];
 
     return (
         <nav className="bg-white dark:bg-gray-900 shadow-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
@@ -262,7 +262,7 @@ const HeaderSSR: React.FC = () => {
 
 // 客户端Header组件，包含完整Clerk功能
 const HeaderWithClerk: React.FC = () => {
-    const { t, i18n } = useTranslation("common");
+    const { t } = useTranslation("common");
     const location = useLocation();
     const navigate = useNavigate();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -321,15 +321,15 @@ const HeaderWithClerk: React.FC = () => {
         { name: t("nav.documentation"), href: "/docs", current: location.pathname === "/docs" },
     ];
 
-    const languages = [
-        { code: "zh-CN", name: "简体中文" },
-        { code: "en", name: "English" },
-        { code: "zh-TW", name: "繁體中文" },
-        { code: "ja", name: "日本語" },
-        { code: "ko", name: "한국어" },
-        { code: "fr", name: "Français" },
-        { code: "ru", name: "Русский" },
-    ];
+    // const languages = [
+    //     { code: "zh-CN", name: "简体中文" },
+    //     { code: "en", name: "English" },
+    //     { code: "zh-TW", name: "繁體中文" },
+    //     { code: "ja", name: "日本語" },
+    //     { code: "ko", name: "한국어" },
+    //     { code: "fr", name: "Français" },
+    //     { code: "ru", name: "Русский" },
+    // ];
 
     return (
         <nav className="bg-white dark:bg-gray-900 shadow-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
