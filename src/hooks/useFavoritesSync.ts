@@ -6,6 +6,7 @@ import { useSupabaseFavoritesService } from "../services/supabase-favorites";
 /**
  * @hook useFavoritesSync
  * @description 处理收藏功能的同步逻辑，包括登录状态变化时的数据迁移和自动同步
+ * 注意：此 hook 只能在 ClerkProvider 内部使用
  */
 export function useFavoritesSync() {
     // Check if we're in a client environment to avoid SSR issues
