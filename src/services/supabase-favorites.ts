@@ -101,52 +101,52 @@ export class SupabaseFavoritesService implements FavoritesService {
      */
     async syncWithLocal(localFavorites: string[]): Promise<string[]> {
         try {
+            console.log(`[Sync] Starting sync for user ${this.userId}`);
+            console.log('[Sync] Local favorites:', localFavorites);
+            
             // Get current favorites from Supabase
             const cloudFavorites = await this.getFavorites();
+            console.log('[Sync] Cloud favorites:', cloudFavorites);
             
             // Find favorites to add (in local but not in cloud)
             const toAdd = localFavorites.filter(id => !cloudFavorites.includes(id));
+            console.log('[Sync] Favorites to add to cloud:', toAdd);
             
-            // Find favorites to remove (in cloud but not in local)
-            const toRemove = cloudFavorites.filter(id => !localFavorites.includes(id));
+            // Create merged list (union of local and cloud)
+            const mergedFavorites = [...new Set([...localFavorites, ...cloudFavorites])];
+            console.log('[Sync] Merged favorites:', mergedFavorites);
             
-            // Batch operations for better performance
-            const operations = [];
-            
-            // Add missing favorites
+            // Add missing favorites to cloud
             if (toAdd.length > 0) {
                 const insertData = toAdd.map(server_id => ({
                     user_id: this.userId,
                     server_id
                 }));
                 
-                operations.push(
-                    supabase
-                        .from('user_favorites')
-                        .insert(insertData)
-                );
+                const { error } = await supabase
+                    .from('user_favorites')
+                    .insert(insertData);
+                
+                if (error && error.code !== '23505') { // Ignore duplicate key errors
+                    console.error('Error adding favorites during sync:', error);
+                }
             }
             
-            // Remove extra favorites
-            if (toRemove.length > 0) {
-                operations.push(
-                    supabase
-                        .from('user_favorites')
-                        .delete()
-                        .eq('user_id', this.userId)
-                        .in('server_id', toRemove)
-                );
-            }
-            
-            // Execute all operations
-            await Promise.all(operations);
-            
-            // Return the synced list
-            return localFavorites;
+            // Return the merged list (union of local and cloud)
+            console.log('[Sync] Returning merged favorites:', mergedFavorites);
+            return mergedFavorites;
         } catch (error) {
             console.error('Failed to sync favorites:', error);
-            // On error, return local favorites as fallback
-            return localFavorites;
+            // On error, try to return cloud favorites if available
+            try {
+                const cloudFavorites = await this.getFavorites();
+                console.log('[Sync] Fallback to cloud favorites:', cloudFavorites);
+                return cloudFavorites.length > 0 ? cloudFavorites : localFavorites;
+            } catch {
+                // If cloud fetch also fails, return local as fallback
+                console.log('[Sync] Fallback to local favorites:', localFavorites);
+                return localFavorites;
+            }
         }
     }
 
@@ -184,12 +184,12 @@ export function createSupabaseFavoritesService(userId: string): FavoritesService
  * @description Hook to get Supabase favorites service instance
  */
 export function useSupabaseFavoritesService(): FavoritesService | null {
+    const { user } = useUser();
+    
     // Check if we're in a client environment to avoid SSR issues
     if (typeof window === 'undefined') {
         return null;
     }
-    
-    const { user } = useUser();
     
     if (!user) {
         return null;

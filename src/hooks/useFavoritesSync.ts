@@ -10,7 +10,8 @@ import { useSupabaseFavoritesService } from "../services/supabase-favorites";
 export function useFavoritesSync() {
     // Check if we're in a client environment to avoid SSR issues
     const isClient = typeof window !== 'undefined';
-    const { isSignedIn } = isClient ? useUser() : { isSignedIn: false };
+    const userResult = useUser();
+    const isSignedIn = isClient ? userResult.isSignedIn : false;
     const favoritesService = useSupabaseFavoritesService();
     const { 
         isOnline, 
@@ -52,9 +53,14 @@ export function useFavoritesSync() {
             hasHandledSignOut.current = false;
             const service = favoritesServiceRef.current;
             if (service && !hasSyncedOnSignIn.current) {
+                const currentLocalFavorites = Array.from(useAppStore.getState().favorites);
+                console.log("Current local favorites before sync:", currentLocalFavorites);
+                
                 useAppStore.getState().syncFavorites(service)
                     .then(() => {
                         hasSyncedOnSignIn.current = true;
+                        const syncedFavorites = Array.from(useAppStore.getState().favorites);
+                        console.log("Favorites after sync:", syncedFavorites);
                     })
                     .catch(error => {
                         console.error("Failed to sync favorites on sign in:", error);
@@ -63,13 +69,12 @@ export function useFavoritesSync() {
             }
         } else if (!isSignedIn && wasSignedIn && !hasHandledSignOut.current) {
             // 从登录变为未登录状态
-            console.log("User just signed out, clearing favorites and switching to local storage mode");
+            console.log("User just signed out, switching to local storage mode");
             hasHandledSignOut.current = true;
             hasSyncedOnSignIn.current = false;
             
-            // 清除收藏数据和相关状态
+            // 保留收藏数据，只更新同步状态
             useAppStore.setState({ 
-                favorites: new Set<string>(),
                 isOnline: false, 
                 lastSynced: null,
                 favoritesError: null,
