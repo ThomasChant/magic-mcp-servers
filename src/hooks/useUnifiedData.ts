@@ -7,6 +7,11 @@ import {
   useSupabaseHomePageData,
   useSupabaseServerStats,
   useSupabasePopularTags,
+  useSupabaseServerReadme,
+  useSupabasePopularServers,
+  useSupabaseRecentServers,
+  useSupabaseSearchServers,
+  useSupabaseServersByCategory,
   transformServer,
   type PopularTag
 } from "./useSupabaseData";
@@ -39,9 +44,72 @@ export const useServersByCategory = (categoryId: string) => {
     error: null
   };
 };
-export const useServersByCategoryPaginated = useSupabaseServersByCategoryPaginated;
-export const useHomePageData = useSupabaseHomePageData;
-export const useServerStats = useSupabaseServerStats;
+
+export const useServerReadme = (serverId: string) => {
+  return useSupabaseServerReadme(serverId);
+};
+
+export const usePopularServers = () => {
+  return useSupabasePopularServers();
+};
+
+export const useRecentServers = () => {
+  return useSupabaseRecentServers();
+};
+
+// Legacy hook - use useSearchServersPaginated instead for better performance
+export const useSearchServers = (query: string) => {
+  console.warn('useSearchServers is deprecated. Use useSearchServersPaginated instead for better performance.');
+  return useSupabaseSearchServers(query);
+};
+
+// Optimized hooks for better performance
+export const useServersPaginated = (
+  page: number = 1,
+  limit: number = 12,
+  sortBy: string = 'stars',
+  sortOrder: 'asc' | 'desc' = 'desc',
+  filters?: {
+    search?: string;
+    category?: string;
+    platforms?: string[];
+    languages?: string[];
+    featured?: boolean;
+    verified?: boolean;
+    qualityScore?: number;
+  }
+) => {
+  return useSupabaseServersPaginated(page, limit, sortBy, sortOrder, filters);
+};
+
+export const useServerStats = () => {
+  return useSupabaseServerStats();
+};
+
+export const useServersByCategoryPaginated = (
+  categoryId: string,
+  page: number = 1,
+  limit: number = 12,
+  sortBy: string = 'stars',
+  sortOrder: 'asc' | 'desc' = 'desc',
+  filters?: {
+    search?: string;
+    subcategory?: string;
+    platforms?: string[];
+    languages?: string[];
+    qualityScore?: number;
+    featured?: boolean;
+    verified?: boolean;
+    popular?: boolean;
+  }
+) => {
+  return useSupabaseServersByCategoryPaginated(categoryId, page, limit, sortBy, sortOrder, filters);
+};
+
+export const useHomePageData = () => {
+  return useSupabaseHomePageData();
+};
+
 export const usePopularTags = useSupabasePopularTags;
 
 // Search servers with full-text search and tag filtering

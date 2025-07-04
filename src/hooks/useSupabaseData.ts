@@ -3,6 +3,7 @@ import { supabase } from "../lib/supabase";
 import type { Category, MCPServer, ServerReadme } from "../types";
 import { type LucideIcon, Database, Code, Search, MessageCircle, Brain, Wrench, CheckSquare, Shield, FileText, Cloud, Briefcase, DollarSign, Layers, Folder, BarChart3, Plug, Settings, Globe, Image, CreditCard, Activity, Link2 } from "lucide-react";
 import type { FeaturedServer } from "./useFeaturedServers";
+import { extractMonorepoName } from "../utils/monorepoNameExtractor";
 
 // Comprehensive icon name mapping for all categories
 const iconNameMap: { [key: string]: LucideIcon } = {
@@ -132,9 +133,16 @@ function transformCategory(dbCategory: Record<string, unknown>, subcategories: R
 
 // Helper function to transform database server to app MCPServer type
 export function transformServer(dbServer: Record<string, unknown>): MCPServer {
+  // Extract monorepo name if this is a monorepo project
+  const originalName = dbServer.name as string;
+  const isMonorepo = dbServer.is_monorepo as boolean;
+  const githubUrl = dbServer.github_url as string;
+  const processedName = isMonorepo 
+    ? extractMonorepoName(githubUrl, originalName)
+    : originalName;
   return {
     id: dbServer.id as string,
-    name: dbServer.name as string,
+    name: processedName,
     owner: dbServer.owner as string,
     slug: dbServer.slug as string,
     description: {
@@ -221,6 +229,13 @@ export function transformServer(dbServer: Record<string, unknown>): MCPServer {
     },
     featured: (dbServer.featured as boolean) || false,
     verified: (dbServer.verified as boolean) || false,
+    latest: (() => {
+      // Check if the repository was created within the last 10 days
+      const createdAt = new Date(dbServer.repo_created_at as string);
+      const now = new Date();
+      const tenDaysAgo = new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000);
+      return createdAt > tenDaysAgo;
+    })(),
     createdAt: (dbServer.repo_created_at as string) || new Date().toISOString(),
     updatedAt: (dbServer.last_updated as string) || new Date().toISOString(),
   };
@@ -340,13 +355,15 @@ export const useSupabaseServersPaginated = (
   sortOrder: 'asc' | 'desc' = 'desc',
   filters?: {
     search?: string;
-    category?: string;
+    category?: string | string[];
     platforms?: string[];
     languages?: string[];
     featured?: boolean;
     verified?: boolean;
     qualityScore?: number;
     tags?: string[];
+    popular?: boolean;
+    latest?: boolean;
   }
 ) => {
   return useQuery({
@@ -362,7 +379,13 @@ export const useSupabaseServersPaginated = (
       }
       
       if (filters?.category) {
-        query = query.eq('category_id', filters.category);
+        if (Array.isArray(filters.category)) {
+          if (filters.category.length > 0) {
+            query = query.in('category_id', filters.category);
+          }
+        } else {
+          query = query.eq('category_id', filters.category);
+        }
       }
 
       if (filters?.featured) {
@@ -381,6 +404,27 @@ export const useSupabaseServersPaginated = (
         // Filter servers that contain ANY of the selected tags
         const tagFilters = filters.tags.map(tag => `tags.cs.{"${tag}"}`);
         query = query.or(tagFilters.join(','));
+      }
+
+      if (filters?.popular) {
+        query = query.or(`stars.gte.1000,forks.gte.100`);
+      }
+
+      if (filters?.latest) {
+        // Filter for repositories created in the last 10 days
+        const tenDaysAgo = new Date();
+        tenDaysAgo.setDate(tenDaysAgo.getDate() - 10);
+        query = query.gte('repo_created_at', tenDaysAgo.toISOString());
+      }
+
+      if (filters?.platforms && filters.platforms.length > 0) {
+        // Use overlaps operator to check if platforms array contains any of the selected platforms
+        query = query.overlaps('platforms', filters.platforms);
+      }
+
+      if (filters?.languages && filters.languages.length > 0) {
+        // Use overlaps operator to check if tech_stack array contains any of the selected languages
+        query = query.overlaps('tech_stack', filters.languages);
       }
 
       // Map sort field to actual database column names
@@ -534,10 +578,20 @@ export const useSupabaseServersByCategoryPaginated = (
   page: number = 1,
   limit: number = 12,
   sortBy: string = 'stars',
-  sortOrder: 'asc' | 'desc' = 'desc'
+  sortOrder: 'asc' | 'desc' = 'desc',
+  filters?: {
+    search?: string;
+    subcategory?: string;
+    platforms?: string[];
+    languages?: string[];
+    qualityScore?: number;
+    featured?: boolean;
+    verified?: boolean;
+    popular?: boolean;
+  }
 ) => {
   return useQuery({
-    queryKey: ["supabase", "servers", "category", categoryId, "paginated", page, limit, sortBy, sortOrder],
+    queryKey: ["supabase", "servers", "category", categoryId, "paginated", page, limit, sortBy, sortOrder, filters],
     queryFn: async (): Promise<PaginatedResult<MCPServer>> => {
       if (!categoryId) {
         return {
@@ -554,6 +608,41 @@ export const useSupabaseServersByCategoryPaginated = (
         .from('servers_with_details')
         .select('*', { count: 'exact' })
         .eq('category_id', categoryId);
+
+      // Apply filters
+      if (filters?.search) {
+        query = query.or(`name.ilike.%${filters.search}%,description_en.ilike.%${filters.search}%,full_description.ilike.%${filters.search}%`);
+      }
+
+      if (filters?.subcategory) {
+        query = query.eq('subcategory_id', filters.subcategory);
+      }
+
+      if (filters?.featured) {
+        query = query.eq('featured', true);
+      }
+
+      if (filters?.verified) {
+        query = query.eq('verified', true);
+      }
+
+      if (filters?.qualityScore) {
+        query = query.gte('quality_score', filters.qualityScore);
+      }
+
+      if (filters?.popular) {
+        query = query.or(`stars.gte.1000,forks.gte.100`);
+      }
+
+      if (filters?.platforms && filters.platforms.length > 0) {
+        // Use overlaps operator to check if platforms array contains any of the selected platforms
+        query = query.overlaps('platforms', filters.platforms);
+      }
+
+      if (filters?.languages && filters.languages.length > 0) {
+        // Use overlaps operator to check if tech_stack array contains any of the selected languages
+        query = query.overlaps('tech_stack', filters.languages);
+      }
 
       // Map sort field to actual database column names
       const sortColumnMap: Record<string, string> = {
@@ -895,6 +984,10 @@ export const useSupabaseServerReadme = (serverId: string) => {
           filename: data.filename,
           projectName: data.project_name,
           rawContent: data.raw_content,
+          extractedInstallation: data.extracted_installation,
+          extractedApiReference: data.extracted_api_reference,
+          extractionStatus: data.extraction_status,
+          extractedAt: data.extracted_at,
         };
       } catch (error) {
         console.warn(`README fetch failed for server ${serverId}:`, error);

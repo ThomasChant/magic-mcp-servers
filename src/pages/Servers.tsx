@@ -1,123 +1,76 @@
-import React, { useState, useMemo, useEffect, useCallback } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useMemo, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import {
     Search,
-    Star,
-    Calendar,
-    ArrowRight,
     Grid3X3,
     List,
     ChevronLeft,
-    ChevronRight,
-    Folder,
-    Database,
-    MessageCircle,
-    Bot,
-    FileText,
+    ChevronRight
 } from "lucide-react";
-import { useServersPaginated, useCategories, usePopularTags } from "../hooks/useUnifiedData";
-import type { MCPServer } from "../types";
-import ProgressiveEllipsis from "../components/ProgressiveEllipsis";
-import { FavoriteButton } from "../components/FavoriteButton";
-
-// Extended interface for JSON data structure
-interface ServerData extends Omit<MCPServer, 'verified'> {
-    official?: boolean;
-    descriptionEn?: string;
-    repository: MCPServer['repository'] & {
-        lastUpdate?: string;
-    };
-}
+import { useServersPaginated, useCategories } from "../hooks/useUnifiedData";
+import { useAppStore } from "../store/useAppStore";
+import { ServerCard, ServerListItem } from "../components/ServerCard";
 
 const Servers: React.FC = () => {
     const location = useLocation();
-    const navigate = useNavigate();
     
-    // Get initial values from URL query parameters
-    const getInitialValues = () => {
+    // Get global search query from app store
+    const { searchQuery } = useAppStore();
+    
+    // Get initial category from URL query parameters
+    const getInitialFilters = () => {
         const searchParams = new URLSearchParams(location.search);
         const categoryParam = searchParams.get('category');
-        const pageParam = searchParams.get('page');
-        const searchParam = searchParams.get('search');
-        const sortParam = searchParams.get('sort');
-        const orderParam = searchParams.get('order');
-        const filterParam = searchParams.get('filter');
         
         return {
-            filters: {
-                categories: categoryParam ? [categoryParam] : [] as string[],
-                platforms: [] as string[],
-                languages: [] as string[],
-                status: [] as string[],
-                tags: [] as string[],
-            },
-            page: pageParam ? parseInt(pageParam, 10) : 1,
-            search: searchParam || '',
-            sortBy: sortParam || 'stars',
-            sortOrder: (orderParam as 'asc' | 'desc') || 'desc',
-            quickFilter: filterParam || 'all'
+            categories: categoryParam ? [categoryParam] : [] as string[],
+            platforms: [] as string[],
+            languages: [] as string[],
+            status: [] as string[],
         };
     };
 
-    const initialValues = getInitialValues();
-
     // State management
-    const [sidebarSearch, setSidebarSearch] = useState(initialValues.search);
-    const [debouncedSearch, setDebouncedSearch] = useState(initialValues.search);
+    const [sidebarSearch, setSidebarSearch] = useState("");
+    const [debouncedSearch, setDebouncedSearch] = useState("");
     const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-    const [sortBy, setSortBy] = useState(initialValues.sortBy);
-    const [sortOrder, setSortOrder] = useState<"asc" | "desc">(initialValues.sortOrder);
-    const [quickFilter, setQuickFilter] = useState(initialValues.quickFilter);
-    const [currentPage, setCurrentPage] = useState(initialValues.page);
-    const [filters, setFilters] = useState(initialValues.filters);
+    const [sortBy, setSortBy] = useState("upvotes"); // 默认按使用人数排序
+    const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+    const [quickFilter, setQuickFilter] = useState("all");
+    const [currentPage, setCurrentPage] = useState(1);
+    const [filters, setFilters] = useState(getInitialFilters());
 
-    // Update URL with current state
-    const updateURL = useCallback((newParams: {
-        page?: number;
-        search?: string;
-        sort?: string;
-        order?: 'asc' | 'desc';
-        filter?: string;
-        category?: string;
-    }) => {
-        const searchParams = new URLSearchParams(location.search);
-        
-        // Update or remove parameters
-        Object.entries(newParams).forEach(([key, value]) => {
-            if (value && value !== '' && (key !== 'page' || value !== 1)) {
-                searchParams.set(key, value.toString());
-            } else {
-                searchParams.delete(key);
-            }
-        });
-
-        // Navigate to new URL
-        navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
-    }, [navigate, location.pathname, location.search]);
-
-    // Update page and URL
-    const handlePageChange = useCallback((page: number) => {
-        setCurrentPage(page);
-        updateURL({ 
-            page,
-            search: debouncedSearch,
-            sort: sortBy,
-            order: sortOrder,
-            filter: quickFilter,
-            category: filters.categories[0]
-        });
-    }, [updateURL, debouncedSearch, sortBy, sortOrder, quickFilter, filters.categories]);
-
-    // Debounce search input to avoid excessive API calls
+    // Handle global search query immediately (from home page search)
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setDebouncedSearch(sidebarSearch);
-        }, 1000); // 500ms delay
+        if (searchQuery.trim()) {
+            setDebouncedSearch(searchQuery.trim());
+            // Sync the local search input with global search (avoid triggering local debounce)
+            if (sidebarSearch !== searchQuery) {
+                setSidebarSearch(searchQuery);
+            }
+            // Reset to first page when searching
+            setCurrentPage(1);
+        } else if (searchQuery === '') {
+            // If global search is cleared, clear debounced search too
+            setDebouncedSearch('');
+        }
+    }, [searchQuery, sidebarSearch]);
 
-        return () => clearTimeout(timer);
-    }, [sidebarSearch]);
+    // Debounce local sidebar search input to avoid excessive API calls
+    useEffect(() => {
+        // Only apply debounce if there's no global search query active
+        if (!searchQuery.trim()) {
+            const timer = setTimeout(() => {
+                setDebouncedSearch(sidebarSearch.trim());
+                // Reset to first page when local search changes
+                setCurrentPage(1);
+            }, 1000);
 
-    // Update filters when URL changes (e.g., when coming from category page)
+            return () => clearTimeout(timer);
+        }
+    }, [sidebarSearch, searchQuery]);
+
+    // Update filters when URL changes
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
         const categoryParam = searchParams.get('category');
@@ -132,9 +85,11 @@ const Servers: React.FC = () => {
 
     // Get real categories with server counts
     const { data: categories } = useCategories();
-    
-    // Get popular tags for filtering
-    const { data: popularTags } = usePopularTags(20);
+
+    // Reset page when filters change
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [filters, quickFilter]);
 
     // Build filters for the hook
     const hookFilters = useMemo(() => {
@@ -145,17 +100,25 @@ const Servers: React.FC = () => {
         }
         
         if (filters.categories.length > 0) {
-            result.category = filters.categories[0]; // For simplicity, use first category
+           result.category = filters.categories;
         }
         
-        if (filters.tags.length > 0) {
-            result.tags = filters.tags;
+        if (filters.platforms.length > 0) {
+            result.platforms = filters.platforms;
+        }
+        
+        if (filters.languages.length > 0) {
+            result.languages = filters.languages;
         }
         
         if (quickFilter === "featured") {
             result.featured = true;
         } else if (quickFilter === "verified") {
             result.verified = true;
+        } else if (quickFilter === "popular") {
+            result.popular = true;
+        } else if (quickFilter === "latest") {
+            result.latest = true;
         }
         
         return Object.keys(result).length > 0 ? result : undefined;
@@ -168,7 +131,7 @@ const Servers: React.FC = () => {
         error: serversError 
     } = useServersPaginated(
         currentPage,
-        12, // items per page
+        36, // items per page
         sortBy,
         sortOrder,
         hookFilters
@@ -188,376 +151,83 @@ const Servers: React.FC = () => {
     ];
 
     const languageFilters = [
-        { id: "python", name: "Python" },
-        { id: "typescript", name: "TypeScript" },
-        { id: "javascript", name: "JavaScript" },
-        { id: "go", name: "Go" },
-        { id: "rust", name: "Rust" },
-        { id: "java", name: "Java" },
+        // 主流编程语言
+        { id: "Python", name: "Python" },
+        { id: "JavaScript", name: "JavaScript" },
+        { id: "TypeScript", name: "TypeScript" },
+        { id: "Java", name: "Java" },
+        { id: "Go", name: "Go" },
+        { id: "Rust", name: "Rust" },
+        { id: "C#", name: "C#" },
+        { id: "PHP", name: "PHP" },
+        { id: "Ruby", name: "Ruby" },
+        { id: "C++", name: "C++" },
+        { id: "C", name: "C" },
+        { id: "Swift", name: "Swift" },
+        { id: "Kotlin", name: "Kotlin" },
+        { id: "Dart", name: "Dart" },
+        
+        // 前端技术
+        { id: "HTML", name: "HTML" },
+        { id: "CSS", name: "CSS" },
+        { id: "SCSS", name: "SCSS" },
+        { id: "Vue", name: "Vue" },
+        
+        // 脚本和Shell
+        { id: "Shell", name: "Shell" },
+        { id: "PowerShell", name: "PowerShell" },
+        { id: "Batchfile", name: "Batch" },
+        
+        // 配置和工具
+        { id: "Dockerfile", name: "Docker" },
+        { id: "Makefile", name: "Makefile" },
+        { id: "CMake", name: "CMake" },
+        
+        // 数据和科学计算
+        { id: "R", name: "R" },
+        { id: "MATLAB", name: "MATLAB" },
+        { id: "Jupyter Notebook", name: "Jupyter" },
+        
+        // 其他重要语言
+        { id: "Lua", name: "Lua" },
+        { id: "Clojure", name: "Clojure" },
+        { id: "Solidity", name: "Solidity" },
+        { id: "HCL", name: "HCL" },
+        { id: "Nix", name: "Nix" }
     ];
 
-    const statusFilters = [
-        { id: "official", name: "Official" },
-        { id: "featured", name: "Featured" },
-        { id: "verified", name: "Verified" },
-        { id: "popular", name: "Popular" },
-    ];
-
-    // Get server icon based on category or tags
-    const getServerIcon = (server: ServerData) => {
-        const tags = server.tags.join(" ").toLowerCase();
-        const category = Array.isArray(server.category) ? server.category.join(" ").toLowerCase() : server.category.toLowerCase();
-        const combined = `${tags} ${category}`;
-        
-        if (combined.includes("file") || combined.includes("storage")) {
-            return <Folder className="h-5 w-5 text-white" />;
-        } else if (combined.includes("database") || combined.includes("sql")) {
-            return <Database className="h-5 w-5 text-white" />;
-        } else if (combined.includes("communication") || combined.includes("slack") || combined.includes("messaging")) {
-            return <MessageCircle className="h-5 w-5 text-white" />;
-        } else if (combined.includes("ai") || combined.includes("ml") || combined.includes("search")) {
-            return <Bot className="h-5 w-5 text-white" />;
-        } else if (combined.includes("development") || combined.includes("github") || combined.includes("git")) {
-            return <Bot className="h-5 w-5 text-white" />;
-        } else {
-            return <FileText className="h-5 w-5 text-white" />;
-        }
-    };
-
-    // Get server icon background color
-    const getServerIconBg = (server: ServerData) => {
-        const tags = server.tags.join(" ").toLowerCase();
-        const category = Array.isArray(server.category) ? server.category.join(" ").toLowerCase() : server.category.toLowerCase();
-        const combined = `${tags} ${category}`;
-        
-        if (combined.includes("file") || combined.includes("storage")) {
-            return "bg-blue-600";
-        } else if (combined.includes("database") || combined.includes("sql")) {
-            return server.name.toLowerCase().includes("sqlite") ? "bg-yellow-600" : "bg-green-600";
-        } else if (combined.includes("communication") || combined.includes("slack") || combined.includes("messaging")) {
-            return "bg-purple-600";
-        } else if (combined.includes("ai") || combined.includes("ml") || combined.includes("search")) {
-            return "bg-red-600";
-        } else if (combined.includes("development") || combined.includes("github") || combined.includes("git")) {
-            return "bg-indigo-600";
-        } else {
-            return "bg-yellow-600";
-        }
-    };
-
-    // Format numbers
-    const formatNumber = (num: number) => {
-        if (num >= 1000) {
-            return (num / 1000).toFixed(1) + "k";
-        }
-        return num.toString();
-    };
-
-    // Format time ago - matching demo format exactly
-    const formatTimeAgo = (dateString: string) => {
-        const date = new Date(dateString);
-        const now = new Date();
-        const diffInDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
-        
-        if (diffInDays === 0) return "today";
-        if (diffInDays === 1) return "1d ago";
-        if (diffInDays === 2) return "2d ago";
-        if (diffInDays === 3) return "3d ago";
-        if (diffInDays === 5) return "5d ago";
-        if (diffInDays < 7) return `${diffInDays}d ago`;
-        if (diffInDays < 14) return "1w ago";
-        return `${Math.floor(diffInDays / 7)}w ago`;
-    };
+    
+    // Format star count like GitHub
+    // const formatStarCount = (count: number): string => {
+    //     if (count >= 1000000) {
+    //         const m = count / 1000000;
+    //         return m >= 10 ? Math.floor(m) + 'm' : m.toFixed(1) + 'm';
+    //     } else if (count >= 1000) {
+    //         const k = count / 1000;
+    //         return k >= 10 ? Math.floor(k) + 'k' : k.toFixed(1) + 'k';
+    //     }
+    //     return count.toString();
+    // };
 
     // Server data is already filtered and sorted on the server side
     const filteredAndSortedServers = servers;
 
     // Reset page when filters change
     React.useEffect(() => {
-        handlePageChange(1);
+        setCurrentPage(1);
     }, [debouncedSearch, quickFilter, filters, sortBy, sortOrder]);
 
     // Servers are already paginated from the server
     const paginatedServers = filteredAndSortedServers;
 
-    const ServerCard: React.FC<{ server: ServerData }> = ({ server }) => (
-        <Link to={`/servers/${server.slug}`}>
-            <div
-                className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover-lift cursor-pointer"
-                data-testid="server-card"
-            >
-                <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center min-w-0 flex-1 mr-4">
-                        <div
-                            className={`w-10 h-10 ${getServerIconBg(
-                                server
-                            )} rounded-lg flex items-center justify-center mr-3 flex-shrink-0`}
-                        >
-                            {getServerIcon(server)}
-                        </div>
-                        <div className="min-w-0 flex-1">
-                            {server.owner && (
-                                <div className="text-sm text-gray-500 dark:text-gray-400 mb-1 truncate">
-                                    @{server.owner}
-                                </div>
-                            )}
-                            <h3
-                                className="server-name text-lg font-semibold text-gray-900 dark:text-white"
-                                data-testid="server-name"
-                            >
-                                <ProgressiveEllipsis
-                                    text={server.name}
-                                    maxLength={15}
-                                    preserveStart={6}
-                                    preserveEnd={4}
-                                />
-                            </h3>
-                            <div className="flex items-center space-x-2 mt-1">
-                                {server.official && (
-                                    <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-2 py-1 rounded-full">
-                                        Official
-                                    </span>
-                                )}
-                                {server.featured && (
-                                    <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs px-2 py-1 rounded-full">
-                                        Featured
-                                    </span>
-                                )}
-                                {server.usage.downloads >= 10000 && (
-                                    <span className="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 text-xs px-2 py-1 rounded-full">
-                                        Popular
-                                    </span>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="text-right flex-shrink-0 space-y-2">
-                        <FavoriteButton
-                            serverId={server.id}
-                            size="sm"
-                            className="mb-2"
-                        />
-                        {/* <div className="flex items-center text-yellow-500">
-                        <Star className="h-4 w-4 fill-current" />
-                        <span className="ml-1 text-gray-900 dark:text-white font-medium text-sm">
-                            {(server.quality.score / 20).toFixed(1)}
-                        </span>
-                    </div> */}
-                        {/* <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center">
-                            <Star className="mr-1.5 h-4 w-4 fill-current text-yellow-500" />{" "}
-                            {formatNumber(server.repository.stars)} stars
-                        </div> */}
-                    </div>
-                </div>
-
-                <p className="server-description text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
-                    {server.descriptionEn || server.description["zh-CN"]}
-                </p>
-
-                <div className="flex flex-wrap gap-1 mb-4">
-                    {server.tags.slice(0, 3).map((tag: string) => (
-                        <Link
-                            key={tag}
-                            to={`/tags/${encodeURIComponent(tag)}`}
-                            className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-800 dark:hover:text-primary-200 text-xs px-2 py-1 rounded transition-colors"
-                        >
-                            #{tag}
-                        </Link>
-                    ))}
-                </div>
-
-                <div className="flex items-center justify-between">
-                    <div className="server-stats flex items-center space-x-3 text-xs text-gray-500 dark:text-gray-400">
-                        {/* <span className="flex items-center">
-                            <Download className="h-3 w-3 mr-1" />
-                            {formatNumber(server.usage.downloads)}
-                        </span> */}
-                        <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center">
-                            <Star className="h-4 w-4 fill-current text-yellow-500" />{" "}
-                            {formatNumber(server.repository.stars)} stars
-                        </div>
-                        <span className="flex items-center">
-                            <Calendar className="h-3 w-3" />
-                            {formatTimeAgo(
-                                server.repository.lastUpdate ||
-                                    server.repository.lastUpdated ||
-                                    ""
-                            )}
-                        </span>
-                    </div>
-                    <span className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium text-xs flex items-center">
-                        View Details
-                        <ArrowRight className="h-3 w-3" />
-                    </span>
-                </div>
-            </div>
-        </Link>
-    );
-
-    // Server List Item Component
-    const ServerListItem: React.FC<{ server: ServerData }> = ({ server }) => (
-        <Link to={`/servers/${server.slug}`}>
-            <div
-                className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 hover-lift cursor-pointer mb-4"
-                data-testid="server-list-item"
-            >
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center min-w-0 flex-1">
-                        <div
-                            className={`w-12 h-12 ${getServerIconBg(
-                                server
-                            )} rounded-lg flex items-center justify-center mr-4 flex-shrink-0`}
-                        >
-                            {getServerIcon(server)}
-                        </div>
-                        <div className="min-w-0 flex-1">
-                            <div className="flex items-center space-x-3 mb-2">
-                                <h3
-                                    className="server-name text-lg font-semibold text-gray-900 dark:text-white"
-                                    data-testid="server-name"
-                                >
-                                    <ProgressiveEllipsis
-                                        text={server.name}
-                                        maxLength={25}
-                                        preserveStart={10}
-                                        preserveEnd={8}
-                                    />
-                                </h3>
-                                {server.owner && (
-                                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                                        @{server.owner}
-                                    </span>
-                                )}
-                                <div className="flex items-center space-x-2">
-                                    {server.official && (
-                                        <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-2 py-1 rounded-full">
-                                            Official
-                                        </span>
-                                    )}
-                                    {server.featured && (
-                                        <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs px-2 py-1 rounded-full">
-                                            Featured
-                                        </span>
-                                    )}
-                                    {server.usage.downloads >= 10000 && (
-                                        <span className="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 text-xs px-2 py-1 rounded-full">
-                                            Popular
-                                        </span>
-                                    )}
-                                </div>
-                            </div>
-                            <p className="server-description text-gray-600 dark:text-gray-300 text-sm mb-2 line-clamp-1">
-                                {server.descriptionEn ||
-                                    server.description["zh-CN"]}
-                            </p>
-                            <div className="flex items-center space-x-4 text-xs text-gray-500 dark:text-gray-400">
-                                {/* <span className="flex items-center">
-                                    <Download className="h-3 w-3 mr-1" />
-                                    {formatNumber(server.usage.downloads)}
-                                </span> */}
-                                <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center">
-                                    <Star className="mr-1.5 h-4 w-4 fill-current text-yellow-500" />{" "}
-                                    {formatNumber(server.repository.stars)}{" "}
-                                    stars
-                                </div>
-                                <span className="flex items-center">
-                                    <Calendar className="h-3 w-3 mr-1" />
-                                    {formatTimeAgo(
-                                        server.repository.lastUpdate ||
-                                            server.repository.lastUpdated ||
-                                            ""
-                                    )}
-                                </span>
-                                <div className="flex flex-wrap gap-1">
-                                    {server.tags
-                                        .slice(0, 2)
-                                        .map((tag: string) => (
-                                            <Link
-                                                key={tag}
-                                                to={`/tags/${encodeURIComponent(tag)}`}
-                                                className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-800 dark:hover:text-primary-200 text-xs px-2 py-1 rounded transition-colors"
-                                            >
-                                                #{tag}
-                                            </Link>
-                                        ))}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex items-center space-x-4 flex-shrink-0">
-                        {/* <div className="flex items-center text-yellow-500">
-                            <Star className="h-4 w-4 fill-current" />
-                            <span className="ml-1 text-gray-900 dark:text-white font-medium text-sm">
-                                {(server.quality.score / 20).toFixed(1)}
-                            </span>
-                        </div> */}
-
-                        <FavoriteButton serverId={server.id} size="sm" />
-                        <span className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium text-sm flex items-center">
-                            View Details
-                            <ArrowRight className="h-3 w-3 ml-1" />
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </Link>
-    );
-
     if (serversLoading) {
         return (
             <div className="bg-gray-50 dark:bg-gray-900 min-h-screen" data-testid="loading">
-                {/* Page Header */}
-                <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                        <div className="animate-pulse">
-                            <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-64 mb-4"></div>
-                            <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-96"></div>
-                        </div>
-                    </div>
-                </div>
-
+                {/* 加载状态UI */}
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                    <div className="flex flex-col lg:flex-row gap-8">
-                        {/* Sidebar */}
-                        <div className="lg:w-1/4">
-                            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 animate-pulse">
-                                <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded mb-4"></div>
-                                <div className="space-y-4">
-                                    <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded"></div>
-                                    <div className="h-20 bg-gray-200 dark:bg-gray-700 rounded"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Main Content */}
-                        <div className="lg:w-3/4">
-                            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                                {[...Array(9)].map((_, i) => (
-                                    <div
-                                        key={i}
-                                        className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 animate-pulse"
-                                    >
-                                        <div className="flex items-center mb-4">
-                                            <div className="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-lg mr-3"></div>
-                                            <div>
-                                                <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-32 mb-2"></div>
-                                                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
-                                            </div>
-                                        </div>
-                                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded mb-2"></div>
-                                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-4"></div>
-                                        <div className="flex gap-2 mb-4">
-                                            <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
-                                            <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-24"></div>
-                                            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                    <div className="animate-pulse">
+                        <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-64 mb-4"></div>
+                        <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-96"></div>
                     </div>
                 </div>
             </div>
@@ -577,18 +247,6 @@ const Servers: React.FC = () => {
                     >
                         Retry
                     </button>
-                </div>
-            </div>
-        );
-    }
-
-    if (serversLoading) {
-        return (
-            <div className="bg-gray-50 dark:bg-gray-900 min-h-screen" data-testid="loading">
-                <div className="flex items-center justify-center h-screen">
-                    <div className="animate-pulse text-lg text-gray-600 dark:text-gray-400">
-                        Loading servers...
-                    </div>
                 </div>
             </div>
         );
@@ -647,14 +305,14 @@ const Servers: React.FC = () => {
                                 }}
                                 className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             >
-                                <option value="stars-desc">Sort by Stars (High to Low)</option>
-                                <option value="stars-asc">Sort by Stars (Low to High)</option>
-                                <option value="downloads-desc">Sort by Downloads (High to Low)</option>
-                                <option value="downloads-asc">Sort by Downloads (Low to High)</option>
-                                <option value="quality_score-desc">Sort by Quality (High to Low)</option>
-                                <option value="quality_score-asc">Sort by Quality (Low to High)</option>
+                                <option value="upvotes-desc">Sort by Usage Count (High to Low)</option>
+                                <option value="upvotes-asc">Sort by Usage Count (Low to High)</option>
+                                <option value="stars-desc">Sort by GitHub Stars (High to Low)</option>
+                                <option value="stars-asc">Sort by GitHub Stars (Low to High)</option>
                                 <option value="name-asc">Sort by Name (A to Z)</option>
                                 <option value="name-desc">Sort by Name (Z to A)</option>
+                                <option value="repo_created_at-desc">Sort by Created (Newest First)</option>
+                                <option value="repo_created_at-asc">Sort by Created (Oldest First)</option>
                                 <option value="last_updated-desc">Sort by Updated (Recent First)</option>
                                 <option value="last_updated-asc">Sort by Updated (Oldest First)</option>
                             </select>
@@ -679,7 +337,6 @@ const Servers: React.FC = () => {
                                             platforms: [],
                                             languages: [],
                                             status: [],
-                                            tags: [],
                                         });
                                         setSidebarSearch("");
                                         setDebouncedSearch("");
@@ -808,76 +465,6 @@ const Servers: React.FC = () => {
                                     ))}
                                 </div>
                             </div>
-
-                            {/* Status Filter */}
-                            <div className="mb-6">
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                                    Status
-                                </label>
-                                <div className="space-y-2">
-                                    {statusFilters.map((status) => (
-                                        <label key={status.id} className="flex items-center">
-                                            <input
-                                                type="checkbox"
-                                                checked={filters.status.includes(status.id)}
-                                                onChange={(e) => {
-                                                    if (e.target.checked) {
-                                                        setFilters({
-                                                            ...filters,
-                                                            status: [...filters.status, status.id]
-                                                        });
-                                                    } else {
-                                                        setFilters({
-                                                            ...filters,
-                                                            status: filters.status.filter(s => s !== status.id)
-                                                        });
-                                                    }
-                                                }}
-                                                className="rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-blue-600 focus:ring-blue-500"
-                                            />
-                                            <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-                                                {status.name}
-                                            </span>
-                                        </label>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Tags Filter */}
-                            {popularTags && popularTags.length > 0 && (
-                                <div className="mb-6">
-                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                                        Popular Tags
-                                    </label>
-                                    <div className="space-y-2 max-h-48 overflow-y-auto">
-                                        {popularTags.slice(0, 15).map((tag) => (
-                                            <label key={tag.tag} className="flex items-center">
-                                                <input
-                                                    type="checkbox"
-                                                    checked={filters.tags.includes(tag.tag)}
-                                                    onChange={(e) => {
-                                                        if (e.target.checked) {
-                                                            setFilters({
-                                                                ...filters,
-                                                                tags: [...filters.tags, tag.tag]
-                                                            });
-                                                        } else {
-                                                            setFilters({
-                                                                ...filters,
-                                                                tags: filters.tags.filter(t => t !== tag.tag)
-                                                            });
-                                                        }
-                                                    }}
-                                                    className="rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-blue-600 focus:ring-blue-500"
-                                                />
-                                                <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-                                                    #{tag.tag} ({tag.count})
-                                                </span>
-                                            </label>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
                         </div>
                     </div>
 
@@ -893,13 +480,13 @@ const Servers: React.FC = () => {
 
                             {/* Quick Filters */}
                             <div className="flex flex-wrap gap-2">
-                                {["all", "official", "featured", "popular"].map((filter) => (
+                                {["all", "official", "featured", "popular", "latest"].map((filter) => (
                                     <span
                                         key={filter}
                                         onClick={() => setQuickFilter(filter)}
                                         className={`filter-tag px-3 py-1 rounded-full text-xs cursor-pointer ${
                                             quickFilter === filter
-                                                ? "active"
+                                                ? "active bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300"
                                                 : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
                                         }`}
                                     >
@@ -948,7 +535,7 @@ const Servers: React.FC = () => {
 
                                 <div className="flex items-center space-x-2">
                                     <button
-                                        onClick={() => handlePageChange(currentPage - 1)}
+                                        onClick={() => setCurrentPage(currentPage - 1)}
                                         disabled={!hasPreviousPage}
                                         className="px-3 py-2 text-sm text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
                                     >
@@ -973,7 +560,7 @@ const Servers: React.FC = () => {
                                             return (
                                                 <button
                                                     key={pageNum}
-                                                    onClick={() => handlePageChange(pageNum)}
+                                                    onClick={() => setCurrentPage(pageNum)}
                                                     className={`px-3 py-2 text-sm rounded-md ${
                                                         currentPage === pageNum
                                                             ? "bg-blue-600 text-white"
@@ -989,7 +576,7 @@ const Servers: React.FC = () => {
                                             <>
                                                 <span className="px-2 text-gray-500 dark:text-gray-400">...</span>
                                                 <button
-                                                    onClick={() => handlePageChange(totalPages)}
+                                                    onClick={() => setCurrentPage(totalPages)}
                                                     className="px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
                                                 >
                                                     {totalPages}
@@ -999,7 +586,7 @@ const Servers: React.FC = () => {
                                     </div>
 
                                     <button
-                                        onClick={() => handlePageChange(currentPage + 1)}
+                                        onClick={() => setCurrentPage(currentPage + 1)}
                                         disabled={!hasNextPage}
                                         className="px-3 py-2 text-sm text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
                                     >

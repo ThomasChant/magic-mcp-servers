@@ -109,6 +109,7 @@ export interface MCPServer {
     };
     featured?: boolean;
     verified?: boolean;
+    latest?: boolean;
     createdAt?: string;
     updatedAt?: string;
 }
@@ -166,13 +167,15 @@ export interface SearchFilters {
     subcategory?: string;
     tags?: string[];
     compatibility?: string[];
+    platforms?: string[];
+    languages?: string[];
     qualityScore?: number;
     featured?: boolean;
     verified?: boolean;
 }
 
 export interface SortOption {
-    key: "name" | "stars" | "downloads" | "quality" | "updated";
+    key: "name" | "stars" | "downloads" | "quality_score" | "last_updated";
     label: string;
     direction: "asc" | "desc";
 }
@@ -210,6 +213,95 @@ export interface ServerReadme {
     filename: string;
     projectName: string;
     rawContent: string;
+    extractedInstallation?: ExtractedInstallation;
+    extractedApiReference?: ExtractedAPIReference;
+    extractionStatus?: 'pending' | 'processing' | 'completed' | 'failed';
+    extractionError?: string;
+    extractedAt?: string;
+}
+
+// README结构化提取数据类型
+export interface ExtractedInstallation {
+    methods: InstallationMethod[];
+    client_configs: ClientConfig[];
+    prerequisites: string[];
+    environment_setup?: EnvironmentVariable[];
+}
+
+export interface InstallationMethod {
+    type: 'npm' | 'pip' | 'docker' | 'smithery' | 'manual' | 'uv' | 'other';
+    title: string;
+    commands: string[];
+    prerequisites?: string[];
+    description?: string;
+    platform?: 'macos' | 'windows' | 'linux' | 'all';
+}
+
+export interface ClientConfig {
+    client: 'claude' | 'vscode' | 'zed' | 'cursor' | 'windsurf' | 'other';
+    platform?: 'macos' | 'windows' | 'linux' | 'all';
+    config_path?: string;
+    config_json: string;
+    notes?: string;
+    description?: string;
+}
+
+export interface EnvironmentVariable {
+    name: string;
+    value: string;
+    description: string;
+    required?: boolean;
+}
+
+export interface ExtractedAPIReference {
+    tools: APITool[];
+    usage_examples?: string[];
+    configuration_options?: ConfigurationOption[];
+    authentication?: AuthenticationInfo;
+}
+
+export interface APITool {
+    name: string;
+    description: string;
+    parameters: APIParameter[];
+    examples?: APIExample[];
+    returns?: APIResponse;
+}
+
+export interface APIParameter {
+    name: string;
+    type: string;
+    required: boolean;
+    description?: string;
+    default?: string;
+    enum_values?: string[];
+}
+
+export interface APIExample {
+    title?: string;
+    request: Record<string, any>;
+    response?: Record<string, any>;
+    description?: string;
+}
+
+export interface APIResponse {
+    type: string;
+    description?: string;
+    properties?: Record<string, any>;
+}
+
+export interface ConfigurationOption {
+    name: string;
+    type: string;
+    description: string;
+    default?: string;
+    required?: boolean;
+}
+
+export interface AuthenticationInfo {
+    type: 'api_key' | 'oauth' | 'token' | 'none';
+    description?: string;
+    setup_instructions?: string[];
 }
 
 // Comment types for Supabase integration
