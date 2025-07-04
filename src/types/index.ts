@@ -175,7 +175,7 @@ export interface SearchFilters {
 }
 
 export interface SortOption {
-    key: "name" | "stars" | "downloads" | "quality_score" | "last_updated";
+    key: "name" | "stars" | "quality_score" | "last_updated";
     label: string;
     direction: "asc" | "desc";
 }

@@ -1,32 +1,24 @@
 import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { ServerCard, ServerListItem } from "../components/ServerCard";
 import {
     ArrowLeft,
     Search,
-    Star,
-    Calendar,
-    ArrowRight,
     Grid3X3,
     List,
     ChevronLeft,
     ChevronRight,
     Tag,
-    Hash,
-    Package,
-    AlertCircle,
 } from "lucide-react";
 import { useSearchServersPaginated } from "../hooks/useUnifiedData";
-import type { MCPServer, SortOption } from "../types";
-import { FavoriteButton } from "../components/FavoriteButton";
-import ProgressiveEllipsis from "../components/ProgressiveEllipsis";
-
+import type { SortOption } from "../types";
 const TagDetail: React.FC = () => {
     const { tag } = useParams<{ tag: string }>();
     const decodedTag = decodeURIComponent(tag || '');
 
     const [searchQuery, setSearchQuery] = useState("");
     const [sortBy, setSortBy] = useState<SortOption>({
-        key: "quality",
+        key: "stars",
         label: "Quality Score",
         direction: "desc",
     });
@@ -49,206 +41,6 @@ const TagDetail: React.FC = () => {
     const totalServers = paginatedResult?.total || 0;
     const hasNextPage = paginatedResult?.hasNextPage || false;
     const hasPrevPage = currentPage > 1;
-
-    // Format numbers
-    const formatNumber = (num: number) => {
-        if (num >= 1000) {
-            return (num / 1000).toFixed(1) + "k";
-        }
-        return num.toString();
-    };
-
-    // Format time ago
-    const formatTimeAgo = (dateString: string) => {
-        const date = new Date(dateString);
-        const now = new Date();
-        const diffInDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
-        
-        if (diffInDays === 0) return "today";
-        if (diffInDays < 7) return `${diffInDays}d ago`;
-        if (diffInDays < 30) return `${Math.floor(diffInDays / 7)}w ago`;
-        return `${Math.floor(diffInDays / 30)}mo ago`;
-    };
-
-    // Get server icon based on category and tags
-    const getServerIcon = (server: MCPServer) => {
-        const tags = server.tags.join(" ").toLowerCase();
-        const category = Array.isArray(server.category) ? server.category.join(" ").toLowerCase() : server.category.toLowerCase();
-        
-        if (tags.includes("database") || category.includes("database")) {
-            return <Package className="h-5 w-5 text-white" />;
-        }
-        return <Hash className="h-5 w-5 text-white" />;
-    };
-
-    const getServerIconBg = (server: MCPServer) => {
-        const tags = server.tags.join(" ").toLowerCase();
-        const category = Array.isArray(server.category) ? server.category.join(" ").toLowerCase() : server.category.toLowerCase();
-        
-        if (tags.includes("database") || category.includes("database")) {
-            return "bg-green-600";
-        } else if (tags.includes("ai") || tags.includes("ml")) {
-            return "bg-purple-600";
-        } else if (tags.includes("file") || tags.includes("storage")) {
-            return "bg-blue-600";
-        } else if (tags.includes("communication") || tags.includes("messaging")) {
-            return "bg-orange-600";
-        }
-        return "bg-indigo-600";
-    };
-
-    const ServerCard: React.FC<{ server: MCPServer }> = ({ server }) => (
-        <Link to={`/servers/${server.slug}`}>
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover-lift cursor-pointer">
-                <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center min-w-0 flex-1 mr-4">
-                        <div
-                            className={`w-10 h-10 ${getServerIconBg(server)} rounded-lg flex items-center justify-center mr-3 flex-shrink-0`}
-                        >
-                            {getServerIcon(server)}
-                        </div>
-                        <div className="min-w-0 flex-1">
-                            {server.owner && (
-                                <div className="text-sm text-gray-500 dark:text-gray-400 mb-1 truncate">
-                                    @{server.owner}
-                                </div>
-                            )}
-                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                                <ProgressiveEllipsis
-                                    text={server.name}
-                                    maxLength={20}
-                                    preserveStart={8}
-                                    preserveEnd={4}
-                                />
-                            </h3>
-                            <div className="flex items-center space-x-2 mt-1">
-                                {server.featured && (
-                                    <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs px-2 py-1 rounded-full">
-                                        Featured
-                                    </span>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="text-right flex-shrink-0">
-                        <FavoriteButton serverId={server.id} size="sm" />
-                    </div>
-                </div>
-
-                <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
-                    {server.description.en || server.description["zh-CN"]}
-                </p>
-
-                <div className="flex flex-wrap gap-1 mb-4">
-                    {server.tags.slice(0, 4).map((serverTag: string) => (
-                        <span
-                            key={serverTag}
-                            className={`text-xs px-2 py-1 rounded ${
-                                serverTag.toLowerCase() === decodedTag.toLowerCase()
-                                    ? "bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 font-medium"
-                                    : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
-                            }`}
-                        >
-                            #{serverTag}
-                        </span>
-                    ))}
-                </div>
-
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3 text-xs text-gray-500 dark:text-gray-400">
-                        <div className="flex items-center">
-                            <Star className="h-4 w-4 fill-current text-yellow-500" />{" "}
-                            {formatNumber(server.repository.stars)}
-                        </div>
-                        <span className="flex items-center">
-                            <Calendar className="h-3 w-3" />
-                            {formatTimeAgo(
-                                server.repository.lastUpdated || ""
-                            )}
-                        </span>
-                    </div>
-                    <span className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium text-xs flex items-center">
-                        View Details
-                        <ArrowRight className="h-3 w-3" />
-                    </span>
-                </div>
-            </div>
-        </Link>
-    );
-
-    const ServerListItem: React.FC<{ server: MCPServer }> = ({ server }) => (
-        <Link to={`/servers/${server.slug}`}>
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 hover-lift cursor-pointer mb-4">
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center min-w-0 flex-1">
-                        <div
-                            className={`w-12 h-12 ${getServerIconBg(server)} rounded-lg flex items-center justify-center mr-4 flex-shrink-0`}
-                        >
-                            {getServerIcon(server)}
-                        </div>
-                        <div className="min-w-0 flex-1">
-                            <div className="flex items-center justify-between">
-                                <h3 className="text-lg font-semibold text-gray-900 dark:text-white truncate">
-                                    {server.name}
-                                </h3>
-                                <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
-                                    <div className="flex items-center">
-                                        <Star className="h-4 w-4 fill-current text-yellow-500 mr-1" />
-                                        {formatNumber(server.repository.stars)}
-                                    </div>
-                                    <span>{formatTimeAgo(server.repository.lastUpdated || "")}</span>
-                                </div>
-                            </div>
-                            <p className="text-gray-600 dark:text-gray-300 text-sm mt-1 line-clamp-1">
-                                {server.description.en || server.description["zh-CN"]}
-                            </p>
-                            <div className="flex flex-wrap gap-1 mt-2">
-                                {server.tags.slice(0, 5).map((serverTag: string) => (
-                                    <span
-                                        key={serverTag}
-                                        className={`text-xs px-2 py-1 rounded ${
-                                            serverTag.toLowerCase() === decodedTag.toLowerCase()
-                                                ? "bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 font-medium"
-                                                : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
-                                        }`}
-                                    >
-                                        #{serverTag}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex items-center space-x-3 ml-4">
-                        <FavoriteButton serverId={server.id} size="sm" />
-                        <ArrowRight className="h-5 w-5 text-gray-400" />
-                    </div>
-                </div>
-            </div>
-        </Link>
-    );
-
-    if (!tag) {
-        return (
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-                <div className="text-red-400 dark:text-red-500 mb-4">
-                    <AlertCircle className="h-12 w-12 mx-auto" />
-                </div>
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                    Tag Not Found
-                </h1>
-                <p className="text-gray-600 dark:text-gray-300 mb-8">
-                    Sorry, we couldn't find the tag you're looking for.
-                </p>
-                <Link
-                    to="/servers"
-                    className="inline-flex items-center px-4 py-2 bg-primary-600 dark:bg-primary-500 text-white font-medium rounded-lg hover:bg-primary-700 dark:hover:bg-primary-600 transition-colors"
-                >
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    Back to Servers
-                </Link>
-            </div>
-        );
-    }
 
     return (
         <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">

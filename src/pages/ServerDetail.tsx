@@ -41,7 +41,6 @@ import ServerTooltip from "../components/ServerTooltip";
 import InstallationTab from "../components/InstallationTab";
 import APIReferenceTab from "../components/APIReferenceTab";
 import { ClientOnly } from "../components/ClientOnly";
-
 const ServerDetail: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();
     const { data: server, isLoading, error } = useServer(slug!);
@@ -455,6 +454,22 @@ const ServerDetail: React.FC = () => {
                                         </span>
                                     </div>
                                 </div>
+
+                                {/* Tags Section */}
+                                {server.tags && server.tags.length > 0 && (
+                                    <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                                        <div className="flex flex-wrap gap-2">
+                                            {server.tags.map((tag: string) => (
+                                                <span
+                                                    key={tag}
+                                                    className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded font-medium hover:bg-gray-200 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
+                                                >
+                                                    <Link to={`/tags/${tag}`}>#{tag}</Link>
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -1069,6 +1084,25 @@ const ServerDetail: React.FC = () => {
                                 </div>
                             </div> */}
 
+                            {/* Tags Section */}
+                            {server.tags && server.tags.length > 0 && (
+                                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                                        Tags
+                                    </h3>
+                                    <div className="flex flex-wrap gap-2">
+                                        {server.tags.map((tag: string) => (
+                                            <span
+                                                key={tag}
+                                                className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full font-medium"
+                                            >
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
                             {/* Compatibility */}
                             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
                                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
@@ -1219,7 +1253,7 @@ const ServerDetail: React.FC = () => {
                                                     delay={300}
                                                 >
                                                     <Link
-                                                        to={`/servers/${relatedServer.id}`}
+                                                        to={`/servers/${relatedServer.slug}`}
                                                         className="group block p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:border-blue-300 dark:hover:border-blue-500 transition-all duration-200 hover:shadow-md"
                                                     >
                                                         <div className="flex items-start space-x-3 mb-3">

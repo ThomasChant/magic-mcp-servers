@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
     Calendar,
     ArrowRight,
@@ -130,9 +130,22 @@ interface ServerListItemProps {
     server: ServerData | MCPServer;
 }
 
+const reSortTag = (tags: string[], decodedTag: string) => {
+    tags.sort((a, b) => {
+        if (a.toLowerCase() === decodedTag.toLowerCase()) return -1;
+        if (b.toLowerCase() === decodedTag.toLowerCase()) return 1;
+        return 0;
+    });
+}
+
 // Server Card Component for Grid View
 export const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
+    const { tag } = useParams<{ tag: string }>();
+    const decodedTag = decodeURIComponent(tag || '');
     const serverData = server as ServerData;
+    if (decodedTag) {
+        reSortTag(serverData.tags, decodedTag);
+    }
     
     return (
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between h-full">
@@ -196,12 +209,18 @@ export const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                 </Link>
 
                 <div className="flex flex-wrap gap-1 mb-4">
+                    
                     {server.tags.slice(0, 3).map((tag: string) => (
                         <span
                             key={tag}
-                            className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded"
+                            // className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded"
+                            className={`text-xs px-2 py-1 rounded hover:bg-gray-200 ${
+                                tag.toLowerCase() === decodedTag.toLowerCase()
+                                    ? "bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 font-medium"
+                                    : "bg-gray-100 dark:bg-gray-700 hover:dark:bg-gray-500 hover:dark:text-gray-50 text-gray-700 dark:text-gray-300"
+                            }`}
                         >
-                            {tag}
+                            <Link to={`/tags/${tag}`}>#{tag}</Link>
                         </span>
                     ))}
                 </div>
@@ -236,6 +255,11 @@ export const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
 // Server List Item Component for List View
 export const ServerListItem: React.FC<ServerListItemProps> = ({ server }) => {
     const serverData = server as ServerData;
+    const { tag } = useParams<{ tag: string }>();
+    const decodedTag = decodeURIComponent(tag || '');
+    if (decodedTag) {
+        reSortTag(serverData.tags, decodedTag);
+    }
     
     return (
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 hover:shadow-md transition-all duration-300 hover:-translate-y-1 cursor-pointer mb-4">
@@ -296,13 +320,17 @@ export const ServerListItem: React.FC<ServerListItemProps> = ({ server }) => {
                             </span>
                             <div className="flex flex-wrap gap-1">
                                 {server.tags
-                                    .slice(0, 2)
+                                    .slice(0, 4)
                                     .map((tag: string) => (
                                         <span
                                             key={tag}
-                                            className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded"
+                                            className={`text-xs px-2 py-1 rounded hover:bg-gray-200 ${
+                                                tag.toLowerCase() === decodedTag.toLowerCase()
+                                                    ? "bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 font-medium"
+                                                    : "bg-gray-100 dark:bg-gray-700 hover:dark:bg-gray-500 hover:dark:text-gray-50 text-gray-700 dark:text-gray-300"
+                                            }`}
                                         >
-                                            {tag}
+                                            <Link to={`/tags/${tag}`}>#{tag}</Link>
                                         </span>
                                     ))}
                             </div>
@@ -316,11 +344,11 @@ export const ServerListItem: React.FC<ServerListItemProps> = ({ server }) => {
                     <ClientOnly>
                         <VoteButtons 
                             serverId={server.id}
-                            size="sm"
+                            size="md"
                         />
                     </ClientOnly>
                     <Link to={`/servers/${server.slug}`}>
-                        <span className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium text-sm flex items-center">
+                        <span className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-sm text-sm flex items-center">
                             View Details
                             <ArrowRight className="h-3 w-3 ml-1" />
                         </span>
