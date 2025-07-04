@@ -54,7 +54,7 @@ const Servers: React.FC = () => {
     const [sidebarSearch, setSidebarSearch] = useState("");
     const [debouncedSearch, setDebouncedSearch] = useState("");
     const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-    const [sortBy, setSortBy] = useState("stars"); // 默认按星标数排序
+    const [sortBy, setSortBy] = useState("upvotes"); // 默认按使用人数排序
     const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
     const [quickFilter, setQuickFilter] = useState("all");
     const [currentPage, setCurrentPage] = useState(1);
@@ -618,8 +618,8 @@ const Servers: React.FC = () => {
                                 }}
                                 className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             >
-                                <option value="total_score-desc">Sort by Community Score (High to Low)</option>
-                                <option value="total_score-asc">Sort by Community Score (Low to High)</option>
+                                <option value="upvotes-desc">Sort by Usage Count (High to Low)</option>
+                                <option value="upvotes-asc">Sort by Usage Count (Low to High)</option>
                                 <option value="stars-desc">Sort by GitHub Stars (High to Low)</option>
                                 <option value="stars-asc">Sort by GitHub Stars (Low to High)</option>
                                 <option value="quality_score-desc">Sort by Quality (High to Low)</option>
