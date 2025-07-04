@@ -313,7 +313,7 @@ const ServerDetail: React.FC = () => {
                                         </div>
                                     </div>
                                     <div className="flex flex-row items-center gap-2">
-                                        <a
+                                        {/* <a
                                             href={server.repository.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
@@ -321,7 +321,7 @@ const ServerDetail: React.FC = () => {
                                             title="View on GitHub"
                                         >
                                             <GitBranch className="h-4 w-4" />
-                                        </a>
+                                        </a> */}
                                         <FavoriteButton
                                             serverId={server.id}
                                             showText={false}
