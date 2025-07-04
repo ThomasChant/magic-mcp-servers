@@ -118,15 +118,13 @@ export async function render(url: string, context?: any) {
             
             // Pre-populate the React Query cache with server data
             if (serverData) {
-                queryClient.setQueryData(["supabase", "server", slug], serverData);
-                queryClient.setQueryData(["supabase", "server", ""], serverData);
+                queryClient.setQueryData(["server", slug], serverData);
                 console.log(`✅ Pre-populated query cache for server: ${serverData.name}`);
             }
             
             // Pre-populate the React Query cache with README data
             if (readmeData && serverData) {
                 queryClient.setQueryData(["supabase", "readme", serverData.id], readmeData);
-                queryClient.setQueryData(["supabase", "readme", slug], readmeData);
                 console.log(`✅ Pre-populated README cache for server: ${serverData.name}`);
             }
             

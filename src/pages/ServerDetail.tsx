@@ -40,6 +40,7 @@ import VoteButtons from "../components/VoteButtons";
 import ServerTooltip from "../components/ServerTooltip";
 import InstallationTab from "../components/InstallationTab";
 import APIReferenceTab from "../components/APIReferenceTab";
+import { ClientOnly } from "../components/ClientOnly";
 
 const ServerDetail: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();
@@ -322,18 +323,22 @@ const ServerDetail: React.FC = () => {
                                         >
                                             <GitBranch className="h-4 w-4" />
                                         </a> */}
-                                        <FavoriteButton
-                                            serverId={server.id}
-                                            showText={false}
-                                            size="sm"
-                                            className="shadow-sm hover:shadow-md"
-                                        />
-                                        <VoteButtons
-                                            serverId={server.id}
-                                            size="sm"
-                                            showScore={false}
-                                            className="flex items-center"
-                                        />
+                                        <ClientOnly>
+                                            <FavoriteButton
+                                                serverId={server.id}
+                                                showText={false}
+                                                size="sm"
+                                                className="shadow-sm hover:shadow-md"
+                                            />
+                                        </ClientOnly>
+                                        <ClientOnly>
+                                            <VoteButtons
+                                                serverId={server.id}
+                                                size="sm"
+                                                showScore={false}
+                                                className="flex items-center"
+                                            />
+                                        </ClientOnly>
                                         <div className="relative" ref={shareMenuRef}>
                                             <button
                                                 onClick={() =>
@@ -596,7 +601,9 @@ const ServerDetail: React.FC = () => {
                             ) : activeTab === 'comments' ? (
                                 <div className="p-6">
                                     {/* Comments Section */}
-                                    <ServerCommentsWithReplies serverId={server.id} />
+                                    <ClientOnly>
+                                        <ServerCommentsWithReplies serverId={server.id} />
+                                    </ClientOnly>
                                 </div>
                             ) : (
                                 <div className="p-6">
