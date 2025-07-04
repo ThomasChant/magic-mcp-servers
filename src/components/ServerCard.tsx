@@ -73,7 +73,7 @@ const formatTimeAgo = (dateString: string) => {
     const displayUnits = units.slice(0, 2);
     
     // Format the output
-    return displayUnits.map(unit => `${unit.value}${unit.label}`).join('');
+    return displayUnits.map(unit => `${unit.value}${unit.label}`).join(' ');
 };
 
 // Detect if server is part of a monorepo

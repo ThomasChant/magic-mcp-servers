@@ -1,16 +1,8 @@
 import React, { useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-    Star,
-    Download,
-    Calendar,
     ArrowRight,
     Heart,
-    Folder,
-    Database,
-    MessageCircle,
-    Bot,
-    FileText,
     Cloud,
     CloudOff,
     AlertCircle,
@@ -19,8 +11,7 @@ import {
 } from "lucide-react";
 import { useServers, useCategories } from "../hooks/useUnifiedData";
 import { useAppStore } from "../store/useAppStore";
-import { FavoriteButton } from "../components/FavoriteButton";
-import ProgressiveEllipsis from "../components/ProgressiveEllipsis";
+import { ServerCard } from "../components/ServerCard";
 import { useFavoritesSync } from "../hooks/useFavoritesSync";
 import type { MCPServer } from "../types";
 
@@ -77,167 +68,7 @@ const Favorites: React.FC = () => {
             }
         });
         return counts;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [servers, categories, currentContent]);
-
-    const getServerIcon = (server: ServerData) => {
-        const tags = server.tags.join(" ").toLowerCase();
-        const category = Array.isArray(server.category) ? server.category.join(" ").toLowerCase() : server.category.toLowerCase();
-        const combined = `${tags} ${category}`;
-        
-        if (combined.includes("file") || combined.includes("storage")) {
-            return <Folder className="h-5 w-5 text-white" />;
-        } else if (combined.includes("database") || combined.includes("sql")) {
-            return <Database className="h-5 w-5 text-white" />;
-        } else if (combined.includes("communication") || combined.includes("slack") || combined.includes("messaging")) {
-            return <MessageCircle className="h-5 w-5 text-white" />;
-        } else if (combined.includes("ai") || combined.includes("ml") || combined.includes("search")) {
-            return <Bot className="h-5 w-5 text-white" />;
-        } else if (combined.includes("development") || combined.includes("github") || combined.includes("git")) {
-            return <Bot className="h-5 w-5 text-white" />;
-        } else {
-            return <FileText className="h-5 w-5 text-white" />;
-        }
-    };
-
-    const getServerIconBg = (server: ServerData) => {
-        const tags = server.tags.join(" ").toLowerCase();
-        const category = Array.isArray(server.category) ? server.category.join(" ").toLowerCase() : server.category.toLowerCase();
-        const combined = `${tags} ${category}`;
-        
-        if (combined.includes("file") || combined.includes("storage")) {
-            return "bg-blue-600";
-        } else if (combined.includes("database") || combined.includes("sql")) {
-            return server.name.toLowerCase().includes("sqlite") ? "bg-yellow-600" : "bg-green-600";
-        } else if (combined.includes("communication") || combined.includes("slack") || combined.includes("messaging")) {
-            return "bg-purple-600";
-        } else if (combined.includes("ai") || combined.includes("ml") || combined.includes("search")) {
-            return "bg-red-600";
-        } else if (combined.includes("development") || combined.includes("github") || combined.includes("git")) {
-            return "bg-indigo-600";
-        } else {
-            return "bg-yellow-600";
-        }
-    };
-
-    const formatNumber = (num: number) => {
-        if (num >= 1000) {
-            return (num / 1000).toFixed(1) + "k";
-        }
-        return num.toString();
-    };
-
-    const formatTimeAgo = (dateString: string) => {
-        const date = new Date(dateString);
-        const now = new Date();
-        const diffInDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
-        
-        if (diffInDays === 0) return "today";
-        if (diffInDays === 1) return "1d ago";
-        if (diffInDays === 2) return "2d ago";
-        if (diffInDays === 3) return "3d ago";
-        if (diffInDays === 5) return "5d ago";
-        if (diffInDays < 7) return `${diffInDays}d ago`;
-        if (diffInDays < 14) return "1w ago";
-        return `${Math.floor(diffInDays / 7)}w ago`;
-    };
-
-    const ServerCard: React.FC<{ server: ServerData }> = ({ server }) => (
-        <Link to={`/servers/${server.slug}`}>
-            <div 
-                className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover-lift cursor-pointer"
-                data-testid="favorite-server-card"
-            >
-                <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center min-w-0 flex-1 mr-4">
-                        <div className={`w-10 h-10 ${getServerIconBg(server)} rounded-lg flex items-center justify-center mr-3 flex-shrink-0`}>
-                            {getServerIcon(server)}
-                        </div>
-                        <div className="min-w-0 flex-1">
-                            {server.owner && (
-                                <div className="text-sm text-gray-500 dark:text-gray-400 mb-1 truncate">
-                                    @{server.owner}
-                                </div>
-                            )}
-                            <h3 className="server-name text-lg font-semibold text-gray-900 dark:text-white" data-testid="server-name">
-                                <ProgressiveEllipsis 
-                                    text={server.name}
-                                    maxLength={15}
-                                    preserveStart={6}
-                                    preserveEnd={4}
-                                />
-                            </h3>
-                            <div className="flex items-center space-x-2 mt-1">
-                                {server.official && (
-                                    <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-2 py-1 rounded-full">
-                                        Official
-                                    </span>
-                                )}
-                                {server.featured && (
-                                    <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs px-2 py-1 rounded-full">
-                                        Featured
-                                    </span>
-                                )}
-                                {server.usage.downloads >= 10000 && (
-                                    <span className="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 text-xs px-2 py-1 rounded-full">
-                                        Popular
-                                    </span>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="text-right flex-shrink-0 space-y-2">
-                        <FavoriteButton 
-                            serverId={server.id} 
-                            size="sm"
-                            className="mb-2"
-                        />
-                        <div className="flex items-center text-yellow-500">
-                            <Star className="h-4 w-4 fill-current" />
-                            <span className="ml-1 text-gray-900 dark:text-white font-medium text-sm">
-                                {(server.quality.score / 20).toFixed(1)}
-                            </span>
-                        </div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400">
-                            {formatNumber(server.repository.stars)} stars
-                        </div>
-                    </div>
-                </div>
-
-                <p className="server-description text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
-                    {server.descriptionEn || server.description["zh-CN"]}
-                </p>
-
-                <div className="flex flex-wrap gap-1 mb-4">
-                    {server.tags.slice(0, 3).map((tag: string) => (
-                        <span
-                            key={tag}
-                            className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded"
-                        >
-                            {tag}
-                        </span>
-                    ))}
-                </div>
-
-                <div className="flex items-center justify-between">
-                    <div className="server-stats flex items-center space-x-3 text-xs text-gray-500 dark:text-gray-400">
-                        <span className="flex items-center">
-                            <Download className="h-3 w-3 mr-1" />
-                            {formatNumber(server.usage.downloads)}
-                        </span>
-                        <span className="flex items-center">
-                            <Calendar className="h-3 w-3 mr-1" />
-                            {formatTimeAgo(server.repository.lastUpdate || server.repository.lastUpdated || "")}
-                        </span>
-                    </div>
-                    <span className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium text-sm flex items-center">
-                        View Details
-                        <ArrowRight className="h-3 w-3 ml-1" />
-                    </span>
-                </div>
-            </div>
-        </Link>
-    );
+    }, [servers, categories]);
 
     if (isLoading) {
         return (
@@ -428,7 +259,7 @@ const Favorites: React.FC = () => {
                                     : "md:grid-cols-2 xl:grid-cols-3"
                             }`}>
                                 {favoriteServers.map((server) => (
-                                    <ServerCard key={server.id} server={server as ServerData} />
+                                    <ServerCard key={server.slug} server={server as ServerData} />
                                 ))}
                             </div>
                         ) : (
