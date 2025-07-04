@@ -966,7 +966,7 @@ const ServerDetail: React.FC = () => {
                                             </dd>
                                         </div>
                                     )}
-                                    <div>
+                                    {/* <div>
                                         <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
                                             Issues
                                         </dt>
@@ -980,7 +980,7 @@ const ServerDetail: React.FC = () => {
                                                 View Issues
                                             </a>
                                         </dd>
-                                    </div>
+                                    </div> */}
                                 </dl>
                             </div>
 
