@@ -1,16 +1,32 @@
 {
-    "buildCommand": "npm run build:client",
-    "devCommand": "npm run dev:spa",
-    "outputDirectory": "dist/client",
+    "buildCommand": "npm run build",
+    "outputDirectory": ".",
     "installCommand": "npm install --force",
-    "framework": "vite",
+    "functions": {
+        "api/ssr.js": {
+            "maxDuration": 30
+        }
+    },
     "rewrites": [
         {
+            "source": "/assets/(.*)",
+            "destination": "/dist/client/assets/$1"
+        },
+        {
             "source": "/(.*)",
-            "destination": "/index.html"
+            "destination": "/api/ssr"
         }
     ],
     "headers": [
+        {
+            "source": "/assets/(.*)",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, immutable, max-age=31536000"
+                }
+            ]
+        },
         {
             "source": "/servers/(.*)",
             "headers": [
