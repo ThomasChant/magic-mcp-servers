@@ -85,6 +85,9 @@
     "vike": "^0.4.235",
     "zustand": "^5.0.5"
   },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.30.3"
+  },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
     "@testing-library/jest-dom": "^6.4.6",

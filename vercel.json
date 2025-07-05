@@ -1,8 +1,8 @@
 {
-    "buildCommand": "npm ci && npm run build:client",
+    "buildCommand": "npm run build:client",
     "devCommand": "npm run dev:spa",
     "outputDirectory": "dist/client",
-    "installCommand": "npm ci",
+    "installCommand": "npm install --force",
     "framework": "vite",
     "rewrites": [
         {
