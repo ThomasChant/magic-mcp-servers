@@ -1,0 +1,11 @@
+{
+    "buildCommand": "npm run build:client",
+    "devCommand": "npm run dev:spa",
+    "outputDirectory": "dist/client",
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/index.html"
+        }
+    ]
+}
