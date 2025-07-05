@@ -1094,9 +1094,9 @@ const ServerDetail: React.FC = () => {
                                         {server.tags.map((tag: string) => (
                                             <span
                                                 key={tag}
-                                                className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded-full font-medium"
+                                                className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-3 py-1 rounded font-medium"
                                             >
-                                                {tag}
+                                                <Link to={`/servers?tag=${tag}`}>#{tag}</Link>
                                             </span>
                                         ))}
                                     </div>
@@ -1282,9 +1282,9 @@ const ServerDetail: React.FC = () => {
                                                             {relatedServer.tags?.slice(0, 2).map((tag) => (
                                                                 <span
                                                                     key={tag}
-                                                                    className="inline-flex items-center px-2 py-0.5 bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300 text-[10px] rounded font-medium"
+                                                                    className="inline-flex items-center px-2 py-0.5 hover:bg-gray-200 dark:hover:bg-gray-400 dark:hover:text-gray-100 bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300 text-[10px] rounded font-medium"
                                                                 >
-                                                                    {tag}
+                                                                   <Link to={`/servers?tag=${tag}`} > #{tag}</Link>
                                                                 </span>
                                                             ))}
                                                         </div>

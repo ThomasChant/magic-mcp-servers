@@ -9,6 +9,7 @@ import {
     Bot,
     FileText,
     GitBranch,
+    Star,
 } from "lucide-react";
 import type { MCPServer } from "../types";
 import { FavoriteButton } from "./FavoriteButton";
@@ -47,6 +48,18 @@ interface ServerData extends Omit<MCPServer, 'verified'> {
 
 
 
+
+// Format star count like GitHub
+const formatStarCount = (count: number): string => {
+    if (count >= 1000000) {
+        const m = count / 1000000;
+        return m >= 10 ? Math.floor(m) + 'm' : m.toFixed(1) + 'm';
+    } else if (count >= 1000) {
+        const k = count / 1000;
+        return k >= 10 ? Math.floor(k) + 'k' : k.toFixed(1) + 'k';
+    }
+    return count.toString();
+};
 
 // Format time ago
 const formatTimeAgo = (dateString: string) => {
@@ -229,6 +242,10 @@ export const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
             <div className="flex items-center justify-between mt-auto">
                 <div className="server-stats flex items-center space-x-3 text-xs text-gray-500 dark:text-gray-400">
                     <span className="flex items-center">
+                        <Star className="h-3 w-3 mr-1 text-yellow-500 dark:text-yellow-400" fill="currentColor" />
+                        {formatStarCount(server.stats?.stars || server.repository?.stars || 0)}
+                    </span>
+                    <span className="flex items-center">
                         <Calendar className="h-3 w-3 mr-1" />
                         {formatTimeAgo(
                             server.createdAt ||
@@ -308,6 +325,10 @@ export const ServerListItem: React.FC<ServerListItemProps> = ({ server }) => {
                             {serverData.descriptionEn || server.description["zh-CN"] || server.description.en}
                         </p>
                         <div className="flex items-center space-x-4 text-xs text-gray-500 dark:text-gray-400">
+                            <span className="flex items-center">
+                                <Star className="h-3 w-3 mr-1 text-yellow-500 dark:text-yellow-400" fill="currentColor" />
+                                {formatStarCount(server.stats?.stars || server.repository?.stars || 0)}
+                            </span>
                             <span className="flex items-center">
                                 <Calendar className="h-3 w-3 mr-1" />
                                 {formatTimeAgo(
