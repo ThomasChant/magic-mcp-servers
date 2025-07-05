@@ -1,5 +1,19 @@
 # Supabase 数据库连接指南
 
+🔒 **安全提醒**: 此文档仅供配置参考，所有敏感信息（用户名、密码、主机地址）请从 Supabase 控制台获取，并通过环境变量管理。
+
+## 环境变量配置
+
+在使用数据库连接前，请先设置以下环境变量（在 `.env.local` 文件中）：
+
+```env
+SUPABASE_HOST=your_supabase_host
+SUPABASE_PORT=5432
+SUPABASE_DATABASE=postgres
+SUPABASE_USER=your_username
+SUPABASE_PASSWORD=your_password
+```
+
 ## 连接信息
 
 从 Supabase 控制台获取以下信息：
@@ -17,13 +31,13 @@ jdbc:postgresql://[HOST]:[PORT]/[DATABASE]?user=[USER]&password=[PASSWORD]
 
 示例：
 ```
-jdbc:postgresql://aws-0-us-east-2.pooler.supabase.com:5432/postgres?user=postgres.lptsvryohchbklxcyoyc&password=xgCT84482819
+jdbc:postgresql://[YOUR_SUPABASE_HOST]:5432/postgres?user=[YOUR_USERNAME]&password=[YOUR_PASSWORD]
 ```
 
 或者分开配置：
-- **JDBC URL**: `jdbc:postgresql://aws-0-us-east-2.pooler.supabase.com:5432/postgres`
-- **Username**: `postgres.lptsvryohchbklxcyoyc`
-- **Password**: `xgCT84482819`
+- **JDBC URL**: `jdbc:postgresql://[YOUR_SUPABASE_HOST]:5432/postgres`
+- **Username**: `[YOUR_USERNAME]`
+- **Password**: `[YOUR_PASSWORD]`
 
 ### 2. PostgreSQL 标准连接字符串
 
@@ -33,13 +47,13 @@ postgresql://[USER]:[PASSWORD]@[HOST]:[PORT]/[DATABASE]
 
 示例：
 ```
-postgresql://postgres.lptsvryohchbklxcyoyc:xgCT84482819@aws-0-us-east-2.pooler.supabase.com:5432/postgres
+postgresql://[YOUR_USERNAME]:[YOUR_PASSWORD]@[YOUR_SUPABASE_HOST]:5432/postgres
 ```
 
 ### 3. psql 命令行
 
 ```bash
-psql -h aws-0-us-east-2.pooler.supabase.com -p 5432 -d postgres -U postgres.lptsvryohchbklxcyoyc
+psql -h [YOUR_SUPABASE_HOST] -p 5432 -d postgres -U [YOUR_USERNAME]
 ```
 
 ### 4. Node.js (pg 库)
@@ -48,11 +62,11 @@ psql -h aws-0-us-east-2.pooler.supabase.com -p 5432 -d postgres -U postgres.lpts
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  host: 'aws-0-us-east-2.pooler.supabase.com',
-  port: 5432,
-  database: 'postgres',
-  user: 'postgres.lptsvryohchbklxcyoyc',
-  password: 'xgCT84482819',
+  host: process.env.SUPABASE_HOST,
+  port: process.env.SUPABASE_PORT || 5432,
+  database: process.env.SUPABASE_DATABASE || 'postgres',
+  user: process.env.SUPABASE_USER,
+  password: process.env.SUPABASE_PASSWORD,
   ssl: {
     rejectUnauthorized: false
   }
@@ -63,13 +77,14 @@ const pool = new Pool({
 
 ```python
 import psycopg2
+import os
 
 conn = psycopg2.connect(
-    host="aws-0-us-east-2.pooler.supabase.com",
-    port=5432,
-    database="postgres",
-    user="postgres.lptsvryohchbklxcyoyc",
-    password="xgCT84482819",
+    host=os.getenv("SUPABASE_HOST"),
+    port=int(os.getenv("SUPABASE_PORT", 5432)),
+    database=os.getenv("SUPABASE_DATABASE", "postgres"),
+    user=os.getenv("SUPABASE_USER"),
+    password=os.getenv("SUPABASE_PASSWORD"),
     sslmode="require"
 )
 ```
@@ -78,11 +93,11 @@ conn = psycopg2.connect(
 
 1. 新建连接 > 选择 PostgreSQL
 2. 在 Main 标签页填写：
-   - **Server Host**: `aws-0-us-east-2.pooler.supabase.com`
+   - **Server Host**: `[YOUR_SUPABASE_HOST]`
    - **Port**: `5432`
    - **Database**: `postgres`
-   - **Username**: `postgres.lptsvryohchbklxcyoyc`
-   - **Password**: `xgCT84482819`
+   - **Username**: `[YOUR_USERNAME]`
+   - **Password**: `[YOUR_PASSWORD]`
 
 3. 在 SSL 标签页：
    - 勾选 **Use SSL**
@@ -94,11 +109,11 @@ conn = psycopg2.connect(
 
 1. 新建数据源 > PostgreSQL
 2. 配置：
-   - **Host**: `aws-0-us-east-2.pooler.supabase.com`
+   - **Host**: `[YOUR_SUPABASE_HOST]`
    - **Port**: `5432`
    - **Database**: `postgres`
-   - **User**: `postgres.lptsvryohchbklxcyoyc`
-   - **Password**: `xgCT84482819`
+   - **User**: `[YOUR_USERNAME]`
+   - **Password**: `[YOUR_PASSWORD]`
 
 3. 在 SSH/SSL 标签：
    - 勾选 **Use SSL**
@@ -109,10 +124,10 @@ conn = psycopg2.connect(
 1. 创建新连接 > PostgreSQL
 2. 填写：
    - **Name**: Supabase MCP-DB
-   - **Host**: `aws-0-us-east-2.pooler.supabase.com`
+   - **Host**: `[YOUR_SUPABASE_HOST]`
    - **Port**: `5432`
-   - **User**: `postgres.lptsvryohchbklxcyoyc`
-   - **Password**: `xgCT84482819`
+   - **User**: `[YOUR_USERNAME]`
+   - **Password**: `[YOUR_PASSWORD]`
    - **Database**: `postgres`
    - **SSL Mode**: Require
 

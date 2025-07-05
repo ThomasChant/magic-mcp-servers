@@ -18,9 +18,21 @@ from datetime import datetime, timezone
 from collections import defaultdict
 import hashlib
 
-# Same configuration as the main script
-GITHUB_API_TOKEN = os.environ.get('GITHUB_TOKEN', '')
-GITHUB_API_BASE = "https://api.github.com"
+# 加载环境变量
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    print("Warning: python-dotenv not installed. Environment variables must be set manually.")
+
+# GitHub API configuration
+GITHUB_API_TOKEN = os.getenv('GITHUB_TOKEN')
+if not GITHUB_API_TOKEN:
+    print("❌ 错误: 未找到 GITHUB_TOKEN 环境变量")
+    print("请在 .env.local 文件中设置 GITHUB_TOKEN=your_token_here")
+    sys.exit(1)
+
+GITHUB_API_BASE = os.getenv("GITHUB_API_BASE_URL", "https://api.github.com")
 HEADERS = {
     "Accept": "application/vnd.github.v3+json"
 }
@@ -28,30 +40,38 @@ if GITHUB_API_TOKEN:
     HEADERS["Authorization"] = f"token {GITHUB_API_TOKEN}"
 
 RATE_LIMIT_THRESHOLD = 100
-BASE_DELAY = 0.2 if GITHUB_API_TOKEN else 0.75
+BASE_DELAY = float(os.getenv("GITHUB_RATE_LIMIT_DELAY", "200")) / 1000  # Convert ms to seconds
 
 def get_database_config():
-    """Get database configuration interactively"""
+    """Get database configuration from environment variables or prompt interactively"""
     print("🔧 Database Configuration")
     print("=" * 50)
     
-    host = input("Database Host [aws-0-us-east-2.pooler.supabase.com]: ").strip()
+    # Try to get from environment variables first
+    host = os.getenv('SUPABASE_HOST')
+    user = os.getenv('SUPABASE_USER') 
+    password = os.getenv('SUPABASE_PASSWORD')
+    port = int(os.getenv('SUPABASE_PORT', '5432'))
+    database = os.getenv('SUPABASE_DATABASE', 'postgres')
+    
+    # If environment variables are not set, prompt interactively
     if not host:
-        host = "aws-0-us-east-2.pooler.supabase.com"
+        host = input("Database Host: ").strip()
+        if not host:
+            print("❌ 数据库主机地址是必需的")
+            sys.exit(1)
     
-    port_input = input("Database Port [6543]: ").strip()
-    port = int(port_input) if port_input else 6543
+    if not user:
+        user = input("Database User: ").strip()
+        if not user:
+            print("❌ 数据库用户名是必需的")
+            sys.exit(1)
     
-    database = input("Database Name [postgres]: ").strip()
-    if not database:
-        database = "postgres"
-    
-    # user = input("Database User: ").strip()
-    user = "postgres.lptsvryohchbklxcyoyc"
-    
-    # password = getpass.getpass("Database Password: ")
-
-    password = "xgCT84482819"
+    if not password:
+        password = getpass.getpass("Database Password: ")
+        if not password:
+            print("❌ 数据库密码是必需的")
+            sys.exit(1)
     
     return {
         'host': host,

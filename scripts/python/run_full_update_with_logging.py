@@ -29,6 +29,13 @@ import hashlib
 import logging
 from psycopg2 import sql, extras
 
+# 加载环境变量
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    print("Warning: python-dotenv not installed. Environment variables must be set manually.")
+
 # Set up logging
 log_filename = f"update_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
 logging.basicConfig(
@@ -42,8 +49,13 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Configuration
-GITHUB_API_TOKEN = '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'
-GITHUB_API_BASE = "https://api.github.com"
+GITHUB_API_TOKEN = os.getenv('GITHUB_TOKEN')
+if not GITHUB_API_TOKEN:
+    logger.error("❌ 错误: 未找到 GITHUB_TOKEN 环境变量")
+    logger.error("请在 .env.local 文件中设置 GITHUB_TOKEN=your_token_here")
+    sys.exit(1)
+
+GITHUB_API_BASE = os.getenv("GITHUB_API_BASE_URL", "https://api.github.com")
 HEADERS = {
     "Accept": "application/vnd.github.v3+json"
 }
@@ -52,15 +64,23 @@ if GITHUB_API_TOKEN:
 
 # Database configuration
 DATABASE_CONFIG = {
-    'host': 'aws-0-us-east-2.pooler.supabase.com',
-    'port': 6543,
-    'database': 'postgres',
-    'user': 'postgres.lptsvryohchbklxcyoyc',
-    'password': 'xgCT84482819'
+    'host': os.getenv('SUPABASE_HOST', 'localhost'),
+    'port': int(os.getenv('SUPABASE_PORT', '5432')),
+    'database': os.getenv('SUPABASE_DATABASE', 'postgres'),
+    'user': os.getenv('SUPABASE_USER'),
+    'password': os.getenv('SUPABASE_PASSWORD')
 }
 
+# Validate required database configuration
+if not all([DATABASE_CONFIG['user'], DATABASE_CONFIG['password']]):
+    logger.error("❌ 错误: 数据库配置不完整")
+    logger.error("请在 .env.local 文件中设置:")
+    logger.error("  SUPABASE_USER=your_database_user")
+    logger.error("  SUPABASE_PASSWORD=your_database_password")
+    sys.exit(1)
+
 RATE_LIMIT_THRESHOLD = 100
-BASE_DELAY = 0.2 if GITHUB_API_TOKEN else 0.75
+BASE_DELAY = float(os.getenv("GITHUB_RATE_LIMIT_DELAY", "200")) / 1000  # Convert ms to seconds
 
 def safe_insert_installation(cursor, server_id: str, method: str, command: str):
     """Safely insert installation method with duplicate handling"""

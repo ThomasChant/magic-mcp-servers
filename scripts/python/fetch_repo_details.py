@@ -7,10 +7,23 @@ from typing import Dict, List, Any, Optional
 from urllib.parse import urlparse
 import base64
 from datetime import datetime
+import sys
+
+# 加载环境变量
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    print("Warning: python-dotenv not installed. Environment variables must be set manually.")
 
 # GitHub API configuration
-GITHUB_API_TOKEN = "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"
-GITHUB_API_BASE = "https://api.github.com"
+GITHUB_API_TOKEN = os.getenv("GITHUB_TOKEN")
+if not GITHUB_API_TOKEN:
+    print("❌ 错误: 未找到 GITHUB_TOKEN 环境变量")
+    print("请在 .env.local 文件中设置 GITHUB_TOKEN=your_token_here")
+    sys.exit(1)
+
+GITHUB_API_BASE = os.getenv("GITHUB_API_BASE_URL", "https://api.github.com")
 HEADERS = {
     "Authorization": f"token {GITHUB_API_TOKEN}",
     "Accept": "application/vnd.github.v3+json"
@@ -18,7 +31,7 @@ HEADERS = {
 
 # Rate limiting configuration
 REQUESTS_PER_HOUR = 5000  # Authenticated rate limit
-DELAY_BETWEEN_REQUESTS = 1  # 750ms delay between requests
+DELAY_BETWEEN_REQUESTS = float(os.getenv("GITHUB_RATE_LIMIT_DELAY", "750")) / 1000  # Convert ms to seconds
 
 def extract_github_info(github_url: str) -> Optional[Dict[str, str]]:
     """Extract owner and repo name from GitHub URL"""

@@ -4,15 +4,31 @@ Fix database schema issues - add missing columns and constraints
 """
 import psycopg2
 import sys
+import os
+
+# 加载环境变量
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    print("Warning: python-dotenv not installed. Environment variables must be set manually.")
 
 # Database configuration
 DATABASE_CONFIG = {
-    'host': 'aws-0-us-east-2.pooler.supabase.com',
-    'port': 6543,
-    'database': 'postgres',
-    'user': 'postgres.lptsvryohchbklxcyoyc',
-    'password': 'xgCT84482819'
+    'host': os.getenv('SUPABASE_HOST', 'localhost'),
+    'port': int(os.getenv('SUPABASE_PORT', '5432')),
+    'database': os.getenv('SUPABASE_DATABASE', 'postgres'),
+    'user': os.getenv('SUPABASE_USER'),
+    'password': os.getenv('SUPABASE_PASSWORD')
 }
+
+# Validate required database configuration
+if not all([DATABASE_CONFIG['user'], DATABASE_CONFIG['password']]):
+    print("❌ 错误: 数据库配置不完整")
+    print("请在 .env.local 文件中设置:")
+    print("  SUPABASE_USER=your_database_user")
+    print("  SUPABASE_PASSWORD=your_database_password")
+    sys.exit(1)
 
 def fix_database_schema():
     """Fix database schema issues"""
