@@ -12,11 +12,10 @@ export function extractMonorepoName(githubUrl: string, originalName: string): st
   if (githubUrl.includes('/tree/')) {
     const match = githubUrl.match(/\/tree\/[^/]+\/(.+)$/);
     if (match) {
-      // Extract the directory path and clean it up
       const directoryPath = match[1];
       // Remove any trailing slashes
       const cleanPath = directoryPath.replace(/\/$/, '');
-      // Get only the final directory name (after the last slash)
+      // Get the last directory name (after the last slash)
       const finalDirName = cleanPath.split('/').pop() || cleanPath;
       return finalDirName.replace(/[^a-zA-Z0-9-_]/g, '-');
     }
@@ -26,14 +25,17 @@ export function extractMonorepoName(githubUrl: string, originalName: string): st
   if (githubUrl.includes('/blob/')) {
     const match = githubUrl.match(/\/blob\/[^/]+\/(.+)$/);
     if (match) {
-      let directoryPath = match[1];
-      // Remove filename if present (anything after the last slash)
-      directoryPath = directoryPath.replace(/\/[^/]*$/, '');
-      // Remove any trailing slashes
-      const cleanPath = directoryPath.replace(/\/$/, '');
-      // Get only the final directory name (after the last slash)
-      const finalDirName = cleanPath.split('/').pop() || cleanPath;
-      return finalDirName.replace(/[^a-zA-Z0-9-_]/g, '-');
+      const fullPath = match[1];
+      const pathParts = fullPath.split('/');
+      
+      // If there's only a file (no directories), return original name
+      if (pathParts.length === 1) {
+        return originalName;
+      }
+      
+      // Get the last directory (before the filename)
+      const lastDir = pathParts[pathParts.length - 1];
+      return lastDir.replace(/[^a-zA-Z0-9-_]/g, '-');
     }
   }
   

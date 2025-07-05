@@ -135,11 +135,10 @@ function transformCategory(dbCategory: Record<string, unknown>, subcategories: R
 export function transformServer(dbServer: Record<string, unknown>): MCPServer {
   // Extract monorepo name if this is a monorepo project
   const originalName = dbServer.name as string;
-  const isMonorepo = dbServer.is_monorepo as boolean;
   const githubUrl = dbServer.github_url as string;
-  const processedName = isMonorepo 
-    ? extractMonorepoName(githubUrl, originalName)
-    : originalName;
+  console.log(1+"-"+originalName, githubUrl);
+  const processedName = extractMonorepoName(githubUrl, originalName);
+  console.log(2+"-"+processedName, githubUrl);
   return {
     id: dbServer.id as string,
     name: processedName,
@@ -228,7 +227,6 @@ export function transformServer(dbServer: Record<string, unknown>): MCPServer {
       weeklyDownloads: (dbServer.weekly_downloads as number) || 0,
     },
     featured: (dbServer.featured as boolean) || false,
-    verified: (dbServer.is_official as boolean) || false,
     latest: (() => {
       // Check if the repository was created within the last 10 days
       const createdAt = new Date(dbServer.repo_created_at as string);
