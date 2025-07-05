@@ -24,7 +24,7 @@ function transformServer(dbServer: Record<string, unknown>): MCPServer {
     tags: (dbServer.tags as string[]) || [],
     techStack: (dbServer.tech_stack as string[]) || [],
     featured: (dbServer.featured as boolean) || false,
-    verified: (dbServer.verified as boolean) || false,
+    verified: (dbServer.official as boolean) || false,
     metadata: {
       qualityScore: (dbServer.quality_score as number) || 0,
       maturity: (dbServer.maturity as string) || "unknown",

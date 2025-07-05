@@ -113,7 +113,7 @@ const Servers: React.FC = () => {
         
         if (quickFilter === "featured") {
             result.featured = true;
-        } else if (quickFilter === "verified") {
+        } else if (quickFilter === "official") {
             result.verified = true;
         } else if (quickFilter === "popular") {
             result.popular = true;

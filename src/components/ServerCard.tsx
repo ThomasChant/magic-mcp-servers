@@ -8,7 +8,6 @@ import {
     MessageCircle,
     Bot,
     FileText,
-    GitBranch,
     Star,
 } from "lucide-react";
 import type { MCPServer } from "../types";
@@ -90,25 +89,6 @@ const formatTimeAgo = (dateString: string) => {
     return displayUnits.map(unit => `${unit.value}${unit.label}`).join(' ');
 };
 
-// Detect if server is part of a monorepo
-const getMonorepoInfo = (githubUrl: string) => {
-    if (!githubUrl) return null;
-    
-    // Pattern to match monorepo URLs like github.com/owner/repo/tree/main/path
-    const monorepoPattern = /github\.com\/([^/]+\/[^/]+)\/(tree|blob)\/[^/]+\/(.+)/;
-    const match = githubUrl.match(monorepoPattern);
-    
-    if (match) {
-        return {
-            parentRepo: match[1],
-            path: match[3]
-        };
-    }
-    
-    return null;
-};
-
-
 const getServerIconBg = (server: ServerData | MCPServer) => {
     const tags = server.tags.join(" ").toLowerCase();
     const category = Array.isArray(server.category) ? server.category.join(" ").toLowerCase() : server.category.toLowerCase();
@@ -180,7 +160,7 @@ export const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                                 {server.name}
                             </h3>
                             <div className="flex items-center flex-wrap gap-1 mt-1">
-                                {serverData.official && (
+                                {server.metadata.official && (
                                     <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
                                         Official
                                     </span>
@@ -195,12 +175,12 @@ export const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                                         Popular
                                     </span>
                                 )}
-                                {getMonorepoInfo(server.repository.url) && (
+                                {/* {getMonorepoInfo(server.repository.url) && (
                                     <span className="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-[10px] px-1.5 py-0.5 rounded-full flex items-center font-medium">
                                         <GitBranch className="h-2.5 w-2.5 mr-0.5" />
                                         Monorepo
                                     </span>
-                                )}
+                                )} */}
                             </div>
                         </div>
                     </Link>
@@ -298,7 +278,7 @@ export const ServerListItem: React.FC<ServerListItemProps> = ({ server }) => {
                                 </span>
                             )}
                             <div className="flex items-center flex-wrap gap-1">
-                                {serverData.official && (
+                                {server.official && (
                                     <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
                                         Official
                                     </span>
@@ -313,12 +293,12 @@ export const ServerListItem: React.FC<ServerListItemProps> = ({ server }) => {
                                         Popular
                                     </span>
                                 )}
-                                {getMonorepoInfo(server.repository.url) && (
+                                {/* {getMonorepoInfo(server.repository.url) && (
                                     <span className="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-[10px] px-1.5 py-0.5 rounded-full flex items-center font-medium">
                                         <GitBranch className="h-2.5 w-2.5 mr-0.5" />
                                         Monorepo
                                     </span>
-                                )}
+                                )} */}
                             </div>
                         </div>
                         <p className="server-description text-gray-600 dark:text-gray-300 text-sm mb-2 line-clamp-1">

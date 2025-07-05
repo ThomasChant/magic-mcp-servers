@@ -48,7 +48,7 @@ export interface MCPServer {
         maturity: string;
         deployment: string[];
         featured: boolean;
-        verified: boolean;
+        official: boolean;
     };
     categorization?: {
         confidence: number;
@@ -108,7 +108,7 @@ export interface MCPServer {
         weeklyDownloads?: number;
     };
     featured?: boolean;
-    verified?: boolean;
+    official?: boolean;
     latest?: boolean;
     createdAt?: string;
     updatedAt?: string;

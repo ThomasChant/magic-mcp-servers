@@ -178,7 +178,7 @@ export function transformServer(dbServer: Record<string, unknown>): MCPServer {
       maturity: (dbServer.maturity as string) || "stable",
       deployment: [], // Will be populated separately if needed
       featured: (dbServer.featured as boolean) || false,
-      verified: (dbServer.verified as boolean) || false,
+      official: (dbServer.official as boolean) || false,
     },
     categorization: {
       confidence: (dbServer.categorization_confidence as number) || 0.8,
@@ -228,7 +228,7 @@ export function transformServer(dbServer: Record<string, unknown>): MCPServer {
       weeklyDownloads: (dbServer.weekly_downloads as number) || 0,
     },
     featured: (dbServer.featured as boolean) || false,
-    verified: (dbServer.verified as boolean) || false,
+    verified: (dbServer.is_official as boolean) || false,
     latest: (() => {
       // Check if the repository was created within the last 10 days
       const createdAt = new Date(dbServer.repo_created_at as string);
@@ -393,7 +393,7 @@ export const useSupabaseServersPaginated = (
       }
 
       if (filters?.verified) {
-        query = query.eq('verified', true);
+        query = query.eq('official', true);
       }
 
       if (filters?.qualityScore) {
@@ -623,7 +623,7 @@ export const useSupabaseServersByCategoryPaginated = (
       }
 
       if (filters?.verified) {
-        query = query.eq('verified', true);
+        query = query.eq('official', true);
       }
 
       if (filters?.qualityScore) {
