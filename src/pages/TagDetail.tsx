@@ -19,7 +19,7 @@ const TagDetail: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [sortBy, setSortBy] = useState<SortOption>({
         key: "stars",
-        label: "Quality Score",
+        label: "Stars",
         direction: "desc",
     });
     const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -155,7 +155,7 @@ const TagDetail: React.FC = () => {
                                 onChange={(e) => {
                                     const [key, direction] = e.target.value.split('-');
                                     setSortBy({
-                                        key: key as 'quality' | 'stars' | 'lastUpdated' | 'name',
+                                        key: key as 'quality' | 'stars' | 'updated' | 'name',
                                         label: key,
                                         direction: direction as 'asc' | 'desc'
                                     });
@@ -166,8 +166,8 @@ const TagDetail: React.FC = () => {
                                 <option value="quality-desc">Quality Score</option>
                                 <option value="stars-desc">Most Stars</option>
                                 <option value="stars-asc">Least Stars</option>
-                                <option value="lastUpdated-desc">Recently Updated</option>
-                                <option value="lastUpdated-asc">Oldest Updated</option>
+                                <option value="updated-desc">Recently Updated</option>
+                                <option value="updated-asc">Oldest Updated</option>
                                 <option value="name-asc">Name A-Z</option>
                                 <option value="name-desc">Name Z-A</option>
                             </select>

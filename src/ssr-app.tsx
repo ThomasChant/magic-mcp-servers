@@ -9,6 +9,8 @@ import ServersPage from "./pages/Servers";
 import ServerDetailPage from "./pages/ServerDetail";
 import CategoriesPage from "./pages/Categories";
 import CategoryDetailPage from "./pages/CategoryDetail";
+import TagsPage from "./pages/Tags";
+import TagDetailPage from "./pages/TagDetail";
 import DocsPage from "./pages/Docs";
 import FavoritesPage from "./pages/Favorites";
 import { isClientSide } from "./utils/environment";
@@ -57,6 +59,8 @@ export function SSRApp({ queryClient, ssrData = {} }: SSRAppProps) {
             <Route path="servers/:slug" element={<ServerDetailPage />} />
             <Route path="categories" element={<CategoriesPage />} />
             <Route path="categories/:id" element={<CategoryDetailPage />} />
+            <Route path="tags" element={<TagsPage />} />
+            <Route path="tags/:tag" element={<TagDetailPage />} />
             <Route path="docs" element={<DocsPage />} />
             <Route path="favorites" element={<FavoritesPage />} />
             <Route path="*" element={<NotFoundPage />} />

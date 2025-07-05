@@ -46,6 +46,8 @@ export async function render(url: string, context?: any) {
         serverDetail: normalizedUrl.match(/^\/servers\/([^/]+)$/),
         categoriesList: normalizedUrl === '/categories',
         categoryDetail: normalizedUrl.match(/^\/categories\/([^/]+)$/),
+        tagsList: normalizedUrl === '/tags',
+        tagDetail: normalizedUrl.match(/^\/tags\/([^/]+)$/),
         docs: normalizedUrl === '/docs',
     };
 
@@ -145,6 +147,50 @@ export async function render(url: string, context?: any) {
                 queryClient.setQueryData(["supabase", "category", categoryId], categoryData);
                 console.log(`✅ Pre-populated query cache for category: ${categoryData.name_en || categoryData.name}`);
             }
+            
+        } else if (routes.tagsList) {
+            console.log(`🏷️ Processing tags list page SSR`);
+            seoData = {
+                title: "标签 - Magic MCP",
+                description: "浏览所有可用的 MCP 服务器标签。",
+                ogTitle: "标签 - Magic MCP",
+                ogDescription: "浏览所有可用的 MCP 服务器标签。",
+                ogUrl: fullUrl,
+                ogImage: "https://magicmcp.net/og-image.png",
+                canonicalUrl: fullUrl,
+                keywords: "MCP, 标签, tags, Model Context Protocol",
+                structuredData: {
+                    "@context": "https://schema.org",
+                    "@type": "CollectionPage",
+                    "name": "MCP 服务器标签",
+                    "description": "浏览所有可用的 MCP 服务器标签",
+                    "url": fullUrl
+                }
+            };
+            
+        } else if (routes.tagDetail) {
+            const tag = routes.tagDetail[1];
+            const decodedTag = decodeURIComponent(tag);
+            console.log(`🏷️ Processing tag detail page SSR for: ${decodedTag}`);
+            
+            seoData = {
+                title: `标签: ${decodedTag} - Magic MCP`,
+                description: `浏览所有标记为 "${decodedTag}" 的 MCP 服务器。`,
+                ogTitle: `标签: ${decodedTag} - Magic MCP`,
+                ogDescription: `浏览所有标记为 "${decodedTag}" 的 MCP 服务器。`,
+                ogUrl: fullUrl,
+                ogImage: "https://magicmcp.net/og-image.png",
+                canonicalUrl: fullUrl,
+                keywords: `MCP, ${decodedTag}, 标签, Model Context Protocol`,
+                structuredData: {
+                    "@context": "https://schema.org",
+                    "@type": "CollectionPage",
+                    "name": `MCP 服务器 - ${decodedTag}`,
+                    "description": `所有标记为 "${decodedTag}" 的 MCP 服务器`,
+                    "url": fullUrl,
+                    "keywords": decodedTag
+                }
+            };
             
         } else if (routes.docs) {
             console.log(`📚 Processing docs page SSR`);
