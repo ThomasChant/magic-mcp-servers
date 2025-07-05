@@ -158,7 +158,7 @@ const Categories: React.FC = () => {
                       {category.subcategories.length} {isZh ? "个子分类" : "subcategories"}
                     </span>
                     <Link
-                      to={`/servers?category=${category.id}`}
+                      to={`/categories/${category.id}`}
                       className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium text-sm inline-flex items-center"
                     >
                       {isZh ? "浏览" : "Browse"}
@@ -179,7 +179,7 @@ const Categories: React.FC = () => {
               {additionalCategories.map((category) => (
                 <Link
                   key={category.id}
-                  to={`/servers?category=${category.id}`}
+                  to={`/categories/${category.id}`}
                   className="group p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-gray-300 dark:hover:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-all"
                 >
                   <div className="flex items-center mb-3">
