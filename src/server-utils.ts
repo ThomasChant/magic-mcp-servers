@@ -136,7 +136,7 @@ export function generateServerSEO(server: MCPServer | null, url: string) {
     server.description["zh-CN"] || 
     `${server.name} - A Model Context Protocol server`;
 
-  const title = `${server.name} - ${server.category} MCP Server | Magic MCP`;
+  const title = `${server.name} MCP Server - ${server.category} | Magic MCP`;
   
   // Clean and truncate description - ensure proper encoding and HTML safety
   const cleanDescription = description
@@ -149,8 +149,9 @@ export function generateServerSEO(server: MCPServer | null, url: string) {
     .replace(/\s+/g, ' ') // Normalize whitespace
     .trim();
     
-  const fullDescription = cleanDescription.length > 160 
-    ? cleanDescription.substring(0, 157) + "..." 
+  // Optimize description length (150-160 characters recommended)
+  const fullDescription = cleanDescription.length > 155 
+    ? cleanDescription.substring(0, 152) + "..." 
     : cleanDescription;
 
   return {
@@ -160,35 +161,72 @@ export function generateServerSEO(server: MCPServer | null, url: string) {
     ogDescription: fullDescription,
     ogUrl: url,
     ogImage: "https://magicmcp.net/og-image.png",
+    ogType: "website",
+    twitterCard: "summary_large_image",
+    twitterTitle: title,
+    twitterDescription: fullDescription,
+    twitterImage: "https://magicmcp.net/og-image.png",
     canonicalUrl: url,
     keywords: [
       "MCP",
-      "Model Context Protocol",
+      "Model Context Protocol", 
       server.name,
       server.category,
-      ...server.tags,
-      ...server.techStack,
-    ].join(", "),
+      "Claude MCP",
+      "AI integration",
+      ...server.tags.slice(0, 3), // Limit tags to avoid keyword stuffing
+      ...server.techStack.slice(0, 2), // Limit tech stack
+    ].filter(Boolean).join(", "),
     structuredData: {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": server.name,
       "description": fullDescription,
       "url": server.repository.url,
+      "downloadUrl": server.repository.url,
       "applicationCategory": "DeveloperApplication",
+      "applicationSubCategory": server.category,
       "operatingSystem": server.compatibility.platforms.join(", "),
       "programmingLanguage": server.repository.language,
+      "keywords": server.tags.join(", "),
       "author": {
         "@type": "Person",
-        "name": server.owner
+        "name": server.owner,
+        "url": `https://github.com/${server.owner}`
+      },
+      "publisher": {
+        "@type": "Organization", 
+        "name": "Magic MCP",
+        "url": "https://magicmcp.net"
       },
       "aggregateRating": {
         "@type": "AggregateRating",
-        "ratingValue": server.repository.stars > 0 ? Math.min(5, server.repository.stars / 100) : 4,
-        "reviewCount": server.repository.stars
+        "ratingValue": server.repository.stars > 0 ? Math.min(5, Math.max(1, server.repository.stars / 50)) : 4,
+        "reviewCount": server.repository.stars,
+        "bestRating": 5,
+        "worstRating": 1
       },
+      "interactionStatistic": [
+        {
+          "@type": "InteractionCounter",
+          "interactionType": "https://schema.org/LikeAction",
+          "userInteractionCount": server.repository.stars
+        },
+        {
+          "@type": "InteractionCounter", 
+          "interactionType": "https://schema.org/ShareAction",
+          "userInteractionCount": server.repository.forks
+        }
+      ],
       "datePublished": server.stats.createdAt,
       "dateModified": server.stats.lastUpdated,
+      "version": "latest",
+      "license": "Open Source",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Magic MCP",
+        "url": "https://magicmcp.net"
+      }
     }
   };
 }
@@ -261,24 +299,28 @@ export async function getServerReadmeBySlug(slug: string): Promise<ServerReadme 
 // Generate SEO metadata for home page
 export function generateHomeSEO(url: string) {
   return {
-    title: "Magic MCP - Model Context Protocol 服务器发现平台",
-    description: "发现并集成最优秀的 Model Context Protocol (MCP) 服务器。浏览超过200个高质量的MCP服务器，涵盖数据库、文件系统、API集成等各种功能领域。",
-    ogTitle: "Magic MCP - Model Context Protocol 服务器发现平台",
-    ogDescription: "发现并集成最优秀的 Model Context Protocol (MCP) 服务器。浏览超过200个高质量的MCP服务器，涵盖数据库、文件系统、API集成等各种功能领域。",
+    title: "Magic MCP - Model Context Protocol Server Discovery",
+    description: "Discover and integrate the best Model Context Protocol (MCP) servers. Browse 200+ high-quality MCP servers for databases, filesystems, APIs, and development tools.",
+    ogTitle: "Magic MCP - Model Context Protocol Server Discovery Platform",
+    ogDescription: "Discover and integrate the best Model Context Protocol (MCP) servers. Browse 200+ high-quality MCP servers for databases, filesystems, APIs, and development tools.",
     ogUrl: url,
     ogImage: "https://magicmcp.net/og-image.png",
     canonicalUrl: url,
-    keywords: "MCP, Model Context Protocol, AI工具, 服务器, 数据库集成, API, 开发工具",
+    keywords: "MCP, Model Context Protocol, AI tools, servers, database integration, API, development tools, Claude MCP, AI agents",
     structuredData: {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "Magic MCP",
       "url": "https://magicmcp.net",
-      "description": "Model Context Protocol 服务器发现平台",
+      "description": "Model Context Protocol server discovery platform",
       "publisher": {
         "@type": "Organization",
         "name": "Magic MCP",
-        "url": "https://magicmcp.net"
+        "url": "https://magicmcp.net",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://magicmcp.net/og-image.png"
+        }
       },
       "potentialAction": {
         "@type": "SearchAction",
@@ -287,6 +329,12 @@ export function generateHomeSEO(url: string) {
           "urlTemplate": "https://magicmcp.net/servers?search={search_term_string}"
         },
         "query-input": "required name=search_term_string"
+      },
+      "mainEntity": {
+        "@type": "ItemList",
+        "name": "MCP Servers",
+        "description": "Curated list of Model Context Protocol servers",
+        "numberOfItems": 200
       }
     }
   };
@@ -295,24 +343,42 @@ export function generateHomeSEO(url: string) {
 // Generate SEO metadata for servers listing page  
 export function generateServersListSEO(url: string) {
   return {
-    title: "MCP 服务器目录 - 浏览所有服务器 | Magic MCP",
-    description: "浏览完整的 Model Context Protocol 服务器目录。超过200个经过验证的MCP服务器，涵盖数据库、文件系统、API集成、开发工具等各个领域。",
-    ogTitle: "MCP 服务器目录 - 浏览所有服务器 | Magic MCP", 
-    ogDescription: "浏览完整的 Model Context Protocol 服务器目录。超过200个经过验证的MCP服务器，涵盖数据库、文件系统、API集成、开发工具等各个领域。",
+    title: "MCP Server Directory - Browse All Servers | Magic MCP",
+    description: "Browse the complete Model Context Protocol server directory. 200+ verified MCP servers for databases, filesystems, API integration, and development tools.",
+    ogTitle: "MCP Server Directory - Browse All Servers | Magic MCP", 
+    ogDescription: "Browse the complete Model Context Protocol server directory. 200+ verified MCP servers for databases, filesystems, API integration, and development tools.",
     ogUrl: url,
     ogImage: "https://magicmcp.net/og-image.png",
     canonicalUrl: url,
-    keywords: "MCP服务器, Model Context Protocol, 服务器目录, 数据库集成, API工具, 开发工具",
+    keywords: "MCP servers, Model Context Protocol, server directory, database integration, API tools, development tools, Claude MCP",
     structuredData: {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
-      "name": "MCP 服务器目录",
-      "description": "Model Context Protocol 服务器完整目录",
+      "name": "MCP Server Directory",
+      "description": "Complete directory of Model Context Protocol servers",
       "url": url,
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://magicmcp.net"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Servers",
+            "item": url
+          }
+        ]
+      },
       "mainEntity": {
         "@type": "ItemList",
         "name": "MCP Servers",
-        "description": "Collection of Model Context Protocol servers"
+        "description": "Collection of Model Context Protocol servers",
+        "numberOfItems": 200
       }
     }
   };
@@ -321,20 +387,37 @@ export function generateServersListSEO(url: string) {
 // Generate SEO metadata for categories page
 export function generateCategoriesListSEO(url: string) {
   return {
-    title: "MCP 服务器分类 - 按功能浏览 | Magic MCP",
-    description: "按功能分类浏览 Model Context Protocol 服务器。包括数据库、文件系统、API集成、开发工具、AI助手等多个分类，快速找到适合的MCP服务器。",
-    ogTitle: "MCP 服务器分类 - 按功能浏览 | Magic MCP",
-    ogDescription: "按功能分类浏览 Model Context Protocol 服务器。包括数据库、文件系统、API集成、开发工具、AI助手等多个分类，快速找到适合的MCP服务器。",
+    title: "MCP Server Categories - Browse by Function | Magic MCP",
+    description: "Browse Model Context Protocol servers by category. Includes databases, filesystems, API integration, development tools, AI assistants and more.",
+    ogTitle: "MCP Server Categories - Browse by Function | Magic MCP",
+    ogDescription: "Browse Model Context Protocol servers by category. Includes databases, filesystems, API integration, development tools, AI assistants and more.",
     ogUrl: url,
     ogImage: "https://magicmcp.net/og-image.png", 
     canonicalUrl: url,
-    keywords: "MCP分类, Model Context Protocol, 服务器分类, 数据库, 文件系统, API集成, 开发工具",
+    keywords: "MCP categories, Model Context Protocol, server categories, databases, filesystems, API integration, development tools, Claude MCP",
     structuredData: {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
-      "name": "MCP 服务器分类",
-      "description": "Model Context Protocol 服务器按功能分类",
+      "name": "MCP Server Categories",
+      "description": "Model Context Protocol servers organized by function",
       "url": url,
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://magicmcp.net"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Categories",
+            "item": url
+          }
+        ]
+      },
       "mainEntity": {
         "@type": "ItemList",
         "name": "MCP Categories",
@@ -394,23 +477,23 @@ export async function getCategoryById(categoryId: string): Promise<any | null> {
 export function generateCategorySEO(category: any | null, url: string) {
   if (!category) {
     return {
-      title: "分类未找到 - Magic MCP",
-      description: "请求的MCP服务器分类未找到。",
-      ogTitle: "分类未找到 - Magic MCP",
-      ogDescription: "请求的MCP服务器分类未找到。",
+      title: "Category Not Found - Magic MCP",
+      description: "The requested MCP server category could not be found.",
+      ogTitle: "Category Not Found - Magic MCP",
+      ogDescription: "The requested MCP server category could not be found.",
       ogUrl: url,
       ogImage: "https://magicmcp.net/og-image.png",
       canonicalUrl: url,
     };
   }
 
-  const categoryName = category.name_zh_cn || category.name_en || category.name || "未知分类";
-  const categoryDesc = category.description_zh_cn || category.description_en || category.description || "";
+  const categoryName = category.name_en || category.name_zh_cn || category.name || "Unknown Category";
+  const categoryDesc = category.description_en || category.description_zh_cn || category.description || "";
   
-  const title = `${categoryName} MCP 服务器 | Magic MCP`;
+  const title = `${categoryName} MCP Servers | Magic MCP`;
   const description = categoryDesc ? 
-    `探索 ${categoryName} 类别的 Model Context Protocol 服务器。${categoryDesc}` :
-    `浏览 ${categoryName} 类别下的所有 Model Context Protocol 服务器，找到适合您需求的工具。`;
+    `Explore ${categoryName} Model Context Protocol servers. ${categoryDesc}` :
+    `Browse all ${categoryName} Model Context Protocol servers to find tools that meet your needs.`;
 
   return {
     title,
@@ -420,13 +503,36 @@ export function generateCategorySEO(category: any | null, url: string) {
     ogUrl: url,
     ogImage: "https://magicmcp.net/og-image.png",
     canonicalUrl: url,
-    keywords: `MCP, Model Context Protocol, ${categoryName}, 服务器, 工具`,
+    keywords: `MCP, Model Context Protocol, ${categoryName}, servers, tools, Claude MCP, AI integration`,
     structuredData: {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
       "name": `${categoryName} MCP Servers`,
       "description": description,
       "url": url,
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://magicmcp.net"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Categories",
+            "item": "https://magicmcp.net/categories"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": categoryName,
+            "item": url
+          }
+        ]
+      },
       "mainEntity": {
         "@type": "ItemList",
         "name": `${categoryName} Servers`,
@@ -439,23 +545,55 @@ export function generateCategorySEO(category: any | null, url: string) {
 // Generate SEO metadata for docs page
 export function generateDocsSEO(url: string) {
   return {
-    title: "文档 - 如何使用 MCP 服务器 | Magic MCP",
-    description: "学习如何安装、配置和使用 Model Context Protocol 服务器。包含详细的设置指南、最佳实践和常见问题解答。",
-    ogTitle: "文档 - 如何使用 MCP 服务器 | Magic MCP",
-    ogDescription: "学习如何安装、配置和使用 Model Context Protocol 服务器。包含详细的设置指南、最佳实践和常见问题解答。",
+    title: "Documentation - How to Use MCP Servers | Magic MCP",
+    description: "Learn how to install, configure, and use Model Context Protocol servers. Includes detailed setup guides, best practices, and troubleshooting.",
+    ogTitle: "Documentation - How to Use MCP Servers | Magic MCP",
+    ogDescription: "Learn how to install, configure, and use Model Context Protocol servers. Includes detailed setup guides, best practices, and troubleshooting.",
     ogUrl: url,
     ogImage: "https://magicmcp.net/og-image.png",
     canonicalUrl: url,
-    keywords: "MCP文档, Model Context Protocol, 安装指南, 配置教程, 使用说明",
+    keywords: "MCP documentation, Model Context Protocol, installation guide, configuration tutorial, setup instructions, Claude MCP, AI integration",
     structuredData: {
       "@context": "https://schema.org",
       "@type": "TechArticle",
-      "name": "MCP 服务器使用文档",
-      "description": "Model Context Protocol 服务器完整使用指南",
+      "name": "MCP Server Usage Documentation",
+      "description": "Complete guide for using Model Context Protocol servers",
       "url": url,
       "author": {
         "@type": "Organization",
-        "name": "Magic MCP"
+        "name": "Magic MCP",
+        "url": "https://magicmcp.net"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Magic MCP",
+        "url": "https://magicmcp.net",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://magicmcp.net/og-image.png"
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://magicmcp.net"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Documentation",
+            "item": url
+          }
+        ]
+      },
+      "mainEntity": {
+        "@type": "HowTo",
+        "name": "How to Install and Use MCP Servers",
+        "description": "Step-by-step guide to get started with Model Context Protocol servers"
       }
     }
   };

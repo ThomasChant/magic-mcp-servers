@@ -151,20 +151,37 @@ export async function render(url: string, context?: any) {
         } else if (routes.tagsList) {
             console.log(`🏷️ Processing tags list page SSR`);
             seoData = {
-                title: "标签 - Magic MCP",
-                description: "浏览所有可用的 MCP 服务器标签。",
-                ogTitle: "标签 - Magic MCP",
-                ogDescription: "浏览所有可用的 MCP 服务器标签。",
+                title: "MCP Server Tags - Browse by Technology | Magic MCP",
+                description: "Browse all available MCP server tags. Find servers by programming language, technology stack, and functionality.",
+                ogTitle: "MCP Server Tags - Browse by Technology | Magic MCP",
+                ogDescription: "Browse all available MCP server tags. Find servers by programming language, technology stack, and functionality.",
                 ogUrl: fullUrl,
                 ogImage: "https://magicmcp.net/og-image.png",
                 canonicalUrl: fullUrl,
-                keywords: "MCP, 标签, tags, Model Context Protocol",
+                keywords: "MCP tags, Model Context Protocol, server tags, programming languages, technology stack, Claude MCP",
                 structuredData: {
                     "@context": "https://schema.org",
                     "@type": "CollectionPage",
-                    "name": "MCP 服务器标签",
-                    "description": "浏览所有可用的 MCP 服务器标签",
-                    "url": fullUrl
+                    "name": "MCP Server Tags",
+                    "description": "Browse all available MCP server tags",
+                    "url": fullUrl,
+                    "breadcrumb": {
+                        "@type": "BreadcrumbList",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "https://magicmcp.net"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Tags",
+                                "item": fullUrl
+                            }
+                        ]
+                    }
                 }
             };
             
@@ -174,21 +191,44 @@ export async function render(url: string, context?: any) {
             console.log(`🏷️ Processing tag detail page SSR for: ${decodedTag}`);
             
             seoData = {
-                title: `标签: ${decodedTag} - Magic MCP`,
-                description: `浏览所有标记为 "${decodedTag}" 的 MCP 服务器。`,
-                ogTitle: `标签: ${decodedTag} - Magic MCP`,
-                ogDescription: `浏览所有标记为 "${decodedTag}" 的 MCP 服务器。`,
+                title: `${decodedTag} MCP Servers - Magic MCP`,
+                description: `Browse all Model Context Protocol servers tagged with "${decodedTag}". Find servers built with ${decodedTag} technology.`,
+                ogTitle: `${decodedTag} MCP Servers - Magic MCP`,
+                ogDescription: `Browse all Model Context Protocol servers tagged with "${decodedTag}". Find servers built with ${decodedTag} technology.`,
                 ogUrl: fullUrl,
                 ogImage: "https://magicmcp.net/og-image.png",
                 canonicalUrl: fullUrl,
-                keywords: `MCP, ${decodedTag}, 标签, Model Context Protocol`,
+                keywords: `MCP, ${decodedTag}, Model Context Protocol, servers, technology, Claude MCP, ${decodedTag} integration`,
                 structuredData: {
                     "@context": "https://schema.org",
                     "@type": "CollectionPage",
-                    "name": `MCP 服务器 - ${decodedTag}`,
-                    "description": `所有标记为 "${decodedTag}" 的 MCP 服务器`,
+                    "name": `MCP Servers - ${decodedTag}`,
+                    "description": `All MCP servers tagged with "${decodedTag}"`,
                     "url": fullUrl,
-                    "keywords": decodedTag
+                    "keywords": decodedTag,
+                    "breadcrumb": {
+                        "@type": "BreadcrumbList",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "https://magicmcp.net"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Tags",
+                                "item": "https://magicmcp.net/tags"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": decodedTag,
+                                "item": fullUrl
+                            }
+                        ]
+                    }
                 }
             };
             
@@ -200,14 +240,14 @@ export async function render(url: string, context?: any) {
             console.log(`❓ Unknown route, using default SEO: ${normalizedUrl}`);
             // For unknown routes, generate basic SEO
             seoData = {
-                title: "Magic MCP - Model Context Protocol 服务器发现平台",
-                description: "发现并集成最优秀的 Model Context Protocol (MCP) 服务器。",
-                ogTitle: "Magic MCP - Model Context Protocol 服务器发现平台",
-                ogDescription: "发现并集成最优秀的 Model Context Protocol (MCP) 服务器。",
+                title: "Magic MCP - Model Context Protocol Server Discovery",
+                description: "Discover and integrate the best Model Context Protocol (MCP) servers for AI applications.",
+                ogTitle: "Magic MCP - Model Context Protocol Server Discovery",
+                ogDescription: "Discover and integrate the best Model Context Protocol (MCP) servers for AI applications.",
                 ogUrl: fullUrl,
                 ogImage: "https://magicmcp.net/og-image.png",
                 canonicalUrl: fullUrl,
-                keywords: "MCP, Model Context Protocol, AI工具, 服务器",
+                keywords: "MCP, Model Context Protocol, AI tools, servers, Claude MCP, AI integration",
             };
         }
         
