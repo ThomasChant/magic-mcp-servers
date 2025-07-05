@@ -18,6 +18,11 @@ const STATIC_CACHE_DIR = path.join(__dirname, "static-cache");
 const HOME_STATIC_FILE = path.join(STATIC_CACHE_DIR, "home.html");
 const HOME_META_FILE = path.join(STATIC_CACHE_DIR, "home-meta.json");
 
+// Static prerender configuration
+const STATIC_PRERENDER_DIR = path.join(__dirname, "dist/static");
+const CATEGORIES_STATIC_FILE = path.join(STATIC_PRERENDER_DIR, "categories.html");
+const CATEGORIES_META_FILE = path.join(STATIC_PRERENDER_DIR, "categories.meta.json");
+
 // Static cache functions
 async function ensureStaticDir() {
     try {
@@ -153,6 +158,37 @@ async function isStaticHomeExpired() {
     }
 }
 
+// Static prerender functions
+async function getStaticPrerender(filename) {
+    try {
+        const htmlPath = path.join(STATIC_PRERENDER_DIR, `${filename}.html`);
+        const metaPath = path.join(STATIC_PRERENDER_DIR, `${filename}.meta.json`);
+        
+        const [html, metaContent] = await Promise.all([
+            fs.readFile(htmlPath, "utf-8"),
+            fs.readFile(metaPath, "utf-8")
+        ]);
+        
+        const metadata = JSON.parse(metaContent);
+        return { html, metadata, exists: true };
+    } catch {
+        return { exists: false };
+    }
+}
+
+async function isStaticPrerenderExpired(filename, maxHours = 24) {
+    try {
+        const metaPath = path.join(STATIC_PRERENDER_DIR, `${filename}.meta.json`);
+        const metaContent = await fs.readFile(metaPath, "utf-8");
+        const metadata = JSON.parse(metaContent);
+        const generatedAt = new Date(metadata.generatedAt);
+        const hoursSinceGeneration = (Date.now() - generatedAt.getTime()) / (1000 * 60 * 60);
+        return hoursSinceGeneration >= maxHours;
+    } catch {
+        return true; // 文件不存在视为过期
+    }
+}
+
 // Create http server
 const app = express();
 
@@ -256,6 +292,24 @@ app.use("*", async (req, res) => {
         }
         
         console.log(`📡 Processing request: ${url}`);
+
+        // Special handling for categories page - check static prerender first
+        if (url === 'categories' || url === '/categories') {
+            if (isProduction) {
+                console.log(`📋 Categories page request - checking static prerender`);
+                
+                const staticCategories = await getStaticPrerender('categories');
+                const isExpired = await isStaticPrerenderExpired('categories', 24); // 24 hour cache
+                
+                if (staticCategories.exists && !isExpired) {
+                    console.log(`✅ Serving static categories page (generated: ${staticCategories.metadata.generatedAt})`);
+                    return res.status(200).set({ "Content-Type": "text/html" }).send(staticCategories.html);
+                } else {
+                    console.log(`⚠️ Static categories ${!staticCategories.exists ? 'not found' : 'expired'} - falling back to dynamic SSR`);
+                    // Fall through to normal SSR for this request
+                }
+            }
+        }
 
         // Special handling for home page - check static cache first
         if (url === '' || url === '/') {

@@ -13,7 +13,8 @@ import {
   getCategoryById,
   generateCategorySEO,
   generateDocsSEO,
-  getHomePageData
+  getHomePageData,
+  getCategoriesData
 } from "./server-utils";
 // Import i18n to ensure it's initialized during SSR
 import "./i18n";
@@ -133,6 +134,14 @@ export async function render(url: string, context?: any) {
         } else if (routes.categoriesList) {
             console.log(`🗂️ Processing categories list page SSR`);
             seoData = generateCategoriesListSEO(fullUrl);
+            
+            // Fetch categories data for SSR
+            const categoriesData = await getCategoriesData();
+            if (categoriesData && categoriesData.length > 0) {
+                // Pre-populate QueryClient cache with categories data
+                queryClient.setQueryData(["supabase", "categories"], categoriesData);
+                console.log(`✅ Pre-populated categories cache with ${categoriesData.length} categories for SSR`);
+            }
             
         } else if (routes.categoryDetail) {
             const categoryId = routes.categoryDetail[1];

@@ -300,9 +300,9 @@ export async function getServerReadmeBySlug(slug: string): Promise<ServerReadme 
 export function generateHomeSEO(url: string) {
   return {
     title: "Magic MCP - Model Context Protocol Server Discovery",
-    description: "Discover and integrate the best Model Context Protocol (MCP) servers. Browse 200+ high-quality MCP servers for databases, filesystems, APIs, and development tools.",
+    description: "Discover and integrate the best Model Context Protocol (MCP) servers. Browse 1000+ high-quality MCP servers for databases, filesystems, APIs, and development tools.",
     ogTitle: "Magic MCP - Model Context Protocol Server Discovery Platform",
-    ogDescription: "Discover and integrate the best Model Context Protocol (MCP) servers. Browse 200+ high-quality MCP servers for databases, filesystems, APIs, and development tools.",
+    ogDescription: "Discover and integrate the best Model Context Protocol (MCP) servers. Browse 1000+ high-quality MCP servers for databases, filesystems, APIs, and development tools.",
     ogUrl: url,
     ogImage: "https://magicmcp.net/og-image.png",
     canonicalUrl: url,
@@ -742,6 +742,69 @@ export async function getHomePageData(): Promise<{
 
   } catch (err) {
     console.error('Error fetching home page data:', err);
+    return null;
+  }
+}
+
+// Server-side function to get categories data for categories page
+export async function getCategoriesData(): Promise<any[] | null> {
+  // For SSR, try different environment variable sources
+  const supabaseUrl = process.env.VITE_SUPABASE_URL || 
+                    process.env.NEXT_PUBLIC_SUPABASE_URL || 
+                    'https://lptsvryohchbklxcyoyc.supabase.co';
+                    
+  const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || 
+                        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxwdHN2cnlvaGNoYmtseGN5b3ljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwODY0MzUsImV4cCI6MjA2NjY2MjQzNX0.hEleXmYktD79nKq4Q6Ow-9KF0RWRgGOJjXLgglyK2GQ';
+  
+  if (!supabaseUrl || !supabaseAnonKey) {
+    console.error('Missing Supabase environment variables for SSR');
+    return null;
+  }
+  
+  const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+    auth: {
+      persistSession: false,
+    },
+  });
+
+  try {
+    console.log('🏗️ Fetching categories data for SSR...');
+
+    // Get categories with basic information
+    const { data: categoriesData, error } = await supabase
+      .from('categories')
+      .select('id, name_en, description_en, icon, color')
+      .order('name_en');
+
+    if (error) {
+      console.error('Categories query error:', error);
+      return null;
+    }
+
+    console.log(`✅ Fetched ${categoriesData?.length || 0} categories for SSR`);
+    
+    // Transform the data to match the expected format
+    const transformedCategories = categoriesData?.map(cat => ({
+      id: cat.id,
+      name: {
+        en: cat.name_en,
+        "zh-CN": cat.name_en, // Fallback to English for now
+      },
+      description: {
+        en: cat.description_en,
+        "zh-CN": cat.description_en, // Fallback to English for now
+      },
+      icon: cat.icon,
+      color: cat.color,
+      serverCount: 0, // Will be populated by client-side hooks
+      subcategories: [], // Will be populated by client-side hooks
+    })) || [];
+    
+    return transformedCategories;
+
+  } catch (err) {
+    console.error('Error fetching categories data:', err);
     return null;
   }
 }
