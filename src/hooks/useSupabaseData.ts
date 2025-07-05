@@ -136,9 +136,7 @@ export function transformServer(dbServer: Record<string, unknown>): MCPServer {
   // Extract monorepo name if this is a monorepo project
   const originalName = dbServer.name as string;
   const githubUrl = dbServer.github_url as string;
-  console.log(1+"-"+originalName, githubUrl);
   const processedName = extractMonorepoName(githubUrl, originalName);
-  console.log(2+"-"+processedName, githubUrl);
   return {
     id: dbServer.id as string,
     name: processedName,
