@@ -1,46 +1,24 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import express from "express";
-import compression from "compression";
-import sirv from "sirv";
-import dotenv from "dotenv";
-
-// Load environment variables
-dotenv.config({ path: '.env.local' });
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const resolve = (p) => path.resolve(__dirname, '..', p);
 
-// Create Express app
-const app = express();
-
-// Add compression middleware
-app.use(compression());
-
-// Serve static files in production
-app.use("/assets", sirv(resolve("dist/client/assets"), { 
-    immutable: true,
-    maxAge: 31536000 // 1 year
-}));
-
-// Serve static files
-app.use(sirv(resolve("dist/client"), { 
-    gzip: true,
-    single: false
-}));
-
-// Main SSR handler
-app.use("*", async (req, res) => {
+export default async function handler(req, res) {
     try {
-        const url = req.originalUrl.replace("/", "");
+        const url = req.url;
+        
+        // Skip SSR for static files
+        if (url.match(/\\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|json|xml|txt|webmanifest)$/)) {
+            return res.status(404).end();
+        }
 
-        // Read template - try production build first, fallback to SSR template
+        // Read HTML template
         let template;
         try {
             template = await fs.readFile(resolve("dist/client/index.html"), "utf-8");
         } catch (e) {
-            // Fallback to SSR template if production build not found
             template = await fs.readFile(resolve("index-ssr.html"), "utf-8");
         }
 
@@ -48,7 +26,7 @@ app.use("*", async (req, res) => {
         const { render } = await import("../dist/server/entry-server.js");
         
         // Render the app
-        const { html, seoData } = await render(url || "/");
+        const { html, seoData } = await render(url.replace(/^\//, '') || "/");
         
         // Helper function to escape HTML
         const escapeHtml = (text) => text
@@ -64,7 +42,7 @@ app.use("*", async (req, res) => {
     <meta name="description" content="${escapeHtml(seoData.description)}" />
     <meta name="keywords" content="${escapeHtml(seoData.keywords)}" />
     
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph -->
     <meta property="og:title" content="${escapeHtml(seoData.ogTitle)}" />
     <meta property="og:description" content="${escapeHtml(seoData.ogDescription)}" />
     <meta property="og:url" content="${escapeHtml(seoData.ogUrl)}" />
@@ -87,12 +65,12 @@ app.use("*", async (req, res) => {
             .replace(`<!--app-head-->`, dynamicHead)
             .replace(`<!--app-html-->`, html);
         
-        // Send the rendered page
-        res.status(200).set({ "Content-Type": "text/html" }).end(finalHtml);
+        // Set headers
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
+        res.status(200).send(finalHtml);
     } catch (e) {
         console.error("SSR Error:", e);
-        res.status(500).end(e.stack);
+        res.status(500).send(`<html><body><h1>Server Error</h1><pre>${e.stack}</pre></body></html>`);
     }
-});
-
-export default app;
+}

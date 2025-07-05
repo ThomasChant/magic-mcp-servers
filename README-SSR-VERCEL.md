@@ -2,6 +2,20 @@
 
 本项目支持在 Vercel 上进行服务端渲染（SSR）部署。
 
+## 重要说明
+
+当前已配置为 **SSR 模式**，通过 `/api/ssr.js` 提供服务端渲染。
+
+### 当前模式：SSR（服务端渲染）
+网站以服务端渲染模式运行，提供更好的 SEO 和首屏加载性能。
+
+### 关键特性
+- ✅ 完整的 SEO 支持（动态标题、描述、结构化数据）
+- ✅ 静态资源正确处理
+- ✅ 错误页面友好显示
+- ✅ 缓存优化（1小时页面缓存）
+- ✅ 安全头部设置
+
 ## 部署步骤
 
 1. **确保代码已提交到 Git**
@@ -109,18 +123,34 @@ npm run serve
    - 需要轻量级的 SSR 实现
    - 更快的冷启动时间
 
+## 当前 SSR 配置状态
+
+### ✅ 已完成
+- Vercel SSR 函数 (`/api/ssr.js`)
+- 完整的构建流程 (`npm run build`)
+- 静态资源正确处理
+- SEO 优化和错误处理
+- 环境变量配置
+
+### 🔧 技术实现
+- **SSR 函数**: 30秒超时，支持所有 Node.js API
+- **构建产物**: 客户端 + 服务端 + 预渲染
+- **静态资源**: 通过 Vercel 直接服务
+- **缓存策略**: 页面缓存 1 小时
+
+### 🚀 部署就绪
+当前配置已经过测试，可以直接部署到 Vercel。
+
 ## 常见问题
 
 ### Q: 部署失败，提示找不到模块
-A: 确保 `npm install --force` 在 `vercel.json` 中配置
+A: 确保 `npm install --force` 在 `vercel.json` 中配置，并添加了所有 rollup 平台依赖
 
 ### Q: SSR 页面没有 SEO 数据
-A: 检查 `entry-server.tsx` 中的 SEO 数据生成逻辑
+A: 检查 `entry-server.tsx` 中的 SEO 数据生成逻辑，确保 Supabase 环境变量正确
 
 ### Q: 静态资源 404
-A: 确保构建输出目录结构正确，检查 rewrites 配置
+A: 验证 `vercel.json` 中的 rewrites 配置，确保 `/assets/*` 正确映射
 
-### Q: 如何选择 Node.js Runtime 还是 Edge Runtime？
-A: 
-- **Node.js Runtime** (`/api/ssr.js`): 完整的 SSR 功能，支持所有 Node.js API
-- **Edge Runtime** (`/api/ssr-edge.js`): 更快的响应时间，但功能有限
+### Q: 构建失败
+A: 运行 `npm run build` 本地测试，检查环境变量和依赖
