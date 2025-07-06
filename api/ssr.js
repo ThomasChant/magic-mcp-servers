@@ -72,6 +72,20 @@ export default async function handler(req, res) {
             return res.status(404).end();
         }
 
+        // Check for prerendered static files first
+        const staticFilePath = resolve(`dist/static${url}.html`);
+        try {
+            await fs.access(staticFilePath);
+            const staticContent = await fs.readFile(staticFilePath, "utf-8");
+            
+            res.setHeader('Content-Type', 'text/html; charset=utf-8');
+            res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
+            res.setHeader('X-Prerendered', 'true');
+            return res.status(200).send(staticContent);
+        } catch {
+            // No prerendered file found, proceed with SSR
+        }
+
         // Handle SSR for HTML pages
         let template;
         try {
