@@ -8,9 +8,14 @@ process.env.NODE_ENV = "production";
 async function testSSR() {
     // Get URL from command line argument or default to home page
     const testUrl = process.argv[2] || "/";
-
-    console.log(`🧪 Testing Vercel SSR function for: ${testUrl}`);
-    console.log(`🔄 Calling handler with "${testUrl}" URL...`);
+    
+    // Check if we want silent mode (only HTML output)
+    const silentMode = process.argv.includes('--silent');
+    
+    if (!silentMode) {
+        console.log(`🧪 Testing Vercel SSR function for: ${testUrl}`);
+        console.log(`🔄 Calling handler with "${testUrl}" URL...`);
+    }
 
     try {
         // Import the SSR handler
@@ -53,23 +58,30 @@ async function testSSR() {
         // Call the handler
         await handler(req, res);
 
-        // Log results
-        console.log(`📊 Response status: ${responseData.status}`);
-        console.log(`📊 Response headers:`, responseData.headers);
-        console.log(
-            `📊 Response content length: ${
-                responseData.body?.length || 0
-            } characters`
-        );
+        if (silentMode) {
+            // Only output the HTML body
+            console.log(responseData.body);
+        } else {
+            // Log results
+            console.log(`📊 Response status: ${responseData.status}`);
+            console.log(`📊 Response headers:`, responseData.headers);
+            console.log(
+                `📊 Response content length: ${
+                    responseData.body?.length || 0
+                } characters`
+            );
 
-        if (responseData.body && responseData.body.length > 0) {
-            const preview = responseData.body.substring(0, 200);
-            console.log(`📊 First 200 chars: ${preview}`);
+            if (responseData.body && responseData.body.length > 0) {
+                const preview = responseData.body.substring(0, 200);
+                console.log(`📊 First 200 chars: ${preview}`);
+            }
+
+            console.log(`✅ Test completed successfully`);
         }
-
-        console.log(`✅ Test completed successfully`);
     } catch (error) {
-        console.error(`❌ Test failed:`, error);
+        if (!silentMode) {
+            console.error(`❌ Test failed:`, error);
+        }
         process.exit(1);
     }
 }

@@ -32,6 +32,57 @@ function getMimeType(filePath) {
     return mimeTypes[ext] || 'application/octet-stream';
 }
 
+// Helper function to update asset paths dynamically
+async function updateAssetPaths(template) {
+    try {
+        const assetsDir = resolve('dist/client/assets');
+        const files = await fs.readdir(assetsDir);
+        
+        // Find the correct asset files
+        const indexJSFile = files.find(file => file.startsWith('index-') && file.endsWith('.js'));
+        const indexCSSFile = files.find(file => file.startsWith('index-') && file.endsWith('.css'));
+        
+        console.log(`📦 Found assets: JS=${indexJSFile}, CSS=${indexCSSFile}`);
+        
+        let updatedTemplate = template;
+        
+        // Update JS file reference
+        if (indexJSFile) {
+            // Replace any existing JS script reference
+            updatedTemplate = updatedTemplate.replace(
+                /src="\/assets\/index-[^"]+\.js"/g,
+                `src="/assets/${indexJSFile}"`
+            );
+            // Also handle entry-client.tsx fallback
+            updatedTemplate = updatedTemplate.replace(
+                'src="/src/entry-client.tsx"',
+                `type="module" crossorigin src="/assets/${indexJSFile}"`
+            );
+        }
+        
+        // Add CSS if not present and file exists
+        if (indexCSSFile && !updatedTemplate.includes(`/assets/${indexCSSFile}`)) {
+            // Remove any existing CSS links to avoid duplicates
+            updatedTemplate = updatedTemplate.replace(
+                /<link[^>]+href="\/assets\/index-[^"]+\.css"[^>]*>/g,
+                ''
+            );
+            // Add the correct CSS link before </head>
+            updatedTemplate = updatedTemplate.replace(
+                '</head>',
+                `    <link rel="stylesheet" crossorigin href="/assets/${indexCSSFile}">\n  </head>`
+            );
+        }
+        
+        console.log(`✅ Asset paths updated in template`);
+        return updatedTemplate;
+        
+    } catch (error) {
+        console.warn(`⚠️ Could not update asset paths:`, error.message);
+        return template;
+    }
+}
+
 // Simplified SSR logic - only render SEO-critical pages
 function needsSSR(url) {
     const normalizedUrl = url.startsWith('/') ? url : `/${url}`;
@@ -156,6 +207,9 @@ export default async function handler(req, res) {
             }
         }
 
+        // 🔧 Update asset paths dynamically
+        template = await updateAssetPaths(template);
+
         if (!requiresSSR) {
             // 🏃‍♂️ CSR Mode: Return basic template for client-side rendering
             console.log(`⚡ Using CSR for: ${routePath}`);
@@ -208,10 +262,10 @@ export default async function handler(req, res) {
             const clientFilePath = resolve(`dist/client/${staticFileName}`);
             try {
                 await fs.access(clientFilePath);
-                const staticContent = await fs.readFile(
-                    clientFilePath,
-                    "utf-8"
-                );
+                let staticContent = await fs.readFile(clientFilePath, "utf-8");
+
+                // 🔧 Update asset paths for prerendered files too
+                staticContent = await updateAssetPaths(staticContent);
 
                 res.setHeader("Content-Type", "text/html; charset=utf-8");
                 res.setHeader(
@@ -227,10 +281,13 @@ export default async function handler(req, res) {
                 const staticFilePath = resolve(`dist/static/${staticFileName}`);
                 try {
                     await fs.access(staticFilePath);
-                    const staticContent = await fs.readFile(
+                    let staticContent = await fs.readFile(
                         staticFilePath,
                         "utf-8"
                     );
+
+                    // 🔧 Update asset paths for prerendered files too
+                    staticContent = await updateAssetPaths(staticContent);
 
                     res.setHeader("Content-Type", "text/html; charset=utf-8");
                     res.setHeader(
