@@ -165,8 +165,9 @@ const ServerDetail: React.FC = () => {
                         };
                     }
                 }
-            } catch (e) {
+            } catch (error) {
                 // Continue searching if JSON parse fails
+                console.error('Error extracting config from README:', error);
                 continue;
             }
         }
@@ -300,7 +301,7 @@ const ServerDetail: React.FC = () => {
                                             {server.name}
                                         </h1>
                                         <div className="flex items-center space-x-2">
-                                            {server.verified && (
+                                            {server.official && (
                                                 <span className="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
                                                     Official
                                                 </span>
