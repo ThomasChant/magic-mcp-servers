@@ -97,7 +97,7 @@ const HeaderSSR: React.FC = () => {
                                 {/* <span className="text-white text-sm font-bold">
                                     M
                                 </span> */}
-                                <img src={logoImg} alt="Magic MCP" className="w-10 h-10" />
+                                <img src={logoImg} alt="Magic MCP" className="rounded" />
                             </div>
                             <span className="text-xxl font-bold text-gray-900 dark:text-white">
                                 Magic MCP
@@ -343,7 +343,7 @@ const HeaderWithClerk: React.FC = () => {
                                 {/* <span className="text-white text-sm font-bold">
                                     M
                                 </span> */}
-                                <img src={logoImg} alt="Magic MCP"/>
+                                <img src={logoImg} alt="Magic MCP" className="rounded"/>
                                 
                             </div>
                             <span className="text-xxl font-bold text-gray-900 dark:text-white">
