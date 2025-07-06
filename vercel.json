@@ -10,7 +10,19 @@
     },
     "rewrites": [
         {
+            "source": "/",
+            "destination": "/api/ssr"
+        },
+        {
+            "source": "/servers",
+            "destination": "/api/ssr"
+        },
+        {
             "source": "/servers/(.*)",
+            "destination": "/api/ssr"
+        },
+        {
+            "source": "/categories",
             "destination": "/api/ssr"
         },
         {

@@ -96,31 +96,62 @@ export default async function handler(req, res) {
         const requiresSSR = needsSSR(routePath);
 
         console.log(`📡 Processing request: ${routePath}`);
+        console.log(
+            `🔍 URL analysis: original="${url}", normalized="${routePath}"`
+        );
         console.log(`🎯 Needs SSR: ${requiresSSR ? "Yes" : "No"}`);
+        console.log(`🏠 Is home page: ${routePath === "/"}`);
+
+        // Special logging for home page
+        if (routePath === "/") {
+            console.log(`🏠 HOME PAGE DETECTED - Should use SSR!`);
+        }
 
         // Load template - prioritize SSR template with placeholders
         let template;
         try {
             // In Vercel deployment, try dist/client directory first
-            template = await fs.readFile(resolve("dist/client/index-ssr.html"), "utf-8");
-            console.log(`📄 Using SSR template: dist/client/index-ssr.html (${template.length} chars)`);
+            template = await fs.readFile(
+                resolve("dist/client/index-ssr.html"),
+                "utf-8"
+            );
+            console.log(
+                `📄 Using SSR template: dist/client/index-ssr.html (${template.length} chars)`
+            );
         } catch (e) {
             try {
                 // Fallback to root directory for local development
-                template = await fs.readFile(resolve("index-ssr.html"), "utf-8");
-                console.log(`📄 Using SSR template: index-ssr.html (${template.length} chars)`);
+                template = await fs.readFile(
+                    resolve("index-ssr.html"),
+                    "utf-8"
+                );
+                console.log(
+                    `📄 Using SSR template: index-ssr.html (${template.length} chars)`
+                );
             } catch (e2) {
-                console.log(`⚠️ SSR templates not found, falling back to client template`);
+                console.log(
+                    `⚠️ SSR templates not found, falling back to client template`
+                );
                 try {
-                    template = await fs.readFile(resolve("dist/client/index.html"), "utf-8");
-                    console.log(`📄 Using client template: dist/client/index.html (${template.length} chars)`);
+                    template = await fs.readFile(
+                        resolve("dist/client/index.html"),
+                        "utf-8"
+                    );
+                    console.log(
+                        `📄 Using client template: dist/client/index.html (${template.length} chars)`
+                    );
                     // Check if this template has placeholders
-                    if (!template.includes('<!--app-head-->') || !template.includes('<!--app-html-->')) {
-                        console.warn(`⚠️ Client template missing SSR placeholders - SSR may not work correctly`);
+                    if (
+                        !template.includes("<!--app-head-->") ||
+                        !template.includes("<!--app-html-->")
+                    ) {
+                        console.warn(
+                            `⚠️ Client template missing SSR placeholders - SSR may not work correctly`
+                        );
                     }
                 } catch (e3) {
                     console.error(`❌ No template found: ${e3.message}`);
-                    throw new Error('No HTML template found for SSR');
+                    throw new Error("No HTML template found for SSR");
                 }
             }
         }
@@ -160,15 +191,19 @@ export default async function handler(req, res) {
         // 🎨 SSR Mode: Full server-side rendering for SEO-critical pages
         console.log(`🚀 Using SSR for: ${routePath}`);
 
-        // Check for prerendered static files first
+        // For home page, always use dynamic SSR for better content
+        if (routePath === "/") {
+            console.log(`🏠 FORCING DYNAMIC SSR FOR HOME PAGE`);
+        }
+
+        // Check for prerendered static files first (skip home page)
         const staticFiles = {
-            "/": "index.html",
             "/servers": "servers.html",
             "/categories": "categories.html",
         };
 
         const staticFileName = staticFiles[routePath];
-        if (staticFileName) {
+        if (staticFileName && routePath !== "/") {
             // Try client directory first (Vercel deployment location)
             const clientFilePath = resolve(`dist/client/${staticFileName}`);
             try {
