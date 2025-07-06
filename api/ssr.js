@@ -5,16 +5,74 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const resolve = (p) => path.resolve(__dirname, '..', p);
 
+// MIME type mapping
+const mimeTypes = {
+    '.js': 'application/javascript',
+    '.mjs': 'application/javascript',
+    '.css': 'text/css',
+    '.html': 'text/html',
+    '.json': 'application/json',
+    '.svg': 'image/svg+xml',
+    '.png': 'image/png',
+    '.jpg': 'image/jpeg',
+    '.jpeg': 'image/jpeg',
+    '.gif': 'image/gif',
+    '.ico': 'image/x-icon',
+    '.webmanifest': 'application/manifest+json',
+    '.txt': 'text/plain',
+    '.xml': 'application/xml',
+    '.woff': 'font/woff',
+    '.woff2': 'font/woff2',
+    '.ttf': 'font/ttf',
+    '.eot': 'application/vnd.ms-fontobject'
+};
+
+function getMimeType(filePath) {
+    const ext = path.extname(filePath).toLowerCase();
+    return mimeTypes[ext] || 'application/octet-stream';
+}
+
 export default async function handler(req, res) {
     try {
         const url = req.url;
         
-        // Skip SSR for static files
-        if (url.match(/\\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|json|xml|txt|webmanifest)$/)) {
+        // Handle static files
+        if (url.match(/\.(js|mjs|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|json|xml|txt|webmanifest)$/)) {
+            try {
+                // Try assets directory first
+                let filePath = resolve(`dist/client/assets${url}`);
+                let fileExists = false;
+                
+                try {
+                    await fs.access(filePath);
+                    fileExists = true;
+                } catch {
+                    // Try root client directory
+                    filePath = resolve(`dist/client${url}`);
+                    try {
+                        await fs.access(filePath);
+                        fileExists = true;
+                    } catch {
+                        fileExists = false;
+                    }
+                }
+                
+                if (fileExists) {
+                    const fileContent = await fs.readFile(filePath);
+                    const mimeType = getMimeType(filePath);
+                    
+                    res.setHeader('Content-Type', mimeType);
+                    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+                    return res.status(200).send(fileContent);
+                }
+            } catch (error) {
+                console.error('Static file error:', error);
+            }
+            
             return res.status(404).end();
         }
 
-        // Read HTML template
+        // Handle SSR for HTML pages
         let template;
         try {
             template = await fs.readFile(resolve("dist/client/index.html"), "utf-8");

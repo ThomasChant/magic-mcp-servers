@@ -344,9 +344,9 @@ export function generateHomeSEO(url: string) {
 export function generateServersListSEO(url: string) {
   return {
     title: "MCP Server Directory - Browse All Servers | Magic MCP",
-    description: "Browse the complete Model Context Protocol server directory. 200+ verified MCP servers for databases, filesystems, API integration, and development tools.",
+    description: "Browse the complete Model Context Protocol server directory. 1500+ veerified servers for databases, filesystems, API integration, and development tools.",
     ogTitle: "MCP Server Directory - Browse All Servers | Magic MCP", 
-    ogDescription: "Browse the complete Model Context Protocol server directory. 200+ verified MCP servers for databases, filesystems, API integration, and development tools.",
+    ogDescription: "Browse the complete Model Context Protocol server directory. 1500+ verified MCP servers for databases, filesystems, API integration, and development tools.",
     ogUrl: url,
     ogImage: "https://magicmcp.net/og-image.png",
     canonicalUrl: url,
@@ -378,7 +378,7 @@ export function generateServersListSEO(url: string) {
         "@type": "ItemList",
         "name": "MCP Servers",
         "description": "Collection of Model Context Protocol servers",
-        "numberOfItems": 200
+        "numberOfItems": 1500
       }
     }
   };
