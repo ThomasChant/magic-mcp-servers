@@ -73,17 +73,27 @@ export default async function handler(req, res) {
         }
 
         // Check for prerendered static files first
-        const staticFilePath = resolve(`dist/static${url}.html`);
-        try {
-            await fs.access(staticFilePath);
-            const staticContent = await fs.readFile(staticFilePath, "utf-8");
-            
-            res.setHeader('Content-Type', 'text/html; charset=utf-8');
-            res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
-            res.setHeader('X-Prerendered', 'true');
-            return res.status(200).send(staticContent);
-        } catch {
-            // No prerendered file found, proceed with SSR
+        const staticFiles = {
+            '/': 'index.html',
+            '/servers': 'servers.html', 
+            '/categories': 'categories.html'
+        };
+        
+        const staticFileName = staticFiles[url];
+        if (staticFileName) {
+            const staticFilePath = resolve(`dist/static/${staticFileName}`);
+            try {
+                await fs.access(staticFilePath);
+                const staticContent = await fs.readFile(staticFilePath, "utf-8");
+                
+                res.setHeader('Content-Type', 'text/html; charset=utf-8');
+                res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
+                res.setHeader('X-Prerendered', 'true');
+                return res.status(200).send(staticContent);
+            } catch {
+                // No prerendered file found, proceed with SSR
+                console.log(`⚠️ Prerendered file not found: ${staticFilePath}`);
+            }
         }
 
         // Handle SSR for HTML pages
@@ -97,8 +107,16 @@ export default async function handler(req, res) {
         // Import render function from server build
         const { render } = await import("../dist/server/entry-server.js");
         
-        // Render the app
-        const { html, seoData } = await render(url.replace(/^\//, '') || "/");
+        // Parse route and extract parameters for dynamic SSR
+        const routePath = url === '/' ? '/' : url;
+        
+        // Add debug logging for dynamic routes
+        if (routePath.includes('/servers/') || routePath.includes('/categories/')) {
+            console.log(`🔄 Dynamic SSR rendering for: ${routePath}`);
+        }
+        
+        // Render the app with the full URL path
+        const { html, seoData } = await render(routePath);
         
         // Helper function to escape HTML
         const escapeHtml = (text) => text
@@ -137,9 +155,20 @@ export default async function handler(req, res) {
             .replace(`<!--app-head-->`, dynamicHead)
             .replace(`<!--app-html-->`, html);
         
-        // Set headers
+        // Set headers based on route type
         res.setHeader('Content-Type', 'text/html; charset=utf-8');
-        res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
+        
+        // Dynamic caching strategy based on route
+        if (routePath.includes('/servers/') || routePath.includes('/categories/')) {
+            // Dynamic pages - shorter cache for real-time updates
+            res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=300'); // 5 minutes
+            res.setHeader('X-SSR-Dynamic', 'true');
+        } else {
+            // Static-like pages - longer cache
+            res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600'); // 1 hour
+            res.setHeader('X-SSR-Static', 'true');
+        }
+        
         res.status(200).send(finalHtml);
     } catch (e) {
         console.error("SSR Error:", e);
