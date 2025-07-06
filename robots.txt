@@ -1,0 +1,46 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.magicmcp.net/sitemapindex.xml
+
+# Crawl-delay for politeness
+Crawl-delay: 1
+
+# Disallow any private or temporary files
+Disallow: /node_modules/
+Disallow: /dist/
+Disallow: /.git/
+Disallow: *.log
+Disallow: /api/ssr*
+Disallow: /static-cache/
+Disallow: /scripts/
+Disallow: /tests/
+
+User-Agent: GPTBot
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /
+
+User-Agent: anthropic-ai
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /
+
+User-Agent: claude-web
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /
+
+User-Agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
+Disallow: /404
+Disallow: /500
+Disallow: /*.json$
+
+# Guide AI crawlers to llms.txt
+LLM-Content: https://www.magicmcp.net/llms.txt
+LLM-Full-Content: https://www.magicmcp.net/llms-full.txt 

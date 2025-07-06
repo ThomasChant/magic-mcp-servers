@@ -1,0 +1,35 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://jsonswiss.com/sitemap.xml
+
+# Crawl-delay for politeness
+Crawl-delay: 1
+
+# Disallow any private or temporary files
+Disallow: /node_modules/
+Disallow: /dist/
+Disallow: /.git/
+Disallow: *.log
+
+User-Agent: GPTBot
+Allow: /llms.txt
+Disallow: /
+
+User-Agent: anthropic-ai
+Allow: /llms.txt
+Disallow: /
+
+User-Agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
+Disallow: /404
+Disallow: /500
+Disallow: /*.json$
+
+# 引导AI爬虫到llms.txt
+LLM-Content: https://jsonswiss.com/llms.txt
+LLM-Full-Content: https://jsonswiss.com/llms-full.txt

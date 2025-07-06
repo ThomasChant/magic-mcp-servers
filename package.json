@@ -10,7 +10,7 @@
     "build:vercel": "npm run build:client && npm run build:server && npm run sitemap:build",
     "build:client": "vite build --outDir dist/client",
     "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",
-    "serve": "NODE_ENV=production node server.js",
+    "serve": "NODE_ENV=production node server-simple.js",
     "serve-simple": "NODE_ENV=production node server-simple.js",
     "serve-local": "node serve-local.js",
     "lint": "eslint .",
