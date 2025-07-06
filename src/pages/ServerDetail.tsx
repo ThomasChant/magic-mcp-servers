@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 import {
     ArrowLeft,
     ArrowRight,
@@ -42,9 +42,30 @@ import InstallationTab from "../components/InstallationTab";
 import APIReferenceTab from "../components/APIReferenceTab";
 import { ClientOnly } from "../components/ClientOnly";
 const ServerDetail: React.FC = () => {
-    const { slug } = useParams<{ slug: string }>();
+    const { slug: paramSlug } = useParams<{ slug: string }>();
+    const location = useLocation();
+    
+    // Backup slug extraction from URL path for SSR compatibility
+    const extractSlugFromPath = (pathname: string): string | null => {
+        const match = pathname.match(/^\/servers\/([^/]+)$/);
+        return match ? match[1] : null;
+    };
+    
+    // Use param slug or extract from location for SSR compatibility
+    const slug = paramSlug || extractSlugFromPath(location.pathname);
     const { data: server, isLoading, error } = useServer(slug!);
-    console.log("server", server)
+    
+    // Debug logging for ServerDetail component
+    console.log("🔍 ServerDetail Debug:", {
+        paramSlug,
+        extractedSlug: extractSlugFromPath(location.pathname),
+        finalSlug: slug,
+        pathname: location.pathname,
+        hasSlug: !!slug,
+        server: server ? `${server.name} (${server.id})` : 'null',
+        isLoading,
+        error: error?.message || 'none'
+    });
 
     const { relatedServers, isLoading: relatedLoading } = useRelatedServers(server, 30);
     const [activeTab, setActiveTab] = useState<'overview' | 'installation' | 'api-reference' | 'comments'>('overview');
@@ -69,7 +90,9 @@ const ServerDetail: React.FC = () => {
 
     if (isLoading) {
         return (
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" data-testid="server-detail-loading">
+                {/* Debug marker for server detail loading state */}
+                <div className="hidden" data-server-detail-loading="true" data-slug={slug}></div>
                 <div className="animate-pulse">
                     <div className="h-8 bg-gray-300 dark:bg-gray-600 rounded w-1/4 mb-6"></div>
                     <div className="h-12 bg-gray-300 dark:bg-gray-600 rounded mb-4"></div>
@@ -238,7 +261,9 @@ const ServerDetail: React.FC = () => {
     // Tabs removed - using StructuredReadme component
 
     return (
-        <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
+        <div className="bg-gray-50 dark:bg-gray-900 min-h-screen" data-testid="server-detail-content" data-server={server.id}>
+            {/* Debug marker for server detail content */}
+            <div className="hidden" data-server-detail-content="true" data-server-name={server.name} data-slug={slug}></div>
             {/* Breadcrumb */}
             <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">

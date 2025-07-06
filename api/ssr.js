@@ -116,9 +116,11 @@ export default async function handler(req, res) {
         // Handle SSR for HTML pages
         let template;
         try {
-            template = await fs.readFile(resolve("dist/client/index.html"), "utf-8");
-        } catch (e) {
+            // Use the SSR template file first - it has the correct placeholders
             template = await fs.readFile(resolve("index-ssr.html"), "utf-8");
+        } catch (e) {
+            // Fallback to the root template if SSR template is not available
+            template = await fs.readFile(resolve("index.html"), "utf-8");
         }
 
         // Import render function from server build
