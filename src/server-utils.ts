@@ -17,56 +17,56 @@ function transformServer(dbServer: Record<string, unknown>): MCPServer {
       ko: (dbServer.description_ko as string) || (dbServer.description_en as string) || "",
       ru: (dbServer.description_ru as string) || (dbServer.description_en as string) || "",
     },
-    fullDescription: (dbServer.full_description as string) || "",
+    fullDescription: (dbServer.description_en as string) || "", // Use description_en as fallback
     icon: (dbServer.icon as string) || "",
-    category: (dbServer.category as string) || "",
-    subcategory: (dbServer.subcategory as string) || "",
+    category: (dbServer.category_id as string) || "",
+    subcategory: "", // Default empty as field not selected
     tags: (dbServer.tags as string[]) || [],
-    techStack: (dbServer.tech_stack as string[]) || [],
+    techStack: [], // Default empty as field not selected
     featured: (dbServer.featured as boolean) || false,
     verified: (dbServer.official as boolean) || false,
     metadata: {
       qualityScore: (dbServer.quality_score as number) || 0,
-      maturity: (dbServer.maturity as string) || "unknown",
-      complexity: (dbServer.complexity as string) || "medium",
-      maintenanceStatus: (dbServer.maintenance_status as string) || "unknown",
+      maturity: "stable", // Default value
+      complexity: "medium", // Default value
+      maintenanceStatus: "active", // Default value
     },
     repository: {
       owner: (dbServer.owner as string) || "",
-      name: (dbServer.repository_name as string) || "",
-      url: (dbServer.repository_url as string) || "",
+      name: (dbServer.name as string) || "", // Use name as fallback
+      url: "", // Default empty as field not selected
       stars: (dbServer.stars as number) || 0,
-      forks: (dbServer.forks as number) || 0,
-      watchers: (dbServer.watchers as number) || 0,
-      issues: (dbServer.issues as number) || 0,
-      lastCommit: (dbServer.last_commit as string) || "",
-      language: (dbServer.language as string) || "",
+      forks: 0, // Default value as field not selected
+      watchers: 0, // Default value as field not selected
+      issues: 0, // Default value as field not selected
+      lastCommit: "", // Default empty as field not selected
+      language: "", // Default empty as field not selected
     },
     stats: {
       createdAt: (dbServer.created_at as string) || "",
       lastUpdated: (dbServer.last_updated as string) || "",
-      downloads: (dbServer.downloads as number) || 0,
+      downloads: 0, // Default value as field may not exist
     },
     installation: {
-      npm: (dbServer.installation_npm as string) || "",
-      pip: (dbServer.installation_pip as string) || "",
-      docker: (dbServer.installation_docker as string) || "",
-      manual: (dbServer.installation_manual as string) || "",
-      uv: (dbServer.installation_uv as string) || "",
+      npm: "", // Default empty as field not selected
+      pip: "", // Default empty as field not selected
+      docker: "", // Default empty as field not selected
+      manual: "", // Default empty as field not selected
+      uv: "", // Default empty as field not selected
     },
     compatibility: {
-      platforms: (dbServer.platforms as string[]) || [],
-      pythonVersion: (dbServer.python_version as string) || "",
-      nodeVersion: (dbServer.node_version as string) || "",
+      platforms: [], // Default empty as field not selected
+      pythonVersion: "", // Default empty as field not selected
+      nodeVersion: "", // Default empty as field not selected
     },
     documentation: {
-      readme: (dbServer.readme as string) || "",
-      examples: (dbServer.examples as string[]) || [],
-      apiDocs: (dbServer.api_docs as string) || "",
+      readme: "", // Default empty as field not selected
+      examples: [], // Default empty as field not selected
+      apiDocs: "", // Default empty as field not selected
     },
     usage: {
-      downloads: (dbServer.downloads as number) || 0,
-      dependents: (dbServer.dependents as number) || 0,
+      downloads: 0, // Default empty as field not selected
+      dependents: 0, // Default empty as field not selected
     },
   };
 }
@@ -805,6 +805,81 @@ export async function getCategoriesData(): Promise<any[] | null> {
 
   } catch (err) {
     console.error('Error fetching categories data:', err);
+    return null;
+  }
+}
+
+export async function getServersPageData(): Promise<{
+  servers?: MCPServer[];
+  categories?: any[];
+  serverStats?: any;
+} | null> {
+  // For SSR, try different environment variable sources
+  const supabaseUrl = process.env.VITE_SUPABASE_URL || 
+                    process.env.NEXT_PUBLIC_SUPABASE_URL || 
+                    'https://lptsvryohchbklxcyoyc.supabase.co';
+                    
+  const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || 
+                        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxwdHN2cnlvaGNoYmtseGN5b3ljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwODY0MzUsImV4cCI6MjA2NjY2MjQzNX0.hEleXmYktD79nKq4Q6Ow-9KF0RWRgGOJjXLgglyK2GQ';
+  
+  if (!supabaseUrl || !supabaseAnonKey) {
+    console.error('Missing Supabase environment variables for SSR');
+    return null;
+  }
+  
+  const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+    auth: {
+      persistSession: false,
+    },
+  });
+
+  try {
+    console.log('📋 Fetching servers page data from Supabase...');
+    
+    // Fetch servers data for the first page (default sort by upvotes desc)
+    const { data: serversData, error: serversError } = await supabase
+      .from('servers_with_details')
+      .select(`
+        id, name, owner, slug, description_en, 
+        icon, category_id, tags,
+        featured, official, 
+        stars, created_at, last_updated
+      `)
+      .order('upvotes', { ascending: false })
+      .limit(36); // First page limit to match Servers component
+    
+    if (serversError) {
+      console.error('Servers query error:', serversError);
+      return null;
+    }
+
+    console.log(`✅ Fetched ${serversData?.length || 0} servers for SSR`);
+
+    // Transform servers data
+    const transformedServers = serversData?.map(transformServer) || [];
+
+    // Also fetch categories for filters
+    const categoriesData = await getCategoriesData();
+    
+    // Basic server stats for the page
+    const serverStats = {
+      total: transformedServers.length,
+      categories: categoriesData?.length || 0,
+      averageStars: transformedServers.length > 0 
+        ? Math.round(transformedServers.reduce((sum, s) => sum + (s.repository.stars || 0), 0) / transformedServers.length)
+        : 0,
+      activeRepos: transformedServers.filter(s => s.repository.stars > 0).length,
+    };
+
+    return {
+      servers: transformedServers,
+      categories: categoriesData,
+      serverStats,
+    };
+
+  } catch (err) {
+    console.error('Error fetching servers page data:', err);
     return null;
   }
 }

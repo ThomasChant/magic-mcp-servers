@@ -14,7 +14,8 @@ import {
   generateCategorySEO,
   generateDocsSEO,
   getHomePageData,
-  getCategoriesData
+  getCategoriesData,
+  getServersPageData
 } from "./server-utils";
 // Import i18n to ensure it's initialized during SSR
 import "./i18n";
@@ -114,6 +115,42 @@ export async function render(url: string, context?: any) {
         } else if (routes.serversList) {
             console.log(`📋 Processing servers list page SSR`);
             seoData = generateServersListSEO(fullUrl);
+            
+            // Fetch servers page data for SSR
+            const serversPageData = await getServersPageData();
+            if (serversPageData) {
+                // Pre-populate QueryClient cache with servers data
+                if (serversPageData.servers && serversPageData.servers.length > 0) {
+                    const paginatedResult = {
+                        data: serversPageData.servers,
+                        total: serversPageData.servers.length,
+                        hasNextPage: false,
+                        hasPreviousPage: false,
+                        currentPage: 1,
+                        totalPages: 1,
+                    };
+                    
+                    // Cache for the default parameters that Servers component uses
+                    queryClient.setQueryData(
+                        ["supabase", "servers", "paginated", 1, 36, "upvotes", "desc", undefined], 
+                        paginatedResult
+                    );
+                    console.log(`✅ Pre-populated servers cache with ${serversPageData.servers.length} servers`);
+                }
+                
+                if (serversPageData.categories && serversPageData.categories.length > 0) {
+                    queryClient.setQueryData(["supabase", "categories"], serversPageData.categories);
+                    console.log(`✅ Pre-populated categories cache with ${serversPageData.categories.length} categories`);
+                }
+                
+                if (serversPageData.serverStats) {
+                    queryClient.setQueryData(["supabase", "server-stats"], serversPageData.serverStats);
+                    console.log(`✅ Pre-populated server stats cache`);
+                }
+                
+                // Store servers data in additional data
+                additionalData.serversPageData = serversPageData;
+            }
             
         } else if (routes.serverDetail) {
             const slug = routes.serverDetail[1];

@@ -32,6 +32,18 @@ function getMimeType(filePath) {
     return mimeTypes[ext] || 'application/octet-stream';
 }
 
+// Simplified SSR logic - only render SEO-critical pages
+function needsSSR(url) {
+    const normalizedUrl = url.startsWith('/') ? url : `/${url}`;
+    
+    // Core pages that need SSR for SEO
+    const ssrRoutes = ['/', '/servers', '/categories'];
+    const dynamicSSRRoutes = ['/servers/', '/categories/'];
+    
+    return ssrRoutes.includes(normalizedUrl) || 
+           dynamicSSRRoutes.some(route => normalizedUrl.startsWith(route));
+}
+
 export default async function handler(req, res) {
     try {
         const url = req.url;
@@ -72,6 +84,53 @@ export default async function handler(req, res) {
             return res.status(404).end();
         }
 
+        // 🚀 Simplified SSR: Check if this route needs SSR
+        const routePath = url === '/' ? '/' : url;
+        const requiresSSR = needsSSR(routePath);
+        
+        console.log(`📡 Processing request: ${routePath}`);
+        console.log(`🎯 Needs SSR: ${requiresSSR ? 'Yes' : 'No'}`);
+
+        // Load template
+        let template;
+        try {
+            template = await fs.readFile(resolve("dist/client/index.html"), "utf-8");
+        } catch (e) {
+            template = await fs.readFile(resolve("index-ssr.html"), "utf-8");
+        }
+
+        if (!requiresSSR) {
+            // 🏃‍♂️ CSR Mode: Return basic template for client-side rendering
+            console.log(`⚡ Using CSR for: ${routePath}`);
+            
+            // Basic SEO for non-SSR pages
+            const basicHead = `
+    <title>Magic MCP - Model Context Protocol Server Discovery</title>
+    <meta name="description" content="Discover and integrate the best Model Context Protocol (MCP) servers for AI applications." />
+    <meta name="keywords" content="MCP, Model Context Protocol, AI tools, servers, Claude MCP, AI integration" />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Magic MCP - Model Context Protocol Server Discovery" />
+    <meta property="og:description" content="Discover and integrate the best Model Context Protocol (MCP) servers for AI applications." />
+    <meta property="og:url" content="https://magicmcp.net${routePath}" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://magicmcp.net${routePath}" />`;
+            
+            const finalHtml = template
+                .replace(`<!--app-head-->`, basicHead)
+                .replace(`<!--app-html-->`, '<div id="root"></div>');
+            
+            res.setHeader('Content-Type', 'text/html; charset=utf-8');
+            res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
+            res.setHeader('X-Render-Mode', 'CSR');
+            
+            return res.status(200).send(finalHtml);
+        }
+
+        // 🎨 SSR Mode: Full server-side rendering for SEO-critical pages
+        console.log(`🚀 Using SSR for: ${routePath}`);
+
         // Check for prerendered static files first
         const staticFiles = {
             '/': 'index.html',
@@ -79,7 +138,7 @@ export default async function handler(req, res) {
             '/categories': 'categories.html'
         };
         
-        const staticFileName = staticFiles[url];
+        const staticFileName = staticFiles[routePath];
         if (staticFileName) {
             // Try client directory first (Vercel deployment location)
             const clientFilePath = resolve(`dist/client/${staticFileName}`);
@@ -107,28 +166,14 @@ export default async function handler(req, res) {
                     console.log(`✅ Serving prerendered file: ${staticFilePath}`);
                     return res.status(200).send(staticContent);
                 } catch {
-                    // No prerendered file found, proceed with SSR
+                    // No prerendered file found, proceed with dynamic SSR
                     console.log(`⚠️ Prerendered file not found in client or static: ${staticFileName}`);
                 }
             }
         }
 
-        // Handle SSR for HTML pages
-        let template;
-        try {
-            template = await fs.readFile(resolve("dist/client/index.html"), "utf-8");
-        } catch (e) {
-            template = await fs.readFile(resolve("index-ssr.html"), "utf-8");
-        }
-
         // Import render function from server build
         const { render } = await import("../dist/server/entry-server.js");
-        
-        // Parse route and extract parameters for dynamic SSR
-        const routePath = url === '/' ? '/' : url;
-        
-        // Add debug logging for all routes
-        console.log(`🔄 SSR processing route: ${routePath}`);
         
         // Add detailed debug logging for dynamic routes
         if (routePath.includes('/servers/') || routePath.includes('/categories/')) {
@@ -182,11 +227,11 @@ export default async function handler(req, res) {
         if (routePath.includes('/servers/') || routePath.includes('/categories/')) {
             // Dynamic pages - shorter cache for real-time updates
             res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=300'); // 5 minutes
-            res.setHeader('X-SSR-Dynamic', 'true');
+            res.setHeader('X-Render-Mode', 'SSR-Dynamic');
         } else {
             // Static-like pages - longer cache
             res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600'); // 1 hour
-            res.setHeader('X-SSR-Static', 'true');
+            res.setHeader('X-Render-Mode', 'SSR-Static');
         }
         
         res.status(200).send(finalHtml);
