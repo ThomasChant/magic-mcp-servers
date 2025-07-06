@@ -89,9 +89,9 @@
     "zustand": "^5.0.5"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.30.3",
     "@rollup/rollup-darwin-arm64": "^4.30.3",
-    "@rollup/rollup-darwin-x64": "^4.30.3"
+    "@rollup/rollup-darwin-x64": "^4.30.3",
+    "@rollup/rollup-linux-x64-gnu": "^4.30.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
@@ -110,6 +110,7 @@
     "globals": "^16.0.0",
     "jsdom": "^24.1.0",
     "postcss": "^8.5.6",
+    "sharp": "^0.34.2",
     "tailwindcss": "^3.4.17",
     "tsx": "^4.20.3",
     "typescript": "~5.8.3",
