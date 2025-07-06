@@ -116,45 +116,9 @@ export default async function handler(req, res) {
         // Handle SSR for HTML pages
         let template;
         try {
-            // Use the SSR template file first - it has the correct placeholders
-            template = await fs.readFile(resolve("index-ssr.html"), "utf-8");
-            
-            // Dynamically find and inject correct asset paths
-            const assetsDir = resolve("dist/client/assets");
-            try {
-                const assetFiles = await fs.readdir(assetsDir);
-                const cssFile = assetFiles.find(file => file.startsWith('index-') && file.endsWith('.css'));
-                const jsFile = assetFiles.find(file => file.startsWith('index-') && file.endsWith('.js'));
-                
-                if (cssFile && jsFile) {
-                    // Replace asset placeholders with actual built assets
-                    template = template
-                        .replace('<!--app-css-->', `<link rel="stylesheet" crossorigin href="/assets/${cssFile}">`)
-                        .replace('<!--app-js-->', `<script type="module" crossorigin src="/assets/${jsFile}"></script>`);
-                }
-            } catch (assetError) {
-                console.warn('Could not read assets directory for dynamic paths:', assetError);
-                // Fallback: try to read from client directory to get asset references
-                try {
-                    const clientIndexPath = resolve("dist/client/index.html");
-                    const clientIndex = await fs.readFile(clientIndexPath, "utf-8");
-                    
-                    // Extract CSS and JS references from client index.html
-                    const cssMatch = clientIndex.match(/<link[^>]*href="\/assets\/[^"]*\.css"[^>]*>/);
-                    const jsMatch = clientIndex.match(/<script[^>]*src="\/assets\/[^"]*\.js"[^>]*><\/script>/);
-                    
-                    if (cssMatch && jsMatch) {
-                        template = template
-                            .replace('<!--app-css-->', cssMatch[0])
-                            .replace('<!--app-js-->', jsMatch[0]);
-                    }
-                } catch (fallbackError) {
-                    console.warn('Could not extract assets from client index.html:', fallbackError);
-                }
-            }
+            template = await fs.readFile(resolve("dist/client/index.html"), "utf-8");
         } catch (e) {
-            // Fallback to the root template if SSR template is not available
-            template = await fs.readFile(resolve("index.html"), "utf-8");
+            template = await fs.readFile(resolve("index-ssr.html"), "utf-8");
         }
 
         // Import render function from server build
