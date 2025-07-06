@@ -101,35 +101,27 @@ export default async function handler(req, res) {
         // Load template - prioritize SSR template with placeholders
         let template;
         try {
-            // For SSR, we should use the template with placeholders, not the built client file
-            template = await fs.readFile(resolve("index-ssr.html"), "utf-8");
-            console.log(
-                `📄 Using SSR template: index-ssr.html (${template.length} chars)`
-            );
+            // In Vercel deployment, try dist/client directory first
+            template = await fs.readFile(resolve("dist/client/index-ssr.html"), "utf-8");
+            console.log(`📄 Using SSR template: dist/client/index-ssr.html (${template.length} chars)`);
         } catch (e) {
-            console.log(
-                `⚠️ SSR template not found, falling back to client template`
-            );
             try {
-                template = await fs.readFile(
-                    resolve("dist/client/index.html"),
-                    "utf-8"
-                );
-                console.log(
-                    `📄 Using client template: dist/client/index.html (${template.length} chars)`
-                );
-                // Check if this template has placeholders
-                if (
-                    !template.includes("<!--app-head-->") ||
-                    !template.includes("<!--app-html-->")
-                ) {
-                    console.warn(
-                        `⚠️ Client template missing SSR placeholders - SSR may not work correctly`
-                    );
-                }
+                // Fallback to root directory for local development
+                template = await fs.readFile(resolve("index-ssr.html"), "utf-8");
+                console.log(`📄 Using SSR template: index-ssr.html (${template.length} chars)`);
             } catch (e2) {
-                console.error(`❌ No template found: ${e2.message}`);
-                throw new Error("No HTML template found for SSR");
+                console.log(`⚠️ SSR templates not found, falling back to client template`);
+                try {
+                    template = await fs.readFile(resolve("dist/client/index.html"), "utf-8");
+                    console.log(`📄 Using client template: dist/client/index.html (${template.length} chars)`);
+                    // Check if this template has placeholders
+                    if (!template.includes('<!--app-head-->') || !template.includes('<!--app-html-->')) {
+                        console.warn(`⚠️ Client template missing SSR placeholders - SSR may not work correctly`);
+                    }
+                } catch (e3) {
+                    console.error(`❌ No template found: ${e3.message}`);
+                    throw new Error('No HTML template found for SSR');
+                }
             }
         }
 
