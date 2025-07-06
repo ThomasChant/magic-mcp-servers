@@ -23,11 +23,7 @@ const PAGES_TO_PRERENDER = [
         filename: 'index.html',
         description: 'Home page'
     },
-    {
-        path: '/servers',
-        filename: 'servers.html',
-        description: 'Servers list page'
-    },
+    // NOTE: /servers prerendering removed to avoid conflict with dynamic routes /servers/:slug
     {
         path: '/categories',
         filename: 'categories.html',
