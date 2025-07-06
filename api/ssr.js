@@ -81,18 +81,35 @@ export default async function handler(req, res) {
         
         const staticFileName = staticFiles[url];
         if (staticFileName) {
-            const staticFilePath = resolve(`dist/static/${staticFileName}`);
+            // Try client directory first (Vercel deployment location)
+            const clientFilePath = resolve(`dist/client/${staticFileName}`);
             try {
-                await fs.access(staticFilePath);
-                const staticContent = await fs.readFile(staticFilePath, "utf-8");
+                await fs.access(clientFilePath);
+                const staticContent = await fs.readFile(clientFilePath, "utf-8");
                 
                 res.setHeader('Content-Type', 'text/html; charset=utf-8');
                 res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
                 res.setHeader('X-Prerendered', 'true');
+                res.setHeader('X-Prerendered-Source', 'client');
+                console.log(`✅ Serving prerendered file: ${clientFilePath}`);
                 return res.status(200).send(staticContent);
             } catch {
-                // No prerendered file found, proceed with SSR
-                console.log(`⚠️ Prerendered file not found: ${staticFilePath}`);
+                // Fallback to static directory
+                const staticFilePath = resolve(`dist/static/${staticFileName}`);
+                try {
+                    await fs.access(staticFilePath);
+                    const staticContent = await fs.readFile(staticFilePath, "utf-8");
+                    
+                    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+                    res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
+                    res.setHeader('X-Prerendered', 'true');
+                    res.setHeader('X-Prerendered-Source', 'static');
+                    console.log(`✅ Serving prerendered file: ${staticFilePath}`);
+                    return res.status(200).send(staticContent);
+                } catch {
+                    // No prerendered file found, proceed with SSR
+                    console.log(`⚠️ Prerendered file not found in client or static: ${staticFileName}`);
+                }
             }
         }
 

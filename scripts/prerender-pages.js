@@ -130,17 +130,30 @@ async function prerenderPage(routePath, filename, description) {
             console.warn(`⚠️ Could not update asset paths for ${routePath}:`, assetsError.message);
         }
         
-        // Ensure static directory exists
+        // Ensure both static and client directories exist for proper deployment
         const staticDir = path.join(__dirname, '../dist/static');
+        const clientDir = path.join(__dirname, '../dist/client');
+        
         try {
             await fs.access(staticDir);
         } catch {
             await fs.mkdir(staticDir, { recursive: true });
         }
         
-        // Save prerendered page
-        const filePath = path.join(staticDir, filename);
-        await fs.writeFile(filePath, template, 'utf-8');
+        try {
+            await fs.access(clientDir);
+        } catch {
+            await fs.mkdir(clientDir, { recursive: true });
+        }
+        
+        // Save prerendered page to both locations
+        // 1. Static directory (for local development and reference)
+        const staticFilePath = path.join(staticDir, filename);
+        await fs.writeFile(staticFilePath, template, 'utf-8');
+        
+        // 2. Client directory (for Vercel deployment)
+        const clientFilePath = path.join(clientDir, filename);
+        await fs.writeFile(clientFilePath, template, 'utf-8');
         
         // Create metadata file
         const metadata = {
@@ -154,7 +167,8 @@ async function prerenderPage(routePath, filename, description) {
         await fs.writeFile(metadataPath, JSON.stringify(metadata, null, 2), 'utf-8');
         
         console.log(`✅ ${description} pre-rendered successfully`);
-        console.log(`📁 Static file: ${filePath}`);
+        console.log(`📁 Static file: ${staticFilePath}`);
+        console.log(`🚀 Client file: ${clientFilePath}`);
         console.log(`📊 HTML size: ${template.length} characters`);
         console.log(`⏱️ Generated at: ${metadata.generatedAt}`);
         
