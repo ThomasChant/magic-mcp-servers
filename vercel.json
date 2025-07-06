@@ -10,7 +10,15 @@
     },
     "rewrites": [
         {
-            "source": "/(.*)",
+            "source": "/servers/(.*)",
+            "destination": "/api/ssr"
+        },
+        {
+            "source": "/categories/(.*)",
+            "destination": "/api/ssr"
+        },
+        {
+            "source": "/((?!_next|api|assets|favicon|android-chrome|apple-touch|manifest|robots|sitemap|vite).*)",
             "destination": "/api/ssr"
         }
     ]
