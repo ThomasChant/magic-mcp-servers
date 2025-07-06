@@ -94,19 +94,19 @@ async function prerenderCategories() {
         // Update asset paths for production
         try {
             const assetsDir = await fs.readdir('./dist/client/assets');
-            const clientSSRFile = assetsDir.find(file => file.startsWith('client-ssr-'));
-            const clientFile = assetsDir.find(file => file.startsWith('client-') && file.endsWith('.js') && !file.includes('ssr'));
-            const queryClientJSFile = assetsDir.find(file => file.startsWith('queryClient-') && file.endsWith('.js'));
-            const queryClientCSSFile = assetsDir.find(file => file.startsWith('queryClient-') && file.endsWith('.css'));
+            const indexJSFile = assetsDir.find(file => file.startsWith('index-') && file.endsWith('.js'));
+            const indexCSSFile = assetsDir.find(file => file.startsWith('index-') && file.endsWith('.css'));
             
-            if (clientSSRFile) {
-                template = template.replace('src="/src/entry-client.tsx"', `type="module" crossorigin src="/assets/${clientSSRFile}"`);
+            console.log('📦 Found assets:', { indexJSFile, indexCSSFile });
+            
+            // Update script src to use the correct hashed filename
+            if (indexJSFile) {
+                template = template.replace('src="/src/entry-client.tsx"', `type="module" crossorigin src="/assets/${indexJSFile}"`);
             }
             
-            if (clientFile && queryClientJSFile && queryClientCSSFile) {
-                template = template.replace('</head>', `    <link rel="modulepreload" crossorigin href="/assets/${clientFile}">
-    <link rel="modulepreload" crossorigin href="/assets/${queryClientJSFile}">
-    <link rel="stylesheet" crossorigin href="/assets/${queryClientCSSFile}">
+            // Add CSS link to head if found
+            if (indexCSSFile) {
+                template = template.replace('</head>', `    <link rel="stylesheet" crossorigin href="/assets/${indexCSSFile}">
   </head>`);
             }
         } catch (assetsError) {
