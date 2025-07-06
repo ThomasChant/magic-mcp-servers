@@ -127,7 +127,10 @@ export default async function handler(req, res) {
         // Parse route and extract parameters for dynamic SSR
         const routePath = url === '/' ? '/' : url;
         
-        // Add debug logging for dynamic routes
+        // Add debug logging for all routes
+        console.log(`🔄 SSR processing route: ${routePath}`);
+        
+        // Add detailed debug logging for dynamic routes
         if (routePath.includes('/servers/') || routePath.includes('/categories/')) {
             console.log(`🔄 Dynamic SSR rendering for: ${routePath}`);
         }

@@ -52,6 +52,16 @@ export async function render(url: string, context?: any) {
         docs: normalizedUrl === '/docs',
     };
 
+    // Debug logging for route matching
+    console.log(`📍 Route matching for: ${normalizedUrl}`);
+    console.log(`📍 Route matches:`, {
+        home: !!routes.home,
+        serversList: !!routes.serversList,
+        serverDetail: !!routes.serverDetail,
+        categoriesList: !!routes.categoriesList,
+        categoryDetail: !!routes.categoryDetail,
+    });
+
     const fullUrl = `https://magicmcp.net${normalizedUrl}`;
 
     try {
@@ -109,26 +119,68 @@ export async function render(url: string, context?: any) {
             const slug = routes.serverDetail[1];
             console.log(`📄 Processing server detail page SSR for: ${slug}`);
             
-            // Fetch both server data and README data in parallel
-            const [fetchedServerData, fetchedReadmeData] = await Promise.all([
-                getServerBySlug(slug),
-                getServerReadmeBySlug(slug)
-            ]);
-            
-            serverData = fetchedServerData;
-            readmeData = fetchedReadmeData;
-            seoData = generateServerSEO(serverData, fullUrl);
-            
-            // Pre-populate the React Query cache with server data
-            if (serverData) {
-                queryClient.setQueryData(["server", slug], serverData);
-                console.log(`✅ Pre-populated query cache for server: ${serverData.name}`);
-            }
-            
-            // Pre-populate the React Query cache with README data
-            if (readmeData && serverData) {
-                queryClient.setQueryData(["supabase", "readme", serverData.id], readmeData);
-                console.log(`✅ Pre-populated README cache for server: ${serverData.name}`);
+            try {
+                // Fetch both server data and README data in parallel
+                const [fetchedServerData, fetchedReadmeData] = await Promise.all([
+                    getServerBySlug(slug),
+                    getServerReadmeBySlug(slug)
+                ]);
+                
+                serverData = fetchedServerData;
+                readmeData = fetchedReadmeData;
+                
+                if (serverData) {
+                    console.log(`✅ Server data found for slug "${slug}": ${serverData.name}`);
+                    seoData = generateServerSEO(serverData, fullUrl);
+                    
+                    // Pre-populate the React Query cache with server data
+                    queryClient.setQueryData(["server", slug], serverData);
+                    console.log(`✅ Pre-populated query cache for server: ${serverData.name}`);
+                    
+                    // Pre-populate the React Query cache with README data
+                    if (readmeData) {
+                        queryClient.setQueryData(["supabase", "readme", serverData.id], readmeData);
+                        console.log(`✅ Pre-populated README cache for server: ${serverData.name}`);
+                    } else {
+                        console.log(`⚠️ No README data found for server: ${serverData.name}`);
+                    }
+                } else {
+                    console.error(`❌ No server found for slug: ${slug}`);
+                    // Generate a not-found SEO for better error handling
+                    seoData = {
+                        title: 'Server Not Found | Magic MCP',
+                        description: 'The requested MCP server could not be found.',
+                        keywords: 'MCP, Model Context Protocol, server not found',
+                        ogTitle: 'Server Not Found | Magic MCP',
+                        ogDescription: 'The requested MCP server could not be found.',
+                        ogUrl: fullUrl,
+                        canonicalUrl: fullUrl,
+                        structuredData: {
+                            "@context": "https://schema.org",
+                            "@type": "WebPage",
+                            "name": "Server Not Found",
+                            "url": fullUrl
+                        }
+                    };
+                }
+            } catch (serverDetailError) {
+                console.error(`❌ Error fetching server detail for slug "${slug}":`, serverDetailError);
+                // Still generate basic SEO data to avoid rendering errors
+                seoData = {
+                    title: 'Error Loading Server | Magic MCP',
+                    description: 'There was an error loading the requested MCP server.',
+                    keywords: 'MCP, Model Context Protocol, server error',
+                    ogTitle: 'Error Loading Server | Magic MCP',
+                    ogDescription: 'There was an error loading the requested MCP server.',
+                    ogUrl: fullUrl,
+                    canonicalUrl: fullUrl,
+                    structuredData: {
+                        "@context": "https://schema.org",
+                        "@type": "WebPage",
+                        "name": "Server Error",
+                        "url": fullUrl
+                    }
+                };
             }
             
         } else if (routes.categoriesList) {
