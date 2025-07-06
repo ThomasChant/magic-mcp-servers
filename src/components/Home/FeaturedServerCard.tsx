@@ -37,7 +37,7 @@ const FeaturedServerCard: React.FC<FeaturedServerCardProps> = React.memo(({
                             {server.name}
                         </h3>
                         <div className="flex items-center flex-wrap gap-1 mt-1">
-                            {server.verified && (
+                            {server.official && (
                                 <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
                                     Official
                                 </span>

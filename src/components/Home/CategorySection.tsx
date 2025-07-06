@@ -81,9 +81,9 @@ const CategorySection: React.FC<CategorySectionProps> = ({
                                         </div>
                                     </div>
                                 </div>
-                                {server.verified && (
+                                {server.official && (
                                     <div className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 text-xs px-2 py-1 rounded-full">
-                                        Verified
+                                        Official
                                     </div>
                                 )}
                             </div>
