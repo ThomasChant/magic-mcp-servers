@@ -47,14 +47,18 @@ function needsSSR(url) {
 export default async function handler(req, res) {
     try {
         const url = req.url;
-        
+
         // Handle static files
-        if (url.match(/\.(js|mjs|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|json|xml|txt|webmanifest)$/)) {
+        if (
+            url.match(
+                /\.(js|mjs|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|json|xml|txt|webmanifest)$/
+            )
+        ) {
             try {
                 // Try assets directory first
                 let filePath = resolve(`dist/client/assets${url}`);
                 let fileExists = false;
-                
+
                 try {
                     await fs.access(filePath);
                     fileExists = true;
@@ -68,41 +72,71 @@ export default async function handler(req, res) {
                         fileExists = false;
                     }
                 }
-                
+
                 if (fileExists) {
                     const fileContent = await fs.readFile(filePath);
                     const mimeType = getMimeType(filePath);
-                    
-                    res.setHeader('Content-Type', mimeType);
-                    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+
+                    res.setHeader("Content-Type", mimeType);
+                    res.setHeader(
+                        "Cache-Control",
+                        "public, max-age=31536000, immutable"
+                    );
                     return res.status(200).send(fileContent);
                 }
             } catch (error) {
-                console.error('Static file error:', error);
+                console.error("Static file error:", error);
             }
-            
+
             return res.status(404).end();
         }
 
         // 🚀 Simplified SSR: Check if this route needs SSR
-        const routePath = url === '/' ? '/' : url;
+        const routePath = url === "/" ? "/" : url;
         const requiresSSR = needsSSR(routePath);
-        
-        console.log(`📡 Processing request: ${routePath}`);
-        console.log(`🎯 Needs SSR: ${requiresSSR ? 'Yes' : 'No'}`);
 
-        // Load template
+        console.log(`📡 Processing request: ${routePath}`);
+        console.log(`🎯 Needs SSR: ${requiresSSR ? "Yes" : "No"}`);
+
+        // Load template - prioritize SSR template with placeholders
         let template;
         try {
-            template = await fs.readFile(resolve("dist/client/index.html"), "utf-8");
-        } catch (e) {
+            // For SSR, we should use the template with placeholders, not the built client file
             template = await fs.readFile(resolve("index-ssr.html"), "utf-8");
+            console.log(
+                `📄 Using SSR template: index-ssr.html (${template.length} chars)`
+            );
+        } catch (e) {
+            console.log(
+                `⚠️ SSR template not found, falling back to client template`
+            );
+            try {
+                template = await fs.readFile(
+                    resolve("dist/client/index.html"),
+                    "utf-8"
+                );
+                console.log(
+                    `📄 Using client template: dist/client/index.html (${template.length} chars)`
+                );
+                // Check if this template has placeholders
+                if (
+                    !template.includes("<!--app-head-->") ||
+                    !template.includes("<!--app-html-->")
+                ) {
+                    console.warn(
+                        `⚠️ Client template missing SSR placeholders - SSR may not work correctly`
+                    );
+                }
+            } catch (e2) {
+                console.error(`❌ No template found: ${e2.message}`);
+                throw new Error("No HTML template found for SSR");
+            }
         }
 
         if (!requiresSSR) {
             // 🏃‍♂️ CSR Mode: Return basic template for client-side rendering
             console.log(`⚡ Using CSR for: ${routePath}`);
-            
+
             // Basic SEO for non-SSR pages
             const basicHead = `
     <title>Magic MCP - Model Context Protocol Server Discovery</title>
@@ -116,15 +150,18 @@ export default async function handler(req, res) {
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://magicmcp.net${routePath}" />`;
-            
+
             const finalHtml = template
                 .replace(`<!--app-head-->`, basicHead)
                 .replace(`<!--app-html-->`, '<div id="root"></div>');
-            
-            res.setHeader('Content-Type', 'text/html; charset=utf-8');
-            res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
-            res.setHeader('X-Render-Mode', 'CSR');
-            
+
+            res.setHeader("Content-Type", "text/html; charset=utf-8");
+            res.setHeader(
+                "Cache-Control",
+                "public, max-age=3600, s-maxage=3600"
+            );
+            res.setHeader("X-Render-Mode", "CSR");
+
             return res.status(200).send(finalHtml);
         }
 
@@ -133,23 +170,29 @@ export default async function handler(req, res) {
 
         // Check for prerendered static files first
         const staticFiles = {
-            '/': 'index.html',
-            '/servers': 'servers.html', 
-            '/categories': 'categories.html'
+            "/": "index.html",
+            "/servers": "servers.html",
+            "/categories": "categories.html",
         };
-        
+
         const staticFileName = staticFiles[routePath];
         if (staticFileName) {
             // Try client directory first (Vercel deployment location)
             const clientFilePath = resolve(`dist/client/${staticFileName}`);
             try {
                 await fs.access(clientFilePath);
-                const staticContent = await fs.readFile(clientFilePath, "utf-8");
-                
-                res.setHeader('Content-Type', 'text/html; charset=utf-8');
-                res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
-                res.setHeader('X-Prerendered', 'true');
-                res.setHeader('X-Prerendered-Source', 'client');
+                const staticContent = await fs.readFile(
+                    clientFilePath,
+                    "utf-8"
+                );
+
+                res.setHeader("Content-Type", "text/html; charset=utf-8");
+                res.setHeader(
+                    "Cache-Control",
+                    "public, max-age=3600, s-maxage=3600"
+                );
+                res.setHeader("X-Prerendered", "true");
+                res.setHeader("X-Prerendered-Source", "client");
                 console.log(`✅ Serving prerendered file: ${clientFilePath}`);
                 return res.status(200).send(staticContent);
             } catch {
@@ -157,40 +200,67 @@ export default async function handler(req, res) {
                 const staticFilePath = resolve(`dist/static/${staticFileName}`);
                 try {
                     await fs.access(staticFilePath);
-                    const staticContent = await fs.readFile(staticFilePath, "utf-8");
-                    
-                    res.setHeader('Content-Type', 'text/html; charset=utf-8');
-                    res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
-                    res.setHeader('X-Prerendered', 'true');
-                    res.setHeader('X-Prerendered-Source', 'static');
-                    console.log(`✅ Serving prerendered file: ${staticFilePath}`);
+                    const staticContent = await fs.readFile(
+                        staticFilePath,
+                        "utf-8"
+                    );
+
+                    res.setHeader("Content-Type", "text/html; charset=utf-8");
+                    res.setHeader(
+                        "Cache-Control",
+                        "public, max-age=3600, s-maxage=3600"
+                    );
+                    res.setHeader("X-Prerendered", "true");
+                    res.setHeader("X-Prerendered-Source", "static");
+                    console.log(
+                        `✅ Serving prerendered file: ${staticFilePath}`
+                    );
                     return res.status(200).send(staticContent);
                 } catch {
                     // No prerendered file found, proceed with dynamic SSR
-                    console.log(`⚠️ Prerendered file not found in client or static: ${staticFileName}`);
+                    console.log(
+                        `⚠️ Prerendered file not found in client or static: ${staticFileName}`
+                    );
                 }
             }
         }
 
         // Import render function from server build
         const { render } = await import("../dist/server/entry-server.js");
-        
+
         // Add detailed debug logging for dynamic routes
-        if (routePath.includes('/servers/') || routePath.includes('/categories/')) {
+        if (
+            routePath.includes("/servers/") ||
+            routePath.includes("/categories/")
+        ) {
             console.log(`🔄 Dynamic SSR rendering for: ${routePath}`);
+            console.log(
+                `🔄 About to call render function with URL: ${routePath}`
+            );
         }
-        
+
         // Render the app with the full URL path
-        const { html, seoData } = await render(routePath);
-        
+        console.log(`🎨 Calling render function for: ${routePath}`);
+        const renderResult = await render(routePath);
+        console.log(`🎨 Render result:`, {
+            hasHtml: !!renderResult.html,
+            htmlLength: renderResult.html?.length || 0,
+            hasSeoData: !!renderResult.seoData,
+            hasServerData: !!renderResult.serverData,
+            hasAdditionalData: !!renderResult.additionalData,
+        });
+
+        const { html, seoData } = renderResult;
+
         // Helper function to escape HTML
-        const escapeHtml = (text) => text
-            .replace(/&/g, '&amp;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#39;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;');
-        
+        const escapeHtml = (text) =>
+            text
+                .replace(/&/g, "&amp;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#39;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
+
         // Inject SEO data
         const dynamicHead = `
     <title>${escapeHtml(seoData.title)}</title>
@@ -199,12 +269,16 @@ export default async function handler(req, res) {
     
     <!-- Open Graph -->
     <meta property="og:title" content="${escapeHtml(seoData.ogTitle)}" />
-    <meta property="og:description" content="${escapeHtml(seoData.ogDescription)}" />
+    <meta property="og:description" content="${escapeHtml(
+        seoData.ogDescription
+    )}" />
     <meta property="og:url" content="${escapeHtml(seoData.ogUrl)}" />
     
     <!-- Twitter -->
     <meta property="twitter:title" content="${escapeHtml(seoData.ogTitle)}" />
-    <meta property="twitter:description" content="${escapeHtml(seoData.ogDescription)}" />
+    <meta property="twitter:description" content="${escapeHtml(
+        seoData.ogDescription
+    )}" />
     <meta property="twitter:url" content="${escapeHtml(seoData.ogUrl)}" />
     
     <!-- Canonical URL -->
@@ -214,29 +288,55 @@ export default async function handler(req, res) {
     <script type="application/ld+json">
     ${JSON.stringify(seoData.structuredData, null, 2)}
     </script>`;
-        
-        // Replace placeholders
+
+        // Replace placeholders with debug logging
+        console.log(
+            `🔄 Template replacement - original length: ${template.length}`
+        );
+        console.log(
+            `🔄 Template has <!--app-head-->: ${template.includes(
+                "<!--app-head-->"
+            )}`
+        );
+        console.log(
+            `🔄 Template has <!--app-html-->: ${template.includes(
+                "<!--app-html-->"
+            )}`
+        );
+        console.log(`🔄 Rendered HTML length: ${html.length}`);
+        console.log(`🔄 Dynamic head length: ${dynamicHead.length}`);
+
         const finalHtml = template
             .replace(`<!--app-head-->`, dynamicHead)
             .replace(`<!--app-html-->`, html);
-        
+
+        console.log(`🔄 Final HTML length: ${finalHtml.length}`);
+
         // Set headers based on route type
-        res.setHeader('Content-Type', 'text/html; charset=utf-8');
-        
+        res.setHeader("Content-Type", "text/html; charset=utf-8");
+
         // Dynamic caching strategy based on route
-        if (routePath.includes('/servers/') || routePath.includes('/categories/')) {
+        if (
+            routePath.includes("/servers/") ||
+            routePath.includes("/categories/")
+        ) {
             // Dynamic pages - shorter cache for real-time updates
-            res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=300'); // 5 minutes
-            res.setHeader('X-Render-Mode', 'SSR-Dynamic');
+            res.setHeader("Cache-Control", "public, max-age=300, s-maxage=300"); // 5 minutes
+            res.setHeader("X-Render-Mode", "SSR-Dynamic");
         } else {
             // Static-like pages - longer cache
-            res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600'); // 1 hour
-            res.setHeader('X-Render-Mode', 'SSR-Static');
+            res.setHeader(
+                "Cache-Control",
+                "public, max-age=3600, s-maxage=3600"
+            ); // 1 hour
+            res.setHeader("X-Render-Mode", "SSR-Static");
         }
-        
+
         res.status(200).send(finalHtml);
     } catch (e) {
         console.error("SSR Error:", e);
-        res.status(500).send(`<html><body><h1>Server Error</h1><pre>${e.stack}</pre></body></html>`);
+        res.status(500).send(
+            `<html><body><h1>Server Error</h1><pre>${e.stack}</pre></body></html>`
+        );
     }
-}
+} 
