@@ -15,7 +15,6 @@ import { useServers, useCategories } from "../hooks/useUnifiedData";
 import { useAppStore } from "../store/useAppStore";
 import { ServerCard, ServerListItem } from "../components/ServerCard";
 import { useFavoritesSync } from "../hooks/useFavoritesSync";
-import { ClientOnly } from "../components/ClientOnly";
 import type { MCPServer } from "../types";
 
 interface ServerData extends Omit<MCPServer, "verified"> {
@@ -26,26 +25,15 @@ interface ServerData extends Omit<MCPServer, "verified"> {
     };
 }
 
-interface SyncData {
-    isOnline?: boolean;
-    favoritesError?: string | null;
-    retrySync?: () => void;
-    isSignedIn?: boolean;
-}
-
-// SSR-safe Favorites component without sync functionality
-const FavoritesCore: React.FC<{ syncData?: SyncData }> = ({ syncData }) => {
+// Pure CSR Favorites component
+const Favorites: React.FC = () => {
     const { data: servers, isLoading, error } = useServers();
     const { data: categories } = useCategories();
     const { favorites, favoriteViewMode, setFavoriteViewMode } = useAppStore();
 
-    // Use provided sync data or default values
-    const {
-        isOnline = false,
-        favoritesError = null,
-        retrySync = () => {},
-        isSignedIn = false,
-    } = syncData || {};
+    // Get sync data for cloud sync functionality
+    const { isOnline, favoritesError, retrySync, isSignedIn } =
+        useFavoritesSync();
 
     // Filter state
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -192,43 +180,32 @@ const FavoritesCore: React.FC<{ syncData?: SyncData }> = ({ syncData }) => {
                             </div>
 
                             {/* Sync Status */}
-                            {syncData && (
-                                <div className="flex items-center gap-3">
-                                    {favoritesError ? (
-                                        <div className="flex items-center gap-2 text-red-600 dark:text-red-400 text-sm">
-                                            <AlertCircle className="h-4 w-4" />
-                                            <span>Sync failed</span>
-                                            <button
-                                                onClick={retrySync}
-                                                className="flex items-center gap-1 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 underline"
-                                            >
-                                                <RefreshCw className="h-3 w-3" />
-                                                Retry
-                                            </button>
-                                        </div>
-                                    ) : (
-                                        <div
-                                            className={`flex items-center gap-2 text-sm ${
-                                                isOnline
-                                                    ? "text-green-600 dark:text-green-400"
-                                                    : "text-amber-600 dark:text-amber-400"
-                                            }`}
+                            <div className="flex items-center gap-3">
+                                {favoritesError ? (
+                                    <div className="flex items-center gap-2 text-red-600 dark:text-red-400 text-sm">
+                                        <AlertCircle className="h-4 w-4" />
+                                        <span>Sync failed</span>
+                                        <button
+                                            onClick={retrySync}
+                                            className="flex items-center gap-1 px-2 py-1 text-xs bg-red-100 dark:bg-red-900 rounded hover:bg-red-200 dark:hover:bg-red-800"
                                         >
-                                            {isOnline ? (
-                                                <>
-                                                    <Cloud className="h-4 w-4" />
-                                                    <span>Synced</span>
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <CloudOff className="h-4 w-4" />
-                                                    <span>Local only</span>
-                                                </>
-                                            )}
-                                        </div>
-                                    )}
-                                </div>
-                            )}
+                                            <RefreshCw className="h-3 w-3" />
+                                            Retry
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                                        {isOnline ? (
+                                            <Cloud className="h-4 w-4 text-green-600 dark:text-green-400" />
+                                        ) : (
+                                            <CloudOff className="h-4 w-4 text-gray-400" />
+                                        )}
+                                        <span>
+                                            {isOnline ? "Synced" : "Local only"}
+                                        </span>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
 
@@ -412,21 +389,6 @@ const FavoritesCore: React.FC<{ syncData?: SyncData }> = ({ syncData }) => {
                 </div>
             </div>
         </div>
-    );
-};
-
-// Client-side wrapper with sync functionality
-const FavoritesWithSync: React.FC = () => {
-    const syncData = useFavoritesSync();
-    return <FavoritesCore syncData={syncData} />;
-};
-
-// Main Favorites component that works in both SSR and client environments
-const Favorites: React.FC = () => {
-    return (
-        <ClientOnly fallback={<FavoritesCore />}>
-            <FavoritesWithSync />
-        </ClientOnly>
     );
 };
 
