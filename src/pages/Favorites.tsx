@@ -15,32 +15,47 @@ import { useServers, useCategories } from "../hooks/useUnifiedData";
 import { useAppStore } from "../store/useAppStore";
 import { ServerCard, ServerListItem } from "../components/ServerCard";
 import { useFavoritesSync } from "../hooks/useFavoritesSync";
+import { ClientOnly } from "../components/ClientOnly";
 import type { MCPServer } from "../types";
 
-interface ServerData extends Omit<MCPServer, 'verified'> {
+interface ServerData extends Omit<MCPServer, "verified"> {
     official?: boolean;
     descriptionEn?: string;
-    repository: MCPServer['repository'] & {
+    repository: MCPServer["repository"] & {
         lastUpdate?: string;
     };
 }
 
-const Favorites: React.FC = () => {
+interface SyncData {
+    isOnline?: boolean;
+    favoritesError?: string | null;
+    retrySync?: () => void;
+    isSignedIn?: boolean;
+}
+
+// SSR-safe Favorites component without sync functionality
+const FavoritesCore: React.FC<{ syncData?: SyncData }> = ({ syncData }) => {
     const { data: servers, isLoading, error } = useServers();
     const { data: categories } = useCategories();
     const { favorites, favoriteViewMode, setFavoriteViewMode } = useAppStore();
-    const syncData = useFavoritesSync();
-    const { isOnline, favoritesError, retrySync, isSignedIn } = syncData;
-    
+
+    // Use provided sync data or default values
+    const {
+        isOnline = false,
+        favoritesError = null,
+        retrySync = () => {},
+        isSignedIn = false,
+    } = syncData || {};
+
     // Filter state
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
     // 使用ref跟踪favorites的实际内容，避免Set对象引用变化导致的重渲染
-    const favoritesContentRef = useRef<string>('');
+    const favoritesContentRef = useRef<string>("");
     const stableFavoritesRef = useRef<Set<string>>(new Set());
-    
+
     // 只在favorites内容实际变化时更新
-    const currentContent = Array.from(favorites).sort().join(',');
+    const currentContent = Array.from(favorites).sort().join(",");
     if (currentContent !== favoritesContentRef.current) {
         favoritesContentRef.current = currentContent;
         stableFavoritesRef.current = new Set(favorites);
@@ -48,23 +63,27 @@ const Favorites: React.FC = () => {
 
     const favoriteServers = useMemo(() => {
         if (!servers) return [];
-        let filtered = servers.filter((server) => stableFavoritesRef.current.has(server.id));
-        
+        let filtered = servers.filter((server) =>
+            stableFavoritesRef.current.has(server.id)
+        );
+
         // Apply category filter
         if (selectedCategories.length > 0) {
-            filtered = filtered.filter((server) => selectedCategories.includes(server.category));
+            filtered = filtered.filter((server) =>
+                selectedCategories.includes(server.category)
+            );
         }
-        
+
         return filtered;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [servers, currentContent, selectedCategories]);
-    
+
     // Count servers per category from favorites
     const categoryCounts = useMemo(() => {
         if (!servers || !categories) return {};
-        
+
         const counts: Record<string, number> = {};
-        servers.forEach(server => {
+        servers.forEach((server) => {
             if (stableFavoritesRef.current.has(server.id)) {
                 counts[server.category] = (counts[server.category] || 0) + 1;
             }
@@ -115,11 +134,17 @@ const Favorites: React.FC = () => {
         return (
             <div className="bg-gray-50 dark:bg-gray-900 min-h-screen flex items-center justify-center">
                 <div className="text-center">
-                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Error loading favorites</h1>
-                    <p className="text-gray-600 dark:text-gray-400 mb-4">Failed to load server data. Please try again later.</p>
-                    <div className="text-red-500 mb-4">Error: {String(error)}</div>
-                    <button 
-                        onClick={() => window.location.reload()} 
+                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                        Error loading favorites
+                    </h1>
+                    <p className="text-gray-600 dark:text-gray-400 mb-4">
+                        Failed to load server data. Please try again later.
+                    </p>
+                    <div className="text-red-500 mb-4">
+                        Error: {String(error)}
+                    </div>
+                    <button
+                        onClick={() => window.location.reload()}
                         className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
                     >
                         Retry
@@ -137,11 +162,13 @@ const Favorites: React.FC = () => {
                         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-0">
                             My Favorites
                         </h1>
-                        
+
                         <div className="flex items-center gap-4">
                             {/* View Toggle */}
                             <div className="flex items-center space-x-2">
-                                <span className="text-sm text-gray-600 dark:text-gray-400">View:</span>
+                                <span className="text-sm text-gray-600 dark:text-gray-400">
+                                    View:
+                                </span>
                                 <button
                                     onClick={() => setFavoriteViewMode("grid")}
                                     className={`p-2 rounded-md ${
@@ -163,9 +190,9 @@ const Favorites: React.FC = () => {
                                     <List className="h-4 w-4" />
                                 </button>
                             </div>
-                            
+
                             {/* Sync Status */}
-                            {isSignedIn && (
+                            {syncData && (
                                 <div className="flex items-center gap-3">
                                     {favoritesError ? (
                                         <div className="flex items-center gap-2 text-red-600 dark:text-red-400 text-sm">
@@ -180,11 +207,13 @@ const Favorites: React.FC = () => {
                                             </button>
                                         </div>
                                     ) : (
-                                        <div className={`flex items-center gap-2 text-sm ${
-                                            isOnline 
-                                                ? "text-green-600 dark:text-green-400" 
-                                                : "text-amber-600 dark:text-amber-400"
-                                        }`}>
+                                        <div
+                                            className={`flex items-center gap-2 text-sm ${
+                                                isOnline
+                                                    ? "text-green-600 dark:text-green-400"
+                                                    : "text-amber-600 dark:text-amber-400"
+                                            }`}
+                                        >
                                             {isOnline ? (
                                                 <>
                                                     <Cloud className="h-4 w-4" />
@@ -202,19 +231,24 @@ const Favorites: React.FC = () => {
                             )}
                         </div>
                     </div>
-                    
+
                     <p className="text-lg text-gray-600 dark:text-gray-300">
                         Your saved MCP servers for quick access
                         <span className="block text-sm mt-1">
                             {selectedCategories.length > 0 ? (
                                 <>
-                                    Showing {favoriteServers.length} of{' '}
-                                    {servers?.filter(s => stableFavoritesRef.current.has(s.id)).length || 0}{' '}
-                                    favorite server{favoriteServers.length !== 1 ? 's' : ''}
+                                    Showing {favoriteServers.length} of{" "}
+                                    {servers?.filter((s) =>
+                                        stableFavoritesRef.current.has(s.id)
+                                    ).length || 0}{" "}
+                                    favorite server
+                                    {favoriteServers.length !== 1 ? "s" : ""}
                                 </>
                             ) : (
                                 <>
-                                    {favoriteServers.length} server{favoriteServers.length !== 1 ? 's' : ''} in your favorites
+                                    {favoriteServers.length} server
+                                    {favoriteServers.length !== 1 ? "s" : ""} in
+                                    your favorites
                                 </>
                             )}
                             {!isSignedIn && (
@@ -238,7 +272,9 @@ const Favorites: React.FC = () => {
                                     </h3>
                                     {selectedCategories.length > 0 && (
                                         <button
-                                            onClick={() => setSelectedCategories([])}
+                                            onClick={() =>
+                                                setSelectedCategories([])
+                                            }
                                             className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
                                         >
                                             Clear
@@ -248,19 +284,36 @@ const Favorites: React.FC = () => {
 
                                 <div className="space-y-2">
                                     {categories.map((category) => {
-                                        const categoryCount = categoryCounts[category.id] || 0;
+                                        const categoryCount =
+                                            categoryCounts[category.id] || 0;
                                         if (categoryCount === 0) return null;
 
                                         return (
-                                            <label key={category.id} className="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 rounded px-2 py-1.5 transition-colors">
+                                            <label
+                                                key={category.id}
+                                                className="flex items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 rounded px-2 py-1.5 transition-colors"
+                                            >
                                                 <input
                                                     type="checkbox"
-                                                    checked={selectedCategories.includes(category.id)}
+                                                    checked={selectedCategories.includes(
+                                                        category.id
+                                                    )}
                                                     onChange={(e) => {
                                                         if (e.target.checked) {
-                                                            setSelectedCategories([...selectedCategories, category.id]);
+                                                            setSelectedCategories(
+                                                                [
+                                                                    ...selectedCategories,
+                                                                    category.id,
+                                                                ]
+                                                            );
                                                         } else {
-                                                            setSelectedCategories(selectedCategories.filter(c => c !== category.id));
+                                                            setSelectedCategories(
+                                                                selectedCategories.filter(
+                                                                    (c) =>
+                                                                        c !==
+                                                                        category.id
+                                                                )
+                                                            );
                                                         }
                                                     }}
                                                     className="rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-blue-600 focus:ring-blue-500 mr-3"
@@ -280,69 +333,100 @@ const Favorites: React.FC = () => {
                     )}
 
                     {/* Main content */}
-                    <div className={categories && categories.length > 0 ? "lg:flex-1" : "w-full"}>
+                    <div
+                        className={
+                            categories && categories.length > 0
+                                ? "lg:flex-1"
+                                : "w-full"
+                        }
+                    >
                         {favoriteServers.length > 0 ? (
                             favoriteViewMode === "grid" ? (
-                                <div className={`grid grid-cols-1 gap-6 ${
-                                    categories && categories.length > 0 
-                                        ? "lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3" 
-                                        : "md:grid-cols-2 xl:grid-cols-3"
-                                }`}>
+                                <div
+                                    className={`grid grid-cols-1 gap-6 ${
+                                        categories && categories.length > 0
+                                            ? "lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3"
+                                            : "md:grid-cols-2 xl:grid-cols-3"
+                                    }`}
+                                >
                                     {favoriteServers.map((server) => (
-                                        <ServerCard key={server.slug} server={server as ServerData} />
+                                        <ServerCard
+                                            key={server.slug}
+                                            server={server as ServerData}
+                                        />
                                     ))}
                                 </div>
                             ) : (
                                 <div className="space-y-2">
                                     {favoriteServers.map((server) => (
-                                        <ServerListItem key={server.slug} server={server as ServerData} />
+                                        <ServerListItem
+                                            key={server.slug}
+                                            server={server as ServerData}
+                                        />
                                     ))}
                                 </div>
                             )
+                        ) : selectedCategories.length > 0 ? (
+                            <div className="text-center py-12">
+                                <div className="max-w-md mx-auto">
+                                    <Filter className="h-12 w-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
+                                    <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                                        No favorites in selected categories
+                                    </h3>
+                                    <p className="text-gray-600 dark:text-gray-400 mb-6">
+                                        Try selecting different categories or
+                                        clear the filter
+                                    </p>
+                                    <button
+                                        onClick={() =>
+                                            setSelectedCategories([])
+                                        }
+                                        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                    >
+                                        Clear Filter
+                                    </button>
+                                </div>
+                            </div>
                         ) : (
-                            selectedCategories.length > 0 ? (
-                                <div className="text-center py-12">
-                                    <div className="max-w-md mx-auto">
-                                        <Filter className="h-12 w-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
-                                        <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                                            No favorites in selected categories
-                                        </h3>
-                                        <p className="text-gray-600 dark:text-gray-400 mb-6">
-                                            Try selecting different categories or clear the filter
-                                        </p>
-                                        <button
-                                            onClick={() => setSelectedCategories([])}
-                                            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                                        >
-                                            Clear Filter
-                                        </button>
-                                    </div>
+                            <div className="text-center py-12">
+                                <div className="max-w-md mx-auto">
+                                    <Heart className="h-12 w-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
+                                    <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                                        No favorites yet
+                                    </h3>
+                                    <p className="text-gray-600 dark:text-gray-400 mb-6">
+                                        Start exploring MCP servers and save
+                                        your favorites for quick access
+                                    </p>
+                                    <Link
+                                        to="/servers"
+                                        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                    >
+                                        Browse Servers
+                                        <ArrowRight className="ml-2 h-4 w-4" />
+                                    </Link>
                                 </div>
-                            ) : (
-                                <div className="text-center py-12">
-                                    <div className="max-w-md mx-auto">
-                                        <Heart className="h-12 w-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
-                                        <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                                            No favorites yet
-                                        </h3>
-                                        <p className="text-gray-600 dark:text-gray-400 mb-6">
-                                            Start exploring MCP servers and save your favorites for quick access
-                                        </p>
-                                        <Link
-                                            to="/servers"
-                                            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                                        >
-                                            Browse Servers
-                                            <ArrowRight className="ml-2 h-4 w-4" />
-                                        </Link>
-                                    </div>
-                                </div>
-                            )
+                            </div>
                         )}
                     </div>
                 </div>
             </div>
         </div>
+    );
+};
+
+// Client-side wrapper with sync functionality
+const FavoritesWithSync: React.FC = () => {
+    const syncData = useFavoritesSync();
+    return <FavoritesCore syncData={syncData} />;
+};
+
+// Main Favorites component that works in both SSR and client environments
+const Favorites: React.FC = () => {
+    return (
+        <ClientOnly fallback={<FavoritesCore />}>
+            <FavoritesWithSync />
+        </ClientOnly>
     );
 };
 

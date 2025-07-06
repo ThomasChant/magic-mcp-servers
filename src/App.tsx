@@ -14,7 +14,6 @@ import CategoryDetailPage from "./pages/CategoryDetail";
 import DocsPage from "./pages/Docs";
 import ProfilePage from "./pages/Profile";
 import FavoritesPage from "./pages/Favorites";
-import FavoritesPageSSR from "./pages/FavoritesSSR";
 import TagDetailPage from "./pages/TagDetail";
 import TagsPage from "./pages/Tags";
 import { useAppStore } from "./store/useAppStore";
@@ -77,12 +76,9 @@ function AppContentSSR() {
                         element={<CategoryDetailPage />}
                     />
                     <Route path="tags" element={<TagsPage />} />
-                    <Route
-                        path="tags/:tag"
-                        element={<TagDetailPage />}
-                    />
+                    <Route path="tags/:tag" element={<TagDetailPage />} />
                     <Route path="docs" element={<DocsPage />} />
-                    <Route path="favorites" element={<FavoritesPageSSR />} />
+                    <Route path="favorites" element={<FavoritesPage />} />
                     <Route path="*" element={<NotFoundPage />} />
                 </Route>
             </Routes>
