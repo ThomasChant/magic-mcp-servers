@@ -41,6 +41,7 @@ import ServerTooltip from "../components/ServerTooltip";
 import InstallationTab from "../components/InstallationTab";
 import APIReferenceTab from "../components/APIReferenceTab";
 import { ClientOnly } from "../components/ClientOnly";
+import { BatchScoreProvider } from "../components/BatchScoreProvider";
 const ServerDetail: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();
     const { data: server, isLoading, error } = useServer(slug!);
@@ -395,12 +396,14 @@ const ServerDetail: React.FC = () => {
                                 </p>
                                 <div className="flex items-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
                                     <ClientOnly>
-                                        <VoteButtons
-                                            serverId={server.id}
-                                            size="md"
-                                            showScore={true}
-                                            className="flex items-center"
-                                        />
+                                        <BatchScoreProvider serverIds={[server.id]}>
+                                            <VoteButtons
+                                                serverId={server.id}
+                                                size="md"
+                                                showScore={true}
+                                                className="flex items-center"
+                                            />
+                                        </BatchScoreProvider>
                                     </ClientOnly>
                                     <div className="flex items-center">
                                         <Star className="h-4 w-4 text-yellow-500 mr-1" />

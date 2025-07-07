@@ -39,12 +39,12 @@ const VoteButtons: React.FC<VoteButtonsProps> = ({
     const { openSignIn } = isClient ? useClerk() : { openSignIn: () => {} };
     
     // Try to get score from batch provider first, fallback to individual query
-    const batchScore = useBatchScore(serverId);
-    // Only fetch individual score if not provided by batch
-    const shouldFetchIndividual = !batchScore;
+    const { score: batchScore, isLoading: batchLoading, hasBatchProvider } = useBatchScore(serverId);
+    // Only fetch individual score if no batch provider exists
+    const shouldFetchIndividual = !hasBatchProvider;
     const { data: individualScore, isLoading: individualScoreLoading } = useServerScore(serverId, shouldFetchIndividual);
     const serverScore = batchScore || individualScore;
-    const scoreLoading = !batchScore && individualScoreLoading;
+    const scoreLoading = hasBatchProvider ? batchLoading : individualScoreLoading;
     
     // Get user vote status
     const { data: userVote, isLoading: voteLoading } = useUserVote(serverId);
@@ -205,7 +205,10 @@ export const CompactVoteButtons: React.FC<Omit<VoteButtonsProps, 'size'>> = (pro
 export const DetailedVoteButtons: React.FC<VoteButtonsProps & { 
     showDetails?: boolean;
 }> = ({ showDetails = false, ...props }) => {
-    const { data: serverScore } = useServerScore(props.serverId);
+    // Use batch score hook to be consistent
+    const { score: batchScore, hasBatchProvider } = useBatchScore(props.serverId);
+    const { data: individualScore } = useServerScore(props.serverId, !hasBatchProvider);
+    const serverScore = batchScore || individualScore;
     
     if (!showDetails) {
         return <VoteButtons {...props} />;
