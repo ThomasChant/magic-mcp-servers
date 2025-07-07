@@ -7,7 +7,7 @@
         "dev": "node server.js",
         "dev:spa": "vite",
         "build": "npm run build:client && npm run build:server",
-        "build:vercel": "npm run build:client && npm run build:server && npm run sitemap:build && mv dist/client/index.html dist/client/client-fallback.html && cp favicon.ico dist/client/",
+        "build:vercel": "npm run build:client && npm run build:server && npm run sitemap:build && mv dist/client/index.html dist/client/client-fallback.html && cp favicon.ico dist/client/ && cp bingkey.txt dist/client/",
         "build:client": "vite build --outDir dist/client && cp index-ssr.html dist/client/",
         "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",
         "serve": "NODE_ENV=production node server-simple.js",
