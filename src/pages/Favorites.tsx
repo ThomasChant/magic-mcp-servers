@@ -15,6 +15,7 @@ import { useServers, useCategories } from "../hooks/useUnifiedData";
 import { useAppStore } from "../store/useAppStore";
 import { ServerCard, ServerListItem } from "../components/ServerCard";
 import { useFavoritesSync } from "../hooks/useFavoritesSync";
+import { BatchScoreProvider } from "../components/BatchScoreProvider";
 import type { MCPServer } from "../types";
 
 interface ServerData extends Omit<MCPServer, "verified"> {
@@ -65,6 +66,9 @@ const Favorites: React.FC = () => {
         return filtered;
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [servers, currentContent, selectedCategories]);
+    
+    // Extract server IDs for batch score fetching
+    const favoriteServerIds = useMemo(() => favoriteServers.map(server => server.id), [favoriteServers]);
 
     // Count servers per category from favorites
     const categoryCounts = useMemo(() => {
@@ -318,31 +322,33 @@ const Favorites: React.FC = () => {
                         }
                     >
                         {favoriteServers.length > 0 ? (
-                            favoriteViewMode === "grid" ? (
-                                <div
-                                    className={`grid grid-cols-1 gap-6 ${
-                                        categories && categories.length > 0
-                                            ? "lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3"
-                                            : "md:grid-cols-2 xl:grid-cols-3"
-                                    }`}
-                                >
-                                    {favoriteServers.map((server) => (
-                                        <ServerCard
-                                            key={server.slug}
-                                            server={server as ServerData}
-                                        />
-                                    ))}
-                                </div>
-                            ) : (
-                                <div className="space-y-2">
-                                    {favoriteServers.map((server) => (
-                                        <ServerListItem
-                                            key={server.slug}
-                                            server={server as ServerData}
-                                        />
-                                    ))}
-                                </div>
-                            )
+                            <BatchScoreProvider serverIds={favoriteServerIds}>
+                                {favoriteViewMode === "grid" ? (
+                                    <div
+                                        className={`grid grid-cols-1 gap-6 ${
+                                            categories && categories.length > 0
+                                                ? "lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3"
+                                                : "md:grid-cols-2 xl:grid-cols-3"
+                                        }`}
+                                    >
+                                        {favoriteServers.map((server) => (
+                                            <ServerCard
+                                                key={server.slug}
+                                                server={server as ServerData}
+                                            />
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className="space-y-2">
+                                        {favoriteServers.map((server) => (
+                                            <ServerListItem
+                                                key={server.slug}
+                                                server={server as ServerData}
+                                            />
+                                        ))}
+                                    </div>
+                                )}
+                            </BatchScoreProvider>
                         ) : selectedCategories.length > 0 ? (
                             <div className="text-center py-12">
                                 <div className="max-w-md mx-auto">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ServerCard, ServerListItem } from "../components/ServerCard";
 import {
@@ -11,6 +11,7 @@ import {
     Tag,
 } from "lucide-react";
 import { useSearchServersPaginated } from "../hooks/useUnifiedData";
+import { BatchScoreProvider } from "../components/BatchScoreProvider";
 import type { SortOption } from "../types";
 const TagDetail: React.FC = () => {
     const { tag } = useParams<{ tag: string }>();
@@ -41,6 +42,9 @@ const TagDetail: React.FC = () => {
     const totalServers = paginatedResult?.total || 0;
     const hasNextPage = paginatedResult?.hasNextPage || false;
     const hasPrevPage = currentPage > 1;
+    
+    // Extract server IDs for batch score fetching
+    const serverIds = useMemo(() => servers.map(server => server.id), [servers]);
 
     return (
         <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
@@ -174,19 +178,21 @@ const TagDetail: React.FC = () => {
                         </div>
 
                         {/* Servers Grid/List */}
-                        {viewMode === "grid" ? (
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
-                                {servers.map((server) => (
-                                    <ServerCard key={server.id} server={server} />
-                                ))}
-                            </div>
-                        ) : (
-                            <div className="space-y-4 mb-8">
-                                {servers.map((server) => (
-                                    <ServerListItem key={server.id} server={server} />
-                                ))}
-                            </div>
-                        )}
+                        <BatchScoreProvider serverIds={serverIds}>
+                            {viewMode === "grid" ? (
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+                                    {servers.map((server) => (
+                                        <ServerCard key={server.id} server={server} />
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="space-y-4 mb-8">
+                                    {servers.map((server) => (
+                                        <ServerListItem key={server.id} server={server} />
+                                    ))}
+                                </div>
+                            )}
+                        </BatchScoreProvider>
 
                         {/* Pagination */}
                         {(hasPrevPage || hasNextPage) && (
