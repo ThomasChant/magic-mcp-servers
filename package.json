@@ -14,7 +14,10 @@
         "serve": "NODE_ENV=production node server-simple.js",
         "serve-simple": "NODE_ENV=production node server-simple.js",
         "serve-local": "node serve-local.js",
-        "lint": "eslint ."
+        "lint": "eslint .",
+        "sitemap:generate": "node scripts/generate-complete-sitemap.js",
+        "sitemap:deploy": "node scripts/deploy-sitemaps.js",
+        "sitemap:build": "npm run sitemap:generate && npm run sitemap:deploy"
     },
     "dependencies": {
         "@clerk/clerk-react": "^5.32.2",
