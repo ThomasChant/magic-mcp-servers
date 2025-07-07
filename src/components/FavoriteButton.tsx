@@ -1,7 +1,7 @@
 import { Heart, Loader2, Cloud, CloudOff, AlertCircle } from "lucide-react";
 import { useAppStore } from "../store/useAppStore";
 import { useSupabaseFavoritesService } from "../services/supabase-favorites";
-import { useFavoritesSync } from "../hooks/useFavoritesSync";
+import { useFavoritesSyncSafe } from "../hooks/useFavoritesSyncSafe";
 
 interface FavoriteButtonProps {
     serverId: string;
@@ -25,7 +25,7 @@ export function FavoriteButton({
         isFavorite 
     } = useAppStore();
     const favoritesService = useSupabaseFavoritesService();
-    const { isOnline, retrySync } = useFavoritesSync();
+    const { isOnline, retrySync } = useFavoritesSyncSafe();
     
     const isFavorited = isFavorite(serverId);
     const isCurrentlyLoading = favoritesLoading;

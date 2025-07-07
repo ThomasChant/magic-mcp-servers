@@ -17,7 +17,7 @@ import FavoritesPage from "./pages/Favorites";
 import TagDetailPage from "./pages/TagDetail";
 import TagsPage from "./pages/Tags";
 import { useAppStore } from "./store/useAppStore";
-import { useFavoritesSync } from "./hooks/useFavoritesSync";
+import { useFavoritesSyncWithClerk } from "./hooks/useFavoritesSyncSafe";
 import { isClientSide } from "./utils/environment";
 
 // Get Clerk publishable key - only on client side
@@ -91,7 +91,7 @@ function AppContentWithClerk() {
     const theme = useAppStore((state) => state.theme);
     
     // Initialize favorites sync (需要Clerk Provider)
-    useFavoritesSync();
+    useFavoritesSyncWithClerk();
 
     useEffect(() => {
         if (theme === 'dark') {

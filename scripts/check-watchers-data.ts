@@ -41,7 +41,7 @@ async function checkWatchersData() {
     console.log('-----|-------|----------|-------|---------------');
 
     let starsEqualsWatchers = 0;
-    let totalServers = servers.length;
+    const totalServers = servers.length;
 
     for (const server of servers) {
       const name = server.name.length > 20 ? server.name.substring(0, 17) + '...' : server.name;
