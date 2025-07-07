@@ -4,14 +4,35 @@ import { useAppStore } from "../store/useAppStore";
 import { useSupabaseFavoritesService } from "../services/supabase-favorites";
 
 /**
+ * Safe wrapper for useUser that handles cases where ClerkProvider is not available
+ */
+function useSafeUser() {
+    const isClient = typeof window !== 'undefined';
+    
+    try {
+        const userResult = useUser();
+        return {
+            isSignedIn: isClient ? userResult.isSignedIn : false,
+            hasClerkProvider: true
+        };
+    } catch {
+        // ClerkProvider not available, return safe defaults
+        return {
+            isSignedIn: false,
+            hasClerkProvider: false
+        };
+    }
+}
+
+/**
  * @hook useFavoritesSync
  * @description 处理收藏功能的同步逻辑，包括登录状态变化时的数据迁移和自动同步
- * 注意：此 hook 只能在 ClerkProvider 内部使用
+ * 注意：此 hook 可以在有或没有 ClerkProvider 的环境中安全使用
  */
 export function useFavoritesSync() {
     // Check if we're in a client environment to avoid SSR issues
     const isClient = typeof window !== 'undefined';
-    const userResult = useUser();
+    const userResult = useSafeUser();
     const isSignedIn = isClient ? userResult.isSignedIn : false;
     const favoritesService = useSupabaseFavoritesService();
     const { 
@@ -20,6 +41,10 @@ export function useFavoritesSync() {
         favoritesLoading,
         favoritesError
     } = useAppStore();
+
+    // Only use sync functionality if ClerkProvider is available
+    const hasClerkProvider = userResult.hasClerkProvider;
+    const syncEnabled = hasClerkProvider && isClient;
 
     // 使用ref存储favoritesService，避免依赖数组问题
     const favoritesServiceRef = useRef(favoritesService);
@@ -34,16 +59,20 @@ export function useFavoritesSync() {
      * 监听isOnline状态变化，重置同步标志
      */
     useEffect(() => {
+        if (!syncEnabled) return;
+        
         if (!isOnline) {
             hasSyncedOnSignIn.current = false;
             hasHandledSignOut.current = false;
         }
-    }, [isOnline]);
+    }, [isOnline, syncEnabled]);
 
     /**
      * 监听用户登录状态变化
      */
     useEffect(() => {
+        if (!syncEnabled) return;
+        
         // 只在登录状态实际发生变化时才执行
         const wasSignedIn = previousIsSignedIn.current;
         previousIsSignedIn.current = isSignedIn;
@@ -82,13 +111,13 @@ export function useFavoritesSync() {
                 favoritesLoading: false
             });
         }
-    }, [isSignedIn]);
+    }, [isSignedIn, syncEnabled]);
 
     /**
      * 定期同步（仅在用户登录时）
      */
     useEffect(() => {
-        if (!isSignedIn) {
+        if (!syncEnabled || !isSignedIn) {
             return;
         }
 
@@ -105,12 +134,14 @@ export function useFavoritesSync() {
         }, 5 * 60 * 1000); // 5分钟
 
         return () => clearInterval(syncInterval);
-    }, [isSignedIn]);
+    }, [isSignedIn, syncEnabled]);
 
     /**
      * 网络状态监听（用于网络恢复后自动重试）
      */
     useEffect(() => {
+        if (!syncEnabled) return;
+        
         const handleOnline = async () => {
             const service = favoritesServiceRef.current;
             if (isSignedIn && service && !isOnline) {
@@ -123,14 +154,18 @@ export function useFavoritesSync() {
             }
         };
 
-        window.addEventListener('online', handleOnline);
-        return () => window.removeEventListener('online', handleOnline);
-    }, [isSignedIn, isOnline]);
+        if (isClient) {
+            window.addEventListener('online', handleOnline);
+            return () => window.removeEventListener('online', handleOnline);
+        }
+    }, [isSignedIn, isOnline, syncEnabled, isClient]);
 
     /**
      * 手动重试同步
      */
     const retrySync = useCallback(async () => {
+        if (!syncEnabled) return;
+        
         const service = favoritesServiceRef.current;
         if (service) {
             useAppStore.getState().clearFavoritesError();
@@ -140,12 +175,14 @@ export function useFavoritesSync() {
                 console.error("Retry sync failed:", error);
             }
         }
-    }, []);
+    }, [syncEnabled]);
 
     /**
      * 强制同步（用于解决冲突）
      */
     const forceSync = useCallback(async () => {
+        if (!syncEnabled) return;
+        
         const service = favoritesServiceRef.current;
         if (service) {
             useAppStore.getState().clearFavoritesError();
@@ -166,17 +203,18 @@ export function useFavoritesSync() {
                 });
             }
         }
-    }, []);
+    }, [syncEnabled]);
 
     return useMemo(() => ({
-        isOnline,
-        lastSynced,
-        favoritesLoading,
-        favoritesError,
+        isOnline: syncEnabled ? isOnline : false,
+        lastSynced: syncEnabled ? lastSynced : null,
+        favoritesLoading: syncEnabled ? favoritesLoading : false,
+        favoritesError: syncEnabled ? favoritesError : null,
         retrySync,
         forceSync,
-        isSignedIn,
-        hasService: !!favoritesServiceRef.current
+        isSignedIn: syncEnabled ? isSignedIn : false,
+        hasService: syncEnabled ? !!favoritesServiceRef.current : false,
+        syncEnabled
     }), [
         isOnline,
         lastSynced,
@@ -184,6 +222,7 @@ export function useFavoritesSync() {
         favoritesError,
         retrySync,
         forceSync,
-        isSignedIn
+        isSignedIn,
+        syncEnabled
     ]);
 }
