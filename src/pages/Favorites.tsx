@@ -81,7 +81,7 @@ const Favorites: React.FC = () => {
             }
         });
         return counts;
-    }, [servers, categories]);
+    }, [servers, categories, currentContent]);
 
     if (isLoading) {
         return (
