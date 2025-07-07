@@ -24,6 +24,7 @@ Implemented a `BatchScoreProvider` component that:
 1. **VoteButtons** (`src/components/VoteButtons.tsx`)
    - Now checks for batch-provided score first
    - Falls back to individual query if not in batch context
+   - Fixed logic to prevent unnecessary individual queries
 
 2. **Servers Page** (`src/pages/Servers.tsx`)
    - Wraps server list with `BatchScoreProvider`
@@ -31,6 +32,18 @@ Implemented a `BatchScoreProvider` component that:
 
 3. **CategoryDetail Page** (`src/pages/CategoryDetail.tsx`)
    - Same optimization as Servers page
+
+4. **Favorites Page** (`src/pages/Favorites.tsx`)
+   - Added BatchScoreProvider for favorite servers
+   - Optimizes score queries for user's saved servers
+
+5. **TagDetail Page** (`src/pages/TagDetail.tsx`)
+   - Added BatchScoreProvider for tag-filtered servers
+   - Reduces queries when browsing servers by tag
+
+6. **ServerDetail Page** (`src/pages/ServerDetail.tsx`)
+   - Added BatchScoreProvider for single server vote button
+   - Ensures consistency across all pages
 
 ## Performance Impact
 - **Before**: 36 API calls per page (one per server)
