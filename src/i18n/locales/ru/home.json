@@ -1,15 +1,15 @@
 {
     "hero": {
-        "title": "Discover the Best",
-        "titleHighlight": "MCP Servers",
-        "subtitle": "Your gateway to enhanced AI capabilities. Explore, integrate, and supercharge your applications with Model Context Protocol servers.",
-        "searchPlaceholder": "Search for MCP servers, categories, or features...",
-        "searchButton": "Search",
+        "title": "Откройте для себя Лучшие",
+        "titleHighlight": "MCP Серверы",
+        "subtitle": "Ваш путь к расширенным возможностям ИИ. Исследуйте, интегрируйте и усиливайте ваши приложения с серверами Model Context Protocol.",
+        "searchPlaceholder": "Поиск MCP серверов, категорий или функций...",
+        "searchButton": "Поиск",
         "stats": {
-            "servers": "MCP Servers",
-            "categories": "Categories",
-            "averageStars": "Average Stars",
-            "activeThisMonth": "Active This Month"
+            "servers": "MCP Серверы",
+            "categories": "Категории",
+            "averageStars": "Средний Рейтинг",
+            "activeThisMonth": "Активные в этом месяце"
         }
     },
     "search": {
