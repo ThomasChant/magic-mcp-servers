@@ -1,0 +1,118 @@
+{
+    "title": "Documentation",
+    "subtitle": "Apprenez à connaître les serveurs MCP et leur utilisation",
+    "sections": {
+        "gettingStarted": {
+            "title": "Commencer",
+            "subtitle": "Apprenez les bases des serveurs MCP",
+            "introduction": "Introduction à MCP",
+            "installation": "Guide d'installation",
+            "quickStart": "Démarrage rapide",
+            "firstServer": "Votre premier serveur",
+            "basicConcepts": "Concepts de base",
+            "configuration": "Configuration"
+        },
+        "serverDevelopment": {
+            "title": "Développement de serveurs",
+            "subtitle": "Construisez votre propre serveur MCP",
+            "createServer": "Créer un serveur",
+            "serverStructure": "Structure du serveur",
+            "apiDesign": "Conception d'API",
+            "bestPractices": "Meilleures pratiques",
+            "testing": "Tests",
+            "deployment": "Déploiement",
+            "versioning": "Gestion des versions"
+        },
+        "integration": {
+            "title": "Intégration",
+            "subtitle": "Intégrez les serveurs MCP dans vos applications",
+            "clientLibraries": "Bibliothèques client",
+            "sdks": "SDK",
+            "examples": "Exemples d'intégration",
+            "authentication": "Authentification",
+            "errorHandling": "Gestion des erreurs",
+            "performance": "Performance",
+            "monitoring": "Surveillance"
+        },
+        "api": {
+            "title": "Référence API",
+            "subtitle": "Documentation complète de l'API",
+            "endpoints": "Points de terminaison",
+            "methods": "Méthodes",
+            "parameters": "Paramètres",
+            "responses": "Réponses",
+            "errorCodes": "Codes d'erreur",
+            "schemas": "Schémas",
+            "examples": "Exemples"
+        },
+        "community": {
+            "title": "Communauté",
+            "subtitle": "Rejoignez la communauté MCP",
+            "contributing": "Contribuer",
+            "guidelines": "Directives",
+            "codeOfConduct": "Code de conduite",
+            "support": "Support",
+            "forums": "Forums",
+            "discord": "Discord",
+            "github": "GitHub"
+        },
+        "advanced": {
+            "title": "Sujets avancés",
+            "subtitle": "Concepts avancés des serveurs MCP",
+            "architecture": "Architecture",
+            "security": "Sécurité",
+            "scalability": "Évolutivité",
+            "customization": "Personnalisation",
+            "plugins": "Plugins",
+            "extensions": "Extensions",
+            "troubleshooting": "Dépannage"
+        }
+    },
+    "navigation": {
+        "previousPage": "Page précédente",
+        "nextPage": "Page suivante",
+        "tableOfContents": "Table des matières",
+        "onThisPage": "Sur cette page",
+        "editPage": "Modifier cette page",
+        "viewSource": "Voir la source",
+        "lastUpdated": "Dernière mise à jour",
+        "contributors": "Contributeurs",
+        "feedback": "Commentaires",
+        "improve": "Améliorer cette page"
+    },
+    "search": {
+        "placeholder": "Rechercher dans la documentation...",
+        "noResults": "Aucun résultat trouvé",
+        "resultsFor": "Résultats pour \"{{query}}\"",
+        "suggestions": "Suggestions",
+        "searchTips": "Conseils de recherche",
+        "exactMatch": "Correspondance exacte",
+        "partialMatch": "Correspondance partielle"
+    },
+    "common": {
+        "readMore": "Lire la suite",
+        "showLess": "Afficher moins",
+        "expand": "Développer",
+        "collapse": "Réduire",
+        "copy": "Copier",
+        "copied": "Copié !",
+        "share": "Partager",
+        "print": "Imprimer",
+        "download": "Télécharger",
+        "bookmark": "Marque-page",
+        "note": "Note",
+        "tip": "Astuce",
+        "warning": "Avertissement",
+        "danger": "Danger",
+        "info": "Information",
+        "example": "Exemple",
+        "codeExample": "Exemple de code",
+        "liveDemo": "Démo en direct",
+        "tryIt": "Essayez-le"
+    },
+    "meta": {
+        "title": "Documentation | Magic MCP",
+        "description": "Documentation complète pour les serveurs MCP. Apprenez à créer, déployer et intégrer les serveurs Model Context Protocol.",
+        "keywords": "MCP, Model Context Protocol, documentation, guide, tutoriel, API, développement"
+    }
+}

@@ -1,0 +1,36 @@
+{
+    "title": "マイお気に入り",
+    "subtitle": "保存されたMCPサーバーへのクイックアクセス",
+    "description": "{{total}}個のお気に入りサーバー中{{count}}個を表示",
+    "categoryInfo": "お気に入りに{{count}}個のサーバー",
+    "syncStatus": "• デバイス間で同期するにはサインイン",
+    "view": "表示:",
+    "showingInfo": "{{total}}個中{{count}}個を表示",
+    "error": "お気に入りの読み込みエラー",
+    "errorMessage": "サーバーデータの読み込みに失敗しました。後でもう一度お試しください。",
+    "retry": "再試行",
+    "syncFailed": "同期失敗",
+    "synced": "同期済み",
+    "localOnly": "ローカルのみ",
+    "filterByCategory": "カテゴリで絞り込み",
+    "clear": "クリア",
+    "noFavoritesInCategory": "選択したカテゴリにお気に入りがありません",
+    "noFavoritesInCategoryDescription": "別のカテゴリを選択するか、フィルターをクリアしてください",
+    "clearFilter": "フィルターをクリア",
+    "noFavoritesYet": "まだお気に入りがありません",
+    "noFavoritesYetDescription": "MCPサーバーを探索して、クイックアクセスのためにお気に入りを保存しましょう",
+    "browseServers": "サーバーを閲覧",
+    "viewModes": {
+        "grid": "グリッド表示",
+        "list": "リスト表示",
+        "compact": "コンパクト表示",
+        "detailed": "詳細表示"
+    },
+    "empty": {
+        "title": "お気に入りがありません",
+        "subtitle": "探索を始めて、サーバーをお気に入りに追加しましょう",
+        "description": "気に入ったサーバーを見つけたら、ハートアイコンをクリックしてここに保存し、クイックアクセスできます。",
+        "browseServers": "サーバーを閲覧",
+        "discoverServers": "サーバーを発見"
+    }
+}

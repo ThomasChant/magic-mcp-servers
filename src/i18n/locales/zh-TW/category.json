@@ -1,0 +1,56 @@
+{
+    "title": "分類",
+    "subtitle": "按分類探索 MCP 伺服器",
+    "detail": {
+        "title": "分類：{{category}}",
+        "subtitle": "{{category}} 分類中的伺服器",
+        "description": "描述",
+        "serverCount": "{{count}} 個伺服器",
+        "noServers": "此分類中未找到伺服器",
+        "loadingServers": "載入伺服器中...",
+        "errorLoadingServers": "載入伺服器時出錯",
+        "tryAgain": "重試",
+        "backToCategories": "返回分類",
+        "subcategories": "子分類",
+        "allServers": "所有伺服器",
+        "popularServers": "熱門伺服器",
+        "recentServers": "最近更新",
+        "topRated": "評分最高",
+        "mostStars": "最多星標",
+        "filters": "篩選",
+        "sortBy": "排序",
+        "filterBy": "篩選",
+        "clearFilters": "清除篩選",
+        "showFilters": "顯示篩選",
+        "hideFilters": "隱藏篩選",
+        "resultsCount": "{{count}} 個結果",
+        "noResults": "未找到結果",
+        "searchInCategory": "在 {{category}} 中搜索...",
+        "viewAll": "檢視全部",
+        "viewLess": "收起"
+    },
+    "list": {
+        "allCategories": "所有分類",
+        "browseByCategory": "按分類瀏覽",
+        "categoryCount": "{{count}} 個分類",
+        "popularCategories": "熱門分類",
+        "serverCount": "{{count}} 個伺服器",
+        "noDescription": "暫無描述",
+        "viewCategory": "檢視分類",
+        "exploreServers": "探索伺服器",
+        "loadingCategories": "載入分類中...",
+        "errorLoadingCategories": "載入分類時出錯",
+        "searchCategories": "搜索分類...",
+        "filterCategories": "篩選分類"
+    },
+    "breadcrumb": {
+        "home": "首頁",
+        "categories": "分類",
+        "category": "{{category}}"
+    },
+    "meta": {
+        "title": "{{category}} MCP 伺服器 | Magic MCP",
+        "description": "發現和探索 {{category}} MCP 伺服器。找到適合 {{category}} 應用的最佳 Model Context Protocol 伺服器。",
+        "keywords": "MCP, Model Context Protocol, {{category}}, 伺服器, AI, ML"
+    }
+}

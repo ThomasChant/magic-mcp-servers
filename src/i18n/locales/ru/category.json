@@ -1,0 +1,56 @@
+{
+    "title": "Категории",
+    "subtitle": "Изучайте MCP серверы по категориям",
+    "detail": {
+        "title": "Категория: {{category}}",
+        "subtitle": "Серверы в категории {{category}}",
+        "description": "Описание",
+        "serverCount": "{{count}} серверов",
+        "noServers": "Серверы в этой категории не найдены",
+        "loadingServers": "Загрузка серверов...",
+        "errorLoadingServers": "Ошибка загрузки серверов",
+        "tryAgain": "Попробовать снова",
+        "backToCategories": "Вернуться к категориям",
+        "subcategories": "Подкатегории",
+        "allServers": "Все серверы",
+        "popularServers": "Популярные серверы",
+        "recentServers": "Недавно обновлённые",
+        "topRated": "Лучшие по рейтингу",
+        "mostStars": "Больше всего звёзд",
+        "filters": "Фильтры",
+        "sortBy": "Сортировать",
+        "filterBy": "Фильтровать",
+        "clearFilters": "Очистить фильтры",
+        "showFilters": "Показать фильтры",
+        "hideFilters": "Скрыть фильтры",
+        "resultsCount": "{{count}} результатов",
+        "noResults": "Результаты не найдены",
+        "searchInCategory": "Поиск в {{category}}...",
+        "viewAll": "Посмотреть все",
+        "viewLess": "Свернуть"
+    },
+    "list": {
+        "allCategories": "Все категории",
+        "browseByCategory": "Просмотр по категориям",
+        "categoryCount": "{{count}} категорий",
+        "popularCategories": "Популярные категории",
+        "serverCount": "{{count}} серверов",
+        "noDescription": "Описание отсутствует",
+        "viewCategory": "Посмотреть категорию",
+        "exploreServers": "Изучить серверы",
+        "loadingCategories": "Загрузка категорий...",
+        "errorLoadingCategories": "Ошибка загрузки категорий",
+        "searchCategories": "Поиск категорий...",
+        "filterCategories": "Фильтровать категории"
+    },
+    "breadcrumb": {
+        "home": "Главная",
+        "categories": "Категории",
+        "category": "{{category}}"
+    },
+    "meta": {
+        "title": "{{category}} MCP серверы | Magic MCP",
+        "description": "Откройте и изучите {{category}} MCP серверы. Найдите лучшие Model Context Protocol серверы для {{category}} приложений.",
+        "keywords": "MCP, Model Context Protocol, {{category}}, серверы, AI, ML"
+    }
+}

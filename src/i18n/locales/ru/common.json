@@ -1,55 +1,67 @@
 {
     "nav": {
-        "home": "Home",
-        "servers": "Servers",
-        "categories": "Categories",
-        "favorites": "Favorites",
-        "documentation": "Documentation",
+        "home": "Главная",
+        "servers": "Серверы",
+        "categories": "Категории",
+        "favorites": "Избранное",
+        "documentation": "Документация",
         "tag": "Теги"
     },
     "header": {
         "title": "Magic MCP",
-        "subtitle": "Model Context Protocol Server Discovery Platform",
-        "searchPlaceholder": "Search servers..."
+        "subtitle": "Платформа поиска серверов Model Context Protocol",
+        "searchPlaceholder": "Поиск серверов..."
     },
     "footer": {
-        "about": "About",
-        "contact": "Contact",
-        "privacy": "Privacy Policy",
-        "terms": "Terms of Service",
-        "copyright": "© 2024 Magic MCP. All rights reserved."
+        "brand": "Magic MCP",
+        "description": "Платформа поиска серверов Model Context Protocol. Найдите и интегрируйте лучшие MCP серверы для ваших ИИ приложений.",
+        "quickLinks": "Быстрые ссылки",
+        "home": "Главная",
+        "browseServers": "Просмотр серверов",
+        "categories": "Категории",
+        "tags": "Теги",
+        "documentation": "Документация",
+        "resources": "Ресурсы",
+        "apiReference": "Справочник API",
+        "developerGuide": "Руководство разработчика",
+        "community": "Сообщество",
+        "about": "О проекте",
+        "contact": "Контакты",
+        "privacy": "Политика конфиденциальности",
+        "terms": "Условия использования",
+        "copyright": "© 2024 Magic MCP. Все права защищены."
     },
     "common": {
-        "loading": "Loading...",
-        "error": "Error",
-        "notFound": "Not Found",
-        "backToHome": "Back to Home",
-        "viewMore": "View More",
-        "showLess": "Show Less",
-        "search": "Search",
-        "filter": "Filter",
-        "sort": "Sort",
-        "share": "Share",
-        "copy": "Copy",
-        "copied": "Copied!",
-        "install": "Install",
-        "documentation": "Documentation",
+        "loading": "Загрузка...",
+        "error": "Ошибка",
+        "notFound": "Не найдено",
+        "backToHome": "Вернуться на главную",
+        "viewMore": "Показать больше",
+        "showLess": "Показать меньше",
+        "search": "Поиск",
+        "filter": "Фильтр",
+        "sort": "Сортировка",
+        "share": "Поделиться",
+        "copy": "Копировать",
+        "copied": "Скопировано!",
+        "install": "Установить",
+        "documentation": "Документация",
         "github": "GitHub",
-        "demo": "Demo",
-        "website": "Website"
+        "demo": "Демо",
+        "website": "Веб-сайт"
     },
     "auth": {
-        "signIn": "Sign In",
-        "signOut": "Sign Out",
-        "profile": "Profile",
-        "settings": "Settings"
+        "signIn": "Войти",
+        "signOut": "Выйти",
+        "profile": "Профиль",
+        "settings": "Настройки"
     },
     "theme": {
-        "light": "Light",
-        "dark": "Dark",
-        "system": "System"
+        "light": "Светлая",
+        "dark": "Тёмная",
+        "system": "Системная"
     },
     "language": {
-        "selectLanguage": "Select Language"
+        "selectLanguage": "Выбрать язык"
     }
 }

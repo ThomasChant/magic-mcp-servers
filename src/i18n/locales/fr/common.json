@@ -1,55 +1,67 @@
 {
     "nav": {
-        "home": "Home",
-        "servers": "Servers",
-        "categories": "Categories",
-        "favorites": "Favorites",
+        "home": "Accueil",
+        "servers": "Serveurs",
+        "categories": "Catégories",
+        "favorites": "Favoris",
         "documentation": "Documentation",
         "tag": "Étiquettes"
     },
     "header": {
         "title": "Magic MCP",
-        "subtitle": "Model Context Protocol Server Discovery Platform",
-        "searchPlaceholder": "Search servers..."
+        "subtitle": "Plateforme de découverte de serveurs Model Context Protocol",
+        "searchPlaceholder": "Rechercher des serveurs..."
     },
     "footer": {
-        "about": "About",
+        "brand": "Magic MCP",
+        "description": "Plateforme de découverte de serveurs Model Context Protocol. Trouvez et intégrez les meilleurs serveurs MCP pour vos applications IA.",
+        "quickLinks": "Liens rapides",
+        "home": "Accueil",
+        "browseServers": "Parcourir les serveurs",
+        "categories": "Catégories",
+        "tags": "Étiquettes",
+        "documentation": "Documentation",
+        "resources": "Ressources",
+        "apiReference": "Référence API",
+        "developerGuide": "Guide développeur",
+        "community": "Communauté",
+        "about": "À propos",
         "contact": "Contact",
-        "privacy": "Privacy Policy",
-        "terms": "Terms of Service",
-        "copyright": "© 2024 Magic MCP. All rights reserved."
+        "privacy": "Politique de confidentialité",
+        "terms": "Conditions d'utilisation",
+        "copyright": "© 2024 Magic MCP. Tous droits réservés."
     },
     "common": {
-        "loading": "Loading...",
-        "error": "Error",
-        "notFound": "Not Found",
-        "backToHome": "Back to Home",
-        "viewMore": "View More",
-        "showLess": "Show Less",
-        "search": "Search",
-        "filter": "Filter",
-        "sort": "Sort",
-        "share": "Share",
-        "copy": "Copy",
-        "copied": "Copied!",
-        "install": "Install",
+        "loading": "Chargement...",
+        "error": "Erreur",
+        "notFound": "Non trouvé",
+        "backToHome": "Retour à l'accueil",
+        "viewMore": "Voir plus",
+        "showLess": "Afficher moins",
+        "search": "Rechercher",
+        "filter": "Filtrer",
+        "sort": "Trier",
+        "share": "Partager",
+        "copy": "Copier",
+        "copied": "Copié !",
+        "install": "Installer",
         "documentation": "Documentation",
         "github": "GitHub",
-        "demo": "Demo",
-        "website": "Website"
+        "demo": "Démo",
+        "website": "Site web"
     },
     "auth": {
-        "signIn": "Sign In",
-        "signOut": "Sign Out",
-        "profile": "Profile",
-        "settings": "Settings"
+        "signIn": "Se connecter",
+        "signOut": "Se déconnecter",
+        "profile": "Profil",
+        "settings": "Paramètres"
     },
     "theme": {
-        "light": "Light",
-        "dark": "Dark",
-        "system": "System"
+        "light": "Clair",
+        "dark": "Sombre",
+        "system": "Système"
     },
     "language": {
-        "selectLanguage": "Select Language"
+        "selectLanguage": "Sélectionner la langue"
     }
 }

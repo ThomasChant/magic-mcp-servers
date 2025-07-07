@@ -1,0 +1,36 @@
+{
+    "title": "내 즐겨찾기",
+    "subtitle": "빠른 액세스를 위해 저장된 MCP 서버",
+    "description": "{{total}}개 즐겨찾기 서버 중 {{count}}개 표시",
+    "categoryInfo": "즐겨찾기에 {{count}}개 서버",
+    "syncStatus": "• 기기 간 동기화하려면 로그인",
+    "view": "보기:",
+    "showingInfo": "{{total}}개 중 {{count}}개 표시",
+    "error": "즐겨찾기 로딩 오류",
+    "errorMessage": "서버 데이터를 로드하지 못했습니다. 나중에 다시 시도해 주세요.",
+    "retry": "다시 시도",
+    "syncFailed": "동기화 실패",
+    "synced": "동기화됨",
+    "localOnly": "로컬만",
+    "filterByCategory": "카테고리별 필터",
+    "clear": "지우기",
+    "noFavoritesInCategory": "선택한 카테고리에 즐겨찾기가 없습니다",
+    "noFavoritesInCategoryDescription": "다른 카테고리를 선택하거나 필터를 지워보세요",
+    "clearFilter": "필터 지우기",
+    "noFavoritesYet": "아직 즐겨찾기가 없습니다",
+    "noFavoritesYetDescription": "MCP 서버를 탐색하고 빠른 액세스를 위해 즐겨찾기를 저장하세요",
+    "browseServers": "서버 둘러보기",
+    "viewModes": {
+        "grid": "그리드 보기",
+        "list": "목록 보기",
+        "compact": "컴팩트 보기",
+        "detailed": "상세 보기"
+    },
+    "empty": {
+        "title": "즐겨찾기가 없습니다",
+        "subtitle": "탐색을 시작하고 서버를 즐겨찾기에 추가하세요",
+        "description": "마음에 드는 서버를 찾으면 하트 아이콘을 클릭하여 빠른 액세스를 위해 여기에 저장하세요.",
+        "browseServers": "서버 둘러보기",
+        "discoverServers": "서버 발견하기"
+    }
+}

@@ -1,0 +1,118 @@
+{
+    "title": "ドキュメント",
+    "subtitle": "MCPサーバーとその使用方法について学ぶ",
+    "sections": {
+        "gettingStarted": {
+            "title": "はじめに",
+            "subtitle": "MCPサーバーの基礎を学ぶ",
+            "introduction": "MCP の紹介",
+            "installation": "インストールガイド",
+            "quickStart": "クイックスタート",
+            "firstServer": "初めてのサーバー",
+            "basicConcepts": "基本概念",
+            "configuration": "設定"
+        },
+        "serverDevelopment": {
+            "title": "サーバー開発",
+            "subtitle": "独自のMCPサーバーを構築",
+            "createServer": "サーバーを作成",
+            "serverStructure": "サーバー構造",
+            "apiDesign": "API設計",
+            "bestPractices": "ベストプラクティス",
+            "testing": "テスト",
+            "deployment": "デプロイ",
+            "versioning": "バージョン管理"
+        },
+        "integration": {
+            "title": "統合",
+            "subtitle": "MCPサーバーをアプリケーションに統合",
+            "clientLibraries": "クライアントライブラリ",
+            "sdks": "SDK",
+            "examples": "統合例",
+            "authentication": "認証",
+            "errorHandling": "エラーハンドリング",
+            "performance": "パフォーマンス",
+            "monitoring": "監視"
+        },
+        "api": {
+            "title": "APIリファレンス",
+            "subtitle": "完全なAPIドキュメント",
+            "endpoints": "エンドポイント",
+            "methods": "メソッド",
+            "parameters": "パラメータ",
+            "responses": "レスポンス",
+            "errorCodes": "エラーコード",
+            "schemas": "スキーマ",
+            "examples": "例"
+        },
+        "community": {
+            "title": "コミュニティ",
+            "subtitle": "MCPコミュニティに参加",
+            "contributing": "貢献",
+            "guidelines": "ガイドライン",
+            "codeOfConduct": "行動規範",
+            "support": "サポート",
+            "forums": "フォーラム",
+            "discord": "Discord",
+            "github": "GitHub"
+        },
+        "advanced": {
+            "title": "高度なトピック",
+            "subtitle": "高度なMCPサーバーの概念",
+            "architecture": "アーキテクチャ",
+            "security": "セキュリティ",
+            "scalability": "スケーラビリティ",
+            "customization": "カスタマイゼーション",
+            "plugins": "プラグイン",
+            "extensions": "拡張機能",
+            "troubleshooting": "トラブルシューティング"
+        }
+    },
+    "navigation": {
+        "previousPage": "前のページ",
+        "nextPage": "次のページ",
+        "tableOfContents": "目次",
+        "onThisPage": "このページの内容",
+        "editPage": "このページを編集",
+        "viewSource": "ソースを表示",
+        "lastUpdated": "最終更新",
+        "contributors": "貢献者",
+        "feedback": "フィードバック",
+        "improve": "このページを改善"
+    },
+    "search": {
+        "placeholder": "ドキュメントを検索...",
+        "noResults": "結果が見つかりません",
+        "resultsFor": "\"{{query}}\"の検索結果",
+        "suggestions": "提案",
+        "searchTips": "検索のヒント",
+        "exactMatch": "完全一致",
+        "partialMatch": "部分一致"
+    },
+    "common": {
+        "readMore": "もっと読む",
+        "showLess": "折りたたむ",
+        "expand": "展開",
+        "collapse": "折りたたむ",
+        "copy": "コピー",
+        "copied": "コピーしました！",
+        "share": "共有",
+        "print": "印刷",
+        "download": "ダウンロード",
+        "bookmark": "ブックマーク",
+        "note": "注意",
+        "tip": "ヒント",
+        "warning": "警告",
+        "danger": "危険",
+        "info": "情報",
+        "example": "例",
+        "codeExample": "コード例",
+        "liveDemo": "ライブデモ",
+        "tryIt": "試してみる"
+    },
+    "meta": {
+        "title": "ドキュメント | Magic MCP",
+        "description": "MCPサーバーの完全なドキュメント。Model Context Protocolサーバーの作成、デプロイ、統合方法を学びましょう。",
+        "keywords": "MCP, Model Context Protocol, ドキュメント, ガイド, チュートリアル, API, 開発"
+    }
+}

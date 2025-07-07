@@ -1,0 +1,118 @@
+{
+    "title": "Документация",
+    "subtitle": "Изучите MCP серверы и способы их использования",
+    "sections": {
+        "gettingStarted": {
+            "title": "Начало работы",
+            "subtitle": "Изучите основы MCP серверов",
+            "introduction": "Введение в MCP",
+            "installation": "Руководство по установке",
+            "quickStart": "Быстрый старт",
+            "firstServer": "Ваш первый сервер",
+            "basicConcepts": "Основные концепции",
+            "configuration": "Конфигурация"
+        },
+        "serverDevelopment": {
+            "title": "Разработка серверов",
+            "subtitle": "Создайте свой собственный MCP сервер",
+            "createServer": "Создание сервера",
+            "serverStructure": "Структура сервера",
+            "apiDesign": "Дизайн API",
+            "bestPractices": "Лучшие практики",
+            "testing": "Тестирование",
+            "deployment": "Развёртывание",
+            "versioning": "Управление версиями"
+        },
+        "integration": {
+            "title": "Интеграция",
+            "subtitle": "Интегрируйте MCP серверы в ваши приложения",
+            "clientLibraries": "Клиентские библиотеки",
+            "sdks": "SDK",
+            "examples": "Примеры интеграции",
+            "authentication": "Аутентификация",
+            "errorHandling": "Обработка ошибок",
+            "performance": "Производительность",
+            "monitoring": "Мониторинг"
+        },
+        "api": {
+            "title": "Справочник API",
+            "subtitle": "Полная документация по API",
+            "endpoints": "Эндпоинты",
+            "methods": "Методы",
+            "parameters": "Параметры",
+            "responses": "Ответы",
+            "errorCodes": "Коды ошибок",
+            "schemas": "Схемы",
+            "examples": "Примеры"
+        },
+        "community": {
+            "title": "Сообщество",
+            "subtitle": "Присоединяйтесь к сообществу MCP",
+            "contributing": "Вклад",
+            "guidelines": "Руководящие принципы",
+            "codeOfConduct": "Кодекс поведения",
+            "support": "Поддержка",
+            "forums": "Форумы",
+            "discord": "Discord",
+            "github": "GitHub"
+        },
+        "advanced": {
+            "title": "Продвинутые темы",
+            "subtitle": "Продвинутые концепции MCP серверов",
+            "architecture": "Архитектура",
+            "security": "Безопасность",
+            "scalability": "Масштабируемость",
+            "customization": "Настройка",
+            "plugins": "Плагины",
+            "extensions": "Расширения",
+            "troubleshooting": "Устранение неполадок"
+        }
+    },
+    "navigation": {
+        "previousPage": "Предыдущая страница",
+        "nextPage": "Следующая страница",
+        "tableOfContents": "Содержание",
+        "onThisPage": "На этой странице",
+        "editPage": "Редактировать страницу",
+        "viewSource": "Посмотреть исходный код",
+        "lastUpdated": "Последнее обновление",
+        "contributors": "Участники",
+        "feedback": "Обратная связь",
+        "improve": "Улучшить эту страницу"
+    },
+    "search": {
+        "placeholder": "Поиск по документации...",
+        "noResults": "Результаты не найдены",
+        "resultsFor": "Результаты поиска для \"{{query}}\"",
+        "suggestions": "Предложения",
+        "searchTips": "Советы по поиску",
+        "exactMatch": "Точное совпадение",
+        "partialMatch": "Частичное совпадение"
+    },
+    "common": {
+        "readMore": "Читать далее",
+        "showLess": "Свернуть",
+        "expand": "Развернуть",
+        "collapse": "Свернуть",
+        "copy": "Копировать",
+        "copied": "Скопировано!",
+        "share": "Поделиться",
+        "print": "Печать",
+        "download": "Скачать",
+        "bookmark": "Закладка",
+        "note": "Примечание",
+        "tip": "Совет",
+        "warning": "Предупреждение",
+        "danger": "Опасно",
+        "info": "Информация",
+        "example": "Пример",
+        "codeExample": "Пример кода",
+        "liveDemo": "Живая демонстрация",
+        "tryIt": "Попробовать"
+    },
+    "meta": {
+        "title": "Документация | Magic MCP",
+        "description": "Полная документация по MCP серверам. Узнайте, как создавать, развёртывать и интегрировать серверы Model Context Protocol.",
+        "keywords": "MCP, Model Context Protocol, документация, руководство, учебник, API, разработка"
+    }
+}

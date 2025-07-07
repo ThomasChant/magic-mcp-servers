@@ -1,0 +1,118 @@
+{
+    "title": "文件",
+    "subtitle": "瞭解 MCP 伺服器及其使用方法",
+    "sections": {
+        "gettingStarted": {
+            "title": "入門指南",
+            "subtitle": "學習 MCP 伺服器的基礎知識",
+            "introduction": "MCP 介紹",
+            "installation": "安裝指南",
+            "quickStart": "快速開始",
+            "firstServer": "您的第一個伺服器",
+            "basicConcepts": "基本概念",
+            "configuration": "組態"
+        },
+        "serverDevelopment": {
+            "title": "伺服器開發",
+            "subtitle": "建構您自己的 MCP 伺服器",
+            "createServer": "建立伺服器",
+            "serverStructure": "伺服器結構",
+            "apiDesign": "API 設計",
+            "bestPractices": "最佳實務",
+            "testing": "測試",
+            "deployment": "部署",
+            "versioning": "版本控制"
+        },
+        "integration": {
+            "title": "整合",
+            "subtitle": "將 MCP 伺服器整合到您的應用程式中",
+            "clientLibraries": "客戶端函式庫",
+            "sdks": "SDK",
+            "examples": "整合範例",
+            "authentication": "身份驗證",
+            "errorHandling": "錯誤處理",
+            "performance": "效能",
+            "monitoring": "監控"
+        },
+        "api": {
+            "title": "API 參考",
+            "subtitle": "完整的 API 文件",
+            "endpoints": "端點",
+            "methods": "方法",
+            "parameters": "參數",
+            "responses": "回應",
+            "errorCodes": "錯誤代碼",
+            "schemas": "結構描述",
+            "examples": "範例"
+        },
+        "community": {
+            "title": "社群",
+            "subtitle": "加入 MCP 社群",
+            "contributing": "貢獻",
+            "guidelines": "指南",
+            "codeOfConduct": "行為準則",
+            "support": "支援",
+            "forums": "論壇",
+            "discord": "Discord",
+            "github": "GitHub"
+        },
+        "advanced": {
+            "title": "進階主題",
+            "subtitle": "進階 MCP 伺服器概念",
+            "architecture": "架構",
+            "security": "安全性",
+            "scalability": "可擴展性",
+            "customization": "自訂",
+            "plugins": "外掛程式",
+            "extensions": "擴充功能",
+            "troubleshooting": "疑難排解"
+        }
+    },
+    "navigation": {
+        "previousPage": "上一頁",
+        "nextPage": "下一頁",
+        "tableOfContents": "目錄",
+        "onThisPage": "本頁內容",
+        "editPage": "編輯此頁",
+        "viewSource": "檢視原始碼",
+        "lastUpdated": "最後更新",
+        "contributors": "貢獻者",
+        "feedback": "回饋",
+        "improve": "改進此頁"
+    },
+    "search": {
+        "placeholder": "搜尋文件...",
+        "noResults": "未找到結果",
+        "resultsFor": "\"{{query}}\" 的搜尋結果",
+        "suggestions": "建議",
+        "searchTips": "搜尋提示",
+        "exactMatch": "精確符合",
+        "partialMatch": "部分符合"
+    },
+    "common": {
+        "readMore": "閱讀更多",
+        "showLess": "收起",
+        "expand": "展開",
+        "collapse": "摺疊",
+        "copy": "複製",
+        "copied": "已複製！",
+        "share": "分享",
+        "print": "列印",
+        "download": "下載",
+        "bookmark": "書籤",
+        "note": "注意",
+        "tip": "提示",
+        "warning": "警告",
+        "danger": "危險",
+        "info": "資訊",
+        "example": "範例",
+        "codeExample": "程式碼範例",
+        "liveDemo": "線上示範",
+        "tryIt": "試試看"
+    },
+    "meta": {
+        "title": "文件 | Magic MCP",
+        "description": "MCP 伺服器的完整文件。瞭解如何建立、部署和整合 Model Context Protocol 伺服器。",
+        "keywords": "MCP, Model Context Protocol, 文件, 指南, 教學, API, 開發"
+    }
+}
