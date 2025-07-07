@@ -4,7 +4,7 @@ import { useUser, useClerk } from "@clerk/clerk-react";
 import { useServerScore, useUserVote, useVoteMutation } from "../services/voting";
 import { useBatchScore } from "./BatchScoreProvider";
 import { useBatchUserVote } from "./BatchUserVoteProvider";
-import { isClientSide } from "../utils/environment";
+
 
 // Simple notification function
 const notify = (message: string, type: 'success' | 'error' = 'success') => {
@@ -29,20 +29,11 @@ const VoteButtonsBatch: React.FC<VoteButtonsProps> = ({
     className = '',
     showScore = true
 }) => {
-    // Handle SSR - provide safe defaults for Clerk hooks
-    let isSignedIn = false;
-    let openSignIn = () => {};
-    
-    try {
-        // Try to use Clerk hooks - will fail in SSR without ClerkProvider
-        const user = useUser();
-        const clerk = useClerk();
-        isSignedIn = user?.isSignedIn || false;
-        openSignIn = clerk?.openSignIn || (() => {});
-    } catch (error) {
-        // In SSR or when ClerkProvider is not available, use defaults
-        // This is expected during SSR
-    }
+    // Always call hooks at top level to follow React rules
+    const user = useUser();
+    const clerk = useClerk();
+    const isSignedIn = user?.isSignedIn || false;
+    const openSignIn = clerk?.openSignIn || (() => {});
     
     // Only use batch providers - no individual queries
     const { score: serverScore, isLoading: scoreLoading } = useBatchScore(serverId);
@@ -153,7 +144,7 @@ const VoteButtonsBatch: React.FC<VoteButtonsProps> = ({
             : `flex items-center justify-center ${buttonClass} bg-gray-50 border border-gray-200 text-gray-600 hover:bg-gray-100 rounded-lg transition-all duration-150 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700`;
         
         return (
-            <div className={`flex items-center ${config.container} ${className}`}>
+            <div className={`flex items-center  ${className}`}>
                 <button
                     onClick={() => openSignIn()}
                     className={buttonStyle}
@@ -171,7 +162,7 @@ const VoteButtonsBatch: React.FC<VoteButtonsProps> = ({
     }
 
     return (
-        <div className={`flex items-center ${config.container} ${className}`}>
+        <div className={`flex items-center  ${className}`}>
             {/* I'm using this button */}
             <button
                 onClick={handleUsage}
@@ -205,20 +196,11 @@ const VoteButtonsIndividual: React.FC<VoteButtonsProps> = ({
     className = '',
     showScore = true
 }) => {
-    // Handle SSR - provide safe defaults for Clerk hooks
-    let isSignedIn = false;
-    let openSignIn = () => {};
-    
-    try {
-        // Try to use Clerk hooks - will fail in SSR without ClerkProvider
-        const user = useUser();
-        const clerk = useClerk();
-        isSignedIn = user?.isSignedIn || false;
-        openSignIn = clerk?.openSignIn || (() => {});
-    } catch (error) {
-        // In SSR or when ClerkProvider is not available, use defaults
-        // This is expected during SSR
-    }
+    // Always call hooks at top level to follow React rules
+    const user = useUser();
+    const clerk = useClerk();
+    const isSignedIn = user?.isSignedIn || false;
+    const openSignIn = clerk?.openSignIn || (() => {});
     
     // Only use individual queries - no batch providers
     const { data: serverScore, isLoading: scoreLoading } = useServerScore(serverId);
@@ -329,7 +311,7 @@ const VoteButtonsIndividual: React.FC<VoteButtonsProps> = ({
             : `flex items-center justify-center ${buttonClass} bg-gray-50 border border-gray-200 text-gray-600 hover:bg-gray-100 rounded-lg transition-all duration-150 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700`;
         
         return (
-            <div className={`flex items-center ${config.container} ${className}`}>
+            <div className={`flex items-center  ${className}`}>
                 <button
                     onClick={() => openSignIn()}
                     className={buttonStyle}
@@ -347,7 +329,7 @@ const VoteButtonsIndividual: React.FC<VoteButtonsProps> = ({
     }
 
     return (
-        <div className={`flex items-center ${config.container} ${className}`}>
+        <div className={`flex items-center  ${className}`}>
             {/* I'm using this button */}
             <button
                 onClick={handleUsage}
