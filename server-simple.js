@@ -270,7 +270,7 @@ app.use("*", async (req, res, next) => {
             try {
                 // Import SSR render function
                 const serverModule = await import(
-                    "./dist/server/assets/entry-server.RccnaOZv.js"
+                    "./dist/server/assets/entry-server.CCy7F7DZ.js"
                 );
                 const { html: renderedHtml, seoData } =
                     await serverModule.render(url);
