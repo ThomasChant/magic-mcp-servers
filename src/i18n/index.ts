@@ -7,10 +7,16 @@ import { isClientSide, isDevelopment } from "../utils/environment";
 // Import all translations
 import enCommon from "./locales/en/common.json";
 import enHome from "./locales/en/home.json";
+import enServer from "./locales/en/server.json";
+import enFavorites from "./locales/en/favorites.json";
 import zhCNCommon from "./locales/zh-CN/common.json";
 import zhCNHome from "./locales/zh-CN/home.json";
+import zhCNServer from "./locales/zh-CN/server.json";
+import zhCNFavorites from "./locales/zh-CN/favorites.json";
 import zhTWCommon from "./locales/zh-TW/common.json";
 import zhTWHome from "./locales/zh-TW/home.json";
+import zhTWServer from "./locales/zh-TW/server.json";
+import zhTWFavorites from "./locales/zh-TW/favorites.json";
 import frCommon from "./locales/fr/common.json";
 import frHome from "./locales/fr/home.json";
 import jaCommon from "./locales/ja/common.json";
@@ -24,14 +30,20 @@ const resources = {
     en: {
         common: enCommon,
         home: enHome,
+        server: enServer,
+        favorites: enFavorites,
     },
     "zh-CN": {
         common: zhCNCommon,
         home: zhCNHome,
+        server: zhCNServer,
+        favorites: zhCNFavorites,
     },
     "zh-TW": {
         common: zhTWCommon,
         home: zhTWHome,
+        server: zhTWServer,
+        favorites: zhTWFavorites,
     },
     fr: {
         common: frCommon,
@@ -57,7 +69,7 @@ const i18nConfig = {
     lng: "en", // 默认语言
     fallbackLng: "en",
     
-    ns: ["common", "home"],
+    ns: ["common", "home", "server", "category", "docs", "profile", "favorites"],
     defaultNS: "common",
     
     interpolation: {
@@ -78,7 +90,8 @@ const i18nConfig = {
     ...(isClientSide() && {
         // 只在客户端启用语言检测和缓存
         detection: {
-            order: ['localStorage', 'navigator', 'htmlTag'],
+            order: ['path', 'localStorage', 'navigator', 'htmlTag'],
+            lookupFromPathIndex: 0,
             lookupLocalStorage: 'i18nextLng',
             caches: ['localStorage'],
             excludeCacheFor: ['cimode'],

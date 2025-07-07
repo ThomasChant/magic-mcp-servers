@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Search, Menu, X, Sun, Moon } from "lucide-react";
+import { Search, Menu, X, Sun, Moon, Globe } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useAppStore } from "../../store/useAppStore";
 import { ClientOnly } from "../ClientOnly";
+import LocaleLink from "../LocaleLink";
+import { useLocaleRouter } from "../LocaleRouter";
+import { languageNames, locales } from "../../i18n/config";
 import logoImg from "../../assets/logo.png";
 
 import { 
@@ -19,6 +22,7 @@ const HeaderSSR: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const { navigateToLocale, currentLocale, getLocalizedPath } = useLocaleRouter();
     // const { isSignedIn } = useUser();
     const {
         theme,
@@ -32,7 +36,8 @@ const HeaderSSR: React.FC = () => {
     const handleSearchChange = (query: string) => {
         setSearchQuery(query);
         // If on home page, search immediately; if on other pages, wait for Enter or explicit search
-        if (location.pathname === "/") {
+        const homePath = getLocalizedPath("/");
+        if (location.pathname === homePath || location.pathname === "/") {
             // On home page, search is immediate
             return;
         }
@@ -42,12 +47,13 @@ const HeaderSSR: React.FC = () => {
     const handleSearchSubmit = (query: string) => {
         setSearchQuery(query);
         // Navigate to home page if not already there and there's a search query
-        if (query.trim() && location.pathname !== "/") {
-            navigate("/");
+        const homePath = getLocalizedPath("/");
+        if (query.trim() && location.pathname !== homePath && location.pathname !== "/") {
+            navigate(homePath);
         }
     };
 
-    // Handle search input key press
+    // Handle search input key down
     const handleSearchKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             e.preventDefault();
@@ -57,23 +63,31 @@ const HeaderSSR: React.FC = () => {
     };
 
     const navigation = [
-        { name: t("nav.home"), href: "/", current: location.pathname === "/" },
+        { 
+            name: t("nav.home"), 
+            href: "/", 
+            current: location.pathname === "/" || location.pathname === getLocalizedPath("/")
+        },
         {
             name: t("nav.servers"),
             href: "/servers",
-            current: location.pathname === "/servers",
+            current: location.pathname === "/servers" || location.pathname === getLocalizedPath("/servers"),
         },
         {
             name: t("nav.categories"),
             href: "/categories",
-            current: location.pathname === "/categories",
+            current: location.pathname === "/categories" || location.pathname === getLocalizedPath("/categories"),
         },
         {
             name: t("nav.favorites"),
             href: "/favorites",
-            current: location.pathname === "/favorites",
+            current: location.pathname === "/favorites" || location.pathname === getLocalizedPath("/favorites"),
         },
-        { name: t("nav.documentation"), href: "/docs", current: location.pathname === "/docs" },
+        { 
+            name: t("nav.documentation"), 
+            href: "/docs", 
+            current: location.pathname === "/docs" || location.pathname === getLocalizedPath("/docs")
+        },
     ];
 
     // const languages = [
@@ -91,25 +105,25 @@ const HeaderSSR: React.FC = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
-                    <div className="flex items-center">
-                        <Link to="/" className="flex items-center">
+                    <div className="flex items-center flex-shrink-0">
+                        <LocaleLink to="/" className="flex items-center">
                             <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center mr-3">
                                 {/* <span className="text-white text-sm font-bold">
                                     M
                                 </span> */}
                                 <img src={logoImg} alt="Magic MCP" className="rounded" />
                             </div>
-                            <span className="text-xxl font-bold text-gray-900 dark:text-white">
-                                Magic MCP
+                            <span className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white whitespace-nowrap">
+                                {t('footer.brand')}
                             </span>
-                        </Link>
+                        </LocaleLink>
                     </div>
 
                     {/* Desktop Navigation */}
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-8">
                             {navigation.map((item) => (
-                                <Link
+                                <LocaleLink
                                     key={item.name}
                                     to={item.href}
                                     className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
@@ -119,13 +133,13 @@ const HeaderSSR: React.FC = () => {
                                     }`}
                                 >
                                     {item.name}
-                                </Link>
+                                </LocaleLink>
                             ))}
                         </div>
                     </div>
 
                     {/* Search and Controls */}
-                    <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-2 lg:space-x-4">
                         {/* Search */}
                         <div className="hidden lg:block">
                             <div className="relative">
@@ -136,8 +150,8 @@ const HeaderSSR: React.FC = () => {
                                     onChange={(e) =>
                                         handleSearchChange(e.target.value)
                                     }
-                                    onKeyPress={handleSearchKeyPress}
-                                    className="w-64 pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                                    onKeyDown={handleSearchKeyPress}
+                                    className="w-48 xl:w-64 pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
 
                                     data-testid="header-search-input"
                                 />
@@ -161,39 +175,39 @@ const HeaderSSR: React.FC = () => {
                             )}
                         </button>
 
-                        {/* Language Selector - Temporarily disabled for SSR */}
-                        {/* <ClientOnly fallback={
+                        {/* Language Selector */}
+                        <ClientOnly fallback={
                             <div className="flex items-center p-2 text-gray-600 dark:text-gray-300 rounded-md">
                                 <Globe className="h-5 w-5 mr-1" />
-                                <span className="text-sm font-medium">en</span>
+                                <span className="text-sm font-medium">{currentLocale}</span>
                             </div>
                         }>
                             <div className="relative group">
                                 <button className="flex items-center p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-800 rounded-md transition-colors" title={t("language.selectLanguage")}>
                                     <Globe className="h-5 w-5 mr-1" />
-                                    <span className="text-sm font-medium">{i18n.language}</span>
+                                    <span className="text-sm font-medium">{currentLocale}</span>
                                 </button>
 
                                 <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                                    {languages.map((lang) => (
+                                    {locales.map((locale) => (
                                         <button
-                                            key={lang.code}
+                                            key={locale}
                                             onClick={() => {
-                                                console.log(`切换语言到: ${lang.code}`);
-                                                i18n.changeLanguage(lang.code);
+                                                console.log(`切换语言到: ${locale}`);
+                                                navigateToLocale(locale);
                                             }}
                                             className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 first:rounded-t-lg last:rounded-b-lg ${
-                                                i18n.language === lang.code
+                                                currentLocale === locale
                                                     ? "text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-primary-900/50"
                                                     : "text-gray-700 dark:text-gray-300"
                                             }`}
                                         >
-                                            {lang.name}
+                                            {languageNames[locale]}
                                         </button>
                                     ))}
                                 </div>
                             </div>
-                        </ClientOnly> */}
+                        </ClientOnly>
 
                         
                         <AuthSectionSSR />
@@ -229,7 +243,7 @@ const HeaderSSR: React.FC = () => {
                                     onChange={(e) =>
                                         handleSearchChange(e.target.value)
                                     }
-                                    onKeyPress={handleSearchKeyPress}
+                                    onKeyDown={handleSearchKeyPress}
                                     className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                                 />
                                 <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
@@ -240,7 +254,7 @@ const HeaderSSR: React.FC = () => {
 
                             {/* Mobile Menu Items */}
                             {navigation.map((item) => (
-                                <Link
+                                <LocaleLink
                                     key={item.name}
                                     to={item.href}
                                     onClick={() => setMobileMenuOpen(false)}
@@ -251,7 +265,7 @@ const HeaderSSR: React.FC = () => {
                                     }`}
                                 >
                                     {item.name}
-                                </Link>
+                                </LocaleLink>
                             ))}
                         </div>
                     </div>
@@ -267,6 +281,7 @@ const HeaderWithClerk: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const { navigateToLocale, currentLocale, getLocalizedPath } = useLocaleRouter();
     const {
         theme,
         searchQuery,
@@ -278,7 +293,8 @@ const HeaderWithClerk: React.FC = () => {
     const handleSearchChange = (query: string) => {
         setSearchQuery(query);
         // If on home page, search immediately; if on other pages, wait for Enter or explicit search
-        if (location.pathname === "/") {
+        const homePath = getLocalizedPath("/");
+        if (location.pathname === homePath || location.pathname === "/") {
             // On home page, search is immediate
             return;
         }
@@ -288,12 +304,13 @@ const HeaderWithClerk: React.FC = () => {
     const handleSearchSubmit = (query: string) => {
         setSearchQuery(query);
         // Navigate to home page if not already there and there's a search query
-        if (query.trim() && location.pathname !== "/") {
-            navigate("/");
+        const homePath = getLocalizedPath("/");
+        if (query.trim() && location.pathname !== homePath && location.pathname !== "/") {
+            navigate(homePath);
         }
     };
 
-    // Handle search input key press
+    // Handle search input key down
     const handleSearchKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             e.preventDefault();
@@ -303,23 +320,31 @@ const HeaderWithClerk: React.FC = () => {
     };
 
     const navigation = [
-        { name: t("nav.home"), href: "/", current: location.pathname === "/" },
+        { 
+            name: t("nav.home"), 
+            href: "/", 
+            current: location.pathname === "/" || location.pathname === getLocalizedPath("/")
+        },
         {
             name: t("nav.servers"),
             href: "/servers",
-            current: location.pathname === "/servers",
+            current: location.pathname === "/servers" || location.pathname === getLocalizedPath("/servers"),
         },
         {
             name: t("nav.categories"),
             href: "/categories",
-            current: location.pathname === "/categories",
+            current: location.pathname === "/categories" || location.pathname === getLocalizedPath("/categories"),
         },
         {
             name: t("nav.favorites"),
             href: "/favorites",
-            current: location.pathname === "/favorites",
+            current: location.pathname === "/favorites" || location.pathname === getLocalizedPath("/favorites"),
         },
-        { name: t("nav.documentation"), href: "/docs", current: location.pathname === "/docs" },
+        { 
+            name: t("nav.documentation"), 
+            href: "/docs", 
+            current: location.pathname === "/docs" || location.pathname === getLocalizedPath("/docs")
+        },
     ];
 
     // const languages = [
@@ -337,8 +362,8 @@ const HeaderWithClerk: React.FC = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
-                    <div className="flex items-center">
-                        <Link to="/" className="flex items-center">
+                    <div className="flex items-center flex-shrink-0">
+                        <LocaleLink to="/" className="flex items-center">
                             <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center mr-3">
                                 {/* <span className="text-white text-sm font-bold">
                                     M
@@ -346,17 +371,17 @@ const HeaderWithClerk: React.FC = () => {
                                 <img src={logoImg} alt="Magic MCP" className="rounded"/>
                                 
                             </div>
-                            <span className="text-xxl font-bold text-gray-900 dark:text-white">
-                                Magic MCP
+                            <span className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white whitespace-nowrap">
+                                {t('footer.brand')}
                             </span>
-                        </Link>
+                        </LocaleLink>
                     </div>
 
                     {/* Desktop Navigation */}
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-8">
                             {navigation.map((item) => (
-                                <Link
+                                <LocaleLink
                                     key={item.name}
                                     to={item.href}
                                     className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
@@ -366,13 +391,13 @@ const HeaderWithClerk: React.FC = () => {
                                     }`}
                                 >
                                     {item.name}
-                                </Link>
+                                </LocaleLink>
                             ))}
                         </div>
                     </div>
 
                     {/* Search and Controls */}
-                    <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-2 lg:space-x-4">
                         {/* Search */}
                         <div className="hidden lg:block">
                             <div className="relative">
@@ -383,8 +408,8 @@ const HeaderWithClerk: React.FC = () => {
                                     onChange={(e) =>
                                         handleSearchChange(e.target.value)
                                     }
-                                    onKeyPress={handleSearchKeyPress}
-                                    className="w-64 pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:border-transparent"
+                                    onKeyDown={handleSearchKeyPress}
+                                    className="w-48 xl:w-64 pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:border-transparent"
 
                                     data-testid="header-search-input"
                                 />
@@ -407,39 +432,39 @@ const HeaderWithClerk: React.FC = () => {
                             )}
                         </button>
 
-                        {/* Language Selector - Temporarily disabled for Client */}
-                        {/* <ClientOnly fallback={
+                        {/* Language Selector */}
+                        <ClientOnly fallback={
                             <div className="flex items-center p-2 text-gray-600 dark:text-gray-300 rounded-md">
                                 <Globe className="h-5 w-5 mr-1" />
-                                <span className="text-sm font-medium">en</span>
+                                <span className="text-sm font-medium">{currentLocale}</span>
                             </div>
                         }>
                             <div className="relative group">
                                 <button className="flex items-center p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-800 rounded-md transition-colors" title={t("language.selectLanguage")}>
                                     <Globe className="h-5 w-5 mr-1" />
-                                    <span className="text-sm font-medium">{i18n.language}</span>
+                                    <span className="text-sm font-medium">{currentLocale}</span>
                                 </button>
 
                                 <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                                    {languages.map((lang) => (
+                                    {locales.map((locale) => (
                                         <button
-                                            key={lang.code}
+                                            key={locale}
                                             onClick={() => {
-                                                console.log(`切换语言到: ${lang.code}`);
-                                                i18n.changeLanguage(lang.code);
+                                                console.log(`切换语言到: ${locale}`);
+                                                navigateToLocale(locale);
                                             }}
                                             className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 first:rounded-t-lg last:rounded-b-lg ${
-                                                i18n.language === lang.code
+                                                currentLocale === locale
                                                     ? "text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-primary-900/50"
                                                     : "text-gray-700 dark:text-gray-300"
                                             }`}
                                         >
-                                            {lang.name}
+                                            {languageNames[locale]}
                                         </button>
                                     ))}
                                 </div>
                             </div>
-                        </ClientOnly> */}
+                        </ClientOnly>
 
                         {/* Auth Section */}
                         <AuthSectionWithClerk />
@@ -475,7 +500,7 @@ const HeaderWithClerk: React.FC = () => {
                                     onChange={(e) =>
                                         handleSearchChange(e.target.value)
                                     }
-                                    onKeyPress={handleSearchKeyPress}
+                                    onKeyDown={handleSearchKeyPress}
                                     className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                                 />
                                 <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
@@ -486,7 +511,7 @@ const HeaderWithClerk: React.FC = () => {
 
                             {/* Mobile Menu Items */}
                             {navigation.map((item) => (
-                                <Link
+                                <LocaleLink
                                     key={item.name}
                                     to={item.href}
                                     onClick={() => setMobileMenuOpen(false)}
@@ -497,7 +522,7 @@ const HeaderWithClerk: React.FC = () => {
                                     }`}
                                 >
                                     {item.name}
-                                </Link>
+                                </LocaleLink>
                             ))}
                         </div>
                     </div>

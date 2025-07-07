@@ -13,11 +13,23 @@
         "searchPlaceholder": "Search servers..."
     },
     "footer": {
+        "brand": "Magic MCP",
+        "description": "Your gateway to discover and integrate the best Model Context Protocol servers, empowering AI capabilities.",
+        "quickLinks": "Quick Links",
+        "resources": "Resources",
+        "home": "Home",
+        "browseServers": "Browse Servers",
+        "categories": "Categories",
+        "tags": "Tags",
+        "documentation": "Documentation",
+        "apiReference": "API Reference",
+        "developerGuide": "Developer Guide",
+        "community": "Community",
         "about": "About",
         "contact": "Contact",
         "privacy": "Privacy Policy",
         "terms": "Terms of Service",
-        "copyright": "© 2024 Magic MCP. All rights reserved."
+        "copyright": "© 2024 Magic MCP. Built with ❤️ for the AI community"
     },
     "common": {
         "loading": "Loading...",

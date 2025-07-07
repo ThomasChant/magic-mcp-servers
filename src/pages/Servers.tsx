@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
     Search,
     Grid3X3,
@@ -13,6 +14,7 @@ import { ServerCard, ServerListItem } from "../components/ServerCard";
 import { BatchScoreProvider } from "../components/BatchScoreProvider";
 
 const Servers: React.FC = () => {
+    const { t } = useTranslation(['server', 'common']);
     const location = useLocation();
     
     // Get global search query from app store
@@ -154,10 +156,10 @@ const Servers: React.FC = () => {
     const paginatedServers = filteredAndSortedServers;
 
     const platformFilters = [
-        { id: "web", name: "Web" },
-        { id: "desktop", name: "Desktop" },
-        { id: "mobile", name: "Mobile" },
-        { id: "cloud", name: "Cloud" },
+        { id: "web", name: t('platforms.web') },
+        { id: "desktop", name: t('platforms.desktop') },
+        { id: "mobile", name: t('platforms.mobile') },
+        { id: "cloud", name: t('platforms.cloud') },
     ];
 
     const languageFilters = [
@@ -242,14 +244,14 @@ const Servers: React.FC = () => {
         return (
             <div className="bg-gray-50 dark:bg-gray-900 min-h-screen flex items-center justify-center">
                 <div className="text-center">
-                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Error loading servers</h1>
-                    <p className="text-gray-600 dark:text-gray-400 mb-4">Failed to load server data. Please try again later.</p>
-                    <div className="text-red-500 mb-4">Error: {String(serversError)}</div>
+                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('list.error')}</h1>
+                    <p className="text-gray-600 dark:text-gray-400 mb-4">{t('list.errorMessage')}</p>
+                    <div className="text-red-500 mb-4">{t('error')}: {String(serversError)}</div>
                     <button 
                         onClick={() => window.location.reload()} 
                         className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
                     >
-                        Retry
+                        {t('list.retry')}
                     </button>
                 </div>
             </div>
@@ -264,12 +266,12 @@ const Servers: React.FC = () => {
                     <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
                         <div className="mb-6 lg:mb-0">
                             <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                                MCP Servers
+                                {t('hero.title')}
                             </h1>
                             <p className="text-lg text-gray-600 dark:text-gray-300">
-                                Discover and integrate powerful Model Context Protocol servers
+                                {t('hero.subtitle')}
                                 <span className="block text-sm mt-1">
-                                    {totalServers} servers available across {categories?.length || 0} categories
+                                    {t('hero.serverCount', { count: totalServers, categoryCount: categories?.length || 0 })}
                                 </span>
                             </p>
                         </div>
@@ -277,7 +279,7 @@ const Servers: React.FC = () => {
                         {/* View Toggle and Sort */}
                         <div className="flex items-center space-x-4">
                             <div className="flex items-center space-x-2">
-                                <span className="text-sm text-gray-600 dark:text-gray-400">View:</span>
+                                <span className="text-sm text-gray-600 dark:text-gray-400">{t('list.view')}</span>
                                 <button
                                     onClick={() => setViewMode("grid")}
                                     className={`p-2 rounded-md ${
@@ -309,16 +311,16 @@ const Servers: React.FC = () => {
                                 }}
                                 className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             >
-                                <option value="upvotes-desc">Sort by Usage Count (High to Low)</option>
-                                <option value="upvotes-asc">Sort by Usage Count (Low to High)</option>
-                                <option value="stars-desc">Sort by GitHub Stars (High to Low)</option>
-                                <option value="stars-asc">Sort by GitHub Stars (Low to High)</option>
-                                <option value="name-asc">Sort by Name (A to Z)</option>
-                                <option value="name-desc">Sort by Name (Z to A)</option>
-                                <option value="repo_created_at-desc">Sort by Created (Newest First)</option>
-                                <option value="repo_created_at-asc">Sort by Created (Oldest First)</option>
-                                <option value="last_updated-desc">Sort by Updated (Recent First)</option>
-                                <option value="last_updated-asc">Sort by Updated (Oldest First)</option>
+                                <option value="upvotes-desc">{t('sort.usageCountDesc')}</option>
+                                <option value="upvotes-asc">{t('sort.usageCountAsc')}</option>
+                                <option value="stars-desc">{t('sort.starsDesc')}</option>
+                                <option value="stars-asc">{t('sort.starsAsc')}</option>
+                                <option value="name-asc">{t('sort.nameAsc')}</option>
+                                <option value="name-desc">{t('sort.nameDesc')}</option>
+                                <option value="repo_created_at-desc">{t('sort.createdDesc')}</option>
+                                <option value="repo_created_at-asc">{t('sort.createdAsc')}</option>
+                                <option value="last_updated-desc">{t('sort.updatedDesc')}</option>
+                                <option value="last_updated-asc">{t('sort.updatedAsc')}</option>
                             </select>
                         </div>
                     </div>
@@ -332,7 +334,7 @@ const Servers: React.FC = () => {
                         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 sticky top-24">
                             <div className="flex items-center justify-between mb-4">
                                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                                    Filters
+                                    {t('list.filters')}
                                 </h3>
                                 <button
                                     onClick={() => {
@@ -347,19 +349,19 @@ const Servers: React.FC = () => {
                                     }}
                                     className="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline"
                                 >
-                                    Clear All
+                                    {t('list.clearAll')}
                                 </button>
                             </div>
 
                             {/* Search Filter */}
                             <div className="mb-6">
                                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                    Search
+                                    {t('list.search')}
                                 </label>
                                 <div className="relative">
                                     <input
                                         type="search"
-                                        placeholder="Filter by name or description..."
+                                        placeholder={t('hero.searchPlaceholder')}
                                         value={sidebarSearch}
                                         onChange={(e) => setSidebarSearch(e.target.value)}
                                         className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg text-sm placeholder-gray-500 dark:placeholder-gray-400"
@@ -371,7 +373,7 @@ const Servers: React.FC = () => {
                             {/* Category Filter */}
                             <div className="mb-6">
                                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                                    Categories
+                                    {t('list.categories')}
                                 </label>
                                 <div className="space-y-2">
                                     {categories?.map((category) => (
@@ -405,7 +407,7 @@ const Servers: React.FC = () => {
                             {/* Platform Filter */}
                             <div className="mb-6">
                                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                                    Platform
+                                    {t('list.platform')}
                                 </label>
                                 <div className="space-y-2">
                                     {platformFilters.map((platform) => (
@@ -439,7 +441,7 @@ const Servers: React.FC = () => {
                             {/* Language Filter */}
                             <div className="mb-6">
                                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                                    Language
+                                    {t('list.language')}
                                 </label>
                                 <div className="space-y-2">
                                     {languageFilters.map((language) => (
@@ -477,9 +479,7 @@ const Servers: React.FC = () => {
                         {/* Results Summary */}
                         <div className="flex items-center justify-between mb-6">
                             <div className="text-sm text-gray-600 dark:text-gray-400">
-                                Showing <span className="font-medium">{paginatedServers.length}</span> of{" "}
-                                <span className="font-medium">{totalServers}</span> servers
-                                (Page {currentPage} of {totalPages})
+                                {t('list.showing', { start: paginatedServers.length, total: totalServers })} {t('list.page', { current: currentPage, total: totalPages })}
                             </div>
 
                             {/* Quick Filters */}
@@ -494,7 +494,7 @@ const Servers: React.FC = () => {
                                                 : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
                                         }`}
                                     >
-                                        {filter.charAt(0).toUpperCase() + filter.slice(1)}
+                                        {t(`list.${filter}`)}
                                     </span>
                                 ))}
                             </div>
@@ -522,10 +522,10 @@ const Servers: React.FC = () => {
                                 <div className="max-w-md mx-auto">
                                     <Search className="h-12 w-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
                                     <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                                        No matching servers found
+                                        {t('list.noResults')}
                                     </h3>
                                     <p className="text-gray-600 dark:text-gray-400">
-                                        Try adjusting your search terms or filters
+                                        {t('list.tryAdjusting')}
                                     </p>
                                 </div>
                             </div>
@@ -535,8 +535,7 @@ const Servers: React.FC = () => {
                         {totalPages > 1 && (
                             <div className="mt-8 flex items-center justify-between">
                                 <div className="text-sm text-gray-600 dark:text-gray-400">
-                                    Showing <span className="font-medium">{paginatedServers.length}</span> of{" "}
-                                    <span className="font-medium">{totalServers}</span> results
+                                    {t('list.showingResults', { count: paginatedServers.length, total: totalServers })}
                                 </div>
 
                                 <div className="flex items-center space-x-2">
@@ -546,7 +545,7 @@ const Servers: React.FC = () => {
                                         className="px-3 py-2 text-sm text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
                                     >
                                         <ChevronLeft className="h-4 w-4 mr-1" />
-                                        Previous
+                                        {t('list.previous')}
                                     </button>
 
                                     <div className="flex items-center space-x-1">
@@ -596,7 +595,7 @@ const Servers: React.FC = () => {
                                         disabled={!hasNextPage}
                                         className="px-3 py-2 text-sm text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
                                     >
-                                        Next
+                                        {t('list.next')}
                                         <ChevronRight className="h-4 w-4 ml-1" />
                                     </button>
                                 </div>

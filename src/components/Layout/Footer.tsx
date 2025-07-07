@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Footer: React.FC = () => {
+    const { t } = useTranslation();
+    
     return (
         <footer className="bg-gray-900 dark:bg-gray-950 text-white dark:text-gray-100 border-t border-gray-200 dark:border-gray-800 transition-colors duration-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -15,20 +18,18 @@ const Footer: React.FC = () => {
                                 </span>
                             </div>
                             <span className="text-xl font-bold text-white dark:text-gray-100">
-                                Magic MCP
+                                {t('footer.brand')}
                             </span>
                         </div>
                         <p className="text-gray-300 dark:text-gray-400 mb-6 max-w-md">
-                            Your gateway to discover and integrate the best
-                            Model Context Protocol servers, empowering AI
-                            capabilities.
+                            {t('footer.description')}
                         </p>
                     </div>
 
                     {/* Quick Links */}
                     <div>
                         <h3 className="text-lg font-semibold mb-4 text-white dark:text-gray-100">
-                            Quick Links
+                            {t('footer.quickLinks')}
                         </h3>
                         <ul className="space-y-2">
                             <li>
@@ -36,7 +37,7 @@ const Footer: React.FC = () => {
                                     to="/"
                                     className="text-gray-300 dark:text-gray-400 hover:text-white dark:hover:text-gray-100 transition-colors duration-200"
                                 >
-                                    Home
+                                    {t('footer.home')}
                                 </Link>
                             </li>
                             <li>
@@ -44,7 +45,7 @@ const Footer: React.FC = () => {
                                     to="/servers"
                                     className="text-gray-300 dark:text-gray-400 hover:text-white dark:hover:text-gray-100 transition-colors duration-200"
                                 >
-                                    Browse Servers
+                                    {t('footer.browseServers')}
                                 </Link>
                             </li>
                             <li>
@@ -52,7 +53,7 @@ const Footer: React.FC = () => {
                                     to="/categories"
                                     className="text-gray-300 dark:text-gray-400 hover:text-white dark:hover:text-gray-100 transition-colors duration-200"
                                 >
-                                    Categories
+                                    {t('footer.categories')}
                                 </Link>
                             </li>
                             <li>
@@ -60,7 +61,7 @@ const Footer: React.FC = () => {
                                     to="/tags"
                                     className="text-gray-300 dark:text-gray-400 hover:text-white dark:hover:text-gray-100 transition-colors duration-200"
                                 >
-                                    Tags
+                                    {t('footer.tags')}
                                 </Link>
                             </li>
                             <li>
@@ -68,7 +69,7 @@ const Footer: React.FC = () => {
                                     to="/docs"
                                     className="text-gray-300 dark:text-gray-400 hover:text-white dark:hover:text-gray-100 transition-colors duration-200"
                                 >
-                                    Documentation
+                                    {t('footer.documentation')}
                                 </Link>
                             </li>
                         </ul>
@@ -77,7 +78,7 @@ const Footer: React.FC = () => {
                     {/* Resources */}
                     <div>
                         <h3 className="text-lg font-semibold mb-4 text-white dark:text-gray-100">
-                            Resources
+                            {t('footer.resources')}
                         </h3>
                         <ul className="space-y-2">
                             <li>
@@ -87,7 +88,7 @@ const Footer: React.FC = () => {
                                     rel="noopener noreferrer"
                                     className="text-gray-300 dark:text-gray-400 hover:text-white dark:hover:text-gray-100 transition-colors duration-200"
                                 >
-                                    API Reference
+                                    {t('footer.apiReference')}
                                 </a>
                             </li>
                             <li>
@@ -97,7 +98,7 @@ const Footer: React.FC = () => {
                                     rel="noopener noreferrer"
                                     className="text-gray-300 dark:text-gray-400 hover:text-white dark:hover:text-gray-100 transition-colors duration-200"
                                 >
-                                    Developer Guide
+                                    {t('footer.developerGuide')}
                                 </a>
                             </li>
                             <li>
@@ -107,7 +108,7 @@ const Footer: React.FC = () => {
                                     rel="noopener noreferrer"
                                     className="text-gray-300 dark:text-gray-400 hover:text-white dark:hover:text-gray-100 transition-colors duration-200"
                                 >
-                                    Community
+                                    {t('footer.community')}
                                 </a>
                             </li>
                         </ul>
@@ -116,7 +117,7 @@ const Footer: React.FC = () => {
 
                 <div className="border-t border-gray-800 dark:border-gray-700 pt-8 mt-8 transition-colors duration-200">
                     <p className="text-center text-gray-400 dark:text-gray-500">
-                        © 2024 Magic MCP. Built with ❤️ for the AI community
+                        {t('footer.copyright')}
                     </p>
                 </div>
             </div>
