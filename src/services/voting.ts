@@ -185,6 +185,7 @@ export class VotingService {
      */
     async getUserVote(serverId: string): Promise<'up' | 'down' | null> {
         try {
+            console.log('getUserVote', this.userId, serverId);
             const { data, error } = await supabase
                 .from('server_votes')
                 .select('vote_type')
