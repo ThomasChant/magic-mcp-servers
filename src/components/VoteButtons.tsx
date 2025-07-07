@@ -86,20 +86,17 @@ const VoteButtons: React.FC<VoteButtonsProps> = ({
         sm: {
             button: showScore ? 'w-6 h-6' : 'w-8 h-8',
             icon: showScore ? 'h-3 w-3' : 'h-4 w-4',
-            score: 'text-xs font-medium px-1 min-w-[1.5rem]',
-            container: 'gap-1'
+            score: 'text-xs font-medium px-1 min-w-[1.5rem]'
         },
         md: {
             button: 'w-8 h-8',
             icon: 'h-4 w-4',
-            score: 'text-sm font-medium px-1 min-w-[2rem]',
-            container: 'gap-1'
+            score: 'text-sm font-medium px-1 min-w-[2rem]'
         },
         lg: {
             button: 'w-10 h-10',
             icon: 'h-5 w-5',
-            score: 'text-base font-medium px-1 min-w-[2.5rem]',
-            container: 'gap-1'
+            score: 'text-base font-medium px-1 min-w-[2.5rem]'
         }
     };
 
