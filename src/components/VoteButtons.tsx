@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { ThumbsUp, LogIn } from "lucide-react";
 import { useUser, useClerk } from "@clerk/clerk-react";
 import { useServerScore, useUserVote, useVoteMutation } from "../services/voting";
+import { useBatchScore } from "./BatchScoreProvider";
 
 // Simple notification function
 const notify = (message: string, type: 'success' | 'error' = 'success') => {
@@ -37,8 +38,15 @@ const VoteButtons: React.FC<VoteButtonsProps> = ({
     const { isSignedIn } = isClient ? useUser() : { isSignedIn: false };
     const { openSignIn } = isClient ? useClerk() : { openSignIn: () => {} };
     
-    // Get server score and user vote status
-    const { data: serverScore, isLoading: scoreLoading } = useServerScore(serverId);
+    // Try to get score from batch provider first, fallback to individual query
+    const batchScore = useBatchScore(serverId);
+    // Only fetch individual score if not provided by batch
+    const shouldFetchIndividual = !batchScore;
+    const { data: individualScore, isLoading: individualScoreLoading } = useServerScore(serverId, shouldFetchIndividual);
+    const serverScore = batchScore || individualScore;
+    const scoreLoading = !batchScore && individualScoreLoading;
+    
+    // Get user vote status
     const { data: userVote, isLoading: voteLoading } = useUserVote(serverId);
     
     // Vote operations
