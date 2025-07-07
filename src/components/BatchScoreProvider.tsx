@@ -9,12 +9,24 @@ interface BatchScoreContextValue {
 
 const BatchScoreContext = createContext<BatchScoreContextValue | null>(null);
 
-export function useBatchScore(serverId: string): ServerScore | undefined {
+export function useBatchScore(serverId: string): {
+    score: ServerScore | undefined;
+    isLoading: boolean;
+    hasBatchProvider: boolean;
+} {
     const context = useContext(BatchScoreContext);
     if (!context) {
-        return undefined;
+        return {
+            score: undefined,
+            isLoading: false,
+            hasBatchProvider: false
+        };
     }
-    return context.scores[serverId];
+    return {
+        score: context.scores[serverId],
+        isLoading: context.isLoading,
+        hasBatchProvider: true
+    };
 }
 
 interface BatchScoreProviderProps {
