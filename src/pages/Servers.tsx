@@ -12,6 +12,7 @@ import { useServersPaginated, useCategories } from "../hooks/useUnifiedData";
 import { useAppStore } from "../store/useAppStore";
 import { ServerCard, ServerListItem } from "../components/ServerCard";
 import { BatchScoreProvider } from "../components/BatchScoreProvider";
+import { BatchUserVoteProvider } from "../components/BatchUserVoteProvider";
 
 const Servers: React.FC = () => {
     const { t } = useTranslation(['server', 'common']);
@@ -502,21 +503,23 @@ const Servers: React.FC = () => {
 
                         {/* Server Grid/List */}
                         {paginatedServers.length > 0 ? (
-                            <BatchScoreProvider serverIds={serverIds}>
-                                {viewMode === "grid" ? (
-                                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                                        {paginatedServers.map((server) => (
-                                            <ServerCard key={server.id} server={server} />
-                                        ))}
-                                    </div>
-                                ) : (
-                                    <div className="space-y-2">
-                                        {paginatedServers.map((server) => (
-                                            <ServerListItem key={server.id} server={server} />
-                                        ))}
-                                    </div>
-                                )}
-                            </BatchScoreProvider>
+                            <BatchUserVoteProvider serverIds={serverIds}>
+                                <BatchScoreProvider serverIds={serverIds}>
+                                    {viewMode === "grid" ? (
+                                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                                            {paginatedServers.map((server) => (
+                                                <ServerCard key={server.id} server={server} />
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <div className="space-y-2">
+                                            {paginatedServers.map((server) => (
+                                                <ServerListItem key={server.id} server={server} />
+                                            ))}
+                                        </div>
+                                    )}
+                                </BatchScoreProvider>
+                            </BatchUserVoteProvider>
                         ) : (
                             <div className="text-center py-12">
                                 <div className="max-w-md mx-auto">

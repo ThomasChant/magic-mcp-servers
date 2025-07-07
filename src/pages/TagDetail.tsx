@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { useSearchServersPaginated } from "../hooks/useUnifiedData";
 import { BatchScoreProvider } from "../components/BatchScoreProvider";
+import { BatchUserVoteProvider } from "../components/BatchUserVoteProvider";
 import type { SortOption } from "../types";
 const TagDetail: React.FC = () => {
     const { tag } = useParams<{ tag: string }>();
@@ -178,21 +179,23 @@ const TagDetail: React.FC = () => {
                         </div>
 
                         {/* Servers Grid/List */}
-                        <BatchScoreProvider serverIds={serverIds}>
-                            {viewMode === "grid" ? (
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
-                                    {servers.map((server) => (
-                                        <ServerCard key={server.id} server={server} />
-                                    ))}
-                                </div>
-                            ) : (
-                                <div className="space-y-4 mb-8">
-                                    {servers.map((server) => (
-                                        <ServerListItem key={server.id} server={server} />
-                                    ))}
-                                </div>
-                            )}
-                        </BatchScoreProvider>
+                        <BatchUserVoteProvider serverIds={serverIds}>
+                            <BatchScoreProvider serverIds={serverIds}>
+                                {viewMode === "grid" ? (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+                                        {servers.map((server) => (
+                                            <ServerCard key={server.id} server={server} />
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className="space-y-4 mb-8">
+                                        {servers.map((server) => (
+                                            <ServerListItem key={server.id} server={server} />
+                                        ))}
+                                    </div>
+                                )}
+                            </BatchScoreProvider>
+                        </BatchUserVoteProvider>
 
                         {/* Pagination */}
                         {(hasPrevPage || hasNextPage) && (

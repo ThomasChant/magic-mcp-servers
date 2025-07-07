@@ -3,6 +3,7 @@ import { ThumbsUp, LogIn } from "lucide-react";
 import { useUser, useClerk } from "@clerk/clerk-react";
 import { useServerScore, useUserVote, useVoteMutation } from "../services/voting";
 import { useBatchScore } from "./BatchScoreProvider";
+import { useBatchUserVote } from "./BatchUserVoteProvider";
 
 // Simple notification function
 const notify = (message: string, type: 'success' | 'error' = 'success') => {
@@ -46,8 +47,13 @@ const VoteButtons: React.FC<VoteButtonsProps> = ({
     const serverScore = batchScore || individualScore;
     const scoreLoading = hasBatchProvider ? batchLoading : individualScoreLoading;
     
-    // Get user vote status
-    const { data: userVote, isLoading: voteLoading } = useUserVote(serverId);
+    // Try to get user vote from batch provider first, fallback to individual query
+    const { userVote: batchUserVote, isLoading: batchVoteLoading, hasBatchProvider: hasUserVoteBatchProvider } = useBatchUserVote(serverId);
+    // Only fetch individual user vote if no batch provider exists
+    const shouldFetchIndividualVote = !hasUserVoteBatchProvider;
+    const { data: individualUserVote, isLoading: individualVoteLoading } = useUserVote(serverId, shouldFetchIndividualVote);
+    const userVote = batchUserVote || individualUserVote;
+    const voteLoading = hasUserVoteBatchProvider ? batchVoteLoading : individualVoteLoading;
     
     // Vote operations
     const { vote, removeVote, isVoting, lastVoteResult } = useVoteMutation(serverId);

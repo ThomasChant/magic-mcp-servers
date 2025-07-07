@@ -43,6 +43,7 @@ import InstallationTab from "../components/InstallationTab";
 import APIReferenceTab from "../components/APIReferenceTab";
 import { ClientOnly } from "../components/ClientOnly";
 import { BatchScoreProvider } from "../components/BatchScoreProvider";
+import { BatchUserVoteProvider } from "../components/BatchUserVoteProvider";
 const ServerDetail: React.FC = () => {
     const { slug } = useParams<{ slug: string }>();
     const { data: server, isLoading, error } = useServer(slug!);
@@ -241,7 +242,8 @@ const ServerDetail: React.FC = () => {
     // Tabs removed - using StructuredReadme component
 
     return (
-        <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
+        <BatchUserVoteProvider serverIds={[server.id]}>
+            <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
             {/* Breadcrumb */}
             <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -1333,7 +1335,8 @@ const ServerDetail: React.FC = () => {
                     opacity: 1;
                 }
             `}</style>
-        </div>
+            </div>
+        </BatchUserVoteProvider>
     );
 };
 

@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { ThumbsUp, LogIn } from "lucide-react";
-import { useServerScore, useUserVote, useVoteMutation } from "../services/voting";
+import React from "react";
+import { LogIn } from "lucide-react";
+import { useServerScore } from "../services/voting";
 import { useBatchScore } from "./BatchScoreProvider";
 
 // Simple notification function

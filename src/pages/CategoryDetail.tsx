@@ -14,6 +14,7 @@ import { useServersByCategoryPaginated, useCategories } from "../hooks/useUnifie
 import type { SearchFilters } from "../types";
 import { ServerCard, ServerListItem } from "../components/ServerCard";
 import { BatchScoreProvider } from "../components/BatchScoreProvider";
+import { BatchUserVoteProvider } from "../components/BatchUserVoteProvider";
 
 const CategoryDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -495,21 +496,23 @@ const CategoryDetail: React.FC = () => {
                                 </div>
                             </div>
                         ) : (
-                            <BatchScoreProvider serverIds={serverIds}>
-                                {viewMode === "grid" ? (
-                                    <div className="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-                                        {filteredAndSortedServers.map((server) => (
-                                            <ServerCard key={server.id} server={server} />
-                                        ))}
-                                    </div>
-                                ) : (
-                                    <div className="space-y-4">
-                                        {filteredAndSortedServers.map((server) => (
-                                            <ServerListItem key={server.id} server={server} />
-                                        ))}
-                                    </div>
-                                )}
-                            </BatchScoreProvider>
+                            <BatchUserVoteProvider serverIds={serverIds}>
+                                <BatchScoreProvider serverIds={serverIds}>
+                                    {viewMode === "grid" ? (
+                                        <div className="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+                                            {filteredAndSortedServers.map((server) => (
+                                                <ServerCard key={server.id} server={server} />
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <div className="space-y-4">
+                                            {filteredAndSortedServers.map((server) => (
+                                                <ServerListItem key={server.id} server={server} />
+                                            ))}
+                                        </div>
+                                    )}
+                                </BatchScoreProvider>
+                            </BatchUserVoteProvider>
                         )}
 
                         {/* Pagination */}

@@ -16,6 +16,7 @@ import { useServers, useCategories } from "../hooks/useUnifiedData";
 import { useAppStore } from "../store/useAppStore";
 import { ServerCard, ServerListItem } from "../components/ServerCard";
 import { BatchScoreProvider } from "../components/BatchScoreProvider";
+import { BatchUserVoteProvider } from "../components/BatchUserVoteProvider";
 import { useFavoritesSync } from "../hooks/useFavoritesSync";
 import type { MCPServer } from "../types";
 
@@ -340,33 +341,35 @@ const Favorites: React.FC = () => {
                         }
                     >
                         {favoriteServers.length > 0 ? (
-                            <BatchScoreProvider serverIds={favoriteServerIds}>
-                                {favoriteViewMode === "grid" ? (
-                                    <div
-                                        className={`grid grid-cols-1 gap-6 ${
-                                            categories && categories.length > 0
-                                                ? "lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3"
-                                                : "md:grid-cols-2 xl:grid-cols-3"
-                                        }`}
-                                    >
-                                        {favoriteServers.map((server) => (
-                                            <ServerCard
-                                                key={server.slug}
-                                                server={server as ServerData}
-                                            />
-                                        ))}
-                                    </div>
-                                ) : (
-                                    <div className="space-y-2">
-                                        {favoriteServers.map((server) => (
-                                            <ServerListItem
-                                                key={server.slug}
-                                                server={server as ServerData}
-                                            />
-                                        ))}
-                                    </div>
-                                )}
-                            </BatchScoreProvider>
+                            <BatchUserVoteProvider serverIds={favoriteServerIds}>
+                                <BatchScoreProvider serverIds={favoriteServerIds}>
+                                    {favoriteViewMode === "grid" ? (
+                                        <div
+                                            className={`grid grid-cols-1 gap-6 ${
+                                                categories && categories.length > 0
+                                                    ? "lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3"
+                                                    : "md:grid-cols-2 xl:grid-cols-3"
+                                            }`}
+                                        >
+                                            {favoriteServers.map((server) => (
+                                                <ServerCard
+                                                    key={server.slug}
+                                                    server={server as ServerData}
+                                                />
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <div className="space-y-2">
+                                            {favoriteServers.map((server) => (
+                                                <ServerListItem
+                                                    key={server.slug}
+                                                    server={server as ServerData}
+                                                />
+                                            ))}
+                                        </div>
+                                    )}
+                                </BatchScoreProvider>
+                            </BatchUserVoteProvider>
                         ) : selectedCategories.length > 0 ? (
                             <div className="text-center py-12">
                                 <div className="max-w-md mx-auto">

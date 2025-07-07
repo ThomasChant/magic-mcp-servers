@@ -365,7 +365,7 @@ export function useServerScores(serverIds: string[]) {
  * @hook useUserVote
  * @description Hook to get user's vote for a server
  */
-export function useUserVote(serverId: string) {
+export function useUserVote(serverId: string, enabled: boolean = true) {
     const { user } = useUser();
     
     return useQuery({
@@ -386,7 +386,7 @@ export function useUserVote(serverId: string) {
 
             return data?.vote_type as 'up' | 'down' | null || null;
         },
-        enabled: !!user && !!serverId,
+        enabled: !!user && !!serverId && enabled,
         staleTime: 30 * 1000, // 30 seconds
     });
 }
