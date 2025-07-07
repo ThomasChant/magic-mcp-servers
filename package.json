@@ -7,7 +7,7 @@
         "dev": "node server.js",
         "dev:spa": "vite",
         "build": "npm run build:client && npm run build:server && npm run update:html",
-        "build:vercel": "rm -rf node_modules package-lock.json && npm install && npm run build:client && npm run build:server && npm run update:html && npm run sitemap:build && mv dist/client/index.html dist/client/client-fallback.html && cp favicon.ico dist/client/",    
+        "build:vercel": "npm run build:client && npm run build:server && npm run sitemap:build && mv dist/client/index.html dist/client/client-fallback.html && cp favicon.ico dist/client/",    
         "build:client": "vite build --outDir dist/client && cp index-ssr.html dist/client/",
         "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",
         "update:html": "node scripts/update-html-assets.js",
