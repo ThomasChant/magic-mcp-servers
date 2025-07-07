@@ -268,9 +268,18 @@ app.use("*", async (req, res, next) => {
             console.log(`🚀 Using SSR for: ${url}`);
 
             try {
-                // Import SSR render function
+                // Dynamically discover the correct entry-server file
+                const serverAssetsDir = "./dist/server/assets";
+                const files = await fs.readdir(serverAssetsDir);
+                const entryServerFile = files.find(file => file.startsWith('entry-server.') && file.endsWith('.js'));
+                
+                if (!entryServerFile) {
+                    throw new Error('No entry-server file found in dist/server/assets');
+                }
+                
+                // Import SSR render function with discovered filename
                 const serverModule = await import(
-                    "./dist/server/assets/entry-server.BcCNoANn.js"
+                    `${serverAssetsDir}/${entryServerFile}`
                 );
                 const { html: renderedHtml, seoData } =
                     await serverModule.render(url);
