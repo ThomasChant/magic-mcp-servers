@@ -180,29 +180,29 @@ export class VotingService {
         }
     }
 
-    /**
-     * Get user's vote for a specific server
-     */
-    async getUserVote(serverId: string): Promise<'up' | 'down' | null> {
-        try {
-            console.log('getUserVote', this.userId, serverId);
-            const { data, error } = await supabase
-                .from('server_votes')
-                .select('vote_type')
-                .eq('user_id', this.userId)
-                .eq('server_id', serverId)
-                .single();
+    // /**
+    //  * Get user's vote for a specific server
+    //  */
+    // async getUserVote(serverId: string): Promise<'up' | 'down' | null> {
+    //     try {
+    //         console.log('getUserVote', this.userId, serverId);
+    //         const { data, error } = await supabase
+    //             .from('server_votes')
+    //             .select('vote_type')
+    //             .eq('user_id', this.userId)
+    //             .eq('server_id', serverId)
+    //             .single();
 
-            if (error && error.code !== 'PGRST116') { // PGRST116 = no rows returned
-                throw new Error(`Failed to get user vote: ${error.message}`);
-            }
+    //         if (error && error.code !== 'PGRST116') { // PGRST116 = no rows returned
+    //             throw new Error(`Failed to get user vote: ${error.message}`);
+    //         }
 
-            return data?.vote_type || null;
-        } catch (error) {
-            console.error('Failed to get user vote:', error);
-            return null;
-        }
-    }
+    //         return data?.vote_type || null;
+    //     } catch (error) {
+    //         console.error('Failed to get user vote:', error);
+    //         return null;
+    //     }
+    // }
 
     /**
      * Get server score information
@@ -362,35 +362,35 @@ export function useServerScores(serverIds: string[]) {
     });
 }
 
-/**
- * @hook useUserVote
- * @description Hook to get user's vote for a server
- */
-export function useUserVote(serverId: string, enabled: boolean = true) {
-    const { user } = useUser();
+// /**
+//  * @hook useUserVote
+//  * @description Hook to get user's vote for a server
+//  */
+// export function useUserVote(serverId: string, enabled: boolean = true) {
+//     const { user } = useUser();
     
-    return useQuery({
-        queryKey: ['user-vote', user?.id, serverId],
-        queryFn: async () => {
-            if (!user) return null;
+//     return useQuery({
+//         queryKey: ['user-vote', user?.id, serverId],
+//         queryFn: async () => {
+//             if (!user) return null;
 
-            const { data, error } = await supabase
-                .from('server_votes')
-                .select('vote_type')
-                .eq('user_id', user.id)
-                .eq('server_id', serverId)
-                .single();
+//             const { data, error } = await supabase
+//                 .from('server_votes')
+//                 .select('vote_type')
+//                 .eq('user_id', user.id)
+//                 .eq('server_id', serverId)
+//                 .single();
 
-            if (error && error.code !== 'PGRST116') {
-                throw new Error(`Failed to get user vote: ${error.message}`);
-            }
+//             if (error && error.code !== 'PGRST116') {
+//                 throw new Error(`Failed to get user vote: ${error.message}`);
+//             }
 
-            return data?.vote_type as 'up' | 'down' | null || null;
-        },
-        enabled: !!user && !!serverId && enabled,
-        staleTime: 30 * 1000, // 30 seconds
-    });
-}
+//             return data?.vote_type as 'up' | 'down' | null || null;
+//         },
+//         enabled: !!user && !!serverId && enabled,
+//         staleTime: 30 * 1000, // 30 seconds
+//     });
+// }
 
 /**
  * @hook useVoteMutation
