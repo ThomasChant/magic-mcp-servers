@@ -14,7 +14,7 @@ import {
 import { useServers, useCategories } from "../hooks/useUnifiedData";
 import { useAppStore } from "../store/useAppStore";
 import { ServerCard, ServerListItem } from "../components/ServerCard";
-import { useFavoritesSyncSafe } from "../hooks/useFavoritesSyncSafe";
+import { useFavoritesSyncWithClerk } from "../hooks/useFavoritesSyncSafe";
 import { BatchScoreProvider } from "../components/BatchScoreProvider";
 import type { MCPServer } from "../types";
 
@@ -34,7 +34,7 @@ const Favorites: React.FC = () => {
 
     // Get sync data for cloud sync functionality
     const { isOnline, favoritesError, retrySync, isSignedIn } =
-        useFavoritesSyncSafe();
+        useFavoritesSyncWithClerk();
 
     // Filter state
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
