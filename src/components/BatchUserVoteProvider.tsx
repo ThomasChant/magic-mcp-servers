@@ -16,7 +16,12 @@ export function useBatchUserVote(serverId: string): {
     hasBatchProvider: boolean;
 } {
     const context = useContext(BatchUserVoteContext);
+    
+    // Debug logging
+    console.log(`useBatchUserVote Debug - ServerID: ${serverId}, HasContext: ${!!context}, Context: ${context ? Object.keys(context.userVotes).length + ' votes' : 'null'}`);
+    
     if (!context) {
+        console.log(`useBatchUserVote - No context for ${serverId}, returning defaults`);
         return {
             userVote: null,
             isLoading: false,
@@ -37,6 +42,9 @@ interface BatchUserVoteProviderProps {
 
 export const BatchUserVoteProvider: React.FC<BatchUserVoteProviderProps> = ({ serverIds, children }) => {
     const { user } = useUser();
+    
+    // Debug logging
+    console.log(`BatchUserVoteProvider Debug - ServerIDs: [${serverIds.join(', ')}], User: ${user?.id || 'none'}`);
     
     // Fetch all user votes in one batch query
     const { data: userVotes = {}, isLoading } = useQuery({

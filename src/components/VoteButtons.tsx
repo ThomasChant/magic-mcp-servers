@@ -37,7 +37,10 @@ const VoteButtons: React.FC<VoteButtonsProps> = ({
     
     // Use batch providers for all queries
     const { score: serverScore, isLoading: scoreLoading } = useBatchScore(serverId);
-    const { userVote, isLoading: voteLoading } = useBatchUserVote(serverId);
+    const { userVote, isLoading: voteLoading, hasBatchProvider } = useBatchUserVote(serverId);
+    
+    // Debug logging
+    console.log(`VoteButtons Debug - ServerID: ${serverId}, HasBatchProvider: ${hasBatchProvider}, UserVote: ${userVote}, Loading: ${voteLoading}`);
     
     // Vote operations
     const { vote, removeVote, isVoting, lastVoteResult } = useVoteMutation(serverId);
