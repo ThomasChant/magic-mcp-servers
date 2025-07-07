@@ -98,6 +98,14 @@ function needsSSR(url) {
 export default async function handler(req, res) {
     try {
         const url = req.url;
+        
+        // Debug: Log environment info
+        console.log("🔍 Vercel Environment Debug:");
+        console.log("  - Current working directory:", process.cwd());
+        console.log("  - __dirname:", __dirname);
+        console.log("  - NODE_ENV:", process.env.NODE_ENV);
+        console.log("  - VERCEL:", process.env.VERCEL);
+        console.log("  - Request URL:", url);
 
         // Handle static files
         if (
@@ -310,7 +318,114 @@ export default async function handler(req, res) {
         }
 
         // Import render function from server build
-        const { render } = await import("../dist/server/entry-server.js");
+        // In Vercel environment, the path might be different
+        let render;
+        
+        // Debug: Check what files exist
+        console.log("🔍 Checking for entry-server.js...");
+        const possiblePaths = [
+            "../dist/server/entry-server.js",
+            "./dist/server/entry-server.js",
+            resolve("dist/server/entry-server.js"),
+            "/var/task/dist/server/entry-server.js", // Vercel function path
+            path.join(process.cwd(), "dist/server/entry-server.js")
+        ];
+        
+        for (const testPath of possiblePaths) {
+            try {
+                await fs.access(testPath);
+                console.log(`✅ File exists at: ${testPath}`);
+            } catch {
+                console.log(`❌ File not found at: ${testPath}`);
+            }
+        }
+        
+        // Also check dist directory structure
+        try {
+            const distPath = resolve("dist");
+            const distContents = await fs.readdir(distPath);
+            console.log("📁 Contents of dist directory:", distContents);
+            
+            const serverPath = resolve("dist/server");
+            const serverContents = await fs.readdir(serverPath);
+            console.log("📁 Contents of dist/server directory:", serverContents);
+        } catch (e) {
+            console.log("❌ Could not read dist directory:", e.message);
+        }
+        
+        // Try multiple import strategies for Vercel compatibility
+        let importError = null;
+        const importStrategies = [
+            // Strategy 1: Relative path from api directory
+            async () => {
+                const module = await import("../dist/server/entry-server.js");
+                console.log("✅ Loaded entry-server using relative path from api/");
+                return module.render;
+            },
+            // Strategy 2: Path from project root (Vercel's working directory)
+            async () => {
+                const entryPath = path.join(process.cwd(), "dist/server/entry-server.js");
+                const module = await import(entryPath);
+                console.log("✅ Loaded entry-server using cwd path:", entryPath);
+                return module.render;
+            },
+            // Strategy 3: Using file URL
+            async () => {
+                const entryPath = new URL(
+                    "../dist/server/entry-server.js",
+                    import.meta.url
+                ).pathname;
+                const module = await import(entryPath);
+                console.log("✅ Loaded entry-server using file URL:", entryPath);
+                return module.render;
+            },
+            // Strategy 4: Vercel's /var/task directory
+            async () => {
+                const module = await import("/var/task/dist/server/entry-server.js");
+                console.log("✅ Loaded entry-server from /var/task/");
+                return module.render;
+            }
+        ];
+
+        for (const strategy of importStrategies) {
+            try {
+                render = await strategy();
+                break;
+            } catch (e) {
+                importError = e;
+                console.log("❌ Import strategy failed:", e.message);
+            }
+        }
+
+        if (!render) {
+            console.error("❌ All import strategies failed. Last error:", importError);
+            console.warn("⚠️ Falling back to client-side rendering");
+            
+            // Fallback to CSR with basic SEO
+            const basicHead = `
+    <title>Magic MCP - Model Context Protocol Server Discovery</title>
+    <meta name="description" content="Discover and integrate the best Model Context Protocol (MCP) servers for AI applications." />
+    <meta name="keywords" content="MCP, Model Context Protocol, AI tools, servers, Claude MCP, AI integration" />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Magic MCP - Model Context Protocol Server Discovery" />
+    <meta property="og:description" content="Discover and integrate the best Model Context Protocol (MCP) servers for AI applications." />
+    <meta property="og:url" content="https://magicmcp.net${routePath}" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://magicmcp.net${routePath}" />`;
+
+            const finalHtml = template
+                .replace(`<!--app-head-->`, basicHead)
+                .replace(`<!--app-html-->`, '<div id="root"></div>');
+
+            res.setHeader("Content-Type", "text/html; charset=utf-8");
+            res.setHeader("Cache-Control", "public, max-age=300, s-maxage=300");
+            res.setHeader("X-Render-Mode", "CSR-Fallback");
+            res.setHeader("X-SSR-Error", importError?.message || "Unknown error");
+
+            return res.status(200).send(finalHtml);
+        }
 
         // Add detailed debug logging for dynamic routes
         if (
