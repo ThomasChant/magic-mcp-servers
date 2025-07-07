@@ -17,16 +17,16 @@ interface VoteButtonsProps {
 }
 
 /**
- * VoteButtonsSafeBatch - Uses only batch providers, no individual queries
- * Safe component that doesn't depend on Clerk, optimized for pages with multiple servers
+ * VoteButtonsSafe - Safe component that doesn't depend on Clerk
+ * Uses batch queries for optimal performance
  */
-const VoteButtonsSafeBatch: React.FC<VoteButtonsProps> = ({
+const VoteButtonsSafe: React.FC<VoteButtonsProps> = ({
     serverId,
     size = 'md',
     className = '',
     showScore = true
 }) => {
-    // Only use batch providers - no individual queries
+    // Use batch providers for all queries
     const { score: serverScore, isLoading: scoreLoading } = useBatchScore(serverId);
 
     // Style configuration - clean single button layout
@@ -92,97 +92,5 @@ const VoteButtonsSafeBatch: React.FC<VoteButtonsProps> = ({
     );
 };
 
-/**
- * VoteButtonsSafeIndividual - Uses only individual queries, no batch providers
- * Safe component optimized for single server pages or when batch providers aren't available
- */
-const VoteButtonsSafeIndividual: React.FC<VoteButtonsProps> = ({
-    serverId,
-    size = 'md',
-    className = '',
-    showScore = true
-}) => {
-    // Only use individual queries - no batch providers
-    const { data: serverScore, isLoading: scoreLoading } = useServerScore(serverId);
-
-    // Style configuration - clean single button layout
-    const sizeConfig = {
-        sm: {
-            button: showScore ? 'w-6 h-6' : 'w-8 h-8',
-            icon: showScore ? 'h-3 w-3' : 'h-4 w-4',
-            score: 'text-xs font-medium px-1 min-w-[1.5rem]'
-        },
-        md: {
-            button: 'w-8 h-8',
-            icon: 'h-4 w-4',
-            score: 'text-sm font-medium px-1 min-w-[2rem]'
-        },
-        lg: {
-            button: 'w-10 h-10',
-            icon: 'h-5 w-5',
-            score: 'text-base font-medium px-1 min-w-[2.5rem]'
-        }
-    };
-
-    const config = sizeConfig[size];
-    const isLoading = scoreLoading;
-
-    // User count style
-    const getScoreStyle = () => {
-        const baseStyle = `text-center flex items-center justify-center ${config.score}`;
-        const upvotes = serverScore?.upvotes || 0;
-
-        if (upvotes > 0) {
-            return `${baseStyle} text-red-600 dark:text-red-400`;
-        } else {
-            return `${baseStyle} text-gray-600 dark:text-gray-400`;
-        }
-    };
-
-    // Show login prompt (non-functional for safety)
-    const buttonClass = showScore ? 'w-6 h-6' : 'w-8 h-8';
-    const iconClass = showScore ? 'h-3 w-3' : 'h-4 w-4';
-    const buttonStyle = showScore 
-        ? `flex items-center justify-center ${buttonClass} bg-red-100 text-red-600 hover:bg-red-200 rounded-full transition-all duration-150 dark:bg-red-900/20 dark:text-red-400`
-        : `flex items-center justify-center ${buttonClass} bg-gray-50 border border-gray-200 text-gray-600 hover:bg-gray-100 rounded-lg transition-all duration-150 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700`;
-    
-    return (
-        <div className={`flex items-center gap-1 ${className}`}>
-            <button
-                onClick={() => {
-                    // Safe no-op - could show a message or redirect to sign up
-                    notify('Please sign in to vote', 'error');
-                }}
-                className={buttonStyle}
-                title={`Sign in to vote (${serverScore?.upvotes || 0} users)`}
-                disabled={isLoading}
-            >
-                <LogIn className={iconClass} />
-            </button>
-            {showScore && serverScore && (
-                <div className={getScoreStyle()}>
-                    {serverScore.upvotes || 0} users
-                </div>
-            )}
-        </div>
-    );
-};
-
-/**
- * VoteButtonsSafe - Smart wrapper component that detects batch providers and chooses optimal implementation
- * Uses VoteButtonsSafeBatch when batch providers are available, VoteButtonsSafeIndividual otherwise
- */
-const VoteButtonsSafe: React.FC<VoteButtonsProps> = (props) => {
-    // Check if batch providers are available
-    const { hasBatchProvider } = useBatchScore(props.serverId);
-    
-    // Use batch component when batch provider is available
-    if (hasBatchProvider) {
-        return <VoteButtonsSafeBatch {...props} />;
-    }
-    
-    // Fall back to individual component
-    return <VoteButtonsSafeIndividual {...props} />;
-};
 
 export default VoteButtonsSafe;

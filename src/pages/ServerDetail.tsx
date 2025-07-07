@@ -399,32 +399,36 @@ const ServerDetail: React.FC = () => {
                                 </p>
                                 <div className="flex items-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
                                     <ClientOnly fallback={
-                                        <BatchScoreProvider serverIds={[server.id]}>
-                                            <VoteButtonsSafe
-                                                serverId={server.id}
-                                                size="md"
-                                                showScore={true}
-                                                className="flex items-center"
-                                            />
-                                        </BatchScoreProvider>
-                                    }>
-                                        <BatchScoreProvider serverIds={[server.id]}>
-                                            {import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ? (
-                                                <VoteButtons
-                                                    serverId={server.id}
-                                                    size="md"
-                                                    showScore={true}
-                                                    className="flex items-center"
-                                                />
-                                            ) : (
+                                        <BatchUserVoteProvider serverIds={[server.id]}>
+                                            <BatchScoreProvider serverIds={[server.id]}>
                                                 <VoteButtonsSafe
                                                     serverId={server.id}
                                                     size="md"
                                                     showScore={true}
                                                     className="flex items-center"
                                                 />
-                                            )}
-                                        </BatchScoreProvider>
+                                            </BatchScoreProvider>
+                                        </BatchUserVoteProvider>
+                                    }>
+                                        <BatchUserVoteProvider serverIds={[server.id]}>
+                                            <BatchScoreProvider serverIds={[server.id]}>
+                                                {import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ? (
+                                                    <VoteButtons
+                                                        serverId={server.id}
+                                                        size="md"
+                                                        showScore={true}
+                                                        className="flex items-center"
+                                                    />
+                                                ) : (
+                                                    <VoteButtonsSafe
+                                                        serverId={server.id}
+                                                        size="md"
+                                                        showScore={true}
+                                                        className="flex items-center"
+                                                    />
+                                                )}
+                                            </BatchScoreProvider>
+                                        </BatchUserVoteProvider>
                                     </ClientOnly>
                                     <div className="flex items-center">
                                         <Star className="h-4 w-4 text-yellow-500 mr-1" />
