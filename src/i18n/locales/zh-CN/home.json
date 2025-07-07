@@ -8,8 +8,8 @@
         "stats": {
             "servers": "MCP 服务器",
             "categories": "分类",
-            "averageStars": "平均星数",
-            "activeThisMonth": "本月活跃"
+            "averageStars": "平均星标",
+            "activeThisMonth": "活跃仓库"
         }
     },
     "search": {

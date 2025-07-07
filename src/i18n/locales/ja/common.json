@@ -1,55 +1,67 @@
 {
     "nav": {
-        "home": "Home",
-        "servers": "Servers",
-        "categories": "Categories",
-        "favorites": "Favorites",
-        "documentation": "Documentation",
+        "home": "ホーム",
+        "servers": "サーバー",
+        "categories": "カテゴリ",
+        "favorites": "お気に入り",
+        "documentation": "ドキュメント",
         "tag": "タグ"
     },
     "header": {
         "title": "Magic MCP",
-        "subtitle": "Model Context Protocol Server Discovery Platform",
-        "searchPlaceholder": "Search servers..."
+        "subtitle": "Model Context Protocol サーバー発見プラットフォーム",
+        "searchPlaceholder": "サーバーを検索..."
     },
     "footer": {
-        "about": "About",
-        "contact": "Contact",
-        "privacy": "Privacy Policy",
-        "terms": "Terms of Service",
+        "brand": "Magic MCP",
+        "description": "Model Context Protocol サーバー発見プラットフォーム。AIアプリケーション向けの最高のMCPサーバーを見つけて統合しましょう。",
+        "quickLinks": "クイックリンク",
+        "home": "ホーム",
+        "browseServers": "サーバーを閲覧",
+        "categories": "カテゴリ",
+        "tags": "タグ",
+        "documentation": "ドキュメント",
+        "resources": "リソース",
+        "apiReference": "APIリファレンス",
+        "developerGuide": "開発者ガイド",
+        "community": "コミュニティ",
+        "about": "について",
+        "contact": "お問い合わせ",
+        "privacy": "プライバシーポリシー",
+        "terms": "利用規約",
         "copyright": "© 2024 Magic MCP. All rights reserved."
     },
     "common": {
-        "loading": "Loading...",
-        "error": "Error",
-        "notFound": "Not Found",
-        "backToHome": "Back to Home",
-        "viewMore": "View More",
-        "showLess": "Show Less",
-        "search": "Search",
-        "filter": "Filter",
-        "sort": "Sort",
-        "share": "Share",
-        "copy": "Copy",
-        "copied": "Copied!",
-        "install": "Install",
-        "documentation": "Documentation",
+        "loading": "読み込み中...",
+        "error": "エラー",
+        "notFound": "見つかりません",
+        "backToHome": "ホームに戻る",
+        "viewMore": "もっと見る",
+        "showLess": "表示を減らす",
+        "search": "検索",
+        "filter": "フィルター",
+        "sort": "並び替え",
+        "share": "共有",
+        "copy": "コピー",
+        "copied": "コピーしました！",
+        "install": "インストール",
+        "documentation": "ドキュメント",
         "github": "GitHub",
-        "demo": "Demo",
-        "website": "Website"
+        "demo": "デモ",
+        "website": "ウェブサイト"
     },
     "auth": {
-        "signIn": "Sign In",
-        "signOut": "Sign Out",
-        "profile": "Profile",
-        "settings": "Settings"
+        "signIn": "サインイン",
+        "signOut": "サインアウト",
+        "profile": "プロフィール",
+        "settings": "設定"
     },
     "theme": {
-        "light": "Light",
-        "dark": "Dark",
-        "system": "System"
+        "light": "ライト",
+        "dark": "ダーク",
+        "system": "システム"
     },
     "language": {
-        "selectLanguage": "Select Language"
+        "selectLanguage": "言語を選択"
     }
 }

@@ -1,0 +1,56 @@
+{
+    "title": "カテゴリ",
+    "subtitle": "カテゴリ別にMCPサーバーを探索",
+    "detail": {
+        "title": "カテゴリ：{{category}}",
+        "subtitle": "{{category}}カテゴリのサーバー",
+        "description": "説明",
+        "serverCount": "{{count}}個のサーバー",
+        "noServers": "このカテゴリにサーバーが見つかりません",
+        "loadingServers": "サーバーを読み込み中...",
+        "errorLoadingServers": "サーバーの読み込みエラー",
+        "tryAgain": "再試行",
+        "backToCategories": "カテゴリに戻る",
+        "subcategories": "サブカテゴリ",
+        "allServers": "すべてのサーバー",
+        "popularServers": "人気のサーバー",
+        "recentServers": "最近更新されたサーバー",
+        "topRated": "評価が高いサーバー",
+        "mostStars": "スター数が多いサーバー",
+        "filters": "フィルター",
+        "sortBy": "並び替え",
+        "filterBy": "絞り込み",
+        "clearFilters": "フィルターをクリア",
+        "showFilters": "フィルターを表示",
+        "hideFilters": "フィルターを非表示",
+        "resultsCount": "{{count}}件の結果",
+        "noResults": "結果が見つかりません",
+        "searchInCategory": "{{category}}内で検索...",
+        "viewAll": "すべて表示",
+        "viewLess": "折りたたむ"
+    },
+    "list": {
+        "allCategories": "すべてのカテゴリ",
+        "browseByCategory": "カテゴリ別で閲覧",
+        "categoryCount": "{{count}}個のカテゴリ",
+        "popularCategories": "人気のカテゴリ",
+        "serverCount": "{{count}}個のサーバー",
+        "noDescription": "説明がありません",
+        "viewCategory": "カテゴリを表示",
+        "exploreServers": "サーバーを探索",
+        "loadingCategories": "カテゴリを読み込み中...",
+        "errorLoadingCategories": "カテゴリの読み込みエラー",
+        "searchCategories": "カテゴリを検索...",
+        "filterCategories": "カテゴリを絞り込み"
+    },
+    "breadcrumb": {
+        "home": "ホーム",
+        "categories": "カテゴリ",
+        "category": "{{category}}"
+    },
+    "meta": {
+        "title": "{{category}} MCPサーバー | Magic MCP",
+        "description": "{{category}} MCPサーバーを発見して探索。{{category}}アプリケーションに最適なModel Context Protocolサーバーを見つけましょう。",
+        "keywords": "MCP, Model Context Protocol, {{category}}, サーバー, AI, ML"
+    }
+}

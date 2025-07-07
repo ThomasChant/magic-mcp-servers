@@ -1,0 +1,36 @@
+{
+    "title": "我的收藏",
+    "subtitle": "您儲存的 MCP 伺服器，方便快速存取",
+    "description": "顯示 {{total}} 個收藏伺服器中的 {{count}} 個",
+    "categoryInfo": "您的收藏中有 {{count}} 個伺服器",
+    "syncStatus": "• 登入以在裝置間同步",
+    "view": "檢視：",
+    "showingInfo": "顯示 {{total}} 個中的 {{count}} 個",
+    "error": "載入收藏時發生錯誤",
+    "errorMessage": "無法載入伺服器資料。請稍後重試。",
+    "retry": "重試",
+    "syncFailed": "同步失敗",
+    "synced": "已同步",
+    "localOnly": "僅本機",
+    "filterByCategory": "按分類篩選",
+    "clear": "清除",
+    "noFavoritesInCategory": "所選分類中沒有收藏",
+    "noFavoritesInCategoryDescription": "請嘗試選擇不同的分類或清除篩選",
+    "clearFilter": "清除篩選",
+    "noFavoritesYet": "還沒有收藏",
+    "noFavoritesYetDescription": "開始探索 MCP 伺服器並儲存您的收藏以便快速存取",
+    "browseServers": "瀏覽伺服器",
+    "viewModes": {
+        "grid": "網格檢視",
+        "list": "清單檢視",
+        "compact": "緊湊檢視",
+        "detailed": "詳細檢視"
+    },
+    "empty": {
+        "title": "暫無收藏",
+        "subtitle": "開始探索並新增伺服器到您的收藏",
+        "description": "當您找到喜歡的伺服器時，點擊愛心圖示將其儲存到這裡以便快速存取。",
+        "browseServers": "瀏覽伺服器",
+        "discoverServers": "發現伺服器"
+    }
+}

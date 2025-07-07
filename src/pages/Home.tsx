@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import {
     Search
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useServerStats } from "../hooks/useUnifiedData";
 import { useAppStore } from "../store/useAppStore";
 import ParticleHero from "../components/ParticleHero";
@@ -11,6 +12,8 @@ import type { MCPServer } from "../types";
 
 
 const Home: React.FC = () => {
+    const { t } = useTranslation('home');
+    
     // Get app store state
     const { searchQuery, setSearchQuery } = useAppStore();
     
@@ -51,11 +54,11 @@ const Home: React.FC = () => {
                 <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 pointer-events-none" style={{ zIndex: 10 }}>
                     <div className="text-center animate-fade-in-up">
                         <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 relative z-10">
-                            Discover the Best
-                            <span className="block bg-gradient-to-r from-cyan-300 to-purple-300 bg-clip-text text-transparent">MCP Servers</span>
+                            {t('hero.title')}
+                            <span className="block bg-gradient-to-r from-cyan-300 to-purple-300 bg-clip-text text-transparent">{t('hero.titleHighlight')}</span>
                         </h1>
                         <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto relative z-10">
-                            Your gateway to enhanced AI capabilities. Explore, integrate, and supercharge your applications with Model Context Protocol servers.
+                            {t('hero.subtitle')}
                         </p>
 
                         {/* Search Bar */}
@@ -68,7 +71,7 @@ const Home: React.FC = () => {
                             }}>
                                 <input
                                     type="search"
-                                    placeholder="Search for MCP servers, categories, or features..."
+                                    placeholder={t('hero.searchPlaceholder')}
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     className="w-full px-6 py-4 bg-white dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 rounded-lg border-0 text-lg"
@@ -76,7 +79,7 @@ const Home: React.FC = () => {
                                 />
                                 <button className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-6 py-2 rounded-lg hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 shadow-lg hover:shadow-cyan-500/25">
                                     <Search className="h-4 w-4 mr-2 inline" />
-                                    Search
+                                    {t('hero.searchButton')}
                                 </button>
                             </div>
                         </div>
@@ -92,7 +95,7 @@ const Home: React.FC = () => {
                                 <div className="text-3xl font-bold bg-gradient-to-r from-cyan-300 to-white bg-clip-text text-transparent">
                                     {statistics.totalServers > 0 ? statistics.totalServers.toLocaleString() : '...'}
                                 </div>
-                                <div className="text-gray-300">MCP Servers</div>
+                                <div className="text-gray-300">{t('hero.stats.servers')}</div>
                             </div>
                             <div className="rounded-lg p-4 text-center hover-lift" style={{
                                 background: 'rgba(147, 51, 234, 0.1)',
@@ -103,7 +106,7 @@ const Home: React.FC = () => {
                                 <div className="text-3xl font-bold bg-gradient-to-r from-purple-300 to-white bg-clip-text text-transparent">
                                     {statistics.uniqueCategories > 0 ? statistics.uniqueCategories : '...'}
                                 </div>
-                                <div className="text-gray-300">Categories</div>
+                                <div className="text-gray-300">{t('hero.stats.categories')}</div>
                             </div>
                             <div className="rounded-lg p-4 text-center hover-lift" style={{
                                 background: 'rgba(34, 197, 94, 0.1)',
@@ -119,7 +122,7 @@ const Home: React.FC = () => {
                                         : '...'
                                     }
                                 </div>
-                                <div className="text-gray-300">Avg Stars</div>
+                                <div className="text-gray-300">{t('hero.stats.averageStars')}</div>
                             </div>
                             <div className="rounded-lg p-4 text-center hover-lift" style={{
                                 background: 'rgba(249, 115, 22, 0.1)',
@@ -130,7 +133,7 @@ const Home: React.FC = () => {
                                 <div className="text-3xl font-bold bg-gradient-to-r from-orange-300 to-white bg-clip-text text-transparent">
                                     {statistics.activeRepos > 0 ? statistics.activeRepos.toLocaleString() : '...'}
                                 </div>
-                                <div className="text-gray-300">Active Repos</div>
+                                <div className="text-gray-300">{t('hero.stats.activeThisMonth')}</div>
                             </div>
                         </div>
                     </div>

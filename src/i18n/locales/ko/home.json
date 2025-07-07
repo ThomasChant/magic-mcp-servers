@@ -1,15 +1,15 @@
 {
     "hero": {
-        "title": "Discover the Best",
-        "titleHighlight": "MCP Servers",
-        "subtitle": "Your gateway to enhanced AI capabilities. Explore, integrate, and supercharge your applications with Model Context Protocol servers.",
-        "searchPlaceholder": "Search for MCP servers, categories, or features...",
-        "searchButton": "Search",
+        "title": "최고의",
+        "titleHighlight": "MCP 서버를 발견하세요",
+        "subtitle": "향상된 AI 기능을 위한 관문입니다. Model Context Protocol 서버를 탐색하고 통합하여 애플리케이션을 강화하세요.",
+        "searchPlaceholder": "MCP 서버, 카테고리, 기능 검색...",
+        "searchButton": "검색",
         "stats": {
-            "servers": "MCP Servers",
-            "categories": "Categories",
-            "averageStars": "Average Stars",
-            "activeThisMonth": "Active This Month"
+            "servers": "MCP 서버",
+            "categories": "카테고리",
+            "averageStars": "평균 별점",
+            "activeThisMonth": "이번 달 활성"
         }
     },
     "search": {

@@ -1,0 +1,56 @@
+{
+    "title": "Categories",
+    "subtitle": "Explore MCP servers by category",
+    "detail": {
+        "title": "Category: {{category}}",
+        "subtitle": "Servers in the {{category}} category",
+        "description": "Description",
+        "serverCount": "{{count}} servers",
+        "noServers": "No servers found in this category",
+        "loadingServers": "Loading servers...",
+        "errorLoadingServers": "Error loading servers",
+        "tryAgain": "Try again",
+        "backToCategories": "Back to Categories",
+        "subcategories": "Subcategories",
+        "allServers": "All Servers",
+        "popularServers": "Popular Servers",
+        "recentServers": "Recently Updated",
+        "topRated": "Top Rated",
+        "mostStars": "Most Stars",
+        "filters": "Filters",
+        "sortBy": "Sort by",
+        "filterBy": "Filter by",
+        "clearFilters": "Clear Filters",
+        "showFilters": "Show Filters",
+        "hideFilters": "Hide Filters",
+        "resultsCount": "{{count}} results",
+        "noResults": "No results found",
+        "searchInCategory": "Search in {{category}}...",
+        "viewAll": "View All",
+        "viewLess": "View Less"
+    },
+    "list": {
+        "allCategories": "All Categories",
+        "browseByCategory": "Browse by Category",
+        "categoryCount": "{{count}} categories",
+        "popularCategories": "Popular Categories",
+        "serverCount": "{{count}} servers",
+        "noDescription": "No description available",
+        "viewCategory": "View Category",
+        "exploreServers": "Explore Servers",
+        "loadingCategories": "Loading categories...",
+        "errorLoadingCategories": "Error loading categories",
+        "searchCategories": "Search categories...",
+        "filterCategories": "Filter categories"
+    },
+    "breadcrumb": {
+        "home": "Home",
+        "categories": "Categories",
+        "category": "{{category}}"
+    },
+    "meta": {
+        "title": "{{category}} MCP Servers | Magic MCP",
+        "description": "Discover and explore {{category}} MCP servers. Find the best Model Context Protocol servers for {{category}} applications.",
+        "keywords": "MCP, Model Context Protocol, {{category}}, servers, AI, ML"
+    }
+}

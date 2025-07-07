@@ -1,55 +1,67 @@
 {
     "nav": {
-        "home": "Home",
-        "servers": "Servers",
-        "categories": "Categories",
-        "favorites": "Favorites",
-        "documentation": "Documentation",
+        "home": "홈",
+        "servers": "서버",
+        "categories": "카테고리",
+        "favorites": "즐겨찾기",
+        "documentation": "문서",
         "tag": "태그"
     },
     "header": {
         "title": "Magic MCP",
-        "subtitle": "Model Context Protocol Server Discovery Platform",
-        "searchPlaceholder": "Search servers..."
+        "subtitle": "Model Context Protocol 서버 발견 플랫폼",
+        "searchPlaceholder": "서버 검색..."
     },
     "footer": {
-        "about": "About",
-        "contact": "Contact",
-        "privacy": "Privacy Policy",
-        "terms": "Terms of Service",
+        "brand": "Magic MCP",
+        "description": "Model Context Protocol 서버 발견 플랫폼. AI 애플리케이션을 위한 최고의 MCP 서버를 찾고 통합하세요.",
+        "quickLinks": "빠른 링크",
+        "home": "홈",
+        "browseServers": "서버 둘러보기",
+        "categories": "카테고리",
+        "tags": "태그",
+        "documentation": "문서",
+        "resources": "리소스",
+        "apiReference": "API 참조",
+        "developerGuide": "개발자 가이드",
+        "community": "커뮤니티",
+        "about": "소개",
+        "contact": "연락처",
+        "privacy": "개인정보 보호정책",
+        "terms": "이용약관",
         "copyright": "© 2024 Magic MCP. All rights reserved."
     },
     "common": {
-        "loading": "Loading...",
-        "error": "Error",
-        "notFound": "Not Found",
-        "backToHome": "Back to Home",
-        "viewMore": "View More",
-        "showLess": "Show Less",
-        "search": "Search",
-        "filter": "Filter",
-        "sort": "Sort",
-        "share": "Share",
-        "copy": "Copy",
-        "copied": "Copied!",
-        "install": "Install",
-        "documentation": "Documentation",
+        "loading": "로딩 중...",
+        "error": "오류",
+        "notFound": "찾을 수 없음",
+        "backToHome": "홈으로 돌아가기",
+        "viewMore": "더 보기",
+        "showLess": "적게 보기",
+        "search": "검색",
+        "filter": "필터",
+        "sort": "정렬",
+        "share": "공유",
+        "copy": "복사",
+        "copied": "복사됨!",
+        "install": "설치",
+        "documentation": "문서",
         "github": "GitHub",
-        "demo": "Demo",
-        "website": "Website"
+        "demo": "데모",
+        "website": "웹사이트"
     },
     "auth": {
-        "signIn": "Sign In",
-        "signOut": "Sign Out",
-        "profile": "Profile",
-        "settings": "Settings"
+        "signIn": "로그인",
+        "signOut": "로그아웃",
+        "profile": "프로필",
+        "settings": "설정"
     },
     "theme": {
-        "light": "Light",
-        "dark": "Dark",
-        "system": "System"
+        "light": "라이트",
+        "dark": "다크",
+        "system": "시스템"
     },
     "language": {
-        "selectLanguage": "Select Language"
+        "selectLanguage": "언어 선택"
     }
 }

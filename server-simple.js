@@ -220,25 +220,41 @@ function injectSEOData(template, seoData, url) {
 }
 
 // Main SSR handler
-app.use("*", async (req, res) => {
+app.use("*", async (req, res, next) => {
     try {
         const url = req.originalUrl.replace(base, "");
-        
+
         // Skip SSR for static assets and API routes
         const skipSSR = [
-            '.js', '.css', '.json', '.ico', '.png', '.jpg', '.jpeg', 
-            '.svg', '.woff', '.woff2', '.ttf', '.eot', '.map',
-            '.well-known', 'api/', '_next/', 'static/', 'assets/'
-        ].some(ext => url.includes(ext));
-        
+            ".js",
+            ".css",
+            ".json",
+            ".ico",
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".svg",
+            ".woff",
+            ".woff2",
+            ".ttf",
+            ".eot",
+            ".map",
+            ".well-known",
+            "api/",
+            "_next/",
+            "static/",
+            "assets/",
+        ].some((ext) => url.includes(ext));
+
         if (skipSSR) {
-            return res.status(404).send('Not found');
+            // Don't handle static assets here - let static file server handle them
+            return next();
         }
-        
+
         console.log(`📡 Processing request: ${url}`);
 
         let template;
-        
+
         if (!isProduction) {
             // Development: Use Vite dev server with CSR
             template = await fs.readFile("./index.html", "utf-8");
@@ -246,36 +262,50 @@ app.use("*", async (req, res) => {
             res.status(200).set({ "Content-Type": "text/html" }).send(template);
             return;
         }
-        
+
         // Production: Decide between SSR and CSR
         if (needsSSR(url)) {
             console.log(`🚀 Using SSR for: ${url}`);
-            
+
             try {
                 // Import SSR render function
-                const serverModule = await import("./dist/server/entry-server.js");
-                const { html: renderedHtml, seoData } = await serverModule.render(url);
-                
+                const serverModule = await import(
+                    "./dist/server/assets/entry-server.ysiTMTjp.js"
+                );
+                const { html: renderedHtml, seoData } =
+                    await serverModule.render(url);
+
                 // Load SSR template
                 template = await fs.readFile("./index-ssr.html", "utf-8");
-                
+
                 // Inject SEO data
                 template = injectSEOData(template, seoData, url);
-                
+
                 // Inject rendered HTML
-                const finalHtml = template.replace('<!--app-html-->', renderedHtml || '');
-                
-                console.log(`✅ SSR completed for ${url} (${finalHtml.length} chars)`);
-                res.status(200).set({ "Content-Type": "text/html" }).send(finalHtml);
+                const finalHtml = template.replace(
+                    "<!--app-html-->",
+                    renderedHtml || ""
+                );
+
+                console.log(
+                    `✅ SSR completed for ${url} (${finalHtml.length} chars)`
+                );
+                res.status(200)
+                    .set({ "Content-Type": "text/html" })
+                    .send(finalHtml);
                 return;
-                
             } catch (ssrError) {
                 console.error("❌ SSR failed for", url, ":", ssrError.message);
                 console.error("Falling back to CSR");
-                
+
                 // Fallback to CSR
-                template = await fs.readFile("./dist/client/index.html", "utf-8");
-                res.status(200).set({ "Content-Type": "text/html" }).send(template);
+                template = await fs.readFile(
+                    "./dist/client/index.html",
+                    "utf-8"
+                );
+                res.status(200)
+                    .set({ "Content-Type": "text/html" })
+                    .send(template);
                 return;
             }
         } else {
@@ -285,7 +315,6 @@ app.use("*", async (req, res) => {
             res.status(200).set({ "Content-Type": "text/html" }).send(template);
             return;
         }
-        
     } catch (e) {
         if (vite) {
             vite.ssrFixStacktrace(e);

@@ -1,0 +1,36 @@
+{
+    "title": "Mes favoris",
+    "subtitle": "Vos serveurs MCP sauvegardés pour un accès rapide",
+    "description": "Affichage de {{count}} sur {{total}} serveurs favoris",
+    "categoryInfo": "{{count}} serveurs dans vos favoris",
+    "syncStatus": "• Connectez-vous pour synchroniser entre appareils",
+    "view": "Affichage :",
+    "showingInfo": "Affichage de {{count}} sur {{total}}",
+    "error": "Erreur de chargement des favoris",
+    "errorMessage": "Impossible de charger les données du serveur. Veuillez réessayer plus tard.",
+    "retry": "Réessayer",
+    "syncFailed": "Échec de synchronisation",
+    "synced": "Synchronisé",
+    "localOnly": "Local seulement",
+    "filterByCategory": "Filtrer par catégorie",
+    "clear": "Effacer",
+    "noFavoritesInCategory": "Aucun favori dans les catégories sélectionnées",
+    "noFavoritesInCategoryDescription": "Essayez de sélectionner d'autres catégories ou d'effacer le filtre",
+    "clearFilter": "Effacer le filtre",
+    "noFavoritesYet": "Aucun favori pour le moment",
+    "noFavoritesYetDescription": "Commencez à explorer les serveurs MCP et sauvegardez vos favoris pour un accès rapide",
+    "browseServers": "Parcourir les serveurs",
+    "viewModes": {
+        "grid": "Grille",
+        "list": "Liste",
+        "compact": "Vue compacte",
+        "detailed": "Vue détaillée"
+    },
+    "empty": {
+        "title": "Aucun favori",
+        "subtitle": "Commencez à explorer et ajoutez des serveurs à vos favoris",
+        "description": "Lorsque vous trouvez des serveurs que vous aimez, cliquez sur l'icône cœur pour les sauvegarder ici pour un accès rapide.",
+        "browseServers": "Parcourir les serveurs",
+        "discoverServers": "Découvrir les serveurs"
+    }
+}

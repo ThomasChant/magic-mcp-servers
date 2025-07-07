@@ -1,5 +1,6 @@
 import React, { useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
     ArrowRight,
     Heart,
@@ -28,6 +29,7 @@ interface ServerData extends Omit<MCPServer, "verified"> {
 
 // Pure CSR Favorites component
 const Favorites: React.FC = () => {
+    const { t } = useTranslation(['favorites', 'common']);
     const { data: servers, isLoading, error } = useServers();
     const { data: categories } = useCategories();
     const { favorites, favoriteViewMode, setFavoriteViewMode } = useAppStore();
@@ -127,19 +129,19 @@ const Favorites: React.FC = () => {
             <div className="bg-gray-50 dark:bg-gray-900 min-h-screen flex items-center justify-center">
                 <div className="text-center">
                     <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                        Error loading favorites
+                        {t('error')}
                     </h1>
                     <p className="text-gray-600 dark:text-gray-400 mb-4">
-                        Failed to load server data. Please try again later.
+                        {t('errorMessage')}
                     </p>
                     <div className="text-red-500 mb-4">
-                        Error: {String(error)}
+                        {t('error')}: {String(error)}
                     </div>
                     <button
                         onClick={() => window.location.reload()}
                         className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
                     >
-                        Retry
+                        {t('retry')}
                     </button>
                 </div>
             </div>
@@ -152,14 +154,14 @@ const Favorites: React.FC = () => {
                 <div className="mb-8">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
                         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-0">
-                            My Favorites
+                            {t('title')}
                         </h1>
 
                         <div className="flex items-center gap-4">
                             {/* View Toggle */}
                             <div className="flex items-center space-x-2">
                                 <span className="text-sm text-gray-600 dark:text-gray-400">
-                                    View:
+                                    {t('view')}
                                 </span>
                                 <button
                                     onClick={() => setFavoriteViewMode("grid")}
@@ -188,13 +190,13 @@ const Favorites: React.FC = () => {
                                 {favoritesError ? (
                                     <div className="flex items-center gap-2 text-red-600 dark:text-red-400 text-sm">
                                         <AlertCircle className="h-4 w-4" />
-                                        <span>Sync failed</span>
+                                        <span>{t('syncFailed')}</span>
                                         <button
                                             onClick={retrySync}
                                             className="flex items-center gap-1 px-2 py-1 text-xs bg-red-100 dark:bg-red-900 rounded hover:bg-red-200 dark:hover:bg-red-800"
                                         >
                                             <RefreshCw className="h-3 w-3" />
-                                            Retry
+                                            {t('retry')}
                                         </button>
                                     </div>
                                 ) : (
@@ -205,7 +207,7 @@ const Favorites: React.FC = () => {
                                             <CloudOff className="h-4 w-4 text-gray-400" />
                                         )}
                                         <span>
-                                            {isOnline ? "Synced" : "Local only"}
+                                            {isOnline ? t('synced') : t('localOnly')}
                                         </span>
                                     </div>
                                 )}
@@ -214,27 +216,33 @@ const Favorites: React.FC = () => {
                     </div>
 
                     <p className="text-lg text-gray-600 dark:text-gray-300">
-                        Your saved MCP servers for quick access
+                        {t('subtitle')}
                         <span className="block text-sm mt-1">
                             {selectedCategories.length > 0 ? (
                                 <>
-                                    Showing {favoriteServers.length} of{" "}
-                                    {servers?.filter((s) =>
-                                        stableFavoritesRef.current.has(s.id)
-                                    ).length || 0}{" "}
-                                    favorite server
-                                    {favoriteServers.length !== 1 ? "s" : ""}
+                                    {t('description', { 
+                                        count: favoriteServers.length, 
+                                        total: servers?.filter((s) => stableFavoritesRef.current.has(s.id)).length || 0,
+                                        plural: favoriteServers.length !== 1 ? "s" : ""
+                                    })}
                                 </>
                             ) : (
                                 <>
-                                    {favoriteServers.length} server
-                                    {favoriteServers.length !== 1 ? "s" : ""} in
-                                    your favorites
+                                    {t('categoryInfo', { 
+                                        count: favoriteServers.length,
+                                        plural: favoriteServers.length !== 1 ? "s" : ""
+                                    })}
                                 </>
                             )}
+<<<<<<< HEAD
                             {displayMessage && (
                                 <span className="ml-2 text-amber-600 dark:text-amber-400">
                                     • {displayMessage}
+=======
+                            {!isSignedIn && (
+                                <span className="text-amber-600 dark:text-amber-400 ml-2">
+                                    {t('syncStatus')}
+>>>>>>> i18n
                                 </span>
                             )}
                         </span>
@@ -249,7 +257,7 @@ const Favorites: React.FC = () => {
                                 <div className="flex items-center justify-between mb-4">
                                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center">
                                         <Filter className="h-5 w-5 mr-2" />
-                                        Filter by Category
+                                        {t('filterByCategory')}
                                     </h3>
                                     {selectedCategories.length > 0 && (
                                         <button
@@ -258,7 +266,7 @@ const Favorites: React.FC = () => {
                                             }
                                             className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
                                         >
-                                            Clear
+                                            {t('clear')}
                                         </button>
                                     )}
                                 </div>
@@ -354,11 +362,10 @@ const Favorites: React.FC = () => {
                                 <div className="max-w-md mx-auto">
                                     <Filter className="h-12 w-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
                                     <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                                        No favorites in selected categories
+                                        {t('noFavoritesInCategory')}
                                     </h3>
                                     <p className="text-gray-600 dark:text-gray-400 mb-6">
-                                        Try selecting different categories or
-                                        clear the filter
+                                        {t('noFavoritesInCategoryDescription')}
                                     </p>
                                     <button
                                         onClick={() =>
@@ -366,7 +373,7 @@ const Favorites: React.FC = () => {
                                         }
                                         className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                                     >
-                                        Clear Filter
+                                        {t('clearFilter')}
                                     </button>
                                 </div>
                             </div>
@@ -375,9 +382,10 @@ const Favorites: React.FC = () => {
                                 <div className="max-w-md mx-auto">
                                     <Heart className="h-12 w-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
                                     <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                                        No favorites yet
+                                        {t('noFavoritesYet')}
                                     </h3>
                                     <p className="text-gray-600 dark:text-gray-400 mb-6">
+<<<<<<< HEAD
                                         {authState === 'not-authenticated' 
                                             ? 'Sign in to save your favorite MCP servers and access them across all your devices'
                                             : 'Start exploring MCP servers and save your favorites for quick access'
@@ -408,6 +416,17 @@ const Favorites: React.FC = () => {
                                             <ArrowRight className="ml-2 h-4 w-4" />
                                         </Link>
                                     </div>
+=======
+                                        {t('noFavoritesYetDescription')}
+                                    </p>
+                                    <Link
+                                        to="/servers"
+                                        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                    >
+                                        {t('browseServers')}
+                                        <ArrowRight className="ml-2 h-4 w-4" />
+                                    </Link>
+>>>>>>> i18n
                                 </div>
                             </div>
                         )}

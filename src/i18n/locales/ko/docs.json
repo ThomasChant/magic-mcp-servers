@@ -1,0 +1,118 @@
+{
+    "title": "문서",
+    "subtitle": "MCP 서버와 사용 방법에 대해 알아보기",
+    "sections": {
+        "gettingStarted": {
+            "title": "시작하기",
+            "subtitle": "MCP 서버의 기초 배우기",
+            "introduction": "MCP 소개",
+            "installation": "설치 가이드",
+            "quickStart": "빠른 시작",
+            "firstServer": "첫 번째 서버",
+            "basicConcepts": "기본 개념",
+            "configuration": "구성"
+        },
+        "serverDevelopment": {
+            "title": "서버 개발",
+            "subtitle": "자신만의 MCP 서버 구축",
+            "createServer": "서버 생성",
+            "serverStructure": "서버 구조",
+            "apiDesign": "API 설계",
+            "bestPractices": "모범 사례",
+            "testing": "테스트",
+            "deployment": "배포",
+            "versioning": "버전 관리"
+        },
+        "integration": {
+            "title": "통합",
+            "subtitle": "MCP 서버를 애플리케이션에 통합",
+            "clientLibraries": "클라이언트 라이브러리",
+            "sdks": "SDK",
+            "examples": "통합 예제",
+            "authentication": "인증",
+            "errorHandling": "오류 처리",
+            "performance": "성능",
+            "monitoring": "모니터링"
+        },
+        "api": {
+            "title": "API 참조",
+            "subtitle": "완전한 API 문서",
+            "endpoints": "엔드포인트",
+            "methods": "메서드",
+            "parameters": "매개변수",
+            "responses": "응답",
+            "errorCodes": "오류 코드",
+            "schemas": "스키마",
+            "examples": "예제"
+        },
+        "community": {
+            "title": "커뮤니티",
+            "subtitle": "MCP 커뮤니티에 참여",
+            "contributing": "기여",
+            "guidelines": "가이드라인",
+            "codeOfConduct": "행동 강령",
+            "support": "지원",
+            "forums": "포럼",
+            "discord": "Discord",
+            "github": "GitHub"
+        },
+        "advanced": {
+            "title": "고급 주제",
+            "subtitle": "고급 MCP 서버 개념",
+            "architecture": "아키텍처",
+            "security": "보안",
+            "scalability": "확장성",
+            "customization": "사용자 정의",
+            "plugins": "플러그인",
+            "extensions": "확장",
+            "troubleshooting": "문제 해결"
+        }
+    },
+    "navigation": {
+        "previousPage": "이전 페이지",
+        "nextPage": "다음 페이지",
+        "tableOfContents": "목차",
+        "onThisPage": "이 페이지의 내용",
+        "editPage": "이 페이지 편집",
+        "viewSource": "소스 보기",
+        "lastUpdated": "마지막 업데이트",
+        "contributors": "기여자",
+        "feedback": "피드백",
+        "improve": "이 페이지 개선"
+    },
+    "search": {
+        "placeholder": "문서 검색...",
+        "noResults": "결과를 찾을 수 없습니다",
+        "resultsFor": "\"{{query}}\"의 검색 결과",
+        "suggestions": "제안",
+        "searchTips": "검색 팁",
+        "exactMatch": "정확한 일치",
+        "partialMatch": "부분 일치"
+    },
+    "common": {
+        "readMore": "더 읽기",
+        "showLess": "접기",
+        "expand": "확장",
+        "collapse": "접기",
+        "copy": "복사",
+        "copied": "복사됨!",
+        "share": "공유",
+        "print": "인쇄",
+        "download": "다운로드",
+        "bookmark": "북마크",
+        "note": "참고",
+        "tip": "팁",
+        "warning": "경고",
+        "danger": "위험",
+        "info": "정보",
+        "example": "예제",
+        "codeExample": "코드 예제",
+        "liveDemo": "라이브 데모",
+        "tryIt": "시도해보기"
+    },
+    "meta": {
+        "title": "문서 | Magic MCP",
+        "description": "MCP 서버의 완전한 문서. Model Context Protocol 서버를 생성, 배포 및 통합하는 방법을 알아보세요.",
+        "keywords": "MCP, Model Context Protocol, 문서, 가이드, 튜토리얼, API, 개발"
+    }
+}

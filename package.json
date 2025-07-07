@@ -6,10 +6,11 @@
     "scripts": {
         "dev": "node server.js",
         "dev:spa": "vite",
-        "build": "npm run build:client && npm run build:server",
-        "build:vercel": "npm run build:client && npm run build:server && npm run sitemap:build && mv dist/client/index.html dist/client/client-fallback.html && cp favicon.ico dist/client/ && cp bingkey.txt dist/client/",
+        "build": "npm run build:client && npm run build:server && npm run update:html",
+        "build:vercel": "npm run build:client && npm run build:server && npm run update:html && npm run sitemap:build && mv dist/client/index.html dist/client/client-fallback.html && cp favicon.ico dist/client/",    
         "build:client": "vite build --outDir dist/client && cp index-ssr.html dist/client/",
         "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",
+        "update:html": "node scripts/update-html-assets.js",
         "serve": "NODE_ENV=production node server-simple.js",
         "serve-simple": "NODE_ENV=production node server-simple.js",
         "serve-local": "node serve-local.js",

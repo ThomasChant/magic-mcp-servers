@@ -1,47 +1,47 @@
 {
     "hero": {
-        "title": "发现最优秀的",
-        "titleHighlight": "MCP 服务器",
-        "subtitle": "您增强 AI 能力的门户。探索、集成并使用 Model Context Protocol 服务器为您的应用程序增强功能。",
-        "searchPlaceholder": "搜索 MCP 服务器、分类或功能...",
-        "searchButton": "搜索",
+        "title": "發現最優秀的",
+        "titleHighlight": "MCP 伺服器",
+        "subtitle": "您增強 AI 能力的門戶。探索、整合並使用 Model Context Protocol 伺服器為您的應用程式增強功能。",
+        "searchPlaceholder": "搜尋 MCP 伺服器、分類或功能...",
+        "searchButton": "搜尋",
         "stats": {
-            "servers": "MCP 服务器",
-            "categories": "分类",
-            "averageStars": "平均星数",
-            "activeThisMonth": "本月活跃"
+            "servers": "MCP 伺服器",
+            "categories": "分類",
+            "averageStars": "平均星標",
+            "activeThisMonth": "活躍儲存庫"
         }
     },
     "search": {
-        "resultsFor": "搜索结果：",
-        "noResults": "未找到匹配的服务器",
-        "tryDifferent": "尝试不同的搜索词"
+        "resultsFor": "搜尋結果：",
+        "noResults": "未找到相符的伺服器",
+        "tryDifferent": "嘗試不同的搜尋詞"
     },
     "categories": {
-        "title": "按分类浏览",
-        "subtitle": "根据主要功能查找服务器",
+        "title": "按分類瀏覽",
+        "subtitle": "根據主要功能查找伺服器",
         "viewAll": "查看全部",
-        "servers": "个服务器"
+        "servers": "個伺服器"
     },
     "featured": {
-        "title": "精选服务器",
-        "subtitle": "精心挑选的高质量和功能出色的服务器"
+        "title": "精選伺服器",
+        "subtitle": "精心挑選的高品質和功能出色的伺服器"
     },
     "popular": {
-        "title": "热门服务器",
-        "subtitle": "最受欢迎和积极维护的服务器"
+        "title": "熱門伺服器",
+        "subtitle": "最受歡迎和積極維護的伺服器"
     },
     "recent": {
         "title": "最近更新",
-        "subtitle": "具有最新更新和改进的服务器"
+        "subtitle": "具有最新更新和改進的伺服器"
     },
     "server": {
-        "stars": "星标",
+        "stars": "星標",
         "forks": "分支",
-        "install": "安装",
-        "viewDetails": "查看详情",
-        "qualityScore": "质量评分",
-        "lastUpdated": "最后更新",
-        "createdBy": "创建者"
+        "install": "安裝",
+        "viewDetails": "查看詳情",
+        "qualityScore": "品質評分",
+        "lastUpdated": "最後更新",
+        "createdBy": "建立者"
     }
 }

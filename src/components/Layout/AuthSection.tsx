@@ -24,8 +24,8 @@ export const AuthSectionWithClerk: React.FC = () => {
                 </div>
             ) : (
                 <SignInButton mode="modal">
-                    <button className="flex items-center px-4 py-2 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-colors">
-                        <User className="h-4 w-4" />
+                    <button className="flex items-center px-4 py-2 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-colors whitespace-nowrap">
+                        <User className="h-4 w-4 mr-2" />
                         {t("auth.signIn")}
                     </button>
                 </SignInButton>
@@ -83,8 +83,8 @@ export const AuthSectionSSR: React.FC = () => {
 
     return (
         <div className="flex items-center space-x-3">
-            <button className="flex items-center px-4 py-2 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-colors">
-                <User className="h-4 w-4" />
+            <button className="flex items-center px-4 py-2 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-colors whitespace-nowrap">
+                <User className="h-4 w-4 mr-2" />
                 {t("auth.signIn")}
             </button>
         </div>
