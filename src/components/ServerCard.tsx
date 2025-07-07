@@ -13,6 +13,7 @@ import {
 import type { MCPServer } from "../types";
 import { FavoriteButton } from "./FavoriteButton";
 import VoteButtons from "./VoteButtons";
+import VoteButtonsSafe from "./VoteButtonsSafe";
 import { ClientOnly } from "./ClientOnly";
 
 // Extended interface for JSON data structure compatibility
@@ -237,12 +238,26 @@ export const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                     </span>
                 </div>
                 
-                <ClientOnly>
-                    <VoteButtons 
+                <ClientOnly fallback={
+                    <VoteButtonsSafe 
                         serverId={server.id}
                         size="sm"
                         className="ml-2"
                     />
+                }>
+                    {import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ? (
+                        <VoteButtons 
+                            serverId={server.id}
+                            size="sm"
+                            className="ml-2"
+                        />
+                    ) : (
+                        <VoteButtonsSafe 
+                            serverId={server.id}
+                            size="sm"
+                            className="ml-2"
+                        />
+                    )}
                 </ClientOnly>
             </div>
         </div>
@@ -342,11 +357,23 @@ export const ServerListItem: React.FC<ServerListItemProps> = ({ server }) => {
                     <ClientOnly>
                         <FavoriteButton serverId={server.id} size="sm" />
                     </ClientOnly>
-                    <ClientOnly>
-                        <VoteButtons 
+                    <ClientOnly fallback={
+                        <VoteButtonsSafe 
                             serverId={server.id}
                             size="md"
                         />
+                    }>
+                        {import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ? (
+                            <VoteButtons 
+                                serverId={server.id}
+                                size="md"
+                            />
+                        ) : (
+                            <VoteButtonsSafe 
+                                serverId={server.id}
+                                size="md"
+                            />
+                        )}
                     </ClientOnly>
                     <Link to={`/servers/${server.slug}`}>
                         <span className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-sm text-sm flex items-center">

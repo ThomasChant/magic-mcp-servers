@@ -14,7 +14,7 @@ import {
 import { useServers, useCategories } from "../hooks/useUnifiedData";
 import { useAppStore } from "../store/useAppStore";
 import { ServerCard, ServerListItem } from "../components/ServerCard";
-import { useFavoritesSyncWithClerk } from "../hooks/useFavoritesSyncSafe";
+import { useFavoritesSync, type FavoritesSyncStatus } from "../hooks/useFavoritesSync";
 import { BatchScoreProvider } from "../components/BatchScoreProvider";
 import type { MCPServer } from "../types";
 
@@ -33,8 +33,8 @@ const Favorites: React.FC = () => {
     const { favorites, favoriteViewMode, setFavoriteViewMode } = useAppStore();
 
     // Get sync data for cloud sync functionality
-    const { isOnline, favoritesError, retrySync, isSignedIn } =
-        useFavoritesSyncWithClerk();
+    const syncStatus = useFavoritesSync();
+    const { isOnline, favoritesError, retrySync, isSignedIn, authState, displayMessage } = syncStatus;
 
     // Filter state
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -232,9 +232,13 @@ const Favorites: React.FC = () => {
                                     your favorites
                                 </>
                             )}
-                            {!isSignedIn && (
-                                <span className="text-amber-600 dark:text-amber-400 ml-2">
-                                    • Sign in to sync across devices
+                            {displayMessage && (
+                                <span className={`ml-2 ${
+                                    authState === 'authenticated-limited' 
+                                        ? 'text-orange-600 dark:text-orange-400'
+                                        : 'text-amber-600 dark:text-amber-400'
+                                }`}>
+                                    • {displayMessage}
                                 </span>
                             )}
                         </span>
@@ -378,16 +382,36 @@ const Favorites: React.FC = () => {
                                         No favorites yet
                                     </h3>
                                     <p className="text-gray-600 dark:text-gray-400 mb-6">
-                                        Start exploring MCP servers and save
-                                        your favorites for quick access
+                                        {authState === 'not-authenticated' 
+                                            ? 'Sign in to save your favorite MCP servers and access them across all your devices'
+                                            : 'Start exploring MCP servers and save your favorites for quick access'
+                                        }
                                     </p>
-                                    <Link
-                                        to="/servers"
-                                        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                                    >
-                                        Browse Servers
-                                        <ArrowRight className="ml-2 h-4 w-4" />
-                                    </Link>
+                                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                                        {authState === 'not-authenticated' && (
+                                            <button
+                                                onClick={() => {
+                                                    // 如果有Clerk环境，可以触发登录；否则显示提示
+                                                    if (import.meta.env.VITE_CLERK_PUBLISHABLE_KEY) {
+                                                        console.log('Would open sign in modal');
+                                                        // TODO: 触发Clerk登录
+                                                    } else {
+                                                        alert('Authentication is not configured. Please set up Clerk to enable sign in.');
+                                                    }
+                                                }}
+                                                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                                            >
+                                                Sign In to Save Favorites
+                                            </button>
+                                        )}
+                                        <Link
+                                            to="/servers"
+                                            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                        >
+                                            Browse Servers
+                                            <ArrowRight className="ml-2 h-4 w-4" />
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
                         )}

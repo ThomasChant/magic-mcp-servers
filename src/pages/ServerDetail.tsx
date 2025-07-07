@@ -37,6 +37,7 @@ import StructuredReadme from "../components/StructuredReadme";
 import ServerCommentsWithReplies from "../components/ServerCommentsWithReplies";
 import { FavoriteButton } from "../components/FavoriteButton";
 import VoteButtons from "../components/VoteButtons";
+import VoteButtonsSafe from "../components/VoteButtonsSafe";
 import ServerTooltip from "../components/ServerTooltip";
 import InstallationTab from "../components/InstallationTab";
 import APIReferenceTab from "../components/APIReferenceTab";
@@ -395,14 +396,32 @@ const ServerDetail: React.FC = () => {
 
                                 </p>
                                 <div className="flex items-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
-                                    <ClientOnly>
+                                    <ClientOnly fallback={
                                         <BatchScoreProvider serverIds={[server.id]}>
-                                            <VoteButtons
+                                            <VoteButtonsSafe
                                                 serverId={server.id}
                                                 size="md"
                                                 showScore={true}
                                                 className="flex items-center"
                                             />
+                                        </BatchScoreProvider>
+                                    }>
+                                        <BatchScoreProvider serverIds={[server.id]}>
+                                            {import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ? (
+                                                <VoteButtons
+                                                    serverId={server.id}
+                                                    size="md"
+                                                    showScore={true}
+                                                    className="flex items-center"
+                                                />
+                                            ) : (
+                                                <VoteButtonsSafe
+                                                    serverId={server.id}
+                                                    size="md"
+                                                    showScore={true}
+                                                    className="flex items-center"
+                                                />
+                                            )}
                                         </BatchScoreProvider>
                                     </ClientOnly>
                                     <div className="flex items-center">
