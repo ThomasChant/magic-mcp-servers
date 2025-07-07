@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { ThumbsUp, LogIn } from "lucide-react";
 import { useUser, useClerk } from "@clerk/clerk-react";
+import { useQueryClient } from "@tanstack/react-query";
 import { useVoteMutation } from "../services/voting";
 import { useBatchScore } from "./BatchScoreProvider";
 import { useBatchUserVote } from "./BatchUserVoteProvider";
@@ -44,6 +45,18 @@ const VoteButtons: React.FC<VoteButtonsProps> = ({
     
     // Vote operations
     const { vote, removeVote, isVoting, lastVoteResult } = useVoteMutation(serverId);
+    const queryClient = useQueryClient();
+    
+    // Clear any legacy user-vote queries to prevent conflicts
+    React.useEffect(() => {
+        try {
+            // Remove old individual vote queries that might conflict
+            queryClient.removeQueries({ queryKey: ['user-vote'] });
+            console.log('VoteButtons: Cleared legacy user-vote queries');
+        } catch (e) {
+            // Ignore errors in cache cleanup
+        }
+    }, [queryClient]);
 
     // Listen to vote results, provide feedback
     useEffect(() => {

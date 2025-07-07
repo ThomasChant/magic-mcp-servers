@@ -48,10 +48,16 @@ export const BatchUserVoteProvider: React.FC<BatchUserVoteProviderProps> = ({ se
     
     // Fetch all user votes in one batch query
     const { data: userVotes = {}, isLoading } = useQuery({
-        queryKey: ['user-votes', user?.id, serverIds],
+        queryKey: ['batch-user-votes', user?.id, serverIds.sort().join(',')],
         queryFn: async () => {
-            if (!user || serverIds.length === 0) return {};
+            // Return empty object if no user (SSR) or no serverIds
+            if (!user || serverIds.length === 0) {
+                console.log('BatchUserVoteProvider: No user or serverIds, returning empty votes');
+                return {};
+            }
 
+            console.log(`BatchUserVoteProvider: Executing batch query for user ${user.id}, servers: [${serverIds.join(', ')}]`);
+            
             const { data, error } = await supabase
                 .from('server_votes')
                 .select('server_id, vote_type')
@@ -59,8 +65,11 @@ export const BatchUserVoteProvider: React.FC<BatchUserVoteProviderProps> = ({ se
                 .in('server_id', serverIds);
 
             if (error) {
+                console.error('BatchUserVoteProvider: Query failed:', error.message);
                 throw new Error(`Failed to get user votes: ${error.message}`);
             }
+
+            console.log('BatchUserVoteProvider: Query successful, votes:', data?.length || 0);
 
             const votes: Record<string, 'up' | 'down'> = {};
             data?.forEach(vote => {
@@ -69,7 +78,7 @@ export const BatchUserVoteProvider: React.FC<BatchUserVoteProviderProps> = ({ se
 
             return votes;
         },
-        enabled: !!user && serverIds.length > 0,
+        enabled: serverIds.length > 0, // Remove user dependency for SSR compatibility
         staleTime: 30 * 1000, // 30 seconds
     });
     
