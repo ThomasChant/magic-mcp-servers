@@ -1,8 +1,7 @@
-import { useMemo } from 'react';
+import { useState, useEffect } from 'react';
 
 export type AuthState = 
   | 'not-authenticated'      // 用户未登录
-  | 'authenticated-limited'  // 用户已登录但Clerk功能受限  
   | 'authenticated-full';    // 用户已登录且功能完整
 
 export interface AuthStatus {
@@ -15,63 +14,143 @@ export interface AuthStatus {
 
 /**
  * @hook useAuthStatus
- * @description 智能检测用户认证状态，区分三种情况：
- * 1. 未登录
- * 2. 已登录但Clerk功能受限（生产环境配置问题等）
- * 3. 已登录且功能完整
+ * @description 简化版的认证状态检测，专注于准确性和可靠性
+ * 只区分两种状态：已登录和未登录
  */
 export function useAuthStatus(): AuthStatus {
-  return useMemo(() => {
-    const isClient = typeof window !== 'undefined';
-    const hasClerkKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
-    
-    // 检查是否在ClerkProvider环境中
-    let hasClerkProvider = false;
-    let actuallySignedIn = false;
-    
-    if (isClient && hasClerkKey) {
+  const [authStatus, setAuthStatus] = useState<AuthStatus>({
+    state: 'not-authenticated',
+    isSignedIn: false,
+    hasClerkFeatures: false,
+    canSync: false,
+    displayMessage: 'Sign in to sync favorites across devices'
+  });
+
+  useEffect(() => {
+    const checkAuthStatus = () => {
+      const hasClerkKey = !!import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+      const isClient = typeof window !== 'undefined';
+
+      if (!hasClerkKey) {
+        console.log('[AuthStatus] No Clerk key configured');
+        setAuthStatus({
+          state: 'not-authenticated',
+          isSignedIn: false,
+          hasClerkFeatures: false,
+          canSync: false,
+          displayMessage: 'Sign in to sync favorites across devices'
+        });
+        return;
+      }
+
+      if (!isClient) {
+        console.log('[AuthStatus] Not in client environment');
+        setAuthStatus({
+          state: 'not-authenticated',
+          isSignedIn: false,
+          hasClerkFeatures: false,
+          canSync: false,
+          displayMessage: 'Sign in to sync favorites across devices'
+        });
+        return;
+      }
+
       try {
-        // 尝试检测Clerk是否可用
         const clerkInstance = (window as any).Clerk;
-        if (clerkInstance) {
-          hasClerkProvider = true;
-          // 尝试获取用户状态
-          actuallySignedIn = clerkInstance.user ? true : false;
+        
+        if (clerkInstance && clerkInstance.loaded) {
+          const isSignedIn = !!clerkInstance.user;
+          console.log('[AuthStatus] Clerk detected, user signed in:', isSignedIn);
+          
+          setAuthStatus({
+            state: isSignedIn ? 'authenticated-full' : 'not-authenticated',
+            isSignedIn,
+            hasClerkFeatures: true,
+            canSync: isSignedIn,
+            displayMessage: isSignedIn ? null : 'Sign in to sync favorites across devices'
+          });
+        } else if (clerkInstance && !clerkInstance.loaded) {
+          console.log('[AuthStatus] Clerk found but not loaded yet');
+          // Clerk 正在加载中，保持未登录状态但标记有 Clerk 功能
+          setAuthStatus({
+            state: 'not-authenticated',
+            isSignedIn: false,
+            hasClerkFeatures: true,
+            canSync: false,
+            displayMessage: 'Sign in to sync favorites across devices'
+          });
+        } else {
+          console.log('[AuthStatus] Clerk not found on window');
+          // 没有找到 Clerk 实例，可能是 SSR 或配置问题
+          setAuthStatus({
+            state: 'not-authenticated',
+            isSignedIn: false,
+            hasClerkFeatures: false,
+            canSync: false,
+            displayMessage: 'Sign in to sync favorites across devices'
+          });
         }
       } catch (error) {
-        console.warn('Failed to detect Clerk status:', error);
-        hasClerkProvider = false;
+        console.warn('[AuthStatus] Error checking Clerk status:', error);
+        setAuthStatus({
+          state: 'not-authenticated',
+          isSignedIn: false,
+          hasClerkFeatures: false,
+          canSync: false,
+          displayMessage: 'Sign in to sync favorites across devices'
+        });
       }
+    };
+
+    // 立即检查一次
+    checkAuthStatus();
+
+    // 监听 Clerk 状态变化
+    const setupClerkListener = () => {
+      try {
+        const clerkInstance = (window as any).Clerk;
+        if (clerkInstance) {
+          const handleUserChange = () => {
+            console.log('[AuthStatus] Clerk user changed, rechecking status');
+            checkAuthStatus();
+          };
+
+          clerkInstance.addListener('user', handleUserChange);
+          return () => {
+            clerkInstance.removeListener('user', handleUserChange);
+          };
+        }
+      } catch (error) {
+        console.warn('[AuthStatus] Failed to setup Clerk listener:', error);
+      }
+      return () => {};
+    };
+
+    const cleanup = setupClerkListener();
+
+    // 如果 Clerk 还没有加载，设置轮询检查
+    let pollInterval: NodeJS.Timeout | null = null;
+    let pollTimeout: NodeJS.Timeout | null = null;
+
+    if (typeof window !== 'undefined' && !(window as any).Clerk) {
+      console.log('[AuthStatus] Starting Clerk detection polling');
+      pollInterval = setInterval(checkAuthStatus, 1000);
+      
+      // 10秒后停止轮询
+      pollTimeout = setTimeout(() => {
+        if (pollInterval) {
+          console.log('[AuthStatus] Stopping Clerk detection polling');
+          clearInterval(pollInterval);
+        }
+      }, 10000);
     }
-    
-    // 确定认证状态
-    let state: AuthState;
-    let displayMessage: string | null = null;
-    
-    if (!hasClerkKey) {
-      // 没有配置Clerk
-      state = 'not-authenticated';
-      displayMessage = 'Sign in to sync favorites across devices';
-    } else if (hasClerkProvider && actuallySignedIn) {
-      // 已登录且功能完整
-      state = 'authenticated-full';
-      displayMessage = null;
-    } else if (hasClerkProvider && !actuallySignedIn) {
-      // 有Clerk但未登录
-      state = 'not-authenticated'; 
-      displayMessage = 'Sign in to sync favorites across devices';
-    } else {
-      // 有Clerk配置但功能受限（可能是SSR模式或其他技术原因）
-      state = 'authenticated-limited';
-      displayMessage = 'Limited sync features - sign in on a supported device';
-    }
-    
-    return {
-      state,
-      isSignedIn: actuallySignedIn,
-      hasClerkFeatures: hasClerkProvider,
-      canSync: state === 'authenticated-full',
-      displayMessage
+
+    return () => {
+      cleanup();
+      if (pollInterval) clearInterval(pollInterval);
+      if (pollTimeout) clearTimeout(pollTimeout);
     };
   }, []);
+
+  return authStatus;
 }

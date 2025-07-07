@@ -14,7 +14,7 @@ import {
 import { useServers, useCategories } from "../hooks/useUnifiedData";
 import { useAppStore } from "../store/useAppStore";
 import { ServerCard, ServerListItem } from "../components/ServerCard";
-import { useFavoritesSync, type FavoritesSyncStatus } from "../hooks/useFavoritesSync";
+import { useFavoritesSync } from "../hooks/useFavoritesSync";
 import { BatchScoreProvider } from "../components/BatchScoreProvider";
 import type { MCPServer } from "../types";
 
@@ -34,7 +34,7 @@ const Favorites: React.FC = () => {
 
     // Get sync data for cloud sync functionality
     const syncStatus = useFavoritesSync();
-    const { isOnline, favoritesError, retrySync, isSignedIn, authState, displayMessage } = syncStatus;
+    const { isOnline, favoritesError, retrySync, authState, displayMessage } = syncStatus;
 
     // Filter state
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -233,11 +233,7 @@ const Favorites: React.FC = () => {
                                 </>
                             )}
                             {displayMessage && (
-                                <span className={`ml-2 ${
-                                    authState === 'authenticated-limited' 
-                                        ? 'text-orange-600 dark:text-orange-400'
-                                        : 'text-amber-600 dark:text-amber-400'
-                                }`}>
+                                <span className="ml-2 text-amber-600 dark:text-amber-400">
                                     • {displayMessage}
                                 </span>
                             )}

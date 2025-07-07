@@ -12,7 +12,7 @@ export interface FavoritesSyncStatus {
     isSignedIn: boolean;
     hasService: boolean;
     syncEnabled: boolean;
-    authState: 'not-authenticated' | 'authenticated-limited' | 'authenticated-full';
+    authState: 'not-authenticated' | 'authenticated-full';
     displayMessage: string | null;
 }
 
@@ -28,22 +28,24 @@ export function useFavoritesSync(): FavoritesSyncStatus {
     
     // 提供空操作的回调，保持接口一致
     const retrySync = useCallback(async () => {
-        // No-op when Clerk is not available or user not signed in
-        if (authStatus.state !== 'authenticated-full') {
-            console.log('Sync not available in current auth state:', authStatus.state);
+        // No-op when user not signed in
+        if (!authStatus.isSignedIn) {
+            console.log('[FavoritesSync] Sync not available - user not signed in');
             return;
         }
         // TODO: 实际的同步逻辑
-    }, [authStatus.state]);
+        console.log('[FavoritesSync] Would retry sync for authenticated user');
+    }, [authStatus.isSignedIn]);
 
     const forceSync = useCallback(async () => {
-        // No-op when Clerk is not available or user not signed in
-        if (authStatus.state !== 'authenticated-full') {
-            console.log('Force sync not available in current auth state:', authStatus.state);
+        // No-op when user not signed in
+        if (!authStatus.isSignedIn) {
+            console.log('[FavoritesSync] Force sync not available - user not signed in');
             return;
         }
         // TODO: 实际的强制同步逻辑
-    }, [authStatus.state]);
+        console.log('[FavoritesSync] Would force sync for authenticated user');
+    }, [authStatus.isSignedIn]);
 
     return useMemo(() => ({
         isOnline: authStatus.canSync,
