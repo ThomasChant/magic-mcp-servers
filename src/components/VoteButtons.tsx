@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { ThumbsUp, LogIn } from "lucide-react";
 import { useUser, useClerk } from "@clerk/clerk-react";
 import { useServerScore, useUserVote, useVoteMutation } from "../services/voting";
+import { useBatchScore } from "./BatchScoreProvider";
 
 // Simple notification function
 const notify = (message: string, type: 'success' | 'error' = 'success') => {
@@ -37,8 +38,15 @@ const VoteButtons: React.FC<VoteButtonsProps> = ({
     const { isSignedIn } = isClient ? useUser() : { isSignedIn: false };
     const { openSignIn } = isClient ? useClerk() : { openSignIn: () => {} };
     
-    // Get server score and user vote status
-    const { data: serverScore, isLoading: scoreLoading } = useServerScore(serverId);
+    // Try to get score from batch provider first, fallback to individual query
+    const batchScore = useBatchScore(serverId);
+    // Only fetch individual score if not provided by batch
+    const shouldFetchIndividual = !batchScore;
+    const { data: individualScore, isLoading: individualScoreLoading } = useServerScore(serverId, shouldFetchIndividual);
+    const serverScore = batchScore || individualScore;
+    const scoreLoading = !batchScore && individualScoreLoading;
+    
+    // Get user vote status
     const { data: userVote, isLoading: voteLoading } = useUserVote(serverId);
     
     // Vote operations
@@ -86,20 +94,17 @@ const VoteButtons: React.FC<VoteButtonsProps> = ({
         sm: {
             button: showScore ? 'w-6 h-6' : 'w-8 h-8',
             icon: showScore ? 'h-3 w-3' : 'h-4 w-4',
-            score: 'text-xs font-medium px-1 min-w-[1.5rem]',
-            container: 'gap-1'
+            score: 'text-xs font-medium px-1 min-w-[1.5rem]'
         },
         md: {
             button: 'w-8 h-8',
             icon: 'h-4 w-4',
-            score: 'text-sm font-medium px-1 min-w-[2rem]',
-            container: 'gap-1'
+            score: 'text-sm font-medium px-1 min-w-[2rem]'
         },
         lg: {
             button: 'w-10 h-10',
             icon: 'h-5 w-5',
-            score: 'text-base font-medium px-1 min-w-[2.5rem]',
-            container: 'gap-1'
+            score: 'text-base font-medium px-1 min-w-[2.5rem]'
         }
     };
 

@@ -331,14 +331,6 @@ const ServerDetail: React.FC = () => {
                                                 className="shadow-sm hover:shadow-md"
                                             />
                                         </ClientOnly>
-                                        <ClientOnly>
-                                            <VoteButtons
-                                                serverId={server.id}
-                                                size="sm"
-                                                showScore={false}
-                                                className="flex items-center"
-                                            />
-                                        </ClientOnly>
                                         <div className="relative" ref={shareMenuRef}>
                                             <button
                                                 onClick={() =>
@@ -402,6 +394,14 @@ const ServerDetail: React.FC = () => {
 
                                 </p>
                                 <div className="flex items-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
+                                    <ClientOnly>
+                                        <VoteButtons
+                                            serverId={server.id}
+                                            size="md"
+                                            showScore={true}
+                                            className="flex items-center"
+                                        />
+                                    </ClientOnly>
                                     <div className="flex items-center">
                                         <Star className="h-4 w-4 text-yellow-500 mr-1" />
                                         <span className="font-medium text-gray-900 dark:text-white">

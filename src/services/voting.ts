@@ -309,7 +309,7 @@ export function useVotingService(): VotingService | null {
  * @hook useServerScore
  * @description Hook to get server score
  */
-export function useServerScore(serverId: string) {
+export function useServerScore(serverId: string, enabled: boolean = true) {
     return useQuery({
         queryKey: ['server-score', serverId],
         queryFn: async () => {
@@ -325,7 +325,7 @@ export function useServerScore(serverId: string) {
 
             return data as ServerScore;
         },
-        enabled: !!serverId,
+        enabled: !!serverId && enabled,
         staleTime: 1 * 60 * 1000, // 1 minute
     });
 }

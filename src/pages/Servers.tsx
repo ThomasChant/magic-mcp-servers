@@ -10,6 +10,7 @@ import {
 import { useServersPaginated, useCategories } from "../hooks/useUnifiedData";
 import { useAppStore } from "../store/useAppStore";
 import { ServerCard, ServerListItem } from "../components/ServerCard";
+import { BatchScoreProvider } from "../components/BatchScoreProvider";
 
 const Servers: React.FC = () => {
     const location = useLocation();
@@ -142,6 +143,15 @@ const Servers: React.FC = () => {
     const hasNextPage = paginatedResult?.hasNextPage || false;
     const hasPreviousPage = paginatedResult?.hasPreviousPage || false;
     const totalPages = paginatedResult?.totalPages || 0;
+    
+    // Extract server IDs for batch score fetching
+    const serverIds = useMemo(() => servers.map(server => server.id), [servers]);
+    
+    // Server data is already filtered and sorted on the server side
+    const filteredAndSortedServers = servers;
+    
+    // Servers are already paginated from the server
+    const paginatedServers = filteredAndSortedServers;
 
     const platformFilters = [
         { id: "web", name: "Web" },
@@ -209,16 +219,10 @@ const Servers: React.FC = () => {
     //     return count.toString();
     // };
 
-    // Server data is already filtered and sorted on the server side
-    const filteredAndSortedServers = servers;
-
     // Reset page when filters change
     React.useEffect(() => {
         setCurrentPage(1);
     }, [debouncedSearch, quickFilter, filters, sortBy, sortOrder]);
-
-    // Servers are already paginated from the server
-    const paginatedServers = filteredAndSortedServers;
 
     if (serversLoading) {
         return (
@@ -498,19 +502,21 @@ const Servers: React.FC = () => {
 
                         {/* Server Grid/List */}
                         {paginatedServers.length > 0 ? (
-                            viewMode === "grid" ? (
-                                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                                    {paginatedServers.map((server) => (
-                                        <ServerCard key={server.id} server={server} />
-                                    ))}
-                                </div>
-                            ) : (
-                                <div className="space-y-2">
-                                    {paginatedServers.map((server) => (
-                                        <ServerListItem key={server.id} server={server} />
-                                    ))}
-                                </div>
-                            )
+                            <BatchScoreProvider serverIds={serverIds}>
+                                {viewMode === "grid" ? (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                                        {paginatedServers.map((server) => (
+                                            <ServerCard key={server.id} server={server} />
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className="space-y-2">
+                                        {paginatedServers.map((server) => (
+                                            <ServerListItem key={server.id} server={server} />
+                                        ))}
+                                    </div>
+                                )}
+                            </BatchScoreProvider>
                         ) : (
                             <div className="text-center py-12">
                                 <div className="max-w-md mx-auto">
