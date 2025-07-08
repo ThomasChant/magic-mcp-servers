@@ -367,7 +367,7 @@ const HeaderWithClerk: React.FC = () => {
                                 {/* <span className="text-white text-sm font-bold">
                                     M
                                 </span> */}
-                                <img src={logoImg} alt="Magic MCP" className="rounded"/>
+                                <img src="/logo.png" alt="Magic MCP" className="rounded"/>
                                 
                             </div>
                             <span className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white whitespace-nowrap">
