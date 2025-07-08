@@ -30,6 +30,26 @@
             "destination": "/api/ssr"
         },
         {
+            "source": "/:locale(zh-CN|zh-TW|fr|ja|ko|ru)",
+            "destination": "/api/ssr"
+        },
+        {
+            "source": "/:locale(zh-CN|zh-TW|fr|ja|ko|ru)/servers",
+            "destination": "/api/ssr"
+        },
+        {
+            "source": "/:locale(zh-CN|zh-TW|fr|ja|ko|ru)/servers/:slug*",
+            "destination": "/api/ssr"
+        },
+        {
+            "source": "/:locale(zh-CN|zh-TW|fr|ja|ko|ru)/categories",
+            "destination": "/api/ssr"
+        },
+        {
+            "source": "/:locale(zh-CN|zh-TW|fr|ja|ko|ru)/categories/:slug*",
+            "destination": "/api/ssr"
+        },
+        {
             "source": "/((?!_next|api|assets|favicon|android-chrome|apple-touch|manifest|robots|sitemap|vite).*)",
             "destination": "/api/ssr"
         }

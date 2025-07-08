@@ -36,12 +36,19 @@
         "subtitle": "Servers with the latest updates and improvements"
     },
     "server": {
-        "stars": "stars",
-        "forks": "forks",
-        "install": "Install",
-        "viewDetails": "View Details",
-        "qualityScore": "Quality Score",
-        "lastUpdated": "Last updated",
-        "createdBy": "Created by"
+        "stars": "별점",
+        "forks": "포크",
+        "install": "설치",
+        "viewDetails": "자세히 보기",
+        "qualityScore": "품질 점수",
+        "lastUpdated": "마지막 업데이트",
+        "createdBy": "제작자"
+    },
+    "seo": {
+        "title": "Magic MCP - Model Context Protocol 서버 발견 플랫폼",
+        "description": "최고의 Model Context Protocol (MCP) 서버를 발견하고 통합하세요. 데이터베이스, 파일 시스템, API 및 개발 도구용 1000개 이상의 고품질 MCP 서버를 탐색하세요.",
+        "ogTitle": "Magic MCP - Model Context Protocol 서버 발견 플랫폼",
+        "ogDescription": "최고의 Model Context Protocol (MCP) 서버를 발견하고 통합하세요. 데이터베이스, 파일 시스템, API 및 개발 도구용 1000개 이상의 고품질 MCP 서버를 탐색하세요.",
+        "keywords": "MCP, Model Context Protocol, AI 도구, 서버, 데이터베이스 통합, API, 개발 도구, Claude MCP, AI 에이전트"
     }
 }

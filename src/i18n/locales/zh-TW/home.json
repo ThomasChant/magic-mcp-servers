@@ -43,5 +43,12 @@
         "qualityScore": "品質評分",
         "lastUpdated": "最後更新",
         "createdBy": "建立者"
+    },
+    "seo": {
+        "title": "Magic MCP - Model Context Protocol 伺服器發現平台",
+        "description": "發現並整合最優秀的 Model Context Protocol (MCP) 伺服器。瀏覽 1000+ 高品質的 MCP 伺服器，用於資料庫、檔案系統、API 和開發工具。",
+        "ogTitle": "Magic MCP - Model Context Protocol 伺服器發現平台",
+        "ogDescription": "發現並整合最優秀的 Model Context Protocol (MCP) 伺服器。瀏覽 1000+ 高品質的 MCP 伺服器，用於資料庫、檔案系統、API 和開發工具。",
+        "keywords": "MCP, Model Context Protocol, AI 工具, 伺服器, 資料庫整合, API, 開發工具, Claude MCP, AI 代理"
     }
 }

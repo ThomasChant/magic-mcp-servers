@@ -43,5 +43,12 @@
         "qualityScore": "Quality Score",
         "lastUpdated": "Last updated",
         "createdBy": "Created by"
+    },
+    "seo": {
+        "title": "Magic MCP - Model Context Protocol Server Discovery",
+        "description": "Discover and integrate the best Model Context Protocol (MCP) servers. Browse 1000+ high-quality MCP servers for databases, filesystems, APIs, and development tools.",
+        "ogTitle": "Magic MCP - Model Context Protocol Server Discovery Platform",
+        "ogDescription": "Discover and integrate the best Model Context Protocol (MCP) servers. Browse 1000+ high-quality MCP servers for databases, filesystems, APIs, and development tools.",
+        "keywords": "MCP, Model Context Protocol, AI tools, servers, database integration, API, development tools, Claude MCP, AI agents"
     }
 }

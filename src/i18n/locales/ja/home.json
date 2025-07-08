@@ -36,12 +36,19 @@
         "subtitle": "Servers with the latest updates and improvements"
     },
     "server": {
-        "stars": "stars",
-        "forks": "forks",
-        "install": "Install",
-        "viewDetails": "View Details",
-        "qualityScore": "Quality Score",
-        "lastUpdated": "Last updated",
-        "createdBy": "Created by"
+        "stars": "スター",
+        "forks": "フォーク",
+        "install": "インストール",
+        "viewDetails": "詳細を見る",
+        "qualityScore": "品質スコア",
+        "lastUpdated": "最終更新",
+        "createdBy": "作成者"
+    },
+    "seo": {
+        "title": "Magic MCP - Model Context Protocol サーバー発見プラットフォーム",
+        "description": "最高のModel Context Protocol（MCP）サーバーを発見し、統合しましょう。データベース、ファイルシステム、API、開発ツール用の1000以上の高品質MCPサーバーを閲覧できます。",
+        "ogTitle": "Magic MCP - Model Context Protocol サーバー発見プラットフォーム",
+        "ogDescription": "最高のModel Context Protocol（MCP）サーバーを発見し、統合しましょう。データベース、ファイルシステム、API、開発ツール用の1000以上の高品質MCPサーバーを閲覧できます。",
+        "keywords": "MCP, Model Context Protocol, AIツール, サーバー, データベース統合, API, 開発ツール, Claude MCP, AIエージェント"
     }
 }

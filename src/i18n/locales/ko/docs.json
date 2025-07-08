@@ -1,118 +1,235 @@
 {
-    "title": "문서",
-    "subtitle": "MCP 서버와 사용 방법에 대해 알아보기",
-    "sections": {
-        "gettingStarted": {
-            "title": "시작하기",
-            "subtitle": "MCP 서버의 기초 배우기",
-            "introduction": "MCP 소개",
-            "installation": "설치 가이드",
-            "quickStart": "빠른 시작",
-            "firstServer": "첫 번째 서버",
-            "basicConcepts": "기본 개념",
-            "configuration": "구성"
-        },
-        "serverDevelopment": {
-            "title": "서버 개발",
-            "subtitle": "자신만의 MCP 서버 구축",
-            "createServer": "서버 생성",
-            "serverStructure": "서버 구조",
-            "apiDesign": "API 설계",
-            "bestPractices": "모범 사례",
-            "testing": "테스트",
-            "deployment": "배포",
-            "versioning": "버전 관리"
-        },
-        "integration": {
-            "title": "통합",
-            "subtitle": "MCP 서버를 애플리케이션에 통합",
-            "clientLibraries": "클라이언트 라이브러리",
-            "sdks": "SDK",
-            "examples": "통합 예제",
-            "authentication": "인증",
-            "errorHandling": "오류 처리",
-            "performance": "성능",
-            "monitoring": "모니터링"
-        },
-        "api": {
-            "title": "API 참조",
-            "subtitle": "완전한 API 문서",
-            "endpoints": "엔드포인트",
-            "methods": "메서드",
-            "parameters": "매개변수",
-            "responses": "응답",
-            "errorCodes": "오류 코드",
-            "schemas": "스키마",
-            "examples": "예제"
-        },
-        "community": {
-            "title": "커뮤니티",
-            "subtitle": "MCP 커뮤니티에 참여",
-            "contributing": "기여",
-            "guidelines": "가이드라인",
-            "codeOfConduct": "행동 강령",
-            "support": "지원",
-            "forums": "포럼",
-            "discord": "Discord",
-            "github": "GitHub"
-        },
-        "advanced": {
-            "title": "고급 주제",
-            "subtitle": "고급 MCP 서버 개념",
-            "architecture": "아키텍처",
-            "security": "보안",
-            "scalability": "확장성",
-            "customization": "사용자 정의",
-            "plugins": "플러그인",
-            "extensions": "확장",
-            "troubleshooting": "문제 해결"
-        }
+    "header": {
+        "title": "문서",
+        "subtitle": "MCP 서버를 효과적으로 발견, 통합, 사용하기 위해 알아야 할 모든 것들에 대한 완전한 가이드입니다."
     },
     "navigation": {
-        "previousPage": "이전 페이지",
-        "nextPage": "다음 페이지",
-        "tableOfContents": "목차",
-        "onThisPage": "이 페이지의 내용",
-        "editPage": "이 페이지 편집",
-        "viewSource": "소스 보기",
-        "lastUpdated": "마지막 업데이트",
-        "contributors": "기여자",
-        "feedback": "피드백",
-        "improve": "이 페이지 개선"
+        "gettingStarted": "시작하기",
+        "coreConcepts": "핵심 개념",
+        "advanced": "고급",
+        "reference": "참조",
+        "introduction": "소개",
+        "quickStart": "빠른 시작",
+        "installation": "설치",
+        "whatIsMcp": "MCP란 무엇인가요?",
+        "serverTypes": "서버 유형",
+        "integration": "통합 가이드",
+        "customServers": "서버 구축",
+        "bestPractices": "모범 사례",
+        "troubleshooting": "문제 해결",
+        "apiReference": "API 참조",
+        "examples": "예제",
+        "faq": "자주 묻는 질문"
     },
-    "search": {
-        "placeholder": "문서 검색...",
-        "noResults": "결과를 찾을 수 없습니다",
-        "resultsFor": "\"{{query}}\"의 검색 결과",
-        "suggestions": "제안",
-        "searchTips": "검색 팁",
-        "exactMatch": "정확한 일치",
-        "partialMatch": "부분 일치"
+    "introduction": {
+        "title": "Magic MCP 소개",
+        "description": "Magic MCP는 모델 컨텍스트 프로토콜(MCP) 서버를 발견, 평가, 통합하기 위한 종합 플랫폼입니다. AI 애플리케이션을 구축하거나 기존 시스템을 향상시키든, Magic MCP는 필요한 도구와 리소스를 제공합니다.",
+        "newToMcp": "MCP를 처음 접하시나요?",
+        "mcpDescription": "모델 컨텍스트 프로토콜은 AI 애플리케이션이 외부 데이터 소스와 도구에 연결하는 표준화된 방법입니다.",
+        "learnMore": "MCP에 대해 더 알아보기 →",
+        "keyFeatures": "주요 기능",
+        "smartDiscovery": {
+            "title": "스마트 발견",
+            "description": "지능적인 검색과 필터링으로 완벽한 MCP 서버 찾기"
+        },
+        "qualityRatings": {
+            "title": "품질 평가",
+            "description": "신뢰할 수 있는 선택을 위한 커뮤니티 주도 평가 및 리뷰"
+        },
+        "easyIntegration": {
+            "title": "쉬운 통합",
+            "description": "빠른 설정을 위한 단계별 가이드와 코드 예제"
+        },
+        "activeCommunity": {
+            "title": "활발한 커뮤니티",
+            "description": "개발자들과 연결되고 지식을 공유하세요"
+        }
     },
-    "common": {
-        "readMore": "더 읽기",
-        "showLess": "접기",
-        "expand": "확장",
-        "collapse": "접기",
+    "quickStart": {
+        "title": "빠른 시작 가이드",
+        "description": "몇 분 안에 MCP 서버를 시작하세요. 첫 번째 서버를 통합하려면 다음의 간단한 단계를 따르세요.",
+        "step1": {
+            "title": "서버 발견",
+            "description": "카탈로그를 탐색하거나 검색 기능을 사용하여 요구사항에 맞는 서버를 찾으세요.",
+            "browseServers": "서버 탐색"
+        },
+        "step2": {
+            "title": "서버 설치",
+            "description": "선호하는 방법(npm, pip, Docker)에 대한 설치 지침을 따르세요."
+        },
+        "step3": {
+            "title": "애플리케이션 구성",
+            "description": "제공된 구성을 사용하여 AI 애플리케이션을 MCP 서버에 연결하세요."
+        },
+        "step4": {
+            "title": "구축 시작",
+            "description": "MCP 서버가 준비되었습니다! 놀라운 AI 기반 애플리케이션 구축을 시작하세요.",
+            "viewExamples": "예제 보기"
+        }
+    },
+    "installation": {
+        "title": "설치",
+        "description": "MCP 서버는 다양한 패키지 매니저와 배포 방법을 사용하여 설치할 수 있습니다. 개발 환경에 가장 적합한 방법을 선택하세요.",
+        "npmInstallation": {
+            "title": "NPM 설치",
+            "description": "Node.js 기반 MCP 서버의 경우:"
+        },
+        "pythonInstallation": {
+            "title": "Python 설치",
+            "description": "Python 기반 MCP 서버의 경우:"
+        },
+        "dockerInstallation": {
+            "title": "Docker 설치",
+            "description": "컨테이너에서 MCP 서버 실행:"
+        }
+    },
+    "whatIsMcp": {
+        "title": "모델 컨텍스트 프로토콜이란 무엇인가요?",
+        "description": "모델 컨텍스트 프로토콜(MCP)은 AI 애플리케이션이 외부 데이터 소스, 도구, 서비스에 안전하게 연결할 수 있게 하는 개방형 표준입니다. 보안과 제어를 유지하면서 AI 모델이 다양한 리소스에 액세스하고 상호 작용할 수 있는 표준화된 방법을 제공합니다.",
+        "keyBenefits": "주요 이점",
+        "secureDataAccess": "안전한 데이터 액세스",
+        "standardizedIntegration": "표준화된 통합",
+        "scalableArchitecture": "확장 가능한 아키텍처",
+        "easyMaintenance": "쉬운 유지보수",
+        "howMcpWorks": "MCP 작동 방식",
+        "clientServerArchitecture": "클라이언트-서버 아키텍처: AI 애플리케이션(클라이언트)이 특정 기능을 제공하는 MCP 서버에 연결",
+        "standardizedProtocol": "표준화된 프로토콜: 모든 통신이 일관성을 위해 MCP 사양을 따름",
+        "resourceAccess": "리소스 액세스: 서버는 클라이언트가 발견하고 사용할 수 있는 리소스(데이터, 도구, 프롬프트)를 노출",
+        "secureBoundaries": "안전한 경계: 각 서버는 정의된 보안 경계와 권한 내에서 작동"
+    },
+    "serverTypes": {
+        "title": "서버 유형 및 카테고리",
+        "description": "MCP 서버는 각각 특정 사용 사례를 위해 설계된 다양한 유형으로 제공됩니다. 이러한 카테고리를 이해하면 요구사항에 맞는 서버를 선택하는 데 도움이 됩니다.",
+        "fileSystem": {
+            "title": "파일 시스템",
+            "description": "안전한 경계 내에서 파일과 디렉토리에 액세스하고 조작합니다.",
+            "readWrite": "읽기/쓰기",
+            "cloudStorage": "클라우드 스토리지"
+        },
+        "database": {
+            "title": "데이터베이스",
+            "description": "데이터 작업을 위해 SQL 및 NoSQL 데이터베이스에 연결합니다.",
+            "sql": "SQL",
+            "nosql": "NoSQL"
+        },
+        "communication": {
+            "title": "커뮤니케이션",
+            "description": "메시징 및 알림 플랫폼과 통합합니다.",
+            "slack": "Slack",
+            "email": "이메일"
+        },
+        "development": {
+            "title": "개발",
+            "description": "개발 도구, 버전 제어 및 CI/CD 시스템에 액세스합니다.",
+            "git": "Git",
+            "cicd": "CI/CD"
+        }
+    },
+    "integration": {
+        "title": "통합 가이드",
+        "description": "MCP 서버를 AI 애플리케이션과 통합하려면 연결을 구성하고 사용 가능한 리소스와 도구를 이해해야 합니다.",
+        "configurationSetup": {
+            "title": "구성 설정",
+            "description": "애플리케이션의 구성 파일에 MCP 서버 구성을 추가하세요:"
+        },
+        "connectionTesting": {
+            "title": "연결 테스트",
+            "description": "서버가 올바르게 응답하는지 확인하기 위해 연결을 테스트하세요:"
+        }
+    },
+    "customServers": {
+        "title": "사용자 정의 서버 구축",
+        "description": "AI 애플리케이션에 사용자 정의 기능과 데이터 소스를 노출하는 자체 MCP 서버를 만드세요.",
+        "serverStructure": {
+            "title": "서버 구조",
+            "description": "기본 MCP 서버 구현:"
+        }
+    },
+    "bestPractices": {
+        "title": "모범 사례",
+        "description": "MCP 서버 구현의 최적 성능, 보안, 유지보수성을 보장하기 위해 이러한 모범 사례를 따르세요.",
+        "security": {
+            "title": "보안",
+            "validateInput": "항상 입력 매개변수를 검증하세요",
+            "implementAuth": "적절한 인증 및 권한 부여를 구현하세요",
+            "useEnvVars": "민감한 데이터에 환경 변수를 사용하세요",
+            "updateDependencies": "정기적으로 종속성을 업데이트하세요"
+        },
+        "performance": {
+            "title": "성능",
+            "implementCaching": "자주 액세스하는 데이터에 캐싱을 구현하세요",
+            "useConnectionPooling": "데이터베이스 연결에 연결 풀링을 사용하세요",
+            "optimizeResources": "리소스 로딩 및 메모리 사용량을 최적화하세요",
+            "monitorMetrics": "성능 메트릭을 모니터링하고 기록하세요"
+        }
+    },
+    "troubleshooting": {
+        "title": "문제 해결",
+        "description": "MCP 서버 작업 시 일반적인 문제와 해결책입니다.",
+        "connectionFailures": {
+            "title": "연결 실패",
+            "description": "MCP 서버 연결에 실패한 경우:",
+            "checkProcess": "서버 프로세스가 실행 중인지 확인하세요",
+            "verifyPaths": "구성 파일 경로를 확인하세요",
+            "ensureDependencies": "필요한 모든 종속성이 설치되어 있는지 확인하세요",
+            "checkLogs": "오류 메시지에 대한 서버 로그를 확인하세요"
+        },
+        "permissionErrors": {
+            "title": "권한 오류",
+            "description": "파일 시스템 또는 리소스 액세스 문제의 경우:",
+            "verifyPermissions": "파일 및 디렉토리 권한을 확인하세요",
+            "checkAccess": "서버가 필요한 경로에 액세스할 수 있는지 확인하세요",
+            "ensureCredentials": "API 키와 자격 증명이 올바른지 확인하세요",
+            "reviewPolicies": "보안 정책 및 액세스 제어를 검토하세요"
+        }
+    },
+    "apiReference": {
+        "title": "API 참조",
+        "description": "MCP 프로토콜 메서드 및 데이터 구조에 대한 완전한 참조입니다.",
+        "coreMethods": "핵심 메서드",
+        "resourcesList": "서버에서 사용 가능한 모든 리소스를 나열합니다.",
+        "resourcesRead": "특정 리소스의 내용을 읽습니다.",
+        "toolsList": "서버에서 제공하는 모든 사용 가능한 도구를 나열합니다."
+    },
+    "examples": {
+        "title": "예제",
+        "description": "MCP 서버 구현 및 통합의 실용적인 예제입니다.",
+        "fileSystemServer": {
+            "title": "파일 시스템 서버",
+            "description": "특정 디렉토리에 대한 읽기/쓰기 액세스를 제공하는 간단한 파일 시스템 서버:"
+        },
+        "databaseServer": {
+            "title": "데이터베이스 서버",
+            "description": "PostgreSQL 데이터베이스에 연결하고 쿼리 실행:"
+        }
+    },
+    "faq": {
+        "title": "자주 묻는 질문",
+        "choosingServer": {
+            "question": "올바른 MCP 서버를 선택하는 방법은?",
+            "answer": "특정 사용 사례, 필요한 데이터나 기능의 유형, 기술 스택과의 서버 호환성을 고려하세요. 필터링 및 검색 기능을 사용하여 옵션을 좁히고 커뮤니티 평가와 리뷰를 확인하세요."
+        },
+        "security": {
+            "question": "MCP 서버는 안전한가요?",
+            "answer": "네, MCP 서버는 보안을 염두에 두고 설계되었습니다. 정의된 경계 내에서 작동하고, 권한 제어를 지원하며, MCP 보안 사양을 따릅니다. 항상 서버의 문서를 검토하고 적절한 액세스 제어를 구성하세요."
+        },
+        "multipleServers": {
+            "question": "여러 MCP 서버를 함께 사용할 수 있나요?",
+            "answer": "물론입니다! 대부분의 AI 애플리케이션은 다양한 유형의 리소스에 액세스하기 위해 여러 MCP 서버를 사용합니다. MCP 프로토콜은 여러 동시 서버 연결을 지원하도록 설계되었습니다."
+        },
+        "contribute": {
+            "question": "새 서버를 기여하는 방법은?",
+            "answer": "커뮤니티 기여를 환영합니다! GitHub 저장소를 통해 MCP 서버를 제출하거나 직접 문의하세요. 서버가 MCP 사양을 따르고 적절한 문서가 포함되어 있는지 확인하세요."
+        }
+    },
+    "callToAction": {
+        "title": "시작할 준비가 되셨나요?",
+        "description": "MCP 서버 컬렉션을 탐색하고 오늘부터 놀라운 AI 애플리케이션 구축을 시작하세요.",
+        "browseServers": "서버 탐색",
+        "viewCategories": "카테고리 보기"
+    },
+    "buttons": {
         "copy": "복사",
-        "copied": "복사됨!",
-        "share": "공유",
-        "print": "인쇄",
-        "download": "다운로드",
-        "bookmark": "북마크",
-        "note": "참고",
-        "tip": "팁",
-        "warning": "경고",
-        "danger": "위험",
-        "info": "정보",
-        "example": "예제",
-        "codeExample": "코드 예제",
-        "liveDemo": "라이브 데모",
-        "tryIt": "시도해보기"
-    },
-    "meta": {
-        "title": "문서 | Magic MCP",
-        "description": "MCP 서버의 완전한 문서. Model Context Protocol 서버를 생성, 배포 및 통합하는 방법을 알아보세요.",
-        "keywords": "MCP, Model Context Protocol, 문서, 가이드, 튜토리얼, API, 개발"
+        "copied": "복사됨!"
     }
 }

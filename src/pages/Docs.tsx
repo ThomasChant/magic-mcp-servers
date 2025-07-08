@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import {
     Code,
@@ -21,6 +22,7 @@ import {
 } from "lucide-react";
 
 const Docs: React.FC = () => {
+    const { t } = useTranslation('docs');
     const [activeSection, setActiveSection] = useState("introduction");
     const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
@@ -89,12 +91,12 @@ const Docs: React.FC = () => {
                 {copiedCode === id ? (
                     <>
                         <Check className="inline mr-1" size={12} />
-                        Copied!
+                        {t('buttons.copied')}
                     </>
                 ) : (
                     <>
                         <Copy className="inline mr-1" size={12} />
-                        Copy
+                        {t('buttons.copy')}
                     </>
                 )}
             </button>
@@ -111,11 +113,10 @@ const Docs: React.FC = () => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                     <div className="text-center">
                         <h1 className="text-4xl font-bold mb-4">
-                            Documentation
+                            {t('header.title')}
                         </h1>
                         <p className="text-xl text-blue-100 dark:text-blue-200 max-w-3xl mx-auto">
-                            Everything you need to know about discovering,
-                            integrating, and using MCP servers effectively.
+                            {t('header.subtitle')}
                         </p>
                     </div>
                 </div>
@@ -127,66 +128,66 @@ const Docs: React.FC = () => {
                     <div className="lg:w-1/4">
                         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 sticky top-6">
                             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-                                Documentation
+                                {t('header.title')}
                             </h3>
 
                             <nav className="space-y-1">
                                 <div className="mb-4">
                                     <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
-                                        Getting Started
+                                        {t('navigation.gettingStarted')}
                                     </h4>
                                     <NavItem sectionId="introduction">
-                                        Introduction
+                                        {t('navigation.introduction')}
                                     </NavItem>
                                     <NavItem sectionId="quick-start">
-                                        Quick Start
+                                        {t('navigation.quickStart')}
                                     </NavItem>
                                     <NavItem sectionId="installation">
-                                        Installation
+                                        {t('navigation.installation')}
                                     </NavItem>
                                 </div>
 
                                 <div className="mb-4">
                                     <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
-                                        Core Concepts
+                                        {t('navigation.coreConcepts')}
                                     </h4>
                                     <NavItem sectionId="what-is-mcp">
-                                        What is MCP?
+                                        {t('navigation.whatIsMcp')}
                                     </NavItem>
                                     <NavItem sectionId="server-types">
-                                        Server Types
+                                        {t('navigation.serverTypes')}
                                     </NavItem>
                                     <NavItem sectionId="integration">
-                                        Integration Guide
+                                        {t('navigation.integration')}
                                     </NavItem>
                                 </div>
 
                                 <div className="mb-4">
                                     <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
-                                        Advanced
+                                        {t('navigation.advanced')}
                                     </h4>
                                     <NavItem sectionId="custom-servers">
-                                        Building Servers
+                                        {t('navigation.customServers')}
                                     </NavItem>
                                     <NavItem sectionId="best-practices">
-                                        Best Practices
+                                        {t('navigation.bestPractices')}
                                     </NavItem>
                                     <NavItem sectionId="troubleshooting">
-                                        Troubleshooting
+                                        {t('navigation.troubleshooting')}
                                     </NavItem>
                                 </div>
 
                                 <div>
                                     <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
-                                        Reference
+                                        {t('navigation.reference')}
                                     </h4>
                                     <NavItem sectionId="api-reference">
-                                        API Reference
+                                        {t('navigation.apiReference')}
                                     </NavItem>
                                     <NavItem sectionId="examples">
-                                        Examples
+                                        {t('navigation.examples')}
                                     </NavItem>
-                                    <NavItem sectionId="faq">FAQ</NavItem>
+                                    <NavItem sectionId="faq">{t('navigation.faq')}</NavItem>
                                 </div>
                             </nav>
                         </div>
@@ -198,15 +199,10 @@ const Docs: React.FC = () => {
                             {/* Introduction Section */}
                             <section id="introduction" className="mb-12">
                                 <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-                                    Introduction to Magic MCP
+                                    {t('introduction.title')}
                                 </h2>
                                 <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-                                    Magic MCP is your comprehensive platform for
-                                    discovering, evaluating, and integrating
-                                    Model Context Protocol (MCP) servers.
-                                    Whether you're building AI applications or
-                                    enhancing existing systems, Magic MCP
-                                    provides the tools and resources you need.
+                                    {t('introduction.description')}
                                 </p>
 
                                 <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-400 dark:border-blue-500 p-4 mb-6">
@@ -219,11 +215,7 @@ const Docs: React.FC = () => {
                                         </div>
                                         <div className="ml-3">
                                             <p className="text-sm text-blue-700 dark:text-blue-300">
-                                                <strong>New to MCP?</strong> The
-                                                Model Context Protocol is a
-                                                standardized way for AI
-                                                applications to connect with
-                                                external data sources and tools.{" "}
+                                                <strong>{t('introduction.newToMcp')}</strong> {t('introduction.mcpDescription')}{" "}
                                                 <button
                                                     onClick={() =>
                                                         scrollToSection(
@@ -232,7 +224,7 @@ const Docs: React.FC = () => {
                                                     }
                                                     className="underline hover:no-underline"
                                                 >
-                                                    Learn more about MCP →
+                                                    {t('introduction.learnMore')}
                                                 </button>
                                             </p>
                                         </div>
@@ -240,7 +232,7 @@ const Docs: React.FC = () => {
                                 </div>
 
                                 <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-                                    Key Features
+                                    {t('introduction.keyFeatures')}
                                 </h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                                     <div className="flex items-start">
@@ -252,12 +244,10 @@ const Docs: React.FC = () => {
                                         </div>
                                         <div>
                                             <h4 className="font-medium text-gray-900 dark:text-gray-100">
-                                                Smart Discovery
+                                                {t('introduction.smartDiscovery.title')}
                                             </h4>
                                             <p className="text-sm text-gray-600 dark:text-gray-400">
-                                                Find the perfect MCP server
-                                                using intelligent search and
-                                                filtering
+                                                {t('introduction.smartDiscovery.description')}
                                             </p>
                                         </div>
                                     </div>
@@ -271,11 +261,10 @@ const Docs: React.FC = () => {
                                         </div>
                                         <div>
                                             <h4 className="font-medium text-gray-900 dark:text-gray-100">
-                                                Quality Ratings
+                                                {t('introduction.qualityRatings.title')}
                                             </h4>
                                             <p className="text-sm text-gray-600 dark:text-gray-400">
-                                                Community-driven ratings and
-                                                reviews for reliable choices
+                                                {t('introduction.qualityRatings.description')}
                                             </p>
                                         </div>
                                     </div>
@@ -289,11 +278,10 @@ const Docs: React.FC = () => {
                                         </div>
                                         <div>
                                             <h4 className="font-medium text-gray-900 dark:text-gray-100">
-                                                Easy Integration
+                                                {t('introduction.easyIntegration.title')}
                                             </h4>
                                             <p className="text-sm text-gray-600 dark:text-gray-400">
-                                                Step-by-step guides and code
-                                                examples for quick setup
+                                                {t('introduction.easyIntegration.description')}
                                             </p>
                                         </div>
                                     </div>
@@ -307,11 +295,10 @@ const Docs: React.FC = () => {
                                         </div>
                                         <div>
                                             <h4 className="font-medium text-gray-900 dark:text-gray-100">
-                                                Active Community
+                                                {t('introduction.activeCommunity.title')}
                                             </h4>
                                             <p className="text-sm text-gray-600 dark:text-gray-400">
-                                                Connect with developers and
-                                                share knowledge
+                                                {t('introduction.activeCommunity.description')}
                                             </p>
                                         </div>
                                     </div>
@@ -321,12 +308,10 @@ const Docs: React.FC = () => {
                             {/* Quick Start Section */}
                             <section id="quick-start" className="mb-12">
                                 <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-                                    Quick Start Guide
+                                    {t('quickStart.title')}
                                 </h2>
                                 <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                    Get up and running with MCP servers in just
-                                    a few minutes. Follow these simple steps to
-                                    integrate your first server.
+                                    {t('quickStart.description')}
                                 </p>
 
                                 <div className="space-y-6">
@@ -337,18 +322,16 @@ const Docs: React.FC = () => {
                                         </div>
                                         <div className="flex-1">
                                             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                                                Discover a Server
+                                                {t('quickStart.step1.title')}
                                             </h3>
                                             <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                                Browse our catalog or use the
-                                                search function to find a server
-                                                that meets your needs.
+                                                {t('quickStart.step1.description')}
                                             </p>
                                             <Link
                                                 to="/servers"
                                                 className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium"
                                             >
-                                                Browse Servers
+                                                {t('quickStart.step1.browseServers')}
                                                 <ArrowRight
                                                     className="ml-1"
                                                     size={16}
@@ -364,12 +347,10 @@ const Docs: React.FC = () => {
                                         </div>
                                         <div className="flex-1">
                                             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                                                Install the Server
+                                                {t('quickStart.step2.title')}
                                             </h3>
                                             <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                                Follow the installation
-                                                instructions for your preferred
-                                                method (npm, pip, Docker).
+                                                {t('quickStart.step2.description')}
                                             </p>
                                             <div className="group">
                                                 <CodeBlock
@@ -387,12 +368,10 @@ const Docs: React.FC = () => {
                                         </div>
                                         <div className="flex-1">
                                             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                                                Configure Your Application
+                                                {t('quickStart.step3.title')}
                                             </h3>
                                             <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                                Connect your AI application to
-                                                the MCP server using the
-                                                provided configuration.
+                                                {t('quickStart.step3.description')}
                                             </p>
                                             <div className="group">
                                                 <CodeBlock
@@ -417,12 +396,10 @@ const Docs: React.FC = () => {
                                         </div>
                                         <div className="flex-1">
                                             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                                                Start Building
+                                                {t('quickStart.step4.title')}
                                             </h3>
                                             <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                                Your MCP server is now ready!
-                                                Start building amazing
-                                                AI-powered applications.
+                                                {t('quickStart.step4.description')}
                                             </p>
                                             <button
                                                 onClick={() =>
@@ -430,7 +407,7 @@ const Docs: React.FC = () => {
                                                 }
                                                 className="inline-flex items-center text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-medium"
                                             >
-                                                View Examples
+                                                {t('quickStart.step4.viewExamples')}
                                                 <ArrowRight
                                                     className="ml-1"
                                                     size={16}
@@ -444,22 +421,19 @@ const Docs: React.FC = () => {
                             {/* Installation Section */}
                             <section id="installation" className="mb-12">
                                 <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-                                    Installation
+                                    {t('installation.title')}
                                 </h2>
                                 <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                    MCP servers can be installed using various
-                                    package managers and deployment methods.
-                                    Choose the method that best fits your
-                                    development environment.
+                                    {t('installation.description')}
                                 </p>
 
                                 <div className="space-y-6">
                                     <div>
                                         <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-                                            NPM Installation
+                                            {t('installation.npmInstallation.title')}
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                            For Node.js-based MCP servers:
+                                            {t('installation.npmInstallation.description')}
                                         </p>
                                         <div className="group">
                                             <CodeBlock
@@ -471,10 +445,10 @@ const Docs: React.FC = () => {
 
                                     <div>
                                         <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-                                            Python Installation
+                                            {t('installation.pythonInstallation.title')}
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                            For Python-based MCP servers:
+                                            {t('installation.pythonInstallation.description')}
                                         </p>
                                         <div className="group">
                                             <CodeBlock
@@ -486,10 +460,10 @@ const Docs: React.FC = () => {
 
                                     <div>
                                         <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-                                            Docker Installation
+                                            {t('installation.dockerInstallation.title')}
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                            Run MCP servers in containers:
+                                            {t('installation.dockerInstallation.description')}
                                         </p>
                                         <div className="group">
                                             <CodeBlock
@@ -504,21 +478,15 @@ const Docs: React.FC = () => {
                             {/* What is MCP Section */}
                             <section id="what-is-mcp" className="mb-12">
                                 <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-                                    What is Model Context Protocol?
+                                    {t('whatIsMcp.title')}
                                 </h2>
                                 <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                    The Model Context Protocol (MCP) is an open
-                                    standard that enables AI applications to
-                                    securely connect with external data sources,
-                                    tools, and services. It provides a
-                                    standardized way for AI models to access and
-                                    interact with various resources while
-                                    maintaining security and control.
+                                    {t('whatIsMcp.description')}
                                 </p>
 
                                 <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-lg p-6 mb-6">
                                     <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-                                        Key Benefits
+                                        {t('whatIsMcp.keyBenefits')}
                                     </h3>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div className="flex items-center">
@@ -527,7 +495,7 @@ const Docs: React.FC = () => {
                                                 size={20}
                                             />
                                             <span className="text-gray-700 dark:text-gray-300">
-                                                Secure data access
+                                                {t('whatIsMcp.secureDataAccess')}
                                             </span>
                                         </div>
                                         <div className="flex items-center">
@@ -536,7 +504,7 @@ const Docs: React.FC = () => {
                                                 size={20}
                                             />
                                             <span className="text-gray-700 dark:text-gray-300">
-                                                Standardized integration
+                                                {t('whatIsMcp.standardizedIntegration')}
                                             </span>
                                         </div>
                                         <div className="flex items-center">
@@ -545,7 +513,7 @@ const Docs: React.FC = () => {
                                                 size={20}
                                             />
                                             <span className="text-gray-700 dark:text-gray-300">
-                                                Scalable architecture
+                                                {t('whatIsMcp.scalableArchitecture')}
                                             </span>
                                         </div>
                                         <div className="flex items-center">
@@ -554,52 +522,38 @@ const Docs: React.FC = () => {
                                                 size={20}
                                             />
                                             <span className="text-gray-700 dark:text-gray-300">
-                                                Easy maintenance
+                                                {t('whatIsMcp.easyMaintenance')}
                                             </span>
                                         </div>
                                     </div>
                                 </div>
 
                                 <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-                                    How MCP Works
+                                    {t('whatIsMcp.howMcpWorks')}
                                 </h3>
                                 <div className="space-y-4 mb-6">
                                     <div className="flex items-start">
                                         <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full mt-2 mr-3"></div>
                                         <p className="text-gray-600 dark:text-gray-300">
-                                            <strong>
-                                                Client-Server Architecture:
-                                            </strong>
-                                            AI applications (clients) connect to
-                                            MCP servers that provide specific
-                                            capabilities
+                                            {t('whatIsMcp.clientServerArchitecture')}
                                         </p>
                                     </div>
                                     <div className="flex items-start">
                                         <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full mt-2 mr-3"></div>
                                         <p className="text-gray-600 dark:text-gray-300">
-                                            <strong>
-                                                Standardized Protocol:
-                                            </strong>
-                                            All communication follows the MCP
-                                            specification for consistency
+                                            {t('whatIsMcp.standardizedProtocol')}
                                         </p>
                                     </div>
                                     <div className="flex items-start">
                                         <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full mt-2 mr-3"></div>
                                         <p className="text-gray-600 dark:text-gray-300">
-                                            <strong>Resource Access:</strong>
-                                            Servers expose resources (data,
-                                            tools, prompts) that clients can
-                                            discover and use
+                                            {t('whatIsMcp.resourceAccess')}
                                         </p>
                                     </div>
                                     <div className="flex items-start">
                                         <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full mt-2 mr-3"></div>
                                         <p className="text-gray-600 dark:text-gray-300">
-                                            <strong>Secure Boundaries:</strong>{" "}
-                                            Each server operates within defined
-                                            security boundaries and permissions
+                                            {t('whatIsMcp.secureBoundaries')}
                                         </p>
                                     </div>
                                 </div>
@@ -608,13 +562,10 @@ const Docs: React.FC = () => {
                             {/* Server Types Section */}
                             <section id="server-types" className="mb-12">
                                 <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-                                    Server Types & Categories
+                                    {t('serverTypes.title')}
                                 </h2>
                                 <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                    MCP servers come in various types, each
-                                    designed for specific use cases.
-                                    Understanding these categories helps you
-                                    choose the right server for your needs.
+                                    {t('serverTypes.description')}
                                 </p>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -627,19 +578,18 @@ const Docs: React.FC = () => {
                                                 />
                                             </div>
                                             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                                                File System
+                                                {t('serverTypes.fileSystem.title')}
                                             </h3>
                                         </div>
                                         <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                            Access and manipulate files and
-                                            directories with secure boundaries.
+                                            {t('serverTypes.fileSystem.description')}
                                         </p>
                                         <div className="text-sm text-gray-500 dark:text-gray-400">
                                             <span className="bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded mr-2">
-                                                Read/Write
+                                                {t('serverTypes.fileSystem.readWrite')}
                                             </span>
                                             <span className="bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded mr-2">
-                                                Cloud Storage
+                                                {t('serverTypes.fileSystem.cloudStorage')}
                                             </span>
                                         </div>
                                     </div>
@@ -653,19 +603,18 @@ const Docs: React.FC = () => {
                                                 />
                                             </div>
                                             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                                                Database
+                                                {t('serverTypes.database.title')}
                                             </h3>
                                         </div>
                                         <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                            Connect to SQL and NoSQL databases
-                                            for data operations.
+                                            {t('serverTypes.database.description')}
                                         </p>
                                         <div className="text-sm text-gray-500 dark:text-gray-400">
                                             <span className="bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded mr-2">
-                                                SQL
+                                                {t('serverTypes.database.sql')}
                                             </span>
                                             <span className="bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded mr-2">
-                                                NoSQL
+                                                {t('serverTypes.database.nosql')}
                                             </span>
                                         </div>
                                     </div>
@@ -679,19 +628,18 @@ const Docs: React.FC = () => {
                                                 />
                                             </div>
                                             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                                                Communication
+                                                {t('serverTypes.communication.title')}
                                             </h3>
                                         </div>
                                         <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                            Integrate with messaging and
-                                            notification platforms.
+                                            {t('serverTypes.communication.description')}
                                         </p>
                                         <div className="text-sm text-gray-500 dark:text-gray-400">
                                             <span className="bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded mr-2">
-                                                Slack
+                                                {t('serverTypes.communication.slack')}
                                             </span>
                                             <span className="bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded mr-2">
-                                                Email
+                                                {t('serverTypes.communication.email')}
                                             </span>
                                         </div>
                                     </div>
@@ -705,19 +653,18 @@ const Docs: React.FC = () => {
                                                 />
                                             </div>
                                             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                                                Development
+                                                {t('serverTypes.development.title')}
                                             </h3>
                                         </div>
                                         <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                            Access development tools, version
-                                            control, and CI/CD systems.
+                                            {t('serverTypes.development.description')}
                                         </p>
                                         <div className="text-sm text-gray-500 dark:text-gray-400">
                                             <span className="bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded mr-2">
-                                                Git
+                                                {t('serverTypes.development.git')}
                                             </span>
                                             <span className="bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded mr-2">
-                                                CI/CD
+                                                {t('serverTypes.development.cicd')}
                                             </span>
                                         </div>
                                     </div>
@@ -727,23 +674,19 @@ const Docs: React.FC = () => {
                             {/* Integration Section */}
                             <section id="integration" className="mb-12">
                                 <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-                                    Integration Guide
+                                    {t('integration.title')}
                                 </h2>
                                 <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                    Integrating MCP servers with your AI
-                                    application requires configuring the
-                                    connection and understanding the available
-                                    resources and tools.
+                                    {t('integration.description')}
                                 </p>
 
                                 <div className="space-y-6">
                                     <div>
                                         <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-                                            Configuration Setup
+                                            {t('integration.configurationSetup.title')}
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                            Add your MCP server configuration to
-                                            your application's config file:
+                                            {t('integration.configurationSetup.description')}
                                         </p>
                                         <div className="group">
                                             <CodeBlock
@@ -765,11 +708,10 @@ const Docs: React.FC = () => {
 
                                     <div>
                                         <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-                                            Connection Testing
+                                            {t('integration.connectionTesting.title')}
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                            Test your connection to ensure the
-                                            server is responding correctly:
+                                            {t('integration.connectionTesting.description')}
                                         </p>
                                         <div className="group">
                                             <CodeBlock
@@ -784,21 +726,19 @@ const Docs: React.FC = () => {
                             {/* Building Servers Section */}
                             <section id="custom-servers" className="mb-12">
                                 <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-                                    Building Custom Servers
+                                    {t('customServers.title')}
                                 </h2>
                                 <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                    Create your own MCP servers to expose custom
-                                    functionality and data sources to AI
-                                    applications.
+                                    {t('customServers.description')}
                                 </p>
 
                                 <div className="space-y-6">
                                     <div>
                                         <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-                                            Server Structure
+                                            {t('customServers.serverStructure.title')}
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                            A basic MCP server implementation:
+                                            {t('customServers.serverStructure.description')}
                                         </p>
                                         <div className="group">
                                             <CodeBlock
@@ -835,59 +775,49 @@ await server.connect(transport);`}
                             {/* Best Practices Section */}
                             <section id="best-practices" className="mb-12">
                                 <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-                                    Best Practices
+                                    {t('bestPractices.title')}
                                 </h2>
                                 <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                    Follow these best practices to ensure
-                                    optimal performance, security, and
-                                    maintainability of your MCP server
-                                    implementations.
+                                    {t('bestPractices.description')}
                                 </p>
 
                                 <div className="space-y-6">
                                     <div className="bg-green-50 dark:bg-green-900/20 border-l-4 border-green-400 dark:border-green-500 p-4">
                                         <h3 className="text-lg font-semibold text-green-800 dark:text-green-300 mb-2">
-                                            Security
+                                            {t('bestPractices.security.title')}
                                         </h3>
                                         <ul className="text-green-700 dark:text-green-300 space-y-1">
                                             <li>
-                                                • Always validate input
-                                                parameters
+                                                • {t('bestPractices.security.validateInput')}
                                             </li>
                                             <li>
-                                                • Implement proper
-                                                authentication and authorization
+                                                • {t('bestPractices.security.implementAuth')}
                                             </li>
                                             <li>
-                                                • Use environment variables for
-                                                sensitive data
+                                                • {t('bestPractices.security.useEnvVars')}
                                             </li>
                                             <li>
-                                                • Regularly update dependencies
+                                                • {t('bestPractices.security.updateDependencies')}
                                             </li>
                                         </ul>
                                     </div>
 
                                     <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-400 dark:border-blue-500 p-4">
                                         <h3 className="text-lg font-semibold text-blue-800 dark:text-blue-300 mb-2">
-                                            Performance
+                                            {t('bestPractices.performance.title')}
                                         </h3>
                                         <ul className="text-blue-700 dark:text-blue-300 space-y-1">
                                             <li>
-                                                • Implement caching for
-                                                frequently accessed data
+                                                • {t('bestPractices.performance.implementCaching')}
                                             </li>
                                             <li>
-                                                • Use connection pooling for
-                                                database connections
+                                                • {t('bestPractices.performance.useConnectionPooling')}
                                             </li>
                                             <li>
-                                                • Optimize resource loading and
-                                                memory usage
+                                                • {t('bestPractices.performance.optimizeResources')}
                                             </li>
                                             <li>
-                                                • Monitor and log performance
-                                                metrics
+                                                • {t('bestPractices.performance.monitorMetrics')}
                                             </li>
                                         </ul>
                                     </div>
@@ -897,65 +827,55 @@ await server.connect(transport);`}
                             {/* Troubleshooting Section */}
                             <section id="troubleshooting" className="mb-12">
                                 <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-                                    Troubleshooting
+                                    {t('troubleshooting.title')}
                                 </h2>
                                 <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                    Common issues and solutions when working
-                                    with MCP servers.
+                                    {t('troubleshooting.description')}
                                 </p>
 
                                 <div className="space-y-6">
                                     <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-6 bg-white dark:bg-gray-700/50">
                                         <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                                            Connection Failures
+                                            {t('troubleshooting.connectionFailures.title')}
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                            If your MCP server fails to connect:
+                                            {t('troubleshooting.connectionFailures.description')}
                                         </p>
                                         <ul className="text-gray-600 dark:text-gray-300 space-y-1 ml-4">
                                             <li>
-                                                • Check that the server process
-                                                is running
+                                                • {t('troubleshooting.connectionFailures.checkProcess')}
                                             </li>
                                             <li>
-                                                • Verify the configuration file
-                                                paths
+                                                • {t('troubleshooting.connectionFailures.verifyPaths')}
                                             </li>
                                             <li>
-                                                • Ensure all required
-                                                dependencies are installed
+                                                • {t('troubleshooting.connectionFailures.ensureDependencies')}
                                             </li>
                                             <li>
-                                                • Check the server logs for
-                                                error messages
+                                                • {t('troubleshooting.connectionFailures.checkLogs')}
                                             </li>
                                         </ul>
                                     </div>
 
                                     <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-6 bg-white dark:bg-gray-700/50">
                                         <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                                            Permission Errors
+                                            {t('troubleshooting.permissionErrors.title')}
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                            For file system or resource access
-                                            issues:
+                                            {t('troubleshooting.permissionErrors.description')}
                                         </p>
                                         <ul className="text-gray-600 dark:text-gray-300 space-y-1 ml-4">
                                             <li>
-                                                • Verify file and directory
-                                                permissions
+                                                • {t('troubleshooting.permissionErrors.verifyPermissions')}
                                             </li>
                                             <li>
-                                                • Check that the server has
-                                                access to required paths
+                                                • {t('troubleshooting.permissionErrors.checkAccess')}
                                             </li>
                                             <li>
-                                                • Ensure API keys and
-                                                credentials are correct
+                                                • {t('troubleshooting.permissionErrors.ensureCredentials')}
                                             </li>
                                             <li>
-                                                • Review security policies and
-                                                access controls
+                                                • {t('troubleshooting.permissionErrors.reviewPolicies')}
                                             </li>
                                         </ul>
                                     </div>
@@ -965,17 +885,16 @@ await server.connect(transport);`}
                             {/* API Reference Section */}
                             <section id="api-reference" className="mb-12">
                                 <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-                                    API Reference
+                                    {t('apiReference.title')}
                                 </h2>
                                 <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                    Complete reference for the MCP protocol
-                                    methods and data structures.
+                                    {t('apiReference.description')}
                                 </p>
 
                                 <div className="space-y-6">
                                     <div>
                                         <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-                                            Core Methods
+                                            {t('apiReference.coreMethods')}
                                         </h3>
                                         <div className="space-y-4">
                                             <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-4 bg-white dark:bg-gray-700/50">
@@ -983,8 +902,7 @@ await server.connect(transport);`}
                                                     resources/list
                                                 </h4>
                                                 <p className="text-gray-600 dark:text-gray-300 text-sm">
-                                                    Lists all available
-                                                    resources from the server.
+                                                    {t('apiReference.resourcesList')}
                                                 </p>
                                             </div>
                                             <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-4 bg-white dark:bg-gray-700/50">
@@ -992,8 +910,7 @@ await server.connect(transport);`}
                                                     resources/read
                                                 </h4>
                                                 <p className="text-gray-600 dark:text-gray-300 text-sm">
-                                                    Reads the contents of a
-                                                    specific resource.
+                                                    {t('apiReference.resourcesRead')}
                                                 </p>
                                             </div>
                                             <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-4 bg-white dark:bg-gray-700/50">
@@ -1001,8 +918,7 @@ await server.connect(transport);`}
                                                     tools/list
                                                 </h4>
                                                 <p className="text-gray-600 dark:text-gray-300 text-sm">
-                                                    Lists all available tools
-                                                    provided by the server.
+                                                    {t('apiReference.toolsList')}
                                                 </p>
                                             </div>
                                         </div>
@@ -1013,22 +929,19 @@ await server.connect(transport);`}
                             {/* Examples Section */}
                             <section id="examples" className="mb-12">
                                 <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-                                    Examples
+                                    {t('examples.title')}
                                 </h2>
                                 <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                    Practical examples of MCP server
-                                    implementations and integrations.
+                                    {t('examples.description')}
                                 </p>
 
                                 <div className="space-y-6">
                                     <div>
                                         <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-                                            File System Server
+                                            {t('examples.fileSystemServer.title')}
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                            A simple file system server that
-                                            provides read/write access to a
-                                            specific directory:
+                                            {t('examples.fileSystemServer.description')}
                                         </p>
                                         <div className="group">
                                             <CodeBlock
@@ -1054,11 +967,10 @@ await server.connect(transport);`}
 
                                     <div>
                                         <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-                                            Database Server
+                                            {t('examples.databaseServer.title')}
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-300 mb-3">
-                                            Connect to a PostgreSQL database and
-                                            execute queries:
+                                            {t('examples.databaseServer.description')}
                                         </p>
                                         <div className="group">
                                             <CodeBlock
@@ -1086,68 +998,43 @@ await server.connect(transport);`}
                             {/* FAQ Section */}
                             <section id="faq" className="mb-12">
                                 <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-                                    Frequently Asked Questions
+                                    {t('faq.title')}
                                 </h2>
 
                                 <div className="space-y-6">
                                     <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-6 bg-white dark:bg-gray-700/50">
                                         <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                                            How do I choose the right MCP
-                                            server?
+                                            {t('faq.choosingServer.question')}
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-300">
-                                            Consider your specific use case, the
-                                            type of data or functionality you
-                                            need, and the server's compatibility
-                                            with your tech stack. Use our
-                                            filtering and search features to
-                                            narrow down options, and check
-                                            community ratings and reviews.
+                                            {t('faq.choosingServer.answer')}
                                         </p>
                                     </div>
 
                                     <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-6 bg-white dark:bg-gray-700/50">
                                         <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                                            Are MCP servers secure?
+                                            {t('faq.security.question')}
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-300">
-                                            Yes, MCP servers are designed with
-                                            security in mind. They operate
-                                            within defined boundaries, support
-                                            permission controls, and follow the
-                                            MCP security specifications. Always
-                                            review the server's documentation
-                                            and configure appropriate access
-                                            controls.
+                                            {t('faq.security.answer')}
                                         </p>
                                     </div>
 
                                     <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-6 bg-white dark:bg-gray-700/50">
                                         <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                                            Can I use multiple MCP servers
-                                            together?
+                                            {t('faq.multipleServers.question')}
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-300">
-                                            Absolutely! Most AI applications use
-                                            multiple MCP servers to access
-                                            different types of resources. The
-                                            MCP protocol is designed to support
-                                            multiple concurrent server
-                                            connections.
+                                            {t('faq.multipleServers.answer')}
                                         </p>
                                     </div>
 
                                     <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-6 bg-white dark:bg-gray-700/50">
                                         <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                                            How do I contribute a new server?
+                                            {t('faq.contribute.question')}
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-300">
-                                            We welcome community contributions!
-                                            You can submit your MCP server
-                                            through our GitHub repository or
-                                            contact us directly. Make sure your
-                                            server follows MCP specifications
-                                            and includes proper documentation.
+                                            {t('faq.contribute.answer')}
                                         </p>
                                     </div>
                                 </div>
@@ -1156,12 +1043,10 @@ await server.connect(transport);`}
                             {/* Call to Action */}
                             <div className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-700 dark:to-purple-700 rounded-lg p-8 text-center text-white">
                                 <h2 className="text-2xl font-bold mb-4">
-                                    Ready to Get Started?
+                                    {t('callToAction.title')}
                                 </h2>
                                 <p className="text-blue-100 dark:text-blue-200 mb-6">
-                                    Explore our collection of MCP servers and
-                                    start building amazing AI applications
-                                    today.
+                                    {t('callToAction.description')}
                                 </p>
                                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                     <Link
@@ -1169,7 +1054,7 @@ await server.connect(transport);`}
                                         className="inline-flex items-center px-6 py-3 bg-white text-blue-600 font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-100 transition-colors"
                                     >
                                         <Rocket className="mr-2" size={20} />
-                                        Browse Servers
+                                        {t('callToAction.browseServers')}
                                     </Link>
                                     <Link
                                         to="/categories"
@@ -1179,7 +1064,7 @@ await server.connect(transport);`}
                                             className="mr-2"
                                             size={20}
                                         />
-                                        View Categories
+                                        {t('callToAction.viewCategories')}
                                     </Link>
                                 </div>
                             </div>

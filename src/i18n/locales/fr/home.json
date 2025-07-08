@@ -36,12 +36,19 @@
         "subtitle": "Servers with the latest updates and improvements"
     },
     "server": {
-        "stars": "stars",
+        "stars": "étoiles",
         "forks": "forks",
-        "install": "Install",
-        "viewDetails": "View Details",
-        "qualityScore": "Quality Score",
-        "lastUpdated": "Last updated",
-        "createdBy": "Created by"
+        "install": "Installer",
+        "viewDetails": "Voir les Détails",
+        "qualityScore": "Score de Qualité",
+        "lastUpdated": "Dernière mise à jour",
+        "createdBy": "Créé par"
+    },
+    "seo": {
+        "title": "Magic MCP - Plateforme de Découverte de Serveurs Model Context Protocol",
+        "description": "Découvrez et intégrez les meilleurs serveurs Model Context Protocol (MCP). Parcourez plus de 1000 serveurs MCP de haute qualité pour bases de données, systèmes de fichiers, API et outils de développement.",
+        "ogTitle": "Magic MCP - Plateforme de Découverte de Serveurs Model Context Protocol",
+        "ogDescription": "Découvrez et intégrez les meilleurs serveurs Model Context Protocol (MCP). Parcourez plus de 1000 serveurs MCP de haute qualité pour bases de données, systèmes de fichiers, API et outils de développement.",
+        "keywords": "MCP, Model Context Protocol, outils IA, serveurs, intégration base de données, API, outils de développement, Claude MCP, agents IA"
     }
 }

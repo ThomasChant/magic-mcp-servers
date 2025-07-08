@@ -1,118 +1,235 @@
 {
-    "title": "文件",
-    "subtitle": "瞭解 MCP 伺服器及其使用方法",
-    "sections": {
-        "gettingStarted": {
-            "title": "入門指南",
-            "subtitle": "學習 MCP 伺服器的基礎知識",
-            "introduction": "MCP 介紹",
-            "installation": "安裝指南",
-            "quickStart": "快速開始",
-            "firstServer": "您的第一個伺服器",
-            "basicConcepts": "基本概念",
-            "configuration": "組態"
-        },
-        "serverDevelopment": {
-            "title": "伺服器開發",
-            "subtitle": "建構您自己的 MCP 伺服器",
-            "createServer": "建立伺服器",
-            "serverStructure": "伺服器結構",
-            "apiDesign": "API 設計",
-            "bestPractices": "最佳實務",
-            "testing": "測試",
-            "deployment": "部署",
-            "versioning": "版本控制"
-        },
-        "integration": {
-            "title": "整合",
-            "subtitle": "將 MCP 伺服器整合到您的應用程式中",
-            "clientLibraries": "客戶端函式庫",
-            "sdks": "SDK",
-            "examples": "整合範例",
-            "authentication": "身份驗證",
-            "errorHandling": "錯誤處理",
-            "performance": "效能",
-            "monitoring": "監控"
-        },
-        "api": {
-            "title": "API 參考",
-            "subtitle": "完整的 API 文件",
-            "endpoints": "端點",
-            "methods": "方法",
-            "parameters": "參數",
-            "responses": "回應",
-            "errorCodes": "錯誤代碼",
-            "schemas": "結構描述",
-            "examples": "範例"
-        },
-        "community": {
-            "title": "社群",
-            "subtitle": "加入 MCP 社群",
-            "contributing": "貢獻",
-            "guidelines": "指南",
-            "codeOfConduct": "行為準則",
-            "support": "支援",
-            "forums": "論壇",
-            "discord": "Discord",
-            "github": "GitHub"
-        },
-        "advanced": {
-            "title": "進階主題",
-            "subtitle": "進階 MCP 伺服器概念",
-            "architecture": "架構",
-            "security": "安全性",
-            "scalability": "可擴展性",
-            "customization": "自訂",
-            "plugins": "外掛程式",
-            "extensions": "擴充功能",
-            "troubleshooting": "疑難排解"
-        }
+    "header": {
+        "title": "文檔",
+        "subtitle": "瞭解如何高效地發現、整合和使用 MCP 伺服器的完整指南。"
     },
     "navigation": {
-        "previousPage": "上一頁",
-        "nextPage": "下一頁",
-        "tableOfContents": "目錄",
-        "onThisPage": "本頁內容",
-        "editPage": "編輯此頁",
-        "viewSource": "檢視原始碼",
-        "lastUpdated": "最後更新",
-        "contributors": "貢獻者",
-        "feedback": "回饋",
-        "improve": "改進此頁"
+        "gettingStarted": "快速入門",
+        "coreConcepts": "核心概念",
+        "advanced": "進階主題",
+        "reference": "參考資料",
+        "introduction": "介紹",
+        "quickStart": "快速開始",
+        "installation": "安裝",
+        "whatIsMcp": "什麼是 MCP？",
+        "serverTypes": "伺服器類型",
+        "integration": "整合指南",
+        "customServers": "建構伺服器",
+        "bestPractices": "最佳實務",
+        "troubleshooting": "疑難排解",
+        "apiReference": "API 參考",
+        "examples": "範例",
+        "faq": "常見問題"
     },
-    "search": {
-        "placeholder": "搜尋文件...",
-        "noResults": "未找到結果",
-        "resultsFor": "\"{{query}}\" 的搜尋結果",
-        "suggestions": "建議",
-        "searchTips": "搜尋提示",
-        "exactMatch": "精確符合",
-        "partialMatch": "部分符合"
+    "introduction": {
+        "title": "Magic MCP 介紹",
+        "description": "Magic MCP 是您發現、評估和整合模型上下文協定（MCP）伺服器的綜合平臺。無論您是在建構 AI 應用程式還是增強現有系統，Magic MCP 都為您提供所需的工具和資源。",
+        "newToMcp": "初次接觸 MCP？",
+        "mcpDescription": "模型上下文協定是 AI 應用程式連接外部資料來源和工具的標準化方式。",
+        "learnMore": "瞭解更多關於 MCP →",
+        "keyFeatures": "核心特性",
+        "smartDiscovery": {
+            "title": "智慧發現",
+            "description": "使用智慧搜尋和篩選功能找到完美的 MCP 伺服器"
+        },
+        "qualityRatings": {
+            "title": "品質評級",
+            "description": "社群驅動的評級和評論，為您提供可靠的選擇"
+        },
+        "easyIntegration": {
+            "title": "輕鬆整合",
+            "description": "分步指南和程式碼範例，助您快速設置"
+        },
+        "activeCommunity": {
+            "title": "活躍社群",
+            "description": "與開發者連接並分享知識"
+        }
     },
-    "common": {
-        "readMore": "閱讀更多",
-        "showLess": "收起",
-        "expand": "展開",
-        "collapse": "摺疊",
+    "quickStart": {
+        "title": "快速開始指南",
+        "description": "幾分鐘內即可開始使用 MCP 伺服器。按照以下簡單步驟整合您的第一個伺服器。",
+        "step1": {
+            "title": "發現伺服器",
+            "description": "瀏覽我們的目錄或使用搜尋功能找到滿足您需求的伺服器。",
+            "browseServers": "瀏覽伺服器"
+        },
+        "step2": {
+            "title": "安裝伺服器",
+            "description": "按照您首選方法（npm、pip、Docker）的安裝說明進行操作。"
+        },
+        "step3": {
+            "title": "配置您的應用程式",
+            "description": "使用提供的配置將您的 AI 應用程式連接到 MCP 伺服器。"
+        },
+        "step4": {
+            "title": "開始建構",
+            "description": "您的 MCP 伺服器現在已準備就緒！開始建構令人驚嘆的 AI 驅動應用程式。",
+            "viewExamples": "檢視範例"
+        }
+    },
+    "installation": {
+        "title": "安裝",
+        "description": "MCP 伺服器可以使用各種套件管理員和部署方法進行安裝。選擇最適合您開發環境的方法。",
+        "npmInstallation": {
+            "title": "NPM 安裝",
+            "description": "對於基於 Node.js 的 MCP 伺服器："
+        },
+        "pythonInstallation": {
+            "title": "Python 安裝",
+            "description": "對於基於 Python 的 MCP 伺服器："
+        },
+        "dockerInstallation": {
+            "title": "Docker 安裝",
+            "description": "在容器中執行 MCP 伺服器："
+        }
+    },
+    "whatIsMcp": {
+        "title": "什麼是模型上下文協定？",
+        "description": "模型上下文協定（MCP）是一個開放標準，使 AI 應用程式能夠安全地連接外部資料來源、工具和服務。它為 AI 模型存取和與各種資源互動提供了標準化方式，同時保持安全性和控制。",
+        "keyBenefits": "主要優勢",
+        "secureDataAccess": "安全的資料存取",
+        "standardizedIntegration": "標準化整合",
+        "scalableArchitecture": "可擴展架構",
+        "easyMaintenance": "易於維護",
+        "howMcpWorks": "MCP 工作原理",
+        "clientServerArchitecture": "客戶端-伺服器架構：AI 應用程式（客戶端）連接到提供特定功能的 MCP 伺服器",
+        "standardizedProtocol": "標準化協定：所有通訊都遵循 MCP 規範以確保一致性",
+        "resourceAccess": "資源存取：伺服器暴露客戶端可以發現和使用的資源（資料、工具、提示）",
+        "secureBoundaries": "安全邊界：每個伺服器在定義的安全邊界和權限內執行"
+    },
+    "serverTypes": {
+        "title": "伺服器類型與分類",
+        "description": "MCP 伺服器有多種類型，每種都為特定用例而設計。瞭解這些分類有助於您為需求選擇合適的伺服器。",
+        "fileSystem": {
+            "title": "檔案系統",
+            "description": "在安全邊界內存取和操作檔案和目錄。",
+            "readWrite": "讀寫",
+            "cloudStorage": "雲端儲存"
+        },
+        "database": {
+            "title": "資料庫",
+            "description": "連接到 SQL 和 NoSQL 資料庫進行資料操作。",
+            "sql": "SQL",
+            "nosql": "NoSQL"
+        },
+        "communication": {
+            "title": "通訊",
+            "description": "與訊息傳遞和通知平臺整合。",
+            "slack": "Slack",
+            "email": "電子郵件"
+        },
+        "development": {
+            "title": "開發",
+            "description": "存取開發工具、版本控制和 CI/CD 系統。",
+            "git": "Git",
+            "cicd": "CI/CD"
+        }
+    },
+    "integration": {
+        "title": "整合指南",
+        "description": "將 MCP 伺服器與您的 AI 應用程式整合需要配置連接並瞭解可用的資源和工具。",
+        "configurationSetup": {
+            "title": "配置設定",
+            "description": "將您的 MCP 伺服器配置新增到應用程式的配置檔案中："
+        },
+        "connectionTesting": {
+            "title": "連接測試",
+            "description": "測試您的連接以確保伺服器正確回應："
+        }
+    },
+    "customServers": {
+        "title": "建構自訂伺服器",
+        "description": "建立您自己的 MCP 伺服器，向 AI 應用程式暴露自訂功能和資料來源。",
+        "serverStructure": {
+            "title": "伺服器結構",
+            "description": "基本的 MCP 伺服器實現："
+        }
+    },
+    "bestPractices": {
+        "title": "最佳實務",
+        "description": "遵循這些最佳實務，確保 MCP 伺服器實現的最佳效能、安全性和可維護性。",
+        "security": {
+            "title": "安全性",
+            "validateInput": "始終驗證輸入參數",
+            "implementAuth": "實施適當的身份驗證和授權",
+            "useEnvVars": "對敏感資料使用環境變數",
+            "updateDependencies": "定期更新相依性"
+        },
+        "performance": {
+            "title": "效能",
+            "implementCaching": "對頻繁存取的資料實施快取",
+            "useConnectionPooling": "對資料庫連接使用連接池",
+            "optimizeResources": "最佳化資源載入和記憶體使用",
+            "monitorMetrics": "監控和記錄效能指標"
+        }
+    },
+    "troubleshooting": {
+        "title": "疑難排解",
+        "description": "使用 MCP 伺服器時的常見問題和解決方案。",
+        "connectionFailures": {
+            "title": "連接失敗",
+            "description": "如果您的 MCP 伺服器連接失敗：",
+            "checkProcess": "檢查伺服器程序是否正在執行",
+            "verifyPaths": "驗證配置檔案路徑",
+            "ensureDependencies": "確保安裝了所有必需的相依性",
+            "checkLogs": "檢查伺服器日誌中的錯誤訊息"
+        },
+        "permissionErrors": {
+            "title": "權限錯誤",
+            "description": "對於檔案系統或資源存取問題：",
+            "verifyPermissions": "驗證檔案和目錄權限",
+            "checkAccess": "檢查伺服器是否有權存取所需路徑",
+            "ensureCredentials": "確保 API 金鑰和憑證正確",
+            "reviewPolicies": "審查安全政策和存取控制"
+        }
+    },
+    "apiReference": {
+        "title": "API 參考",
+        "description": "MCP 協定方法和資料結構的完整參考。",
+        "coreMethods": "核心方法",
+        "resourcesList": "列出伺服器的所有可用資源。",
+        "resourcesRead": "讀取特定資源的內容。",
+        "toolsList": "列出伺服器提供的所有可用工具。"
+    },
+    "examples": {
+        "title": "範例",
+        "description": "MCP 伺服器實現和整合的實際範例。",
+        "fileSystemServer": {
+            "title": "檔案系統伺服器",
+            "description": "一個簡單的檔案系統伺服器，提供對特定目錄的讀寫存取："
+        },
+        "databaseServer": {
+            "title": "資料庫伺服器",
+            "description": "連接到 PostgreSQL 資料庫並執行查詢："
+        }
+    },
+    "faq": {
+        "title": "常見問題",
+        "choosingServer": {
+            "question": "如何選擇合適的 MCP 伺服器？",
+            "answer": "考慮您的具體用例、所需的資料或功能類型，以及伺服器與您技術堆疊的相容性。使用我們的篩選和搜尋功能縮小選擇範圍，並檢視社群評級和評論。"
+        },
+        "security": {
+            "question": "MCP 伺服器安全嗎？",
+            "answer": "是的，MCP 伺服器在設計時考慮了安全性。它們在定義的邊界內執行，支援權限控制，並遵循 MCP 安全規範。始終檢視伺服器的文檔並配置適當的存取控制。"
+        },
+        "multipleServers": {
+            "question": "我可以同時使用多個 MCP 伺服器嗎？",
+            "answer": "當然可以！大多數 AI 應用程式使用多個 MCP 伺服器來存取不同類型的資源。MCP 協定設計用於支援多個並發伺服器連接。"
+        },
+        "contribute": {
+            "question": "如何貢獻新的伺服器？",
+            "answer": "我們歡迎社群貢獻！您可以透過我們的 GitHub 儲存庫提交您的 MCP 伺服器或直接聯絡我們。確保您的伺服器遵循 MCP 規範並包含適當的文檔。"
+        }
+    },
+    "callToAction": {
+        "title": "準備好開始了嗎？",
+        "description": "探索我們的 MCP 伺服器集合，立即開始建構令人驚嘆的 AI 應用程式。",
+        "browseServers": "瀏覽伺服器",
+        "viewCategories": "檢視分類"
+    },
+    "buttons": {
         "copy": "複製",
-        "copied": "已複製！",
-        "share": "分享",
-        "print": "列印",
-        "download": "下載",
-        "bookmark": "書籤",
-        "note": "注意",
-        "tip": "提示",
-        "warning": "警告",
-        "danger": "危險",
-        "info": "資訊",
-        "example": "範例",
-        "codeExample": "程式碼範例",
-        "liveDemo": "線上示範",
-        "tryIt": "試試看"
-    },
-    "meta": {
-        "title": "文件 | Magic MCP",
-        "description": "MCP 伺服器的完整文件。瞭解如何建立、部署和整合 Model Context Protocol 伺服器。",
-        "keywords": "MCP, Model Context Protocol, 文件, 指南, 教學, API, 開發"
+        "copied": "已複製！"
     }
 }

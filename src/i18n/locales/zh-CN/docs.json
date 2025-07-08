@@ -1,118 +1,235 @@
 {
-    "title": "文档",
-    "subtitle": "了解 MCP 服务器及其使用方法",
-    "sections": {
-        "gettingStarted": {
-            "title": "入门指南",
-            "subtitle": "学习 MCP 服务器的基础知识",
-            "introduction": "MCP 介绍",
-            "installation": "安装指南",
-            "quickStart": "快速开始",
-            "firstServer": "您的第一个服务器",
-            "basicConcepts": "基本概念",
-            "configuration": "配置"
-        },
-        "serverDevelopment": {
-            "title": "服务器开发",
-            "subtitle": "构建您自己的 MCP 服务器",
-            "createServer": "创建服务器",
-            "serverStructure": "服务器结构",
-            "apiDesign": "API 设计",
-            "bestPractices": "最佳实践",
-            "testing": "测试",
-            "deployment": "部署",
-            "versioning": "版本控制"
-        },
-        "integration": {
-            "title": "集成",
-            "subtitle": "将 MCP 服务器集成到您的应用程序中",
-            "clientLibraries": "客户端库",
-            "sdks": "SDK",
-            "examples": "集成示例",
-            "authentication": "身份验证",
-            "errorHandling": "错误处理",
-            "performance": "性能",
-            "monitoring": "监控"
-        },
-        "api": {
-            "title": "API 参考",
-            "subtitle": "完整的 API 文档",
-            "endpoints": "端点",
-            "methods": "方法",
-            "parameters": "参数",
-            "responses": "响应",
-            "errorCodes": "错误代码",
-            "schemas": "模式",
-            "examples": "示例"
-        },
-        "community": {
-            "title": "社区",
-            "subtitle": "加入 MCP 社区",
-            "contributing": "贡献",
-            "guidelines": "指南",
-            "codeOfConduct": "行为准则",
-            "support": "支持",
-            "forums": "论坛",
-            "discord": "Discord",
-            "github": "GitHub"
-        },
-        "advanced": {
-            "title": "高级主题",
-            "subtitle": "高级 MCP 服务器概念",
-            "architecture": "架构",
-            "security": "安全",
-            "scalability": "可扩展性",
-            "customization": "自定义",
-            "plugins": "插件",
-            "extensions": "扩展",
-            "troubleshooting": "故障排除"
-        }
+    "header": {
+        "title": "文档",
+        "subtitle": "了解如何高效地发现、集成和使用 MCP 服务器的完整指南。"
     },
     "navigation": {
-        "previousPage": "上一页",
-        "nextPage": "下一页",
-        "tableOfContents": "目录",
-        "onThisPage": "本页内容",
-        "editPage": "编辑此页",
-        "viewSource": "查看源码",
-        "lastUpdated": "最后更新",
-        "contributors": "贡献者",
-        "feedback": "反馈",
-        "improve": "改进此页"
+        "gettingStarted": "快速入门",
+        "coreConcepts": "核心概念",
+        "advanced": "高级主题",
+        "reference": "参考资料",
+        "introduction": "介绍",
+        "quickStart": "快速开始",
+        "installation": "安装",
+        "whatIsMcp": "什么是 MCP？",
+        "serverTypes": "服务器类型",
+        "integration": "集成指南",
+        "customServers": "构建服务器",
+        "bestPractices": "最佳实践",
+        "troubleshooting": "故障排除",
+        "apiReference": "API 参考",
+        "examples": "示例",
+        "faq": "常见问题"
     },
-    "search": {
-        "placeholder": "搜索文档...",
-        "noResults": "未找到结果",
-        "resultsFor": "\"{{query}}\" 的搜索结果",
-        "suggestions": "建议",
-        "searchTips": "搜索提示",
-        "exactMatch": "精确匹配",
-        "partialMatch": "部分匹配"
+    "introduction": {
+        "title": "Magic MCP 介绍",
+        "description": "Magic MCP 是您发现、评估和集成模型上下文协议（MCP）服务器的综合平台。无论您是在构建 AI 应用程序还是增强现有系统，Magic MCP 都为您提供所需的工具和资源。",
+        "newToMcp": "初次接触 MCP？",
+        "mcpDescription": "模型上下文协议是 AI 应用程序连接外部数据源和工具的标准化方式。",
+        "learnMore": "了解更多关于 MCP →",
+        "keyFeatures": "核心特性",
+        "smartDiscovery": {
+            "title": "智能发现",
+            "description": "使用智能搜索和过滤功能找到完美的 MCP 服务器"
+        },
+        "qualityRatings": {
+            "title": "质量评级",
+            "description": "社区驱动的评级和评论，为您提供可靠的选择"
+        },
+        "easyIntegration": {
+            "title": "轻松集成",
+            "description": "分步指南和代码示例，助您快速设置"
+        },
+        "activeCommunity": {
+            "title": "活跃社区",
+            "description": "与开发者连接并分享知识"
+        }
     },
-    "common": {
-        "readMore": "阅读更多",
-        "showLess": "收起",
-        "expand": "展开",
-        "collapse": "折叠",
+    "quickStart": {
+        "title": "快速开始指南",
+        "description": "几分钟内即可开始使用 MCP 服务器。按照以下简单步骤集成您的第一个服务器。",
+        "step1": {
+            "title": "发现服务器",
+            "description": "浏览我们的目录或使用搜索功能找到满足您需求的服务器。",
+            "browseServers": "浏览服务器"
+        },
+        "step2": {
+            "title": "安装服务器",
+            "description": "按照您首选方法（npm、pip、Docker）的安装说明进行操作。"
+        },
+        "step3": {
+            "title": "配置您的应用程序",
+            "description": "使用提供的配置将您的 AI 应用程序连接到 MCP 服务器。"
+        },
+        "step4": {
+            "title": "开始构建",
+            "description": "您的 MCP 服务器现在已准备就绪！开始构建令人惊叹的 AI 驱动应用程序。",
+            "viewExamples": "查看示例"
+        }
+    },
+    "installation": {
+        "title": "安装",
+        "description": "MCP 服务器可以使用各种包管理器和部署方法进行安装。选择最适合您开发环境的方法。",
+        "npmInstallation": {
+            "title": "NPM 安装",
+            "description": "对于基于 Node.js 的 MCP 服务器："
+        },
+        "pythonInstallation": {
+            "title": "Python 安装",
+            "description": "对于基于 Python 的 MCP 服务器："
+        },
+        "dockerInstallation": {
+            "title": "Docker 安装",
+            "description": "在容器中运行 MCP 服务器："
+        }
+    },
+    "whatIsMcp": {
+        "title": "什么是模型上下文协议？",
+        "description": "模型上下文协议（MCP）是一个开放标准，使 AI 应用程序能够安全地连接外部数据源、工具和服务。它为 AI 模型访问和与各种资源交互提供了标准化方式，同时保持安全性和控制。",
+        "keyBenefits": "主要优势",
+        "secureDataAccess": "安全的数据访问",
+        "standardizedIntegration": "标准化集成",
+        "scalableArchitecture": "可扩展架构",
+        "easyMaintenance": "易于维护",
+        "howMcpWorks": "MCP 工作原理",
+        "clientServerArchitecture": "客户端-服务器架构：AI 应用程序（客户端）连接到提供特定功能的 MCP 服务器",
+        "standardizedProtocol": "标准化协议：所有通信都遵循 MCP 规范以确保一致性",
+        "resourceAccess": "资源访问：服务器暴露客户端可以发现和使用的资源（数据、工具、提示）",
+        "secureBoundaries": "安全边界：每个服务器在定义的安全边界和权限内运行"
+    },
+    "serverTypes": {
+        "title": "服务器类型与分类",
+        "description": "MCP 服务器有多种类型，每种都为特定用例而设计。了解这些分类有助于您为需求选择合适的服务器。",
+        "fileSystem": {
+            "title": "文件系统",
+            "description": "在安全边界内访问和操作文件和目录。",
+            "readWrite": "读写",
+            "cloudStorage": "云存储"
+        },
+        "database": {
+            "title": "数据库",
+            "description": "连接到 SQL 和 NoSQL 数据库进行数据操作。",
+            "sql": "SQL",
+            "nosql": "NoSQL"
+        },
+        "communication": {
+            "title": "通信",
+            "description": "与消息传递和通知平台集成。",
+            "slack": "Slack",
+            "email": "电子邮件"
+        },
+        "development": {
+            "title": "开发",
+            "description": "访问开发工具、版本控制和 CI/CD 系统。",
+            "git": "Git",
+            "cicd": "CI/CD"
+        }
+    },
+    "integration": {
+        "title": "集成指南",
+        "description": "将 MCP 服务器与您的 AI 应用程序集成需要配置连接并了解可用的资源和工具。",
+        "configurationSetup": {
+            "title": "配置设置",
+            "description": "将您的 MCP 服务器配置添加到应用程序的配置文件中："
+        },
+        "connectionTesting": {
+            "title": "连接测试",
+            "description": "测试您的连接以确保服务器正确响应："
+        }
+    },
+    "customServers": {
+        "title": "构建自定义服务器",
+        "description": "创建您自己的 MCP 服务器，向 AI 应用程序暴露自定义功能和数据源。",
+        "serverStructure": {
+            "title": "服务器结构",
+            "description": "基本的 MCP 服务器实现："
+        }
+    },
+    "bestPractices": {
+        "title": "最佳实践",
+        "description": "遵循这些最佳实践，确保 MCP 服务器实现的最佳性能、安全性和可维护性。",
+        "security": {
+            "title": "安全",
+            "validateInput": "始终验证输入参数",
+            "implementAuth": "实施适当的身份验证和授权",
+            "useEnvVars": "对敏感数据使用环境变量",
+            "updateDependencies": "定期更新依赖项"
+        },
+        "performance": {
+            "title": "性能",
+            "implementCaching": "对频繁访问的数据实施缓存",
+            "useConnectionPooling": "对数据库连接使用连接池",
+            "optimizeResources": "优化资源加载和内存使用",
+            "monitorMetrics": "监控和记录性能指标"
+        }
+    },
+    "troubleshooting": {
+        "title": "故障排除",
+        "description": "使用 MCP 服务器时的常见问题和解决方案。",
+        "connectionFailures": {
+            "title": "连接失败",
+            "description": "如果您的 MCP 服务器连接失败：",
+            "checkProcess": "检查服务器进程是否正在运行",
+            "verifyPaths": "验证配置文件路径",
+            "ensureDependencies": "确保安装了所有必需的依赖项",
+            "checkLogs": "检查服务器日志中的错误消息"
+        },
+        "permissionErrors": {
+            "title": "权限错误",
+            "description": "对于文件系统或资源访问问题：",
+            "verifyPermissions": "验证文件和目录权限",
+            "checkAccess": "检查服务器是否有权访问所需路径",
+            "ensureCredentials": "确保 API 密钥和凭据正确",
+            "reviewPolicies": "审查安全策略和访问控制"
+        }
+    },
+    "apiReference": {
+        "title": "API 参考",
+        "description": "MCP 协议方法和数据结构的完整参考。",
+        "coreMethods": "核心方法",
+        "resourcesList": "列出服务器的所有可用资源。",
+        "resourcesRead": "读取特定资源的内容。",
+        "toolsList": "列出服务器提供的所有可用工具。"
+    },
+    "examples": {
+        "title": "示例",
+        "description": "MCP 服务器实现和集成的实际示例。",
+        "fileSystemServer": {
+            "title": "文件系统服务器",
+            "description": "一个简单的文件系统服务器，提供对特定目录的读写访问："
+        },
+        "databaseServer": {
+            "title": "数据库服务器",
+            "description": "连接到 PostgreSQL 数据库并执行查询："
+        }
+    },
+    "faq": {
+        "title": "常见问题",
+        "choosingServer": {
+            "question": "如何选择合适的 MCP 服务器？",
+            "answer": "考虑您的具体用例、所需的数据或功能类型，以及服务器与您技术栈的兼容性。使用我们的过滤和搜索功能缩小选择范围，并查看社区评级和评论。"
+        },
+        "security": {
+            "question": "MCP 服务器安全吗？",
+            "answer": "是的，MCP 服务器在设计时考虑了安全性。它们在定义的边界内运行，支持权限控制，并遵循 MCP 安全规范。始终查看服务器的文档并配置适当的访问控制。"
+        },
+        "multipleServers": {
+            "question": "我可以同时使用多个 MCP 服务器吗？",
+            "answer": "当然可以！大多数 AI 应用程序使用多个 MCP 服务器来访问不同类型的资源。MCP 协议设计用于支持多个并发服务器连接。"
+        },
+        "contribute": {
+            "question": "如何贡献新的服务器？",
+            "answer": "我们欢迎社区贡献！您可以通过我们的 GitHub 仓库提交您的 MCP 服务器或直接联系我们。确保您的服务器遵循 MCP 规范并包含适当的文档。"
+        }
+    },
+    "callToAction": {
+        "title": "准备好开始了吗？",
+        "description": "探索我们的 MCP 服务器集合，立即开始构建令人惊叹的 AI 应用程序。",
+        "browseServers": "浏览服务器",
+        "viewCategories": "查看分类"
+    },
+    "buttons": {
         "copy": "复制",
-        "copied": "已复制！",
-        "share": "分享",
-        "print": "打印",
-        "download": "下载",
-        "bookmark": "书签",
-        "note": "注意",
-        "tip": "提示",
-        "warning": "警告",
-        "danger": "危险",
-        "info": "信息",
-        "example": "示例",
-        "codeExample": "代码示例",
-        "liveDemo": "在线演示",
-        "tryIt": "试试看"
-    },
-    "meta": {
-        "title": "文档 | Magic MCP",
-        "description": "MCP 服务器的完整文档。了解如何创建、部署和集成 Model Context Protocol 服务器。",
-        "keywords": "MCP, Model Context Protocol, 文档, 指南, 教程, API, 开发"
+        "copied": "已复制！"
     }
 }

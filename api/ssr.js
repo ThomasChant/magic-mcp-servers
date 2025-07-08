@@ -87,12 +87,22 @@ async function updateAssetPaths(template) {
 function needsSSR(url) {
     const normalizedUrl = url.startsWith('/') ? url : `/${url}`;
     
+    // Extract locale from URL if present
+    const localePattern = /^\/(zh-CN|zh-TW|fr|ja|ko|ru)(\/.*)?$/;
+    const localeMatch = normalizedUrl.match(localePattern);
+    
+    let pathWithoutLocale = normalizedUrl;
+    if (localeMatch) {
+        // Remove locale prefix to check the actual route
+        pathWithoutLocale = localeMatch[2] || '/';
+    }
+    
     // Core pages that need SSR for SEO
     const ssrRoutes = ['/', '/servers', '/categories'];
     const dynamicSSRRoutes = ['/servers/', '/categories/'];
     
-    return ssrRoutes.includes(normalizedUrl) || 
-           dynamicSSRRoutes.some(route => normalizedUrl.startsWith(route));
+    return ssrRoutes.includes(pathWithoutLocale) || 
+           dynamicSSRRoutes.some(route => pathWithoutLocale.startsWith(route));
 }
 
 export default async function handler(req, res) {
@@ -153,10 +163,16 @@ export default async function handler(req, res) {
         // 🚀 Simplified SSR: Check if this route needs SSR
         const routePath = url === "/" ? "/" : url;
         const requiresSSR = needsSSR(routePath);
+        
+        // Extract locale from URL if present
+        const localePattern = /^\/(zh-CN|zh-TW|fr|ja|ko|ru)(\/.*)?$/;
+        const localeMatch = routePath.match(localePattern);
+        const locale = localeMatch ? localeMatch[1] : 'en';
+        const pathWithoutLocale = localeMatch ? (localeMatch[2] || '/') : routePath;
 
         console.log(`📡 Processing request: ${routePath}`);
         console.log(
-            `🔍 URL analysis: original="${url}", normalized="${routePath}"`
+            `🔍 URL analysis: original="${url}", normalized="${routePath}", locale="${locale}", pathWithoutLocale="${pathWithoutLocale}"`
         );
         console.log(`🎯 Needs SSR: ${requiresSSR ? "Yes" : "No"}`);
         console.log(`🏠 Is home page: ${routePath === "/"}`);
@@ -234,7 +250,17 @@ export default async function handler(req, res) {
     <meta property="og:url" content="https://magicmcp.net${routePath}" />
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://magicmcp.net${routePath}" />`;
+    <link rel="canonical" href="https://magicmcp.net${routePath}" />
+    
+    <!-- Language alternate links -->
+    <link rel="alternate" hreflang="en" href="https://magicmcp.net${pathWithoutLocale}" />
+    <link rel="alternate" hreflang="zh-CN" href="https://magicmcp.net/zh-CN${pathWithoutLocale}" />
+    <link rel="alternate" hreflang="zh-TW" href="https://magicmcp.net/zh-TW${pathWithoutLocale}" />
+    <link rel="alternate" hreflang="fr" href="https://magicmcp.net/fr${pathWithoutLocale}" />
+    <link rel="alternate" hreflang="ja" href="https://magicmcp.net/ja${pathWithoutLocale}" />
+    <link rel="alternate" hreflang="ko" href="https://magicmcp.net/ko${pathWithoutLocale}" />
+    <link rel="alternate" hreflang="ru" href="https://magicmcp.net/ru${pathWithoutLocale}" />
+    <link rel="alternate" hreflang="x-default" href="https://magicmcp.net${pathWithoutLocale}" />`;
 
             const finalHtml = template
                 .replace(`<!--app-head-->`, basicHead)
@@ -413,7 +439,17 @@ export default async function handler(req, res) {
     <meta property="og:url" content="https://magicmcp.net${routePath}" />
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://magicmcp.net${routePath}" />`;
+    <link rel="canonical" href="https://magicmcp.net${routePath}" />
+    
+    <!-- Language alternate links -->
+    <link rel="alternate" hreflang="en" href="https://magicmcp.net${pathWithoutLocale}" />
+    <link rel="alternate" hreflang="zh-CN" href="https://magicmcp.net/zh-CN${pathWithoutLocale}" />
+    <link rel="alternate" hreflang="zh-TW" href="https://magicmcp.net/zh-TW${pathWithoutLocale}" />
+    <link rel="alternate" hreflang="fr" href="https://magicmcp.net/fr${pathWithoutLocale}" />
+    <link rel="alternate" hreflang="ja" href="https://magicmcp.net/ja${pathWithoutLocale}" />
+    <link rel="alternate" hreflang="ko" href="https://magicmcp.net/ko${pathWithoutLocale}" />
+    <link rel="alternate" hreflang="ru" href="https://magicmcp.net/ru${pathWithoutLocale}" />
+    <link rel="alternate" hreflang="x-default" href="https://magicmcp.net${pathWithoutLocale}" />`;
 
             const finalHtml = template
                 .replace(`<!--app-head-->`, basicHead)
@@ -438,9 +474,9 @@ export default async function handler(req, res) {
             );
         }
 
-        // Render the app with the full URL path
-        console.log(`🎨 Calling render function for: ${routePath}`);
-        const renderResult = await render(routePath);
+        // Render the app with the full URL path and locale
+        console.log(`🎨 Calling render function for: ${routePath} (locale: ${locale})`);
+        const renderResult = await render(routePath, { locale });
         console.log(`🎨 Render result:`, {
             hasHtml: !!renderResult.html,
             htmlLength: renderResult.html?.length || 0,
@@ -482,6 +518,18 @@ export default async function handler(req, res) {
     
     <!-- Canonical URL -->
     <link rel="canonical" href="${escapeHtml(seoData.canonicalUrl)}" />
+    
+    <!-- Language alternate links -->
+    ${seoData.hreflangTags ? seoData.hreflangTags : `
+    <link rel="alternate" hreflang="en" href="https://magicmcp.net${pathWithoutLocale}" />
+    <link rel="alternate" hreflang="zh-CN" href="https://magicmcp.net/zh-CN${pathWithoutLocale}" />
+    <link rel="alternate" hreflang="zh-TW" href="https://magicmcp.net/zh-TW${pathWithoutLocale}" />
+    <link rel="alternate" hreflang="fr" href="https://magicmcp.net/fr${pathWithoutLocale}" />
+    <link rel="alternate" hreflang="ja" href="https://magicmcp.net/ja${pathWithoutLocale}" />
+    <link rel="alternate" hreflang="ko" href="https://magicmcp.net/ko${pathWithoutLocale}" />
+    <link rel="alternate" hreflang="ru" href="https://magicmcp.net/ru${pathWithoutLocale}" />
+    <link rel="alternate" hreflang="x-default" href="https://magicmcp.net${pathWithoutLocale}" />
+    `}
     
     <!-- Structured Data -->
     <script type="application/ld+json">

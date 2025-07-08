@@ -36,12 +36,19 @@
         "subtitle": "Servers with the latest updates and improvements"
     },
     "server": {
-        "stars": "stars",
-        "forks": "forks",
-        "install": "Install",
-        "viewDetails": "View Details",
-        "qualityScore": "Quality Score",
-        "lastUpdated": "Last updated",
-        "createdBy": "Created by"
+        "stars": "звёзды",
+        "forks": "форки",
+        "install": "Установить",
+        "viewDetails": "Подробности",
+        "qualityScore": "Рейтинг качества",
+        "lastUpdated": "Последнее обновление",
+        "createdBy": "Создано"
+    },
+    "seo": {
+        "title": "Magic MCP - Платформа Обнаружения Серверов Model Context Protocol",
+        "description": "Откройте для себя и интегрируйте лучшие серверы Model Context Protocol (MCP). Просматривайте более 1000 высококачественных MCP серверов для баз данных, файловых систем, API и инструментов разработки.",
+        "ogTitle": "Magic MCP - Платформа Обнаружения Серверов Model Context Protocol",
+        "ogDescription": "Откройте для себя и интегрируйте лучшие серверы Model Context Protocol (MCP). Просматривайте более 1000 высококачественных MCP серверов для баз данных, файловых систем, API и инструментов разработки.",
+        "keywords": "MCP, Model Context Protocol, инструменты ИИ, серверы, интеграция баз данных, API, инструменты разработки, Claude MCP, ИИ агенты"
     }
 }

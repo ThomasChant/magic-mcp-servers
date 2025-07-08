@@ -1,118 +1,235 @@
 {
-    "title": "ドキュメント",
-    "subtitle": "MCPサーバーとその使用方法について学ぶ",
-    "sections": {
-        "gettingStarted": {
-            "title": "はじめに",
-            "subtitle": "MCPサーバーの基礎を学ぶ",
-            "introduction": "MCP の紹介",
-            "installation": "インストールガイド",
-            "quickStart": "クイックスタート",
-            "firstServer": "初めてのサーバー",
-            "basicConcepts": "基本概念",
-            "configuration": "設定"
-        },
-        "serverDevelopment": {
-            "title": "サーバー開発",
-            "subtitle": "独自のMCPサーバーを構築",
-            "createServer": "サーバーを作成",
-            "serverStructure": "サーバー構造",
-            "apiDesign": "API設計",
-            "bestPractices": "ベストプラクティス",
-            "testing": "テスト",
-            "deployment": "デプロイ",
-            "versioning": "バージョン管理"
-        },
-        "integration": {
-            "title": "統合",
-            "subtitle": "MCPサーバーをアプリケーションに統合",
-            "clientLibraries": "クライアントライブラリ",
-            "sdks": "SDK",
-            "examples": "統合例",
-            "authentication": "認証",
-            "errorHandling": "エラーハンドリング",
-            "performance": "パフォーマンス",
-            "monitoring": "監視"
-        },
-        "api": {
-            "title": "APIリファレンス",
-            "subtitle": "完全なAPIドキュメント",
-            "endpoints": "エンドポイント",
-            "methods": "メソッド",
-            "parameters": "パラメータ",
-            "responses": "レスポンス",
-            "errorCodes": "エラーコード",
-            "schemas": "スキーマ",
-            "examples": "例"
-        },
-        "community": {
-            "title": "コミュニティ",
-            "subtitle": "MCPコミュニティに参加",
-            "contributing": "貢献",
-            "guidelines": "ガイドライン",
-            "codeOfConduct": "行動規範",
-            "support": "サポート",
-            "forums": "フォーラム",
-            "discord": "Discord",
-            "github": "GitHub"
-        },
-        "advanced": {
-            "title": "高度なトピック",
-            "subtitle": "高度なMCPサーバーの概念",
-            "architecture": "アーキテクチャ",
-            "security": "セキュリティ",
-            "scalability": "スケーラビリティ",
-            "customization": "カスタマイゼーション",
-            "plugins": "プラグイン",
-            "extensions": "拡張機能",
-            "troubleshooting": "トラブルシューティング"
-        }
+    "header": {
+        "title": "ドキュメント",
+        "subtitle": "MCPサーバーを効果的に発見、統合、使用するために必要なすべての知識をここで学べます。"
     },
     "navigation": {
-        "previousPage": "前のページ",
-        "nextPage": "次のページ",
-        "tableOfContents": "目次",
-        "onThisPage": "このページの内容",
-        "editPage": "このページを編集",
-        "viewSource": "ソースを表示",
-        "lastUpdated": "最終更新",
-        "contributors": "貢献者",
-        "feedback": "フィードバック",
-        "improve": "このページを改善"
+        "gettingStarted": "はじめに",
+        "coreConcepts": "中核概念",
+        "advanced": "上級",
+        "reference": "リファレンス",
+        "introduction": "紹介",
+        "quickStart": "クイックスタート",
+        "installation": "インストール",
+        "whatIsMcp": "MCPとは？",
+        "serverTypes": "サーバータイプ",
+        "integration": "統合ガイド",
+        "customServers": "サーバー構築",
+        "bestPractices": "ベストプラクティス",
+        "troubleshooting": "トラブルシューティング",
+        "apiReference": "APIリファレンス",
+        "examples": "例",
+        "faq": "よくある質問"
     },
-    "search": {
-        "placeholder": "ドキュメントを検索...",
-        "noResults": "結果が見つかりません",
-        "resultsFor": "\"{{query}}\"の検索結果",
-        "suggestions": "提案",
-        "searchTips": "検索のヒント",
-        "exactMatch": "完全一致",
-        "partialMatch": "部分一致"
+    "introduction": {
+        "title": "Magic MCP の紹介",
+        "description": "Magic MCP は、モデルコンテキストプロトコル（MCP）サーバーを発見、評価、統合するための包括的なプラットフォームです。AIアプリケーションを構築する場合でも、既存システムを強化する場合でも、Magic MCP は必要なツールとリソースを提供します。",
+        "newToMcp": "MCPが初めてですか？",
+        "mcpDescription": "モデルコンテキストプロトコルは、AIアプリケーションが外部データソースやツールに接続するための標準化された方法です。",
+        "learnMore": "MCPについてもっと学ぶ →",
+        "keyFeatures": "主要機能",
+        "smartDiscovery": {
+            "title": "スマート発見",
+            "description": "インテリジェントな検索とフィルタリングで完璧なMCPサーバーを見つける"
+        },
+        "qualityRatings": {
+            "title": "品質評価",
+            "description": "信頼できる選択のためのコミュニティ主導の評価とレビュー"
+        },
+        "easyIntegration": {
+            "title": "簡単統合",
+            "description": "迅速なセットアップのためのステップバイステップガイドとコード例"
+        },
+        "activeCommunity": {
+            "title": "活発なコミュニティ",
+            "description": "開発者とつながり、知識を共有する"
+        }
     },
-    "common": {
-        "readMore": "もっと読む",
-        "showLess": "折りたたむ",
-        "expand": "展開",
-        "collapse": "折りたたむ",
+    "quickStart": {
+        "title": "クイックスタートガイド",
+        "description": "数分でMCPサーバーを使い始めましょう。以下の簡単なステップに従って、最初のサーバーを統合してください。",
+        "step1": {
+            "title": "サーバーを発見",
+            "description": "カタログを閲覧するか、検索機能を使用してニーズに合うサーバーを見つけてください。",
+            "browseServers": "サーバーを閲覧"
+        },
+        "step2": {
+            "title": "サーバーをインストール",
+            "description": "お好みの方法（npm、pip、Docker）のインストール手順に従ってください。"
+        },
+        "step3": {
+            "title": "アプリケーションを設定",
+            "description": "提供された設定を使用してAIアプリケーションをMCPサーバーに接続してください。"
+        },
+        "step4": {
+            "title": "構築を開始",
+            "description": "MCPサーバーの準備が整いました！素晴らしいAI駆動アプリケーションの構築を始めましょう。",
+            "viewExamples": "例を見る"
+        }
+    },
+    "installation": {
+        "title": "インストール",
+        "description": "MCPサーバーは、様々なパッケージマネージャーとデプロイメント方法を使用してインストールできます。開発環境に最適な方法を選択してください。",
+        "npmInstallation": {
+            "title": "NPMインストール",
+            "description": "Node.jsベースのMCPサーバーの場合："
+        },
+        "pythonInstallation": {
+            "title": "Pythonインストール",
+            "description": "PythonベースのMCPサーバーの場合："
+        },
+        "dockerInstallation": {
+            "title": "Dockerインストール",
+            "description": "コンテナでMCPサーバーを実行："
+        }
+    },
+    "whatIsMcp": {
+        "title": "モデルコンテキストプロトコルとは？",
+        "description": "モデルコンテキストプロトコル（MCP）は、AIアプリケーションが外部データソース、ツール、サービスに安全に接続できるようにするオープンスタンダードです。セキュリティとコントロールを維持しながら、AIモデルが様々なリソースにアクセスし、相互作用するための標準化された方法を提供します。",
+        "keyBenefits": "主な利点",
+        "secureDataAccess": "セキュアなデータアクセス",
+        "standardizedIntegration": "標準化された統合",
+        "scalableArchitecture": "スケーラブルなアーキテクチャ",
+        "easyMaintenance": "簡単なメンテナンス",
+        "howMcpWorks": "MCPの仕組み",
+        "clientServerArchitecture": "クライアント・サーバーアーキテクチャ：AIアプリケーション（クライアント）が特定の機能を提供するMCPサーバーに接続",
+        "standardizedProtocol": "標準化されたプロトコル：一貫性のためにすべての通信がMCP仕様に従う",
+        "resourceAccess": "リソースアクセス：サーバーはクライアントが発見・使用できるリソース（データ、ツール、プロンプト）を公開",
+        "secureBoundaries": "セキュアな境界：各サーバーは定義されたセキュリティ境界と権限内で動作"
+    },
+    "serverTypes": {
+        "title": "サーバータイプとカテゴリ",
+        "description": "MCPサーバーには様々なタイプがあり、それぞれ特定のユースケース向けに設計されています。これらのカテゴリを理解することで、ニーズに適したサーバーを選択できます。",
+        "fileSystem": {
+            "title": "ファイルシステム",
+            "description": "セキュアな境界内でファイルとディレクトリにアクセス・操作。",
+            "readWrite": "読み書き",
+            "cloudStorage": "クラウドストレージ"
+        },
+        "database": {
+            "title": "データベース",
+            "description": "データ操作のためのSQLおよびNoSQLデータベースへの接続。",
+            "sql": "SQL",
+            "nosql": "NoSQL"
+        },
+        "communication": {
+            "title": "コミュニケーション",
+            "description": "メッセージングおよび通知プラットフォームとの統合。",
+            "slack": "Slack",
+            "email": "Eメール"
+        },
+        "development": {
+            "title": "開発",
+            "description": "開発ツール、バージョン管理、CI/CDシステムへのアクセス。",
+            "git": "Git",
+            "cicd": "CI/CD"
+        }
+    },
+    "integration": {
+        "title": "統合ガイド",
+        "description": "MCPサーバーをAIアプリケーションと統合するには、接続を設定し、利用可能なリソースとツールを理解する必要があります。",
+        "configurationSetup": {
+            "title": "設定セットアップ",
+            "description": "アプリケーションの設定ファイルにMCPサーバー設定を追加："
+        },
+        "connectionTesting": {
+            "title": "接続テスト",
+            "description": "サーバーが正しく応答することを確認するために接続をテスト："
+        }
+    },
+    "customServers": {
+        "title": "カスタムサーバーの構築",
+        "description": "独自のMCPサーバーを作成して、カスタム機能とデータソースをAIアプリケーションに公開しましょう。",
+        "serverStructure": {
+            "title": "サーバー構造",
+            "description": "基本的なMCPサーバーの実装："
+        }
+    },
+    "bestPractices": {
+        "title": "ベストプラクティス",
+        "description": "MCPサーバー実装の最適なパフォーマンス、セキュリティ、メンテナンス性を確保するために、これらのベストプラクティスに従ってください。",
+        "security": {
+            "title": "セキュリティ",
+            "validateInput": "常に入力パラメータを検証する",
+            "implementAuth": "適切な認証と認可を実装する",
+            "useEnvVars": "機密データには環境変数を使用する",
+            "updateDependencies": "依存関係を定期的に更新する"
+        },
+        "performance": {
+            "title": "パフォーマンス",
+            "implementCaching": "頻繁にアクセスされるデータにキャッシュを実装する",
+            "useConnectionPooling": "データベース接続にコネクションプーリングを使用する",
+            "optimizeResources": "リソースの読み込みとメモリ使用量を最適化する",
+            "monitorMetrics": "パフォーマンスメトリクスを監視・記録する"
+        }
+    },
+    "troubleshooting": {
+        "title": "トラブルシューティング",
+        "description": "MCPサーバーの使用時の一般的な問題と解決策。",
+        "connectionFailures": {
+            "title": "接続の失敗",
+            "description": "MCPサーバーの接続に失敗した場合：",
+            "checkProcess": "サーバープロセスが実行中であることを確認",
+            "verifyPaths": "設定ファイルのパスを確認",
+            "ensureDependencies": "必要な依存関係がすべてインストールされていることを確認",
+            "checkLogs": "エラーメッセージのサーバーログを確認"
+        },
+        "permissionErrors": {
+            "title": "権限エラー",
+            "description": "ファイルシステムまたはリソースアクセスの問題の場合：",
+            "verifyPermissions": "ファイルとディレクトリの権限を確認",
+            "checkAccess": "サーバーが必要なパスにアクセスできることを確認",
+            "ensureCredentials": "APIキーと認証情報が正しいことを確認",
+            "reviewPolicies": "セキュリティポリシーとアクセス制御を確認"
+        }
+    },
+    "apiReference": {
+        "title": "APIリファレンス",
+        "description": "MCPプロトコルメソッドとデータ構造の完全なリファレンス。",
+        "coreMethods": "コアメソッド",
+        "resourcesList": "サーバーから利用可能なすべてのリソースをリスト。",
+        "resourcesRead": "特定のリソースの内容を読み取り。",
+        "toolsList": "サーバーが提供するすべての利用可能なツールをリスト。"
+    },
+    "examples": {
+        "title": "例",
+        "description": "MCPサーバーの実装と統合の実践的な例。",
+        "fileSystemServer": {
+            "title": "ファイルシステムサーバー",
+            "description": "特定のディレクトリへの読み書きアクセスを提供する簡単なファイルシステムサーバー："
+        },
+        "databaseServer": {
+            "title": "データベースサーバー",
+            "description": "PostgreSQLデータベースに接続してクエリを実行："
+        }
+    },
+    "faq": {
+        "title": "よくある質問",
+        "choosingServer": {
+            "question": "適切なMCPサーバーを選ぶには？",
+            "answer": "特定のユースケース、必要なデータや機能のタイプ、お使いの技術スタックとのサーバーの互換性を考慮してください。フィルタリングと検索機能を使用してオプションを絞り込み、コミュニティの評価とレビューを確認してください。"
+        },
+        "security": {
+            "question": "MCPサーバーは安全ですか？",
+            "answer": "はい、MCPサーバーはセキュリティを念頭に置いて設計されています。定義された境界内で動作し、権限制御をサポートし、MCPセキュリティ仕様に従います。常にサーバーのドキュメントを確認し、適切なアクセス制御を設定してください。"
+        },
+        "multipleServers": {
+            "question": "複数のMCPサーバーを一緒に使用できますか？",
+            "answer": "もちろんです！ほとんどのAIアプリケーションは、異なるタイプのリソースにアクセスするために複数のMCPサーバーを使用しています。MCPプロトコルは複数の同時サーバー接続をサポートするように設計されています。"
+        },
+        "contribute": {
+            "question": "新しいサーバーを貢献するには？",
+            "answer": "コミュニティからの貢献を歓迎します！GitHubリポジトリを通じてMCPサーバーを提出するか、直接お問い合わせください。サーバーがMCP仕様に従い、適切なドキュメントが含まれていることを確認してください。"
+        }
+    },
+    "callToAction": {
+        "title": "始める準備はできましたか？",
+        "description": "MCPサーバーのコレクションを探索し、今日から素晴らしいAIアプリケーションの構築を始めましょう。",
+        "browseServers": "サーバーを閲覧",
+        "viewCategories": "カテゴリを見る"
+    },
+    "buttons": {
         "copy": "コピー",
-        "copied": "コピーしました！",
-        "share": "共有",
-        "print": "印刷",
-        "download": "ダウンロード",
-        "bookmark": "ブックマーク",
-        "note": "注意",
-        "tip": "ヒント",
-        "warning": "警告",
-        "danger": "危険",
-        "info": "情報",
-        "example": "例",
-        "codeExample": "コード例",
-        "liveDemo": "ライブデモ",
-        "tryIt": "試してみる"
-    },
-    "meta": {
-        "title": "ドキュメント | Magic MCP",
-        "description": "MCPサーバーの完全なドキュメント。Model Context Protocolサーバーの作成、デプロイ、統合方法を学びましょう。",
-        "keywords": "MCP, Model Context Protocol, ドキュメント, ガイド, チュートリアル, API, 開発"
+        "copied": "コピーしました！"
     }
 }

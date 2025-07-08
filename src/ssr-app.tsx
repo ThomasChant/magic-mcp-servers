@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ClerkProvider } from "@clerk/clerk-react";
 import Layout from "./components/Layout/Layout";
+import LocaleRouter from "./components/LocaleRouter";
 import Home from "./pages/Home";
 import ServersPage from "./pages/Servers";
 import ServerDetailPage from "./pages/ServerDetail";
@@ -51,20 +52,38 @@ export function SSRApp({ queryClient, ssrData = {} }: SSRAppProps) {
   const AppRoutes = () => (
     <QueryClientProvider client={queryClient}>
       <SSRDataContext.Provider value={ssrData}>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="servers" element={<ServersPage />} />
-            <Route path="servers/:slug" element={<ServerDetailPage />} />
-            <Route path="categories" element={<CategoriesPage />} />
-            <Route path="categories/:id" element={<CategoryDetailPage />} />
-            <Route path="tags" element={<TagsPage />} />
-            <Route path="tags/:tag" element={<TagDetailPage />} />
-            <Route path="docs" element={<DocsPage />} />
-            <Route path="favorites" element={<FavoritesPage />} />
+        <LocaleRouter>
+          <Routes>
+            {/* Default locale routes (no prefix) */}
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="servers" element={<ServersPage />} />
+              <Route path="servers/:slug" element={<ServerDetailPage />} />
+              <Route path="categories" element={<CategoriesPage />} />
+              <Route path="categories/:id" element={<CategoryDetailPage />} />
+              <Route path="tags" element={<TagsPage />} />
+              <Route path="tags/:tag" element={<TagDetailPage />} />
+              <Route path="docs" element={<DocsPage />} />
+              <Route path="favorites" element={<FavoritesPage />} />
+            </Route>
+            
+            {/* Localized routes with locale prefix */}
+            <Route path="/:locale" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="servers" element={<ServersPage />} />
+              <Route path="servers/:slug" element={<ServerDetailPage />} />
+              <Route path="categories" element={<CategoriesPage />} />
+              <Route path="categories/:id" element={<CategoryDetailPage />} />
+              <Route path="tags" element={<TagsPage />} />
+              <Route path="tags/:tag" element={<TagDetailPage />} />
+              <Route path="docs" element={<DocsPage />} />
+              <Route path="favorites" element={<FavoritesPage />} />
+            </Route>
+            
+            {/* 404 route */}
             <Route path="*" element={<NotFoundPage />} />
-          </Route>
-        </Routes>
+          </Routes>
+        </LocaleRouter>
       </SSRDataContext.Provider>
     </QueryClientProvider>
   );

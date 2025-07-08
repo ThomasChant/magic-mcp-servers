@@ -1,118 +1,235 @@
 {
-    "title": "Documentation",
-    "subtitle": "Apprenez à connaître les serveurs MCP et leur utilisation",
-    "sections": {
-        "gettingStarted": {
-            "title": "Commencer",
-            "subtitle": "Apprenez les bases des serveurs MCP",
-            "introduction": "Introduction à MCP",
-            "installation": "Guide d'installation",
-            "quickStart": "Démarrage rapide",
-            "firstServer": "Votre premier serveur",
-            "basicConcepts": "Concepts de base",
-            "configuration": "Configuration"
-        },
-        "serverDevelopment": {
-            "title": "Développement de serveurs",
-            "subtitle": "Construisez votre propre serveur MCP",
-            "createServer": "Créer un serveur",
-            "serverStructure": "Structure du serveur",
-            "apiDesign": "Conception d'API",
-            "bestPractices": "Meilleures pratiques",
-            "testing": "Tests",
-            "deployment": "Déploiement",
-            "versioning": "Gestion des versions"
-        },
-        "integration": {
-            "title": "Intégration",
-            "subtitle": "Intégrez les serveurs MCP dans vos applications",
-            "clientLibraries": "Bibliothèques client",
-            "sdks": "SDK",
-            "examples": "Exemples d'intégration",
-            "authentication": "Authentification",
-            "errorHandling": "Gestion des erreurs",
-            "performance": "Performance",
-            "monitoring": "Surveillance"
-        },
-        "api": {
-            "title": "Référence API",
-            "subtitle": "Documentation complète de l'API",
-            "endpoints": "Points de terminaison",
-            "methods": "Méthodes",
-            "parameters": "Paramètres",
-            "responses": "Réponses",
-            "errorCodes": "Codes d'erreur",
-            "schemas": "Schémas",
-            "examples": "Exemples"
-        },
-        "community": {
-            "title": "Communauté",
-            "subtitle": "Rejoignez la communauté MCP",
-            "contributing": "Contribuer",
-            "guidelines": "Directives",
-            "codeOfConduct": "Code de conduite",
-            "support": "Support",
-            "forums": "Forums",
-            "discord": "Discord",
-            "github": "GitHub"
-        },
-        "advanced": {
-            "title": "Sujets avancés",
-            "subtitle": "Concepts avancés des serveurs MCP",
-            "architecture": "Architecture",
-            "security": "Sécurité",
-            "scalability": "Évolutivité",
-            "customization": "Personnalisation",
-            "plugins": "Plugins",
-            "extensions": "Extensions",
-            "troubleshooting": "Dépannage"
-        }
+    "header": {
+        "title": "Documentation",
+        "subtitle": "Tout ce que vous devez savoir pour découvrir, intégrer et utiliser efficacement les serveurs MCP."
     },
     "navigation": {
-        "previousPage": "Page précédente",
-        "nextPage": "Page suivante",
-        "tableOfContents": "Table des matières",
-        "onThisPage": "Sur cette page",
-        "editPage": "Modifier cette page",
-        "viewSource": "Voir la source",
-        "lastUpdated": "Dernière mise à jour",
-        "contributors": "Contributeurs",
-        "feedback": "Commentaires",
-        "improve": "Améliorer cette page"
+        "gettingStarted": "Commencer",
+        "coreConcepts": "Concepts de base",
+        "advanced": "Avancé",
+        "reference": "Référence",
+        "introduction": "Introduction",
+        "quickStart": "Démarrage rapide",
+        "installation": "Installation",
+        "whatIsMcp": "Qu'est-ce que MCP ?",
+        "serverTypes": "Types de serveurs",
+        "integration": "Guide d'intégration",
+        "customServers": "Créer des serveurs",
+        "bestPractices": "Bonnes pratiques",
+        "troubleshooting": "Dépannage",
+        "apiReference": "Référence API",
+        "examples": "Exemples",
+        "faq": "FAQ"
     },
-    "search": {
-        "placeholder": "Rechercher dans la documentation...",
-        "noResults": "Aucun résultat trouvé",
-        "resultsFor": "Résultats pour \"{{query}}\"",
-        "suggestions": "Suggestions",
-        "searchTips": "Conseils de recherche",
-        "exactMatch": "Correspondance exacte",
-        "partialMatch": "Correspondance partielle"
+    "introduction": {
+        "title": "Introduction à Magic MCP",
+        "description": "Magic MCP est votre plateforme complète pour découvrir, évaluer et intégrer les serveurs du protocole de contexte modèle (MCP). Que vous construisiez des applications IA ou amélioriez des systèmes existants, Magic MCP fournit les outils et ressources dont vous avez besoin.",
+        "newToMcp": "Nouveau sur MCP ?",
+        "mcpDescription": "Le protocole de contexte modèle est un moyen standardisé pour les applications IA de se connecter à des sources de données et outils externes.",
+        "learnMore": "En savoir plus sur MCP →",
+        "keyFeatures": "Fonctionnalités clés",
+        "smartDiscovery": {
+            "title": "Découverte intelligente",
+            "description": "Trouvez le serveur MCP parfait grâce à la recherche et au filtrage intelligents"
+        },
+        "qualityRatings": {
+            "title": "Évaluations qualité",
+            "description": "Évaluations et avis communautaires pour des choix fiables"
+        },
+        "easyIntegration": {
+            "title": "Intégration facile",
+            "description": "Guides étape par étape et exemples de code pour une configuration rapide"
+        },
+        "activeCommunity": {
+            "title": "Communauté active",
+            "description": "Connectez-vous avec les développeurs et partagez vos connaissances"
+        }
     },
-    "common": {
-        "readMore": "Lire la suite",
-        "showLess": "Afficher moins",
-        "expand": "Développer",
-        "collapse": "Réduire",
+    "quickStart": {
+        "title": "Guide de démarrage rapide",
+        "description": "Commencez avec les serveurs MCP en quelques minutes. Suivez ces étapes simples pour intégrer votre premier serveur.",
+        "step1": {
+            "title": "Découvrir un serveur",
+            "description": "Parcourez notre catalogue ou utilisez la fonction de recherche pour trouver un serveur qui répond à vos besoins.",
+            "browseServers": "Parcourir les serveurs"
+        },
+        "step2": {
+            "title": "Installer le serveur",
+            "description": "Suivez les instructions d'installation pour votre méthode préférée (npm, pip, Docker)."
+        },
+        "step3": {
+            "title": "Configurer votre application",
+            "description": "Connectez votre application IA au serveur MCP en utilisant la configuration fournie."
+        },
+        "step4": {
+            "title": "Commencer à construire",
+            "description": "Votre serveur MCP est maintenant prêt ! Commencez à construire des applications IA incroyables.",
+            "viewExamples": "Voir les exemples"
+        }
+    },
+    "installation": {
+        "title": "Installation",
+        "description": "Les serveurs MCP peuvent être installés en utilisant divers gestionnaires de paquets et méthodes de déploiement. Choisissez la méthode qui convient le mieux à votre environnement de développement.",
+        "npmInstallation": {
+            "title": "Installation NPM",
+            "description": "Pour les serveurs MCP basés sur Node.js :"
+        },
+        "pythonInstallation": {
+            "title": "Installation Python",
+            "description": "Pour les serveurs MCP basés sur Python :"
+        },
+        "dockerInstallation": {
+            "title": "Installation Docker",
+            "description": "Exécuter les serveurs MCP dans des conteneurs :"
+        }
+    },
+    "whatIsMcp": {
+        "title": "Qu'est-ce que le protocole de contexte modèle ?",
+        "description": "Le protocole de contexte modèle (MCP) est un standard ouvert qui permet aux applications IA de se connecter en toute sécurité à des sources de données, outils et services externes. Il fournit un moyen standardisé pour les modèles IA d'accéder et d'interagir avec diverses ressources tout en maintenant la sécurité et le contrôle.",
+        "keyBenefits": "Avantages clés",
+        "secureDataAccess": "Accès sécurisé aux données",
+        "standardizedIntegration": "Intégration standardisée",
+        "scalableArchitecture": "Architecture évolutive",
+        "easyMaintenance": "Maintenance facile",
+        "howMcpWorks": "Comment fonctionne MCP",
+        "clientServerArchitecture": "Architecture client-serveur : Les applications IA (clients) se connectent aux serveurs MCP qui fournissent des capacités spécifiques",
+        "standardizedProtocol": "Protocole standardisé : Toute communication suit la spécification MCP pour la cohérence",
+        "resourceAccess": "Accès aux ressources : Les serveurs exposent des ressources (données, outils, invites) que les clients peuvent découvrir et utiliser",
+        "secureBoundaries": "Limites sécurisées : Chaque serveur opère dans des limites de sécurité et permissions définies"
+    },
+    "serverTypes": {
+        "title": "Types et catégories de serveurs",
+        "description": "Les serveurs MCP viennent en différents types, chacun conçu pour des cas d'usage spécifiques. Comprendre ces catégories vous aide à choisir le bon serveur pour vos besoins.",
+        "fileSystem": {
+            "title": "Système de fichiers",
+            "description": "Accédez et manipulez des fichiers et répertoires avec des limites sécurisées.",
+            "readWrite": "Lecture/Écriture",
+            "cloudStorage": "Stockage cloud"
+        },
+        "database": {
+            "title": "Base de données",
+            "description": "Connectez-vous aux bases de données SQL et NoSQL pour les opérations de données.",
+            "sql": "SQL",
+            "nosql": "NoSQL"
+        },
+        "communication": {
+            "title": "Communication",
+            "description": "Intégrez-vous avec les plateformes de messagerie et de notification.",
+            "slack": "Slack",
+            "email": "Email"
+        },
+        "development": {
+            "title": "Développement",
+            "description": "Accédez aux outils de développement, contrôle de version et systèmes CI/CD.",
+            "git": "Git",
+            "cicd": "CI/CD"
+        }
+    },
+    "integration": {
+        "title": "Guide d'intégration",
+        "description": "Intégrer les serveurs MCP avec votre application IA nécessite de configurer la connexion et de comprendre les ressources et outils disponibles.",
+        "configurationSetup": {
+            "title": "Configuration",
+            "description": "Ajoutez votre configuration de serveur MCP au fichier de configuration de votre application :"
+        },
+        "connectionTesting": {
+            "title": "Test de connexion",
+            "description": "Testez votre connexion pour vous assurer que le serveur répond correctement :"
+        }
+    },
+    "customServers": {
+        "title": "Construire des serveurs personnalisés",
+        "description": "Créez vos propres serveurs MCP pour exposer des fonctionnalités et sources de données personnalisées aux applications IA.",
+        "serverStructure": {
+            "title": "Structure du serveur",
+            "description": "Implémentation de base d'un serveur MCP :"
+        }
+    },
+    "bestPractices": {
+        "title": "Bonnes pratiques",
+        "description": "Suivez ces bonnes pratiques pour assurer une performance, sécurité et maintenabilité optimales de vos implémentations de serveurs MCP.",
+        "security": {
+            "title": "Sécurité",
+            "validateInput": "Toujours valider les paramètres d'entrée",
+            "implementAuth": "Implémenter une authentification et autorisation appropriées",
+            "useEnvVars": "Utiliser des variables d'environnement pour les données sensibles",
+            "updateDependencies": "Mettre à jour régulièrement les dépendances"
+        },
+        "performance": {
+            "title": "Performance",
+            "implementCaching": "Implémenter la mise en cache pour les données fréquemment accédées",
+            "useConnectionPooling": "Utiliser le pooling de connexions pour les connexions à la base de données",
+            "optimizeResources": "Optimiser le chargement des ressources et l'utilisation de la mémoire",
+            "monitorMetrics": "Surveiller et enregistrer les métriques de performance"
+        }
+    },
+    "troubleshooting": {
+        "title": "Dépannage",
+        "description": "Problèmes courants et solutions lors du travail avec les serveurs MCP.",
+        "connectionFailures": {
+            "title": "Échecs de connexion",
+            "description": "Si votre serveur MCP ne parvient pas à se connecter :",
+            "checkProcess": "Vérifiez que le processus serveur est en cours d'exécution",
+            "verifyPaths": "Vérifiez les chemins du fichier de configuration",
+            "ensureDependencies": "Assurez-vous que toutes les dépendances requises sont installées",
+            "checkLogs": "Vérifiez les journaux du serveur pour les messages d'erreur"
+        },
+        "permissionErrors": {
+            "title": "Erreurs de permission",
+            "description": "Pour les problèmes d'accès au système de fichiers ou aux ressources :",
+            "verifyPermissions": "Vérifiez les permissions des fichiers et répertoires",
+            "checkAccess": "Vérifiez que le serveur a accès aux chemins requis",
+            "ensureCredentials": "Assurez-vous que les clés API et identifiants sont corrects",
+            "reviewPolicies": "Examinez les politiques de sécurité et contrôles d'accès"
+        }
+    },
+    "apiReference": {
+        "title": "Référence API",
+        "description": "Référence complète pour les méthodes et structures de données du protocole MCP.",
+        "coreMethods": "Méthodes principales",
+        "resourcesList": "Liste toutes les ressources disponibles du serveur.",
+        "resourcesRead": "Lit le contenu d'une ressource spécifique.",
+        "toolsList": "Liste tous les outils disponibles fournis par le serveur."
+    },
+    "examples": {
+        "title": "Exemples",
+        "description": "Exemples pratiques d'implémentations et intégrations de serveurs MCP.",
+        "fileSystemServer": {
+            "title": "Serveur de système de fichiers",
+            "description": "Un serveur de système de fichiers simple qui fournit un accès en lecture/écriture à un répertoire spécifique :"
+        },
+        "databaseServer": {
+            "title": "Serveur de base de données",
+            "description": "Connectez-vous à une base de données PostgreSQL et exécutez des requêtes :"
+        }
+    },
+    "faq": {
+        "title": "Questions fréquemment posées",
+        "choosingServer": {
+            "question": "Comment choisir le bon serveur MCP ?",
+            "answer": "Considérez votre cas d'usage spécifique, le type de données ou fonctionnalités dont vous avez besoin, et la compatibilité du serveur avec votre pile technologique. Utilisez nos fonctionnalités de filtrage et recherche pour affiner les options, et vérifiez les évaluations et avis de la communauté."
+        },
+        "security": {
+            "question": "Les serveurs MCP sont-ils sécurisés ?",
+            "answer": "Oui, les serveurs MCP sont conçus avec la sécurité à l'esprit. Ils opèrent dans des limites définies, supportent les contrôles de permissions, et suivent les spécifications de sécurité MCP. Examinez toujours la documentation du serveur et configurez des contrôles d'accès appropriés."
+        },
+        "multipleServers": {
+            "question": "Puis-je utiliser plusieurs serveurs MCP ensemble ?",
+            "answer": "Absolument ! La plupart des applications IA utilisent plusieurs serveurs MCP pour accéder à différents types de ressources. Le protocole MCP est conçu pour supporter plusieurs connexions de serveurs simultanées."
+        },
+        "contribute": {
+            "question": "Comment contribuer un nouveau serveur ?",
+            "answer": "Nous accueillons les contributions de la communauté ! Vous pouvez soumettre votre serveur MCP via notre dépôt GitHub ou nous contacter directement. Assurez-vous que votre serveur suit les spécifications MCP et inclut une documentation appropriée."
+        }
+    },
+    "callToAction": {
+        "title": "Prêt à commencer ?",
+        "description": "Explorez notre collection de serveurs MCP et commencez à construire des applications IA incroyables dès aujourd'hui.",
+        "browseServers": "Parcourir les serveurs",
+        "viewCategories": "Voir les catégories"
+    },
+    "buttons": {
         "copy": "Copier",
-        "copied": "Copié !",
-        "share": "Partager",
-        "print": "Imprimer",
-        "download": "Télécharger",
-        "bookmark": "Marque-page",
-        "note": "Note",
-        "tip": "Astuce",
-        "warning": "Avertissement",
-        "danger": "Danger",
-        "info": "Information",
-        "example": "Exemple",
-        "codeExample": "Exemple de code",
-        "liveDemo": "Démo en direct",
-        "tryIt": "Essayez-le"
-    },
-    "meta": {
-        "title": "Documentation | Magic MCP",
-        "description": "Documentation complète pour les serveurs MCP. Apprenez à créer, déployer et intégrer les serveurs Model Context Protocol.",
-        "keywords": "MCP, Model Context Protocol, documentation, guide, tutoriel, API, développement"
+        "copied": "Copié !"
     }
 }

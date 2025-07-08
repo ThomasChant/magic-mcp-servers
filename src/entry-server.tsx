@@ -5,21 +5,24 @@ import { QueryClient } from "@tanstack/react-query";
 import { SSRApp } from "./ssr-app";
 import { 
   getServerBySlug, 
-  generateServerSEO, 
   getServerReadmeBySlug,
-  generateHomeSEO,
-  generateServersListSEO,
-  generateCategoriesListSEO,
   getCategoryById,
-  generateCategorySEO,
-  generateDocsSEO,
   getHomePageData,
   getCategoriesData,
   getServersPageData
 } from "./server-utils";
+import {
+  generateLocalizedHomeSEO,
+  generateLocalizedServersListSEO,
+  generateLocalizedCategoriesListSEO,
+  generateLocalizedCategorySEO,
+  generateLocalizedServerSEO,
+  generateLocalizedDocsSEO
+} from "./seo-utils";
 import type { MCPServer, ServerReadme, Category } from "./types";
 // Import i18n to ensure it's initialized during SSR
 import "./i18n";
+import i18n from "i18next";
 
 interface HomeData {
     serverStats?: unknown;
@@ -46,9 +49,23 @@ interface AdditionalData {
     serversPageData?: ServersPageData;
 }
 
-export async function render(url: string) {
+export async function render(url: string, options?: { locale?: string }) {
     // Ensure URL starts with /
     const normalizedUrl = url.startsWith("/") ? url : `/${url}`;
+    
+    // Extract locale from URL if present
+    const localePattern = /^\/(zh-CN|zh-TW|fr|ja|ko|ru)(\/.*)?$/;
+    const localeMatch = normalizedUrl.match(localePattern);
+    const detectedLocale = localeMatch ? localeMatch[1] : 'en';
+    const pathWithoutLocale = localeMatch ? (localeMatch[2] || '/') : normalizedUrl;
+    
+    // Use provided locale or detected locale
+    const locale = options?.locale || detectedLocale;
+    
+    // Set the locale for i18n
+    if (locale !== i18n.language) {
+        await i18n.changeLanguage(locale);
+    }
 
     // Initialize data variables
     let serverData: MCPServer | null = null;
@@ -67,20 +84,20 @@ export async function render(url: string) {
         },
     });
 
-    // Route pattern matching for different page types
+    // Route pattern matching for different page types (using path without locale)
     const routes = {
-        home: normalizedUrl === "/",
-        serversList: normalizedUrl === "/servers",
-        serverDetail: normalizedUrl.match(/^\/servers\/([^/]+)$/),
-        categoriesList: normalizedUrl === "/categories",
-        categoryDetail: normalizedUrl.match(/^\/categories\/([^/]+)$/),
-        tagsList: normalizedUrl === "/tags",
-        tagDetail: normalizedUrl.match(/^\/tags\/([^/]+)$/),
-        docs: normalizedUrl === "/docs",
+        home: pathWithoutLocale === "/",
+        serversList: pathWithoutLocale === "/servers",
+        serverDetail: pathWithoutLocale.match(/^\/servers\/([^/]+)$/),
+        categoriesList: pathWithoutLocale === "/categories",
+        categoryDetail: pathWithoutLocale.match(/^\/categories\/([^/]+)$/),
+        tagsList: pathWithoutLocale === "/tags",
+        tagDetail: pathWithoutLocale.match(/^\/tags\/([^/]+)$/),
+        docs: pathWithoutLocale === "/docs",
     };
 
     // Debug logging for route matching
-    console.log(`📍 Route matching for: ${normalizedUrl}`);
+    console.log(`📍 Route matching for: ${normalizedUrl} (locale: ${locale}, pathWithoutLocale: ${pathWithoutLocale})`);
     console.log(`📍 Route matches:`, {
         home: !!routes.home,
         serversList: !!routes.serversList,
@@ -90,11 +107,19 @@ export async function render(url: string) {
     });
 
     const fullUrl = `https://magicmcp.net${normalizedUrl}`;
+    const baseUrlWithoutLocale = `https://magicmcp.net${pathWithoutLocale}`;
+    
+    // Generate hreflang tags
+    const supportedLocales = ['en', 'zh-CN', 'zh-TW', 'fr', 'ja', 'ko', 'ru'];
+    const hreflangTags = supportedLocales.map(lang => {
+        const urlPath = lang === 'en' ? pathWithoutLocale : `/${lang}${pathWithoutLocale}`;
+        return `<link rel="alternate" hreflang="${lang}" href="https://magicmcp.net${urlPath}" />`;
+    }).join('\n    ') + '\n    <link rel="alternate" hreflang="x-default" href="' + baseUrlWithoutLocale + '" />';
 
     try {
         if (routes.home) {
             console.log(`🏠 Processing home page SSR`);
-            seoData = generateHomeSEO(fullUrl);
+            seoData = generateLocalizedHomeSEO(fullUrl, locale);
 
             // Fetch home page data for SSR
             const homeData = await getHomePageData();
@@ -166,7 +191,7 @@ export async function render(url: string) {
             }
         } else if (routes.serversList) {
             console.log(`📋 Processing servers list page SSR`);
-            seoData = generateServersListSEO(fullUrl);
+            seoData = generateLocalizedServersListSEO(fullUrl, locale);
 
             // Fetch servers page data for SSR
             const serversPageData = await getServersPageData();
@@ -247,7 +272,7 @@ export async function render(url: string) {
                     console.log(
                         `✅ Server data found for slug "${slug}": ${serverData.name}`
                     );
-                    seoData = generateServerSEO(serverData, fullUrl);
+                    seoData = generateLocalizedServerSEO(serverData, fullUrl, locale);
 
                     // Pre-populate the React Query cache with server data
                     queryClient.setQueryData(["server", slug], serverData);
@@ -317,7 +342,7 @@ export async function render(url: string) {
             }
         } else if (routes.categoriesList) {
             console.log(`🗂️ Processing categories list page SSR`);
-            seoData = generateCategoriesListSEO(fullUrl);
+            seoData = generateLocalizedCategoriesListSEO(fullUrl, locale);
 
             // Fetch categories data for SSR
             const categoriesData = await getCategoriesData();
@@ -339,7 +364,7 @@ export async function render(url: string) {
 
             // Fetch category data
             categoryData = await getCategoryById(categoryId);
-            seoData = generateCategorySEO(categoryData, fullUrl);
+            seoData = generateLocalizedCategorySEO(categoryData, fullUrl, locale);
 
             // Pre-populate the React Query cache with category data
             if (categoryData) {
@@ -392,6 +417,8 @@ export async function render(url: string) {
                     },
                 },
             };
+            // Manually add hreflang tags for tag pages
+            seoData.hreflangTags = hreflangTags;
         } else if (routes.tagDetail) {
             const tag = routes.tagDetail[1];
             const decodedTag = decodeURIComponent(tag);
@@ -438,9 +465,11 @@ export async function render(url: string) {
                     },
                 },
             };
+            // Manually add hreflang tags for tag detail pages
+            seoData.hreflangTags = hreflangTags;
         } else if (routes.docs) {
             console.log(`📚 Processing docs page SSR`);
-            seoData = generateDocsSEO(fullUrl);
+            seoData = generateLocalizedDocsSEO(fullUrl, locale);
         } else {
             console.log(
                 `❓ Unknown route, using default SEO: ${normalizedUrl}`
@@ -459,6 +488,8 @@ export async function render(url: string) {
                 keywords:
                     "MCP, Model Context Protocol, AI tools, servers, Claude MCP, AI integration",
             };
+            // Manually add hreflang tags for unknown pages
+            seoData.hreflangTags = hreflangTags;
         }
 
         // Store all SSR data for context
