@@ -144,7 +144,7 @@ export const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
     return (
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between h-full">
             <div className="flex-1">
-                <div className="flex items-start justify-between mb-2">
+                <div className="flex items-start justify-between mb-3">
                     <Link to={`/servers/${server.slug}`} className="flex items-center min-w-0 flex-1 mr-4">
                         <div
                             className={`w-10 h-10 ${getServerIconBg(server)} rounded-lg flex items-center justify-center mr-3 flex-shrink-0`}

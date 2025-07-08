@@ -229,7 +229,7 @@ export function transformServer(dbServer: Record<string, unknown>): MCPServer {
       // Check if the repository was created within the last 10 days
       const createdAt = new Date(dbServer.repo_created_at as string);
       const now = new Date();
-      const tenDaysAgo = new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000);
+      const tenDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
       return createdAt > tenDaysAgo;
     })(),
     createdAt: (dbServer.repo_created_at as string) || new Date().toISOString(),
