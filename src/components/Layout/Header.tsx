@@ -7,7 +7,6 @@ import { ClientOnly } from "../ClientOnly";
 import LocaleLink from "../LocaleLink";
 import { useLocaleRouter } from "../LocaleRouter";
 import { languageNames, locales } from "../../i18n/config";
-import logoImg from "../../assets/logo.png";
 
 import { 
     AuthSectionWithClerk, 
@@ -111,7 +110,7 @@ const HeaderSSR: React.FC = () => {
                                 {/* <span className="text-white text-sm font-bold">
                                     M
                                 </span> */}
-                                <img src={logoImg} alt="Magic MCP" className="rounded" />
+                                <img src="/logo.png" alt="Magic MCP" className="rounded" />
                             </div>
                             <span className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white whitespace-nowrap">
                                 {t('footer.brand')}

@@ -36,7 +36,7 @@ dist-ssr
 *.sln
 *.sw?
 archive
-public/
+public/sitemap*.xml
 scripts/python/__pycache__/
 static-cache/
 test-results/

@@ -22,7 +22,7 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
                     "@type": "WebSite",
                     "name": "Magic MCP Hub",
                     "url": baseUrl,
-                    "description": "Discover and integrate the best Model Context Protocol (MCP) servers. Browse over 1,800 high-quality MCP servers covering databases, file systems, API integrations, and more.",
+                    "description": "Discover and integrate the best Model Context Protocol (MCP) servers. Browse over 1000+ high-quality MCP servers covering databases, file systems, API integrations, and more.",
                     "publisher": {
                         "@type": "Organization",
                         "name": "Magic MCP Hub",
@@ -71,8 +71,8 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
                     },
                     "downloadUrl": server.repository?.url,
                     "codeRepository": server.repository?.url,
-                    "license": server.license || "MIT",
-                    "version": server.version || "latest",
+                    "license": "MIT",
+                    "version": "latest",
                     "dateCreated": server.stats?.createdAt,
                     "dateModified": server.repository?.lastUpdated || server.stats?.lastUpdated,
                     "interactionStatistic": [
@@ -95,9 +95,9 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
                         "priceCurrency": "USD",
                         "availability": "https://schema.org/InStock"
                     },
-                    "aggregateRating": server.qualityScore ? {
+                    "aggregateRating": server.stats?.stars ? {
                         "@type": "AggregateRating",
-                        "ratingValue": server.qualityScore.overall,
+                        "ratingValue": server.stats.stars,
                         "bestRating": 100,
                         "worstRating": 0,
                         "ratingCount": 1
