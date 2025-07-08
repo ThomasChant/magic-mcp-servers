@@ -409,7 +409,7 @@ export const useSupabaseServersPaginated = (
       if (filters?.latest) {
         // Filter for repositories created in the last 10 days
         const tenDaysAgo = new Date();
-        tenDaysAgo.setDate(tenDaysAgo.getDate() - 10);
+        tenDaysAgo.setDate(tenDaysAgo.getDate() - 60);
         query = query.gte('repo_created_at', tenDaysAgo.toISOString());
       }
 
