@@ -1,16 +1,15 @@
-import { useSupabaseFavoritesService } from "../services/supabase-favorites";
+import { SupabaseFavoritesService } from "../services/supabase-favorites";
 import { useAppStore } from "../store/useAppStore";
 
 /**
  * @function migrateFavoritesToSupabase
  * @description Migrate favorites from localStorage to Supabase
  */
-export async function migrateFavoritesToSupabase(): Promise<{
+export async function migrateFavoritesToSupabase(favoritesService: SupabaseFavoritesService | null): Promise<{
     success: boolean;
     migrated: number;
     errors: string[];
 }> {
-    const favoritesService = useSupabaseFavoritesService();
     const { favorites } = useAppStore.getState();
     
     if (!favoritesService) {
@@ -56,8 +55,8 @@ export async function migrateFavoritesToSupabase(): Promise<{
  * @description Hook to manage favorites migration
  */
 export function useFavoritesMigration() {
-    const migrate = async () => {
-        return await migrateFavoritesToSupabase();
+    const migrate = async (favoritesService: SupabaseFavoritesService | null) => {
+        return await migrateFavoritesToSupabase(favoritesService);
     };
 
     return { migrate };

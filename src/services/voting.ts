@@ -394,7 +394,7 @@ export function useServerScores(serverIds: string[]) {
 
 /**
  * @hook useVoteMutation
- * @description Hook to handle voting mutations
+ * @description Hook to handle voting mutations with optimistic updates
  */
 export function useVoteMutation(serverId: string) {
     const queryClient = useQueryClient();
@@ -408,24 +408,117 @@ export function useVoteMutation(serverId: string) {
             }
             return votingService.vote(serverId, voteType);
         },
+        onMutate: async (voteType) => {
+            if (!user) return null;
+
+            // 取消相关查询以避免竞争条件
+            await queryClient.cancelQueries({ queryKey: ['batch-user-votes'] });
+            await queryClient.cancelQueries({ queryKey: ['server-scores'] });
+
+            // 获取当前用户投票数据
+            const userVoteQueryKeys = queryClient.getQueryCache()
+                .findAll({ queryKey: ['batch-user-votes', user.id] })
+                .map(q => q.queryKey);
+            
+            const scoreQueryKeys = queryClient.getQueryCache()
+                .findAll({ queryKey: ['server-scores'] })
+                .map(q => q.queryKey);
+
+            // 存储之前的状态用于回滚
+            const previousState = {
+                userVotes: userVoteQueryKeys.map(key => [key, queryClient.getQueryData(key)]),
+                scores: scoreQueryKeys.map(key => [key, queryClient.getQueryData(key)])
+            };
+
+            // 乐观更新用户投票
+            userVoteQueryKeys.forEach(queryKey => {
+                const currentVotes = queryClient.getQueryData(queryKey) as Record<string, 'up' | 'down'> || {};
+                const previousVote = currentVotes[serverId];
+                const newVotes = { ...currentVotes };
+
+                if (previousVote === voteType) {
+                    // 如果点击相同的投票，则移除投票
+                    delete newVotes[serverId];
+                } else {
+                    // 否则更新为新的投票类型
+                    newVotes[serverId] = voteType;
+                }
+
+                queryClient.setQueryData(queryKey, newVotes);
+            });
+
+            // 乐观更新分数
+            scoreQueryKeys.forEach(queryKey => {
+                const currentScores = queryClient.getQueryData(queryKey) as Record<string, ServerScore> || {};
+                const currentScore = currentScores[serverId];
+                
+                if (currentScore) {
+                    const newScore = { ...currentScore };
+                    
+                    // 获取当前用户投票
+                    const currentUserVotes = queryClient.getQueryData(['batch-user-votes', user.id]) as Record<string, 'up' | 'down'> || {};
+                    const previousVote = currentUserVotes[serverId];
+                    
+                    // 先撤销之前的投票
+                    if (previousVote === 'up') {
+                        newScore.upvotes = Math.max(0, newScore.upvotes - 1);
+                    } else if (previousVote === 'down') {
+                        newScore.downvotes = Math.max(0, newScore.downvotes - 1);
+                    }
+                    
+                    // 添加新投票（如果不是取消投票）
+                    const finalVote = previousVote === voteType ? null : voteType;
+                    if (finalVote === 'up') {
+                        newScore.upvotes += 1;
+                    } else if (finalVote === 'down') {
+                        newScore.downvotes += 1;
+                    }
+                    
+                    // 重新计算总分
+                    newScore.total_votes = newScore.upvotes + newScore.downvotes;
+                    newScore.vote_score = newScore.upvotes - newScore.downvotes;
+                    newScore.total_score = newScore.initial_score + newScore.vote_score;
+                    
+                    const newScores = { ...currentScores, [serverId]: newScore };
+                    queryClient.setQueryData(queryKey, newScores);
+                }
+            });
+
+            return previousState;
+        },
+        onError: (error, voteType, context) => {
+            // 回滚乐观更新
+            if (context && user) {
+                (context.userVotes as Array<[unknown[], unknown]>).forEach(([queryKey, data]) => {
+                    queryClient.setQueryData(queryKey, data);
+                });
+                (context.scores as Array<[unknown[], unknown]>).forEach(([queryKey, data]) => {
+                    queryClient.setQueryData(queryKey, data);
+                });
+            }
+            console.error('Vote mutation error:', error);
+        },
         onSuccess: (result) => {
             // 检查是否被速率限制
             if (result.rateLimited) {
                 console.warn('Vote was rate limited');
-                return; // 不更新缓存，因为投票失败
+                // 刷新所有相关查询以恢复正确状态
+                queryClient.invalidateQueries({ queryKey: ['batch-user-votes'] });
+                queryClient.invalidateQueries({ queryKey: ['server-scores'] });
+                return;
             }
 
-            // 更新相关缓存
-            queryClient.setQueryData(['server-score', serverId], result.newScore);
-            queryClient.setQueryData(['user-vote', user?.id, serverId], result.userVote);
-            
-            // 使相关查询失效以触发重新获取
-            queryClient.invalidateQueries({ queryKey: ['server-scores'] });
-            queryClient.invalidateQueries({ queryKey: ['servers'] });
+            // 用服务器返回的真实数据更新所有相关的分数查询
+            const scoreQueryKeys = queryClient.getQueryCache()
+                .findAll({ queryKey: ['server-scores'] })
+                .map(q => q.queryKey);
+
+            scoreQueryKeys.forEach(queryKey => {
+                const currentScores = queryClient.getQueryData(queryKey) as Record<string, ServerScore> || {};
+                const newScores = { ...currentScores, [serverId]: result.newScore };
+                queryClient.setQueryData(queryKey, newScores);
+            });
         },
-        onError: (error) => {
-            console.error('Vote mutation error:', error);
-        }
     });
 
     const removeVoteMutation = useMutation({
@@ -435,21 +528,95 @@ export function useVoteMutation(serverId: string) {
             }
             return votingService.removeVote(serverId);
         },
-        onSuccess: (result) => {
-            // 更新相关缓存
-            queryClient.setQueryData(['server-score', serverId], result.newScore);
-            queryClient.setQueryData(['user-vote', user?.id, serverId], result.userVote);
+        onMutate: async () => {
+            if (!user) return null;
+
+            await queryClient.cancelQueries({ queryKey: ['batch-user-votes'] });
+            await queryClient.cancelQueries({ queryKey: ['server-scores'] });
+
+            // 获取所有相关查询
+            const userVoteQueryKeys = queryClient.getQueryCache()
+                .findAll({ queryKey: ['batch-user-votes', user.id] })
+                .map(q => q.queryKey);
             
-            // 使相关查询失效以触发重新获取
-            queryClient.invalidateQueries({ queryKey: ['server-scores'] });
-            queryClient.invalidateQueries({ queryKey: ['servers'] });
+            const scoreQueryKeys = queryClient.getQueryCache()
+                .findAll({ queryKey: ['server-scores'] })
+                .map(q => q.queryKey);
+
+            // 存储之前的状态
+            const previousState = {
+                userVotes: userVoteQueryKeys.map(key => [key, queryClient.getQueryData(key)]),
+                scores: scoreQueryKeys.map(key => [key, queryClient.getQueryData(key)])
+            };
+
+            // 移除用户投票
+            userVoteQueryKeys.forEach(queryKey => {
+                const currentVotes = queryClient.getQueryData(queryKey) as Record<string, 'up' | 'down'> || {};
+                const newVotes = { ...currentVotes };
+                delete newVotes[serverId];
+                queryClient.setQueryData(queryKey, newVotes);
+            });
+
+            // 更新分数
+            scoreQueryKeys.forEach(queryKey => {
+                const currentScores = queryClient.getQueryData(queryKey) as Record<string, ServerScore> || {};
+                const currentScore = currentScores[serverId];
+                
+                if (currentScore) {
+                    const currentUserVotes = queryClient.getQueryData(['batch-user-votes', user.id]) as Record<string, 'up' | 'down'> || {};
+                    const previousVote = currentUserVotes[serverId];
+                    
+                    if (previousVote) {
+                        const newScore = { ...currentScore };
+                        
+                        if (previousVote === 'up') {
+                            newScore.upvotes = Math.max(0, newScore.upvotes - 1);
+                        } else if (previousVote === 'down') {
+                            newScore.downvotes = Math.max(0, newScore.downvotes - 1);
+                        }
+                        
+                        newScore.total_votes = newScore.upvotes + newScore.downvotes;
+                        newScore.vote_score = newScore.upvotes - newScore.downvotes;
+                        newScore.total_score = newScore.initial_score + newScore.vote_score;
+                        
+                        const newScores = { ...currentScores, [serverId]: newScore };
+                        queryClient.setQueryData(queryKey, newScores);
+                    }
+                }
+            });
+
+            return previousState;
+        },
+        onError: (error, variables, context) => {
+            // 回滚乐观更新
+            if (context && user) {
+                (context.userVotes as Array<[unknown[], unknown]>).forEach(([queryKey, data]) => {
+                    queryClient.setQueryData(queryKey, data);
+                });
+                (context.scores as Array<[unknown[], unknown]>).forEach(([queryKey, data]) => {
+                    queryClient.setQueryData(queryKey, data);
+                });
+            }
+            console.error('Remove vote mutation error:', error);
+        },
+        onSuccess: (result) => {
+            // 用服务器返回的真实数据更新所有相关的分数查询
+            const scoreQueryKeys = queryClient.getQueryCache()
+                .findAll({ queryKey: ['server-scores'] })
+                .map(q => q.queryKey);
+
+            scoreQueryKeys.forEach(queryKey => {
+                const currentScores = queryClient.getQueryData(queryKey) as Record<string, ServerScore> || {};
+                const newScores = { ...currentScores, [serverId]: result.newScore };
+                queryClient.setQueryData(queryKey, newScores);
+            });
         },
     });
 
     return {
         vote: voteMutation.mutate,
         removeVote: removeVoteMutation.mutate,
-        isVoting: voteMutation.isPending,
+        isVoting: voteMutation.isPending || removeVoteMutation.isPending,
         isRemoving: removeVoteMutation.isPending,
         error: voteMutation.error || removeVoteMutation.error,
         lastVoteResult: voteMutation.data,

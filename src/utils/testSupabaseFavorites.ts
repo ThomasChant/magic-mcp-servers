@@ -1,10 +1,10 @@
-import { useSupabaseFavoritesService } from "../services/supabase-favorites";
+import { SupabaseFavoritesService } from "../services/supabase-favorites";
 
 /**
  * @function testSupabaseFavorites
  * @description Test function to verify Supabase favorites functionality
  */
-export async function testSupabaseFavorites(): Promise<{
+export async function testSupabaseFavorites(service: SupabaseFavoritesService | null): Promise<{
     success: boolean;
     results: string[];
     errors: string[];
@@ -14,7 +14,6 @@ export async function testSupabaseFavorites(): Promise<{
     let success = true;
 
     try {
-        const service = useSupabaseFavoritesService();
         
         if (!service) {
             errors.push('Favorites service not available - user not authenticated');
@@ -63,7 +62,7 @@ export async function testSupabaseFavorites(): Promise<{
         for (const serverId of localTestFavorites) {
             try {
                 await service.removeFromFavorites(serverId);
-            } catch (e) {
+            } catch {
                 // Ignore cleanup errors
             }
         }
