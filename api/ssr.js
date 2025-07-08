@@ -138,7 +138,11 @@ export default async function handler(req, res) {
             const pathname = urlObj.pathname;
             if (pathname === '/' || pathname === '') {
                 url = `/${locale}`;
+            } else if (pathname.startsWith(`/${locale}/`)) {
+                // Pathname already contains locale prefix, use as-is
+                url = pathname;
             } else {
+                // Add locale prefix to pathname
                 url = `/${locale}${pathname}`;
             }
             console.log(`🔄 Reconstructed localized URL: ${originalUrl} -> ${url}`);
