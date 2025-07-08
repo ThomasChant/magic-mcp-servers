@@ -714,7 +714,7 @@ export async function getHomePageData(): Promise<{
     const homeServersResult = await supabase
       .from('servers_with_details')
       .select('*')
-      .order('upvotes', { ascending: false })
+      .order('stars', { ascending: false })
       .limit(36); // Match the default limit in Servers component
 
     console.log('📊 Home servers query result:', {
@@ -846,7 +846,7 @@ export async function getServersPageData(): Promise<{
         featured, official, 
         stars, created_at, last_updated
       `)
-      .order('upvotes', { ascending: false })
+      .order('stars', { ascending: false })
       .limit(36); // First page limit to match Servers component
     
     if (serversError) {
