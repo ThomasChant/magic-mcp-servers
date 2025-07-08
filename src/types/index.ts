@@ -279,15 +279,15 @@ export interface APIParameter {
 
 export interface APIExample {
     title?: string;
-    request: Record<string, any>;
-    response?: Record<string, any>;
+    request: Record<string, string | number | boolean | null>;
+    response?: Record<string, string | number | boolean | null | object>;
     description?: string;
 }
 
 export interface APIResponse {
     type: string;
     description?: string;
-    properties?: Record<string, any>;
+    properties?: Record<string, string | number | boolean | null | object>;
 }
 
 export interface ConfigurationOption {

@@ -341,8 +341,8 @@ async function demoAPIReferenceAnalysis(readmeContent: string, projectName: stri
  */
 async function demoSaveToDatabase(
   projectName: string, 
-  installation: ExtractedInstallation, 
-  apiReference: ExtractedAPIReference
+  _installation: ExtractedInstallation, 
+  _apiReference: ExtractedAPIReference
 ): Promise<void> {
   console.log(`\\n💾 演示: 保存分析结果到数据库 - ${projectName}`);
   
@@ -353,7 +353,7 @@ async function demoSaveToDatabase(
   }
 
   try {
-    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+    const _supabase = createClient(supabaseUrl, supabaseServiceKey);
     
     // 模拟数据库更新操作
     console.log('📝 模拟数据库更新操作...');

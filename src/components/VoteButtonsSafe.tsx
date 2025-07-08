@@ -1,6 +1,5 @@
 import React from "react";
 import { LogIn } from "lucide-react";
-import { useServerScore } from "../services/voting";
 import { useBatchScore } from "./BatchScoreProvider";
 
 // Simple notification function

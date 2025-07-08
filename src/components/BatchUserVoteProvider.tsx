@@ -2,6 +2,7 @@ import React, { createContext, useContext, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useUser } from '@clerk/clerk-react';
 import { supabase } from '../lib/supabase';
+import { isServerSide } from '../utils/environment';
 
 interface BatchUserVoteContextValue {
     userVotes: Record<string, 'up' | 'down'>;
@@ -40,7 +41,23 @@ interface BatchUserVoteProviderProps {
     children: React.ReactNode;
 }
 
-export const BatchUserVoteProvider: React.FC<BatchUserVoteProviderProps> = ({ serverIds, children }) => {
+// SSR-safe BatchUserVoteProvider
+const BatchUserVoteProviderSSR: React.FC<BatchUserVoteProviderProps> = ({ children }) => {
+    const contextValue = {
+        userVotes: {},
+        isLoading: false
+    };
+    
+    return (
+        <BatchUserVoteContext.Provider value={contextValue}>
+            {children}
+        </BatchUserVoteContext.Provider>
+    );
+};
+
+// Client-side BatchUserVoteProvider
+const BatchUserVoteProviderClient: React.FC<BatchUserVoteProviderProps> = ({ serverIds, children }) => {
+    // Client-side only: use Clerk hook
     const { user } = useUser();
     
     // Debug logging
@@ -92,4 +109,12 @@ export const BatchUserVoteProvider: React.FC<BatchUserVoteProviderProps> = ({ se
             {children}
         </BatchUserVoteContext.Provider>
     );
+};
+
+// Main BatchUserVoteProvider that chooses between SSR and client versions
+export const BatchUserVoteProvider: React.FC<BatchUserVoteProviderProps> = (props) => {
+    if (isServerSide()) {
+        return <BatchUserVoteProviderSSR {...props} />;
+    }
+    return <BatchUserVoteProviderClient {...props} />;
 };

@@ -398,7 +398,7 @@ const Servers: React.FC = () => {
                                                 className="rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-blue-600 focus:ring-blue-500"
                                             />
                                             <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-                                                {category.name?.en || category.name_en || category.id} ({category.serverCount || 0})
+                                                {category.name?.en || category.id} ({category.serverCount || 0})
                                             </span>
                                         </label>
                                     ))}

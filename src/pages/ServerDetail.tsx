@@ -30,6 +30,7 @@ import {
     ExternalLink,
     Code2,
     Terminal,
+    ThumbsUp,
 } from "lucide-react";
 import { useServer, useServerReadme } from "../hooks/useUnifiedData";
 import { useRelatedServers } from "../hooks/useRelatedServers";
@@ -399,16 +400,15 @@ const ServerDetail: React.FC = () => {
                                 </p>
                                 <div className="flex items-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
                                     <ClientOnly fallback={
-                                        <BatchUserVoteProvider serverIds={[server.id]}>
-                                            <BatchScoreProvider serverIds={[server.id]}>
-                                                <VoteButtonsSafe
-                                                    serverId={server.id}
-                                                    size="md"
-                                                    showScore={true}
-                                                    className="flex items-center"
-                                                />
-                                            </BatchScoreProvider>
-                                        </BatchUserVoteProvider>
+                                        <div className="flex items-center gap-2">
+                                            <span className="text-gray-500 min-w-[3ch] text-center">0</span>
+                                            <button 
+                                                className="p-2 rounded-md transition-all text-gray-400 bg-gray-100 dark:bg-gray-800"
+                                                disabled
+                                            >
+                                                <ThumbsUp className="w-4 h-4" />
+                                            </button>
+                                        </div>
                                     }>
                                         <BatchUserVoteProvider serverIds={[server.id]}>
                                             <BatchScoreProvider serverIds={[server.id]}>

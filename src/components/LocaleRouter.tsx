@@ -36,17 +36,6 @@ export const LocaleRouter: React.FC<LocaleRouterProps> = ({ children }) => {
         };
     };
 
-    // Generate localized path
-    const getLocalizedPath = (path: string, locale: Locale): string => {
-        const { pathWithoutLocale } = getLocaleFromPath(path);
-        
-        if (locale === defaultLocale) {
-            return pathWithoutLocale || "/";
-        }
-        
-        return `/${locale}${pathWithoutLocale}`;
-    };
-
     useEffect(() => {
         const { locale, pathWithoutLocale } = getLocaleFromPath(location.pathname);
         

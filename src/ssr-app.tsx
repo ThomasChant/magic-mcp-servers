@@ -69,15 +69,28 @@ export function SSRApp({ queryClient, ssrData = {} }: SSRAppProps) {
     </QueryClientProvider>
   );
 
-  // On client side, wrap with ClerkProvider for authentication features
-  if (isClientSide() && clerkPubKey) {
+  // Always wrap with ClerkProvider, but provide different configurations for SSR
+  if (clerkPubKey) {
+    const clerkProps = isClientSide() 
+      ? { publishableKey: clerkPubKey }
+      : { 
+          publishableKey: clerkPubKey,
+          // SSR-specific options
+          appearance: {},
+          initialState: undefined,
+          // Disable features that require browser APIs
+          afterSignInUrl: undefined,
+          afterSignUpUrl: undefined,
+          afterSignOutUrl: undefined,
+        };
+    
     return (
-      <ClerkProvider publishableKey={clerkPubKey}>
+      <ClerkProvider {...clerkProps}>
         <AppRoutes />
       </ClerkProvider>
     );
   }
 
-  // On server side or when Clerk is not configured, render without ClerkProvider
+  // When Clerk is not configured, render without ClerkProvider
   return <AppRoutes />;
 }

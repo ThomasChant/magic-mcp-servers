@@ -5,6 +5,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useVoteMutation } from "../services/voting";
 import { useBatchScore } from "./BatchScoreProvider";
 import { useBatchUserVote } from "./BatchUserVoteProvider";
+import { isServerSide } from "../utils/environment";
 
 
 // Simple notification function
@@ -24,13 +25,29 @@ interface VoteButtonsProps {
  * VoteButtons - Uses batch queries for optimal performance
  * Works for both single servers and multiple servers pages
  */
-const VoteButtons: React.FC<VoteButtonsProps> = ({
+// SSR-safe VoteButtons component  
+const VoteButtonsSSR: React.FC<VoteButtonsProps> = ({ className, showScore }) => (
+    <div className={`flex items-center gap-2 ${className}`}>
+        {showScore && (
+            <span className="text-gray-500 min-w-[3ch] text-center">0</span>
+        )}
+        <button 
+            className="p-2 rounded-md transition-all text-gray-400 bg-gray-100 dark:bg-gray-800"
+            disabled
+        >
+            <ThumbsUp className="w-4 h-4" />
+        </button>
+    </div>
+);
+
+// Client-side VoteButtons component
+const VoteButtonsClient: React.FC<VoteButtonsProps> = ({
     serverId,
     size = 'md',
     className = '',
     showScore = true
 }) => {
-    // Always call hooks at top level to follow React rules
+    // Client-side only: use Clerk hooks
     const user = useUser();
     const clerk = useClerk();
     const isSignedIn = user?.isSignedIn || false;
@@ -39,9 +56,6 @@ const VoteButtons: React.FC<VoteButtonsProps> = ({
     // Use batch providers for all queries
     const { score: serverScore, isLoading: scoreLoading } = useBatchScore(serverId);
     const { userVote, isLoading: voteLoading, hasBatchProvider } = useBatchUserVote(serverId);
-    
-    // Debug logging
-    console.log(`VoteButtons Debug - ServerID: ${serverId}, HasBatchProvider: ${hasBatchProvider}, UserVote: ${userVote}, Loading: ${voteLoading}`);
     
     // Vote operations
     const { vote, removeVote, isVoting, lastVoteResult } = useVoteMutation(serverId);
@@ -54,6 +68,7 @@ const VoteButtons: React.FC<VoteButtonsProps> = ({
             queryClient.removeQueries({ queryKey: ['user-vote'] });
             console.log('VoteButtons: Cleared legacy user-vote queries');
         } catch (e) {
+            console.error('VoteButtons: Error cleaning up user-vote queries', e);
             // Ignore errors in cache cleanup
         }
     }, [queryClient]);
@@ -73,6 +88,9 @@ const VoteButtons: React.FC<VoteButtonsProps> = ({
             }
         }
     }, [lastVoteResult]);
+    
+    // Debug logging
+    console.log(`VoteButtons Debug - ServerID: ${serverId}, HasBatchProvider: ${hasBatchProvider}, UserVote: ${userVote}, Loading: ${voteLoading}`);
 
     // Handle "I'm using this" marking
     const handleUsage = async () => {
@@ -202,6 +220,12 @@ const VoteButtons: React.FC<VoteButtonsProps> = ({
     );
 };
 
-
+// Main VoteButtons component that chooses between SSR and client versions
+const VoteButtons: React.FC<VoteButtonsProps> = (props) => {
+    if (isServerSide()) {
+        return <VoteButtonsSSR {...props} />;
+    }
+    return <VoteButtonsClient {...props} />;
+};
 
 export default VoteButtons;
