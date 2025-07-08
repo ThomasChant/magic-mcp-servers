@@ -837,7 +837,7 @@ export async function getServersPageData(): Promise<{
   try {
     console.log('📋 Fetching servers page data from Supabase...');
     
-    // Fetch servers data for the first page (default sort by upvotes desc)
+    // Fetch servers data for the first page (default sort by stars desc)
     const { data: serversData, error: serversError } = await supabase
       .from('servers_with_details')
       .select(`

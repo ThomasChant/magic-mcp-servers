@@ -144,7 +144,7 @@ export const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
     return (
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between h-full">
             <div className="flex-1">
-                <div className="flex items-start justify-between mb-4">
+                <div className="flex items-start justify-between mb-2">
                     <Link to={`/servers/${server.slug}`} className="flex items-center min-w-0 flex-1 mr-4">
                         <div
                             className={`w-10 h-10 ${getServerIconBg(server)} rounded-lg flex items-center justify-center mr-3 flex-shrink-0`}
@@ -160,31 +160,11 @@ export const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                             <h3 className="server-name text-base font-semibold text-gray-900 dark:text-white truncate" title={server.name}>
                                 {server.name}
                             </h3>
-                            <div className="flex items-center flex-wrap gap-1 mt-1">
-                                {server.metadata.official && (
-                                    <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
-                                        Official
-                                    </span>
-                                )}
-                                {server.featured && (
-                                    <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
-                                        Featured
-                                    </span>
-                                )}
-                                {isPopular(server) && (
-                                    <span className="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
-                                        Popular
-                                    </span>
-                                )}
-                                {/* {getMonorepoInfo(server.repository.url) && (
-                                    <span className="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-[10px] px-1.5 py-0.5 rounded-full flex items-center font-medium">
-                                        <GitBranch className="h-2.5 w-2.5 mr-0.5" />
-                                        Monorepo
-                                    </span>
-                                )} */}
-                            </div>
+                            
                         </div>
+                        
                     </Link>
+                   
                     <div className="text-right flex-shrink-0 space-y-2">
                         <ClientOnly>
                             <FavoriteButton
@@ -195,7 +175,24 @@ export const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                         </ClientOnly>
                     </div>
                 </div>
-
+                <div className="flex items-center flex-wrap gap-1 mb-2">
+                        {server.metadata.official && (
+                            <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
+                                Official
+                            </span>
+                        )}
+                        {server.featured && (
+                            <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
+                                Featured
+                            </span>
+                        )}
+                        {isPopular(server) && (
+                            <span className="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
+                                Popular
+                            </span>
+                        )}
+                        
+                    </div>
                 <Link to={`/servers/${server.slug}`}>
                     <p className="server-description text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
                         {serverData.descriptionEn || server.description["zh-CN"] || server.description.en}

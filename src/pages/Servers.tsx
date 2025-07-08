@@ -38,7 +38,7 @@ const Servers: React.FC = () => {
     const [sidebarSearch, setSidebarSearch] = useState("");
     const [debouncedSearch, setDebouncedSearch] = useState("");
     const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-    const [sortBy, setSortBy] = useState("upvotes"); // 默认按使用人数排序
+    const [sortBy, setSortBy] = useState("stars"); // 默认按star数排序
     const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
     const [quickFilter, setQuickFilter] = useState("all");
     const [currentPage, setCurrentPage] = useState(1);
@@ -312,10 +312,10 @@ const Servers: React.FC = () => {
                                 }}
                                 className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             >
-                                <option value="upvotes-desc">{t('sort.usageCountDesc')}</option>
-                                <option value="upvotes-asc">{t('sort.usageCountAsc')}</option>
                                 <option value="stars-desc">{t('sort.starsDesc')}</option>
                                 <option value="stars-asc">{t('sort.starsAsc')}</option>
+                                <option value="upvotes-desc">{t('sort.usageCountDesc')}</option>
+                                <option value="upvotes-asc">{t('sort.usageCountAsc')}</option>
                                 <option value="name-asc">{t('sort.nameAsc')}</option>
                                 <option value="name-desc">{t('sort.nameDesc')}</option>
                                 <option value="repo_created_at-desc">{t('sort.createdDesc')}</option>
