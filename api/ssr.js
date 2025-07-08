@@ -97,17 +97,20 @@ function needsSSR(url) {
         pathWithoutLocale = localeMatch[2] || '/';
     }
     
+    // Remove query parameters from path for SSR route matching
+    const pathWithoutQuery = pathWithoutLocale.split('?')[0];
+    
     // Core pages that need SSR for SEO
     const ssrRoutes = ['/', '/servers', '/categories'];
     const dynamicSSRRoutes = ['/servers/', '/categories/'];
     
-    return ssrRoutes.includes(pathWithoutLocale) || 
-           dynamicSSRRoutes.some(route => pathWithoutLocale.startsWith(route));
+    return ssrRoutes.includes(pathWithoutQuery) || 
+           dynamicSSRRoutes.some(route => pathWithoutQuery.startsWith(route));
 }
 
 export default async function handler(req, res) {
     try {
-        const url = req.url;
+        const originalUrl = req.url;
         
         // Debug: Log environment info
         console.log("🔍 Vercel Environment Debug:");
@@ -115,7 +118,34 @@ export default async function handler(req, res) {
         console.log("  - __dirname:", __dirname);
         console.log("  - NODE_ENV:", process.env.NODE_ENV);
         console.log("  - VERCEL:", process.env.VERCEL);
-        console.log("  - Request URL:", url);
+        console.log("  - Request URL:", originalUrl);
+
+        // 🔄 Reconstruct original URL from Vercel rewrite query parameters
+        const urlObj = new URL(originalUrl, `http://${req.headers.host || 'localhost'}`);
+        const queryParams = urlObj.searchParams;
+        
+        let url = originalUrl;
+        
+        // If this is a rewritten URL with locale/slug parameters, reconstruct the original path
+        if (queryParams.has('locale') && queryParams.has('slug')) {
+            const locale = queryParams.get('locale');
+            const slug = queryParams.get('slug');
+            url = `/${locale}/servers/${slug}`;
+            console.log(`🔄 Reconstructed server detail URL: ${originalUrl} -> ${url}`);
+        } else if (queryParams.has('locale') && queryParams.size === 1) {
+            // Just locale parameter (home/servers/categories page)
+            const locale = queryParams.get('locale');
+            const pathname = urlObj.pathname;
+            if (pathname === '/' || pathname === '') {
+                url = `/${locale}`;
+            } else {
+                url = `/${locale}${pathname}`;
+            }
+            console.log(`🔄 Reconstructed localized URL: ${originalUrl} -> ${url}`);
+        } else if (queryParams.size === 0 && urlObj.pathname !== '/') {
+            // No query params, use pathname as-is
+            url = urlObj.pathname;
+        }
 
         // Handle static files
         if (
