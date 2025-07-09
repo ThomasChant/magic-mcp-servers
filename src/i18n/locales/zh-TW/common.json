@@ -48,7 +48,8 @@
         "documentation": "文件",
         "github": "GitHub",
         "demo": "示範",
-        "website": "網站"
+        "website": "網站",
+        "apply": "套用"
     },
     "auth": {
         "signIn": "登入",

@@ -48,7 +48,8 @@
         "documentation": "Документация",
         "github": "GitHub",
         "demo": "Демо",
-        "website": "Веб-сайт"
+        "website": "Веб-сайт",
+        "apply": "Применить"
     },
     "auth": {
         "signIn": "Войти",

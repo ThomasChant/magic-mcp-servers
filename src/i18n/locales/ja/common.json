@@ -48,7 +48,8 @@
         "documentation": "ドキュメント",
         "github": "GitHub",
         "demo": "デモ",
-        "website": "ウェブサイト"
+        "website": "ウェブサイト",
+        "apply": "適用"
     },
     "auth": {
         "signIn": "サインイン",

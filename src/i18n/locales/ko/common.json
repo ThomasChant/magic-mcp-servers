@@ -48,7 +48,8 @@
         "documentation": "문서",
         "github": "GitHub",
         "demo": "데모",
-        "website": "웹사이트"
+        "website": "웹사이트",
+        "apply": "적용"
     },
     "auth": {
         "signIn": "로그인",
