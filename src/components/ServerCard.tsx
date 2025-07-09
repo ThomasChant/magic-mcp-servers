@@ -271,8 +271,134 @@ export const ServerListItem: React.FC<ServerListItemProps> = ({ server }) => {
     }
     
     return (
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 hover:shadow-md transition-all duration-300 hover:-translate-y-1 cursor-pointer mb-4">
-            <div className="flex items-center justify-between">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 hover:shadow-md transition-all duration-300 hover:-translate-y-1 mb-4">
+            {/* Mobile Layout */}
+            <div className="md:hidden">
+                {/* Header Section */}
+                <div className="flex items-start space-x-3 mb-3">
+                    <Link to={`/servers/${server.slug}`}>
+                        <div
+                            className={`w-12 h-12 ${getServerIconBg(server)} rounded-lg flex items-center justify-center flex-shrink-0`}
+                        >
+                            {getServerIcon(server)}
+                        </div>
+                    </Link>
+                    <div className="flex-1 min-w-0">
+                        <div className="flex items-start justify-between">
+                            <div className="flex-1 min-w-0">
+                                {server.owner && (
+                                    <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+                                        @{server.owner}
+                                    </div>
+                                )}
+                                <Link to={`/servers/${server.slug}`}>
+                                    <h3 className="server-name text-base font-semibold text-gray-900 dark:text-white mb-2 leading-tight">
+                                        {server.name}
+                                    </h3>
+                                </Link>
+                                <div className="flex items-center flex-wrap gap-1 mb-2">
+                                    {server.metadata.official && (
+                                        <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
+                                            Official
+                                        </span>
+                                    )}
+                                    {server.featured && (
+                                        <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
+                                            Featured
+                                        </span>
+                                    )}
+                                    {isPopular(server) && (
+                                        <span className="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
+                                            Popular
+                                        </span>
+                                    )}
+                                </div>
+                            </div>
+                            <div className="flex items-center space-x-2 ml-2">
+                                <ClientOnly>
+                                    <FavoriteButton serverId={server.id} size="sm" />
+                                </ClientOnly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Description */}
+                <Link to={`/servers/${server.slug}`}>
+                    <p className="server-description text-gray-600 dark:text-gray-300 text-sm mb-3 line-clamp-2">
+                        {serverData.descriptionEn || server.description["zh-CN"] || server.description.en}
+                    </p>
+                </Link>
+
+                {/* Stats */}
+                <div className="flex items-center space-x-4 text-xs text-gray-500 dark:text-gray-400 mb-3">
+                    <span className="flex items-center">
+                        <Star className="h-3 w-3 mr-1 text-yellow-500 dark:text-yellow-400" fill="currentColor" />
+                        {formatStarCount(server.stats?.stars || server.repository?.stars || 0)}
+                    </span>
+                    <span className="flex items-center">
+                        <Calendar className="h-3 w-3 mr-1" />
+                        {formatTimeAgo(
+                            server.createdAt ||
+                                server.stats?.createdAt ||
+                                serverData.repository?.lastUpdate ||
+                                server.repository?.lastUpdated ||
+                                ""
+                        )}
+                    </span>
+                </div>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-1 mb-3">
+                    {server.tags
+                        .slice(0, 4)
+                        .map((tag: string) => (
+                            <span
+                                key={tag}
+                                className={`text-xs px-2 py-1 rounded hover:bg-gray-200 ${
+                                    tag.toLowerCase() === decodedTag.toLowerCase()
+                                        ? "bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 font-medium"
+                                        : "bg-gray-100 dark:bg-gray-700 hover:dark:bg-gray-500 hover:dark:text-gray-50 text-gray-700 dark:text-gray-300"
+                                }`}
+                            >
+                                <Link to={`/tags/${tag}`}>#{tag}</Link>
+                            </span>
+                        ))}
+                </div>
+
+                {/* Actions */}
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                        <ClientOnly fallback={
+                            <VoteButtonsSafe 
+                                serverId={server.id}
+                                size="sm"
+                            />
+                        }>
+                            {import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ? (
+                                <VoteButtons 
+                                    serverId={server.id}
+                                    size="sm"
+                                />
+                            ) : (
+                                <VoteButtonsSafe 
+                                    serverId={server.id}
+                                    size="sm"
+                                />
+                            )}
+                        </ClientOnly>
+                    </div>
+                    <Link to={`/servers/${server.slug}`}>
+                        <span className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 text-sm flex items-center font-medium">
+                            View Details
+                            <ArrowRight className="h-4 w-4 ml-1" />
+                        </span>
+                    </Link>
+                </div>
+            </div>
+
+            {/* Desktop Layout */}
+            <div className="hidden md:flex items-center justify-between">
                 <Link to={`/servers/${server.slug}`} className="flex items-center min-w-0 flex-1">
                     <div
                         className={`w-12 h-12 ${getServerIconBg(server)} rounded-lg flex items-center justify-center mr-4 flex-shrink-0`}
@@ -290,7 +416,7 @@ export const ServerListItem: React.FC<ServerListItemProps> = ({ server }) => {
                                 </span>
                             )}
                             <div className="flex items-center flex-wrap gap-1">
-                                {server.official && (
+                                {server.metadata.official && (
                                     <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-[10px] px-1.5 py-0.5 rounded-full font-medium">
                                         Official
                                     </span>
@@ -305,12 +431,6 @@ export const ServerListItem: React.FC<ServerListItemProps> = ({ server }) => {
                                         Popular
                                     </span>
                                 )}
-                                {/* {getMonorepoInfo(server.repository.url) && (
-                                    <span className="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-[10px] px-1.5 py-0.5 rounded-full flex items-center font-medium">
-                                        <GitBranch className="h-2.5 w-2.5 mr-0.5" />
-                                        Monorepo
-                                    </span>
-                                )} */}
                             </div>
                         </div>
                         <p className="server-description text-gray-600 dark:text-gray-300 text-sm mb-2 line-clamp-1">

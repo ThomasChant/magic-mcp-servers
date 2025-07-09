@@ -6,7 +6,9 @@ import {
     Grid3X3,
     List,
     ChevronLeft,
-    ChevronRight
+    ChevronRight,
+    Filter,
+    X
 } from "lucide-react";
 import { useServersPaginated, useCategories } from "../hooks/useUnifiedData";
 import { useAppStore } from "../store/useAppStore";
@@ -43,6 +45,7 @@ const Servers: React.FC = () => {
     const [quickFilter, setQuickFilter] = useState("all");
     const [currentPage, setCurrentPage] = useState(1);
     const [filters, setFilters] = useState(getInitialFilters());
+    const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
     // Handle global search query immediately (from home page search)
     useEffect(() => {
@@ -227,6 +230,19 @@ const Servers: React.FC = () => {
         setCurrentPage(1);
     }, [debouncedSearch, quickFilter, filters, sortBy, sortOrder]);
 
+    // Prevent body scroll when mobile filters are open
+    useEffect(() => {
+        if (mobileFiltersOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [mobileFiltersOpen]);
+
     if (serversLoading) {
         return (
             <div className="bg-gray-50 dark:bg-gray-900 min-h-screen" data-testid="loading">
@@ -277,52 +293,73 @@ const Servers: React.FC = () => {
                             </p>
                         </div>
 
+                        {/* Mobile Filter Button */}
+                        <div className="md:hidden mb-6">
+                            <button
+                                onClick={() => setMobileFiltersOpen(true)}
+                                className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors relative shadow-md"
+                            >
+                                <Filter className="h-5 w-5" />
+                                <span className="text-sm font-medium">{t('list.filters')}</span>
+                                {/* Filter Count Badge */}
+                                {(filters.categories.length + filters.platforms.length + filters.languages.length + (sidebarSearch ? 1 : 0)) > 0 && (
+                                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center min-w-[20px]">
+                                        {filters.categories.length + filters.platforms.length + filters.languages.length + (sidebarSearch ? 1 : 0)}
+                                    </span>
+                                )}
+                            </button>
+                        </div>
+
                         {/* View Toggle and Sort */}
-                        <div className="flex items-center space-x-4">
-                            <div className="flex items-center space-x-2">
-                                <span className="text-sm text-gray-600 dark:text-gray-400">{t('list.view')}</span>
-                                <button
-                                    onClick={() => setViewMode("grid")}
-                                    className={`p-2 rounded-md ${
-                                        viewMode === "grid"
-                                            ? "bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300"
-                                            : "text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
-                                    }`}
-                                >
-                                    <Grid3X3 className="h-4 w-4" />
-                                </button>
-                                <button
-                                    onClick={() => setViewMode("list")}
-                                    className={`p-2 rounded-md ${
-                                        viewMode === "list"
-                                            ? "bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300"
-                                            : "text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
-                                    }`}
-                                >
-                                    <List className="h-4 w-4" />
-                                </button>
+                        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                            <div className="flex items-center space-x-3">
+                                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('list.view')}</span>
+                                <div className="flex items-center space-x-1 bg-gray-100 dark:bg-gray-700 rounded-md p-1">
+                                    <button
+                                        onClick={() => setViewMode("grid")}
+                                        className={`p-2 rounded-md transition-colors ${
+                                            viewMode === "grid"
+                                                ? "bg-white dark:bg-gray-600 text-blue-600 dark:text-blue-300 shadow-sm"
+                                                : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                                        }`}
+                                    >
+                                        <Grid3X3 className="h-4 w-4" />
+                                    </button>
+                                    <button
+                                        onClick={() => setViewMode("list")}
+                                        className={`p-2 rounded-md transition-colors ${
+                                            viewMode === "list"
+                                                ? "bg-white dark:bg-gray-600 text-blue-600 dark:text-blue-300 shadow-sm"
+                                                : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                                        }`}
+                                    >
+                                        <List className="h-4 w-4" />
+                                    </button>
+                                </div>
                             </div>
 
-                            <select
-                                value={`${sortBy}-${sortOrder}`}
-                                onChange={(e) => {
-                                    const [newSortBy, newSortOrder] = e.target.value.split('-');
-                                    setSortBy(newSortBy);
-                                    setSortOrder(newSortOrder as 'asc' | 'desc');
-                                }}
-                                className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            >
-                                <option value="stars-desc">{t('sort.starsDesc')}</option>
-                                <option value="stars-asc">{t('sort.starsAsc')}</option>
-                                <option value="upvotes-desc">{t('sort.usageCountDesc')}</option>
-                                <option value="upvotes-asc">{t('sort.usageCountAsc')}</option>
-                                <option value="name-asc">{t('sort.nameAsc')}</option>
-                                <option value="name-desc">{t('sort.nameDesc')}</option>
-                                <option value="repo_created_at-desc">{t('sort.createdDesc')}</option>
-                                <option value="repo_created_at-asc">{t('sort.createdAsc')}</option>
-                                <option value="last_updated-desc">{t('sort.updatedDesc')}</option>
-                                <option value="last_updated-asc">{t('sort.updatedAsc')}</option>
-                            </select>
+                            <div className="w-full md:w-auto">
+                                <select
+                                    value={`${sortBy}-${sortOrder}`}
+                                    onChange={(e) => {
+                                        const [newSortBy, newSortOrder] = e.target.value.split('-');
+                                        setSortBy(newSortBy);
+                                        setSortOrder(newSortOrder as 'asc' | 'desc');
+                                    }}
+                                    className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full md:w-auto md:min-w-[200px] shadow-sm"
+                                >
+                                    <option value="stars-desc">{t('sort.starsDesc')}</option>
+                                    <option value="stars-asc">{t('sort.starsAsc')}</option>
+                                    <option value="upvotes-desc">{t('sort.usageCountDesc')}</option>
+                                    <option value="upvotes-asc">{t('sort.usageCountAsc')}</option>
+                                    <option value="name-asc">{t('sort.nameAsc')}</option>
+                                    <option value="name-desc">{t('sort.nameDesc')}</option>
+                                    <option value="repo_created_at-desc">{t('sort.createdDesc')}</option>
+                                    <option value="repo_created_at-asc">{t('sort.createdAsc')}</option>
+                                    <option value="last_updated-desc">{t('sort.updatedDesc')}</option>
+                                    <option value="last_updated-asc">{t('sort.updatedAsc')}</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -330,8 +367,185 @@ const Servers: React.FC = () => {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="flex flex-col lg:flex-row gap-8">
-                    {/* Sidebar Filters */}
-                    <div className="lg:w-1/4">
+                    {/* Mobile Filter Overlay */}
+                    {mobileFiltersOpen && (
+                        <div className="md:hidden fixed inset-0 z-50 flex">
+                            {/* Backdrop */}
+                            <div 
+                                className="fixed inset-0 bg-black bg-opacity-50 transition-opacity animate-fade-in"
+                                onClick={() => setMobileFiltersOpen(false)}
+                            />
+                            
+                            {/* Filter Panel */}
+                            <div className="relative bg-white dark:bg-gray-800 w-80 max-w-full h-full overflow-y-auto shadow-xl animate-slide-in-left">
+                                {/* Close Button */}
+                                <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-4 flex items-center justify-between">
+                                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                                        {t('list.filters')}
+                                    </h3>
+                                    <button
+                                        onClick={() => setMobileFiltersOpen(false)}
+                                        className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                                    >
+                                        <X className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                                    </button>
+                                </div>
+                                
+                                {/* Filter Content */}
+                                <div className="p-6">
+                                    {/* Search Filter */}
+                                    <div className="mb-6">
+                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                            {t('list.search')}
+                                        </label>
+                                        <div className="relative">
+                                            <input
+                                                type="search"
+                                                placeholder={t('hero.searchPlaceholder')}
+                                                value={sidebarSearch}
+                                                onChange={(e) => setSidebarSearch(e.target.value)}
+                                                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg text-sm placeholder-gray-500 dark:placeholder-gray-400"
+                                            />
+                                            <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400 dark:text-gray-500" />
+                                        </div>
+                                    </div>
+
+                                    {/* Category Filter */}
+                                    <div className="mb-6">
+                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                                            {t('list.categories')}
+                                        </label>
+                                        <div className="space-y-2">
+                                            {categories?.map((category) => (
+                                                <label key={category.id} className="flex items-center">
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={filters.categories.includes(category.id)}
+                                                        onChange={(e) => {
+                                                            if (e.target.checked) {
+                                                                setFilters({
+                                                                    ...filters,
+                                                                    categories: [...filters.categories, category.id]
+                                                                });
+                                                            } else {
+                                                                setFilters({
+                                                                    ...filters,
+                                                                    categories: filters.categories.filter(c => c !== category.id)
+                                                                });
+                                                            }
+                                                        }}
+                                                        className="rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-blue-600 focus:ring-blue-500"
+                                                    />
+                                                    <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
+                                                        {category.name?.en || category.id} ({category.serverCount || 0})
+                                                    </span>
+                                                </label>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Platform Filter */}
+                                    <div className="mb-6">
+                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                                            {t('list.platform')}
+                                        </label>
+                                        <div className="space-y-2">
+                                            {platformFilters.map((platform) => (
+                                                <label key={platform.id} className="flex items-center">
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={filters.platforms.includes(platform.id)}
+                                                        onChange={(e) => {
+                                                            if (e.target.checked) {
+                                                                setFilters({
+                                                                    ...filters,
+                                                                    platforms: [...filters.platforms, platform.id]
+                                                                });
+                                                            } else {
+                                                                setFilters({
+                                                                    ...filters,
+                                                                    platforms: filters.platforms.filter(p => p !== platform.id)
+                                                                });
+                                                            }
+                                                        }}
+                                                        className="rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-blue-600 focus:ring-blue-500"
+                                                    />
+                                                    <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
+                                                        {platform.name}
+                                                    </span>
+                                                </label>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Language Filter */}
+                                    <div className="mb-6">
+                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                                            {t('list.language')}
+                                        </label>
+                                        <div className="space-y-2">
+                                            {languageFilters.map((language) => (
+                                                <label key={language.id} className="flex items-center">
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={filters.languages.includes(language.id)}
+                                                        onChange={(e) => {
+                                                            if (e.target.checked) {
+                                                                setFilters({
+                                                                    ...filters,
+                                                                    languages: [...filters.languages, language.id]
+                                                                });
+                                                            } else {
+                                                                setFilters({
+                                                                    ...filters,
+                                                                    languages: filters.languages.filter(l => l !== language.id)
+                                                                });
+                                                            }
+                                                        }}
+                                                        className="rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-blue-600 focus:ring-blue-500"
+                                                    />
+                                                    <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
+                                                        {language.name}
+                                                    </span>
+                                                </label>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Action Buttons */}
+                                    <div className="space-y-2">
+                                        {/* Clear All Button */}
+                                        <button
+                                            onClick={() => {
+                                                setFilters({
+                                                    categories: [],
+                                                    platforms: [],
+                                                    languages: [],
+                                                    status: [],
+                                                });
+                                                setSidebarSearch("");
+                                                setDebouncedSearch("");
+                                            }}
+                                            className="w-full px-4 py-2 text-sm text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
+                                        >
+                                            {t('list.clearAll')}
+                                        </button>
+                                        
+                                        {/* Apply Filters Button */}
+                                        <button
+                                            onClick={() => setMobileFiltersOpen(false)}
+                                            className="w-full px-4 py-3 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
+                                        >
+                                            {t('common.apply')}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Desktop Sidebar Filters */}
+                    <div className="hidden md:block md:w-1/4">
                         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 sticky top-24">
                             <div className="flex items-center justify-between mb-4">
                                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
@@ -476,7 +690,7 @@ const Servers: React.FC = () => {
                     </div>
 
                     {/* Main Content */}
-                    <div className="lg:w-3/4">
+                    <div className="w-full md:w-3/4">
                         {/* Results Summary */}
                         <div className="flex items-center justify-between mb-6">
                             <div className="text-sm text-gray-600 dark:text-gray-400">

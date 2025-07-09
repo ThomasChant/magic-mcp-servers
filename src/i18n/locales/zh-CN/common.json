@@ -48,7 +48,8 @@
         "documentation": "文档",
         "github": "GitHub",
         "demo": "演示",
-        "website": "网站"
+        "website": "网站",
+        "apply": "应用"
     },
     "auth": {
         "signIn": "登录",

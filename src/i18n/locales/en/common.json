@@ -48,7 +48,8 @@
         "documentation": "Documentation",
         "github": "GitHub",
         "demo": "Demo",
-        "website": "Website"
+        "website": "Website",
+        "apply": "Apply"
     },
     "auth": {
         "signIn": "Sign In",
