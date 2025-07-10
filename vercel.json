@@ -18,7 +18,7 @@
             "destination": "/api/ssr"
         },
         {
-            "source": "/servers/(.*)",
+            "source": "/servers/([^/]+)",
             "destination": "/api/ssr"
         },
         {
@@ -26,7 +26,7 @@
             "destination": "/api/ssr"
         },
         {
-            "source": "/categories/(.*)",
+            "source": "/categories/([^/]+)",
             "destination": "/api/ssr"
         },
         {
@@ -38,7 +38,7 @@
             "destination": "/api/ssr"
         },
         {
-            "source": "/:locale(zh-CN|zh-TW|fr|ja|ko|ru)/servers/:slug*",
+            "source": "/:locale(zh-CN|zh-TW|fr|ja|ko|ru)/servers/:slug",
             "destination": "/api/ssr"
         },
         {
@@ -46,7 +46,39 @@
             "destination": "/api/ssr"
         },
         {
-            "source": "/:locale(zh-CN|zh-TW|fr|ja|ko|ru)/categories/:slug*",
+            "source": "/:locale(zh-CN|zh-TW|fr|ja|ko|ru)/categories/:slug",
+            "destination": "/api/ssr"
+        },
+        {
+            "source": "/tags",
+            "destination": "/api/ssr"
+        },
+        {
+            "source": "/tags/([^/]+)",
+            "destination": "/api/ssr"
+        },
+        {
+            "source": "/docs",
+            "destination": "/api/ssr"
+        },
+        {
+            "source": "/favorites",
+            "destination": "/api/ssr"
+        },
+        {
+            "source": "/:locale(zh-CN|zh-TW|fr|ja|ko|ru)/tags",
+            "destination": "/api/ssr"
+        },
+        {
+            "source": "/:locale(zh-CN|zh-TW|fr|ja|ko|ru)/tags/:slug",
+            "destination": "/api/ssr"
+        },
+        {
+            "source": "/:locale(zh-CN|zh-TW|fr|ja|ko|ru)/docs",
+            "destination": "/api/ssr"
+        },
+        {
+            "source": "/:locale(zh-CN|zh-TW|fr|ja|ko|ru)/favorites",
             "destination": "/api/ssr"
         },
         {

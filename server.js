@@ -275,6 +275,70 @@ app.get('/sitemap-index.xml', async (req, res) => {
     }
 });
 
+// Route validation middleware to prevent invalid paths
+app.use("*", (req, res, next) => {
+    const url = req.originalUrl.replace(base, "");
+    const urlPath = url.split('?')[0]; // Remove query parameters
+    
+    // Define valid locales
+    const validLocales = ['en', 'zh-CN', 'zh-TW', 'fr', 'ja', 'ko', 'ru'];
+    
+    // Define valid route patterns
+    const validRoutes = [
+        /^\/$/,                                    // Home page
+        /^\/servers\/?$/,                          // Servers list
+        /^\/servers\/[^\/]+\/?$/,                  // Server detail
+        /^\/categories\/?$/,                       // Categories list
+        /^\/categories\/[^\/]+\/?$/,               // Category detail
+        /^\/tags\/?$/,                             // Tags list
+        /^\/tags\/[^\/]+\/?$/,                     // Tag detail
+        /^\/docs\/?$/,                             // Documentation
+        /^\/favorites\/?$/,                        // Favorites
+        /^\/profile\/?$/,                          // Profile
+        /^\/about\/?$/,                            // About
+    ];
+    
+    // Check if URL has a locale prefix
+    const segments = urlPath.split('/').filter(Boolean);
+    const firstSegment = segments[0];
+    let pathToCheck = urlPath;
+    
+    if (firstSegment && validLocales.includes(firstSegment)) {
+        // Remove locale prefix to check the actual path
+        pathToCheck = '/' + segments.slice(1).join('/');
+    }
+    
+    // Validate the path
+    const isValidRoute = validRoutes.some(pattern => pattern.test(pathToCheck));
+    
+    // Block invalid paths that Google is trying to crawl
+    const blockedPatterns = [
+        /\/servers\/docs\//,                       // Block /servers/docs/* paths
+        /\/servers\/src\//,                        // Block /servers/src/* paths
+        /\/servers\/\w+\/\w+/,                     // Block nested paths under servers
+        /\/categories\/\w+\/\w+/,                  // Block nested paths under categories
+    ];
+    
+    const isBlockedPath = blockedPatterns.some(pattern => pattern.test(pathToCheck));
+    
+    console.log(`🔍 Server route validation:`, {
+        originalUrl: req.originalUrl,
+        url: url,
+        urlPath: urlPath,
+        pathToCheck: pathToCheck,
+        isValidRoute: isValidRoute,
+        isBlockedPath: isBlockedPath
+    });
+    
+    // Temporarily disable validation for debugging
+    if (false && (isBlockedPath || (!isValidRoute && pathToCheck !== '/' && !pathToCheck.startsWith('/sitemap')))) {
+        console.log(`❌ Blocked invalid path: ${url} (pathToCheck: ${pathToCheck})`);
+        return res.status(404).send('Not Found');
+    }
+    
+    next();
+});
+
 // Serve HTML - only for non-static routes
 app.use("*", async (req, res) => {
     try {

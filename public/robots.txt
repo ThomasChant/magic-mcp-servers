@@ -1,4 +1,32 @@
 User-agent: *
 Allow: /
 
+# Block invalid nested paths that don't exist in the application
+Disallow: /servers/docs/
+Disallow: /servers/src/
+Disallow: /servers/*/*
+Disallow: /categories/*/*
+
+# Block invalid nested paths with any locale prefix
+Disallow: /*/servers/docs/
+Disallow: /*/servers/src/
+Disallow: /*/servers/*/*
+Disallow: /*/categories/*/*
+
+# Allow valid paths (including locale prefixes)
+Allow: /servers/
+Allow: /categories/
+Allow: /tags/
+Allow: /docs
+Allow: /favorites
+Allow: /*/servers/
+Allow: /*/categories/
+Allow: /*/tags/
+Allow: /*/docs
+Allow: /*/favorites
+
+# Sitemap reference
 Sitemap: https://www.magicmcp.net/sitemap.xml
+Sitemap: https://www.magicmcp.net/sitemap-servers.xml
+Sitemap: https://www.magicmcp.net/sitemap-categories.xml
+Sitemap: https://www.magicmcp.net/sitemap-tags.xml
