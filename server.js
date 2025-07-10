@@ -315,25 +315,34 @@ app.use("*", (req, res, next) => {
     const blockedPatterns = [
         /\/servers\/docs\//,                       // Block /servers/docs/* paths
         /\/servers\/src\//,                        // Block /servers/src/* paths
-        /\/servers\/\w+\/\w+/,                     // Block nested paths under servers
-        /\/categories\/\w+\/\w+/,                  // Block nested paths under categories
+        /\/servers\/[^\/]+\/[^\/]+/,               // Block nested paths under servers (e.g., /servers/dd/1)
+        /\/categories\/[^\/]+\/[^\/]+/,            // Block nested paths under categories
     ];
     
     const isBlockedPath = blockedPatterns.some(pattern => pattern.test(pathToCheck));
     
-    console.log(`🔍 Server route validation:`, {
+    // Debug validation 
+    console.log(`🔍 Server route validation:`, { 
         originalUrl: req.originalUrl,
-        url: url,
-        urlPath: urlPath,
-        pathToCheck: pathToCheck,
-        isValidRoute: isValidRoute,
-        isBlockedPath: isBlockedPath
+        url, 
+        urlPath, 
+        pathToCheck, 
+        isValidRoute, 
+        isBlockedPath,
+        validLocales: validLocales.includes(segments[0]),
+        firstSegment: segments[0],
+        blockedTests: {
+            'servers/src': /\/servers\/src\//.test(pathToCheck),
+            'servers/docs': /\/servers\/docs\//.test(pathToCheck),
+            'servers/nested': /\/servers\/[^\/]+\/[^\/]+/.test(pathToCheck)
+        }
     });
     
-    // Temporarily disable validation for debugging
-    if (false && (isBlockedPath || (!isValidRoute && pathToCheck !== '/' && !pathToCheck.startsWith('/sitemap')))) {
-        console.log(`❌ Blocked invalid path: ${url} (pathToCheck: ${pathToCheck})`);
-        return res.status(404).send('Not Found');
+    // Mark invalid paths for 404 handling but let them pass to React Router
+    if (isBlockedPath) {
+        console.log(`❌ Invalid path detected: ${url} (pathToCheck: ${pathToCheck}) - will render with 404 status`);
+        // Add a flag to the request so we can return 404 status later
+        req.shouldReturn404 = true;
     }
     
     next();
@@ -406,8 +415,10 @@ app.use("*", async (req, res) => {
             // Development: Use Vite dev server
             template = await fs.readFile("./index.html", "utf-8");
             template = await vite.transformIndexHtml(url, template);
-            // For development, we'll use client-side rendering for now
-            res.status(200).set({ "Content-Type": "text/html" }).send(template);
+            // Use correct status code even in development
+            const devStatusCode = req.shouldReturn404 ? 404 : 200;
+            console.log(`🎯 Development status code decision: req.shouldReturn404=${req.shouldReturn404}, statusCode=${devStatusCode}`);
+            res.status(devStatusCode).set({ "Content-Type": "text/html" }).send(template);
             return;
         } else {
             // Production: SSR with dynamic SEO
@@ -545,8 +556,11 @@ app.use("*", async (req, res) => {
                 console.log(`✅ Root div is empty after injection: ${hasEmptyRoot}`);
                 console.log(`✅ Final HTML length: ${finalHtml.length}`);
                 
-                res.status(200).set({ "Content-Type": "text/html" }).send(finalHtml);
-                console.log(`✅ Response sent successfully`);
+                // Use 404 status if this is an invalid path, otherwise 200
+                const statusCode = req.shouldReturn404 ? 404 : 200;
+                console.log(`🎯 Status code decision: req.shouldReturn404=${req.shouldReturn404}, statusCode=${statusCode}`);
+                res.status(statusCode).set({ "Content-Type": "text/html" }).send(finalHtml);
+                console.log(`✅ Response sent successfully with status ${statusCode}`);
                 return;
                 
             } catch (ssrError) {
@@ -555,7 +569,9 @@ app.use("*", async (req, res) => {
                 
                 // Fallback to basic client-side rendering
                 template = await fs.readFile("./dist/client/index.html", "utf-8");
-                res.status(200).set({ "Content-Type": "text/html" }).send(template);
+                const fallbackStatusCode = req.shouldReturn404 ? 404 : 200;
+                console.log(`🎯 Fallback status code decision: req.shouldReturn404=${req.shouldReturn404}, statusCode=${fallbackStatusCode}`);
+                res.status(fallbackStatusCode).set({ "Content-Type": "text/html" }).send(template);
                 return;
             }
         }

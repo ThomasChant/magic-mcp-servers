@@ -122,8 +122,8 @@ function validateRoute(url) {
     const blockedPatterns = [
         /\/servers\/docs\//,                       // Block /servers/docs/* paths
         /\/servers\/src\//,                        // Block /servers/src/* paths
-        /\/servers\/\w+\/\w+/,                     // Block nested paths under servers
-        /\/categories\/\w+\/\w+/,                  // Block nested paths under categories
+        /\/servers\/[^\/]+\/[^\/]+/,               // Block nested paths under servers (e.g., /servers/dd/1)
+        /\/categories\/[^\/]+\/[^\/]+/,            // Block nested paths under categories
     ];
     
     const isBlockedPath = blockedPatterns.some(pattern => pattern.test(pathToCheck));
@@ -254,17 +254,14 @@ export default async function handler(req, res) {
         const routePath = url === "/" ? "/" : url;
         const validation = validateRoute(routePath);
         
-        console.log(`🔍 Route validation debug:`, {
-            originalUrl: originalUrl,
-            url: url,
-            routePath: routePath,
-            validation: validation
-        });
+        // Debug validation (uncomment if needed)
+        // console.log(`🔍 SSR route validation:`, { routePath, validation });
         
-        // Temporarily disable validation for debugging
-        if (false && !validation.isValid) {
-            console.log(`❌ Blocked invalid path: ${routePath} (normalized: ${validation.pathToCheck})`);
-            return res.status(404).send('Not Found');
+        // Mark invalid paths for 404 handling but let them pass to React Router
+        let shouldReturn404 = false;
+        if (validation.isBlockedPath) {
+            console.log(`❌ Invalid path detected: ${routePath} (normalized: ${validation.pathToCheck}) - will render with 404 status`);
+            shouldReturn404 = true;
         }
         
         // 🚀 Simplified SSR: Check if this route needs SSR
@@ -685,7 +682,9 @@ export default async function handler(req, res) {
             res.setHeader("X-Render-Mode", "SSR-Static");
         }
 
-        res.status(200).send(finalHtml);
+        // Use 404 status if this is an invalid path, otherwise 200
+        const statusCode = shouldReturn404 ? 404 : 200;
+        res.status(statusCode).send(finalHtml);
     } catch (e) {
         console.error("SSR Error:", e);
         res.status(500).send(
