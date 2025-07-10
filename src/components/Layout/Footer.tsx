@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Mail, ExternalLink } from "lucide-react";
 
 const Footer: React.FC = () => {
     const { t } = useTranslation();
@@ -8,7 +9,7 @@ const Footer: React.FC = () => {
     return (
         <footer className="bg-gray-900 dark:bg-gray-950 text-white dark:text-gray-100 border-t border-gray-200 dark:border-gray-800 transition-colors duration-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div className="grid md:grid-cols-4 gap-8">
+                <div className="grid md:grid-cols-5 gap-8">
                     {/* Brand */}
                     <div className="md:col-span-2">
                         <div className="flex items-center mb-4">
@@ -110,6 +111,35 @@ const Footer: React.FC = () => {
                                 >
                                     {t('footer.community')}
                                 </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    {/* Contact */}
+                    <div>
+                        <h3 className="text-lg font-semibold mb-4 text-white dark:text-gray-100">
+                            {t('footer.contact')}
+                        </h3>
+                        <ul className="space-y-3">
+                            <li>
+                                <div className="flex items-center text-gray-300 dark:text-gray-400">
+                                    <Mail className="h-4 w-4 mr-2 flex-shrink-0" />
+                                    <a
+                                        href="mailto:eme@magicmcp.com"
+                                        className="text-sm break-all hover:text-white dark:hover:text-gray-100 transition-colors duration-200 underline decoration-dotted underline-offset-2 hover:decoration-solid"
+                                    >
+                                        eme@magicmcp.com
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <Link
+                                    to="/about"
+                                    className="flex items-center text-gray-300 dark:text-gray-400 hover:text-white dark:hover:text-gray-100 transition-colors duration-200"
+                                >
+                                    <ExternalLink className="h-4 w-4 mr-2" />
+                                    <span className="text-sm">{t('footer.about')}</span>
+                                </Link>
                             </li>
                         </ul>
                     </div>

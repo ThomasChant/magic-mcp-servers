@@ -29,7 +29,11 @@
         "contact": "お問い合わせ",
         "privacy": "プライバシーポリシー",
         "terms": "利用規約",
-        "copyright": "© 2024 Magic MCP. All rights reserved."
+        "copyright": "© 2024 Magic MCP. All rights reserved.",
+        "email": "メールでお問い合わせ",
+        "github": "GitHub",
+        "twitter": "Twitter",
+        "discord": "Discord"
     },
     "common": {
         "loading": "読み込み中...",

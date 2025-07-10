@@ -29,7 +29,11 @@
         "contact": "연락처",
         "privacy": "개인정보 보호정책",
         "terms": "이용약관",
-        "copyright": "© 2024 Magic MCP. All rights reserved."
+        "copyright": "© 2024 Magic MCP. All rights reserved.",
+        "email": "이메일 문의",
+        "github": "GitHub",
+        "twitter": "Twitter",
+        "discord": "Discord"
     },
     "common": {
         "loading": "로딩 중...",

@@ -29,7 +29,11 @@
         "contact": "Contact",
         "privacy": "Politique de confidentialité",
         "terms": "Conditions d'utilisation",
-        "copyright": "© 2024 Magic MCP. Tous droits réservés."
+        "copyright": "© 2024 Magic MCP. Tous droits réservés.",
+        "email": "Nous contacter",
+        "github": "GitHub",
+        "twitter": "Twitter",
+        "discord": "Discord"
     },
     "common": {
         "loading": "Chargement...",

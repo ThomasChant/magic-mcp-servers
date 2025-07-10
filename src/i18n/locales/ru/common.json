@@ -29,7 +29,11 @@
         "contact": "Контакты",
         "privacy": "Политика конфиденциальности",
         "terms": "Условия использования",
-        "copyright": "© 2024 Magic MCP. Все права защищены."
+        "copyright": "© 2024 Magic MCP. Все права защищены.",
+        "email": "Связаться по email",
+        "github": "GitHub",
+        "twitter": "Twitter",
+        "discord": "Discord"
     },
     "common": {
         "loading": "Загрузка...",
