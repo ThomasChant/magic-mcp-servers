@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ClerkProvider } from "@clerk/clerk-react";
-import { useTranslation } from "react-i18next";
 import Layout from "./components/Layout/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { ClientOnly } from "./components/ClientOnly";
@@ -18,6 +17,7 @@ import ProfilePage from "./pages/Profile";
 import FavoritesPage from "./pages/Favorites";
 import TagDetailPage from "./pages/TagDetail";
 import TagsPage from "./pages/Tags";
+import NotFoundPage from "./pages/NotFound";
 import { useAppStore } from "./store/useAppStore";
 import { useFavoritesSyncWithClerk } from "./hooks/useFavoritesSyncSafe";
 import { isClientSide } from "./utils/environment";
@@ -36,18 +36,6 @@ const queryClient = new QueryClient({
     },
 });
 
-const NotFoundPage = () => {
-    const { t } = useTranslation("common");
-    return (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">404</h1>
-            <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">{t("common.notFound")}</p>
-            <a href="/" className="btn-primary">
-                {t("common.backToHome")}
-            </a>
-        </div>
-    );
-};
 
 // SSR兼容的AppContent - 不包含Clerk相关功能
 function AppContentSSR() {

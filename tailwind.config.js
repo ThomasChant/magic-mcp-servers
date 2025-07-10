@@ -26,6 +26,7 @@ module.exports = {
                 "slide-up": "slideUp 0.3s ease-out",
                 "scale-in": "scaleIn 0.2s ease-out",
                 "slide-in-left": "slideInLeft 0.3s ease-out",
+                "spin-slow": "spin 3s linear infinite",
             },
             keyframes: {
                 fadeIn: {

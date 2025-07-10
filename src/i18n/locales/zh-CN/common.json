@@ -53,7 +53,17 @@
         "github": "GitHub",
         "demo": "演示",
         "website": "网站",
-        "apply": "应用"
+        "apply": "应用",
+        "goBack": "返回上页"
+    },
+    "notFound": {
+        "title": "页面未找到",
+        "description": "抱歉，您访问的页面不存在或已被移动到其他位置。",
+        "browseServers": "浏览所有服务器",
+        "browseCategories": "按分类浏览",
+        "readDocs": "查看文档",
+        "searchTip": "提示：您可以使用搜索功能快速找到需要的内容",
+        "reportIssue": "如果您认为这是一个错误，请联系我们"
     },
     "auth": {
         "signIn": "登录",

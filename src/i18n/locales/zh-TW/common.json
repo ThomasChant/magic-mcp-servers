@@ -53,7 +53,17 @@
         "github": "GitHub",
         "demo": "示範",
         "website": "網站",
-        "apply": "套用"
+        "apply": "套用",
+        "goBack": "返回"
+    },
+    "notFound": {
+        "title": "頁面未找到",
+        "description": "抱歉，您尋找的頁面不存在或已移至其他位置。",
+        "browseServers": "瀏覽所有伺服器",
+        "browseCategories": "依分類瀏覽",
+        "readDocs": "閱讀文件",
+        "searchTip": "小提示：您可以使用搜尋功能快速找到所需內容",
+        "reportIssue": "如果您認為這是錯誤，請聯絡我們"
     },
     "auth": {
         "signIn": "登入",

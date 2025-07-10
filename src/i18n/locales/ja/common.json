@@ -53,7 +53,17 @@
         "github": "GitHub",
         "demo": "デモ",
         "website": "ウェブサイト",
-        "apply": "適用"
+        "apply": "適用",
+        "goBack": "戻る"
+    },
+    "notFound": {
+        "title": "ページが見つかりません",
+        "description": "申し訳ありませんが、お探しのページは存在しないか、他の場所に移動されています。",
+        "browseServers": "すべてのサーバーを閲覧",
+        "browseCategories": "カテゴリで閲覧",
+        "readDocs": "ドキュメントを読む",
+        "searchTip": "ヒント：検索機能を使用して必要なものを素早く見つけることができます",
+        "reportIssue": "これがエラーだと思われる場合は、お問い合わせください"
     },
     "auth": {
         "signIn": "サインイン",

@@ -53,7 +53,17 @@
         "github": "GitHub",
         "demo": "Démo",
         "website": "Site web",
-        "apply": "Appliquer"
+        "apply": "Appliquer",
+        "goBack": "Retour"
+    },
+    "notFound": {
+        "title": "Page introuvable",
+        "description": "Désolé, la page que vous recherchez n'existe pas ou a été déplacée vers un autre emplacement.",
+        "browseServers": "Parcourir tous les serveurs",
+        "browseCategories": "Parcourir par catégorie",
+        "readDocs": "Lire la documentation",
+        "searchTip": "Astuce : Vous pouvez utiliser la fonction de recherche pour trouver rapidement ce dont vous avez besoin",
+        "reportIssue": "Si vous pensez que c'est une erreur, veuillez nous contacter"
     },
     "auth": {
         "signIn": "Se connecter",

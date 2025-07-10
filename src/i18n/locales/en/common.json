@@ -40,6 +40,7 @@
         "error": "Error",
         "notFound": "Not Found",
         "backToHome": "Back to Home",
+        "goBack": "Go Back",
         "viewMore": "View More",
         "showLess": "Show Less",
         "search": "Search",
@@ -54,6 +55,15 @@
         "demo": "Demo",
         "website": "Website",
         "apply": "Apply"
+    },
+    "notFound": {
+        "title": "Page Not Found",
+        "description": "Sorry, the page you are looking for doesn't exist or has been moved to another location.",
+        "browseServers": "Browse all servers",
+        "browseCategories": "Browse by category",
+        "readDocs": "Read documentation",
+        "searchTip": "Tip: You can use the search function to quickly find what you need",
+        "reportIssue": "If you think this is an error, please contact us"
     },
     "auth": {
         "signIn": "Sign In",
