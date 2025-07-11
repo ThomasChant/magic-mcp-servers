@@ -6,7 +6,7 @@ MCP Hub 是一个专为 Model Context Protocol (MCP) 生态系统设计的现代
 
 ## 🌟 在线演示
 
-**🔗 [立即体验 MCP Hub](https://your-mcp-hub-demo.vercel.app)** 
+**🔗 [立即体验 MCP Hub](https://magicmcp.net)** 
 
 ### 📱 快速预览
 - 🏠 [首页](https://magicmcp.net) - 发现和探索MCP服务器
