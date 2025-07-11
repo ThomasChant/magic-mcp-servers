@@ -6,7 +6,7 @@ MCP Hub 是一个专为 Model Context Protocol (MCP) 生态系统设计的现代
 
 ## 🌟 在线演示
 
-**🔗 [立即体验 MCP Hub](https://magicmcp.net)** 
+**🔗 [立即体验](https://magicmcp.net)** 
 
 ### 📱 快速预览
 - 🏠 [首页](https://magicmcp.net) - 发现和探索MCP服务器
@@ -224,20 +224,10 @@ mcp-hub/
 │   │   └── servers.json    # 服务器数据
 │   └── assets/             # 静态资源
 ├── public/                 # 公共文件
-│   ├── data/               # JSON数据文件
-│   └── structured_readme_data/ # 处理后的README
 ├── scripts/                # 构建必须脚本
 │   ├── update-html-assets.js    # HTML资源更新
 │   ├── generate-complete-sitemap.js # 站点地图生成
 │   └── deploy-sitemaps.js       # 站点地图部署
-├── scripts-back/           # 开发工具脚本
-│   ├── ts/                # TypeScript工具
-│   ├── python/            # Python脚本
-│   ├── sql/               # 数据库脚本
-│   └── config/            # 配置工具
-├── supabase/              # Supabase配置
-│   ├── migrations/        # 数据库迁移
-│   └── schema.sql         # 数据库结构
 ├── tests/                 # 测试文件
 │   ├── e2e/              # E2E测试
 │   └── unit/             # 单元测试
