@@ -1,4 +1,4 @@
-# MCP Hub - Model Context Protocol Server Discovery Platform
+# Magic MCP - Model Context Protocol Server Discovery Platform
 
 🚀 **Modern MCP Server Discovery Platform with Full-Stack AI-Assisted Development**
 
