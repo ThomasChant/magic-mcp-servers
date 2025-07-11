@@ -19,7 +19,7 @@ const Home: React.FC = () => {
     
     // Get data for hero section
     const { data: serverStats } = useServerStats();
-    const { data: topStarServers } = useTopStarServers(100);
+    const { data: topStarServers } = useTopStarServers(200);
 
     // Use server stats for statistics display with fallbacks
     const statistics = useMemo(() => {
@@ -47,7 +47,7 @@ const Home: React.FC = () => {
                 <ParticleHero 
                     servers={(topStarServers || []) as (MCPServer | StarServer)[]}
                     searchQuery={searchQuery}
-                    maxStars={100}
+                    maxStars={200}
                 />
                 
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black opacity-30 pointer-events-none" style={{ zIndex: 5 }}></div>
