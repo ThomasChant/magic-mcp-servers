@@ -76,16 +76,13 @@ export async function getServerBySlug(slug: string): Promise<MCPServer | null> {
   if (!slug) return null;
 
   // For SSR, try different environment variable sources
-  const supabaseUrl = process.env.VITE_SUPABASE_URL || 
-                    process.env.NEXT_PUBLIC_SUPABASE_URL || 
-                    'https://lptsvryohchbklxcyoyc.supabase.co';
+  const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
                     
-  const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || 
-                        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
-                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxwdHN2cnlvaGNoYmtseGN5b3ljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwODY0MzUsImV4cCI6MjA2NjY2MjQzNX0.hEleXmYktD79nKq4Q6Ow-9KF0RWRgGOJjXLgglyK2GQ';
-  
+  const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!supabaseUrl || !supabaseAnonKey) {
     console.error('Missing Supabase environment variables for SSR');
+    console.error('Required variables: VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY');
+    console.error('Please check your .env.local file');
     return null;
   }
   
@@ -236,16 +233,13 @@ export async function getServerReadmeBySlug(slug: string): Promise<ServerReadme 
   if (!slug) return null;
 
   // For SSR, try different environment variable sources
-  const supabaseUrl = process.env.VITE_SUPABASE_URL || 
-                    process.env.NEXT_PUBLIC_SUPABASE_URL || 
-                    'https://lptsvryohchbklxcyoyc.supabase.co';
-                    
-  const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || 
-                        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
-                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxwdHN2cnlvaGNoYmtseGN5b3ljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwODY0MzUsImV4cCI6MjA2NjY2MjQzNX0.hEleXmYktD79nKq4Q6Ow-9KF0RWRgGOJjXLgglyK2GQ';
+  const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   
   if (!supabaseUrl || !supabaseAnonKey) {
     console.error('Missing Supabase environment variables for SSR');
+    console.error('Required variables: VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY');
+    console.error('Please check your .env.local file');
     return null;
   }
   
@@ -432,16 +426,13 @@ export async function getCategoryById(categoryId: string): Promise<any | null> {
   if (!categoryId) return null;
 
   // For SSR, try different environment variable sources
-  const supabaseUrl = process.env.VITE_SUPABASE_URL || 
-                    process.env.NEXT_PUBLIC_SUPABASE_URL || 
-                    'https://lptsvryohchbklxcyoyc.supabase.co';
-                    
-  const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || 
-                        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
-                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxwdHN2cnlvaGNoYmtseGN5b3ljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwODY0MzUsImV4cCI6MjA2NjY2MjQzNX0.hEleXmYktD79nKq4Q6Ow-9KF0RWRgGOJjXLgglyK2GQ';
+  const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   
   if (!supabaseUrl || !supabaseAnonKey) {
     console.error('Missing Supabase environment variables for SSR');
+    console.error('Required variables: VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY');
+    console.error('Please check your .env.local file');
     return null;
   }
   
@@ -608,16 +599,13 @@ export async function getHomePageData(): Promise<{
   homeServers?: MCPServer[];
 } | null> {
   // For SSR, try different environment variable sources
-  const supabaseUrl = process.env.VITE_SUPABASE_URL || 
-                    process.env.NEXT_PUBLIC_SUPABASE_URL || 
-                    'https://lptsvryohchbklxcyoyc.supabase.co';
-                    
-  const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || 
-                        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
-                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxwdHN2cnlvaGNoYmtseGN5b3ljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwODY0MzUsImV4cCI6MjA2NjY2MjQzNX0.hEleXmYktD79nKq4Q6Ow-9KF0RWRgGOJjXLgglyK2GQ';
+  const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   
   if (!supabaseUrl || !supabaseAnonKey) {
     console.error('Missing Supabase environment variables for SSR');
+    console.error('Required variables: VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY');
+    console.error('Please check your .env.local file');
     return null;
   }
   
@@ -749,16 +737,13 @@ export async function getHomePageData(): Promise<{
 // Server-side function to get categories data for categories page
 export async function getCategoriesData(): Promise<any[] | null> {
   // For SSR, try different environment variable sources
-  const supabaseUrl = process.env.VITE_SUPABASE_URL || 
-                    process.env.NEXT_PUBLIC_SUPABASE_URL || 
-                    'https://lptsvryohchbklxcyoyc.supabase.co';
-                    
-  const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || 
-                        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
-                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxwdHN2cnlvaGNoYmtseGN5b3ljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwODY0MzUsImV4cCI6MjA2NjY2MjQzNX0.hEleXmYktD79nKq4Q6Ow-9KF0RWRgGOJjXLgglyK2GQ';
+  const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   
   if (!supabaseUrl || !supabaseAnonKey) {
     console.error('Missing Supabase environment variables for SSR');
+    console.error('Required variables: VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY');
+    console.error('Please check your .env.local file');
     return null;
   }
   
@@ -815,16 +800,13 @@ export async function getServersPageData(): Promise<{
   serverStats?: any;
 } | null> {
   // For SSR, try different environment variable sources
-  const supabaseUrl = process.env.VITE_SUPABASE_URL || 
-                    process.env.NEXT_PUBLIC_SUPABASE_URL || 
-                    'https://lptsvryohchbklxcyoyc.supabase.co';
-                    
-  const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || 
-                        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
-                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxwdHN2cnlvaGNoYmtseGN5b3ljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwODY0MzUsImV4cCI6MjA2NjY2MjQzNX0.hEleXmYktD79nKq4Q6Ow-9KF0RWRgGOJjXLgglyK2GQ';
+  const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   
   if (!supabaseUrl || !supabaseAnonKey) {
     console.error('Missing Supabase environment variables for SSR');
+    console.error('Required variables: VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY');
+    console.error('Please check your .env.local file');
     return null;
   }
   
