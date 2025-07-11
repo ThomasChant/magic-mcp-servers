@@ -42,3 +42,6 @@ static-cache/
 test-results/
 playwright-report/
 .log/
+scripts-back/
+docs/
+blogs/
