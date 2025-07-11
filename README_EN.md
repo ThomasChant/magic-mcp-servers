@@ -30,7 +30,7 @@ Magic MCP Hub is a modern server discovery and showcase platform designed for th
 - **Comprehensive Server Directory**: A rich collection of high-quality MCP servers covering databases, file systems, API integrations, and more
 - **Smart Search & Filtering**: Powerful full-text search, multi-dimensional filtering, and intelligent recommendation system
 - **Detailed Server Information**: Each server includes detailed descriptions, installation guides, compatibility information, and quality scores
-- **User Authentication & Interaction**: Clerk-based user authentication supporting favorites, comments, and ratings
+- **Voting & Favorites System**: Support for server voting, rating, favorites management, and user comment features
 - **Real-time Data Sync**: Real-time data updates and cross-device synchronization using Supabase
 
 ### 🎨 User Experience
@@ -61,7 +61,7 @@ Magic MCP Hub is a modern server discovery and showcase platform designed for th
 
 ### 🗄️ Backend & Data
 - **Database**: Supabase (PostgreSQL)
-- **Authentication**: Clerk (user management and authentication)
+- **User System**: Local user data management
 - **Real-time Features**: Supabase Realtime
 - **API Interface**: Supabase REST API
 - **Server**: Express + Node.js
@@ -107,8 +107,8 @@ cp .env.example .env.local
 VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 
-# Clerk Authentication Configuration
-VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+# User Features Configuration (Optional)
+# VITE_ENABLE_USER_FEATURES=true
 
 # GitHub Token (optional, for repository statistics)
 GITHUB_TOKEN=your_github_token
@@ -255,10 +255,10 @@ mcp-hub/
 - **Related Recommendations**: Intelligent recommendation system based on user behavior
 
 ### 👤 User Features
-- **User Authentication**: Secure login system based on Clerk
-- **Favorites System**: Cross-device synchronized favorites
+- **Voting & Rating**: Support for server voting and quality rating
+- **Favorites System**: Local favorites feature for quick access to frequently used servers
 - **Comment Interaction**: User comments, replies, and like system
-- **Personal Center**: User favorites and comment history management
+- **Personal Center**: Favorites and comment history management
 
 ### 🎨 Interface Experience
 - **Modern Design**: Beautiful Material Design interface
@@ -649,7 +649,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - 💙 **Claude AI**: Assistance with development and code optimization
 - 🚀 **Vercel**: Providing excellent deployment platform
 - 🗄️ **Supabase**: Providing powerful backend services
-- 🔐 **Clerk**: Providing secure user authentication
+- 💾 **Local Storage**: Providing reliable data persistence
 - 🎨 **Tailwind CSS**: Providing excellent CSS framework
 - 👥 **Open Source Community**: Thanks to all contributors for their support
 

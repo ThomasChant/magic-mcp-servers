@@ -30,7 +30,7 @@ Magic MCP Hub 是一个专为 Model Context Protocol (MCP) 生态系统设计的
 - **全面的服务器目录**: 收录丰富的高质量 MCP 服务器，涵盖数据库、文件系统、API集成等各种功能领域
 - **智能搜索与筛选**: 强大的全文搜索、多维度筛选和智能推荐系统
 - **详细的服务器信息**: 每个服务器都有详细的描述、安装指南、兼容性信息和质量评分
-- **用户认证与互动**: 基于Clerk的用户认证，支持收藏、评论和评分功能
+- **投票与收藏系统**: 支持服务器投票评分、收藏管理和用户评论功能
 - **实时数据同步**: 使用Supabase实现实时数据更新和跨设备同步
 
 ### 🎨 用户体验
@@ -61,7 +61,7 @@ Magic MCP Hub 是一个专为 Model Context Protocol (MCP) 生态系统设计的
 
 ### 🗄️ 后端与数据
 - **数据库**: Supabase (PostgreSQL)
-- **认证系统**: Clerk (用户管理和认证)
+- **用户系统**: 本地化用户数据管理
 - **实时功能**: Supabase Realtime
 - **API接口**: Supabase REST API
 - **服务端**: Express + Node.js
@@ -107,8 +107,8 @@ cp .env.example .env.local
 VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 
-# Clerk 认证配置
-VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+# 用户功能配置（可选）
+# VITE_ENABLE_USER_FEATURES=true
 
 # GitHub Token（可选，用于获取仓库统计）
 GITHUB_TOKEN=your_github_token
@@ -255,10 +255,10 @@ mcp-hub/
 - **相关推荐**: 基于用户行为的智能推荐系统
 
 ### 👤 用户功能
-- **用户认证**: 基于Clerk的安全登录系统
-- **收藏系统**: 跨设备同步的收藏功能
+- **投票评分**: 支持对服务器进行投票和质量评分
+- **收藏系统**: 本地收藏功能，快速访问常用服务器
 - **评论互动**: 用户评论、回复、点赞系统
-- **个人中心**: 用户收藏、评论历史管理
+- **个人中心**: 收藏和评论历史管理
 
 ### 🎨 界面体验
 - **现代化设计**: 精美的Material Design界面
@@ -668,7 +668,7 @@ git commit -m "perf: optimize server list loading"
 - 💙 **Claude AI**: 协助开发和代码优化
 - 🚀 **Vercel**: 提供优秀的部署平台
 - 🗄️ **Supabase**: 提供强大的后端服务
-- 🔐 **Clerk**: 提供安全的用户认证
+- 💾 **本地存储**: 提供可靠的数据持久化
 - 🎨 **Tailwind CSS**: 提供优秀的CSS框架
 - 👥 **开源社区**: 感谢所有贡献者的支持
 
