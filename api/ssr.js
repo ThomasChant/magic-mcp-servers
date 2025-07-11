@@ -592,7 +592,7 @@ export default async function handler(req, res) {
 
         // Helper function to escape HTML
         const escapeHtml = (text) =>
-            text
+            (text || '')
                 .replace(/&/g, "&amp;")
                 .replace(/"/g, "&quot;")
                 .replace(/'/g, "&#39;")
