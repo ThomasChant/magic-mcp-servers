@@ -1,10 +1,10 @@
-# MCP Hub - Model Context Protocol 服务器发现平台
+# Magic MCP - Model Context Protocol 服务器发现平台
 
 🚀 **全栈AI辅助开发的现代化MCP服务器发现平台**
 
 > 📖 **English Version**: [README_EN.md](README_EN.md) | 中文版本: [README.md](README.md)
 
-Magic MCP Hub 是一个专为 Model Context Protocol (MCP) 生态系统设计的现代化服务器发现和展示平台。我们致力于为开发者提供最全面、最友好的 MCP 服务器目录，帮助您快速找到并集成适合的解决方案。
+Magic MCP 是一个专为 Model Context Protocol (MCP) 生态系统设计的现代化服务器发现和展示平台。我们致力于为开发者提供最全面、最友好的 MCP 服务器目录，帮助您快速找到并集成适合的解决方案。
 
 ## 🌟 在线演示
 
@@ -19,7 +19,7 @@ Magic MCP Hub 是一个专为 Model Context Protocol (MCP) 生态系统设计的
 
 > 💡 **提示**：网站支持深色模式，点击右上角切换主题！
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/your-org/mcp-hub)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/ThomasChant/magic-mcp-servers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://reactjs.org/)
@@ -88,7 +88,7 @@ Magic MCP Hub 是一个专为 Model Context Protocol (MCP) 生态系统设计的
 
 1. **克隆仓库**
 ```bash
-git clone https://github.com/your-org/magic-mcp-servers.git
+git clone https://github.com/ThomasChant/magic-mcp-servers.git
 cd magic-mcp-servers
 ```
 
@@ -181,7 +181,7 @@ node ts/check-github-stats.ts
 ## 📁 项目结构
 
 ```
-mcp-hub/
+magic-mcp-servers/
 ├── src/
 │   ├── components/          # 可复用组件
 │   │   ├── Home/           # 首页专用组件
@@ -483,9 +483,7 @@ export const supportedLanguages = [
 ## 🔗 相关链接
 
 - [Model Context Protocol 官方文档](https://modelcontextprotocol.io/introduction)
-- [Awesome MCP Servers](https://github.com/punkpeye/awesome-mcp-servers)
-- [问题反馈](https://github.com/your-org/mcp-hub/issues)
-- [讨论区](https://github.com/your-org/mcp-hub/discussions)
+- [问题反馈](https://github.com/ThomasChant/magic-mcp-servers/issues)
 
 ## 📈 性能特性
 
@@ -567,7 +565,7 @@ serve -s dist
 ```bash
 # Fork项目到你的GitHub账户
 # 然后克隆到本地
-git clone https://github.com/your-username/mcp-hub.git
+git clone https://github.com/your-username/magic-mcp-servers.git
 ```
 
 2. **创建分支**
@@ -630,20 +628,18 @@ git commit -m "perf: optimize server list loading"
 ## 📞 联系我们
 
 ### 💬 社区交流
-- 💬 **GitHub Discussions**: [讨论区](https://github.com/your-org/mcp-hub/discussions)
-- 🐛 **Bug Reports**: [Issues](https://github.com/your-org/mcp-hub/issues)
-- 💡 **Feature Requests**: [Issues](https://github.com/your-org/mcp-hub/issues)
+- 💬 **GitHub Discussions**: [讨论区](https://github.com/ThomasChant/magic-mcp-servers/discussions)
+- 🐛 **Bug Reports**: [Issues](https://github.com/ThomasChant/magic-mcp-servers/issues)
+- 💡 **Feature Requests**: [Issues](https://github.com/ThomasChant/magic-mcp-servers/issues)
 
 ### 📧 联系方式
-- 📧 **Email**: hello@mcphub.dev
-- 🐦 **Twitter**: [@mcphub_dev](https://twitter.com/mcphub_dev)
-- 📱 **Discord**: [加入我们的Discord社区](https://discord.gg/mcp-hub)
+- 📧 **Email**: eme@magicmcp.net
 
 ### 🔗 相关链接
 
-- 🌐 **在线演示**: [MCP Hub 演示](https://your-mcp-hub-demo.vercel.app)
-- 📖 **项目文档**: [GitHub Repo](https://github.com/your-org/mcp-hub)
-- 🚀 **一键部署**: [Deploy to Vercel](https://vercel.com/import/project?template=https://github.com/your-org/mcp-hub)
+- 🌐 **在线演示**: [Magic MCP 演示](https://magicmcp.net)
+- 📖 **项目文档**: [GitHub Repo](https://github.com/ThomasChant/magic-mcp-servers)
+- 🚀 **一键部署**: [Deploy to Vercel](https://vercel.com/import/project?template=https://github.com/ThomasChant/magic-mcp-servers)
 - 📘 **MCP 官方文档**: [Model Context Protocol](https://modelcontextprotocol.io/introduction)
 - 🎯 **Awesome MCP**: [优秀MCP服务器集合](https://github.com/punkpeye/awesome-mcp-servers)
 
@@ -653,7 +649,6 @@ git commit -m "perf: optimize server list loading"
 - ⭐ 给项目一个Star
 - 🔄 分享给其他开发者
 - 💝 成为项目贡献者
-- ☕ [请我们喝杯咖啡](https://buymeacoffee.com/mcphub)
 
 ---
 
@@ -674,6 +669,4 @@ git commit -m "perf: optimize server list loading"
 
 ---
 
-**感谢您对 MCP Hub 的关注和支持！** 🚀
-
-*这个项目是使用AI（Claude）辅助开发的现代化Web应用的典型案例。我们相信AI将成为未来开发的重要工具，而不是替代品。*
+**感谢您对 Magic MCP 的关注和支持！** 🚀

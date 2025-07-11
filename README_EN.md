@@ -4,7 +4,7 @@
 
 > 📖 **English Version**: [README_EN.md](README_EN.md) | 中文版本: [README.md](README.md)
 
-Magic MCP Hub is a modern server discovery and showcase platform designed for the Model Context Protocol (MCP) ecosystem. We are committed to providing developers with the most comprehensive and user-friendly MCP server directory, helping you quickly find and integrate suitable solutions.
+Magic MCP is a modern server discovery and showcase platform designed for the Model Context Protocol (MCP) ecosystem. We are committed to providing developers with the most comprehensive and user-friendly MCP server directory, helping you quickly find and integrate suitable solutions.
 
 ## 🌟 Live Demo
 
@@ -19,7 +19,6 @@ Magic MCP Hub is a modern server discovery and showcase platform designed for th
 
 > 💡 **Tip**: The website supports dark mode - click the top right corner to switch themes!
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/your-org/mcp-hub)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://reactjs.org/)
@@ -88,8 +87,8 @@ Magic MCP Hub is a modern server discovery and showcase platform designed for th
 
 1. **Clone Repository**
 ```bash
-git clone https://github.com/your-org/mcp-hub.git
-cd mcp-hub
+git clone https://github.com/ThomasChant/magic-mcp-servers.git
+cd magic-mcp-servers
 ```
 
 2. **Install Dependencies**
@@ -181,7 +180,7 @@ node ts/check-github-stats.ts
 ## 📁 Project Structure
 
 ```
-mcp-hub/
+magic-mcp-servers/
 ├── src/
 │   ├── components/          # Reusable components
 │   │   ├── Home/           # Home page specific components
@@ -490,7 +489,7 @@ We welcome community contributions! You can:
 ```bash
 # Fork project to your GitHub account
 # Then clone to local
-git clone https://github.com/your-username/mcp-hub.git
+git clone https://github.com/ThomasChant/magic-mcp-servers.git
 ```
 
 2. **Create Branch**
@@ -553,22 +552,18 @@ git commit -m "perf: optimize server list loading"
 ## 📞 Contact Us
 
 ### 💬 Community Communication
-- 💬 **GitHub Discussions**: [Discussion Forum](https://github.com/your-org/mcp-hub/discussions)
-- 🐛 **Bug Reports**: [Issues](https://github.com/your-org/mcp-hub/issues)
-- 💡 **Feature Requests**: [Issues](https://github.com/your-org/mcp-hub/issues)
+- 🐛 **Bug Reports**: [Issues](https://github.com/ThomasChant/magic-mcp-servers/issues)
+- 💡 **Feature Requests**: [Issues](https://github.com/ThomasChant/magic-mcp-servers/issues)
 
 ### 📧 Contact Information
-- 📧 **Email**: hello@mcphub.dev
-- 🐦 **Twitter**: [@mcphub_dev](https://twitter.com/mcphub_dev)
-- 📱 **Discord**: [Join our Discord community](https://discord.gg/mcp-hub)
+- 📧 **Email**: eme@magicmcp.net
 
 ### 🔗 Related Links
 
-- 🌐 **Live Demo**: [MCP Hub Demo](https://your-mcp-hub-demo.vercel.app)
-- 📖 **Project Documentation**: [GitHub Repo](https://github.com/your-org/mcp-hub)
-- 🚀 **One-click Deploy**: [Deploy to Vercel](https://vercel.com/import/project?template=https://github.com/your-org/mcp-hub)
+- 🌐 **Live Demo**: [Magic MCP Demo](https://magicmcp.net)
+- 📖 **Project Documentation**: [GitHub Repo](https://github.com/ThomasChant/magic-mcp-servers)
+- 🚀 **One-click Deploy**: [Deploy to Vercel](https://vercel.com/import/project?template=https://github.com/ThomasChant/magic-mcp-servers)
 - 📘 **MCP Official Documentation**: [Model Context Protocol](https://modelcontextprotocol.io/introduction)
-- 🎯 **Awesome MCP**: [Awesome MCP Servers Collection](https://github.com/punkpeye/awesome-mcp-servers)
 
 ### 🌟 Support the Project
 
@@ -576,7 +571,6 @@ If this project has been helpful to you, please consider:
 - ⭐ Give the project a Star
 - 🔄 Share with other developers
 - 💝 Become a project contributor
-- ☕ [Buy us a coffee](https://buymeacoffee.com/mcphub)
 
 ## 📈 Performance Features
 
@@ -655,6 +649,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Thank you for your attention and support for MCP Hub!** 🚀
-
-*This project is a typical case of modern web application development with AI (Claude) assistance. We believe AI will become an important tool for future development, not a replacement.*
+**Thank you for your attention and support for Magic MCP!** 🚀
