@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useMemo } from "react";
 import { ThumbsUp, LogIn } from "lucide-react";
 import { useUser, useClerk } from "@clerk/clerk-react";
-import { useQueryClient } from "@tanstack/react-query";
-import { useVoteMutation } from "../services/voting";
 import { useBatchScore } from "./BatchScoreProvider";
 import { useBatchUserVote } from "./BatchUserVoteProvider";
+import { useOptimisticVoting } from "../hooks/useOptimisticVoting";
 import { isServerSide } from "../utils/environment";
 
 
@@ -53,63 +52,49 @@ const VoteButtonsClient: React.FC<VoteButtonsProps> = ({
     const isSignedIn = user?.isSignedIn || false;
     const openSignIn = clerk?.openSignIn || (() => {});
     
-    // Use batch providers for all queries
+    // 获取初始数据
     const { score: serverScore, isLoading: scoreLoading } = useBatchScore(serverId);
-    const { userVote, isLoading: voteLoading, hasBatchProvider } = useBatchUserVote(serverId);
+    const { userVote: batchUserVote, isLoading: voteLoading } = useBatchUserVote(serverId);
     
-    // Vote operations
-    const { vote, removeVote, isVoting, lastVoteResult } = useVoteMutation(serverId);
-    const queryClient = useQueryClient();
+    // 缓存初始数据对象，避免每次渲染创建新对象
+    const initialData = useMemo(() => ({
+        userVote: batchUserVote,
+        upvotes: serverScore?.upvotes || 0
+    }), [batchUserVote, serverScore?.upvotes]);
     
-    // Clear any legacy user-vote queries to prevent conflicts
-    React.useEffect(() => {
-        try {
-            // Remove old individual vote queries that might conflict
-            queryClient.removeQueries({ queryKey: ['user-vote'] });
-            console.log('VoteButtons: Cleared legacy user-vote queries');
-        } catch (e) {
-            console.error('VoteButtons: Error cleaning up user-vote queries', e);
-            // Ignore errors in cache cleanup
-        }
-    }, [queryClient]);
+    // 使用乐观投票hook
+    const { userVote, upvotes, isVoting, vote, canVote } = useOptimisticVoting(serverId, initialData);
+    
+    // 防抖处理，避免重复点击
+    const [lastClickTime, setLastClickTime] = React.useState<number>(0);
 
-    // Listen to vote results, provide feedback
-    useEffect(() => {
-        if (lastVoteResult) {
-            if (lastVoteResult.rateLimited) {
-                notify('Rate limited! Please wait before voting again.', 'error');
-            } else if (lastVoteResult.success) {
-                const voteType = lastVoteResult.userVote;
-                if (voteType) {
-                    notify('Marked as using!');
-                } else {
-                    notify('Usage mark removed');
-                }
-            }
-        }
-    }, [lastVoteResult]);
-    
-    // Debug logging
-    console.log(`VoteButtons Debug - ServerID: ${serverId}, HasBatchProvider: ${hasBatchProvider}, UserVote: ${userVote}, Loading: ${voteLoading}`);
-
-    // Handle "I'm using this" marking
-    const handleUsage = async () => {
+    // Handle "I'm using this" marking - 投票切换逻辑
+    const handleUsage = () => {
         if (!isSignedIn) {
             openSignIn();
             return;
         }
 
-        try {
-            if (userVote === 'up') {
-                // If already marked as using, remove the mark
-                removeVote();
-                notify('Usage mark removed');
-            } else {
-                // Otherwise mark as using
-                vote('up');
-            }
-        } catch {
-            notify('Operation failed, please try again', 'error');
+        // 防抖：检查是否在短时间内重复点击
+        const now = Date.now();
+        if (now - lastClickTime < 500) {
+            return;
+        }
+        setLastClickTime(now);
+
+        // 如果正在投票，不允许重复点击
+        if (!canVote || isVoting) {
+            return;
+        }
+
+        // 自动处理切换逻辑
+        vote('up');
+        
+        // 提供用户反馈
+        if (userVote === 'up') {
+            notify('Usage mark removed');
+        } else {
+            notify('Marked as using!');
         }
     };
 
@@ -133,15 +118,25 @@ const VoteButtonsClient: React.FC<VoteButtonsProps> = ({
     };
 
     const config = sizeConfig[size];
-    const isLoading = scoreLoading || voteLoading || isVoting;
+    const isLoading = scoreLoading || voteLoading;
+    const isDisabled = isLoading || !isSignedIn || isVoting;
 
-    // Button style
+    // Button style - 改进加载状态的视觉反馈
     const getButtonStyle = () => {
         const roundedStyle = showScore ? 'rounded-full' : 'rounded-lg';
         const baseStyle = `flex items-center justify-center ${roundedStyle} transition-all duration-150 ${config.button}`;
         const isSelected = userVote === 'up';
-        const isDisabled = isLoading || !isSignedIn;
+        const isVotingInProgress = isVoting;
 
+        // 投票中状态 - 显示红色加载状态
+        if (isVotingInProgress) {
+            if (!showScore) {
+                return `${baseStyle} text-red-500 bg-red-50 border border-red-200 cursor-not-allowed dark:text-red-400 dark:bg-red-900/20 dark:border-red-800 opacity-75`;
+            }
+            return `${baseStyle} text-red-500 cursor-not-allowed dark:text-red-400 opacity-75`;
+        }
+
+        // 其他禁用状态
         if (isDisabled) {
             return `${baseStyle} text-gray-300 cursor-not-allowed dark:text-gray-600`;
         }
@@ -149,23 +144,23 @@ const VoteButtonsClient: React.FC<VoteButtonsProps> = ({
         if (!showScore) {
             return isSelected
                 ? `${baseStyle} text-red-500 bg-red-50 border border-red-200 hover:bg-red-100 dark:text-red-400 dark:bg-red-900/20 dark:border-red-800 dark:hover:bg-red-900/30`
-                : `${baseStyle} text-gray-600 bg-gray-50 border border-gray-200 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700`;
+                : `${baseStyle} text-gray-900 bg-gray-50 border border-gray-200 hover:bg-gray-100 dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700`;
         }
 
         return isSelected
             ? `${baseStyle} text-red-500 hover:text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20`
-            : `${baseStyle} text-gray-400 hover:text-red-500 hover:bg-red-50 dark:text-gray-500 dark:hover:text-red-400 dark:hover:bg-red-900/20`;
+            : `${baseStyle} text-gray-900 hover:text-red-500 hover:bg-red-50 dark:text-gray-300 dark:hover:text-red-400 dark:hover:bg-red-900/20`;
     };
 
-    // User count style
+    // User count style - 基于当前用户是否投票，而不是总投票数
     const getScoreStyle = () => {
         const baseStyle = `text-center flex items-center justify-center ${config.score}`;
-        const upvotes = serverScore?.upvotes || 0;
-
-        if (upvotes > 0) {
+        
+        // 如果当前用户投票了，显示红色；否则显示黑色/灰色
+        if (userVote === 'up') {
             return `${baseStyle} text-red-600 dark:text-red-400`;
         } else {
-            return `${baseStyle} text-gray-600 dark:text-gray-400`;
+            return `${baseStyle} text-gray-900 dark:text-gray-300`;
         }
     };
 
@@ -182,13 +177,13 @@ const VoteButtonsClient: React.FC<VoteButtonsProps> = ({
                 <button
                     onClick={() => openSignIn()}
                     className={buttonStyle}
-                    title={`Sign in to mark as using (${serverScore?.upvotes || 0} users)`}
+                    title={`Sign in to mark as using (${upvotes} users)`}
                 >
                     <LogIn className={iconClass} />
                 </button>
-                {showScore && serverScore && (
+                {showScore && (
                     <div className={getScoreStyle()}>
-                        {serverScore.upvotes || 0} users
+                        {upvotes} users
                     </div>
                 )}
             </div>
@@ -200,20 +195,30 @@ const VoteButtonsClient: React.FC<VoteButtonsProps> = ({
             {/* I'm using this button */}
             <button
                 onClick={handleUsage}
-                disabled={isLoading}
+                disabled={isDisabled}
                 className={getButtonStyle()}
-                title={userVote === 'up' ? `Remove usage mark (${serverScore?.upvotes || 0} users)` : `Mark as using (${serverScore?.upvotes || 0} users)`}
+                title={userVote === 'up' ? `Remove usage mark (${upvotes} users)` : `Mark as using (${upvotes} users)`}
             >
-                <ThumbsUp 
-                    className={config.icon} 
-                    fill={userVote === 'up' ? 'currentColor' : 'none'} 
-                />
+                {/* 显示图标状态：根据userVote状态立即显示对应图标 */}
+                {userVote === 'up' ? (
+                    <ThumbsUp 
+                        className={config.icon}
+                        fill="currentColor"
+                        strokeWidth={0}
+                    />
+                ) : (
+                    <ThumbsUp 
+                        className={config.icon}
+                        fill="none"
+                        strokeWidth={2}
+                    />
+                )}
             </button>
 
             {/* User count display */}
-            {showScore && serverScore && (
+            {showScore && (
                 <div className={getScoreStyle()}>
-                    {serverScore.upvotes || 0} users
+                    {upvotes} users
                 </div>
             )}
         </div>

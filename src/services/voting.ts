@@ -90,13 +90,23 @@ export class VotingService {
                 .single();
 
             if (existingVote) {
-                // 如果投的是同样的票，不做任何操作
+                // 如果投的是同样的票，删除投票（切换逻辑）
                 if (existingVote.vote_type === voteType) {
+                    const { error: deleteError } = await supabase
+                        .from('server_votes')
+                        .delete()
+                        .eq('user_id', this.userId)
+                        .eq('server_id', serverId);
+
+                    if (deleteError) {
+                        throw new Error(`Failed to remove vote: ${deleteError.message}`);
+                    }
+
                     const score = await this.getServerScore(serverId);
                     return {
                         success: true,
                         newScore: score,
-                        userVote: voteType
+                        userVote: null // 投票已被删除
                     };
                 }
                 

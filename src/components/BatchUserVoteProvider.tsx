@@ -18,11 +18,7 @@ export function useBatchUserVote(serverId: string): {
 } {
     const context = useContext(BatchUserVoteContext);
     
-    // Debug logging
-    console.log(`useBatchUserVote Debug - ServerID: ${serverId}, HasContext: ${!!context}, Context: ${context ? Object.keys(context.userVotes).length + ' votes' : 'null'}`);
-    
     if (!context) {
-        console.log(`useBatchUserVote - No context for ${serverId}, returning defaults`);
         return {
             userVote: null,
             isLoading: false,
@@ -60,20 +56,14 @@ const BatchUserVoteProviderClient: React.FC<BatchUserVoteProviderProps> = ({ ser
     // Client-side only: use Clerk hook
     const { user } = useUser();
     
-    // Debug logging
-    console.log(`BatchUserVoteProvider Debug - ServerIDs: [${serverIds.join(', ')}], User: ${user?.id || 'none'}`);
-    
     // Fetch all user votes in one batch query
     const { data: userVotes = {}, isLoading } = useQuery({
         queryKey: ['batch-user-votes', user?.id, serverIds.sort().join(',')],
         queryFn: async () => {
             // Return empty object if no user (SSR) or no serverIds
             if (!user || serverIds.length === 0) {
-                console.log('BatchUserVoteProvider: No user or serverIds, returning empty votes');
                 return {};
             }
-
-            console.log(`BatchUserVoteProvider: Executing batch query for user ${user.id}, servers: [${serverIds.join(', ')}]`);
             
             const { data, error } = await supabase
                 .from('server_votes')
@@ -82,11 +72,8 @@ const BatchUserVoteProviderClient: React.FC<BatchUserVoteProviderProps> = ({ ser
                 .in('server_id', serverIds);
 
             if (error) {
-                console.error('BatchUserVoteProvider: Query failed:', error.message);
                 throw new Error(`Failed to get user votes: ${error.message}`);
             }
-
-            console.log('BatchUserVoteProvider: Query successful, votes:', data?.length || 0);
 
             const votes: Record<string, 'up' | 'down'> = {};
             data?.forEach(vote => {
