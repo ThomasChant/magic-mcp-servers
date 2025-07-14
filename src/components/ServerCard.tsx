@@ -1,14 +1,12 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import {
-    Calendar,
     ArrowRight,
     Folder,
     Database,
     MessageCircle,
     Bot,
-    FileText,
-    Star,
+    FileText
 } from "lucide-react";
 import type { MCPServer } from "../types";
 import { FavoriteButton } from "./FavoriteButton";
@@ -50,45 +48,45 @@ interface ServerData extends Omit<MCPServer, 'verified'> {
 
 
 // Format star count like GitHub
-const formatStarCount = (count: number): string => {
-    if (count >= 1000000) {
-        const m = count / 1000000;
-        return m >= 10 ? Math.floor(m) + 'm' : m.toFixed(1) + 'm';
-    } else if (count >= 1000) {
-        const k = count / 1000;
-        return k >= 10 ? Math.floor(k) + 'k' : k.toFixed(1) + 'k';
-    }
-    return count.toString();
-};
+// const formatStarCount = (count: number): string => {
+//     if (count >= 1000000) {
+//         const m = count / 1000000;
+//         return m >= 10 ? Math.floor(m) + 'm' : m.toFixed(1) + 'm';
+//     } else if (count >= 1000) {
+//         const k = count / 1000;
+//         return k >= 10 ? Math.floor(k) + 'k' : k.toFixed(1) + 'k';
+//     }
+//     return count.toString();
+// };
 
-// Format time ago
-const formatTimeAgo = (dateString: string) => {
-    const date = new Date(dateString);
-    const now = new Date();
-    const diffInMs = now.getTime() - date.getTime();
-    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+// // Format time ago
+// const formatTimeAgo = (dateString: string) => {
+//     const date = new Date(dateString);
+//     const now = new Date();
+//     const diffInMs = now.getTime() - date.getTime();
+//     const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
     
-    if (diffInDays === 0) return "today";
+//     if (diffInDays === 0) return "today";
     
-    // Calculate years, months, weeks, and days
-    const years = Math.floor(diffInDays / 365);
-    const months = Math.floor((diffInDays % 365) / 30);
-    const weeks = Math.floor((diffInDays % 30) / 7);
-    const days = diffInDays % 7;
+//     // Calculate years, months, weeks, and days
+//     const years = Math.floor(diffInDays / 365);
+//     const months = Math.floor((diffInDays % 365) / 30);
+//     const weeks = Math.floor((diffInDays % 30) / 7);
+//     const days = diffInDays % 7;
     
-    // Build array of time units
-    const units: { value: number; label: string }[] = [];
-    if (years > 0) units.push({ value: years, label: "y" });
-    if (months > 0) units.push({ value: months, label: "m" });
-    if (weeks > 0) units.push({ value: weeks, label: "w" });
-    if (days > 0) units.push({ value: days, label: "d" });
+//     // Build array of time units
+//     const units: { value: number; label: string }[] = [];
+//     if (years > 0) units.push({ value: years, label: "y" });
+//     if (months > 0) units.push({ value: months, label: "m" });
+//     if (weeks > 0) units.push({ value: weeks, label: "w" });
+//     if (days > 0) units.push({ value: days, label: "d" });
     
-    // Take only the two largest units
-    const displayUnits = units.slice(0, 2);
+//     // Take only the two largest units
+//     const displayUnits = units.slice(0, 2);
     
-    // Format the output
-    return displayUnits.map(unit => `${unit.value}${unit.label}`).join(' ');
-};
+//     // Format the output
+//     return displayUnits.map(unit => `${unit.value}${unit.label}`).join(' ');
+// };
 
 const getServerIconBg = (server: ServerData | MCPServer) => {
     const tags = server.tags.join(" ").toLowerCase();
@@ -111,7 +109,9 @@ const getServerIconBg = (server: ServerData | MCPServer) => {
 };
 
 const isPopular = (server: ServerData | MCPServer) => {
-    return (server.stats?.stars || 0) >= 1000 || (server.repository?.stars || 0) >= 1000 || (server.stats?.forks || 0) >= 100 || (server.repository?.forks || 0) >= 100;
+    const stars = server.stats?.stars || server.repository?.stars || 0;
+    const forks = server.stats?.forks || server.repository?.forks || 0;
+    return stars >= 1000 || forks >= 100;
 };
 
 // Server Card Props
@@ -218,44 +218,31 @@ export const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
             </div>
 
             <div className="flex items-center justify-between mt-auto">
-                <div className="server-stats flex items-center space-x-3 text-xs text-gray-500 dark:text-gray-400">
-                    <span className="flex items-center">
-                        <Star className="h-3 w-3 mr-1 text-yellow-500 dark:text-yellow-400" fill="currentColor" />
-                        {formatStarCount(server.stats?.stars || server.repository?.stars || 0)}
-                    </span>
-                    <span className="flex items-center">
-                        <Calendar className="h-3 w-3 mr-1" />
-                        {formatTimeAgo(
-                            server.createdAt ||
-                                server.stats?.createdAt ||
-                                serverData.repository?.lastUpdate ||
-                                server.repository?.lastUpdated ||
-                                ""
-                        )}
-                    </span>
-                </div>
-                
                 <ClientOnly fallback={
                     <VoteButtonsSafe 
                         serverId={server.id}
                         size="sm"
-                        className="ml-2"
                     />
                 }>
                     {import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ? (
                         <VoteButtons 
                             serverId={server.id}
                             size="sm"
-                            className="ml-2"
                         />
                     ) : (
                         <VoteButtonsSafe 
                             serverId={server.id}
                             size="sm"
-                            className="ml-2"
                         />
                     )}
                 </ClientOnly>
+                
+                <Link to={`/servers/${server.slug}`}>
+                    <span className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 text-xs flex items-center font-medium">
+                        View Details
+                        <ArrowRight className="h-3 w-3 ml-1" />
+                    </span>
+                </Link>
             </div>
         </div>
     );
@@ -330,23 +317,6 @@ export const ServerListItem: React.FC<ServerListItemProps> = ({ server }) => {
                     </p>
                 </Link>
 
-                {/* Stats */}
-                <div className="flex items-center space-x-4 text-xs text-gray-500 dark:text-gray-400 mb-3">
-                    <span className="flex items-center">
-                        <Star className="h-3 w-3 mr-1 text-yellow-500 dark:text-yellow-400" fill="currentColor" />
-                        {formatStarCount(server.stats?.stars || server.repository?.stars || 0)}
-                    </span>
-                    <span className="flex items-center">
-                        <Calendar className="h-3 w-3 mr-1" />
-                        {formatTimeAgo(
-                            server.createdAt ||
-                                server.stats?.createdAt ||
-                                serverData.repository?.lastUpdate ||
-                                server.repository?.lastUpdated ||
-                                ""
-                        )}
-                    </span>
-                </div>
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-1 mb-3">
@@ -368,30 +338,28 @@ export const ServerListItem: React.FC<ServerListItemProps> = ({ server }) => {
 
                 {/* Actions */}
                 <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                        <ClientOnly fallback={
+                    <ClientOnly fallback={
+                        <VoteButtonsSafe 
+                            serverId={server.id}
+                            size="sm"
+                        />
+                    }>
+                        {import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ? (
+                            <VoteButtons 
+                                serverId={server.id}
+                                size="sm"
+                            />
+                        ) : (
                             <VoteButtonsSafe 
                                 serverId={server.id}
                                 size="sm"
                             />
-                        }>
-                            {import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ? (
-                                <VoteButtons 
-                                    serverId={server.id}
-                                    size="sm"
-                                />
-                            ) : (
-                                <VoteButtonsSafe 
-                                    serverId={server.id}
-                                    size="sm"
-                                />
-                            )}
-                        </ClientOnly>
-                    </div>
+                        )}
+                    </ClientOnly>
                     <Link to={`/servers/${server.slug}`}>
-                        <span className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 text-sm flex items-center font-medium">
+                        <span className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 text-xs flex items-center font-medium">
                             View Details
-                            <ArrowRight className="h-4 w-4 ml-1" />
+                            <ArrowRight className="h-3 w-3 ml-1" />
                         </span>
                     </Link>
                 </div>
@@ -436,37 +404,21 @@ export const ServerListItem: React.FC<ServerListItemProps> = ({ server }) => {
                         <p className="server-description text-gray-600 dark:text-gray-300 text-sm mb-2 line-clamp-1">
                             {serverData.descriptionEn || server.description["zh-CN"] || server.description.en}
                         </p>
-                        <div className="flex items-center space-x-4 text-xs text-gray-500 dark:text-gray-400">
-                            <span className="flex items-center">
-                                <Star className="h-3 w-3 mr-1 text-yellow-500 dark:text-yellow-400" fill="currentColor" />
-                                {formatStarCount(server.stats?.stars || server.repository?.stars || 0)}
-                            </span>
-                            <span className="flex items-center">
-                                <Calendar className="h-3 w-3 mr-1" />
-                                {formatTimeAgo(
-                                    server.createdAt ||
-                                        server.stats?.createdAt ||
-                                        serverData.repository?.lastUpdate ||
-                                        server.repository?.lastUpdated ||
-                                        ""
-                                )}
-                            </span>
-                            <div className="flex flex-wrap gap-1">
-                                {server.tags
-                                    .slice(0, 4)
-                                    .map((tag: string) => (
-                                        <span
-                                            key={tag}
-                                            className={`text-xs px-2 py-1 rounded hover:bg-gray-200 ${
-                                                tag.toLowerCase() === decodedTag.toLowerCase()
-                                                    ? "bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 font-medium"
-                                                    : "bg-gray-100 dark:bg-gray-700 hover:dark:bg-gray-500 hover:dark:text-gray-50 text-gray-700 dark:text-gray-300"
-                                            }`}
-                                        >
-                                            <Link to={`/tags/${tag}`}>#{tag}</Link>
-                                        </span>
-                                    ))}
-                            </div>
+                        <div className="flex flex-wrap gap-1">
+                            {server.tags
+                                .slice(0, 4)
+                                .map((tag: string) => (
+                                    <span
+                                        key={tag}
+                                        className={`text-xs px-2 py-1 rounded hover:bg-gray-200 ${
+                                            tag.toLowerCase() === decodedTag.toLowerCase()
+                                                ? "bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 font-medium"
+                                                : "bg-gray-100 dark:bg-gray-700 hover:dark:bg-gray-500 hover:dark:text-gray-50 text-gray-700 dark:text-gray-300"
+                                        }`}
+                                    >
+                                        <Link to={`/tags/${tag}`}>#{tag}</Link>
+                                    </span>
+                                ))}
                         </div>
                     </div>
                 </Link>
@@ -493,7 +445,7 @@ export const ServerListItem: React.FC<ServerListItemProps> = ({ server }) => {
                         )}
                     </ClientOnly>
                     <Link to={`/servers/${server.slug}`}>
-                        <span className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-sm text-sm flex items-center">
+                        <span className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 text-xs flex items-center font-medium">
                             View Details
                             <ArrowRight className="h-3 w-3 ml-1" />
                         </span>
