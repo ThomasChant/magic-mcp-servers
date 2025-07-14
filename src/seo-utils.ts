@@ -48,7 +48,7 @@ export function generateLocalizedHomeSEO(url: string, locale: string = 'en'): SE
     description,
     ogTitle,
     ogDescription,
-    ogUrl: `${url}`,
+    ogUrl: url,
     ogImage: "https://magicmcp.net/og-image.png",
     canonicalUrl: url,
     keywords,
@@ -153,7 +153,7 @@ export function generateLocalizedServersListSEO(url: string, locale: string = 'e
     description,
     ogTitle: title,
     ogDescription: description,
-    ogUrl: `${url}`,
+    ogUrl: url,
     ogImage: "https://magicmcp.net/og-image.png",
     canonicalUrl: url,
     keywords,
@@ -163,7 +163,7 @@ export function generateLocalizedServersListSEO(url: string, locale: string = 'e
       "@type": "CollectionPage",
       "name": title,
       "description": description,
-      "url": `${url}`,
+      "url": url,
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [
@@ -177,7 +177,7 @@ export function generateLocalizedServersListSEO(url: string, locale: string = 'e
             "@type": "ListItem",
             "position": 2,
             "name": breadcrumbServers,
-            "item": `${url}`
+            "item": url
           }
         ]
       },
@@ -265,7 +265,7 @@ export function generateLocalizedCategoriesListSEO(url: string, locale: string =
     description,
     ogTitle: title,
     ogDescription: description,
-    ogUrl: `${url}`,
+    ogUrl: url,
     ogImage: "https://magicmcp.net/og-image.png",
     canonicalUrl: url,
     keywords,
@@ -275,7 +275,7 @@ export function generateLocalizedCategoriesListSEO(url: string, locale: string =
       "@type": "CollectionPage",
       "name": title,
       "description": description,
-      "url": `${url}`,
+      "url": url,
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [
@@ -289,7 +289,7 @@ export function generateLocalizedCategoriesListSEO(url: string, locale: string =
             "@type": "ListItem",
             "position": 2,
             "name": breadcrumbCategories,
-            "item": `${url}`
+            "item": url
           }
         ]
       },
@@ -371,7 +371,7 @@ export function generateLocalizedServerSEO(server: MCPServer, url: string, local
     description: metaDescription,
     ogTitle: title,
     ogDescription: metaDescription,
-    ogUrl: `${url}`,
+    ogUrl: url,
     ogImage: server.icon || "https://magicmcp.net/og-image.png",
     canonicalUrl: url,
     keywords,
@@ -381,7 +381,7 @@ export function generateLocalizedServerSEO(server: MCPServer, url: string, local
       "@type": "SoftwareApplication",
       "name": server.name,
       "description": description,
-      "url": `${url}`,
+      "url": url,
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": server.compatibility.platforms.join(', ') || "Cross-platform",
       "programmingLanguage": server.repository.language || "JavaScript",
@@ -419,7 +419,7 @@ export function generateLocalizedServerSEO(server: MCPServer, url: string, local
             "@type": "ListItem",
             "position": 3,
             "name": server.name,
-            "item": `${url}`
+            "item": url
           }
         ]
       }
@@ -442,7 +442,7 @@ export function generateLocalizedCategorySEO(category: Category | null, url: str
       description,
       ogTitle: title,
       ogDescription: description,
-      ogUrl: `${url}`,
+      ogUrl: url,
       ogImage: "https://magicmcp.net/og-image.png",
       canonicalUrl: url,
       keywords: "",
@@ -541,7 +541,7 @@ export function generateLocalizedCategorySEO(category: Category | null, url: str
     description,
     ogTitle: title,
     ogDescription: description,
-    ogUrl: `${url}`,
+    ogUrl: url,
     ogImage: "https://magicmcp.net/og-image.png",
     canonicalUrl: url,
     keywords,
@@ -551,7 +551,7 @@ export function generateLocalizedCategorySEO(category: Category | null, url: str
       "@type": "CollectionPage",
       "name": title,
       "description": description,
-      "url": `${url}`,
+      "url": url,
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [
@@ -571,7 +571,7 @@ export function generateLocalizedCategorySEO(category: Category | null, url: str
             "@type": "ListItem",
             "position": 3,
             "name": categoryName,
-            "item": `${url}`
+            "item": url
           }
         ]
       },
