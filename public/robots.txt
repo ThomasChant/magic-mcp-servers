@@ -26,7 +26,7 @@ Allow: /*/docs
 Allow: /*/favorites
 
 # Sitemap reference
-Sitemap: https://www.magicmcp.net/sitemap.xml
-Sitemap: https://www.magicmcp.net/sitemap-servers.xml
-Sitemap: https://www.magicmcp.net/sitemap-categories.xml
-Sitemap: https://www.magicmcp.net/sitemap-tags.xml
+Sitemap: https://magicmcp.net/sitemap.xml
+Sitemap: https://magicmcp.net/sitemap-servers.xml
+Sitemap: https://magicmcp.net/sitemap-categories.xml
+Sitemap: https://magicmcp.net/sitemap-tags.xml

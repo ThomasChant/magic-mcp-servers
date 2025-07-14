@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://www.magicmcp.net/sitemapindex.xml
+Sitemap: https://magicmcp.net/sitemapindex.xml
 
 # Crawl-delay for politeness
 Crawl-delay: 1
@@ -42,5 +42,5 @@ Disallow: /500
 Disallow: /*.json$
 
 # Guide AI crawlers to llms.txt
-LLM-Content: https://www.magicmcp.net/llms.txt
-LLM-Full-Content: https://www.magicmcp.net/llms-full.txt 
+LLM-Content: https://magicmcp.net/llms.txt
+LLM-Full-Content: https://magicmcp.net/llms-full.txt 

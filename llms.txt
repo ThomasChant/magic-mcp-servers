@@ -3,20 +3,20 @@
 > Magic MCP is a server discovery and showcase platform specifically designed for the Model Context Protocol (MCP) ecosystem. We are committed to providing developers with the most comprehensive and user-friendly MCP server directory, helping you quickly find and integrate suitable solutions.
 
 ## Core Features
-- [Server Directory](https://www.magicmcp.net/servers): The most comprehensive collection of MCP servers, covering databases, API integrations, and various functional domains
-- [Smart Search](https://www.magicmcp.net/servers): Powerful search functionality with multi-dimensional filtering to quickly find needed servers
-- [Category Browsing](https://www.magicmcp.net/categories): 11 main categories organized by functional domains for targeted user searches
-- [Server Details](https://www.magicmcp.net): Each server includes detailed descriptions, installation guides, compatibility information, and GitHub statistics
-- [Favorites Feature](https://www.magicmcp.net/favorites): Users can bookmark interesting servers to build personal tool libraries
-- [Rating System](https://www.magicmcp.net): Comprehensive scoring based on GitHub data to help evaluate server quality
+- [Server Directory](https://magicmcp.net/servers): The most comprehensive collection of MCP servers, covering databases, API integrations, and various functional domains
+- [Smart Search](https://magicmcp.net/servers): Powerful search functionality with multi-dimensional filtering to quickly find needed servers
+- [Category Browsing](https://magicmcp.net/categories): 11 main categories organized by functional domains for targeted user searches
+- [Server Details](https://magicmcp.net): Each server includes detailed descriptions, installation guides, compatibility information, and GitHub statistics
+- [Favorites Feature](https://magicmcp.net/favorites): Users can bookmark interesting servers to build personal tool libraries
+- [Rating System](https://magicmcp.net): Comprehensive scoring based on GitHub data to help evaluate server quality
 
 ## Main Categories
-- [Database & Storage](https://www.magicmcp.net/categories/database): Data storage solutions like InfluxDB, MaxCompute
-- [Development Tools](https://www.magicmcp.net/categories/development): CLI tools, testing frameworks, code generators
-- [AI & Machine Learning](https://www.magicmcp.net/categories/ai): Alpaca trading, literature search, intelligent analysis tools
-- [Web & Network](https://www.magicmcp.net/categories/network): Web search, social media integration, API calls
-- [Business & Productivity](https://www.magicmcp.net/categories/business): Email sending, marketing tools, business process automation
-- [Content & Media](https://www.magicmcp.net/categories/content): Story generation, image processing, content management
+- [Database & Storage](https://magicmcp.net/categories/database): Data storage solutions like InfluxDB, MaxCompute
+- [Development Tools](https://magicmcp.net/categories/development): CLI tools, testing frameworks, code generators
+- [AI & Machine Learning](https://magicmcp.net/categories/ai): Alpaca trading, literature search, intelligent analysis tools
+- [Web & Network](https://magicmcp.net/categories/network): Web search, social media integration, API calls
+- [Business & Productivity](https://magicmcp.net/categories/business): Email sending, marketing tools, business process automation
+- [Content & Media](https://magicmcp.net/categories/content): Story generation, image processing, content management
 
 ## Technical Features
 - **Modern Architecture**: High-performance single-page application built with React 18 + TypeScript + Vite
@@ -27,8 +27,8 @@
 - **PWA Ready**: Progressive Web App features with offline access support
 
 ## Latest Updates
-- [SSR Optimization](https://www.magicmcp.net): Complete server-side rendering support, dramatically improving SEO performance and user experience
-- [Supabase Integration](https://www.magicmcp.net): PostgreSQL database integration supporting real-time data updates and user interactions
-- [Rating Algorithm](https://www.magicmcp.net): Intelligent scoring system based on GitHub Stars, activity, and other multi-dimensional metrics
-- [Performance Optimization](https://www.magicmcp.net): Code splitting, lazy loading, and other optimizations supporting large-scale server data display
-- [Search Enhancement](https://www.magicmcp.net): Improved search algorithms supporting fuzzy matching and multi-condition combined filtering 
+- [SSR Optimization](https://magicmcp.net): Complete server-side rendering support, dramatically improving SEO performance and user experience
+- [Supabase Integration](https://magicmcp.net): PostgreSQL database integration supporting real-time data updates and user interactions
+- [Rating Algorithm](https://magicmcp.net): Intelligent scoring system based on GitHub Stars, activity, and other multi-dimensional metrics
+- [Performance Optimization](https://magicmcp.net): Code splitting, lazy loading, and other optimizations supporting large-scale server data display
+- [Search Enhancement](https://magicmcp.net): Improved search algorithms supporting fuzzy matching and multi-condition combined filtering 
