@@ -48,9 +48,9 @@ export function generateLocalizedHomeSEO(url: string, locale: string = 'en'): SE
     description,
     ogTitle,
     ogDescription,
-    ogUrl: `https://magicmcp.net${url}`,
+    ogUrl: `${url}`,
     ogImage: "https://magicmcp.net/og-image.png",
-    canonicalUrl: `https://magicmcp.net${url}`,
+    canonicalUrl: url,
     keywords,
     hreflangTags: generateHreflangTags(pathWithoutLocale),
     structuredData: {
@@ -153,9 +153,9 @@ export function generateLocalizedServersListSEO(url: string, locale: string = 'e
     description,
     ogTitle: title,
     ogDescription: description,
-    ogUrl: `https://magicmcp.net${url}`,
+    ogUrl: `${url}`,
     ogImage: "https://magicmcp.net/og-image.png",
-    canonicalUrl: `https://magicmcp.net${url}`,
+    canonicalUrl: url,
     keywords,
     hreflangTags: generateHreflangTags(pathWithoutLocale),
     structuredData: {
@@ -163,7 +163,7 @@ export function generateLocalizedServersListSEO(url: string, locale: string = 'e
       "@type": "CollectionPage",
       "name": title,
       "description": description,
-      "url": `https://magicmcp.net${url}`,
+      "url": `${url}`,
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [
@@ -177,7 +177,7 @@ export function generateLocalizedServersListSEO(url: string, locale: string = 'e
             "@type": "ListItem",
             "position": 2,
             "name": breadcrumbServers,
-            "item": `https://magicmcp.net${url}`
+            "item": `${url}`
           }
         ]
       },
@@ -265,9 +265,9 @@ export function generateLocalizedCategoriesListSEO(url: string, locale: string =
     description,
     ogTitle: title,
     ogDescription: description,
-    ogUrl: `https://magicmcp.net${url}`,
+    ogUrl: `${url}`,
     ogImage: "https://magicmcp.net/og-image.png",
-    canonicalUrl: `https://magicmcp.net${url}`,
+    canonicalUrl: url,
     keywords,
     hreflangTags: generateHreflangTags(pathWithoutLocale),
     structuredData: {
@@ -275,7 +275,7 @@ export function generateLocalizedCategoriesListSEO(url: string, locale: string =
       "@type": "CollectionPage",
       "name": title,
       "description": description,
-      "url": `https://magicmcp.net${url}`,
+      "url": `${url}`,
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [
@@ -289,7 +289,7 @@ export function generateLocalizedCategoriesListSEO(url: string, locale: string =
             "@type": "ListItem",
             "position": 2,
             "name": breadcrumbCategories,
-            "item": `https://magicmcp.net${url}`
+            "item": `${url}`
           }
         ]
       },
@@ -371,9 +371,9 @@ export function generateLocalizedServerSEO(server: MCPServer, url: string, local
     description: metaDescription,
     ogTitle: title,
     ogDescription: metaDescription,
-    ogUrl: `https://magicmcp.net${url}`,
+    ogUrl: `${url}`,
     ogImage: server.icon || "https://magicmcp.net/og-image.png",
-    canonicalUrl: `https://magicmcp.net${url}`,
+    canonicalUrl: url,
     keywords,
     hreflangTags: generateHreflangTags(pathWithoutLocale),
     structuredData: {
@@ -381,7 +381,7 @@ export function generateLocalizedServerSEO(server: MCPServer, url: string, local
       "@type": "SoftwareApplication",
       "name": server.name,
       "description": description,
-      "url": `https://magicmcp.net${url}`,
+      "url": `${url}`,
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": server.compatibility.platforms.join(', ') || "Cross-platform",
       "programmingLanguage": server.repository.language || "JavaScript",
@@ -419,7 +419,7 @@ export function generateLocalizedServerSEO(server: MCPServer, url: string, local
             "@type": "ListItem",
             "position": 3,
             "name": server.name,
-            "item": `https://magicmcp.net${url}`
+            "item": `${url}`
           }
         ]
       }
@@ -442,9 +442,9 @@ export function generateLocalizedCategorySEO(category: Category | null, url: str
       description,
       ogTitle: title,
       ogDescription: description,
-      ogUrl: `https://magicmcp.net${url}`,
+      ogUrl: `${url}`,
       ogImage: "https://magicmcp.net/og-image.png",
-      canonicalUrl: `https://magicmcp.net${url}`,
+      canonicalUrl: url,
       keywords: "",
       hreflangTags: generateHreflangTags(pathWithoutLocale),
     };
@@ -541,9 +541,9 @@ export function generateLocalizedCategorySEO(category: Category | null, url: str
     description,
     ogTitle: title,
     ogDescription: description,
-    ogUrl: `https://magicmcp.net${url}`,
+    ogUrl: `${url}`,
     ogImage: "https://magicmcp.net/og-image.png",
-    canonicalUrl: `https://magicmcp.net${url}`,
+    canonicalUrl: url,
     keywords,
     hreflangTags: generateHreflangTags(pathWithoutLocale),
     structuredData: {
@@ -551,7 +551,7 @@ export function generateLocalizedCategorySEO(category: Category | null, url: str
       "@type": "CollectionPage",
       "name": title,
       "description": description,
-      "url": `https://magicmcp.net${url}`,
+      "url": `${url}`,
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [
@@ -571,7 +571,7 @@ export function generateLocalizedCategorySEO(category: Category | null, url: str
             "@type": "ListItem",
             "position": 3,
             "name": categoryName,
-            "item": `https://magicmcp.net${url}`
+            "item": `${url}`
           }
         ]
       },
@@ -665,9 +665,9 @@ export function generateLocalizedDocsSEO(url: string, locale: string = 'en'): SE
     description,
     ogTitle: title,
     ogDescription: description,
-    ogUrl: `https://magicmcp.net${url}`,
+    ogUrl: url,
     ogImage: "https://magicmcp.net/og-image.png",
-    canonicalUrl: `https://magicmcp.net${url}`,
+    canonicalUrl: url,
     keywords,
     hreflangTags: generateHreflangTags(pathWithoutLocale),
     structuredData: {
@@ -675,7 +675,7 @@ export function generateLocalizedDocsSEO(url: string, locale: string = 'en'): SE
       "@type": "TechArticle",
       "name": title,
       "description": description,
-      "url": `https://magicmcp.net${url}`,
+      "url": url,
       "author": {
         "@type": "Organization",
         "name": "Magic MCP",
@@ -703,7 +703,7 @@ export function generateLocalizedDocsSEO(url: string, locale: string = 'en'): SE
             "@type": "ListItem",
             "position": 2,
             "name": breadcrumbDocs,
-            "item": `https://magicmcp.net${url}`
+            "item": url
           }
         ]
       },

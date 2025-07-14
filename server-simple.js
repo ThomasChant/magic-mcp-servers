@@ -103,6 +103,17 @@ function needsSSR(url) {
     // Normalize URL - ensure it starts with /
     const normalizedUrl = url.startsWith('/') ? url : `/${url}`;
     
+    // Remove locale prefix for checking
+    const supportedLocales = ['en', 'zh-CN', 'zh-TW', 'fr', 'ja', 'ko', 'ru'];
+    let pathToCheck = normalizedUrl;
+    
+    for (const locale of supportedLocales) {
+        if (normalizedUrl.startsWith(`/${locale}/`) || normalizedUrl === `/${locale}`) {
+            pathToCheck = normalizedUrl.replace(`/${locale}`, '') || '/';
+            break;
+        }
+    }
+    
     // Core pages that need SSR for SEO
     const ssrRoutes = [
         '/',                    // Home page
@@ -117,12 +128,12 @@ function needsSSR(url) {
     ];
     
     // Check exact matches
-    if (ssrRoutes.includes(normalizedUrl)) {
+    if (ssrRoutes.includes(pathToCheck)) {
         return true;
     }
     
     // Check dynamic routes
-    return dynamicSSRRoutes.some(route => normalizedUrl.startsWith(route));
+    return dynamicSSRRoutes.some(route => pathToCheck.startsWith(route));
 }
 
 // Helper function to inject SEO data into template
@@ -268,19 +279,8 @@ app.use("*", async (req, res, next) => {
             console.log(`🚀 Using SSR for: ${url}`);
 
             try {
-                // Dynamically discover the correct entry-server file
-                const serverAssetsDir = "./dist/server/assets";
-                const files = await fs.readdir(serverAssetsDir);
-                const entryServerFile = files.find(file => file.startsWith('entry-server.') && file.endsWith('.js'));
-                
-                if (!entryServerFile) {
-                    throw new Error('No entry-server file found in dist/server/assets');
-                }
-                
-                // Import SSR render function with discovered filename
-                const serverModule = await import(
-                    `${serverAssetsDir}/${entryServerFile}`
-                );
+                // Import SSR render function
+                const serverModule = await import("./dist/server/entry-server.js");
                 const { html: renderedHtml, seoData } =
                     await serverModule.render(url);
 
