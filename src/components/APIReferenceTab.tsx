@@ -95,7 +95,7 @@ const APIReferenceTab: React.FC<APIReferenceTabProps> = ({
   return (
     <div className="p-6 space-y-8">
       {/* Authentication Info */}
-      {apiReference.authentication && (
+      {apiReference.authentication && apiReference.authentication.type && apiReference.authentication.type !== 'none' && (
         <div>
           <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
             <Key className="h-5 w-5 mr-2" />
@@ -236,7 +236,11 @@ const APIReferenceTab: React.FC<APIReferenceTabProps> = ({
                       )}
 
                       {/* Examples */}
-                      {tool.examples && tool.examples.length > 0 && (
+                      {tool.examples && tool.examples.length > 0 && tool.examples.some(example => 
+                        example.title || example.description || 
+                        (example.request && Object.keys(example.request).length > 0) || 
+                        (example.response && Object.keys(example.response).length > 0)
+                      ) && (
                         <div>
                           <h5 className="font-medium text-gray-900 dark:text-white mb-3">Examples</h5>
                           <div className="space-y-4">
@@ -253,61 +257,71 @@ const APIReferenceTab: React.FC<APIReferenceTabProps> = ({
                                   </p>
                                 )}
                                 
-                                <div className="grid gap-4 md:grid-cols-2">
-                                  {/* Request */}
-                                  <div>
-                                    <div className="flex items-center justify-between mb-2">
-                                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                                        Request:
-                                      </span>
-                                      <button
-                                        onClick={() => onCopy(JSON.stringify(example.request, null, 2), `tool-${index}-example-${exampleIndex}-request`)}
-                                        className={`text-xs px-2 py-1 rounded transition-colors ${
-                                          copiedStates[`tool-${index}-example-${exampleIndex}-request`]
-                                            ? 'bg-green-600 text-white'
-                                            : 'bg-blue-600 text-white hover:bg-blue-700'
-                                        }`}
-                                      >
-                                        {copiedStates[`tool-${index}-example-${exampleIndex}-request`] ? (
-                                          <CheckCircle className="h-3 w-3" />
-                                        ) : (
-                                          <Copy className="h-3 w-3" />
-                                        )}
-                                      </button>
-                                    </div>
-                                    <pre className="bg-gray-900 text-gray-100 p-3 rounded text-sm overflow-x-auto">
-                                      <code>{JSON.stringify(example.request, null, 2)}</code>
-                                    </pre>
-                                  </div>
-
-                                  {/* Response */}
-                                  {example.response && (
-                                    <div>
-                                      <div className="flex items-center justify-between mb-2">
-                                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                                          Response:
-                                        </span>
-                                        <button
-                                          onClick={() => onCopy(JSON.stringify(example.response, null, 2), `tool-${index}-example-${exampleIndex}-response`)}
-                                          className={`text-xs px-2 py-1 rounded transition-colors ${
-                                            copiedStates[`tool-${index}-example-${exampleIndex}-response`]
-                                              ? 'bg-green-600 text-white'
-                                              : 'bg-blue-600 text-white hover:bg-blue-700'
-                                          }`}
-                                        >
-                                          {copiedStates[`tool-${index}-example-${exampleIndex}-response`] ? (
-                                            <CheckCircle className="h-3 w-3" />
-                                          ) : (
-                                            <Copy className="h-3 w-3" />
-                                          )}
-                                        </button>
+                                {/* Only show Request/Response grid if we have meaningful content */}
+                                {(example.request && Object.keys(example.request).length > 0) || 
+                                 (example.response && Object.keys(example.response).length > 0) ? (
+                                  <div className="grid gap-4 md:grid-cols-2">
+                                    {/* Request */}
+                                    {example.request && Object.keys(example.request).length > 0 && (
+                                      <div>
+                                        <div className="flex items-center justify-between mb-2">
+                                          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                            Request:
+                                          </span>
+                                          <button
+                                            onClick={() => onCopy(JSON.stringify(example.request, null, 2), `tool-${index}-example-${exampleIndex}-request`)}
+                                            className={`text-xs px-2 py-1 rounded transition-colors ${
+                                              copiedStates[`tool-${index}-example-${exampleIndex}-request`]
+                                                ? 'bg-green-600 text-white'
+                                                : 'bg-blue-600 text-white hover:bg-blue-700'
+                                            }`}
+                                          >
+                                            {copiedStates[`tool-${index}-example-${exampleIndex}-request`] ? (
+                                              <CheckCircle className="h-3 w-3" />
+                                            ) : (
+                                              <Copy className="h-3 w-3" />
+                                            )}
+                                          </button>
+                                        </div>
+                                        <pre className="bg-gray-900 text-gray-100 p-3 rounded text-sm overflow-x-auto">
+                                          <code>{JSON.stringify(example.request, null, 2)}</code>
+                                        </pre>
                                       </div>
-                                      <pre className="bg-gray-900 text-gray-100 p-3 rounded text-sm overflow-x-auto">
-                                        <code>{JSON.stringify(example.response, null, 2)}</code>
-                                      </pre>
-                                    </div>
-                                  )}
-                                </div>
+                                    )}
+
+                                    {/* Response */}
+                                    {example.response && Object.keys(example.response).length > 0 && (
+                                      <div>
+                                        <div className="flex items-center justify-between mb-2">
+                                          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                            Response:
+                                          </span>
+                                          <button
+                                            onClick={() => onCopy(JSON.stringify(example.response, null, 2), `tool-${index}-example-${exampleIndex}-response`)}
+                                            className={`text-xs px-2 py-1 rounded transition-colors ${
+                                              copiedStates[`tool-${index}-example-${exampleIndex}-response`]
+                                                ? 'bg-green-600 text-white'
+                                                : 'bg-blue-600 text-white hover:bg-blue-700'
+                                            }`}
+                                          >
+                                            {copiedStates[`tool-${index}-example-${exampleIndex}-response`] ? (
+                                              <CheckCircle className="h-3 w-3" />
+                                            ) : (
+                                              <Copy className="h-3 w-3" />
+                                            )}
+                                          </button>
+                                        </div>
+                                        <pre className="bg-gray-900 text-gray-100 p-3 rounded text-sm overflow-x-auto">
+                                          <code>{JSON.stringify(example.response, null, 2)}</code>
+                                        </pre>
+                                      </div>
+                                    )}
+                                  </div>
+                                ) : (
+                                  <div className="text-sm text-gray-500 dark:text-gray-400 italic">
+                                    No request/response examples available for this tool.
+                                  </div>
+                                )}
                               </div>
                             ))}
                           </div>
@@ -323,14 +337,15 @@ const APIReferenceTab: React.FC<APIReferenceTabProps> = ({
       )}
 
       {/* Configuration Options */}
-      {apiReference.configuration_options && apiReference.configuration_options.length > 0 && (
+      {apiReference.configuration_options && apiReference.configuration_options.length > 0 && 
+       apiReference.configuration_options.some(option => option.name && option.name.trim() !== '') && (
         <div>
           <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
             <Settings className="h-5 w-5 mr-2" />
             Configuration Options
           </h3>
           <div className="space-y-3">
-            {apiReference.configuration_options.map((option, index) => (
+            {apiReference.configuration_options.filter(option => option.name && option.name.trim() !== '').map((option, index) => (
               <div key={index} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-2">
                   <code className="font-mono font-medium text-gray-900 dark:text-white">
@@ -362,14 +377,15 @@ const APIReferenceTab: React.FC<APIReferenceTabProps> = ({
       )}
 
       {/* Usage Examples */}
-      {apiReference.usage_examples && apiReference.usage_examples.length > 0 && (
+      {apiReference.usage_examples && apiReference.usage_examples.length > 0 && 
+       apiReference.usage_examples.some(example => example && example.trim() !== '' && example.trim() !== '{}') && (
         <div>
           <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
             <BookOpen className="h-5 w-5 mr-2" />
             Usage Examples
           </h3>
           <div className="space-y-4">
-            {apiReference.usage_examples.map((example, index) => (
+            {apiReference.usage_examples.filter(example => example && example.trim() !== '' && example.trim() !== '{}').map((example, index) => (
               <div key={index} className="border border-gray-200 dark:border-gray-700 rounded-lg">
                 <div className="flex items-center justify-between p-3 border-b border-gray-200 dark:border-gray-700">
                   <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
