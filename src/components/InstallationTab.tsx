@@ -25,8 +25,8 @@ const InstallationTab: React.FC<InstallationTabProps> = ({
   copiedStates,
   onCopy
 }) => {
-  const [selectedMethod, setSelectedMethod] = useState<string>('');
-  const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set(['methods']));
+  const [selectedMethod, setSelectedMethod] = useState<string>('all');
+  const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set(['methods', 'clients']));
 
   const toggleSection = (section: string) => {
     const newExpanded = new Set(expandedSections);
@@ -139,11 +139,17 @@ const InstallationTab: React.FC<InstallationTabProps> = ({
                 <div key={index} className="border border-gray-200 dark:border-gray-700 rounded-lg">
                   <div
                     className={`p-4 cursor-pointer transition-colors ${
-                      selectedMethod === `method-${index}`
+                      selectedMethod === 'all' || selectedMethod === `method-${index}`
                         ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800'
                         : 'hover:bg-gray-50 dark:hover:bg-gray-700/30'
                     }`}
-                    onClick={() => setSelectedMethod(selectedMethod === `method-${index}` ? '' : `method-${index}`)}
+                    onClick={() => {
+                      if (selectedMethod === 'all') {
+                        setSelectedMethod('');
+                      } else {
+                        setSelectedMethod(selectedMethod === `method-${index}` ? '' : `method-${index}`);
+                      }
+                    }}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center">
@@ -159,7 +165,7 @@ const InstallationTab: React.FC<InstallationTabProps> = ({
                           )}
                         </div>
                       </div>
-                      {selectedMethod === `method-${index}` ? (
+                      {selectedMethod === 'all' || selectedMethod === `method-${index}` ? (
                         <ChevronDown className="h-4 w-4 text-gray-500" />
                       ) : (
                         <ChevronRight className="h-4 w-4 text-gray-500" />
@@ -167,13 +173,13 @@ const InstallationTab: React.FC<InstallationTabProps> = ({
                     </div>
                   </div>
 
-                  {selectedMethod === `method-${index}` && (
+                  {(selectedMethod === 'all' || selectedMethod === `method-${index}`) && (
                     <div className="border-t border-gray-200 dark:border-gray-700 p-4 bg-gray-50 dark:bg-gray-800/50">
                       {method.commands.map((command: string, cmdIndex: number) => (
                         <div key={cmdIndex} className="mb-3 last:mb-0">
                           <div className="flex items-center justify-between mb-2">
                             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                              Command {cmdIndex + 1}:
+                              
                             </span>
                             <button
                               onClick={() => onCopy(command, `method-${index}-cmd-${cmdIndex}`)}

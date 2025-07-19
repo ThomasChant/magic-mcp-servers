@@ -215,9 +215,25 @@ export interface ServerReadme {
     rawContent: string;
     extractedInstallation?: ExtractedInstallation;
     extractedApiReference?: ExtractedAPIReference;
+    extractedContent?: ExtractedOverview;
     extractionStatus?: 'pending' | 'processing' | 'completed' | 'failed';
     extractionError?: string;
     extractedAt?: string;
+}
+
+export interface ExtractedOverview {
+    introduction: {
+        title: string;
+        summary: string;
+        motivation: string;
+        core_functionality: string;
+        key_features: string[];
+        use_cases: Array<{
+            scenario: string;
+            description: string;
+        }>;
+        unique_value: string;
+    };
 }
 
 // README结构化提取数据类型

@@ -497,10 +497,6 @@ export const useSupabaseServerStats = () => {
         const { data: serversData, count: totalServers } = serversResult;
         const { count: totalCategories } = categoriesResult;
 
-        console.log('Server stats - total servers:', totalServers);
-        console.log('Server stats - total categories:', totalCategories);
-        console.log('Server stats - sample data:', serversData?.slice(0, 2));
-
         if (!serversData || serversData.length === 0) {
           console.warn('No server data found');
           return {
@@ -547,7 +543,6 @@ export const useSupabaseServerStats = () => {
           verifiedCount,
         };
 
-        console.log('Final calculated stats:', stats);
         return stats;
       } catch (error) {
         console.error('Failed to fetch server stats:', error);
@@ -983,6 +978,7 @@ export const useSupabaseServerReadme = (serverId: string) => {
           extractedInstallation: data.extracted_installation,
           extractedApiReference: data.extracted_api_reference,
           extractionStatus: data.extraction_status,
+          extractedContent: data.extracted_content,
           extractedAt: data.extracted_at,
         };
       } catch (error) {

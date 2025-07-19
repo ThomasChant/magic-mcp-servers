@@ -192,7 +192,6 @@ const HeaderSSR: React.FC = () => {
                                         <button
                                             key={locale}
                                             onClick={() => {
-                                                console.log(`切换语言到: ${locale}`);
                                                 navigateToLocale(locale);
                                             }}
                                             className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 first:rounded-t-lg last:rounded-b-lg ${
@@ -449,7 +448,6 @@ const HeaderWithClerk: React.FC = () => {
                                         <button
                                             key={locale}
                                             onClick={() => {
-                                                console.log(`切换语言到: ${locale}`);
                                                 navigateToLocale(locale);
                                             }}
                                             className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 first:rounded-t-lg last:rounded-b-lg ${
