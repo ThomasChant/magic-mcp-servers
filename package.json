@@ -22,7 +22,8 @@
         "test:auth-voting": "playwright test voting-authenticated",
         "sitemap:generate": "node scripts/generate-complete-sitemap.js",
         "sitemap:deploy": "node scripts/deploy-sitemaps.js",
-        "sitemap:build": "npm run sitemap:generate && npm run sitemap:deploy"
+        "sitemap:build": "npm run sitemap:generate && npm run sitemap:deploy",
+        "parsereadme": "npx tsx scripts/parse-readme-overview.ts"
     },
     "dependencies": {
         "@clerk/clerk-react": "^5.32.2",

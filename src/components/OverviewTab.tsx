@@ -188,23 +188,7 @@ const OverviewTab: React.FC<OverviewTabProps> = ({
                 </div>
             )}
 
-            {/* Link to GitHub README */}
-            <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
-                <div className="text-center">
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
-                        Want more details?
-                    </p>
-                    <a
-                        href={`${repositoryUrl}#readme`}
-                        target="_blank"
-                        rel="noopener noreferrer nofollow"
-                        className="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-sm font-medium"
-                    >
-                        <ExternalLink className="h-4 w-4 mr-2" />
-                        View Full README on GitHub
-                    </a>
-                </div>
-            </div>
+            
         </div>
     );
 };
