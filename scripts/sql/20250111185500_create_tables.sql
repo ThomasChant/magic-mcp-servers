@@ -114,6 +114,7 @@ CREATE TABLE IF NOT EXISTS server_readmes (
     filename TEXT NOT NULL,
     project_name TEXT NOT NULL,
     raw_content TEXT NOT NULL,
+    extracted_content JSONB,
     extracted_installation JSONB,
     extracted_api_reference JSONB,
     extraction_status TEXT DEFAULT 'pending' CHECK (extraction_status IN ('pending', 'processing', 'completed', 'failed')),

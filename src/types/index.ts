@@ -212,7 +212,7 @@ export interface ExtractedSection {
 export interface ServerReadme {
     filename: string;
     projectName: string;
-    rawContent: string;
+    rawContent?: string;
     extractedInstallation?: ExtractedInstallation;
     extractedApiReference?: ExtractedAPIReference;
     extractedContent?: ExtractedOverview;

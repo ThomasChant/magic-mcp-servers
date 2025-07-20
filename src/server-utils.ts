@@ -265,7 +265,7 @@ export async function getServerReadmeBySlug(slug: string): Promise<ServerReadme 
     // Then get the README data using server ID
     const { data, error } = await supabase
       .from('server_readmes')
-      .select('*')
+      .select('filename, project_name, extracted_content, extracted_installation, extracted_api_reference')
       .eq('server_id', serverData.id)
       .maybeSingle();
 
@@ -282,7 +282,9 @@ export async function getServerReadmeBySlug(slug: string): Promise<ServerReadme 
     return {
       filename: data.filename,
       projectName: data.project_name,
-      rawContent: data.raw_content,
+      extractedContent: data.extracted_content,
+      extractedInstallation: data.extracted_installation,
+      extractedApiReference: data.extracted_api_reference
     };
   } catch (err) {
     console.error(`Error fetching README for server ${slug}:`, err);
