@@ -132,15 +132,6 @@ const Footer: React.FC = () => {
                                     </a>
                                 </div>
                             </li>
-                            <li>
-                                <Link
-                                    to="/about"
-                                    className="flex items-center text-gray-300 dark:text-gray-400 hover:text-white dark:hover:text-gray-100 transition-colors duration-200"
-                                >
-                                    <ExternalLink className="h-4 w-4 mr-2" />
-                                    <span className="text-sm">{t('footer.about')}</span>
-                                </Link>
-                            </li>
                         </ul>
                     </div>
                 </div>
